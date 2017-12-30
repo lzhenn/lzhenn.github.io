@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>使用 JavaScript 创建并下载文件</title>
-    <meta name="description" content="  先上代码本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。先上代码/** * 创建并下载文件 * @param  {String} fileName 文件名 * @param  {String} content  文件内容 */function crea...">
+    <title>github技术博客搭建</title>
+    <meta name="description" content="还是要搬家啦～经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。需求端：      类wor...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2016/11/22/js-create-file-and-download/">
+    <link rel="canonical" href="http://202.116.70.212:80/2017/12/30/tech-blog-github-page/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -116,6 +116,16 @@
                     
                 
                     
+                    <li>
+                        
+                        <a href="/comments/">
+                        
+                            <i class="fa fa-comments"></i>Comments
+                        </a>
+                    </li>
+                    
+                
+                    
                 
                     
                 
@@ -129,15 +139,15 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>使用 JavaScript 创建并下载文件</h1>
+        <h1>github技术博客搭建</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2016-11-22
+                <i class="fa fa-calendar"></i>2017-12-30
             </div>
 
             <div class="label-card">
-                <i class="fa fa-user"></i>HyG
+                <i class="fa fa-user"></i>LZN
                 
             </div>
 
@@ -154,7 +164,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#JavaScript" title="Category: JavaScript" rel="category">JavaScript</a>
+        <a href="/category/#network" title="Category: network" rel="category">network</a>
     
   
 
@@ -171,14 +181,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#%E6%96%87%E4%BB%B6" title="Tag: 文件" rel="tag">文件</a-->
-        <a href="/tag/#文件" title="Tag: 文件" rel="tag">文件</a>&nbsp;
+        <!--a href="/tag/#github" title="Tag: github" rel="tag">github</a-->
+        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
     
-        <!--a href="/tag/#%E4%B8%8B%E8%BD%BD" title="Tag: 下载" rel="tag">下载</a-->
-        <a href="/tag/#下载" title="Tag: 下载" rel="tag">下载</a>&nbsp;
+        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
     
-        <!--a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a-->
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
     
   
 
@@ -189,88 +199,136 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#先上代码" id="markdown-toc-先上代码">先上代码</a></li>
-  <li><a href="#blob-对象" id="markdown-toc-blob-对象">Blob 对象</a></li>
-  <li><a href="#blob-urls" id="markdown-toc-blob-urls">Blob URLs</a></li>
-  <li><a href="#模拟-click" id="markdown-toc-模拟-click">模拟 click</a></li>
-  <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
-  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
-</ul>
+        
+<p>还是要搬家啦～</p>
 
-<p>本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。</p>
+<p>经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。</p>
 
-<h2 id="先上代码">先上代码</h2>
+<p>需求端：</p>
+<ol>
+  <li>
+    <p>类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整</p>
+  </li>
+  <li>
+    <p>足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制</p>
+  </li>
+  <li>
+    <p>安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶</p>
+  </li>
+</ol>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * 创建并下载文件
- * @param  {String} fileName 文件名
- * @param  {String} content  文件内容
- */</span>
-<span class="kd">function</span> <span class="nx">createAndDownloadFile</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">aTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">content</span><span class="p">]);</span>
-    <span class="nx">aTag</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
-    <span class="nx">aTag</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
-    <span class="nx">aTag</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-    <span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
-<span class="p">}</span>
+<p>考虑供给端：</p>
+<ol>
+  <li>
+    <p>EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃</p>
+  </li>
+  <li>
+    <p>简书，不灵活，放弃</p>
+  </li>
+  <li>
+    <p>csdn，已经被边缘化了，放弃</p>
+  </li>
+  <li>
+    <p>github，嘿嘿，就是你了</p>
+  </li>
+</ol>
+
+<p>思想准备结束，开始搭建
+follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm">这个</a>来</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--orphan</span> gh-pages
 </code></pre></div></div>
+<p>语句出错，果然又是git版本问题……坑爹centos</p>
 
-<p>很简单对吧，直接调用这个方法，传入文件名和文件内容，程序新建 a 标签，新建 Blob 对象，将文件名赋给 a 标签，同时将 Blob 对象作为 Url 也赋给 a 标签，模拟点击事件，自动下载成功，最后再回收内存。下面我们来看看具体是怎么操作的。</p>
+<p>突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。</p>
 
-<p><img src="https://img.alicdn.com/tfs/TB16.GnOpXXXXXdapXXXXXXXXXX-307-134.png" alt="" /></p>
+<p>https://pages.github.com/</p>
 
-<h2 id="blob-对象">Blob 对象</h2>
+<p>相当有效。</p>
 
-<p>Blob 对象是一个字节序列。拥有 <code class="highlighter-rouge">size</code> 和 <code class="highlighter-rouge">type</code> 等属性。</p>
+<p>然后costumize</p>
 
-<p>拥有 2 个只读状态 <code class="highlighter-rouge">OPEND</code> 和 <code class="highlighter-rouge">CLOSED。</code></p>
+<p>https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/</p>
 
-<p>Blob 对象属于 JavaScript Web APIs 中的 File API 规定的部分，可以参考 W3C 文档中的 <a href="https://www.w3.org/TR/2015/WD-FileAPI-20150421/#blob"> The Blob Interface and Binary Data</a></p>
+<p>模板找到了几个，Jekll安装似乎有点麻烦。</p>
 
-<p>再回来看看我们的代码里是这么写的，使用了 Blob 的构造函数：</p>
+<ol>
+  <li>安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示</li>
+</ol>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">content</span><span class="p">]);</span>
+<blockquote>
+  <p>YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&gt;= 2.0).</p>
+</blockquote>
+
+<blockquote>
+  <p>There are no versions of psych (&gt;= 0) compatible with your Ruby &amp; RubyGems. psych requires Ruby version &gt;= 2.2.2. The current ruby version is 1.8.</p>
+</blockquote>
+
+<p>真是操蛋的centos，不折腾了还是装在ubuntu下好了。</p>
+
+<p>ubuntu下一条apt-get install ruby直接搞定。</p>
+
+<p>安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。</p>
+
+<p>can’t find header files for ruby at /usr/lib/ruby/include/ruby.h</p>
+
+<p>之后</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$jekyll</span> new myblog
 </code></pre></div></div>
+<p>发现第一次执行非常慢，不过问题不大</p>
 
-<p>使用方括号的原因是，其构造函数的参数为以下4中：</p>
+<p>然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1</p>
 
-<ul>
-  <li>ArrayBuffer [TypedArrays] elements.</li>
-  <li>ArrayBufferView [TypedArrays] elements.</li>
-  <li>Blob elements.</li>
-  <li>DOMString [WebIDL] elements.</li>
-</ul>
+<p>_config.yml文件下修改host为内网（公网）IP即可。</p>
 
-<p>所谓 <code class="highlighter-rouge">ArrayBuffer</code> 是一种用于呈现通用、固定长度的二进制数据的类型。详情可以参考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer -MDN</a> 以及 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-arraybuffer-objects">ECMAScript2015 标准中的 ArrayBuffer</a>。</p>
+<p>找到一些不错的介绍防火墙的内容</p>
 
-<h2 id="blob-urls">Blob URLs</h2>
+<p>https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/</p>
 
-<p>Blob URLs 被创建或注销是使用 <code class="highlighter-rouge">URL</code> 对象上的方法。这个 <code class="highlighter-rouge">URL</code> 对象被挂在 <code class="highlighter-rouge">Window</code> (HTML) 对象下，或者 <code class="highlighter-rouge">WorkerGlobalScope</code> (Web Workers)对象下。</p>
+<p>搞定内网调试，开始看官方文档调戏github</p>
 
-<p>拥有以下静态方法 <code class="highlighter-rouge">createObjectURL</code> 和 <code class="highlighter-rouge">revokeObjectURL</code>，用于创建一个 blob 对象的 url 和注销这个 blob url。</p>
+<p>https://help.github.com/articles/about-jekyll-themes-on-github/</p>
 
-<p>详情可查看 <a href="https://www.w3.org/TR/2015/WD-FileAPI-20150421/#creating-revoking">关于创建和注销 Blob URL 的 W3C 标准文档</a></p>
+<p>花了一下午时间找了个好模板</p>
 
-<h2 id="模拟-click">模拟 click</h2>
+<p>https://github.com/Gaohaoyang/gaohaoyang.github.io</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-</code></pre></div></div>
+<p>直接开服务，出错</p>
 
-<p>在 W3C 中很早就有这个<a href="https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-2651361">规范</a>，不需要写繁琐的模拟事件触发的代码。</p>
+<blockquote>
+  <p>Could not locate Gemfile or .bundle/ directory</p>
+</blockquote>
 
-<h2 id="小结">小结</h2>
+<p>不管三七二十一，把示例里面的文件丢过来</p>
 
-<p>目前我将这个技术使用在 天猫双十一技术和UED庆功会 的摇火箭大屏游戏中。最后的游戏结果排名，在请求了接口后，在前端直接生成并下载到了本地，作为记录保存。主要也是因为服务端暂时没有提供这个一张表去记录游戏结果，于是采用了前端记录的解决方案。</p>
+<p>之后新的错误</p>
 
-<p>大家当时都玩的好开心啊，😁。你们的甘其食和全家卡的名单就是这样生成的！</p>
+<blockquote>
+  <p>Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.</p>
+</blockquote>
 
-<h2 id="参考">参考</h2>
+<blockquote>
+  <p>Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`</p>
+</blockquote>
 
-<ul>
-  <li><a href="http://www.alloyteam.com/2014/01/use-js-file-download/">在浏览器端用JS创建和下载文件 -alloyteam</a></li>
-</ul>
+<p>按要求安装之后也不成功。google发现如下stackoverflow帖子</p>
+
+<p>https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed</p>
+
+<p>居然有github-pages这种东西……</p>
+
+<p>装完之后，拿掉gemfile即可。</p>
+
+<p>摸索修改之后，发现这个评论解决方案</p>
+
+<p>https://imsun.net/posts/gitment-introduction/</p>
+
+<p>问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。</p>
+
+<p>参考</p>
+
+<p>http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/</p>
+
+<p>http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）</p>
 
         </article>
         <hr>
@@ -317,18 +375,18 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/10/16/shuffle-algorithm/">Fisher–Yates shuffle 洗牌算法</a></p>
-        
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a></p>
         
     </div>
 </div>
 
 
-        <h2 id="comments">Comments</h2>
-        
+<!--        <h2 id="comments">Comments</h2>
+    
 
 
 
@@ -350,7 +408,7 @@ gitment.render('container')
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://imsun.github.io/gitment/" rel="nofollow">comments powered by Gitment.</a></noscript>
 
-
+ -->
 
 
     </div>
@@ -365,7 +423,7 @@ gitment.render('container')
                 </div>
                 <ul id="content-side" class="content-ul">
                     
-                    <!--<li><a href="#comments">Comments</a></li>-->
+                    <li><a href="#comments">Comments</a></li>
                 </ul>
             </div>
             <!-- 其他div框放到这里 -->

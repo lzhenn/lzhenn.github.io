@@ -18,6 +18,3 @@ type: page
 * GitHub：[Novarizark](https://github.com/Novarizark)
 * email：lzhenn@mail2.sysu.edu.cn
 
-## Comments
-
-{% include comments.html %}

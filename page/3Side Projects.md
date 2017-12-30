@@ -20,4 +20,3 @@ Shandong Peninsula Weather Forecasting Experiment, to be posted.
 ## DLPE
 A test on 500 hPa geopotential high prediction by deep learning, to be posted.
 
-{% include comments.html %}

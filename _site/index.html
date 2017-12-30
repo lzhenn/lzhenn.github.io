@@ -116,6 +116,16 @@
                     
                 
                     
+                    <li>
+                        
+                        <a href="/comments/">
+                        
+                            <i class="fa fa-comments"></i>Comments
+                        </a>
+                    </li>
+                    
+                
+                    
                 
                     
                 
@@ -130,20 +140,20 @@
         <div class="page clearfix" index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
-        <small>tech blog and everythin else</small>
+        <small>tech blog and everything else</small>
         <hr>
         <ul>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/11/22/js-create-file-and-download/">使用 JavaScript 创建并下载文件</a>
+                  <a class="post-link" href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-22
+                        <i class="fa fa-calendar"></i>2017-12-30
                     </div>
                     <div class="label-card">
-                        <i class="fa fa-user"></i>HyG
+                        <i class="fa fa-user"></i>LZN
                         
                     </div>
                     <div class="label-card">
@@ -159,7 +169,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#JavaScript" title="Category: JavaScript" rel="category">JavaScript</a>
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
     
   
 
@@ -176,11 +188,13 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#文件" title="Tag: 文件" rel="tag">文件</a>&nbsp;
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
     
-        <a href="/tag/#下载" title="Tag: 下载" rel="tag">下载</a>&nbsp;
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
     
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
+    
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>
     
   
 
@@ -190,48 +204,120 @@
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc">
-  <li><a href="#先上代码" id="markdown-toc-先上代码">先上代码</a></li>
+  <li><a href="#记得装desktop版本的ubuntu否则没有xserver比较蛋疼" id="markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</a></li>
+  <li><a href="#安装英伟达显卡驱动要关掉x-server" id="markdown-toc-安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</a></li>
+  <li><a href="#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本" id="markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</a></li>
 </ul>
 
-<p>本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。</p>
+<h3 id="记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</h3>
+<h3 id="安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</h3>
+<p>默认进入命令行启动</p>
 
-<h2 id="先上代码">先上代码</h2>
+<p>http://blog.topspeedsnail.com/archives/4922</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * 创建并下载文件
- * @param  {String} fileName 文件名
- * @param  {String} content  文件内容
- */</span>
-<span class="kd">function</span> <span class="nx">createAndDownloadFile</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">aTag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">content</span><span class="p">]);</span>
-    <span class="nx">aTag</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
-    <span class="nx">aTag</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
-    <span class="nx">aTag</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-    <span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<p>注意16.04用这句：</p>
 
-<p>很简单对吧，直接调用这个方法，传入文件名和文件内容，程序新建 a 标签，新建 Blob 对象，将文件名赋给 a 标签，同时将 Blob 对象作为 Url 也赋给 a 标签，模拟点击事件，自动下载成功，最后再回收内存。下面我们来看看具体是怎么操作的。</p>
+<p>$sudo systemctl set-default multi-user.target</p>
+
+<p>这是每次开机默认进入命令行模式的方法。单词关闭用</p>
+
+<p>sudo /etc/init.d/lightdm stop</p>
+
+<p>然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）</p>
+
+<p>驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）</p>
+
+<p>http://blog.csdn.net/u012759136/article/details/53355781</p>
+
+<p>照着来没问题了吧，错了……build driver的时候直接说unable……我去</p>
+
+<p>差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）</p>
+
+<p>http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;lang=us&amp;type=GeForce</p>
+
+<p>这里下载17.11的版本</p>
+
+<h3 id="安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</h3>
+<p>直接运行安装，居然自带了驱动……去死吧……</p>
+
+<p>后面说我有几个库没装好，记录如下</p>
+
+<p>Missing recommended library: libGLU.so</p>
+
+<p>Missing recommended library: libX11.so</p>
+
+<p>Missing recommended library: libXi.so</p>
+
+<p>Missing recommended library: libXmu.so</p>
+
+<p>搜索下直接apt-get搞定</p>
+
+<p>$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
+
+<p>官方参考</p>
+
+<p>https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/</p>
+
+<p>重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。</p>
+
+<p>http://blog.csdn.net/shiorioxy/article/details/52652831</p>
+
+<p>http://blog.csdn.net/jhszh418762259/article/details/52958287</p>
+
+<p>之后写几个配置</p>
+
+<p>环境变量设置</p>
+
+<p>sudo vim ~/.bashrc</p>
+
+<p>在末尾添加</p>
+
+<p>export CUDA_HOME=/usr/local/cuda-8.0</p>
+
+<p>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</p>
+
+<p>export PATH=/usr/local/cuda-8.0/bin:$PATH</p>
+
+<p>保存退出。</p>
+
+<p>然后刷新。</p>
+
+<p>source ~/.bashrc</p>
+
+<p>动态链接库设置</p>
+
+<p>创建文件：</p>
+
+<p>sudo vim /etc/ld.so.conf.d/cuda.conf</p>
+
+<p>写入：/usr/local/cuda/lib64</p>
+
+<p>保存之后使其立即生效：</p>
+
+<p>sudo ldconfig -v</p>
+
+<p>之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。</p>
+
+<p>许久之后，安全完成。</p>
 
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/11/22/js-create-file-and-download/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/12/30/ubuntu-cuda-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/16/shuffle-algorithm/">Fisher–Yates shuffle 洗牌算法</a>
+                  <a class="post-link" href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-16
+                        <i class="fa fa-calendar"></i>2017-12-30
                     </div>
                     <div class="label-card">
-                        <i class="fa fa-user"></i>HyG
+                        <i class="fa fa-user"></i>LZN
                         
                     </div>
                     <div class="label-card">
@@ -247,7 +333,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#JavaScript" title="Category: JavaScript" rel="category">JavaScript</a>
+        <a href="/category/#network" title="Category: network" rel="category">network</a>
     
   
 
@@ -264,13 +350,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#算法" title="Tag: 算法" rel="tag">算法</a>&nbsp;
+        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
     
-        <a href="/tag/#shuffle" title="Tag: shuffle" rel="tag">shuffle</a>&nbsp;
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
     
-        <a href="/tag/#乱序" title="Tag: 乱序" rel="tag">乱序</a>&nbsp;
-    
-        <a href="/tag/#洗牌" title="Tag: 洗牌" rel="tag">洗牌</a>
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
     
   
 
@@ -280,16 +364,139 @@
                 </div>
                 <div class="excerpt">
                     
-<p>简单来说 Fisher–Yates shuffle 算法是一个用来将一个有限集合生成一个随机排列的算法（数组随机排序）。这个算法生成的随机排列是等概率的。同时这个算法非常高效。</p>
+<p>还是要搬家啦～</p>
 
-<p>本文主要介绍这个算法的来源、演变、原理。并举出一个例子为大家清晰的描述每次迭代过程。最后使用 JavaScript 代码将算法实现。</p>
+<p>经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Riffle_shuffle.jpg/320px-Riffle_shuffle.jpg" alt="" /></p>
+<p>需求端：</p>
+<ol>
+  <li>
+    <p>类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整</p>
+  </li>
+  <li>
+    <p>足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制</p>
+  </li>
+  <li>
+    <p>安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶</p>
+  </li>
+</ol>
 
+<p>考虑供给端：</p>
+<ol>
+  <li>
+    <p>EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃</p>
+  </li>
+  <li>
+    <p>简书，不灵活，放弃</p>
+  </li>
+  <li>
+    <p>csdn，已经被边缘化了，放弃</p>
+  </li>
+  <li>
+    <p>github，嘿嘿，就是你了</p>
+  </li>
+</ol>
+
+<p>思想准备结束，开始搭建
+follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm">这个</a>来</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--orphan</span> gh-pages
+</code></pre></div></div>
+<p>语句出错，果然又是git版本问题……坑爹centos</p>
+
+<p>突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。</p>
+
+<p>https://pages.github.com/</p>
+
+<p>相当有效。</p>
+
+<p>然后costumize</p>
+
+<p>https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/</p>
+
+<p>模板找到了几个，Jekll安装似乎有点麻烦。</p>
+
+<ol>
+  <li>安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示</li>
+</ol>
+
+<blockquote>
+  <p>YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&gt;= 2.0).</p>
+</blockquote>
+
+<blockquote>
+  <p>There are no versions of psych (&gt;= 0) compatible with your Ruby &amp; RubyGems. psych requires Ruby version &gt;= 2.2.2. The current ruby version is 1.8.</p>
+</blockquote>
+
+<p>真是操蛋的centos，不折腾了还是装在ubuntu下好了。</p>
+
+<p>ubuntu下一条apt-get install ruby直接搞定。</p>
+
+<p>安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。</p>
+
+<p>can’t find header files for ruby at /usr/lib/ruby/include/ruby.h</p>
+
+<p>之后</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$jekyll</span> new myblog
+</code></pre></div></div>
+<p>发现第一次执行非常慢，不过问题不大</p>
+
+<p>然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1</p>
+
+<p>_config.yml文件下修改host为内网（公网）IP即可。</p>
+
+<p>找到一些不错的介绍防火墙的内容</p>
+
+<p>https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/</p>
+
+<p>搞定内网调试，开始看官方文档调戏github</p>
+
+<p>https://help.github.com/articles/about-jekyll-themes-on-github/</p>
+
+<p>花了一下午时间找了个好模板</p>
+
+<p>https://github.com/Gaohaoyang/gaohaoyang.github.io</p>
+
+<p>直接开服务，出错</p>
+
+<blockquote>
+  <p>Could not locate Gemfile or .bundle/ directory</p>
+</blockquote>
+
+<p>不管三七二十一，把示例里面的文件丢过来</p>
+
+<p>之后新的错误</p>
+
+<blockquote>
+  <p>Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.</p>
+</blockquote>
+
+<blockquote>
+  <p>Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`</p>
+</blockquote>
+
+<p>按要求安装之后也不成功。google发现如下stackoverflow帖子</p>
+
+<p>https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed</p>
+
+<p>居然有github-pages这种东西……</p>
+
+<p>装完之后，拿掉gemfile即可。</p>
+
+<p>摸索修改之后，发现这个评论解决方案</p>
+
+<p>https://imsun.net/posts/gitment-introduction/</p>
+
+<p>问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。</p>
+
+<p>参考</p>
+
+<p>http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/</p>
+
+<p>http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/16/shuffle-algorithm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/12/30/tech-blog-github-page/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -321,9 +528,9 @@
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2016/11/22/js-create-file-and-download/">使用 JavaScript 创建并下载文件</a></li>
+                        <li><a href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a></li>
                     
-                        <li><a href="/2016/10/16/shuffle-algorithm/">Fisher–Yates shuffle 洗牌算法</a></li>
+                        <li><a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a></li>
                     
                 </ul>
             </div>
@@ -337,11 +544,29 @@
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#JavaScript" class="categories-list-item" cate="JavaScript">
+                        <a href="/category/#network" class="categories-list-item" cate="network">
                             <span class="name">
-                                JavaScript
+                                network
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#linux" class="categories-list-item" cate="linux">
+                            <span class="name">
+                                linux
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#machine&nbsp;leanring" class="categories-list-item" cate="machine&nbsp;leanring">
+                            <span class="name">
+                                machine&nbsp;leanring
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     
@@ -367,49 +592,49 @@
                       
                       
                       
-                      <a href="/tag/#算法" style="font-size: 9pt; color: #999;">算法</a>
+                      <a href="/tag/#github" style="font-size: 9pt; color: #999;">github</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#shuffle" style="font-size: 9pt; color: #999;">shuffle</a>
+                      <a href="/tag/#blog" style="font-size: 9pt; color: #999;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#乱序" style="font-size: 9pt; color: #999;">乱序</a>
+                      <a href="/tag/#jekyll" style="font-size: 9pt; color: #999;">jekyll</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#洗牌" style="font-size: 9pt; color: #999;">洗牌</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#文件" style="font-size: 9pt; color: #999;">文件</a>
+                      <a href="/tag/#machine&nbsp;learning" style="font-size: 9pt; color: #999;">machine&nbsp;learning</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#下载" style="font-size: 9pt; color: #999;">下载</a>
+                      <a href="/tag/#CUDA" style="font-size: 9pt; color: #999;">CUDA</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#JavaScript" style="font-size: 9pt; color: #999;">JavaScript</a>
+                      <a href="/tag/#deep&nbsp;learning" style="font-size: 9pt; color: #999;">deep&nbsp;learning</a>
                     
                 </div>
             </div>

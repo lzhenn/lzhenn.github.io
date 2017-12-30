@@ -5,77 +5,274 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Dec 2017 17:04:31 +0800</pubDate>
-    <lastBuildDate>Sat, 30 Dec 2017 17:04:31 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Dec 2017 17:51:18 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Dec 2017 17:51:18 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
-        <title>使用 JavaScript 创建并下载文件</title>
+        <title>Ubuntu/K4200机器学习系统搭建</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#先上代码&quot; id=&quot;markdown-toc-先上代码&quot;&gt;先上代码&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#记得装desktop版本的ubuntu否则没有xserver比较蛋疼&quot; id=&quot;markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼&quot;&gt;记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#安装英伟达显卡驱动要关掉x-server&quot; id=&quot;markdown-toc-安装英伟达显卡驱动要关掉x-server&quot;&gt;安装英伟达显卡驱动，要关掉x server……&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本&quot; id=&quot;markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本&quot;&gt;安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。
+&lt;h3 id=&quot;记得装desktop版本的ubuntu否则没有xserver比较蛋疼&quot;&gt;记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼&lt;/h3&gt;
+&lt;h3 id=&quot;安装英伟达显卡驱动要关掉x-server&quot;&gt;安装英伟达显卡驱动，要关掉x server……&lt;/h3&gt;
+默认进入命令行启动
 
-&lt;h2 id=&quot;先上代码&quot;&gt;先上代码&lt;/h2&gt;
+http://blog.topspeedsnail.com/archives/4922
 
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
- * 创建并下载文件
- * @param  {String} fileName 文件名
- * @param  {String} content  文件内容
- */&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createAndDownloadFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;blob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;download&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createObjectURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;revokeObjectURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+注意16.04用这句：
 
-很简单对吧，直接调用这个方法，传入文件名和文件内容，程序新建 a 标签，新建 Blob 对象，将文件名赋给 a 标签，同时将 Blob 对象作为 Url 也赋给 a 标签，模拟点击事件，自动下载成功，最后再回收内存。下面我们来看看具体是怎么操作的。
+$sudo systemctl set-default multi-user.target
+
+这是每次开机默认进入命令行模式的方法。单词关闭用
+
+sudo /etc/init.d/lightdm stop
+
+然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）
+
+驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）
+
+http://blog.csdn.net/u012759136/article/details/53355781
+
+照着来没问题了吧，错了……build driver的时候直接说unable……我去
+
+差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）
+
+http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;amp;lang=us&amp;amp;type=GeForce
+
+这里下载17.11的版本
+
+&lt;h3 id=&quot;安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本&quot;&gt;安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。&lt;/h3&gt;
+直接运行安装，居然自带了驱动……去死吧……
+
+后面说我有几个库没装好，记录如下
+
+Missing recommended library: libGLU.so
+
+Missing recommended library: libX11.so
+
+Missing recommended library: libXi.so
+
+Missing recommended library: libXmu.so
+
+搜索下直接apt-get搞定
+
+$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
+
+官方参考
+
+https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/
+
+重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。
+
+http://blog.csdn.net/shiorioxy/article/details/52652831
+
+http://blog.csdn.net/jhszh418762259/article/details/52958287
+
+之后写几个配置
+
+环境变量设置
+
+sudo vim ~/.bashrc
+
+在末尾添加
+
+export CUDA_HOME=/usr/local/cuda-8.0
+
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+
+export PATH=/usr/local/cuda-8.0/bin:$PATH
+
+保存退出。
+
+然后刷新。
+
+source ~/.bashrc
+
+动态链接库设置
+
+创建文件：
+
+sudo vim /etc/ld.so.conf.d/cuda.conf
+
+写入：/usr/local/cuda/lib64
+
+保存之后使其立即生效：
+
+sudo ldconfig -v
+
+之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。
+
+许久之后，安全完成。
 
 </description>
-        <pubDate>Tue, 22 Nov 2016 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2016/11/22/js-create-file-and-download/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2016/11/22/js-create-file-and-download/</guid>
+        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2017/12/30/ubuntu-cuda-setup/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/ubuntu-cuda-setup/</guid>
         
-        <category>文件</category>
+        <category>ubuntu</category>
         
-        <category>下载</category>
+        <category>machine&amp;nbsp;learning</category>
         
-        <category>JavaScript</category>
+        <category>CUDA</category>
+        
+        <category>deep&amp;nbsp;learning</category>
         
         
-        <category>JavaScript</category>
+        <category>linux</category>
+        
+        <category>machine&amp;nbsp;leanring</category>
         
       </item>
     
       <item>
-        <title>Fisher–Yates shuffle 洗牌算法</title>
+        <title>github技术博客搭建</title>
         <description>
-简单来说 Fisher–Yates shuffle 算法是一个用来将一个有限集合生成一个随机排列的算法（数组随机排序）。这个算法生成的随机排列是等概率的。同时这个算法非常高效。
+还是要搬家啦～
 
-本文主要介绍这个算法的来源、演变、原理。并举出一个例子为大家清晰的描述每次迭代过程。最后使用 JavaScript 代码将算法实现。
+经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。
 
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Riffle_shuffle.jpg/320px-Riffle_shuffle.jpg&quot; alt=&quot;&quot; /&gt;
+需求端：
+&lt;ol&gt;
+  &lt;li&gt;
+    类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整
+  &lt;/li&gt;
+  &lt;li&gt;
+    足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制
+  &lt;/li&gt;
+  &lt;li&gt;
+    安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶
+  &lt;/li&gt;
+&lt;/ol&gt;
 
+考虑供给端：
+&lt;ol&gt;
+  &lt;li&gt;
+    EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃
+  &lt;/li&gt;
+  &lt;li&gt;
+    简书，不灵活，放弃
+  &lt;/li&gt;
+  &lt;li&gt;
+    csdn，已经被边缘化了，放弃
+  &lt;/li&gt;
+  &lt;li&gt;
+    github，嘿嘿，就是你了
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+思想准备结束，开始搭建
+follow&lt;a href=&quot;http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm&quot;&gt;这个&lt;/a&gt;来
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;--orphan&lt;/span&gt; gh-pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+语句出错，果然又是git版本问题……坑爹centos
+
+突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。
+
+https://pages.github.com/
+
+相当有效。
+
+然后costumize
+
+https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/
+
+模板找到了几个，Jekll安装似乎有点麻烦。
+
+&lt;ol&gt;
+  &lt;li&gt;安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&amp;gt;= 2.0).
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  There are no versions of psych (&amp;gt;= 0) compatible with your Ruby &amp;amp; RubyGems. psych requires Ruby version &amp;gt;= 2.2.2. The current ruby version is 1.8.
+&lt;/blockquote&gt;
+
+真是操蛋的centos，不折腾了还是装在ubuntu下好了。
+
+ubuntu下一条apt-get install ruby直接搞定。
+
+安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。
+
+can’t find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+之后
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$jekyll&lt;/span&gt; new myblog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+发现第一次执行非常慢，不过问题不大
+
+然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1
+
+_config.yml文件下修改host为内网（公网）IP即可。
+
+找到一些不错的介绍防火墙的内容
+
+https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/
+
+搞定内网调试，开始看官方文档调戏github
+
+https://help.github.com/articles/about-jekyll-themes-on-github/
+
+花了一下午时间找了个好模板
+
+https://github.com/Gaohaoyang/gaohaoyang.github.io
+
+直接开服务，出错
+
+&lt;blockquote&gt;
+  Could not locate Gemfile or .bundle/ directory
+&lt;/blockquote&gt;
+
+不管三七二十一，把示例里面的文件丢过来
+
+之后新的错误
+
+&lt;blockquote&gt;
+  Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`
+&lt;/blockquote&gt;
+
+按要求安装之后也不成功。google发现如下stackoverflow帖子
+
+https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed
+
+居然有github-pages这种东西……
+
+装完之后，拿掉gemfile即可。
+
+摸索修改之后，发现这个评论解决方案
+
+https://imsun.net/posts/gitment-introduction/
+
+问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。
+
+参考
+
+http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/
+
+http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）
 </description>
-        <pubDate>Sun, 16 Oct 2016 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2016/10/16/shuffle-algorithm/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2016/10/16/shuffle-algorithm/</guid>
+        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2017/12/30/tech-blog-github-page/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/tech-blog-github-page/</guid>
         
-        <category>算法</category>
+        <category>github</category>
         
-        <category>shuffle</category>
+        <category>blog</category>
         
-        <category>乱序</category>
-        
-        <category>洗牌</category>
+        <category>jekyll</category>
         
         
-        <category>JavaScript</category>
+        <category>network</category>
         
       </item>
     
