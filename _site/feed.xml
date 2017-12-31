@@ -5,8 +5,8 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Dec 2017 17:51:18 +0800</pubDate>
-    <lastBuildDate>Sat, 30 Dec 2017 17:51:18 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Dec 2017 21:43:05 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Dec 2017 21:43:05 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -270,6 +270,54 @@ http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（�
         <category>blog</category>
         
         <category>jekyll</category>
+        
+        
+        <category>network</category>
+        
+      </item>
+    
+      <item>
+        <title>东校实验室服务器阵列rebuild</title>
+        <description>
+东校实验室服务器坏掉了一块RAID I的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。
+
+原RAID没出问题的磁盘被降级为foreign状态，
+
+后查到官方文档
+
+https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh
+
+Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.
+
+按F按键后导入foreign配置，开始进入系统。
+</description>
+        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2017/12/30/raid-rebuild/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/raid-rebuild/</guid>
+        
+        <category>raid</category>
+        
+        <category>server</category>
+        
+        
+        <category>hardware</category>
+        
+      </item>
+    
+      <item>
+        <title>AWS网络问题解决</title>
+        <description>
+很郁闷今天去东校修复服务器阵列，发现另一块RAID盘也坏了，wordpress数据库几乎全部丢失，文章只有题目没有内容。没办法，只能随他去了。
+
+终归还是要迁移到AWS的，之前一直没有折腾好的手机端SS问题，今天yum update的时候发现无法连接yum源，怀疑是安全组策略问题，设置出站流量为所有流量后，成功解决这一问题，看起来限制入站流量就可以了嘛～
+</description>
+        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2017/12/30/aws-port/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/aws-port/</guid>
+        
+        <category>aws</category>
+        
+        <category>server</category>
         
         
         <category>network</category>

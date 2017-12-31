@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>github技术博客搭建</title>
-    <meta name="description" content="还是要搬家啦～经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。需求端：      类wor...">
+    <title>东校实验室服务器阵列rebuild</title>
+    <meta name="description" content="东校实验室服务器坏掉了一块RAID I的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。原RAID没出问题的磁盘被降级为foreign状态，后查到官方文档https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/30/tech-blog-github-page/">
+    <link rel="canonical" href="http://202.116.70.212:80/2017/12/30/raid-rebuild/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -139,7 +139,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>github技术博客搭建</h1>
+        <h1>东校实验室服务器阵列rebuild</h1>
         <div class="label">
 
             <div class="label-card">
@@ -164,7 +164,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#network" title="Category: network" rel="category">network</a>
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>
     
   
 
@@ -181,14 +181,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#github" title="Tag: github" rel="tag">github</a-->
-        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
+        <!--a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a-->
+        <a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a>&nbsp;
     
-        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
     
   
 
@@ -200,135 +197,17 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>还是要搬家啦～</p>
+<p>东校实验室服务器坏掉了一块RAID I的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。</p>
 
-<p>经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。</p>
+<p>原RAID没出问题的磁盘被降级为foreign状态，</p>
 
-<p>需求端：</p>
-<ol>
-  <li>
-    <p>类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整</p>
-  </li>
-  <li>
-    <p>足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制</p>
-  </li>
-  <li>
-    <p>安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶</p>
-  </li>
-</ol>
+<p>后查到官方文档</p>
 
-<p>考虑供给端：</p>
-<ol>
-  <li>
-    <p>EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃</p>
-  </li>
-  <li>
-    <p>简书，不灵活，放弃</p>
-  </li>
-  <li>
-    <p>csdn，已经被边缘化了，放弃</p>
-  </li>
-  <li>
-    <p>github，嘿嘿，就是你了</p>
-  </li>
-</ol>
+<p>https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh</p>
 
-<p>思想准备结束，开始搭建
-follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm">这个</a>来</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--orphan</span> gh-pages
-</code></pre></div></div>
-<p>语句出错，果然又是git版本问题……坑爹centos</p>
+<p>Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.</p>
 
-<p>突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。</p>
-
-<p>https://pages.github.com/</p>
-
-<p>相当有效。</p>
-
-<p>然后costumize</p>
-
-<p>https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/</p>
-
-<p>模板找到了几个，Jekll安装似乎有点麻烦。</p>
-
-<ol>
-  <li>安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示</li>
-</ol>
-
-<blockquote>
-  <p>YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&gt;= 2.0).</p>
-</blockquote>
-
-<blockquote>
-  <p>There are no versions of psych (&gt;= 0) compatible with your Ruby &amp; RubyGems. psych requires Ruby version &gt;= 2.2.2. The current ruby version is 1.8.</p>
-</blockquote>
-
-<p>真是操蛋的centos，不折腾了还是装在ubuntu下好了。</p>
-
-<p>ubuntu下一条apt-get install ruby直接搞定。</p>
-
-<p>安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。</p>
-
-<p>can’t find header files for ruby at /usr/lib/ruby/include/ruby.h</p>
-
-<p>之后</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$jekyll</span> new myblog
-</code></pre></div></div>
-<p>发现第一次执行非常慢，不过问题不大</p>
-
-<p>然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1</p>
-
-<p>_config.yml文件下修改host为内网（公网）IP即可。</p>
-
-<p>找到一些不错的介绍防火墙的内容</p>
-
-<p>https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/</p>
-
-<p>搞定内网调试，开始看官方文档调戏github</p>
-
-<p>https://help.github.com/articles/about-jekyll-themes-on-github/</p>
-
-<p>花了一下午时间找了个好模板</p>
-
-<p>https://github.com/Gaohaoyang/gaohaoyang.github.io</p>
-
-<p>直接开服务，出错</p>
-
-<blockquote>
-  <p>Could not locate Gemfile or .bundle/ directory</p>
-</blockquote>
-
-<p>不管三七二十一，把示例里面的文件丢过来</p>
-
-<p>之后新的错误</p>
-
-<blockquote>
-  <p>Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.</p>
-</blockquote>
-
-<blockquote>
-  <p>Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`</p>
-</blockquote>
-
-<p>按要求安装之后也不成功。google发现如下stackoverflow帖子</p>
-
-<p>https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed</p>
-
-<p>居然有github-pages这种东西……</p>
-
-<p>装完之后，拿掉gemfile即可。</p>
-
-<p>摸索修改之后，发现这个评论解决方案</p>
-
-<p>https://imsun.net/posts/gitment-introduction/</p>
-
-<p>问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。</p>
-
-<p>参考</p>
-
-<p>http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/</p>
-
-<p>http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）</p>
+<p>按F按键后导入foreign配置，开始进入系统。</p>
 
         </article>
         <hr>
@@ -342,6 +221,10 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                 
                     
                 
+            
+                
+                    
+                
                     
                 
             
@@ -350,19 +233,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -377,30 +248,13 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                 
                     
                 
-                    
-                
             
                 
                     
                 
                     
                 
-                    
-                
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -408,18 +262,47 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                 
             
         
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/12/30/aws-port/">AWS网络问题解决
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/30/raid-rebuild/">东校实验室服务器阵列rebuild</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/12/30/aws-port/">AWS网络问题解决</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a></p>
         
     </div>
 </div>
@@ -462,6 +345,8 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
