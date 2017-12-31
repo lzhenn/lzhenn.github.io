@@ -10,7 +10,7 @@ type: page
 {:toc}
 
 ## 关于我
-
+![](http://ww1.sinaimg.cn/large/73ebdc71gy1fmzzdtzucxj20wu0kugmh.jpg)
 
 ## 联系我
 

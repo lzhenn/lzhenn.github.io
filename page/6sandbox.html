@@ -1,0 +1,186 @@
+---
+layout: default
+title: Sandbox 
+permalink: /sandbox/
+icon: magic
+type: page
+---
+
+<!-- <h1>Archive of posts with {{ page.type }} '{{ page.title }}'</h1> -->
+<script type="text/javascript">
+    
+            
+        
+		function get_days(){
+            setTimeout("get_days();", 100);
+            contour++;
+            var ms2day = 1000*3600*24;
+            var ms2hour = 1000*3600;
+            var ms2minute = 1000*60;
+            var ms2second = 1000;
+            
+            var day_now = new Date();
+            var day_now_ms=day_now.getTime();
+           
+
+           //get today
+            var day_midnight = new Date();
+            day_midnight.setHours(0,0,0,0);
+            var our_day_ms=day_midnight.getTime();
+            var delta_ms = (day_now_ms-our_day_ms);
+            var ratio =delta_ms/1000/86400;
+            var day_dec_sec = new Number(Math.round(delta_ms/100)/10)
+            var inner_str = "Since TODAY: "+day_dec_sec.toFixed(1)+"s ("+Math.round(ratio*10000)/100+"%)<br />";
+            
+            inner_str+=bar(ratio,contour)+"<br />";
+            
+            
+           
+            
+            //get Undergraduate graduate day
+            var und_graday_ms=Date.parse("Jun 28, 2014"); 
+            var undergra_in_ms = Date.parse("Sep 7, 2010"); 
+            
+            delta_ms = (day_now_ms-und_graday_ms);
+            var antipodes = new Date();
+            
+            //caculate Re_undergraduate
+            var re_undergra = new Date();
+            
+            re_undergra.setTime(undergra_in_ms+delta_ms);
+            antipodes.setTime(und_graday_ms-delta_ms);
+
+            days = Math.floor(delta_ms/ms2day);
+            years = days/365;
+            inner_str += "Since UND_GRA: "+days+"Day ("+Math.floor(years*100)/100+"yr)<br />";
+            inner_str += " Reundergra: "+re_undergra.getFullYear()+"/"+full(re_undergra.getMonth()+1)+"/"+full(re_undergra.getDate())+"<br />";
+            inner_str += " Antipodes-: "+antipodes.getFullYear()+"/"+full(antipodes.getMonth()+1)+"/"+full(antipodes.getDate())+"<br /><br />"
+            
+            
+            //------------get PhD graduate day--------------
+            var phd_graday_ms=Date.parse("Jun 30, 2019"); 
+            var phd_inday_ms=Date.parse("Aug 20, 2014"); 
+            
+            
+            //caculate deltaT
+            delta_ms = (day_now_ms-phd_inday_ms);
+            var days_in = (day_now_ms-phd_inday_ms)/ms2day;
+            var days_will = (phd_graday_ms-day_now_ms)/ms2day;
+            
+            re_undergra.setTime(undergra_in_ms+delta_ms);
+            
+            //caculate antipodes
+            antipodes.setTime(phd_inday_ms-delta_ms);
+            ratio = days_in/(days_in+days_will);
+            
+            days = Math.floor(delta_ms/ms2day);
+            years = days/365;
+            
+            inner_str += "Since PHD_IN: "+days+"Day ("+Math.floor(years*100)/100+"yr, "+Math.round(ratio*10000)/100+"%)";
+            inner_str += " Reundergra: "+re_undergra.getFullYear()+"/"+full(re_undergra.getMonth()+1)+"/"+full(re_undergra.getDate())+"<br />";
+            inner_str += " Antipodes-: "+antipodes.getFullYear()+"/"+full(antipodes.getMonth()+1)+"/"+full(antipodes.getDate())+"<br />";
+            
+            delta_ms = (phd_graday_ms-day_now_ms);
+            days = Math.floor(delta_ms/ms2day);
+            /*hours = Math.floor((delta_ms-days*ms2day)/ms2hour);
+            minutes = Math.floor((delta_ms-days*ms2day-hours*ms2hour)/ms2minute);
+            seconds = Math.floor((delta_ms-days*ms2day-hours*ms2hour-minutes*ms2minute)/ms2second);*/
+            
+            years = days/365;
+            
+            antipodes.setTime(day_now_ms-delta_ms);
+            
+            
+            inner_str += "Till PHD_GRA: "+days+"Day ("+Math.floor(years*100)/100+"yr, "+Math.round((1-ratio)*10000)/100+"%)";
+            inner_str += " Antipodes-: "+antipodes.getFullYear()+"/"+full(antipodes.getMonth()+1)+"/"+full(antipodes.getDate())+"<br />"
+            // Fixed base: 2017-06-30, Aim: 240,000
+            var ass_aim = 240000
+            var ass_ini = 20161.62*6.8
+            var ass_now = ass_ini+(ass_aim-ass_ini)*(1-days/730)
+            inner_str += "AST: "+Math.floor(ass_now*100)/100+" ("+Math.floor(100*(ass_aim-ass_now))/100+"/"+Math.floor(100*(ass_aim-ass_ini)/730)/100+")<br />"
+            inner_str+=bar(ratio,contour);
+            
+            //------------get 30-year-old day--------------
+            var yr30_day_ms=Date.parse("Jul 27, 2021"); 
+            
+            
+            //caculate deltaT
+            delta_ms = (yr30_day_ms-day_now_ms);
+            
+            
+            //caculate antipodes
+            antipodes.setTime(day_now_ms-delta_ms);
+            
+            days = Math.floor(delta_ms/ms2day);
+            years = days/365;
+            
+             inner_str += "Till 30 Years Old: "+days+"Day ("+Math.floor(years*100)/100+"yr)";
+             inner_str += " Antipodes-: "+antipodes.getFullYear()+"/"+full(antipodes.getMonth()+1)+"/"+full(antipodes.getDate())+"<br />"
+            
+            
+            
+
+            
+            document.getElementById("myDiv").innerHTML= inner_str;
+            
+
+		}
+        
+        
+        // return the processing bar
+        function bar(ratio,counter){
+            var bar_len = 120;
+            bar_str="";
+            ratio = ratio*bar_len;
+            for (var ii=1; ii<=bar_len; ii++){
+                if (ii<=ratio)
+                    bar_str+=">";
+                else if ((ii-ratio)<1.0){
+                  var n_slash= counter%4
+                  switch(n_slash)
+                  {
+                     case 3:
+                        bar_str+="-";    
+                        break;
+                     case 2:
+                        bar_str+="/";    
+                        break;
+                     case 1:
+                        bar_str+="|";    
+                        break;
+                     case 0:
+                        bar_str+="\\";    
+                        break;
+                  }
+                }else
+                    bar_str+="-";    
+                if (ii%40==0)
+                    bar_str+="<br/>";
+            }
+
+            
+            return bar_str+"<br />";
+        }
+        function full(n){
+            if (n<10) 
+                return "0"+n;
+            else
+                return n;
+        }
+        
+</script>
+
+
+<div class="page clearfix">
+    <div class="left">
+        <h1>{{page.title}}</h1>
+        <hr>
+        <h3>Seize the day!</h3>
+		<div id="myDiv"></div>
+		<script>
+            var contour=0;
+			get_days();
+		</script>
+    </div>
+</div>
+<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>

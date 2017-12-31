@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>东校实验室服务器阵列rebuild</title>
-    <meta name="description" content="东校实验室服务器坏掉了一块RAID I的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。原RAID没出问题的磁盘被降级为foreign状态，后查到官方文档https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%...">
+    <title>山东半岛预报系统搭建</title>
+    <meta name="description" content="打算做一个山东半岛的预报系统，以后也算投名状。###configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)之后直接执行编译./compile -j 8 em_real执行编译过程卡住。更换15. 不包括avx指令集后成功。###编译wps发现无法编...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/30/raid-rebuild/">
+    <link rel="canonical" href="http://202.116.70.212:80/2017/12/31/WRF-shandong-setup/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -149,11 +149,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>东校实验室服务器阵列rebuild</h1>
+        <h1>山东半岛预报系统搭建</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-12-30
+                <i class="fa fa-calendar"></i>2017-12-31
             </div>
 
             <div class="label-card">
@@ -174,7 +174,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>
+        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -191,11 +193,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a-->
-        <a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a>&nbsp;
+        <!--a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a-->
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>&nbsp;
     
-        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
+        <!--a href="/tag/#forecast%26nbsp%3Bsystem" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a-->
+        <a href="/tag/#forecast&nbsp;system" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a>
     
   
 
@@ -207,17 +209,25 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>东校实验室服务器坏掉了一块RAID I的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。</p>
+<p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
 
-<p>原RAID没出问题的磁盘被降级为foreign状态，</p>
+<p>###configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</p>
 
-<p>后查到官方文档</p>
+<p>之后直接执行编译</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./compile <span class="nt">-j</span> 8 em_real
+</code></pre></div></div>
+<p>执行编译过程卡住。更换15. 不包括avx指令集后成功。</p>
 
-<p>https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh</p>
+<p>###编译wps发现无法编译出ungrib，经过多次测试，分别</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install libpng-devel
+yum install jasper-devel
+</code></pre></div></div>
+<p>将devel包安装完整后成功。</p>
 
-<p>Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.</p>
+<p>###下载geog包并解压。</p>
 
-<p>按F按键后导入foreign配置，开始进入系统。</p>
+<p>###调整wps设置</p>
+
 
         </article>
         <hr>
@@ -238,21 +248,6 @@
                     
                 
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
                 
                     
                 
@@ -299,35 +294,34 @@
                     
                 
                     
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/12/30/aws-port/">AWS网络问题解决
-                            
-                            </a>
-                        </li>
-                        
-                        
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
                     
                 
             
         
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/30/aws-port/">AWS网络问题解决</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a></p>
         
     </div>
 </div>
@@ -370,8 +364,6 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
