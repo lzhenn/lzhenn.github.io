@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>山东半岛预报系统搭建</title>
-    <meta name="description" content="  configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)  编译wps发现无法编译出ungrib，经过多次测试，分别  下载geog包并解压。  调整wps设置打算做一个山东半岛的预报系统，以后也算投名状。configure尝试选择20. INT...">
+    <title>买房的财务安全边际计算</title>
+    <meta name="description" content="我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5整理可得，净资产B&gt;(0.5-alpha)A+0.5C假设首付率为0.3B&gt;0.5...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/31/WRF-shandong-setup/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/01/01/housing-account/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -151,11 +151,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>山东半岛预报系统搭建</h1>
+        <h1>买房的财务安全边际计算</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-12-31
+                <i class="fa fa-calendar"></i>2018-01-01
             </div>
 
             <div class="label-card">
@@ -176,9 +176,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
     
   
 
@@ -195,11 +193,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a-->
-        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>&nbsp;
+        <!--a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a-->
+        <a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a>&nbsp;
     
-        <!--a href="/tag/#forecast%26nbsp%3Bsystem" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a-->
-        <a href="/tag/#forecast&nbsp;system" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a>
+        <!--a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a-->
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <!--a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a-->
+        <a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a>
     
   
 
@@ -210,31 +211,26 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#configure尝试选择20-intel-iforticc-xeon-snb-with-avx-mods" id="markdown-toc-configure尝试选择20-intel-iforticc-xeon-snb-with-avx-mods">configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</a></li>
-  <li><a href="#编译wps发现无法编译出ungrib经过多次测试分别" id="markdown-toc-编译wps发现无法编译出ungrib经过多次测试分别">编译wps发现无法编译出ungrib，经过多次测试，分别</a></li>
-  <li><a href="#下载geog包并解压" id="markdown-toc-下载geog包并解压">下载geog包并解压。</a></li>
-  <li><a href="#调整wps设置" id="markdown-toc-调整wps设置">调整wps设置</a></li>
-</ul>
+        
+<p>我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。
+假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为</p>
 
-<p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
+<p>R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5</p>
 
-<h3 id="configure尝试选择20-intel-iforticc-xeon-snb-with-avx-mods">configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</h3>
+<p>整理可得，净资产
+B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
 
-<p>之后直接执行编译</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./compile <span class="nt">-j</span> 8 em_real
-</code></pre></div></div>
-<p>执行编译过程卡住。更换15. 不包括avx指令集后成功。</p>
+<p>假设首付率为0.3</p>
 
-<h3 id="编译wps发现无法编译出ungrib经过多次测试分别">编译wps发现无法编译出ungrib，经过多次测试，分别</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install libpng-devel
-yum install jasper-devel
-</code></pre></div></div>
-<p>将devel包安装完整后成功。</p>
+<p>B&gt;0.5<em>C+0.2</em>A</p>
 
-<h3 id="下载geog包并解压">下载geog包并解压。</h3>
+<p>假设家庭本身无负债，B=C</p>
 
-<h3 id="调整wps设置">调整wps设置</h3>
+<p>B&gt;(2/5)*A</p>
+
+<p>因此，在30%首付、家庭无负债的条件下，对于一套500万的房子，总资产大于200万达到购入的安全边际。对于小户型，假设180万，家庭总资产大于72万为安全边际。</p>
+
+<p>再考虑50%首付的情况，这是个很有意思的阈值，在50%首付的前提下，只要初始家庭负债率小于50%即可满足条件，与房产价格无关。是否矛盾，并不，因为还有一个隐含条件是，家庭能够承担买房首付，若不讨论资产是否具有高流动性，至少有C&gt;0.5A。</p>
 
 
         </article>
@@ -249,13 +245,42 @@ yum install jasper-devel
                 
                     
                 
+                    
+                
+            
+                
+                    
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/12/31/new-year-blog/">岁末年初
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
             
                 
                     
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -270,22 +295,11 @@ yum install jasper-devel
                 
                     
                 
-            
-                
-                    
-                
                     
                 
             
-        
-            
-            
                 
                     
-                
-                    
-                
-            
                 
                     
                 
@@ -297,7 +311,11 @@ yum install jasper-devel
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -312,10 +330,6 @@ yum install jasper-devel
                 
                     
                 
-            
-                
-                    
-                
                     
                 
             
@@ -324,16 +338,11 @@ yum install jasper-devel
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
+                
+                    
                 
                     
                 
@@ -348,7 +357,11 @@ yum install jasper-devel
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -356,18 +369,37 @@ yum install jasper-devel
                 
             
         
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/12/31/new-year-blog/">岁末年初</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2017/12/31/new-year-blog/">岁末年初</a></p>
         
     </div>
 </div>
@@ -410,6 +442,8 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
