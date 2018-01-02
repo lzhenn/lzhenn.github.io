@@ -2,7 +2,7 @@
 layout: page
 title: Side Projects 
 permalink: /Side Projects/
-icon: bookmark
+icon: bar-chart 
 type: page
 ---
 

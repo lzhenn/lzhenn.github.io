@@ -70,7 +70,7 @@
                         
                         <a href="/archive/">
                         
-                            <i class="fa fa-archive"></i>Archives
+                            <i class="fa fa-clock-o"></i>Archives
                         </a>
                     </li>
                     
@@ -80,7 +80,7 @@
                         
                         <a href="/category/">
                         
-                            <i class="fa fa-th-list"></i>Categories
+                            <i class="fa fa-server"></i>Categories
                         </a>
                     </li>
                     
@@ -100,7 +100,7 @@
                         
                         <a href="/Side Projects/">
                         
-                            <i class="fa fa-bookmark"></i>Side Projects
+                            <i class="fa fa-bar-chart"></i>Side Projects
                         </a>
                     </li>
                     
@@ -110,7 +110,7 @@
                         
                         <a href="/about/">
                         
-                            <i class="fa fa-heart"></i>About
+                            <i class="fa fa-id-card-o"></i>About
                         </a>
                     </li>
                     
@@ -130,7 +130,7 @@
                         
                         <a href="/sandbox/">
                         
-                            <i class="fa fa-magic"></i>Sandbox
+                            <i class="fa fa-flask"></i>Sandbox
                         </a>
                     </li>
                     
@@ -155,6 +155,76 @@
         <small>tech blog and everything else</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>想要让本地的个人博客服务开机后即启动，测试了下，路径敏感。
+修改rc.local</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> vi rc.local
+</code></pre></div></div>
+<p>其中加入</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$YOUR_REPO</span>
+<span class="nb">sudo </span>jekyll s
+</code></pre></div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/02/ubuntu-boot/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -779,79 +849,6 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/12/30/raid-rebuild/">东校实验室服务器阵列rebuild</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-12-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a>&nbsp;
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>东校实验室服务器坏掉了一块RAID I的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。</p>
-
-<p>原RAID没出问题的磁盘被降级为foreign状态，</p>
-
-<p>后查到官方文档</p>
-
-<p>https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh</p>
-
-<p>Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.</p>
-
-<p>按F按键后导入foreign配置，开始进入系统。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/12/30/raid-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -878,6 +875,8 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a></li>
                     
                         <li><a href="/2018/01/01/housing-account/">买房的财务安全边际计算</a></li>
                     
@@ -927,7 +926,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -1017,7 +1016,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 18pt; color: #000;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 13.5pt; color: #444;">blog</a>
                     
                       
                       
@@ -1031,7 +1030,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 13.5pt; color: #444;">ubuntu</a>
                     
                       
                       
@@ -1073,7 +1072,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 18pt; color: #000;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
