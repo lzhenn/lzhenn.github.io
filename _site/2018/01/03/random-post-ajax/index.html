@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>山东半岛预报系统搭建</title>
-    <meta name="description" content="  configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)  编译wps发现无法编译出ungrib，经过多次测试，分别  下载geog包并解压。  调整wps设置打算做一个山东半岛的预报系统，以后也算投名状。configure尝试选择20. INT...">
+    <title>给博客增加了一个随机展示内容的功能</title>
+    <meta name="description" content="给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/31/WRF-shandong-setup/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/01/03/random-post-ajax/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -149,11 +149,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>山东半岛预报系统搭建</h1>
+        <h1>给博客增加了一个随机展示内容的功能</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-12-31
+                <i class="fa fa-calendar"></i>2018-01-03
             </div>
 
             <div class="label-card">
@@ -174,9 +174,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
+        <a href="/category/#network" title="Category: network" rel="category">network</a>&nbsp;
     
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
     
   
 
@@ -193,11 +193,20 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a-->
-        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>&nbsp;
+        <!--a href="/tag/#json" title="Tag: json" rel="tag">json</a-->
+        <a href="/tag/#json" title="Tag: json" rel="tag">json</a>&nbsp;
     
-        <!--a href="/tag/#forecast%26nbsp%3Bsystem" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a-->
-        <a href="/tag/#forecast&nbsp;system" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a>
+        <!--a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a-->
+        <a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a>&nbsp;
+    
+        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+    
+        <!--a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a-->
+        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
+    
+        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -208,31 +217,37 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#configure尝试选择20-intel-iforticc-xeon-snb-with-avx-mods" id="markdown-toc-configure尝试选择20-intel-iforticc-xeon-snb-with-avx-mods">configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</a></li>
-  <li><a href="#编译wps发现无法编译出ungrib经过多次测试分别" id="markdown-toc-编译wps发现无法编译出ungrib经过多次测试分别">编译wps发现无法编译出ungrib，经过多次测试，分别</a></li>
-  <li><a href="#下载geog包并解压" id="markdown-toc-下载geog包并解压">下载geog包并解压。</a></li>
-  <li><a href="#调整wps设置" id="markdown-toc-调整wps设置">调整wps设置</a></li>
-</ul>
+        
+<p>给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：</p>
 
-<p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
+<p>首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。这样很正常嘛，本身就是静态网页啦。</p>
 
-<h3 id="configure尝试选择20-intel-iforticc-xeon-snb-with-avx-mods">configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</h3>
-
-<p>之后直接执行编译</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./compile <span class="nt">-j</span> 8 em_real
+<p>所以还是回到刚刚的思路，查了下解决方案，发现是自己定义了函数但是木有执行。在定义后加入执行代码后，生效。注意对应的json包不能放在jekyll生成的下划线前缀目录下，否则无法获取到。javascript代码：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showJson</span><span class="p">(){</span>  
+    <span class="kd">var</span> <span class="nx">test</span><span class="p">;</span>  
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">){</span>  
+        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>  
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">){</span>  
+        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">();</span>  
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Browser not supported!"</span><span class="p">);</span>  
+    <span class="p">}</span>  
+    
+    <span class="k">if</span><span class="p">(</span><span class="nx">test</span> <span class="o">!=</span><span class="kc">null</span><span class="p">){</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s2">"/database/principles.json"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>  
+            <span class="k">if</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span><span class="o">&amp;&amp;</span><span class="nx">test</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">){</span>  
+                <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>  
+                <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">rnd_pos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"content-principle"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">rnd_pos</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
+            <span class="p">}</span>  
+        <span class="p">};</span>  
+    <span class="p">}</span>  
+<span class="p">}</span>  
+<span class="nx">showJson</span><span class="p">();</span> 
 </code></pre></div></div>
-<p>执行编译过程卡住。更换15. 不包括avx指令集后成功。</p>
-
-<h3 id="编译wps发现无法编译出ungrib经过多次测试分别">编译wps发现无法编译出ungrib，经过多次测试，分别</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install libpng-devel
-yum install jasper-devel
-</code></pre></div></div>
-<p>将devel包安装完整后成功。</p>
-
-<h3 id="下载geog包并解压">下载geog包并解压。</h3>
-
-<h3 id="调整wps设置">调整wps设置</h3>
 
 
         </article>
@@ -247,13 +262,7 @@ yum install jasper-devel
                 
                     
                 
-            
-                
                     
-                
-                    
-                
-            
                 
                     
                 
@@ -265,7 +274,58 @@ yum install jasper-devel
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
                 
                     
                 
@@ -280,22 +340,7 @@ yum install jasper-devel
                 
                     
                 
-            
-                
                     
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
                 
                     
                 
@@ -307,10 +352,7 @@ yum install jasper-devel
                 
                     
                 
-            
-        
-            
-            
+                    
                 
                     
                 
@@ -322,7 +364,7 @@ yum install jasper-devel
                 
                     
                 
-            
+                    
                 
                     
                 
@@ -337,25 +379,19 @@ yum install jasper-devel
                 
                     
                 
-            
-                
                     
                 
                     
                 
-            
-        
-            
-            
-                
                     
-                
-                    
-                
-            
-                
-                    
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/12/31/new-year-blog/">岁末年初
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
             
@@ -364,7 +400,7 @@ yum install jasper-devel
                 
                     
                 
-            
+                    
                 
                     
                 
@@ -379,28 +415,19 @@ yum install jasper-devel
                 
                     
                 
-            
-                
                     
-                
-                    
-                
-            
                 
                     
                 
                     
                 
             
-        
-            
-            
                 
                     
                 
                     
                 
-            
+                    
                 
                     
                 
@@ -415,7 +442,43 @@ yum install jasper-devel
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
                 
                     
                 
@@ -423,18 +486,120 @@ yum install jasper-devel
                 
             
         
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2017/12/31/new-year-blog/">岁末年初</a></p>
         
     </div>
 </div>
@@ -477,6 +642,8 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

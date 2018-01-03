@@ -5,7 +5,7 @@ layout: default
 <div class="page clearfix" index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
-        <small>tech blog and everything else</small>
+        <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
             {% for post in paginator.posts %}
@@ -65,12 +65,22 @@ layout: default
           {% endif %}
         </div>
     </div>
-    <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
+    <!--<button class="anchor"><i class="fa fa-anchor"></i></button> -->
     <div class="right">
         <div class="wrap">
             <div class="side">
                 <div>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-line-chart"></i>
+                    Principle
+                </div>
+                <ul class="content-ul">
+                    <li><small id="content-principle"></small></li>
+                </ul>
+            </div> 
+            <!--Recent Posts-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
@@ -83,7 +93,7 @@ layout: default
             <!-- Content -->
             <div class="side ">
                 <div>
-                    <i class="fa fa-th-list"></i>
+                    <i class="fa fa-server"></i>
                     Categories
                 </div>
                 <ul class="content-ul" cate>
@@ -144,17 +154,19 @@ layout: default
                 </div>
             </div>
 
-            <!-- <div class="side">
+            <div class="side">
                 <div>
                     <i class="fa fa-external-link"></i>
                     Links
                 </div>
                 <ul  class="content-ul">
-
+                    <li><a href='https://github.com/Novarizark'>GitHub</a></li>
+                    <li><a href='https://www.facebook.com/zhenning.li.9'>FaceBook</a></li>
                 </ul>
-            </div> -->
+            </div> 
         </div>
     </div>
 </div>
+<script src="/js/principles.js" charset="utf-8"></script>
 <!-- <script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
 <!-- <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->

@@ -23,24 +23,12 @@
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      hm.src = "//hm.baidu.com/hm.js?f8f21649f9d39b36012bc6dac8898310";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
 
-
-    <script>
-    // google analytics
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-72449510-4', 'auto');
-      ga('send', 'pageview');
-
-    </script>
 
 
 
@@ -108,6 +96,26 @@
                     
                     <li>
                         
+                        <a href="/sandbox/">
+                        
+                            <i class="fa fa-flask"></i>Sandbox
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-heart"></i>Favorites
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
                         <a href="/about/">
                         
                             <i class="fa fa-id-card-o"></i>About
@@ -121,16 +129,6 @@
                         <a href="/comments/">
                         
                             <i class="fa fa-comments"></i>Comments
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/sandbox/">
-                        
-                            <i class="fa fa-flask"></i>Sandbox
                         </a>
                     </li>
                     
@@ -152,9 +150,173 @@
         <div class="page clearfix" index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
-        <small>tech blog and everything else</small>
+        <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+    
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
+    
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
+    
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#记得装desktop版本的ubuntu否则没有xserver比较蛋疼" id="markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</a></li>
+  <li><a href="#安装英伟达显卡驱动要关掉x-server" id="markdown-toc-安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</a></li>
+  <li><a href="#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本" id="markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</a></li>
+</ul>
+
+<h3 id="记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</h3>
+<h3 id="安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</h3>
+<p>默认进入命令行启动</p>
+
+<p>http://blog.topspeedsnail.com/archives/4922</p>
+
+<p>注意16.04用这句：</p>
+
+<p>$sudo systemctl set-default multi-user.target</p>
+
+<p>这是每次开机默认进入命令行模式的方法。单词关闭用</p>
+
+<p>sudo /etc/init.d/lightdm stop</p>
+
+<p>然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）</p>
+
+<p>驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）</p>
+
+<p>http://blog.csdn.net/u012759136/article/details/53355781</p>
+
+<p>照着来没问题了吧，错了……build driver的时候直接说unable……我去</p>
+
+<p>差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）</p>
+
+<p>http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;lang=us&amp;type=GeForce</p>
+
+<p>这里下载17.11的版本</p>
+
+<h3 id="安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</h3>
+<p>直接运行安装，居然自带了驱动……去死吧……</p>
+
+<p>后面说我有几个库没装好，记录如下</p>
+
+<p>Missing recommended library: libGLU.so</p>
+
+<p>Missing recommended library: libX11.so</p>
+
+<p>Missing recommended library: libXi.so</p>
+
+<p>Missing recommended library: libXmu.so</p>
+
+<p>搜索下直接apt-get搞定</p>
+
+<p>$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
+
+<p>官方参考</p>
+
+<p>https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/</p>
+
+<p>重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。</p>
+
+<p>http://blog.csdn.net/shiorioxy/article/details/52652831</p>
+
+<p>http://blog.csdn.net/jhszh418762259/article/details/52958287</p>
+
+<p>之后写几个配置</p>
+
+<p>环境变量设置</p>
+
+<p>sudo vim ~/.bashrc</p>
+
+<p>在末尾添加</p>
+
+<p>export CUDA_HOME=/usr/local/cuda-8.0</p>
+
+<p>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</p>
+
+<p>export PATH=/usr/local/cuda-8.0/bin:$PATH</p>
+
+<p>保存退出。</p>
+
+<p>然后刷新。</p>
+
+<p>source ~/.bashrc</p>
+
+<p>动态链接库设置</p>
+
+<p>创建文件：</p>
+
+<p>sudo vim /etc/ld.so.conf.d/cuda.conf</p>
+
+<p>写入：/usr/local/cuda/lib64</p>
+
+<p>保存之后使其立即生效：</p>
+
+<p>sudo ldconfig -v</p>
+
+<p>之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。</p>
+
+<p>许久之后，安全完成。</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/ubuntu-cuda-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -504,15 +666,27 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
           
         </div>
     </div>
-    <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
+    <!--<button class="anchor"><i class="fa fa-anchor"></i></button> -->
     <div class="right">
         <div class="wrap">
             <div class="side">
                 <div>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-line-chart"></i>
+                    Principle
+                </div>
+                <ul class="content-ul">
+                    <li><small id="content-principle"></small></li>
+                </ul>
+            </div> 
+            <!--Recent Posts-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a></li>
                     
                         <li><a href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a></li>
                     
@@ -538,7 +712,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
             <!-- Content -->
             <div class="side ">
                 <div>
-                    <i class="fa fa-th-list"></i>
+                    <i class="fa fa-server"></i>
                     Categories
                 </div>
                 <ul class="content-ul" cate>
@@ -548,7 +722,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                             <span class="name">
                                 network
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -606,6 +780,15 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                         </a>
                     </li>
                     
+                    <li>
+                        <a href="/category/#javascript" class="categories-list-item" cate="javascript">
+                            <span class="name">
+                                javascript
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
                 </ul>
             </div>
             <!-- 其他div框放到这里 -->
@@ -635,7 +818,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 18pt; color: #000;">server</a>
+                      <a href="/tag/#server" style="font-size: 15pt; color: #333;">server</a>
                     
                       
                       
@@ -663,14 +846,14 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9pt; color: #999;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 12pt; color: #666;">jekyll</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 13.5pt; color: #444;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 12pt; color: #666;">ubuntu</a>
                     
                       
                       
@@ -712,7 +895,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 12pt; color: #666;">thinking</a>
                     
                       
                       
@@ -742,21 +925,44 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       <a href="/tag/#tinking" style="font-size: 9pt; color: #999;">tinking</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#json" style="font-size: 9pt; color: #999;">json</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#ajax" style="font-size: 9pt; color: #999;">ajax</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#javascript" style="font-size: 9pt; color: #999;">javascript</a>
+                    
                 </div>
             </div>
 
-            <!-- <div class="side">
+            <div class="side">
                 <div>
                     <i class="fa fa-external-link"></i>
                     Links
                 </div>
                 <ul  class="content-ul">
-
+                    <li><a href='https://github.com/Novarizark'>GitHub</a></li>
+                    <li><a href='https://www.facebook.com/zhenning.li.9'>FaceBook</a></li>
                 </ul>
-            </div> -->
+            </div> 
         </div>
     </div>
 </div>
+<script src="/js/principles.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 
