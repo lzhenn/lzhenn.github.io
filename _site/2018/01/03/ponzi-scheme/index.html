@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Ubuntu/K4200机器学习系统搭建</title>
-    <meta name="description" content="  记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼  安装英伟达显卡驱动，要关掉x server……  安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼安装英伟达显卡驱动，要关掉...">
+    <title>庞氏骗局不破灭的条件</title>
+    <meta name="description" content="这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：总资产 A=a*(1+i)^n总负债 L=a*(1+r)^n很显...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/30/ubuntu-cuda-setup/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/01/03/ponzi-scheme/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -151,11 +151,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Ubuntu/K4200机器学习系统搭建</h1>
+        <h1>庞氏骗局不破灭的条件</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-12-30
+                <i class="fa fa-calendar"></i>2018-01-03
             </div>
 
             <div class="label-card">
@@ -176,9 +176,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
     
   
 
@@ -195,17 +193,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a-->
-        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+        <!--a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a-->
+        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
     
-        <!--a href="/tag/#machine%26nbsp%3Blearning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a-->
-        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
+        <!--a href="/tag/#tinking" title="Tag: tinking" rel="tag">tinking</a-->
+        <a href="/tag/#tinking" title="Tag: tinking" rel="tag">tinking</a>&nbsp;
     
-        <!--a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a-->
-        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
-    
-        <!--a href="/tag/#deep%26nbsp%3Blearning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a-->
-        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>
+        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -216,164 +211,30 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#记得装desktop版本的ubuntu否则没有xserver比较蛋疼" id="markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</a></li>
-  <li><a href="#安装英伟达显卡驱动要关掉x-server" id="markdown-toc-安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</a></li>
-  <li><a href="#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本" id="markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</a></li>
-  <li><a href="#安装cudnn-以下是坑" id="markdown-toc-安装cudnn-以下是坑">安装cuDNN (以下是坑)</a></li>
-  <li><a href="#安装cuda-based-tensorflow" id="markdown-toc-安装cuda-based-tensorflow">安装cuda-based TensorFlow</a></li>
-</ul>
+        
+<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
 
-<h3 id="记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</h3>
-<h3 id="安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</h3>
-<p>默认进入命令行启动</p>
-
-<p>http://blog.topspeedsnail.com/archives/4922</p>
-
-<p>注意16.04用这句：</p>
-
-<p>$sudo systemctl set-default multi-user.target</p>
-
-<p>这是每次开机默认进入命令行模式的方法。单词关闭用</p>
-
-<p>sudo /etc/init.d/lightdm stop</p>
-
-<p>然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）</p>
-
-<p>驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）</p>
-
-<p>http://blog.csdn.net/u012759136/article/details/53355781</p>
-
-<p>照着来没问题了吧，错了……build driver的时候直接说unable……我去</p>
-
-<p>差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）</p>
-
-<p>http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;lang=us&amp;type=GeForce</p>
-
-<p>这里下载17.11的版本</p>
-
-<h3 id="安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</h3>
-<p>直接运行安装，居然自带了驱动……去死吧……</p>
-
-<p>后面说我有几个库没装好，记录如下</p>
-
-<p>Missing recommended library: libGLU.so</p>
-
-<p>Missing recommended library: libX11.so</p>
-
-<p>Missing recommended library: libXi.so</p>
-
-<p>Missing recommended library: libXmu.so</p>
-
-<p>搜索下直接apt-get搞定</p>
-
-<p>$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
-
-<p>官方参考</p>
-
-<p>https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/</p>
-
-<p>重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。</p>
-
-<p>http://blog.csdn.net/shiorioxy/article/details/52652831</p>
-
-<p>http://blog.csdn.net/jhszh418762259/article/details/52958287</p>
-
-<p>之后写几个配置</p>
-
-<p>环境变量设置</p>
-
-<p>sudo vim ~/.bashrc</p>
-
-<p>在末尾添加</p>
-
-<p>export CUDA_HOME=/usr/local/cuda-8.0</p>
-
-<p>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</p>
-
-<p>export PATH=/usr/local/cuda-8.0/bin:$PATH</p>
-
-<p>保存退出。</p>
-
-<p>然后刷新。</p>
-
-<p>source ~/.bashrc</p>
-
-<p>动态链接库设置</p>
-
-<p>创建文件：</p>
-
-<p>sudo vim /etc/ld.so.conf.d/cuda.conf</p>
-
-<p>写入：/usr/local/cuda/lib64</p>
-
-<p>保存之后使其立即生效：</p>
-
-<p>sudo ldconfig -v</p>
-
-<p>之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。</p>
-
-<p>许久之后，安全完成。</p>
-
-<h3 id="安装cudnn-以下是坑">安装cuDNN (以下是坑)</h3>
-<p>直接搜索，英伟达官网注册，下载三个相关deb包，然后</p>
-
-<p>$sudo dpkg -i xxxx.deb</p>
-
-<p>应该就把库给安装好了。</p>
-
-<p>安装anaconda，没啥好说的。</p>
-
-<h3 id="安装cuda-based-tensorflow">安装cuda-based TensorFlow</h3>
-<p>https://tensorflow.google.cn/install/install_linux</p>
-
-<p>follow来，突然发现我的cuda版本和cuDNN版本都高了……先试试吧</p>
-
-<p>pip install tensorflow-gpu</p>
-
-<p>安全完成</p>
-
-<p>但是使用的时候出现库缺失。然后conda安装我发现了这些……</p>
-
-<p>你妹啊！直接集成了cuda8，我去！
-但是用conda安装的tensorflow-gpu版本并不能正确执行，怀疑与环境已安装的有关。</p>
-
-<p>https://devtalk.nvidia.com/default/topic/1026198/cuda-9-0-importerror-libcublas-so-8-0/</p>
-
-<p>所以要重装cuda8…</p>
-
-<p>注意apt-get会拿到一个cuda9.1，我们可以用9.1的驱动，但8还是要装一遍，依然选择用runfile安装。</p>
-
-<p>重装cuda8之后，采用gist一脚本安装cuDNN v6，注意删掉apt-get安装cuda9的段落</p>
-
-<p>https://gist.githubusercontent.com/mjdietzx/0ff77af5ae60622ce6ed8c4d9b419f45/raw/ebcb37e45ba14317330ffc1269159ed076242b9a/waya-dl-setup.sh</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># install cuDNN v6.0</span>
-<span class="nv">CUDNN_TAR_FILE</span><span class="o">=</span><span class="s2">"cudnn-8.0-linux-x64-v6.0.tgz"</span>
-wget http://developer.download.nvidia.com/compute/redist/cudnn/v6.0/<span class="k">${</span><span class="nv">CUDNN_TAR_FILE</span><span class="k">}</span>
-<span class="nb">tar</span> <span class="nt">-xzvf</span> <span class="k">${</span><span class="nv">CUDNN_TAR_FILE</span><span class="k">}</span>
-<span class="nb">sudo </span>cp <span class="nt">-P</span> cuda/include/cudnn.h /usr/local/cuda-8.0/include
-<span class="nb">sudo </span>cp <span class="nt">-P</span> cuda/lib64/libcudnn<span class="k">*</span> /usr/local/cuda-8.0/lib64/
-<span class="nb">sudo </span>chmod a+r /usr/local/cuda-8.0/lib64/libcudnn<span class="k">*</span>
-<span class="c"># set environment variables</span>
-<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/cuda-8.0/bin<span class="k">${</span><span class="nv">PATH</span>:+:<span class="k">${</span><span class="nv">PATH</span><span class="k">}}</span>
-<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/cuda-8.0/lib64<span class="se">\$</span><span class="o">{</span>LD_LIBRARY_PATH:+:<span class="k">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="k">}</span><span class="o">}</span>
+<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
+总负债 L=a*(1+r)^n
 </code></pre></div></div>
-<p>pip安装的预编译TensorFlow可以运行，但是有python版本不匹配，没有最适应CPU编译的提示。</p>
+<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
+当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
 
-<p>因此TF还是自行编译得好……回来再折腾吧</p>
+<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
+总负债 L=a*(1-k)*(1+r)^n
+</code></pre></div></div>
+<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
+若不破灭，要求总资产大于等于0，则要求k</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
+</code></pre></div></div>
+<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
 
-<p>6.安装opencv-python
-pip install opencv-python</p>
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
 
-<p>安全完成！</p>
-
-<p>可以了，测试一下GTX760水平的cuda能否吊打E5-2643.</p>
-
-<p>neural style风格迁移测试。</p>
-
-<p>https://github.com/cysmith/neural-style-tf</p>
-
-<p>测试成绩赛高，E5-2643 v4 @ 3.40GHz约1500秒，GTX760水平只用500s，约1/3时间。</p>
+<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
+而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
 
 
         </article>
@@ -390,21 +251,7 @@ pip install opencv-python</p>
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -416,6 +263,37 @@ pip install opencv-python</p>
         
             
             
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
                 
                     
                         
@@ -423,7 +301,7 @@ pip install opencv-python</p>
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动
+                            <a href="/2017/12/31/new-year-blog/">岁末年初
                             
                             </a>
                         </li>
@@ -431,15 +309,7 @@ pip install opencv-python</p>
                         
                     
                 
-                    
-                
-                    
-                
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -458,21 +328,7 @@ pip install opencv-python</p>
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -491,6 +347,12 @@ pip install opencv-python</p>
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
                     
                 
             
@@ -501,24 +363,7 @@ pip install opencv-python</p>
                 
                     
                 
-                    
-                
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -537,8 +382,6 @@ pip install opencv-python</p>
                 
                     
                 
-                    
-                
             
                 
                     
@@ -546,35 +389,17 @@ pip install opencv-python</p>
                     
                 
                     
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -593,11 +418,26 @@ pip install opencv-python</p>
                 
                     
                 
-                    
-                
             
                 
                     
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
                 
                     
                 
@@ -614,13 +454,11 @@ pip install opencv-python</p>
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></p>
         
     </div>
 </div>

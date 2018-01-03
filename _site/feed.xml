@@ -5,9 +5,52 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 02 Jan 2018 10:16:24 +0800</pubDate>
-    <lastBuildDate>Tue, 02 Jan 2018 10:16:24 +0800</lastBuildDate>
+    <pubDate>Wed, 03 Jan 2018 10:38:42 +0800</pubDate>
+    <lastBuildDate>Wed, 03 Jan 2018 10:38:42 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>庞氏骗局不破灭的条件</title>
+        <description>
+这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。
+
+假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;总资产 A=a*(1+i)^n
+总负债 L=a*(1+r)^n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+很显然，若有i&amp;gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
+当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&amp;gt;=r，我们将模型进一步复杂化，继续讨论i&amp;lt;r的情况：
+
+一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;总资产 A=a(1+i)^n-k*a(1+r)^n
+总负债 L=a*(1-k)*(1+r)^n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+i&amp;lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
+若不破灭，要求总资产大于等于0，则要求k
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;k&amp;lt;=((1+i)/(1+r))^n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：
+
+&lt;img src=&quot;http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg&quot; alt=&quot;&quot; /&gt;
+
+结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
+而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……
+
+</description>
+        <pubDate>Wed, 03 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/01/03/ponzi-scheme/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/01/03/ponzi-scheme/</guid>
+        
+        <category>ponzi</category>
+        
+        <category>tinking</category>
+        
+        <category>blog</category>
+        
+        
+        <category>economy</category>
+        
+      </item>
     
       <item>
         <title>Ubuntu开机启动</title>
