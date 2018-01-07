@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>山东半岛预报系统搭建</title>
-    <meta name="description" content="  编译WRF  编译WPS  下载geog包并解压。  调整wps设置打算做一个山东半岛的预报系统，以后也算投名状。编译WRFconfigure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)之后直接执行编译./compile -j 8 em_real执行编...">
+    <meta name="description" content="  编译WRF  编译WPS  下载geog包并解压。  调整wps设置  执行wps  调整WRF设置  执行real  执行wrf打算做一个山东半岛的预报系统，以后也算投名状。编译WRFconfigure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)之后...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -213,6 +213,10 @@
   <li><a href="#编译wps" id="markdown-toc-编译wps">编译WPS</a></li>
   <li><a href="#下载geog包并解压" id="markdown-toc-下载geog包并解压">下载geog包并解压。</a></li>
   <li><a href="#调整wps设置" id="markdown-toc-调整wps设置">调整wps设置</a></li>
+  <li><a href="#执行wps" id="markdown-toc-执行wps">执行wps</a></li>
+  <li><a href="#调整wrf设置" id="markdown-toc-调整wrf设置">调整WRF设置</a></li>
+  <li><a href="#执行real" id="markdown-toc-执行real">执行real</a></li>
+  <li><a href="#执行wrf" id="markdown-toc-执行wrf">执行wrf</a></li>
 </ul>
 
 <p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
@@ -339,20 +343,79 @@ yum install jasper-devel
 <p>domain设置如下：
 <img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn6ptmsx25j20ug0o9dk8.jpg" alt="" /></p>
 
+<h3 id="执行wps">执行wps</h3>
 <p>设置从HKUST ENVR下载GFS输入文件<a href="http://envf.ust.hk/dataop/data/model_input/gfs_1.00deg_realtime/">GFS data archive</a></p>
 
 <p>测试加入gfs的SST数据，参考</p>
 
 <p><a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html">http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html</a></p>
 
-<p>后发现并不能用，出现segfault，更改namelist和ln，采用gfs预报sst解决。</p>
+<p>后发现并不能用，出现segfault，之后更改namelist和，对应GFS数据为SST变量Vtable，以及SST前缀，sst问题解决。</p>
+
+<p>met data生成过程一切顺利。</p>
 
 <p><strong>Updated 2018-01-06</strong></p>
+
+<h3 id="调整wrf设置">调整WRF设置</h3>
+
+<p>根据俊文和海洋局的配置调整namelist.input设置，过程中发现V3.9提供了经过测试的参数化suite，果断采用。CONUS代表北美大陆配置。</p>
+<h3 id="执行real">执行real</h3>
+<p>调整后real过程出错</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 5   --- ERROR: If sst_update /= 0, one of the auxinput4_interval settings must be /= 0
+ 6   --- Set auxinput4_interval_s to the same value as interval_seconds (usually a pretty good guess).
+</code></pre></div></div>
+<p>修改后，执行过程出现段错误。</p>
+
+<p>测试修改环境变量。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># set WRF</span>
+<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
+
+<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
+<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+</code></pre></div></div>
+<p>通过第一断点。新错误：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------</span> FATAL CALLED <span class="nt">---------------</span>
+FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431 
+ Problems, we cannot have excluded middle data from WPS 
+ <span class="nt">-------------------------------------------</span>
+ application called MPI_Abort<span class="o">(</span>MPI_COMM_WORLD, 1<span class="o">)</span> - process 0
+ <span class="o">[</span><span class="nb">unset</span><span class="o">]</span>: write_line error<span class="p">;</span> <span class="nv">fd</span><span class="o">=</span><span class="nt">-1</span> <span class="nv">buf</span><span class="o">=</span>:cmd<span class="o">=</span>abort <span class="nv">exitcode</span><span class="o">=</span>1
+ :
+ system msg <span class="k">for </span>write_line failure : Bad file descriptor
+
+</code></pre></div></div>
+<p>将SST Update设置为0后可以顺利执行完real。</p>
+
+<h3 id="执行wrf">执行wrf</h3>
+<p>执行过程直接出错,有一个gwd_opt设置为1后可行。</p>
+
+<p>顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。</p>
+
+<p><strong>Updated 2018-01-07</strong></p>
 
         </article>
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
         
             
             

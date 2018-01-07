@@ -2,7 +2,7 @@
 layout: post
 title:  "庞氏骗局不破灭的条件"
 categories: economy
-tags:  ponzi tinking blog
+tags:  ponzi thinking blog
 author: LZN
 ---
 

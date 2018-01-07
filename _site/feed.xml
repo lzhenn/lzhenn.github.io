@@ -5,9 +5,31 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Jan 2018 00:00:19 +0800</pubDate>
-    <lastBuildDate>Sun, 07 Jan 2018 00:00:19 +0800</lastBuildDate>
+    <pubDate>Sun, 07 Jan 2018 15:20:00 +0800</pubDate>
+    <lastBuildDate>Sun, 07 Jan 2018 15:20:00 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>干掉僵死ssh进程</title>
+        <description>
+有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pkill &lt;span class=&quot;nt&quot;&gt;-kill&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; pts/2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/01/07/pkill-ssh/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/01/07/pkill-ssh/</guid>
+        
+        <category>ssh</category>
+        
+        <category>server</category>
+        
+        
+        <category>network</category>
+        
+        <category>linux</category>
+        
+      </item>
     
       <item>
         <title>给博客增加了一个随机展示内容的功能</title>
@@ -99,7 +121,7 @@ i&amp;lt;r，很明显从现金流角度而言这是一个收不抵支的状态�
         
         <category>ponzi</category>
         
-        <category>tinking</category>
+        <category>thinking</category>
         
         <category>blog</category>
         
@@ -228,6 +250,10 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
   &lt;li&gt;&lt;a href=&quot;#编译wps&quot; id=&quot;markdown-toc-编译wps&quot;&gt;编译WPS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#下载geog包并解压&quot; id=&quot;markdown-toc-下载geog包并解压&quot;&gt;下载geog包并解压。&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#调整wps设置&quot; id=&quot;markdown-toc-调整wps设置&quot;&gt;调整wps设置&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#执行wps&quot; id=&quot;markdown-toc-执行wps&quot;&gt;执行wps&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#调整wrf设置&quot; id=&quot;markdown-toc-调整wrf设置&quot;&gt;调整WRF设置&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#执行real&quot; id=&quot;markdown-toc-执行real&quot;&gt;执行real&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#执行wrf&quot; id=&quot;markdown-toc-执行wrf&quot;&gt;执行wrf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 打算做一个山东半岛的预报系统，以后也算投名状。
@@ -354,15 +380,59 @@ yum install jasper-devel
 domain设置如下：
 &lt;img src=&quot;http://ww1.sinaimg.cn/large/73ebdc71gy1fn6ptmsx25j20ug0o9dk8.jpg&quot; alt=&quot;&quot; /&gt;
 
+&lt;h3 id=&quot;执行wps&quot;&gt;执行wps&lt;/h3&gt;
 设置从HKUST ENVR下载GFS输入文件&lt;a href=&quot;http://envf.ust.hk/dataop/data/model_input/gfs_1.00deg_realtime/&quot;&gt;GFS data archive&lt;/a&gt;
 
 测试加入gfs的SST数据，参考
 
 &lt;a href=&quot;http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html&quot;&gt;http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html&lt;/a&gt;
 
-后发现并不能用，出现segfault，更改namelist和ln，采用gfs预报sst解决。
+后发现并不能用，出现segfault，之后更改namelist和，对应GFS数据为SST变量Vtable，以及SST前缀，sst问题解决。
+
+met data生成过程一切顺利。
 
 &lt;strong&gt;Updated 2018-01-06&lt;/strong&gt;
+
+&lt;h3 id=&quot;调整wrf设置&quot;&gt;调整WRF设置&lt;/h3&gt;
+
+根据俊文和海洋局的配置调整namelist.input设置，过程中发现V3.9提供了经过测试的参数化suite，果断采用。CONUS代表北美大陆配置。
+&lt;h3 id=&quot;执行real&quot;&gt;执行real&lt;/h3&gt;
+调整后real过程出错
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 5   --- ERROR: If sst_update /= 0, one of the auxinput4_interval settings must be /= 0
+ 6   --- Set auxinput4_interval_s to the same value as interval_seconds (usually a pretty good guess).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+修改后，执行过程出现段错误。
+
+测试修改环境变量。
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# set WRF&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;WRFIO_NCD_LARGE_FILE_SUPPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;WRF_EM_CORE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NETCDF4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
+
+&lt;span class=&quot;nb&quot;&gt;ulimit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; unlimited
+&lt;span class=&quot;nb&quot;&gt;ulimit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; unlimited
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+通过第一断点。新错误：
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;--------------&lt;/span&gt; FATAL CALLED &lt;span class=&quot;nt&quot;&gt;---------------&lt;/span&gt;
+FATAL CALLED FROM FILE:  &amp;lt;stdin&amp;gt;  LINE:     431 
+ Problems, we cannot have excluded middle data from WPS 
+ &lt;span class=&quot;nt&quot;&gt;-------------------------------------------&lt;/span&gt;
+ application called MPI_Abort&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;MPI_COMM_WORLD, 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - process 0
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;unset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;: write_line error&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;:cmd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;abort &lt;span class=&quot;nv&quot;&gt;exitcode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+ :
+ system msg &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;write_line failure : Bad file descriptor
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+将SST Update设置为0后可以顺利执行完real。
+
+&lt;h3 id=&quot;执行wrf&quot;&gt;执行wrf&lt;/h3&gt;
+执行过程直接出错,有一个gwd_opt设置为1后可行。
+
+顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。
+
+&lt;strong&gt;Updated 2018-01-07&lt;/strong&gt;
 </description>
         <pubDate>Sun, 31 Dec 2017 00:00:00 +0800</pubDate>
         <link>http://202.116.70.212:80/2017/12/31/WRF-shandong-setup/</link>
@@ -671,26 +741,6 @@ Foreign configuration(s) found on adapter. Press any key to continue, or ’C’
         
         
         <category>hardware</category>
-        
-      </item>
-    
-      <item>
-        <title>AWS网络问题解决</title>
-        <description>
-很郁闷今天去东校修复服务器阵列，发现另一块RAID盘也坏了，wordpress数据库几乎全部丢失，文章只有题目没有内容。没办法，只能随他去了。
-
-终归还是要迁移到AWS的，之前一直没有折腾好的手机端SS问题，今天yum update的时候发现无法连接yum源，怀疑是安全组策略问题，设置出站流量为所有流量后，成功解决这一问题，看起来限制入站流量就可以了嘛～
-</description>
-        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2017/12/30/aws-port/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/aws-port/</guid>
-        
-        <category>aws</category>
-        
-        <category>server</category>
-        
-        
-        <category>network</category>
         
       </item>
     

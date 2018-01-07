@@ -138,13 +138,59 @@ domain设置如下：
 ![](http://ww1.sinaimg.cn/large/73ebdc71gy1fn6ptmsx25j20ug0o9dk8.jpg)
 
 
+### 执行wps
 设置从HKUST ENVR下载GFS输入文件[GFS data archive](http://envf.ust.hk/dataop/data/model_input/gfs_1.00deg_realtime/)
 
 测试加入gfs的SST数据，参考
 
 [http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html)
 
-后发现并不能用，出现segfault，更改namelist和ln，采用gfs预报sst解决。
+后发现并不能用，出现segfault，之后更改namelist和，对应GFS数据为SST变量Vtable，以及SST前缀，sst问题解决。
 
+met data生成过程一切顺利。
 
 **Updated 2018-01-06**
+
+### 调整WRF设置
+
+根据俊文和海洋局的配置调整namelist.input设置，过程中发现V3.9提供了经过测试的参数化suite，果断采用。CONUS代表北美大陆配置。
+### 执行real
+调整后real过程出错
+
+```
+ 5   --- ERROR: If sst_update /= 0, one of the auxinput4_interval settings must be /= 0
+ 6   --- Set auxinput4_interval_s to the same value as interval_seconds (usually a pretty good guess).
+```
+修改后，执行过程出现段错误。
+
+测试修改环境变量。
+``` bash
+# set WRF
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+export WRF_EM_CORE=1
+export NETCDF4=0
+
+ulimit -s unlimited
+ulimit -c unlimited
+```
+通过第一断点。新错误：
+
+``` bash
+-------------- FATAL CALLED ---------------
+FATAL CALLED FROM FILE:  <stdin>  LINE:     431 
+ Problems, we cannot have excluded middle data from WPS 
+ -------------------------------------------
+ application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+ [unset]: write_line error; fd=-1 buf=:cmd=abort exitcode=1
+ :
+ system msg for write_line failure : Bad file descriptor
+
+```
+将SST Update设置为0后可以顺利执行完real。
+
+### 执行wrf
+执行过程直接出错,有一个gwd_opt设置为1后可行。
+
+顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。
+
+**Updated 2018-01-07**

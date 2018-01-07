@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>给博客增加了一个随机展示内容的功能</title>
-    <meta name="description" content="给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。...">
+    <title>干掉僵死ssh进程</title>
+    <meta name="description" content="有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：pkill -kill -t pts/2">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2018/01/03/random-post-ajax/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/01/07/pkill-ssh/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -149,11 +149,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>给博客增加了一个随机展示内容的功能</h1>
+        <h1>干掉僵死ssh进程</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-01-03
+                <i class="fa fa-calendar"></i>2018-01-07
             </div>
 
             <div class="label-card">
@@ -176,7 +176,7 @@
     
         <a href="/category/#network" title="Category: network" rel="category">network</a>&nbsp;
     
-        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -193,20 +193,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#json" title="Tag: json" rel="tag">json</a-->
-        <a href="/tag/#json" title="Tag: json" rel="tag">json</a>&nbsp;
+        <!--a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a-->
+        <a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a>&nbsp;
     
-        <!--a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a-->
-        <a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a>&nbsp;
-    
-        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
-    
-        <!--a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a-->
-        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
-    
-        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
     
   
 
@@ -218,37 +209,9 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：</p>
-
-<p>首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。这样很正常嘛，本身就是静态网页啦。</p>
-
-<p>所以还是回到刚刚的思路，查了下解决方案，发现是自己定义了函数但是木有执行。在定义后加入执行代码后，生效。注意对应的json包不能放在jekyll生成的下划线前缀目录下，否则无法获取到。javascript代码：</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showJson</span><span class="p">(){</span>  
-    <span class="kd">var</span> <span class="nx">test</span><span class="p">;</span>  
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">){</span>  
-        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>  
-    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">){</span>  
-        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">();</span>  
-    <span class="p">}</span><span class="k">else</span><span class="p">{</span>  
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Browser not supported!"</span><span class="p">);</span>  
-    <span class="p">}</span>  
-    
-    <span class="k">if</span><span class="p">(</span><span class="nx">test</span> <span class="o">!=</span><span class="kc">null</span><span class="p">){</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s2">"/database/principles.json"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>  
-            <span class="k">if</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span><span class="o">&amp;&amp;</span><span class="nx">test</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">){</span>  
-                <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>  
-                <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
-                <span class="kd">var</span> <span class="nx">rnd_pos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"content-principle"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">rnd_pos</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
-            <span class="p">}</span>  
-        <span class="p">};</span>  
-    <span class="p">}</span>  
-<span class="p">}</span>  
-<span class="nx">showJson</span><span class="p">();</span> 
+<p>有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-kill</span> <span class="nt">-t</span> pts/2
 </code></pre></div></div>
-
 
         </article>
         <hr>
@@ -262,7 +225,7 @@
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -274,7 +237,13 @@
                 
                     
                 
+            
+                
                     
+                
+                    
+                
+            
                 
                     
                 
@@ -289,7 +258,7 @@
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -301,19 +270,16 @@
                 
                     
                 
-                    
-                
-                    
-                
-                    
-                
+            
+        
+            
             
                 
                     
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -323,7 +289,7 @@
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件
+                            <a href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动
                             
                             </a>
                         </li>
@@ -340,19 +306,13 @@
                 
                     
                 
-                    
-                
-                    
-                
-                    
-                
             
                 
                     
                 
                     
                 
-                    
+            
                 
                     
                 
@@ -367,31 +327,7 @@
                 
                     
                 
-                    
-                
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
                 
                     
                 
@@ -406,14 +342,77 @@
                 
                     
                 
+            
+                
                     
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
                 
                     
                 
                     
                         
                         <li class="relatedPost">
-                            <a href="/2017/12/31/new-year-blog/">岁末年初
+                            <a href="/2017/12/30/raid-rebuild/">东校实验室服务器阵列rebuild
                             
                             </a>
                         </li>
@@ -422,18 +421,6 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
         
             
             
@@ -442,175 +429,19 @@
                 
                     
                 
-                    
-                
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
                 
                     
                 
                     
                         
                         <li class="relatedPost">
-                            <a href="/2017/12/30/tech-blog-github-page/">github技术博客搭建
+                            <a href="/2017/12/30/aws-port/">AWS网络问题解决
                             
                             </a>
                         </li>
                         
                         
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
                     
                 
             
@@ -622,13 +453,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2018/01/07/pkill-ssh/">干掉僵死ssh进程</a></p>
         
     </div>
 </div>
