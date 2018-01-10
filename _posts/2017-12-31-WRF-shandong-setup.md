@@ -192,5 +192,212 @@ FATAL CALLED FROM FILE:  <stdin>  LINE:     431
 执行过程直接出错,有一个gwd_opt设置为1后可行。
 
 顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。
+最终采用的wrf namelist.input
+``` fortran
+ &time_control
+ run_days                            = 5,
+ run_hours                           = 0,
+ run_minutes                         = 0,
+ run_seconds                         = 0,
+ start_year                          = 2018, 2018, 2018, 2018,
+ start_month                         = 01,   01,   01,   01,
+ start_day                           = 05,   05,   05,   05,
+ start_hour                          = 12,   12,   12,   12,
+ start_minute                        = 00,   00,   00,   00,
+ start_second                        = 00,   00,   00,   00,
+ end_year                            = 2018, 2018, 2018, 2018,
+ end_month                           = 01,   01,   01,   01,
+ end_day                             = 10,   10,   10,   10,
+ end_hour                            = 12,   12,   12,   12,
+ end_minute                          = 00,   00,   00,   00,
+ end_second                          = 00,   00,   00,   00,
+ interval_seconds                    = 21600
+ input_from_file                     = .true.,.true.,.true.,.true.,
+ history_interval                    = 60,  60,   60,   60,
+ frames_per_outfile                  = 1000, 1000, 1000, 1000,
+ restart                             = .false.,
+ restart_interval                    = 5000,
+ io_form_history                     = 2
+ io_form_restart                     = 2
+ io_form_input                       = 2
+ io_form_auxinput4                   = 0 
+ io_form_boundary                    = 2
+ auxinput4_interval                  = 0
+ debug_level                         = 0
+ /
+
+ &domains
+ time_step                           = 180,
+ time_step_fract_num                 = 0,
+ time_step_fract_den                 = 1,
+ max_dom                             = 3,
+ e_we                                = 300, 241, 301, 301,
+ e_sn                                = 220, 202, 283, 301,
+ e_vert                              = 39,   39,  39,  39, 
+ p_top_requested                     = 5000,
+ num_metgrid_levels                  = 32,
+ num_metgrid_soil_levels             = 4,
+ eta_levels			     = 1.0000, 0.9979, 0.9956, 0.9931,
+				       0.9904, 0.9875, 0.9844, 0.9807,
+				       0.9763, 0.9711, 0.9649, 0.9575,
+				       0.9488, 0.9385, 0.9263, 0.9120,
+				       0.8951, 0.8753, 0.8521, 0.8251,
+				       0.7937, 0.7597, 0.7229, 0.6833,
+				       0.6410, 0.5960, 0.5484, 0.4985,
+				       0.4467, 0.3934, 0.3393, 0.2850,
+				       0.2316, 0.1801, 0.1324, 0.0903,
+                                       0.0542, 0.0241, 0.0000
+ dx                                  = 27000,   9000,   3000,	1000,
+ dy                                  = 27000, 	9000,   3000,	1000,
+ 
+ grid_id                             = 1,     2,     3,	   4,
+ parent_id                           = 1,     1,     2,	   3,
+ i_parent_start                      = 1,   140,    80,  140,
+ j_parent_start                      = 1,    80,    50,  110,
+ parent_grid_ratio                   = 1,     3,     3,    3,
+ parent_time_step_ratio              = 1,     3,     3,    3,
+ feedback                            = 0,
+ smooth_option                       = 2
+ /
+
+ &physics
+ physics_suite                       = 'CONUS'
+ 
+ cu_physics                          = 6,     6,     0,    0,
+
+ radt                                = 30,    30,    30,  30,
+ bldt                                = 0,     0,     0,    0,
+ cudt                                = 5,     5,     5,    5,
+ icloud                              = 1,
+ num_soil_layers                     = 4,
+ num_land_cat                        = 21,
+ sf_urban_physics                    = 0,     0,     0,    0,
+ sst_update	            		     = 0,
+ /
+
+ &fdda
+ /
+
+ &dynamics
+ w_damping                           = 0,
+ diff_opt                            = 1,      1,      1,    1,
+ km_opt                              = 4,      4,      4,    4,
+ diff_6th_opt                        = 0,      0,      0,    0,
+ diff_6th_factor                     = 0.12,   0.12,   0.12, 0.12,
+ base_temp                           = 290.                          
+ damp_opt                            = 0,                            
+ zdamp                               = 5000.,  5000.,  5000.,5000.,
+ dampcoef                            = 0.2,    0.2,    0.2   0.2
+ khdif                               = 0,      0,      0,    0,
+ kvdif                               = 0,      0,      0,    0,
+ non_hydrostatic                     = .true., .true., .true..true., ,
+ moist_adv_opt                       = 1,      1,      1,    1,       
+ scalar_adv_opt                      = 1,      1,      1,    1,       
+ gwd_opt                             = 0,
+ /
+
+ &bdy_control
+ spec_bdy_width                      = 5,
+ spec_zone                           = 1,
+ relax_zone                          = 4,
+ specified                           = .true., .false.,.false.,.false.,
+ nested                              = .false., .true., .true., .true.,
+ /
+
+ &grib2
+ /
+
+ &namelist_quilt
+ nio_tasks_per_group = 0,
+ nio_groups = 1,
+ /
+```
+### 计划任务
+之后crontab配合自动运行脚本，每晚0:45开始执行，利用12Z数据，积分步长120s，尝试做未来5天预报。
+自动运行脚本：
+``` bash
+#!/bin/sh
+
+LID=`date -d '1 days ago' +%Y%m%d`
+LID_NLS=`date -d '1 days ago' +%Y-%m-%d`
+LID_NLE=`date -d '-4 days ago' +%Y-%m-%d` # 5 days later, for forecast
+
+WPSDIR=/home/lzhenn/package/WPS
+WRFDIR=/home/lzhenn/array/lzhenn/WRFV3/run
+LOGFILE=/home/lzhenn/workspace/wrf-sdpwfe/sys-log/${LID}.log
+GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID
+
+
+
+############ Fetch GFS ##############
+
+echo "Forecast ${LID_NLS} to ${LID_NLE}"
+echo "Fetching GFS data..."
+python fetch_gfs.py
+
+############## WPS ##################
+cd $WPSDIR 
+# Clean WPS data
+
+echo "Clean WPS..."
+rm -f met_em.*
+rm -f GFS:*
+rm -f SST:*
+
+# Process GFS
+
+## Modify date and GFS
+echo "Working on WPS..."
+sed -i "/prefix/s/^.*/ prefix = 'GFS',/g" namelist.wps
+sed -i "/start_date/s/^.*$/ start_date = '${LID_NLS}_12:00:00','${LID_NLS}_12:00:00','${LID_NLS}_12:00:00','${LID_NLS}_12:00:00',/g" namelist.wps
+sed -i "/end_date/s/^.*$/ end_date = '${LID_NLE}_12:00:00','${LID_NLE}_12:00:00','${LID_NLE}_12:00:00','${LID_NLE}_12:00:00',/g" namelist.wps
+
+echo "Working on WPS->Ungrib GFS..."
+ln -sf ungrib/Variable_Tables/Vtable.GFS Vtable
+./link_grib.csh $GFSDIR/gfs* 
+./ungrib.exe >& $LOGFILE
+
+## Modify  GFS SST
+echo "Working on WPS->Ungrib SST..."
+sed -i "/prefix/s/^.*/ prefix = 'SST',/g" namelist.wps
+
+ln -sf ungrib/Variable_Tables/Vtable.SST Vtable
+./ungrib.exe >& $LOGFILE
+
+echo "Working on WPS->Metgrid..."
+./metgrid.exe >& $LOGFILE
+
+############## WRF ##################
+echo "Working on WRF->REAL..."
+cd $WRFDIR
+
+YYYY_NLS=`date -d '1 days ago' +%Y`
+YYYY_NLE=`date -d '-4 days ago' +%Y`
+
+MM_NLS=`date -d '1 days ago' +%m`
+MM_NLE=`date -d '-4 days ago' +%m`
+
+DD_NLS=`date -d '1 days ago' +%d`
+DD_NLE=`date -d '-4 days ago' +%d`
+
+sed -i "/start_year/s/^.*$/ start_year                          = ${YYYY_NLS}, ${YYYY_NLS}, ${YYYY_NLS}, ${YYYY_NLS},/g" namelist.input
+sed -i "/end_year/s/^.*$/ end_year                            = ${YYYY_NLE}, ${YYYY_NLE}, ${YYYY_NLE}, ${YYYY_NLE},/g" namelist.input
+sed -i "/start_month/s/^.*$/ start_month                          = ${MM_NLS}, ${MM_NLS}, ${MM_NLS}, ${MM_NLS},/g" namelist.input
+sed -i "/end_month/s/^.*$/ end_month                          = ${MM_NLE}, ${MM_NLE}, ${MM_NLE}, ${MM_NLE},/g" namelist.input
+sed -i "/start_day/s/^.*$/ start_day                          = ${DD_NLS}, ${DD_NLS}, ${DD_NLS}, ${DD_NLS},/g" namelist.input
+sed -i "/end_day/s/^.*$/ end_day                          = ${DD_NLE}, ${DD_NLE}, ${DD_NLE}, ${DD_NLE},/g" namelist.input
+
+rm -f met_em.d0*
+rm -f wrfout_d0*
+rm -f wrfinput_d0*
+rm -f wrflowinp_d0*
+rm -f wrfbdy_d0*
+ln -sf $WPSDIR/met_em.d0* ./
+./real.exe >& $LOGFILE
+
+echo "Working on WRF->WRF..."
+mpirun -np 16 ./wrf.exe
+
+```
 
 **Updated 2018-01-07**

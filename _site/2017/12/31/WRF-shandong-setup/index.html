@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>山东半岛预报系统搭建</title>
-    <meta name="description" content="  编译WRF  编译WPS  下载geog包并解压。  调整wps设置  执行wps  调整WRF设置  执行real  执行wrf打算做一个山东半岛的预报系统，以后也算投名状。编译WRFconfigure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)之后...">
+    <meta name="description" content="  编译WRF  编译WPS  下载geog包并解压。  调整wps设置  执行wps  调整WRF设置  执行real  执行wrf  计划任务打算做一个山东半岛的预报系统，以后也算投名状。编译WRFconfigure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX m...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -217,6 +217,7 @@
   <li><a href="#调整wrf设置" id="markdown-toc-调整wrf设置">调整WRF设置</a></li>
   <li><a href="#执行real" id="markdown-toc-执行real">执行real</a></li>
   <li><a href="#执行wrf" id="markdown-toc-执行wrf">执行wrf</a></li>
+  <li><a href="#计划任务" id="markdown-toc-计划任务">计划任务</a></li>
 </ul>
 
 <p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
@@ -393,7 +394,212 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
 <h3 id="执行wrf">执行wrf</h3>
 <p>执行过程直接出错,有一个gwd_opt设置为1后可行。</p>
 
-<p>顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。</p>
+<p>顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。
+最终采用的wrf namelist.input</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">&amp;</span><span class="n">time_control</span><span class="w">
+ </span><span class="n">run_days</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+ </span><span class="n">run_hours</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">run_minutes</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">run_seconds</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_year</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_month</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_day</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_hour</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_minute</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_second</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_year</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_month</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_day</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_hour</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_minute</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_second</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">interval_seconds</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">21600</span><span class="w">
+ </span><span class="n">input_from_file</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="w">
+ </span><span class="n">history_interval</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">  </span><span class="mi">60</span><span class="p">,</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w">
+ </span><span class="n">frames_per_outfile</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+ </span><span class="n">restart</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="w">
+ </span><span class="n">restart_interval</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+ </span><span class="n">io_form_history</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">io_form_restart</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">io_form_input</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">io_form_auxinput4</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+ </span><span class="n">io_form_boundary</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">auxinput4_interval</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+ </span><span class="n">debug_level</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">domains</span><span class="w">
+ </span><span class="n">time_step</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w">
+ </span><span class="n">time_step_fract_num</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">time_step_fract_den</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">max_dom</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_we</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">241</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_sn</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_vert</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">   </span><span class="mi">39</span><span class="p">,</span><span class="w">  </span><span class="mi">39</span><span class="p">,</span><span class="w">  </span><span class="mi">39</span><span class="p">,</span><span class="w"> 
+ </span><span class="n">p_top_requested</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_metgrid_levels</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_metgrid_soil_levels</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">eta_levels</span><span class="w">			     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0000</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9979</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9956</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9931</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.9904</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9875</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9844</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9807</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.9763</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9711</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9649</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9575</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.9488</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9385</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9263</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9120</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.8951</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8753</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8521</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8251</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.7937</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7597</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7229</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6833</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.6410</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5960</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5484</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4985</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.4467</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3934</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3393</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2850</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.2316</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1801</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1324</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0903</span><span class="p">,</span><span class="w">
+                                       </span><span class="mf">0.0542</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0241</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0000</span><span class="w">
+ </span><span class="n">dx</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">   </span><span class="mi">9000</span><span class="p">,</span><span class="w">   </span><span class="mi">3000</span><span class="p">,</span><span class="w">	</span><span class="mi">1000</span><span class="p">,</span><span class="w">
+ </span><span class="n">dy</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w"> 	</span><span class="mi">9000</span><span class="p">,</span><span class="w">   </span><span class="mi">3000</span><span class="p">,</span><span class="w">	</span><span class="mi">1000</span><span class="p">,</span><span class="w">
+ 
+ </span><span class="n">grid_id</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">	   </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_id</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w">	   </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">i_parent_start</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">140</span><span class="p">,</span><span class="w">    </span><span class="mi">80</span><span class="p">,</span><span class="w">  </span><span class="mi">140</span><span class="p">,</span><span class="w">
+ </span><span class="n">j_parent_start</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">80</span><span class="p">,</span><span class="w">    </span><span class="mi">50</span><span class="p">,</span><span class="w">  </span><span class="mi">110</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_grid_ratio</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">    </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_time_step_ratio</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">    </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">feedback</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">smooth_option</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">physics</span><span class="w">
+ </span><span class="n">physics_suite</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="s1">'CONUS'</span><span class="w">
+ 
+ </span><span class="n">cu_physics</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">     </span><span class="mi">6</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+
+ </span><span class="n">radt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">    </span><span class="mi">30</span><span class="p">,</span><span class="w">    </span><span class="mi">30</span><span class="p">,</span><span class="w">  </span><span class="mi">30</span><span class="p">,</span><span class="w">
+ </span><span class="n">bldt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">cudt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w">    </span><span class="mi">5</span><span class="p">,</span><span class="w">
+ </span><span class="n">icloud</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_soil_layers</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_land_cat</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+ </span><span class="n">sf_urban_physics</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">sst_update</span><span class="w">	            		     </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">fdda</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">dynamics</span><span class="w">
+ </span><span class="n">w_damping</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">diff_opt</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">km_opt</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">      </span><span class="mi">4</span><span class="p">,</span><span class="w">      </span><span class="mi">4</span><span class="p">,</span><span class="w">    </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">diff_6th_opt</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">diff_6th_factor</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">   </span><span class="mf">0.12</span><span class="p">,</span><span class="w">   </span><span class="mf">0.12</span><span class="p">,</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">
+ </span><span class="n">base_temp</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mf">290.</span><span class="w">                          
+ </span><span class="n">damp_opt</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                            
+ </span><span class="n">zdamp</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mf">5000.</span><span class="p">,</span><span class="w">  </span><span class="mf">5000.</span><span class="p">,</span><span class="w">  </span><span class="mf">5000.</span><span class="p">,</span><span class="mf">5000.</span><span class="p">,</span><span class="w">
+ </span><span class="n">dampcoef</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w">    </span><span class="mf">0.2</span><span class="p">,</span><span class="w">    </span><span class="mf">0.2</span><span class="w">   </span><span class="mf">0.2</span><span class="w">
+ </span><span class="n">khdif</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">kvdif</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">non_hydrostatic</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true..true.</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w">
+ </span><span class="n">moist_adv_opt</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">       
+ </span><span class="n">scalar_adv_opt</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">       
+ </span><span class="n">gwd_opt</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">bdy_control</span><span class="w">
+ </span><span class="n">spec_bdy_width</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+ </span><span class="n">spec_zone</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">relax_zone</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">specified</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="kc">.false.</span><span class="p">,</span><span class="kc">.false.</span><span class="p">,</span><span class="w">
+ </span><span class="n">nested</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">grib2</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">namelist_quilt</span><span class="w">
+ </span><span class="n">nio_tasks_per_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">nio_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="计划任务">计划任务</h3>
+<p>之后crontab配合自动运行脚本，每晚0:45开始执行，利用12Z数据，积分步长120s，尝试做未来5天预报。
+自动运行脚本：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+
+<span class="nv">LID</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'1 days ago'</span> +%Y%m%d<span class="sb">`</span>
+<span class="nv">LID_NLS</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'1 days ago'</span> +%Y-%m-%d<span class="sb">`</span>
+<span class="nv">LID_NLE</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'-4 days ago'</span> +%Y-%m-%d<span class="sb">`</span> <span class="c"># 5 days later, for forecast</span>
+
+<span class="nv">WPSDIR</span><span class="o">=</span>/home/lzhenn/package/WPS
+<span class="nv">WRFDIR</span><span class="o">=</span>/home/lzhenn/array/lzhenn/WRFV3/run
+<span class="nv">LOGFILE</span><span class="o">=</span>/home/lzhenn/workspace/wrf-sdpwfe/sys-log/<span class="k">${</span><span class="nv">LID</span><span class="k">}</span>.log
+<span class="nv">GFSDIR</span><span class="o">=</span>/home/lzhenn/array/lzhenn/gfs_fcst/<span class="nv">$LID</span>
+
+
+
+<span class="c">############ Fetch GFS ##############</span>
+
+<span class="nb">echo</span> <span class="s2">"Forecast </span><span class="k">${</span><span class="nv">LID_NLS</span><span class="k">}</span><span class="s2"> to </span><span class="k">${</span><span class="nv">LID_NLE</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Fetching GFS data..."</span>
+python fetch_gfs.py
+
+<span class="c">############## WPS ##################</span>
+<span class="nb">cd</span> <span class="nv">$WPSDIR</span> 
+<span class="c"># Clean WPS data</span>
+
+<span class="nb">echo</span> <span class="s2">"Clean WPS..."</span>
+rm <span class="nt">-f</span> met_em.<span class="k">*</span>
+rm <span class="nt">-f</span> GFS:<span class="k">*</span>
+rm <span class="nt">-f</span> SST:<span class="k">*</span>
+
+<span class="c"># Process GFS</span>
+
+<span class="c">## Modify date and GFS</span>
+<span class="nb">echo</span> <span class="s2">"Working on WPS..."</span>
+sed <span class="nt">-i</span> <span class="s2">"/prefix/s/^.*/ prefix = 'GFS',/g"</span> namelist.wps
+sed <span class="nt">-i</span> <span class="s2">"/start_date/s/^.*</span><span class="nv">$/</span><span class="s2"> start_date = '</span><span class="k">${</span><span class="nv">LID_NLS</span><span class="k">}</span><span class="s2">_12:00:00','</span><span class="k">${</span><span class="nv">LID_NLS</span><span class="k">}</span><span class="s2">_12:00:00','</span><span class="k">${</span><span class="nv">LID_NLS</span><span class="k">}</span><span class="s2">_12:00:00','</span><span class="k">${</span><span class="nv">LID_NLS</span><span class="k">}</span><span class="s2">_12:00:00',/g"</span> namelist.wps
+sed <span class="nt">-i</span> <span class="s2">"/end_date/s/^.*</span><span class="nv">$/</span><span class="s2"> end_date = '</span><span class="k">${</span><span class="nv">LID_NLE</span><span class="k">}</span><span class="s2">_12:00:00','</span><span class="k">${</span><span class="nv">LID_NLE</span><span class="k">}</span><span class="s2">_12:00:00','</span><span class="k">${</span><span class="nv">LID_NLE</span><span class="k">}</span><span class="s2">_12:00:00','</span><span class="k">${</span><span class="nv">LID_NLE</span><span class="k">}</span><span class="s2">_12:00:00',/g"</span> namelist.wps
+
+<span class="nb">echo</span> <span class="s2">"Working on WPS-&gt;Ungrib GFS..."</span>
+ln <span class="nt">-sf</span> ungrib/Variable_Tables/Vtable.GFS Vtable
+./link_grib.csh <span class="nv">$GFSDIR</span>/gfs<span class="k">*</span> 
+./ungrib.exe <span class="o">&gt;</span>&amp; <span class="nv">$LOGFILE</span>
+
+<span class="c">## Modify  GFS SST</span>
+<span class="nb">echo</span> <span class="s2">"Working on WPS-&gt;Ungrib SST..."</span>
+sed <span class="nt">-i</span> <span class="s2">"/prefix/s/^.*/ prefix = 'SST',/g"</span> namelist.wps
+
+ln <span class="nt">-sf</span> ungrib/Variable_Tables/Vtable.SST Vtable
+./ungrib.exe <span class="o">&gt;</span>&amp; <span class="nv">$LOGFILE</span>
+
+<span class="nb">echo</span> <span class="s2">"Working on WPS-&gt;Metgrid..."</span>
+./metgrid.exe <span class="o">&gt;</span>&amp; <span class="nv">$LOGFILE</span>
+
+<span class="c">############## WRF ##################</span>
+<span class="nb">echo</span> <span class="s2">"Working on WRF-&gt;REAL..."</span>
+<span class="nb">cd</span> <span class="nv">$WRFDIR</span>
+
+<span class="nv">YYYY_NLS</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'1 days ago'</span> +%Y<span class="sb">`</span>
+<span class="nv">YYYY_NLE</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'-4 days ago'</span> +%Y<span class="sb">`</span>
+
+<span class="nv">MM_NLS</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'1 days ago'</span> +%m<span class="sb">`</span>
+<span class="nv">MM_NLE</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'-4 days ago'</span> +%m<span class="sb">`</span>
+
+<span class="nv">DD_NLS</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'1 days ago'</span> +%d<span class="sb">`</span>
+<span class="nv">DD_NLE</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s1">'-4 days ago'</span> +%d<span class="sb">`</span>
+
+sed <span class="nt">-i</span> <span class="s2">"/start_year/s/^.*</span><span class="nv">$/</span><span class="s2"> start_year                          = </span><span class="k">${</span><span class="nv">YYYY_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">YYYY_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">YYYY_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">YYYY_NLS</span><span class="k">}</span><span class="s2">,/g"</span> namelist.input
+sed <span class="nt">-i</span> <span class="s2">"/end_year/s/^.*</span><span class="nv">$/</span><span class="s2"> end_year                            = </span><span class="k">${</span><span class="nv">YYYY_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">YYYY_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">YYYY_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">YYYY_NLE</span><span class="k">}</span><span class="s2">,/g"</span> namelist.input
+sed <span class="nt">-i</span> <span class="s2">"/start_month/s/^.*</span><span class="nv">$/</span><span class="s2"> start_month                          = </span><span class="k">${</span><span class="nv">MM_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">MM_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">MM_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">MM_NLS</span><span class="k">}</span><span class="s2">,/g"</span> namelist.input
+sed <span class="nt">-i</span> <span class="s2">"/end_month/s/^.*</span><span class="nv">$/</span><span class="s2"> end_month                          = </span><span class="k">${</span><span class="nv">MM_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">MM_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">MM_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">MM_NLE</span><span class="k">}</span><span class="s2">,/g"</span> namelist.input
+sed <span class="nt">-i</span> <span class="s2">"/start_day/s/^.*</span><span class="nv">$/</span><span class="s2"> start_day                          = </span><span class="k">${</span><span class="nv">DD_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">DD_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">DD_NLS</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">DD_NLS</span><span class="k">}</span><span class="s2">,/g"</span> namelist.input
+sed <span class="nt">-i</span> <span class="s2">"/end_day/s/^.*</span><span class="nv">$/</span><span class="s2"> end_day                          = </span><span class="k">${</span><span class="nv">DD_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">DD_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">DD_NLE</span><span class="k">}</span><span class="s2">, </span><span class="k">${</span><span class="nv">DD_NLE</span><span class="k">}</span><span class="s2">,/g"</span> namelist.input
+
+rm <span class="nt">-f</span> met_em.d0<span class="k">*</span>
+rm <span class="nt">-f</span> wrfout_d0<span class="k">*</span>
+rm <span class="nt">-f</span> wrfinput_d0<span class="k">*</span>
+rm <span class="nt">-f</span> wrflowinp_d0<span class="k">*</span>
+rm <span class="nt">-f</span> wrfbdy_d0<span class="k">*</span>
+ln <span class="nt">-sf</span> <span class="nv">$WPSDIR</span>/met_em.d0<span class="k">*</span> ./
+./real.exe <span class="o">&gt;</span>&amp; <span class="nv">$LOGFILE</span>
+
+<span class="nb">echo</span> <span class="s2">"Working on WRF-&gt;WRF..."</span>
+mpirun <span class="nt">-np</span> 16 ./wrf.exe
+
+</code></pre></div></div>
 
 <p><strong>Updated 2018-01-07</strong></p>
 
@@ -431,6 +637,21 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                     
                 
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
                 
                     
                 
@@ -556,21 +777,6 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     
