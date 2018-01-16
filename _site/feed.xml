@@ -5,9 +5,63 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Jan 2018 11:48:20 +0800</pubDate>
-    <lastBuildDate>Tue, 09 Jan 2018 11:48:20 +0800</lastBuildDate>
+    <pubDate>Tue, 16 Jan 2018 13:23:42 +0800</pubDate>
+    <lastBuildDate>Tue, 16 Jan 2018 13:23:42 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>利用pandas生成excel文件</title>
+        <description>需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。
+pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。
+
+以应用情景为例，写入不同的sheets，具体如下：
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# open a new xlsx writer&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;writer1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExcelWriter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_outfile_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sta_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Daily'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spe&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;species&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# parser data&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sta_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;corr_algthm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Daily'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parse_dates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skiprows&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'10H'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'12H'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'14H'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'16H'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'max'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index_col&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'time'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_excel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writer1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# save xlsx&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;writer1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;strong&gt;Updated 2018-01-16&lt;/strong&gt;
+</description>
+        <pubDate>Tue, 16 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/01/16/pandas-excel/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/01/16/pandas-excel/</guid>
+        
+        <category>pandas</category>
+        
+        <category>excel</category>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>Forbes分析与财务目标</title>
+        <description>查了下福布斯实时榜单，居然发现1 Billion以上2000多富豪列表完全就是个硕大的table，果断down下来做点分析啥的。比如富豪里的基尼系数，嘿嘿，两千多样本可以啦。
+子样本也可以计算大陆的情况。不过呢，更关心的是个人的排位以及按高考成绩排位对应的财富目标。虽然相关计算早完成了，可惜的是实验室服务器硬盘问题，诶。这次做个更好的。
+
+留坑，回填。
+
+&lt;strong&gt;Updated 2018-01-10&lt;/strong&gt;
+</description>
+        <pubDate>Wed, 10 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/01/10/forbes-rank/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/01/10/forbes-rank/</guid>
+        
+        <category>thinking</category>
+        
+        <category>blog</category>
+        
+        
+        <category>principle</category>
+        
+      </item>
     
       <item>
         <title>Form principles from mistakes</title>
@@ -631,273 +685,6 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID
         <category>modeling</category>
         
         <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>Ubuntu/K4200机器学习系统搭建</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#记得装desktop版本的ubuntu否则没有xserver比较蛋疼&quot; id=&quot;markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼&quot;&gt;记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#安装英伟达显卡驱动要关掉x-server&quot; id=&quot;markdown-toc-安装英伟达显卡驱动要关掉x-server&quot;&gt;安装英伟达显卡驱动，要关掉x server……&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本&quot; id=&quot;markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本&quot;&gt;安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;记得装desktop版本的ubuntu否则没有xserver比较蛋疼&quot;&gt;记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼&lt;/h3&gt;
-&lt;h3 id=&quot;安装英伟达显卡驱动要关掉x-server&quot;&gt;安装英伟达显卡驱动，要关掉x server……&lt;/h3&gt;
-默认进入命令行启动
-
-http://blog.topspeedsnail.com/archives/4922
-
-注意16.04用这句：
-
-$sudo systemctl set-default multi-user.target
-
-这是每次开机默认进入命令行模式的方法。单词关闭用
-
-sudo /etc/init.d/lightdm stop
-
-然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）
-
-驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）
-
-http://blog.csdn.net/u012759136/article/details/53355781
-
-照着来没问题了吧，错了……build driver的时候直接说unable……我去
-
-差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）
-
-http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;amp;lang=us&amp;amp;type=GeForce
-
-这里下载17.11的版本
-
-&lt;h3 id=&quot;安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本&quot;&gt;安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。&lt;/h3&gt;
-直接运行安装，居然自带了驱动……去死吧……
-
-后面说我有几个库没装好，记录如下
-
-Missing recommended library: libGLU.so
-
-Missing recommended library: libX11.so
-
-Missing recommended library: libXi.so
-
-Missing recommended library: libXmu.so
-
-搜索下直接apt-get搞定
-
-$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
-
-官方参考
-
-https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/
-
-重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。
-
-http://blog.csdn.net/shiorioxy/article/details/52652831
-
-http://blog.csdn.net/jhszh418762259/article/details/52958287
-
-之后写几个配置
-
-环境变量设置
-
-sudo vim ~/.bashrc
-
-在末尾添加
-
-export CUDA_HOME=/usr/local/cuda-8.0
-
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
-
-export PATH=/usr/local/cuda-8.0/bin:$PATH
-
-保存退出。
-
-然后刷新。
-
-source ~/.bashrc
-
-动态链接库设置
-
-创建文件：
-
-sudo vim /etc/ld.so.conf.d/cuda.conf
-
-写入：/usr/local/cuda/lib64
-
-保存之后使其立即生效：
-
-sudo ldconfig -v
-
-之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。
-
-许久之后，安全完成。
-
-</description>
-        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2017/12/30/ubuntu-cuda-setup/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/ubuntu-cuda-setup/</guid>
-        
-        <category>ubuntu</category>
-        
-        <category>machine&amp;nbsp;learning</category>
-        
-        <category>CUDA</category>
-        
-        <category>deep&amp;nbsp;learning</category>
-        
-        
-        <category>linux</category>
-        
-        <category>machine&amp;nbsp;leanring</category>
-        
-      </item>
-    
-      <item>
-        <title>github技术博客搭建</title>
-        <description>
-还是要搬家啦～
-
-经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。
-
-需求端：
-&lt;ol&gt;
-  &lt;li&gt;
-    类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整
-  &lt;/li&gt;
-  &lt;li&gt;
-    足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制
-  &lt;/li&gt;
-  &lt;li&gt;
-    安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-考虑供给端：
-&lt;ol&gt;
-  &lt;li&gt;
-    EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃
-  &lt;/li&gt;
-  &lt;li&gt;
-    简书，不灵活，放弃
-  &lt;/li&gt;
-  &lt;li&gt;
-    csdn，已经被边缘化了，放弃
-  &lt;/li&gt;
-  &lt;li&gt;
-    github，嘿嘿，就是你了
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-思想准备结束，开始搭建
-follow&lt;a href=&quot;http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm&quot;&gt;这个&lt;/a&gt;来
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;--orphan&lt;/span&gt; gh-pages
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-语句出错，果然又是git版本问题……坑爹centos
-
-突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。
-
-https://pages.github.com/
-
-相当有效。
-
-然后costumize
-
-https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/
-
-模板找到了几个，Jekll安装似乎有点麻烦。
-
-&lt;ol&gt;
-  &lt;li&gt;安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&amp;gt;= 2.0).
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  There are no versions of psych (&amp;gt;= 0) compatible with your Ruby &amp;amp; RubyGems. psych requires Ruby version &amp;gt;= 2.2.2. The current ruby version is 1.8.
-&lt;/blockquote&gt;
-
-真是操蛋的centos，不折腾了还是装在ubuntu下好了。
-
-ubuntu下一条apt-get install ruby直接搞定。
-
-安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。
-
-can’t find header files for ruby at /usr/lib/ruby/include/ruby.h
-
-之后
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$jekyll&lt;/span&gt; new myblog
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-发现第一次执行非常慢，不过问题不大
-
-然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1
-
-_config.yml文件下修改host为内网（公网）IP即可。
-
-找到一些不错的介绍防火墙的内容
-
-https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/
-
-搞定内网调试，开始看官方文档调戏github
-
-https://help.github.com/articles/about-jekyll-themes-on-github/
-
-花了一下午时间找了个好模板
-
-https://github.com/Gaohaoyang/gaohaoyang.github.io
-
-直接开服务，出错
-
-&lt;blockquote&gt;
-  Could not locate Gemfile or .bundle/ directory
-&lt;/blockquote&gt;
-
-不管三七二十一，把示例里面的文件丢过来
-
-之后新的错误
-
-&lt;blockquote&gt;
-  Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`
-&lt;/blockquote&gt;
-
-按要求安装之后也不成功。google发现如下stackoverflow帖子
-
-https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed
-
-居然有github-pages这种东西……
-
-装完之后，拿掉gemfile即可。
-
-摸索修改之后，发现这个评论解决方案
-
-https://imsun.net/posts/gitment-introduction/
-
-问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。
-
-参考
-
-http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/
-
-http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）
-</description>
-        <pubDate>Sat, 30 Dec 2017 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2017/12/30/tech-blog-github-page/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2017/12/30/tech-blog-github-page/</guid>
-        
-        <category>github</category>
-        
-        <category>blog</category>
-        
-        <category>jekyll</category>
-        
-        
-        <category>network</category>
         
       </item>
     

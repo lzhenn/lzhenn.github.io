@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>岁末年初</title>
-    <meta name="description" content="  Jan 1 2018 Update犹豫了一下午要不要写点什么，晚上回来还是决定写点吧。又到了跨年的时候了，2017在印象中过的无比的快。真的是无比的快。记得之前有人解释说，为什么人越长大越觉得时间快，想想小学中学，一个学期四个月都觉得无比漫长，如今一年毫无感觉就结束了。解释说是基数效应，十岁的时候，多过一年，...">
+    <title>利用pandas生成excel文件</title>
+    <meta name="description" content="需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。以应用情景为例，写入不同的sheets，...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/31/new-year-blog/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/01/16/pandas-excel/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -151,11 +151,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>岁末年初</h1>
+        <h1>利用pandas生成excel文件</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-12-31
+                <i class="fa fa-calendar"></i>2018-01-16
             </div>
 
             <div class="label-card">
@@ -176,7 +176,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#emotion" title="Category: emotion" rel="category">emotion</a>
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
     
   
 
@@ -193,11 +193,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <!--a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a-->
+        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>&nbsp;
     
-        <!--a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a-->
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <!--a href="/tag/#excel" title="Tag: excel" rel="tag">excel</a-->
+        <a href="/tag/#excel" title="Tag: excel" rel="tag">excel</a>
     
   
 
@@ -208,39 +208,22 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#jan-1-2018-update" id="markdown-toc-jan-1-2018-update">Jan 1 2018 Update</a></li>
-</ul>
+        <p>需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。
+pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。</p>
 
-<p>犹豫了一下午要不要写点什么，晚上回来还是决定写点吧。
-又到了跨年的时候了，2017在印象中过的无比的快。真的是无比的快。记得之前有人解释说，为什么人越长大越觉得时间快，想想小学中学，一个学期四个月都觉得无比漫长，如今一年毫无感觉就结束了。解释说是基数效应，十岁的时候，多过一年，那是生命的十分之一；而25岁的时候，再过一年，也不过是4%的增幅，跟余额宝年化差不多，自然没感觉。
-想到了七年前的这个时候，也是坐在床上，当时用着床上书桌，接着网线，也是用着现在的小Y，当时和烨琪一起倒数跨年，两栋宿舍楼，QQ联系，那时还没确定关系。
-如今我也是这种状态，不过在南校；烨琪也和我聊着，不过隔着伶仃洋，用着手机。
-后来几年，有几次在学校倒数，东校新天地，南校亲新广场，都有。
-去年，我在大洋彼岸，16小时时差，一起跨了两次。</p>
+<p>以应用情景为例，写入不同的sheets，具体如下：</p>
 
-<p>去年对我来说，是一个拐点。
-从2016年，慢慢关注经济和金融，过去的2017当然投入了更多。
-两本对我影响深刻的书：塔勒布《黑天鹅》，Van Tharp《Trade Your Way to Financial Freedom》，思想上对我影响深刻的，反倒是还没有看的塔勒布那本《反脆弱》。
-没错，杠铃策略。
-2016年还在迷茫挣扎，2017则是明确了自己不想要的，而杠铃策略，给了我最大的启发。
-稳定工作应该是保守的一端，而另一端则是激进的机会搜集和备战。
-想清楚这些，很多迷茫都迎刃而解；目标明确，接下来就是按部就班操作，焦虑也少了。
-想想10年初的目标，现在实现早没什么问题了；如今，可能更多想到的是如何去平衡责任。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open a new xlsx writer</span>
+<span class="n">writer1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">out_dir</span><span class="o">+</span><span class="n">get_outfile_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spe</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
+    <span class="c"># parser data</span>
+    <span class="n">pt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">in_dir</span><span class="o">+</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="n">corr_algthm</span><span class="p">,</span> <span class="n">spe</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'10H'</span><span class="p">,</span> <span class="s">'12H'</span><span class="p">,</span> <span class="s">'14H'</span><span class="p">,</span> <span class="s">'16H'</span><span class="p">,</span> <span class="s">'max'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'time'</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer1</span><span class="p">,</span> <span class="n">spe</span><span class="p">)</span>
+<span class="c"># save xlsx</span>
+<span class="n">writer1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div></div>
 
-<p>说说目标吧。
-Van Tharp的规则意识让我明白交易系统是可以机械化操作的，因此也有了写自己交易系统的想法。人性太难克服，随意性，操作瘾性太强。赌多，输多。年末一段时间算是慢慢改掉了坏毛病，看得少了，动的少了，心情起伏也少了。投资以来，总体没亏，年底借了几个标的涨势，今年算勉强跑赢余额宝。大牛市没赚大钱，不过起码没亏。
-所以第一个目标就是动手做一个交易系统，ML要上，我只需要概率而已，剩下的交给时间。
-第二个目标是完成确保保守端成立，问题不大，但是塔勒布告诉我，不能掉以轻心。plan B还是要有的。
-第三个目标算为第二个目标，同时也是Plan B服务，做一套山东半岛预报系统。
-第四个目标，也是为第二个服务，完成最低毕业标准。
-ML没法立flag了，边学边用吧。很多书要看，看很多书。看书的确能让人思路大开。</p>
-
-<p>听说新年立flag都完成不了，不过我还是信心满满。
-知道自己想要什么，也就平和多了，加油！</p>
-
-<h4 id="jan-1-2018-update">Jan 1 2018 Update</h4>
-<p>中午和rds师兄吃饭，再次得出稀缺大于一切的结论，无论怎样，潮水退去时，有所栖倚才会留出反应时间，这当然是极其珍贵的。</p>
+<p><strong>Updated 2018-01-16</strong></p>
 
         </article>
         <hr>
@@ -268,42 +251,6 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                     
                 
                     
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/10/forbes-rank/">Forbes分析与财务目标
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/08/principle-from-mistakes/">Form principles from mistakes
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
             
                 
@@ -356,15 +303,6 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -381,15 +319,6 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件
-                            
-                            </a>
-                        </li>
-                        
-                        
                     
                 
             
@@ -427,14 +356,20 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                     
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/01/housing-account/">买房的财务安全边际计算
-                            
-                            </a>
-                        </li>
-                        
-                        
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
                     
                 
             
@@ -487,20 +422,16 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
             
         
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2018/01/01/housing-account/">买房的财务安全边际计算</a></p>
         
     </div>
 </div>
@@ -543,8 +474,6 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
