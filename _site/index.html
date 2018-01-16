@@ -235,6 +235,74 @@ pandas写出xls简直像csv一样简单，而且是内生支持，不需要安�
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-16
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#imagemagic" title="Tag: imagemagic" rel="tag">imagemagic</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>给生成的wrf预报图去除白边，搜索发现imagemagick大神级命令直接搞定，当然算法本身不复杂，毕竟plot出的图边框都是255，但是有这个命令实在太方便了。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add border</span>
+convert aaa.png <span class="nt">-bordercolor</span> white <span class="nt">-border</span> 10%x10% bbb.png 
+<span class="c"># Delete border</span>
+convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-trim</span> ccc.png
+</code></pre></div></div>
+
+<p><strong>Updated 2018-01-16</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/16/linux-imagemagick/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a>
                 </h2>
                 <div class="label">
@@ -565,94 +633,6 @@ pandas写出xls简直像csv一样简单，而且是内生支持，不需要安�
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
-
-<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
-总负债 L=a*(1+r)^n
-</code></pre></div></div>
-<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
-当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
-
-<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
-总负债 L=a*(1-k)*(1+r)^n
-</code></pre></div></div>
-<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
-若不破灭，要求总资产大于等于0，则要求k</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
-</code></pre></div></div>
-<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
-
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
-
-<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
-而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -706,6 +686,8 @@ pandas写出xls简直像csv一样简单，而且是内生支持，不需要安�
                     
                         <li><a href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a></li>
                     
+                        <li><a href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a></li>
+                    
                         <li><a href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a></li>
                     
                         <li><a href="/2018/01/08/principle-from-mistakes/">Form principles from mistakes</a></li>
@@ -721,8 +703,6 @@ pandas写出xls简直像csv一样简单，而且是内生支持，不需要安�
                         <li><a href="/2018/01/01/housing-account/">买房的财务安全边际计算</a></li>
                     
                         <li><a href="/2017/12/31/new-year-blog/">岁末年初</a></li>
-                    
-                        <li><a href="/2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
                     
                 </ul>
             </div>
@@ -758,7 +738,7 @@ pandas写出xls简直像csv一样简单，而且是内生支持，不需要安�
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -981,6 +961,13 @@ pandas写出xls简直像csv一样简单，而且是内生支持，不需要安�
                       
                       
                       <a href="/tag/#ssh" style="font-size: 9pt; color: #999;">ssh</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#imagemagic" style="font-size: 9pt; color: #999;">imagemagic</a>
                     
                       
                       

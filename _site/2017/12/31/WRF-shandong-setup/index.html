@@ -220,6 +220,7 @@
   <li><a href="#执行real" id="markdown-toc-执行real">执行real</a></li>
   <li><a href="#执行wrf" id="markdown-toc-执行wrf">执行wrf</a></li>
   <li><a href="#计划任务" id="markdown-toc-计划任务">计划任务</a></li>
+  <li><a href="#执行测试" id="markdown-toc-执行测试">执行测试</a></li>
 </ul>
 
 <p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
@@ -602,8 +603,21 @@ ln <span class="nt">-sf</span> <span class="nv">$WPSDIR</span>/met_em.d0<span cl
 mpirun <span class="nt">-np</span> 16 ./wrf.exe
 
 </code></pre></div></div>
-
 <p><strong>Updated 2018-01-07</strong></p>
+
+<h3 id="执行测试">执行测试</h3>
+
+<p>测试预报，发现如下问题：</p>
+<ol>
+  <li>domain区域有问题，竟然d03居然框在勘察加半岛附近，经检查为WPS的ref_x和ref_y的问题，调整为d01中点后，</li>
+  <li>五天预报利用现有机器完全无法完成，3天大概需要9小时，发现问题1后怀疑为区域设置错误，高纬度地图因子问题，重新调整积分步长为180s进行测试。
+    <div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ref_x</span><span class="w">     </span><span class="o">=</span><span class="w">  </span><span class="mf">150.0</span><span class="p">,</span><span class="w">
+</span><span class="n">ref_y</span><span class="w">     </span><span class="o">=</span><span class="w">  </span><span class="mf">110.0</span><span class="p">,</span><span class="w"> 
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Updated 2018-01-16</strong></p>
 
         </article>
         <hr>
@@ -633,12 +647,6 @@ mpirun <span class="nt">-np</span> 16 ./wrf.exe
                     
                 
             
-                
-                    
-                
-                    
-                
-            
         
             
             
@@ -684,24 +692,6 @@ mpirun <span class="nt">-np</span> 16 ./wrf.exe
                     
                 
             
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
         
             
             
@@ -722,9 +712,6 @@ mpirun <span class="nt">-np</span> 16 ./wrf.exe
                 
                     
                 
-            
-        
-            
             
                 
                     
@@ -788,6 +775,15 @@ mpirun <span class="nt">-np</span> 16 ./wrf.exe
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
             
                 
                     

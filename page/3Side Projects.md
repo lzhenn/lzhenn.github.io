@@ -15,6 +15,9 @@ Shandong Peninsula Weather Forecasting Experiment, to be posted.
 
 ### Station Timeseries
 
+#### Home
+![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m-home.png)
+
 ### Hysplit Trajectory Analysis
 
 ## DLPE
