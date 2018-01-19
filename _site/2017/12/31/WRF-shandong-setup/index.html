@@ -221,6 +221,7 @@
   <li><a href="#执行wrf" id="markdown-toc-执行wrf">执行wrf</a></li>
   <li><a href="#计划任务" id="markdown-toc-计划任务">计划任务</a></li>
   <li><a href="#执行测试" id="markdown-toc-执行测试">执行测试</a></li>
+  <li><a href="#运行时间问题" id="markdown-toc-运行时间问题">运行时间问题</a></li>
 </ul>
 
 <p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
@@ -616,6 +617,14 @@ mpirun <span class="nt">-np</span> 16 ./wrf.exe
 </span></code></pre></div>    </div>
   </li>
 </ol>
+
+<p><strong>Updated 2018-01-16</strong></p>
+
+<h3 id="运行时间问题">运行时间问题</h3>
+
+<p>系统按计划任务运行了一天，发现会在运行结束附近提示无法找到更新的边界条件，然后不停写log无法退出。非常不理解，毕竟到这个时候应该终止才对呀。经查发现是wrf的namelist run days依然写的五天。调整后正常。</p>
+
+<p>目前的问题是依然不能在上午九点之前运行完，后面需要考虑调整domain大小。</p>
 
 <p><strong>Updated 2018-01-16</strong></p>
 
