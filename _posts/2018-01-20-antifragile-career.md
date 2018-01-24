@@ -25,7 +25,8 @@ author: LZN
 
 应该先建立效用函数，确定几个维度，然后按照边际效用递减原则对各个维度的情况打分，最终应该评价效用最大。
 资料：
-1.[收入和幸福感] (https://www.zhihu.com/question/24123648/answer/27911498)
-2. [构建效用函数据] (https://www.jianshu.com/p/d3533cf12209)
-3. [个人效用函数] (http://daily.zhihu.com/story/8280265)
+1. [收入和幸福感](https://www.zhihu.com/question/24123648/answer/27911498)
+2. [构建效用函数据](https://www.jianshu.com/p/d3533cf12209)
+3. [个人效用函数](http://daily.zhihu.com/story/8280265)
+
 **Updated 2018-01-20**
