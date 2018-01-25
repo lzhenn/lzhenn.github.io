@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>岁末年初</title>
-    <meta name="description" content="  Jan 1 2018 Update犹豫了一下午要不要写点什么，晚上回来还是决定写点吧。又到了跨年的时候了，2017在印象中过的无比的快。真的是无比的快。记得之前有人解释说，为什么人越长大越觉得时间快，想想小学中学，一个学期四个月都觉得无比漫长，如今一年毫无感觉就结束了。解释说是基数效应，十岁的时候，多过一年，...">
+    <title>python import其他文件</title>
+    <meta name="description" content="交易系统下希望将策略(strategy)和评估(evaluator)分离，这样就需要评估系统调用相应的策略，其实可以用简单的import解决，只是注意python仅仅把当前路径加入搜索目录，如果策略不在当前路径的话，则采用sys模块加入策略路径即可：import syssys.path.append(path_t...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2017/12/31/new-year-blog/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/01/25/import-python/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -153,11 +153,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>岁末年初</h1>
+        <h1>python import其他文件</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-12-31
+                <i class="fa fa-calendar"></i>2018-01-25
             </div>
 
             <div class="label-card">
@@ -178,7 +178,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#emotion" title="Category: emotion" rel="category">emotion</a>
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
     
   
 
@@ -195,11 +195,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a-->
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <!--a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a-->
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <!--a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a-->
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>
     
   
 
@@ -210,39 +207,18 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#jan-1-2018-update" id="markdown-toc-jan-1-2018-update">Jan 1 2018 Update</a></li>
-</ul>
+        
+<p>交易系统下希望将策略(strategy)和评估(evaluator)分离，这样就需要评估系统调用相应的策略，其实可以用简单的import解决，只是注意python仅仅把当前路径加入搜索目录，如果策略不在当前路径的话，则采用sys模块加入策略路径即可：</p>
 
-<p>犹豫了一下午要不要写点什么，晚上回来还是决定写点吧。
-又到了跨年的时候了，2017在印象中过的无比的快。真的是无比的快。记得之前有人解释说，为什么人越长大越觉得时间快，想想小学中学，一个学期四个月都觉得无比漫长，如今一年毫无感觉就结束了。解释说是基数效应，十岁的时候，多过一年，那是生命的十分之一；而25岁的时候，再过一年，也不过是4%的增幅，跟余额宝年化差不多，自然没感觉。
-想到了七年前的这个时候，也是坐在床上，当时用着床上书桌，接着网线，也是用着现在的小Y，当时和烨琪一起倒数跨年，两栋宿舍楼，QQ联系，那时还没确定关系。
-如今我也是这种状态，不过在南校；烨琪也和我聊着，不过隔着伶仃洋，用着手机。
-后来几年，有几次在学校倒数，东校新天地，南校亲新广场，都有。
-去年，我在大洋彼岸，16小时时差，一起跨了两次。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_strategy</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">buy_and_hold</span> <span class="kn">import</span> <span class="n">buy_and_hold</span> <span class="k">as</span> <span class="n">strategy</span>
 
-<p>去年对我来说，是一个拐点。
-从2016年，慢慢关注经济和金融，过去的2017当然投入了更多。
-两本对我影响深刻的书：塔勒布《黑天鹅》，Van Tharp《Trade Your Way to Financial Freedom》，思想上对我影响深刻的，反倒是还没有看的塔勒布那本《反脆弱》。
-没错，杠铃策略。
-2016年还在迷茫挣扎，2017则是明确了自己不想要的，而杠铃策略，给了我最大的启发。
-稳定工作应该是保守的一端，而另一端则是激进的机会搜集和备战。
-想清楚这些，很多迷茫都迎刃而解；目标明确，接下来就是按部就班操作，焦虑也少了。
-想想10年初的目标，现在实现早没什么问题了；如今，可能更多想到的是如何去平衡责任。</p>
+<span class="n">strategy</span><span class="p">()</span>
+</code></pre></div></div>
+<p>就是这么简单。</p>
 
-<p>说说目标吧。
-Van Tharp的规则意识让我明白交易系统是可以机械化操作的，因此也有了写自己交易系统的想法。人性太难克服，随意性，操作瘾性太强。赌多，输多。年末一段时间算是慢慢改掉了坏毛病，看得少了，动的少了，心情起伏也少了。投资以来，总体没亏，年底借了几个标的涨势，今年算勉强跑赢余额宝。大牛市没赚大钱，不过起码没亏。
-所以第一个目标就是动手做一个交易系统，ML要上，我只需要概率而已，剩下的交给时间。
-第二个目标是完成确保保守端成立，问题不大，但是塔勒布告诉我，不能掉以轻心。plan B还是要有的。
-第三个目标算为第二个目标，同时也是Plan B服务，做一套山东半岛预报系统。
-第四个目标，也是为第二个服务，完成最低毕业标准。
-ML没法立flag了，边学边用吧。很多书要看，看很多书。看书的确能让人思路大开。</p>
-
-<p>听说新年立flag都完成不了，不过我还是信心满满。
-知道自己想要什么，也就平和多了，加油！</p>
-
-<h4 id="jan-1-2018-update">Jan 1 2018 Update</h4>
-<p>中午和rds师兄吃饭，再次得出稀缺大于一切的结论，无论怎样，潮水退去时，有所栖倚才会留出反应时间，这当然是极其珍贵的。</p>
+<p><strong>Updated 2018-01-25</strong></p>
 
         </article>
         <hr>
@@ -254,8 +230,6 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                
             
         
             
@@ -263,23 +237,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/25/mercurius-system/">Mercurius交易策略系统搭建
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -287,17 +245,11 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                
             
                 
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -308,35 +260,11 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                
-            
-        
-            
             
                 
                     
                 
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/23/money-trend-model/">趋势交易模型
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
             
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -347,20 +275,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/20/antifragile-career/">模型化分析职业选择上反脆弱策略的收益条件
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -368,11 +283,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -383,20 +294,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/18/2018-investment/">2017投资小结与2018年的交易逻辑
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -407,11 +305,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -422,8 +316,6 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                
             
         
             
@@ -431,20 +323,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/10/forbes-rank/">Forbes分析与财务目标
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -455,39 +334,35 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                 
                     
                 
+            
+                
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/08/principle-from-mistakes/">Form principles from mistakes
-                            
-                            </a>
-                        </li>
-                        
-                        
+                
+            
+        
+            
+            
+                
                     
                 
             
                 
                     
                 
-                    
-                
             
         
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/23/money-trend-model/">趋势交易模型</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2018/01/01/housing-account/">买房的财务安全边际计算</a></p>
+        <p><strong>下一篇</strong> <a href="/2018/01/25/mercurius-system/">Mercurius交易策略系统搭建</a></p>
         
     </div>
 </div>
@@ -530,8 +405,6 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
