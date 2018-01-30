@@ -9,6 +9,8 @@ author: LZN
 * content
 {:toc}
 
+（文末有福利）
+
 追涨杀跌还是买跌卖涨？无论是投资者还是投机客，这可能是个永恒的问题。
 之前刷华尔街见闻的时候发现一个简单的[右侧交易策略](https://wallstreetcn.com/articles/3059211)
 
@@ -75,5 +77,6 @@ Oops！居然无法跑赢佛系buy and hold。这还算在木有交易费用的�
 
 Left or right, This is a problem.
 
+**要Code？没问题！瞎捣鼓的[交易系统都是完全开源](https://github.com/Novarizark/mercurius)的啦！几个简单的策略在strategy目录下。欢迎star/fork/diss**
 
 **Updated 2018-01-30**
