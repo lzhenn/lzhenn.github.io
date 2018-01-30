@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "趋势交易模型"
+title:  "追涨杀跌还是买跌卖涨？几个简单策略的实现与横评"
 categories: economy investment 
 tags:   thinking investment career
 author: LZN
@@ -8,6 +8,9 @@ author: LZN
 
 * content
 {:toc}
+Left or right? This is a problem.
+
+
 刷华尔街见闻的时候发现一个简单的[右侧交易策略](https://wallstreetcn.com/articles/3059211)
 
 >当目前的价格 ＞ 过去12个月的平均价格，那么保持投资（如果没有投资，那么就买入）；
