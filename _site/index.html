@@ -160,6 +160,144 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>追涨杀跌还是买跌卖涨？无论是投资者还是投机客，这可能是个永恒的问题。
+之前刷华尔街见闻的时候发现一个简单的<a href="https://wallstreetcn.com/articles/3059211">右侧交易策略</a></p>
+
+<blockquote>
+  <p>当目前的价格 ＞ 过去12个月的平均价格，那么保持投资（如果没有投资，那么就买入）；
+当目前的价格 ＜ 过去12个月的平均价格，那么就全部卖出，持有现金（或债券）。</p>
+</blockquote>
+
+<p>很有意思，回测也很不错。感觉原则就是，趋势来了我贪心，趋势走了我就离场，而且坚决不回来。不过对于我这种左侧交易者来说，在上升时期宁可hold也不愿意加仓。这个策略很简单，应可以作为一个出发点，后面按自己的理解来进行一些修正。尤其对于我这种喜欢左侧交易和网格策略的～</p>
+
+<p><strong>Updated 2018-01-23</strong></p>
+
+<p>正巧需要构建自己的Mercurius交易系统，不妨先实现几个策略做回测试试，标的的话，就选黄金好了，当然一般来说，黄金并不是什么好的投资标的。不过俺们就是这么俗，土豪金谁人不爱～</p>
+
+<p>一共写了三套策略：</p>
+
+<ul>
+  <li>佛系策略一把梭：Buy and Hold</li>
+  <li>极端贪心与恐惧：Up in and Down out</li>
+  <li>传说中的网格提款机：Grid Trading</li>
+</ul>
+
+<p>回测采用日均值，还没来得及写年化收益，最大回撤、夏普ratio等统计指标，先简单看图吧。首先我们以满仓10000美元的buy and hold策略，来看黄金自2000年以来的表现情况：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fnyyomaw8dj21720lwn15.jpg" alt="" /></p>
+
+<p>很明显，黄金从00年开始，随着全球的货币大宽松走出了一个长期牛市，主升浪在2008金融危机之后。到2011年上半年，净值翻了六倍多，随后由于美国逐渐退出QE，走熊直到2016年初（怎知16-now这波不是反弹？嘿嘿）。</p>
+
+<p>作为对策略的压力测试，当然先看熊市表现啦。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyyxcwibmj216u0l4q8g.jpg" alt="" /></p>
+
+<p>结果还是很有趣的，从投资（机）总效果来看，up in and down out相比于佛系的buyNhold最终表现仅仅略微好一点点，大概也就少损失个一两百刀。过程中我们可以看到金价多次出现假突破，从而使得策略不断进出，在不计交易费用的情况下相比佛系投资还有一点优势，如果存在交易成本，那怕是必然亏更多的。
+当然改进的方法也很简单，比如每隔一个period进行一次检测，这样能够避免频繁假突破时的频繁交易。</p>
+
+<p>值得注意的是，这一贪心策略可以确保在市场急剧下跌期间保持极高的（100%）持现比例，你不爱我绝不回头～一手现金dry powder。充沛的流动性在手给了标的走熊期间去发掘其他资产的机会。</p>
+
+<p>如果我们cover牛市，从2008年到现在呢？看这十年间会发生什么。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzav3p53j216u0l4tey.jpg" alt="" /></p>
+
+<p>Oops！居然无法跑赢佛系buy and hold。这还算在木有交易费用的情况下。矬了吧～主要问题在于前期高频箱体振荡期间出现频繁买卖，而买点恰巧错过一批疾速上涨期，随后基本一直落后buy and hold。</p>
+
+<p>我们再看所谓的网格提款机的效果。我喜欢的左侧交易策略表现又如何呢？</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzm26xq6j216u0l4agu.jpg" alt="" /></p>
+
+<p>嘿嘿！大网格熊市各种睥睨佛系一把梭，我们看到几个酷炫的买点基本都出现在市场底部，然后前期两次出网很酷炫得锁定了收益，随后剧烈走熊阶段不断加仓压低成本，可惜13年中即已满仓，一直到16的市场底部只能不断观望。但是最终到18年初，我们可以看到网格策略仅仅承担了不到10%的账面亏损，而佛系一把梭却有接近20%的账面亏损。</p>
+
+<p>那么牛市呢？</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzri1hp8j216u0l4tf5.jpg" alt="" /></p>
+
+<p>哎哟不错诶。虽然赶不上一把梭的痴长，但是基本保持了数量级相当的收益。不过值得注意的是，在牛市启动阶段，网格卖出所有的quota之后即因成本持续低于市值而按兵不动，所以后续基本相当于大半仓位下buy and hold。注意到09年的turmoil阶段网格抓到了几次低位买点，那么我们将时间尺度继续拉长，是否还能获得如此不错的表现呢？</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzvibso0j216v0l4dlm.jpg" alt="" /></p>
+
+<p>显然，从00年到现在，网格策略远远落后于buy and hold，主要原因也很简单，人家满仓，我们却基本半仓走了快二十年，最终大概只能获得佛系一把梭一半多点的收益。</p>
+
+<p>简单总结一下：</p>
+
+<ul>
+  <li>贪心的up in down out策略在黄金标的上，无论牛熊的表现都差强人意，但是剧烈走熊期间能够确保足够安全，手中握有大量dry powder。</li>
+  <li>网格策略在熊市期间表现出较好的风控能力，低位吸筹，高位抛出，简单机械的操作能够在保持流动性安全以及抓住收益中取得较好平衡。但是单边牛市（或持久熊市）估计会错过机会（输掉裤衩）。</li>
+  <li>如果在市场低位（如何判断，这可是一个大问题）入场，buy and hold可能是非常优秀的交易策略。（事实上李嘉诚先生基本就是这个策略，关键得有他老人家的眼光呀）</li>
+</ul>
+
+<p>总而言之，眼光决定一切。基本面得抓得准呀。不说了，默默啃书。</p>
+
+<p>Left or right, This is a problem.</p>
+
+<p><strong>Updated 2018-01-30</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/30/evaluate-simple-strategy/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/01/28/decoupling-cesm/">CESM air-sea decoupling测试</a>
                 </h2>
                 <div class="label">
@@ -421,88 +559,106 @@
 
 <p>写的时候发现一堆全局变量满天飞，POP的软件工程做得真是醉醉的……</p>
 
+<p>增加namelist变量需要让bld namelist程序认识，根据<a href="https://bb.cgd.ucar.edu/how-add-new-namelist-variables">这个帖子操作</a></p>
+
+<p>增加两个subroutine，一个负责在initial的时候读取forcing文件，另一个负责在pop积分步后给出reset。</p>
+
+<p>写好后发现一个大坑，由于IO module默认没有对3D var+时间的变量进行处理，如果手动增加这一功能需要改动非常多的模块，只能退而求其次，仅仅对第一层temp进行处理了。具体代码：</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">! ***LZN: MOD START***</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">nml_error</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">decoupling_days</span><span class="o">=</span><span class="mi">30</span><span class="w">
+
+   </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="n">char_len</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_fmt</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_field_desc</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">io_temp</span><span class="p">,</span><span class="w"> </span><span class="n">io_ce</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_dim</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">t_dim</span><span class="p">,</span><span class="w"> </span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">k_dim</span><span class="w">
+   </span><span class="k">namelist</span><span class="w"> </span><span class="p">/</span><span class="n">ptempf_forcing_nml</span><span class="p">/</span><span class="w"> </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">ptempf_file_fmt</span><span class="w">
+   
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">WGT_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="n">WGT_DATA</span><span class="o">=</span><span class="mf">1.0</span><span class="w">
+
+
+   </span><span class="c1">! Read forcing file path from namelist file</span><span class="w">
+   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+      </span><span class="k">open</span><span class="w"> </span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="n">nml_filename</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="o">=</span><span class="s1">'old'</span><span class="p">,</span><span class="w"> </span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="p">/</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+      </span><span class="k">else</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+         </span><span class="k">read</span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">nml</span><span class="o">=</span><span class="n">ptempf_forcing_nml</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w"> 
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">close</span><span class="p">(</span><span class="n">nml_in</span><span class="p">)</span><span class="w">
+   </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+   </span><span class="c1">! broadcast the scalar to all MPI processors</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+      
+   </span><span class="n">ptempf_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_file</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">full_name</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">),&amp;</span><span class="w">
+               </span><span class="n">record_length</span><span class="o">=</span><span class="n">rec_type_real</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">recl_words</span><span class="o">=</span><span class="n">nx_global</span><span class="o">*</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'open_read'</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">i_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span><span class="n">nx_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">j_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">t_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,</span><span class="n">decoupling_days</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">io_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'TEMP'</span><span class="p">,</span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="n">dim3</span><span class="o">=</span><span class="n">t_dim</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">long_name</span><span class="o">=</span><span class="s1">'Potential Temperature'</span><span class="p">,</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="s1">'degC'</span><span class="p">,</span><span class="w"> </span><span class="n">grid_loc</span><span class="o">=</span><span class="s1">'3111'</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w"> </span><span class="n">r3d_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'define'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'read'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">!   ru_data = construct_io_field('ru', dim1=i_dim, dim2=j_dim,&amp;</span><span class="w">
+</span><span class="c1">!             long_name='nudging coefficients', units='1',&amp;</span><span class="w">
+</span><span class="c1">!             grid_loc=' 3111', field_loc = field_loc_center,&amp;</span><span class="w">
+</span><span class="c1">!             field_type = field_type_scalar, r2d_array = ru)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'define', ru_data)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'read', ru_data)</span><span class="w">
+
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'close'</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+</span><span class="c1">!   call destroy_io_field(ru_data)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_file</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">)</span><span class="w">
+
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+ 
+ </span><span class="c1">! fixing the SST!</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">int_kind</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">iblock</span><span class="w">
+    </span><span class="c1">! debug info</span><span class="w">
+    </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">iday_of_year</span><span class="p">,:)</span><span class="w"> 
+
+
+    </span><span class="c1">! Operation: override the runtime tracer(temp)</span><span class="w">
+    </span><span class="c1">!$OMP PARALLEL DO PRIVATE(iblock)</span><span class="w">
+    </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nblocks_clinic</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TEMP_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">))</span><span class="w">
+    </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+    </span><span class="c1">!$OMP END PARALLEL DO</span><span class="w">
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+ </span><span class="c1">! ***LZN: MOD END***</span><span class="w">
+</span></code></pre></div></div>
+<p>经测试一个月积分没有问题。</p>
+
+<p><strong>Updated 2018-01-29</strong></p>
 
                 </div>
                 <div class="read-all">
                     <a  href="/2018/01/28/decoupling-cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/27/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-27
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
-    
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
-    
-        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>Left or right? This is a problem.</p>
-
-<p>刷华尔街见闻的时候发现一个简单的<a href="https://wallstreetcn.com/articles/3059211">右侧交易策略</a></p>
-
-<blockquote>
-  <p>当目前的价格 ＞ 过去12个月的平均价格，那么保持投资（如果没有投资，那么就买入）；
-当目前的价格 ＜ 过去12个月的平均价格，那么就全部卖出，持有现金（或债券）。</p>
-</blockquote>
-
-<p>很有意思，回测也很不错。感觉原则就是，趋势来了我贪心，趋势走了我就离场，而且坚决不回来。
-不过对于我这种左侧交易者来说，在上升时期宁可hold也不愿意加仓。这个策略很简单，应可以作为一个出发点，后面按自己的理解来进行一些修正。尤其对于我这种喜欢左侧交易和网格策略的～</p>
-
-<p><strong>Updated 2018-01-23</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/27/evaluate-simple-strategy/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -1134,9 +1290,9 @@
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/01/28/decoupling-cesm/">CESM air-sea decoupling测试</a></li>
+                        <li><a href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></li>
                     
-                        <li><a href="/2018/01/27/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></li>
+                        <li><a href="/2018/01/28/decoupling-cesm/">CESM air-sea decoupling测试</a></li>
                     
                         <li><a href="/2018/01/25/pandas-csv/">利用pandas处理csv文件注意</a></li>
                     

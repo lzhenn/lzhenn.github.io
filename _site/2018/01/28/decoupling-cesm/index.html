@@ -420,6 +420,101 @@
 
 <p>写的时候发现一堆全局变量满天飞，POP的软件工程做得真是醉醉的……</p>
 
+<p>增加namelist变量需要让bld namelist程序认识，根据<a href="https://bb.cgd.ucar.edu/how-add-new-namelist-variables">这个帖子操作</a></p>
+
+<p>增加两个subroutine，一个负责在initial的时候读取forcing文件，另一个负责在pop积分步后给出reset。</p>
+
+<p>写好后发现一个大坑，由于IO module默认没有对3D var+时间的变量进行处理，如果手动增加这一功能需要改动非常多的模块，只能退而求其次，仅仅对第一层temp进行处理了。具体代码：</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">! ***LZN: MOD START***</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">nml_error</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">decoupling_days</span><span class="o">=</span><span class="mi">30</span><span class="w">
+
+   </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="n">char_len</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_fmt</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_field_desc</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">io_temp</span><span class="p">,</span><span class="w"> </span><span class="n">io_ce</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_dim</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">t_dim</span><span class="p">,</span><span class="w"> </span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">k_dim</span><span class="w">
+   </span><span class="k">namelist</span><span class="w"> </span><span class="p">/</span><span class="n">ptempf_forcing_nml</span><span class="p">/</span><span class="w"> </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">ptempf_file_fmt</span><span class="w">
+   
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">WGT_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="n">WGT_DATA</span><span class="o">=</span><span class="mf">1.0</span><span class="w">
+
+
+   </span><span class="c1">! Read forcing file path from namelist file</span><span class="w">
+   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+      </span><span class="k">open</span><span class="w"> </span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="n">nml_filename</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="o">=</span><span class="s1">'old'</span><span class="p">,</span><span class="w"> </span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="p">/</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+      </span><span class="k">else</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+         </span><span class="k">read</span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">nml</span><span class="o">=</span><span class="n">ptempf_forcing_nml</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w"> 
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">close</span><span class="p">(</span><span class="n">nml_in</span><span class="p">)</span><span class="w">
+   </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+   </span><span class="c1">! broadcast the scalar to all MPI processors</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+      
+   </span><span class="n">ptempf_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_file</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">full_name</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">),&amp;</span><span class="w">
+               </span><span class="n">record_length</span><span class="o">=</span><span class="n">rec_type_real</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">recl_words</span><span class="o">=</span><span class="n">nx_global</span><span class="o">*</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'open_read'</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">i_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span><span class="n">nx_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">j_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">t_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,</span><span class="n">decoupling_days</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">io_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'TEMP'</span><span class="p">,</span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="n">dim3</span><span class="o">=</span><span class="n">t_dim</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">long_name</span><span class="o">=</span><span class="s1">'Potential Temperature'</span><span class="p">,</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="s1">'degC'</span><span class="p">,</span><span class="w"> </span><span class="n">grid_loc</span><span class="o">=</span><span class="s1">'3111'</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w"> </span><span class="n">r3d_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'define'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'read'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">!   ru_data = construct_io_field('ru', dim1=i_dim, dim2=j_dim,&amp;</span><span class="w">
+</span><span class="c1">!             long_name='nudging coefficients', units='1',&amp;</span><span class="w">
+</span><span class="c1">!             grid_loc=' 3111', field_loc = field_loc_center,&amp;</span><span class="w">
+</span><span class="c1">!             field_type = field_type_scalar, r2d_array = ru)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'define', ru_data)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'read', ru_data)</span><span class="w">
+
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'close'</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+</span><span class="c1">!   call destroy_io_field(ru_data)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_file</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">)</span><span class="w">
+
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+ 
+ </span><span class="c1">! fixing the SST!</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">int_kind</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">iblock</span><span class="w">
+    </span><span class="c1">! debug info</span><span class="w">
+    </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">iday_of_year</span><span class="p">,:)</span><span class="w"> 
+
+
+    </span><span class="c1">! Operation: override the runtime tracer(temp)</span><span class="w">
+    </span><span class="c1">!$OMP PARALLEL DO PRIVATE(iblock)</span><span class="w">
+    </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nblocks_clinic</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TEMP_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">))</span><span class="w">
+    </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+    </span><span class="c1">!$OMP END PARALLEL DO</span><span class="w">
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+ </span><span class="c1">! ***LZN: MOD END***</span><span class="w">
+</span></code></pre></div></div>
+<p>经测试一个月积分没有问题。</p>
+
 <p><strong>Updated 2018-01-29</strong></p>
 
         </article>
@@ -600,11 +695,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/01/27/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/25/pandas-csv/">利用pandas处理csv文件注意</a></p>
         
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></p>
         
     </div>
 </div>
