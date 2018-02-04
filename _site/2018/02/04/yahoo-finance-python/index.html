@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>买房的财务安全边际计算</title>
-    <meta name="description" content="我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5整理可得，净资产B&gt;(0.5-alpha)A+0.5C假设首付率为0.3B&gt;0.5...">
+    <title>爬取Yahoo Finance美股数据</title>
+    <meta name="description" content="去年5月就试着用python现成包爬取Yahoo Finance的数据，但是发现坑爹的是在我打算搞这个事情前两天，雅虎改了API爬不到。这次想起来查了下发现已经有相应的fix包了，当然只是临时的。不过无所谓，数据先拉到，后面业务化运行时能用多久用多久咯。先装包：pip install pandas_datarea...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2018/01/01/housing-account/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/02/04/yahoo-finance-python/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -153,11 +153,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>买房的财务安全边际计算</h1>
+        <h1>爬取Yahoo Finance美股数据</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-01-01
+                <i class="fa fa-calendar"></i>2018-02-04
             </div>
 
             <div class="label-card">
@@ -178,7 +178,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
     
   
 
@@ -195,14 +199,20 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a-->
-        <a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a>&nbsp;
+        <!--a href="/tag/#yahoo-finance" title="Tag: yahoo-finance" rel="tag">yahoo-finance</a-->
+        <a href="/tag/#yahoo-finance" title="Tag: yahoo-finance" rel="tag">yahoo-finance</a>&nbsp;
     
-        <!--a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a-->
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+        <!--a href="/tag/#spider" title="Tag: spider" rel="tag">spider</a-->
+        <a href="/tag/#spider" title="Tag: spider" rel="tag">spider</a>&nbsp;
     
-        <!--a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a-->
-        <a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a>
+        <!--a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a-->
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <!--a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a-->
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
+    
+        <!--a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a-->
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>
     
   
 
@@ -214,26 +224,38 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。
-假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为</p>
+<p>去年5月就试着用python现成包爬取Yahoo Finance的数据，但是发现坑爹的是在我打算搞这个事情前两天，雅虎改了API爬不到。这次想起来查了下发现已经有相应的fix包了，当然只是临时的。不过无所谓，数据先拉到，后面业务化运行时能用多久用多久咯。</p>
 
-<p>R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5</p>
+<p>先装包：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas_datareader
+pip install yahoo-finance
+pip install fix-yahoo-finance
+</code></pre></div></div>
+<p>然后就可以快乐地爬数据了。Stock ETF代码可以在<a href="https://www.nasdaq.com/screening/companies-by-name.aspx?letter=A">Nasdaq官网</a>拿到，这玩意儿一共26个英文字母，我居然手动下完了所有才发现有集中到一起的表格可以下载，shit！
+对代码先做了个A-Z排序，加上个随机延时，然后就可以开搞啦。源码如下：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mainfunc</span><span class="p">():</span>
 
-<p>整理可得，净资产
-B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
+    <span class="n">yf</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span> <span class="c"># fix yahoo finance api</span>
 
-<p>假设首付率为0.3</p>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">eq_market</span><span class="p">:</span>
+        <span class="n">pd_symbol</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">eq_path</span><span class="o">+</span><span class="n">item</span><span class="o">+</span><span class="s">'.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'Symbol'</span><span class="p">)</span>
+        <span class="n">pos</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">symb</span> <span class="ow">in</span> <span class="n">pd_symbol</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'Now download </span><span class="si">%</span><span class="s">s@</span><span class="si">%</span><span class="s">s (</span><span class="si">%</span><span class="s">d/</span><span class="si">%</span><span class="s">d)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd_symbol</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">ini_time</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_time</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'i</span><span class="se">\n</span><span class="s">Error while downloading </span><span class="si">%</span><span class="s">s@</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
 
-<p>B&gt;0.5<em>C+0.2</em>A</p>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">eq_path</span><span class="o">+</span><span class="n">item</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">symb</span><span class="o">+</span><span class="s">'.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">sptime</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">sleep </span><span class="si">%4.2</span><span class="s">fs'</span> <span class="o">%</span> <span class="n">sptime</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sptime</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>假设家庭本身无负债，B=C</p>
-
-<p>B&gt;(2/5)*A</p>
-
-<p>因此，在30%首付、家庭无负债的条件下，对于一套500万的房子，总资产大于200万达到购入的安全边际。对于小户型，假设180万，家庭总资产大于72万为安全边际。</p>
-
-<p>再考虑50%首付的情况，这是个很有意思的阈值，在50%首付的前提下，只要初始家庭负债率小于50%即可满足条件，与房产价格无关。是否矛盾，并不，因为还有一个隐含条件是，家庭能够承担买房首付，若不讨论资产是否具有高流动性，至少有C&gt;0.5A。</p>
-
+<p><strong>Updated 2018-02-04</strong></p>
 
         </article>
         <hr>
@@ -249,18 +271,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
                     
                 
                     
@@ -268,23 +278,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
             
                 
                     
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
                 
                     
                 
@@ -304,15 +297,13 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
                     
                 
             
+                
+                    
+                
+                    
                 
                     
                 
@@ -331,7 +322,15 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
                 
                     
                 
@@ -350,10 +349,28 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
+                    
+                
+                    
+                
             
         
             
             
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -370,12 +387,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
                     
                 
             
@@ -383,10 +394,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                     
                 
                     
-                
-                    
-                
-            
                 
                     
                 
@@ -398,6 +405,46 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/25/import-python/">python import其他文件
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -413,10 +460,13 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
+                    
+                
+                    
+                
             
-        
-            
-            
+                
+                    
                 
                     
                 
@@ -433,12 +483,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
                     
                 
             
@@ -449,7 +493,15 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
                 
                     
                 
@@ -461,6 +513,20 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
         
             
             
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -477,7 +543,28 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
+                    
+                
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
                 
                     
                 
@@ -496,10 +583,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 
                     
                 
-            
-                
-                    
-                
                     
                 
                     
@@ -508,6 +591,22 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
         
             
             
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
                 
                     
                 
@@ -524,13 +623,11 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/12/31/new-year-blog/">岁末年初</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a></p>
         
     </div>
 </div>

@@ -160,6 +160,110 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/02/04/yahoo-finance-python/">爬取Yahoo Finance美股数据</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-02-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#yahoo-finance" title="Tag: yahoo-finance" rel="tag">yahoo-finance</a>&nbsp;
+    
+        <a href="/tag/#spider" title="Tag: spider" rel="tag">spider</a>&nbsp;
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
+    
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>去年5月就试着用python现成包爬取Yahoo Finance的数据，但是发现坑爹的是在我打算搞这个事情前两天，雅虎改了API爬不到。这次想起来查了下发现已经有相应的fix包了，当然只是临时的。不过无所谓，数据先拉到，后面业务化运行时能用多久用多久咯。</p>
+
+<p>先装包：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas_datareader
+pip install yahoo-finance
+pip install fix-yahoo-finance
+</code></pre></div></div>
+<p>然后就可以快乐地爬数据了。Stock ETF代码可以在<a href="https://www.nasdaq.com/screening/companies-by-name.aspx?letter=A">Nasdaq官网</a>拿到，这玩意儿一共26个英文字母，我居然手动下完了所有才发现有集中到一起的表格可以下载，shit！
+对代码先做了个A-Z排序，加上个随机延时，然后就可以开搞啦。源码如下：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mainfunc</span><span class="p">():</span>
+
+    <span class="n">yf</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span> <span class="c"># fix yahoo finance api</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">eq_market</span><span class="p">:</span>
+        <span class="n">pd_symbol</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">eq_path</span><span class="o">+</span><span class="n">item</span><span class="o">+</span><span class="s">'.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'Symbol'</span><span class="p">)</span>
+        <span class="n">pos</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">symb</span> <span class="ow">in</span> <span class="n">pd_symbol</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'Now download </span><span class="si">%</span><span class="s">s@</span><span class="si">%</span><span class="s">s (</span><span class="si">%</span><span class="s">d/</span><span class="si">%</span><span class="s">d)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd_symbol</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">ini_time</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_time</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'i</span><span class="se">\n</span><span class="s">Error while downloading </span><span class="si">%</span><span class="s">s@</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">eq_path</span><span class="o">+</span><span class="n">item</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">symb</span><span class="o">+</span><span class="s">'.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">sptime</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">sleep </span><span class="si">%4.2</span><span class="s">fs'</span> <span class="o">%</span> <span class="n">sptime</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sptime</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-02-04</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/02/04/yahoo-finance-python/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a>
                 </h2>
                 <div class="label">
@@ -919,99 +1023,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/20/antifragile-career/">模型化分析职业选择上反脆弱策略的收益条件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-20
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
-    
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
-    
-        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>&nbsp;
-    
-        <a href="/tag/#antifragile" title="Tag: antifragile" rel="tag">antifragile</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天上午聊天的时候讨论到all in情况下，在领域前端的边际收益无法覆盖去了解其他领域既成知识体系的机会成本，突然想到应该可以建立一个模型去分析，在怎样的条件下，拒绝all in而采用反脆弱策略，效用能够接近all in所可达到的高度？</p>
-
-<p>简单整理下这个模型应该包括的要素：</p>
-
-<ul>
-  <li>行业的效用收益分布：幂律</li>
-  <li>行业的成本分布：幂律</li>
-  <li>all in的时间投入，承担的风险（如何定价？）</li>
-  <li>all in情况下的期望位置</li>
-  <li>antifragile的分支点位置</li>
-  <li>antifragile的情况下其他领域的收益分布和成本分布</li>
-</ul>
-
-<p>时间投入应该是个守恒量，最终效用如何评定？这个模型应该要比收入分布讨论的模型复杂很多。
-继续挖坑回填。</p>
-
-<p>应该先建立效用函数，确定几个维度，然后按照边际效用递减原则对各个维度的情况打分，最终应该评价效用最大。
-资料：</p>
-<ol>
-  <li><a href="https://www.zhihu.com/question/24123648/answer/27911498">收入和幸福感</a></li>
-  <li><a href="https://www.jianshu.com/p/d3533cf12209">构建效用函数据</a></li>
-  <li><a href="http://daily.zhihu.com/story/8280265">个人效用函数</a></li>
-</ol>
-
-<p><strong>Updated 2018-01-20</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/20/antifragile-career/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -1214,7 +1225,7 @@
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 12.5pt; color: #666;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 13.5pt; color: #444;">investment</a>
                     
                       
                       
@@ -1235,7 +1246,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9pt; color: #999;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 10pt; color: #888;">python_import</a>
                     
                       
                       
@@ -1257,6 +1268,27 @@
                       
                       
                       <a href="/tag/#decoupling" style="font-size: 9pt; color: #999;">decoupling</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#yahoo-finance" style="font-size: 9pt; color: #999;">yahoo-finance</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#spider" style="font-size: 9pt; color: #999;">spider</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#stock" style="font-size: 9pt; color: #999;">stock</a>
                     
                 </div>
             </div>
@@ -1294,6 +1326,8 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/02/04/yahoo-finance-python/">爬取Yahoo Finance美股数据</a></li>
+                    
                         <li><a href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></li>
                     
                         <li><a href="/2018/01/28/decoupling-cesm/">CESM air-sea decoupling测试</a></li>
@@ -1311,8 +1345,6 @@
                         <li><a href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a></li>
                     
                         <li><a href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a></li>
-                    
-                        <li><a href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a></li>
                     
                 </ul>
             </div>
@@ -1384,7 +1416,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -1411,7 +1443,7 @@
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -1420,7 +1452,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
