@@ -145,6 +145,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -157,6 +159,166 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/02/07/trading-diary/">20180207交易笔记</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-02-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
+    
+        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>因为不是day trader，也懒得做短线投机，所以一直觉得没必要写交易日记。不过参与market就是一个假设验证的过程，正巧这几天全球股市暴跌，波动性复活，也不妨投资过程中把整理到的资料和自己的一些想法时不时记录下来，以后也是很好的参考。</p>
+
+<p><strong>Updated 2018-02-04</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/02/07/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/02/07/javascript-option-onchange/">Javascript响应option OnChange事件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-02-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
+    
+        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Side Project中希望能够通过列表选项调整显示的2D map animation，发现JS不去响应OnChange事件，最早以为是单纯改动src不可行，需要ajax方式做请求，检查后发现调用函数时没有给参数括号，不过为啥chrome不报错，奇怪。具体代码：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">change_gif</span><span class="p">(</span><span class="nx">selectObj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">img_obj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"mapimg"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">slc_obj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"select01"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">opt_value</span> <span class="o">=</span> <span class="nx">selectObj</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">opt_value</span><span class="p">){</span>
+            <span class="k">case</span> <span class="s2">"precip"</span><span class="p">:</span>
+                <span class="nx">img_obj</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif?'</span><span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">())</span><span class="o">+</span><span class="s1">'"/&gt;'</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="s2">"snow_cover"</span><span class="p">:</span>
+                <span class="nx">img_obj</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/snow-cover.gif?'</span><span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">())</span><span class="o">+</span><span class="s1">'"/&gt;'</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+</code></pre></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;select</span> <span class="na">style=</span><span class="s">"margin-bottom: 15px"</span> <span class="na">id=</span><span class="s">"select01"</span> <span class="na">onchange=</span><span class="s">"change_gif(this)"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"precip"</span><span class="nt">&gt;</span>Precipitation<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"snow_cover"</span><span class="nt">&gt;</span>Snow Cover<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mapimg"</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">"https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif"</span> <span class="nt">/&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+<p><strong>Updated 2018-01-25</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/02/07/javascript-option-onchange/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -838,191 +1000,6 @@ pip install fix-yahoo-finance
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/25/mercurius-system/">Mercurius交易策略系统搭建</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
-    
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
-    
-        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>&nbsp;
-    
-        <a href="/tag/#quandl" title="Tag: quandl" rel="tag">quandl</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#楔子" id="markdown-toc-楔子">楔子</a></li>
-  <li><a href="#前期准备" id="markdown-toc-前期准备">前期准备</a>    <ul>
-      <li><a href="#数据搜集系统" id="markdown-toc-数据搜集系统">数据搜集系统</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="楔子">楔子</h2>
-
-<p>昨晚和老板以及另一位教授吃了顿饭，本来很不想去，结果却有意外收获。教授直言不讳地说明了就业形势（趋势）的严峻程度，无论中美，无论天气气候。如果美国作为小政府大市场的存在能够快速试错转向，那么中国政策性红利的影响可能会造成更严重的错配。</p>
-
-<p>基本印证了我基于搜集到的资料作出的推断。昨天这一事件进一步说明了搜集机会的重要性，还是应该多接触，吃顿饭的时间，机会成本也很低。</p>
-
-<p>事不宜迟，我想时间精力分配上可以从五五开转到七三开了。言归正传，开始试着搭建自己的交易系统。</p>
-
-<h2 id="前期准备">前期准备</h2>
-
-<p>交易系统命名是个技术活，找个西方财神的名字吧，最早发现希腊神话里是赫尔墨斯，这个英文拼写后来被爱马仕用了，略坑。对应罗马神话是墨丘利，水星，不错，就用Mercurius好了。维基百科的介绍</p>
-
-<blockquote>
-  <p>墨丘利（拉丁语：Mercurius）是罗马神话中为众神传递信息的使者，相对应于希腊神话的赫耳墨斯（Hermes）。他的形象一般是头戴一顶插有双翅的帽子，脚穿飞行鞋，手握魔杖，行走如飞。墨丘利是丘比特和迈亚的儿子，是医药、旅行者、商人和小偷的保护神，西方药店经常用他的缠绕两条蛇的手杖作为标志。</p>
-</blockquote>
-
-<blockquote>
-  <p>此外，由于水星在天上运行的速度很快，所以亦用了他的名字而命名。</p>
-</blockquote>
-
-<p>以及对赫尔墨斯的描述：</p>
-
-<blockquote>
-  <p>变化多端、圆滑机灵的盗贼，他带给人梦境，是夜里守望者，门外的小偷，在长生不老的众神里最先展示善意的人。</p>
-</blockquote>
-
-<h3 id="数据搜集系统">数据搜集系统</h3>
-
-<p>没数据就是无米之炊，首先搭建爬虫系统搜集数据。目前的想法是先写specific脚本把存量拉下来，再用crontab每日update，分辨率到日即可，简单起见先拿大宗下手。</p>
-
-<p>数据源选择quandl和yahoo-finance，国内数据之前在某量化课件上看到个源，后续再说。</p>
-
-<p><strong>Updated 2018-01-25</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/25/mercurius-system/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/25/import-python/">python import其他文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>交易系统下希望将策略(strategy)和评估(evaluator)分离，这样就需要评估系统调用相应的策略，其实可以用简单的import解决，只是注意python仅仅把当前路径加入搜索目录，如果策略不在当前路径的话，则采用sys模块加入策略路径即可：</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_strategy</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">buy_and_hold</span> <span class="kn">import</span> <span class="n">buy_and_hold</span> <span class="k">as</span> <span class="n">strategy</span>
-
-<span class="n">strategy</span><span class="p">()</span>
-</code></pre></div></div>
-<p>就是这么简单。</p>
-
-<p><strong>Updated 2018-01-25</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/25/import-python/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -1033,10 +1010,10 @@ pip install fix-yahoo-finance
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/4</span>
+          <span class="page_number ">1/5</span>
           
             <a href="/page2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page4" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page5" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1099,7 +1076,7 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 11.5pt; color: #777;">jekyll</a>
                     
                       
                       
@@ -1190,7 +1167,7 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#javascript" style="font-size: 9pt; color: #999;">javascript</a>
+                      <a href="/tag/#javascript" style="font-size: 10pt; color: #888;">javascript</a>
                     
                       
                       
@@ -1225,7 +1202,7 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 13.5pt; color: #444;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 14.5pt; color: #333;">investment</a>
                     
                       
                       
@@ -1288,7 +1265,21 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9pt; color: #999;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html" style="font-size: 9pt; color: #999;">html</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#market&nbspcrash" style="font-size: 9pt; color: #999;">market&nbspcrash</a>
                     
                 </div>
             </div>
@@ -1326,6 +1317,10 @@ pip install fix-yahoo-finance
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/02/07/trading-diary/">20180207交易笔记</a></li>
+                    
+                        <li><a href="/2018/02/07/javascript-option-onchange/">Javascript响应option OnChange事件</a></li>
+                    
                         <li><a href="/2018/02/04/yahoo-finance-python/">爬取Yahoo Finance美股数据</a></li>
                     
                         <li><a href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a></li>
@@ -1341,10 +1336,6 @@ pip install fix-yahoo-finance
                         <li><a href="/2018/01/20/antifragile-career/">模型化分析职业选择上反脆弱策略的收益条件</a></li>
                     
                         <li><a href="/2018/01/18/2018-investment/">2017投资小结与2018年的交易逻辑</a></li>
-                    
-                        <li><a href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a></li>
-                    
-                        <li><a href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a></li>
                     
                 </ul>
             </div>
@@ -1416,7 +1407,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">8</span>
                         </a>
                     </li>
                     
@@ -1425,7 +1416,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 javascript
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -1452,7 +1443,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">5</span>
+                            <span class="badge">6</span>
                         </a>
                     </li>
                     
@@ -1460,6 +1451,15 @@ pip install fix-yahoo-finance
                         <a href="/category/#meteorology" class="categories-list-item" cate="meteorology">
                             <span class="name">
                                 meteorology
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#notebook" class="categories-list-item" cate="notebook">
+                            <span class="name">
+                                notebook
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>干掉僵死ssh进程</title>
-    <meta name="description" content="有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：pkill -kill -t pts/2">
+    <title>Javascript响应option OnChange事件</title>
+    <meta name="description" content="Side Project中希望能够通过列表选项调整显示的2D map animation，发现JS不去响应OnChange事件，最早以为是单纯改动src不可行，需要ajax方式做请求，检查后发现调用函数时没有给参数括号，不过为啥chrome不报错，奇怪。具体代码：    function change_gif(s...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2018/01/07/pkill-ssh/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/02/07/javascript-option-onchange/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -155,11 +155,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>干掉僵死ssh进程</h1>
+        <h1>Javascript响应option OnChange事件</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-01-07
+                <i class="fa fa-calendar"></i>2018-02-07
             </div>
 
             <div class="label-card">
@@ -180,9 +180,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#network" title="Category: network" rel="category">network</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
     
   
 
@@ -199,11 +197,14 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a-->
-        <a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a>&nbsp;
+        <!--a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a-->
+        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
     
-        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
+        <!--a href="/tag/#html" title="Tag: html" rel="tag">html</a-->
+        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
+    
+        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
     
   
 
@@ -215,9 +216,31 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-kill</span> <span class="nt">-t</span> pts/2
+<p>Side Project中希望能够通过列表选项调整显示的2D map animation，发现JS不去响应OnChange事件，最早以为是单纯改动src不可行，需要ajax方式做请求，检查后发现调用函数时没有给参数括号，不过为啥chrome不报错，奇怪。具体代码：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">change_gif</span><span class="p">(</span><span class="nx">selectObj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">img_obj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"mapimg"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">slc_obj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"select01"</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">opt_value</span> <span class="o">=</span> <span class="nx">selectObj</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">opt_value</span><span class="p">){</span>
+            <span class="k">case</span> <span class="s2">"precip"</span><span class="p">:</span>
+                <span class="nx">img_obj</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif?'</span><span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">())</span><span class="o">+</span><span class="s1">'"/&gt;'</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="s2">"snow_cover"</span><span class="p">:</span>
+                <span class="nx">img_obj</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/snow-cover.gif?'</span><span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">())</span><span class="o">+</span><span class="s1">'"/&gt;'</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
 </code></pre></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;select</span> <span class="na">style=</span><span class="s">"margin-bottom: 15px"</span> <span class="na">id=</span><span class="s">"select01"</span> <span class="na">onchange=</span><span class="s">"change_gif(this)"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"precip"</span><span class="nt">&gt;</span>Precipitation<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"snow_cover"</span><span class="nt">&gt;</span>Snow Cover<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mapimg"</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">"https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif"</span> <span class="nt">/&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+<p><strong>Updated 2018-01-25</strong></p>
 
         </article>
         <hr>
@@ -231,10 +254,6 @@
                 
                     
                 
-            
-                
-                    
-                
                     
                 
             
@@ -243,22 +262,11 @@
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
                 
                     
-                
-                    
-                
-            
                 
                     
                 
@@ -273,19 +281,11 @@
                 
                     
                 
-            
-                
-                    
-                
                     
                 
             
                 
                     
-                
-                    
-                
-            
                 
                     
                 
@@ -297,13 +297,6 @@
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
@@ -312,7 +305,11 @@
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -327,28 +324,6 @@
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
@@ -357,19 +332,11 @@
                 
                     
                 
-            
-                
-                    
-                
                     
                 
             
                 
                     
-                
-                    
-                
-            
                 
                     
                 
@@ -384,28 +351,11 @@
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
                 
                     
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
                 
                     
                 
@@ -420,7 +370,130 @@
                 
                     
                 
+                    
+                
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -433,13 +506,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/02/04/yahoo-finance-python/">爬取Yahoo Finance美股数据</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2018/01/08/principle-from-mistakes/">Form principles from mistakes</a></p>
+        <p><strong>下一篇</strong> <a href="/2018/02/07/trading-diary/">20180207交易笔记</a></p>
         
     </div>
 </div>

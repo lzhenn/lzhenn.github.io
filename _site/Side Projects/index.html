@@ -145,6 +145,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -155,13 +157,40 @@
     <div class="left">
         <h1>Side Projects</h1>
         <hr>
-        <ul id="markdown-toc">
+        <script type="text/javascript">
+    function change_gif(selectObj) {
+        var img_obj = document.getElementById("mapimg");
+        var slc_obj = document.getElementById("select01");
+        var opt_value = selectObj.value;
+        
+        switch (opt_value){
+            case "precip":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "snow_cover":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/snow-cover.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "t2m":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "rh2m":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/RH2m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "wind":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/Wind10m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+        }
+    }
+        
+</script>
+
+<ul id="markdown-toc">
   <li><a href="#sdpwfe" id="markdown-toc-sdpwfe">SDPWFE</a>    <ul>
-      <li><a href="#weather-map" id="markdown-toc-weather-map">Weather Map</a></li>
       <li><a href="#station-timeseries" id="markdown-toc-station-timeseries">Station Timeseries</a>        <ul>
           <li><a href="#home" id="markdown-toc-home">Home</a></li>
         </ul>
       </li>
+      <li><a href="#weather-map" id="markdown-toc-weather-map">Weather Map</a></li>
       <li><a href="#hysplit-trajectory-analysis" id="markdown-toc-hysplit-trajectory-analysis">Hysplit Trajectory Analysis</a></li>
     </ul>
   </li>
@@ -170,33 +199,25 @@
 <h2 id="sdpwfe">SDPWFE</h2>
 <p>Shandong Peninsula Weather Forecasting Experiment, to be posted.</p>
 
-<h3 id="weather-map">Weather Map</h3>
-<p>Please select the variable for GIF animation.
-<select style="margin-bottom: 15px" id="select01" onchange="change_gif">
-  <option value="snow_cover">Snow Cover</option>
-  <option value="precip">Precipitation</option>
-<!--  <option value="t2m">2m Temp & Relative Humidity</option>
-  <option value="wind">10m Wind</option> -->
-</select>
-<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/snow-cover.gif?xx" /></p>
 <h3 id="station-timeseries">Station Timeseries</h3>
 
 <h4 id="home">Home</h4>
 <p><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m-home.png" alt="" /></p>
 
+<h3 id="weather-map">Weather Map</h3>
+<p>Please select the variable for GIF animation.
+<select style="margin-bottom: 15px" id="select01" onchange="change_gif(this)">
+  <option value="precip">Precipitation</option>
+  <option value="snow_cover">Snow Cover</option>
+  <option value="t2m">2m Temperature</option>
+  <option value="rh2m">2m Relative Humidity</option>
+  <option value="wind">10m Wind</option> 
+</select></p>
+<div id="mapimg"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif" /></div>
 <h3 id="hysplit-trajectory-analysis">Hysplit Trajectory Analysis</h3>
 
 <h2 id="dlpe">DLPE</h2>
 <p>A test on 500 hPa geopotential high prediction by deep learning, to be posted.</p>
-
-<script type="text/javascript">
-　　　　function change_gif() {
-　　　　　　var selId = document.getElementById("selecteId");
-　　　　　　var hidId = document.getElementById("hiddenId");
-
-　　　　　　hidId.value = selId.options[selId.options.selectedIndex].value;
-　　　　}
-</script>
 
 
     </div>
