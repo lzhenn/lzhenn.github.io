@@ -39,7 +39,9 @@ type: page
 * content
 {:toc}
 ## SDPWFE  
-Shandong Peninsula Weather Forecasting Experiment, to be posted.
+Shandong Peninsula Weather Forecasting Experiment. 
+
+Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.
 
 ### Station Timeseries
 
