@@ -158,30 +158,76 @@
         <h1>Side Projects</h1>
         <hr>
         <script type="text/javascript">
-    function change_gif(selectObj) {
-        var img_obj = document.getElementById("mapimg");
-        var slc_obj = document.getElementById("select01");
+    function change_gif03(selectObj) {
+        var img_obj = document.getElementById("mapimg03");
+        var slc_obj = document.getElementById("select03");
         var opt_value = selectObj.value;
         
         switch (opt_value){
-            case "precip":
+            case "precip03":
                 img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif?'+ (new Date().getTime())+'"/>';
                 break;
-            case "snow_cover":
+            case "snow_cover03":
                 img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/snow-cover.gif?'+ (new Date().getTime())+'"/>';
                 break;
-            case "t2m":
+            case "t2m03":
                 img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m.gif?'+ (new Date().getTime())+'"/>';
                 break;
-            case "rh2m":
+            case "rh2m03":
                 img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/RH2m.gif?'+ (new Date().getTime())+'"/>';
                 break;
-            case "wind":
+            case "wind03":
                 img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/Wind10m.gif?'+ (new Date().getTime())+'"/>';
                 break;
         }
     }
+    function change_gif02(selectObj) {
+        var img_obj = document.getElementById("mapimg02");
+        var slc_obj = document.getElementById("select02");
+        var opt_value = selectObj.value;
         
+        switch (opt_value){
+            case "precip02":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d02_precip.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "snow_cover02":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d02_snow-cover.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "t2m02":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d02_T2m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "rh2m02":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d02_RH2m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "wind02":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d02_Wind10m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+        }
+    }
+    function change_gif01(selectObj) {
+        var img_obj = document.getElementById("mapimg01");
+        var slc_obj = document.getElementById("select01");
+        var opt_value = selectObj.value;
+        
+        switch (opt_value){
+            case "precip01":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d01_precip.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "snow_cover01":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d01_snow-cover.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "t2m01":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d01_T2m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "rh2m01":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d01_RH2m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+            case "wind01":
+                img_obj.innerHTML='<img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d01_Wind10m.gif?'+ (new Date().getTime())+'"/>';
+                break;
+        }
+    }
+       
 </script>
 
 <ul id="markdown-toc">
@@ -190,7 +236,12 @@
           <li><a href="#home" id="markdown-toc-home">Home</a></li>
         </ul>
       </li>
-      <li><a href="#weather-map" id="markdown-toc-weather-map">Weather Map</a></li>
+      <li><a href="#weather-map" id="markdown-toc-weather-map">Weather Map</a>        <ul>
+          <li><a href="#domain03-shandong-peninsula" id="markdown-toc-domain03-shandong-peninsula">Domain03 (Shandong Peninsula)</a></li>
+          <li><a href="#domain02-eastern-china" id="markdown-toc-domain02-eastern-china">Domain02 (Eastern China)</a></li>
+          <li><a href="#domain01-east-asia" id="markdown-toc-domain01-east-asia">Domain01 (East Asia)</a></li>
+        </ul>
+      </li>
       <li><a href="#hysplit-trajectory-analysis" id="markdown-toc-hysplit-trajectory-analysis">Hysplit Trajectory Analysis</a></li>
     </ul>
   </li>
@@ -202,20 +253,43 @@
 <p>Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.</p>
 
 <h3 id="station-timeseries">Station Timeseries</h3>
-
 <h4 id="home">Home</h4>
 <p><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m-home.png" alt="" /></p>
 
 <h3 id="weather-map">Weather Map</h3>
+<h4 id="domain03-shandong-peninsula">Domain03 (Shandong Peninsula)</h4>
 <p>Please select the variable for GIF animation.
-<select style="margin-bottom: 15px" id="select01" onchange="change_gif(this)">
-  <option value="precip">Precipitation</option>
-  <option value="snow_cover">Snow Cover</option>
-  <option value="t2m">2m Temperature</option>
-  <option value="rh2m">2m Relative Humidity</option>
-  <option value="wind">10m Wind</option> 
+<select style="margin-bottom: 15px" id="select03" onchange="change_gif03(this)">
+  <option value="precip03">Precipitation</option>
+  <option value="snow_cover03">Snow Cover</option>
+  <option value="t2m03">2m Temperature</option>
+  <option value="rh2m03">2m Relative Humidity</option>
+  <option value="wind03">10m Wind</option> 
 </select></p>
-<div id="mapimg"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif" /></div>
+<div id="mapimg03"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif" /></div>
+
+<h4 id="domain02-eastern-china">Domain02 (Eastern China)</h4>
+<p>Please select the variable for GIF animation.
+<select style="margin-bottom: 15px" id="select02" onchange="change_gif02(this)">
+  <option value="precip02">Precipitation</option>
+  <option value="snow_cover02">Snow Cover</option>
+  <option value="t2m02">2m Temperature</option>
+  <option value="rh2m02">2m Relative Humidity</option>
+  <option value="wind02">10m Wind</option> 
+</select></p>
+<div id="mapimg02"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d02_precip.gif" /></div>
+
+<h4 id="domain01-east-asia">Domain01 (East Asia)</h4>
+<p>Please select the variable for GIF animation.
+<select style="margin-bottom: 15px" id="select01" onchange="change_gif01(this)">
+  <option value="precip01">Precipitation</option>
+  <option value="snow_cover01">Snow Cover</option>
+  <option value="t2m01">2m Temperature</option>
+  <option value="rh2m01">2m Relative Humidity</option>
+  <option value="wind01">10m Wind</option> 
+</select></p>
+<div id="mapimg01"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/d01_precip.gif" /></div>
+
 <h3 id="hysplit-trajectory-analysis">Hysplit Trajectory Analysis</h3>
 
 <h2 id="dlpe">DLPE</h2>
