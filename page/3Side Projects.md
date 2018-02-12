@@ -92,6 +92,7 @@ Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, D
 ### Station Timeseries
 #### Home
 ![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m-home.png)
+![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/Wind10m-home.png)
 
 
 ### Weather Map
