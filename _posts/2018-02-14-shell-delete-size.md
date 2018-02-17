@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Shell删除一定大小文件"
-categories: javascript
-tags:  javascript html jekyll
+categories: linux 
+tags:  server shell
 author: LZN
 ---
 
