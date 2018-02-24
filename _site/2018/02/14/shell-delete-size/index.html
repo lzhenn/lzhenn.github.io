@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>利用imagemagick去除png白边</title>
-    <meta name="description" content="给生成的wrf预报图去除白边，搜索发现imagemagick大神级命令直接搞定，当然算法本身不复杂，毕竟plot出的图边框都是255，但是有这个命令实在太方便了。# Add borderconvert aaa.png -bordercolor white -border 10%x10% bbb.png # Del...">
+    <title>Shell删除一定大小文件</title>
+    <meta name="description" content="拖了几次Yahoo的美股daily数据，发现有很多Symbol对应的标的没有数据，对应的文件大小为3Byte。打算做一下清理，查了下删除语句：find . -size -4 -exec rm {} \;减号代表小于，不带单位默认为byte。exec是find的参数，具体描述  -exec： find命令对匹配的文...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2018/01/16/linux-imagemagick/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/02/14/shell-delete-size/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -155,11 +155,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>利用imagemagick去除png白边</h1>
+        <h1>Shell删除一定大小文件</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-01-16
+                <i class="fa fa-calendar"></i>2018-02-14
             </div>
 
             <div class="label-card">
@@ -197,8 +197,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#imagemagic" title="Tag: imagemagic" rel="tag">imagemagic</a-->
-        <a href="/tag/#imagemagic" title="Tag: imagemagic" rel="tag">imagemagic</a>
+        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <!--a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a-->
+        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
     
   
 
@@ -210,14 +213,19 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>给生成的wrf预报图去除白边，搜索发现imagemagick大神级命令直接搞定，当然算法本身不复杂，毕竟plot出的图边框都是255，但是有这个命令实在太方便了。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add border</span>
-convert aaa.png <span class="nt">-bordercolor</span> white <span class="nt">-border</span> 10%x10% bbb.png 
-<span class="c"># Delete border</span>
-convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-trim</span> ccc.png
-</code></pre></div></div>
+<p>拖了几次Yahoo的美股daily数据，发现有很多Symbol对应的标的没有数据，对应的文件大小为3Byte。打算做一下清理，查了下删除语句：</p>
 
-<p><strong>Updated 2018-01-16</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-size</span> <span class="nt">-4</span> <span class="nt">-exec</span> rm <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div></div>
+<p>减号代表小于，不带单位默认为byte。exec是find的参数，具体描述</p>
+
+<blockquote>
+  <p>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ { } \;，注意{   }和\；之间的空格。</p>
+</blockquote>
+
+<p>至于为啥后面要有个大括号 空格 反斜线 然后再分号？如此冗余设计实在让人不爽。查了一下<a href="https://www.crifan.com/linux_shell_empty_curly_bracket_meaning/">这个帖子</a>刨根问底了一番。具体来说，大括号代表占位符，表示对find出的列表元素，每次展开遍历其中一个，反斜线代表参数范围结束符，分号后面是其他参数了。</p>
+
+<p><strong>Updated 2018-02-14</strong></p>
 
         </article>
         <hr>
@@ -228,8 +236,24 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
             
                 
                     
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
                 
             
+                
+                    
                 
                     
                 
@@ -240,7 +264,17 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
+                    
+                
             
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -251,26 +285,17 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
-            
-                
                     
                 
             
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
                 
                     
-                
-            
                 
                     
                 
@@ -281,7 +306,11 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -289,26 +318,17 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
-            
-                
                     
                 
             
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
                 
                     
-                
-            
                 
                     
                 
@@ -319,7 +339,17 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
+                    
+                
             
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -330,26 +360,11 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
                 
                     
-                
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -360,20 +375,93 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 
                     
                 
+                    
+                
             
         
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/02/07/trading-diary/">20180207交易笔记</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a></p>
+        <p><strong>下一篇</strong> <a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a></p>
         
     </div>
 </div>
@@ -416,6 +504,8 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

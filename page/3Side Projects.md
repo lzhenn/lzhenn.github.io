@@ -90,12 +90,19 @@ Shandong Peninsula Weather Forecasting Experiment **(For Research Use ONLY)**.
 Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.
 
 ### Station Timeseries
-#### Home
-![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/cloud-profile-home.png?{{ site.time }})
-![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/profile-home.png?{{ site.time }})
-![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m-home.png?{{ site.time }})
-![](https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/Wind10m-home.png?{{ site.time }})
-
+<!--Please select the station for its timeseries.
+<select style="margin-bottom: 15px" id="select_ts" onchange="change_png(this)">
+  <option value="home">Home</option>
+  <option value="seaside">Seaside</option>
+  <option value="yt_air">Yantai Airport</option>
+  <option value="yt_railway">Yantai Railway Station</option>
+  <option value="qd_air">Qingdao Airport</option> 
+  <option value="qd_railway">Qingdao Railway Station</option> 
+</select>-->
+<div id="cloud_img"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/cloud-profile-home.png?{{ site.time }}" /></div>
+<div id="profile_img"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/profile-home.png?{{ site.time }}" /></div>
+<div id="t2m_img"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/T2m-home.png?{{ site.time }}" /></div>
+<div id="wind_img"><img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/Wind10m-home.png?{{ site.time }}" /></div>
 
 ### Weather Map
 #### Domain03 (Shandong Peninsula)

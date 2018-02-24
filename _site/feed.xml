@@ -5,9 +5,70 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 13 Feb 2018 21:27:18 +0800</pubDate>
-    <lastBuildDate>Tue, 13 Feb 2018 21:27:18 +0800</lastBuildDate>
+    <pubDate>Sat, 24 Feb 2018 11:43:56 +0800</pubDate>
+    <lastBuildDate>Sat, 24 Feb 2018 11:43:56 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Shell采用wait和后台执行实现多进程</title>
+        <description>
+&lt;a href=&quot;https://novarizark.github.io/2017/12/31/WRF-shandong-setup/&quot;&gt;山东半岛预报系统&lt;/a&gt;中后处理部分的NCL串行效率很低，大概要二十分钟到半个小时才能完成绘图。既然任务之间都是独立的，很自然的想法就是能否在shell的环境下实现进程级别的并行化。
+差了下其实很简单，只需要在语句后面加入 &amp;amp; 符号放到后台执行即可实现异步，但是后台执行无法捕捉结束位置，wait语句可以解决这个问题，其作用就是等待该语句之前的所有后台任务结束之后，再执行此语句后的任务。例子如下：
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180205-plot-precip.ncl &amp;amp;
+ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180207-plot-T2m.ncl &amp;amp;
+ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180207-plot-RH2m.ncl &amp;amp;
+ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180207-plot-UV10m.ncl &amp;amp;
+&lt;span class=&quot;nb&quot;&gt;wait
+echo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Hello world!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+前面四个NCL语句会并行执行（&amp;amp;符号将该命令放入后台执行后立刻执行下一个语句），之后碰到wait，会等待前面四个后台任务中最慢的那个结束，再输出Hello world!
+
+原始脚本处理后，大概只需要三四分钟（不算坑爹慢的git push过程）即可完成所有的绘图操作。惊不惊喜？
+
+&lt;strong&gt;Updated 2018-02-17&lt;/strong&gt;
+</description>
+        <pubDate>Sat, 17 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/02/17/shell-parallel-task/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/02/17/shell-parallel-task/</guid>
+        
+        <category>server</category>
+        
+        <category>shell</category>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Shell删除一定大小文件</title>
+        <description>
+拖了几次Yahoo的美股daily数据，发现有很多Symbol对应的标的没有数据，对应的文件大小为3Byte。打算做一下清理，查了下删除语句：
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-4&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; rm &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+减号代表小于，不带单位默认为byte。exec是find的参数，具体描述
+
+&lt;blockquote&gt;
+  -exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ { } \;，注意{   }和\；之间的空格。
+&lt;/blockquote&gt;
+
+至于为啥后面要有个大括号 空格 反斜线 然后再分号？如此冗余设计实在让人不爽。查了一下&lt;a href=&quot;https://www.crifan.com/linux_shell_empty_curly_bracket_meaning/&quot;&gt;这个帖子&lt;/a&gt;刨根问底了一番。具体来说，大括号代表占位符，表示对find出的列表元素，每次展开遍历其中一个，反斜线代表参数范围结束符，分号后面是其他参数了。
+
+&lt;strong&gt;Updated 2018-02-14&lt;/strong&gt;
+</description>
+        <pubDate>Wed, 14 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/02/14/shell-delete-size/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/02/14/shell-delete-size/</guid>
+        
+        <category>server</category>
+        
+        <category>shell</category>
+        
+        
+        <category>linux</category>
+        
+      </item>
     
       <item>
         <title>20180207交易笔记</title>
@@ -691,84 +752,6 @@ dim123时间都给考虑好了，意不意外，惊不惊喜？依葫芦画瓢�
         
         
         <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>模型化分析职业选择上反脆弱策略的收益条件</title>
-        <description>
-今天上午聊天的时候讨论到all in情况下，在领域前端的边际收益无法覆盖去了解其他领域既成知识体系的机会成本，突然想到应该可以建立一个模型去分析，在怎样的条件下，拒绝all in而采用反脆弱策略，效用能够接近all in所可达到的高度？
-
-简单整理下这个模型应该包括的要素：
-
-&lt;ul&gt;
-  &lt;li&gt;行业的效用收益分布：幂律&lt;/li&gt;
-  &lt;li&gt;行业的成本分布：幂律&lt;/li&gt;
-  &lt;li&gt;all in的时间投入，承担的风险（如何定价？）&lt;/li&gt;
-  &lt;li&gt;all in情况下的期望位置&lt;/li&gt;
-  &lt;li&gt;antifragile的分支点位置&lt;/li&gt;
-  &lt;li&gt;antifragile的情况下其他领域的收益分布和成本分布&lt;/li&gt;
-&lt;/ul&gt;
-
-时间投入应该是个守恒量，最终效用如何评定？这个模型应该要比收入分布讨论的模型复杂很多。
-继续挖坑回填。
-
-应该先建立效用函数，确定几个维度，然后按照边际效用递减原则对各个维度的情况打分，最终应该评价效用最大。
-资料：
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/24123648/answer/27911498&quot;&gt;收入和幸福感&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/d3533cf12209&quot;&gt;构建效用函数据&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://daily.zhihu.com/story/8280265&quot;&gt;个人效用函数&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;strong&gt;Updated 2018-01-20&lt;/strong&gt;
-</description>
-        <pubDate>Sat, 20 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/01/20/antifragile-career/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/01/20/antifragile-career/</guid>
-        
-        <category>thinking</category>
-        
-        <category>investment</category>
-        
-        <category>career</category>
-        
-        <category>antifragile</category>
-        
-        
-        <category>economy</category>
-        
-        <category>investment</category>
-        
-      </item>
-    
-      <item>
-        <title>2017投资小结与2018年的交易逻辑</title>
-        <description>
-17年的交易逻辑的确太嫩了，若不是最后一个月通胀预期起来，恐怕一整年收益跑不过货币基金。最主要的三条经验教训如下：
-
-&lt;ol&gt;
-  &lt;li&gt;信仰价投，左侧交易就代表要在市场非理性的时候拿得住，流动性保证和严格按照交易系统策略交易非常重要，止损位置应该在安全边际以下某一范围。如果胆小，仓位控制不超过10%，真破产就当作慈善了吧。毕竟杠铃策略完全可以保证无风险一端的基本cover激进端平均一年一个负面黑天鹅的损失。&lt;/li&gt;
-  &lt;li&gt;逻辑对的情况下，却不能低估市场非理性的时间。上升期更是这样，不要猜顶，不轻易做空头。杠铃策略，与泡沫共舞，用正头寸收益养put。&lt;/li&gt;
-  &lt;li&gt;尽管看准了不少标的，还是要记住，这是牛市给的，不要忘了最大的一个没看准的标的是USD，或许逻辑没错，时间尺度错了，但是教训应该是择时上恪守左侧交易为主，右侧控制好头寸的策略。&lt;/li&gt;
-&lt;/ol&gt;
-
-2018年逻辑应该基本清晰：油价 通胀 波动率。标的也非常清晰，除了上述三点教训，还是要注意仓位控制和恪守逻辑和策略。不贪不惧，多看书少看盘。毕竟目标很简单，跑赢无风险4%而已，去年目标是不亏，最后却完成了今年的目标不是。
-
-&lt;strong&gt;Updated 2018-01-18&lt;/strong&gt;
-</description>
-        <pubDate>Thu, 18 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/01/18/2018-investment/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/01/18/2018-investment/</guid>
-        
-        <category>thinking</category>
-        
-        <category>investment</category>
-        
-        
-        <category>economy</category>
-        
-        <category>investment</category>
         
       </item>
     
