@@ -162,6 +162,170 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+    
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
+    
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
+    
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#记得装desktop版本的ubuntu否则没有xserver比较蛋疼" id="markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</a></li>
+  <li><a href="#安装英伟达显卡驱动要关掉x-server" id="markdown-toc-安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</a></li>
+  <li><a href="#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本" id="markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</a></li>
+</ul>
+
+<h3 id="记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</h3>
+<h3 id="安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</h3>
+<p>默认进入命令行启动</p>
+
+<p>http://blog.topspeedsnail.com/archives/4922</p>
+
+<p>注意16.04用这句：</p>
+
+<p>$sudo systemctl set-default multi-user.target</p>
+
+<p>这是每次开机默认进入命令行模式的方法。单词关闭用</p>
+
+<p>sudo /etc/init.d/lightdm stop</p>
+
+<p>然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）</p>
+
+<p>驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）</p>
+
+<p>http://blog.csdn.net/u012759136/article/details/53355781</p>
+
+<p>照着来没问题了吧，错了……build driver的时候直接说unable……我去</p>
+
+<p>差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）</p>
+
+<p>http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;lang=us&amp;type=GeForce</p>
+
+<p>这里下载17.11的版本</p>
+
+<h3 id="安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</h3>
+<p>直接运行安装，居然自带了驱动……去死吧……</p>
+
+<p>后面说我有几个库没装好，记录如下</p>
+
+<p>Missing recommended library: libGLU.so</p>
+
+<p>Missing recommended library: libX11.so</p>
+
+<p>Missing recommended library: libXi.so</p>
+
+<p>Missing recommended library: libXmu.so</p>
+
+<p>搜索下直接apt-get搞定</p>
+
+<p>$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
+
+<p>官方参考</p>
+
+<p>https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/</p>
+
+<p>重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。</p>
+
+<p>http://blog.csdn.net/shiorioxy/article/details/52652831</p>
+
+<p>http://blog.csdn.net/jhszh418762259/article/details/52958287</p>
+
+<p>之后写几个配置</p>
+
+<p>环境变量设置</p>
+
+<p>sudo vim ~/.bashrc</p>
+
+<p>在末尾添加</p>
+
+<p>export CUDA_HOME=/usr/local/cuda-8.0</p>
+
+<p>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</p>
+
+<p>export PATH=/usr/local/cuda-8.0/bin:$PATH</p>
+
+<p>保存退出。</p>
+
+<p>然后刷新。</p>
+
+<p>source ~/.bashrc</p>
+
+<p>动态链接库设置</p>
+
+<p>创建文件：</p>
+
+<p>sudo vim /etc/ld.so.conf.d/cuda.conf</p>
+
+<p>写入：/usr/local/cuda/lib64</p>
+
+<p>保存之后使其立即生效：</p>
+
+<p>sudo ldconfig -v</p>
+
+<p>之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。</p>
+
+<p>许久之后，安全完成。</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/ubuntu-cuda-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a>
                 </h2>
                 <div class="label">
@@ -539,7 +703,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 14.5pt; color: #333;">server</a>
+                      <a href="/tag/#server" style="font-size: 14pt; color: #444;">server</a>
                     
                       
                       
@@ -567,7 +731,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 11.5pt; color: #777;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 11pt; color: #777;">jekyll</a>
                     
                       
                       
@@ -693,14 +857,14 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 14.5pt; color: #333;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 14pt; color: #444;">investment</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 11.5pt; color: #777;">career</a>
+                      <a href="/tag/#career" style="font-size: 11pt; color: #777;">career</a>
                     
                       
                       
@@ -779,6 +943,13 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                       
                       <a href="/tag/#shell" style="font-size: 10pt; color: #888;">shell</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#market&nbspchrash" style="font-size: 9pt; color: #999;">market&nbspchrash</a>
+                    
                 </div>
             </div>
 
@@ -815,6 +986,8 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a></li>
+                    
                         <li><a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a></li>
                     
                         <li><a href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件</a></li>
@@ -832,8 +1005,6 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                         <li><a href="/2018/01/25/pandas-csv/">利用pandas处理csv文件注意</a></li>
                     
                         <li><a href="/2018/01/25/mercurius-system/">Mercurius交易策略系统搭建</a></li>
-                    
-                        <li><a href="/2018/01/25/import-python/">python import其他文件</a></li>
                     
                 </ul>
             </div>
@@ -905,7 +1076,7 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">8</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -958,6 +1129,15 @@ follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-p
                         <a href="/category/#notebook" class="categories-list-item" cate="notebook">
                             <span class="name">
                                 notebook
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#reading" class="categories-list-item" cate="reading">
+                            <span class="name">
+                                reading
                             </span>
                             <span class="badge">1</span>
                         </a>
