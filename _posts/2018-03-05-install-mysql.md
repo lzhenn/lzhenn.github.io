@@ -86,4 +86,19 @@ select Host,User from mysql.user;
 +-----------+--------+
 4 rows in set (0.00 sec)
 ```
+这里遇到一点与视频教程不太一致的地方，新建用户的密码与root密码并不相同，查了下解决方法
+``` sql
+update mysql.user set password=password('$NEW_PWD') where User="$YOUR_USER_NAME" and Host="localhost";
+flush privileges;
+```
+
+常用命令
+``` sql
+show databases;
+create database test;
+use test;
+select database(); # show what is the selected database
+drop database if exists test;
+```
+
 **Updated 2018-03-05**
