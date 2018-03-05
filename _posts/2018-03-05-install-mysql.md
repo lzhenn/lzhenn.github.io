@@ -63,5 +63,27 @@ select Host,User from mysql.user;
 +-----------+------+
 2 rows in set (0.00 sec)
 ```
+添加一个非root用户
+``` sql
+CREATE USER 'lzhenn'@'127.0.0.1' IDENTIFIED BY 'password';
+CREATE USER 'lzhenn'@'localhost' IDENTIFIED BY 'password';
+```
+给予新用户相应权限
+``` sql
+GRANT ALL PRIVILEGES ON *.* TO 'lzhenn'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'lzhenn'@'127.0.0.1' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+FLUSH HOSTS;
 
+select Host,User from mysql.user;
++-----------+--------+
+| Host      | User   |
++-----------+--------+
+| 127.0.0.1 | lzhenn |
+| 127.0.0.1 | root   |
+| localhost | lzhenn |
+| localhost | root   |
++-----------+--------+
+4 rows in set (0.00 sec)
+```
 **Updated 2018-03-05**
