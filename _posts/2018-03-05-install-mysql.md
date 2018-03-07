@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "CentOS mysql安装记录"
+title:  "CentOS mysql安装"
 categories: linux mysql
-tags:  server centos
+tags:  server centos database
 author: LZN
 ---
 
@@ -11,21 +11,21 @@ author: LZN
 
 Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
 首先切换到root下安装：
-``` bash
+``` shell
 yum install mysql mysql-server
 ```
 检查服务状态
-``` bash
+``` shell
 chkconfig mysqld --list
 mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
 ```
 启动服务
-``` bash
+``` shell
 chkconfig mysqld on 
 ```
 
 启动开机服务
-``` bash
+``` shell
 service mysqld start
 ```
 
@@ -47,7 +47,7 @@ Alternatively you can run:
 然后的选项一路Y。
 
 登录mysql，在root用户下，直接
-``` bash
+``` shell
 mysql -p
 ```
 登陆后，我们查看一下用户列表。
@@ -63,7 +63,7 @@ select Host,User from mysql.user;
 +-----------+------+
 2 rows in set (0.00 sec)
 ```
-添加一个非root用户
+添加一个非root用户,密码为password
 ``` sql
 CREATE USER 'lzhenn'@'127.0.0.1' IDENTIFIED BY 'password';
 CREATE USER 'lzhenn'@'localhost' IDENTIFIED BY 'password';
@@ -86,19 +86,10 @@ select Host,User from mysql.user;
 +-----------+--------+
 4 rows in set (0.00 sec)
 ```
-这里遇到一点与视频教程不太一致的地方，新建用户的密码与root密码并不相同，查了下解决方法
+这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法
 ``` sql
 update mysql.user set password=password('$NEW_PWD') where User="$YOUR_USER_NAME" and Host="localhost";
 flush privileges;
-```
-
-常用命令
-``` sql
-show databases;
-create database test;
-use test;
-select database(); # show what is the selected database
-drop database if exists test;
 ```
 
 **Updated 2018-03-05**
