@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "mysql基本操作"
-categories: mysql
+categories: mysql notebook
 tags:  server database 
 author: LZN
 ---
@@ -120,5 +120,31 @@ mysql> insert into student value
 ``` sql
 slect * from student;
 ```
+Foreign Key的概念
 
-**Updated 2018-03-06**
+表A中的Primary Key，出现在表B中，则为Foreign Key，可为空值，可重复出现。
+
+如果要对已有的表增加一条数据属性，使用alter table语句
+``` sql
+mysql> alter table test
+    -> add maxscore int not null after type;
+
+describe test;
++----------+------------------+------+-----+---------+----------------+
+| Field    | Type             | Null | Key | Default | Extra          |
++----------+------------------+------+-----+---------+----------------+
+| date     | date             | NO   |     | NULL    |                |
+| type     | enum('T','Q')    | NO   |     | NULL    |                |
+| maxscore | int(11)          | NO   |     | NULL    |                |
+| class_id | int(10) unsigned | NO   |     | NULL    |                |
+| test_id  | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
++----------+------------------+------+-----+---------+----------------+
+
+```
+改变已有的数据表中的Field名，
+``` sql
+mysql> alter table score change event_id test_id
+    -> int unsigned not null;
+```
+
+**Updated 2018-03-08**
