@@ -21,5 +21,9 @@ author: LZN
     * Public-key Cryptography
         * RSA
 
+* Python Class
+    * \_\_init(self,a,b,c)\_\_ --> cls=class(a, b, c) --> cls.a
+    * method(self) --> cls.method() -->class.method(cls)
+
 
 **Updated 2018-03-12**
