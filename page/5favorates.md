@@ -34,7 +34,16 @@ Resources and bookmarks for work, hobby, and others.
     Chrome Extensions for image host using Sina Weibo.
 
 
-### Reading
+#### Reading/Tutorial
+
+* [Corey Schafer's Tutorial](https://www.youtube.com/user/schafer5/playlists)
+
+    Corey Schafer's computer science tutorial on Youtube. Believe me, these are the best basic tutorial videos for CS!
+
+* [Ruanyifeng's Blog](http://www.ruanyifeng.com/home.html)
+
+    Dr. Ruan's personal webpage, very nice CS-related resources in Chinese!
+
 
 #### Tools
 

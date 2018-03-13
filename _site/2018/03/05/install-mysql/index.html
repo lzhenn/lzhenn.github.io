@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CentOS mysql安装</title>
+    <meta name="description" content="Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：首先切换到root下安装：yum install mysql mysql-server检查服务状态chkconfig mysqld -...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/03/05/install-mysql/">
+    <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f8f21649f9d39b36012bc6dac8898310";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">LZN's Blog</a>
+        <small>try to be a day-contributor!</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-clock-o"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-server"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/Side Projects/">
+                        
+                            <i class="fa fa-bar-chart"></i>Side Projects
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/sandbox/">
+                        
+                            <i class="fa fa-flask"></i>Sandbox
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/favorites/">
+                        
+                            <i class="fa fa-heart"></i>Favorites
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-id-card-o"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/comments/">
+                        
+                            <i class="fa fa-comments"></i>Comments
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>CentOS mysql安装</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2018-03-05
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>LZN
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <!--a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a-->
+        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
+    
+        <!--a href="/tag/#database" title="Tag: database" rel="tag">database</a-->
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        
+<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
+首先切换到root下安装：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
+</code></pre></div></div>
+<p>检查服务状态</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
+mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
+</code></pre></div></div>
+<p>启动服务</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
+</code></pre></div></div>
+
+<p>启动开机服务</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
+</code></pre></div></div>
+
+<p>之后给出提示信息：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+/usr/bin/mysqladmin -u root password 'new-password'
+/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
+
+Alternatively you can run:
+/usr/bin/mysql_secure_installation
+</code></pre></div></div>
+<p>采用第二种方法更加安全。</p>
+
+<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
+
+<p>然后的选项一路Y。</p>
+
+<p>登录mysql，在root用户下，直接</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
+</code></pre></div></div>
+<p>登陆后，我们查看一下用户列表。</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
+| Host      | User |
++-----------+------+
+| 127.0.0.1 | root |
+| localhost | root |
++-----------+------+
+2 rows in set (0.00 sec)
+</code></pre></div></div>
+<p>添加一个非root用户,密码为password</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+</code></pre></div></div>
+<p>给予新用户相应权限</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div></div>
+<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
+<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-03-05</strong></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/03/06/mysql-basics/">mysql基本操作
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2018/03/06/mysql-basics/">mysql基本操作</a></p>
+        
+    </div>
+</div>
+
+
+<!--        <h2 id="comments">Comments</h2>
+    
+
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', // 可选。默认为 location.href
+  owner: 'Novarizark',
+  repo: 'Novarizark.github.io',
+  oauth: {
+    client_id: '08594414abfaba1aa8bd',
+    client_secret: '56bd0f234257f69ca94cafa5086af0ff2e43ac70',
+  },
+})
+gitment.render('container')
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://imsun.github.io/gitment/" rel="nofollow">comments powered by Gitment.</a></noscript>
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

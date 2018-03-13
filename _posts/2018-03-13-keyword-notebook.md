@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "关键词笔记本"
+title:  "学习与工作日记：关键词"
 categories:  notebook linux algorithm
 tags:  blog keyword&nbspnotebook
 author: LZN
@@ -26,4 +26,15 @@ author: LZN
     * method(self) --> cls.method() -->class.method(cls)
 
 
-**Updated 2018-03-12**
+### 20180313
+
+* pymysql
+    * with connection.cursor() as cursor
+    * connection.commit()
+    * connection.close()
+
+* python-for-teens
+    * string
+    * if structure
+
+**Updated 2018-03-13**

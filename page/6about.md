@@ -29,7 +29,7 @@ type: page
 
 曾经热爱自然科学，现在依然热爱，只是更加现实；曾经不屑人文社科，现在很感兴趣，也是因为现实。
 
-搞过NOI，败退。但一直热爱计算机，喜欢写新鲜多汁的程序，不喜欢机械重复而又不能模块化的coding。
+搞过NOIP，败退。但一直热爱计算机，喜欢写新鲜多汁的程序，不喜欢机械重复而又不能模块化的coding。
 
 
 ![](http://ww1.sinaimg.cn/large/73ebdc71gy1fmzzdtzucxj20wu0kugmh.jpg)
