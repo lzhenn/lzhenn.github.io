@@ -164,6 +164,96 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#jupyter&nbspnotebook" title="Tag: jupyter&nbspnotebook" rel="tag">jupyter&nbspnotebook</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Jupyter Notebook极端强大，可以直接执行Markdown，执行之后即成为document html。</p>
+
+<p>感叹号(exclamation point)可以用于嵌入bash command:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">xxx</span>
+</code></pre></div></div>
+
+<p>Notebook built-in command叫做Magics，单百分号：Line Magics，双百分号：Cell Magics。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">lsmagic</span>
+</code></pre></div></div>
+<p>常用的magic func</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">HTML</span>  <span class="c">#其后的text会被render为html，可以放入iframe等拖视频过来。</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inlin</span> <span class="c">#将matplotlib绘图放到notebook的输出中。</span>
+
+<span class="o">%%</span><span class="n">javascript</span>
+<span class="o">%%</span><span class="n">bash</span>
+
+<span class="o">%</span> <span class="o">%</span><span class="n">timeit</span>   <span class="c">#可以测试function的速度</span>
+</code></pre></div></div>
+
+<p>甚至可以酷炫地render pandas dataframe，看图，效果真是酷炫到爆炸
+<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp0wdaobj5j20s50zzgx8.jpg" alt="" /></p>
+
+<p>更牛逼的是，居然可以通过file-&gt;download as存储为html pdf markdown等各种形式，简直牛逼到爆炸。
+我们测试一下，发现html直接把图片存成了一串散列值，markdown的话会把图片和md文件放在一个zip包里。</p>
+
+<p>notebook的存储本质是个json file。</p>
+
+<p><strong>Updated 2018-03-04</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/04/jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/02/28/trading-diary/">20180228交易笔记</a>
                 </h2>
                 <div class="label">
@@ -577,95 +667,6 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/07/javascript-option-onchange/">Javascript响应option OnChange事件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
-    
-        <a href="/tag/#html" title="Tag: html" rel="tag">html</a>&nbsp;
-    
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Side Project中希望能够通过列表选项调整显示的2D map animation，发现JS不去响应OnChange事件，最早以为是单纯改动src不可行，需要ajax方式做请求，检查后发现调用函数时没有给参数括号，不过为啥chrome不报错，奇怪。具体代码：</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">change_gif</span><span class="p">(</span><span class="nx">selectObj</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">img_obj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"mapimg"</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">slc_obj</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"select01"</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">opt_value</span> <span class="o">=</span> <span class="nx">selectObj</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
-        
-        <span class="k">switch</span> <span class="p">(</span><span class="nx">opt_value</span><span class="p">){</span>
-            <span class="k">case</span> <span class="s2">"precip"</span><span class="p">:</span>
-                <span class="nx">img_obj</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif?'</span><span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">())</span><span class="o">+</span><span class="s1">'"/&gt;'</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="s2">"snow_cover"</span><span class="p">:</span>
-                <span class="nx">img_obj</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s1">'&lt;img src="https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/snow-cover.gif?'</span><span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">())</span><span class="o">+</span><span class="s1">'"/&gt;'</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
- 
-</code></pre></div></div>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;select</span> <span class="na">style=</span><span class="s">"margin-bottom: 15px"</span> <span class="na">id=</span><span class="s">"select01"</span> <span class="na">onchange=</span><span class="s">"change_gif(this)"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"precip"</span><span class="nt">&gt;</span>Precipitation<span class="nt">&lt;/option&gt;</span>
-  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"snow_cover"</span><span class="nt">&gt;</span>Snow Cover<span class="nt">&lt;/option&gt;</span>
-<span class="nt">&lt;/select&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mapimg"</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">"https://raw.githubusercontent.com/Novarizark/wrf-sdpwfe/master/fig/precip.gif"</span> <span class="nt">/&gt;&lt;/div&gt;</span>
-</code></pre></div></div>
-<p><strong>Updated 2018-01-25</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/07/javascript-option-onchange/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -714,7 +715,7 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 17pt; color: #111;">server</a>
+                      <a href="/tag/#server" style="font-size: 18pt; color: #000;">server</a>
                     
                       
                       
@@ -980,7 +981,7 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                       
                       
                       
-                      <a href="/tag/#database" style="font-size: 12pt; color: #666;">database</a>
+                      <a href="/tag/#database" style="font-size: 13pt; color: #555;">database</a>
                     
                       
                       
@@ -1039,6 +1040,8 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/03/22/mysql-comments/">mysql字段注释</a></li>
+                    
                         <li><a href="/2018/03/13/keyword-notebook/">学习与工作日记：关键词</a></li>
                     
                         <li><a href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a></li>
@@ -1056,8 +1059,6 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                         <li><a href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a></li>
                     
                         <li><a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a></li>
-                    
-                        <li><a href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件</a></li>
                     
                 </ul>
             </div>
@@ -1183,7 +1184,7 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">8</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -1201,7 +1202,7 @@ portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都�
                             <span class="name">
                                 mysql
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     

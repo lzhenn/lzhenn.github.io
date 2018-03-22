@@ -164,6 +164,125 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/03/22/mysql-comments/">mysql字段注释</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-22
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>开始组建财报数据表，过程中有必要做一些注释说明字段，比如资产负债表中为了压缩存储空间，现金等字段单位用kdollar。
+差了下操作如下：</p>
+
+<p>创建表过程中</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">cash_equiv</span> <span class="n">int</span> <span class="k">null</span> <span class="k">comment</span> <span class="s1">'Cash and Equivalents (kdollars)'</span><span class="p">,</span>
+</code></pre></div></div>
+
+<p>修改表过程中</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">eqbalance_sheet</span> <span class="k">modify</span> <span class="k">column</span> <span class="n">invest</span> <span class="n">int</span> <span class="k">comment</span> <span class="s1">'Investments (Deficit, kdollars)'</span><span class="p">;</span> 
+</code></pre></div></div>
+
+<p>添加字段过程中</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">alter</span> <span class="k">table</span> <span class="n">eq_balance_sheet</span> <span class="k">add</span> <span class="n">other_income</span> <span class="n">int</span> <span class="k">comment</span> <span class="s1">'Accumulated Other Comprehensive Income (kdollars)'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>查看说明：</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">full</span> <span class="n">columns</span> <span class="k">from</span> <span class="n">eq_balance_sheet</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">Field</span>          <span class="o">|</span> <span class="k">Type</span>        <span class="o">|</span> <span class="k">Collation</span>       <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span> <span class="o">|</span> <span class="k">Privileges</span>                      <span class="o">|</span> <span class="k">Comment</span>                                           <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">rhid</span>           <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>    <span class="o">|</span> <span class="n">utf8_general_ci</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span>                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">symbol</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="n">utf8_general_ci</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span>                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">cash_equiv</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Cash</span> <span class="k">and</span> <span class="n">Equivalents</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">invest_curr</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="n">cash_st_invest</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Cash</span> <span class="k">and</span> <span class="n">Short</span> <span class="n">Term</span> <span class="n">Investments</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="n">receivables</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Trade</span> <span class="k">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Trade</span> <span class="n">Receivables</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="n">inventory</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Inventory</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                              <span class="o">|</span>
+<span class="o">|</span> <span class="n">curr_ast</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Current</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                         <span class="o">|</span>
+<span class="o">|</span> <span class="n">ppe_net</span>        <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Property</span><span class="p">,</span> <span class="n">Plant</span> <span class="o">&amp;</span> <span class="n">Equipment</span> <span class="n">Net</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="n">goodwill</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Goodwill</span> <span class="k">and</span> <span class="n">Intangible</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>         <span class="o">|</span>
+<span class="o">|</span> <span class="n">invst_ncurr</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">tax_ast</span>        <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Tax</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">ast_ncurr</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Assets</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                     <span class="o">|</span>
+<span class="o">|</span> <span class="n">total_ast</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                           <span class="o">|</span>
+<span class="o">|</span> <span class="n">payables</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Trade</span> <span class="k">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Trade</span> <span class="n">Payables</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">debt_curr</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Debt</span> <span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                           <span class="o">|</span>
+<span class="o">|</span> <span class="n">curr_liab</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Current</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="n">debt_ncurr</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Debt</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                       <span class="o">|</span>
+<span class="o">|</span> <span class="n">total_debt</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Debt</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">def_revenue</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Deferred</span> <span class="n">Revenue</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                       <span class="o">|</span>
+<span class="o">|</span> <span class="n">tax_liab</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Tax</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                        <span class="o">|</span>
+<span class="o">|</span> <span class="n">dep_liab</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Deposit</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="n">liab_ncurr</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Liabilities</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">total_liab</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                      <span class="o">|</span>
+<span class="o">|</span> <span class="n">other_income</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Accumulated</span> <span class="n">Other</span> <span class="n">Comprehensive</span> <span class="n">Income</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">ret_earning</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Accumulated</span> <span class="n">Retained</span> <span class="n">Earnings</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">equity</span>         <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Shareholders</span> <span class="n">Equity</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">invest</span>         <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span>                   <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
+<span class="mi">28</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/22/mysql-comments/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/03/13/keyword-notebook/">学习与工作日记：关键词</a>
                 </h2>
                 <div class="label">
@@ -833,96 +952,6 @@ Alternatively you can run:
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#jupyter&nbspnotebook" title="Tag: jupyter&nbspnotebook" rel="tag">jupyter&nbspnotebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Jupyter Notebook极端强大，可以直接执行Markdown，执行之后即成为document html。</p>
-
-<p>感叹号(exclamation point)可以用于嵌入bash command:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">xxx</span>
-</code></pre></div></div>
-
-<p>Notebook built-in command叫做Magics，单百分号：Line Magics，双百分号：Cell Magics。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">lsmagic</span>
-</code></pre></div></div>
-<p>常用的magic func</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">HTML</span>  <span class="c">#其后的text会被render为html，可以放入iframe等拖视频过来。</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inlin</span> <span class="c">#将matplotlib绘图放到notebook的输出中。</span>
-
-<span class="o">%%</span><span class="n">javascript</span>
-<span class="o">%%</span><span class="n">bash</span>
-
-<span class="o">%</span> <span class="o">%</span><span class="n">timeit</span>   <span class="c">#可以测试function的速度</span>
-</code></pre></div></div>
-
-<p>甚至可以酷炫地render pandas dataframe，看图，效果真是酷炫到爆炸
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp0wdaobj5j20s50zzgx8.jpg" alt="" /></p>
-
-<p>更牛逼的是，居然可以通过file-&gt;download as存储为html pdf markdown等各种形式，简直牛逼到爆炸。
-我们测试一下，发现html直接把图片存成了一串散列值，markdown的话会把图片和md文件放在一个zip包里。</p>
-
-<p>notebook的存储本质是个json file。</p>
-
-<p><strong>Updated 2018-03-04</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/04/jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -971,7 +1000,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 17pt; color: #111;">server</a>
+                      <a href="/tag/#server" style="font-size: 18pt; color: #000;">server</a>
                     
                       
                       
@@ -1237,7 +1266,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#database" style="font-size: 12pt; color: #666;">database</a>
+                      <a href="/tag/#database" style="font-size: 13pt; color: #555;">database</a>
                     
                       
                       
@@ -1296,6 +1325,8 @@ Alternatively you can run:
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/03/22/mysql-comments/">mysql字段注释</a></li>
+                    
                         <li><a href="/2018/03/13/keyword-notebook/">学习与工作日记：关键词</a></li>
                     
                         <li><a href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a></li>
@@ -1313,8 +1344,6 @@ Alternatively you can run:
                         <li><a href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a></li>
                     
                         <li><a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a></li>
-                    
-                        <li><a href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件</a></li>
                     
                 </ul>
             </div>
@@ -1440,7 +1469,7 @@ Alternatively you can run:
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">8</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -1458,7 +1487,7 @@ Alternatively you can run:
                             <span class="name">
                                 mysql
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
