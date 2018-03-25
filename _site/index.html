@@ -149,6 +149,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -161,6 +163,76 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/25/job-seeking-info/">工作信息搜集记录</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>人生有很多重要的选择，常常因信息不足而近似抓阄，又因无法反复尝试而带有巨大风险，交流和搜集信息是降低系统风险的不二法门。
+他人提供的后验概率能够降低系统熵，从而使得决策树剪枝切实可行，在这里搜集整理一下目前得到的关于找工作的信息。以为最终决策提供素材。</p>
+
+<p>交流信息表
+|   Name    |   Date    |   Affiliation |   Position    |       Information|
+|:—       |:—       |:—           |:—           |:—              |
+|HCD        |20180119   |CUIT           |Lecturer       |*根据平行经验认可编制重要性|</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/25/job-seeking-info/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -813,145 +885,6 @@ YEAR		YYYY
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/05/install-mysql/">CentOS mysql安装</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-05
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
-首先切换到root下安装：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
-</code></pre></div></div>
-<p>检查服务状态</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
-mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
-</code></pre></div></div>
-<p>启动服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
-</code></pre></div></div>
-
-<p>启动开机服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
-</code></pre></div></div>
-
-<p>之后给出提示信息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
-To do so, start the server, then issue the following commands:
-
-/usr/bin/mysqladmin -u root password 'new-password'
-/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
-
-Alternatively you can run:
-/usr/bin/mysql_secure_installation
-</code></pre></div></div>
-<p>采用第二种方法更加安全。</p>
-
-<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
-
-<p>然后的选项一路Y。</p>
-
-<p>登录mysql，在root用户下，直接</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
-</code></pre></div></div>
-<p>登陆后，我们查看一下用户列表。</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-</code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
-| Host      | User |
-+-----------+------+
-| 127.0.0.1 | root |
-| localhost | root |
-+-----------+------+
-2 rows in set (0.00 sec)
-</code></pre></div></div>
-<p>添加一个非root用户,密码为password</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-</code></pre></div></div>
-<p>给予新用户相应权限</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
-</code></pre></div></div>
-<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
-<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-03-05</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/05/install-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -962,10 +895,10 @@ Alternatively you can run:
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/6</span>
+          <span class="page_number ">1/7</span>
           
             <a href="/page2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page6" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page7" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1000,7 +933,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 18pt; color: #000;">server</a>
+                      <a href="/tag/#server" style="font-size: 17pt; color: #111;">server</a>
                     
                       
                       
@@ -1021,7 +954,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -1154,14 +1087,14 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 15pt; color: #333;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 14.5pt; color: #444;">investment</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 11pt; color: #777;">career</a>
+                      <a href="/tag/#career" style="font-size: 11.5pt; color: #666;">career</a>
                     
                       
                       
@@ -1266,7 +1199,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#database" style="font-size: 13pt; color: #555;">database</a>
+                      <a href="/tag/#database" style="font-size: 12.5pt; color: #555;">database</a>
                     
                       
                       
@@ -1325,6 +1258,8 @@ Alternatively you can run:
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/03/25/job-seeking-info/">工作信息搜集记录</a></li>
+                    
                         <li><a href="/2018/03/22/mysql-comments/">mysql字段注释</a></li>
                     
                         <li><a href="/2018/03/13/keyword-notebook/">学习与工作日记：关键词</a></li>
@@ -1342,8 +1277,6 @@ Alternatively you can run:
                         <li><a href="/2018/02/28/trading-diary/">20180228交易笔记</a></li>
                     
                         <li><a href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a></li>
                     
                 </ul>
             </div>
@@ -1469,7 +1402,7 @@ Alternatively you can run:
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     

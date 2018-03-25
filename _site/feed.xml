@@ -5,9 +5,34 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 22 Mar 2018 16:36:50 +0800</pubDate>
-    <lastBuildDate>Thu, 22 Mar 2018 16:36:50 +0800</lastBuildDate>
+    <pubDate>Sun, 25 Mar 2018 17:05:40 +0800</pubDate>
+    <lastBuildDate>Sun, 25 Mar 2018 17:05:40 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>工作信息搜集记录</title>
+        <description>
+人生有很多重要的选择，常常因信息不足而近似抓阄，又因无法反复尝试而带有巨大风险，交流和搜集信息是降低系统风险的不二法门。
+他人提供的后验概率能够降低系统熵，从而使得决策树剪枝切实可行，在这里搜集整理一下目前得到的关于找工作的信息。以为最终决策提供素材。
+
+交流信息表
+|   Name    |   Date    |   Affiliation |   Position    |       Information|
+|:—       |:—       |:—           |:—           |:—              |
+|HCD        |20180119   |CUIT           |Lecturer       |*根据平行经验认可编制重要性|
+
+</description>
+        <pubDate>Sun, 25 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/03/25/job-seeking-info/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/03/25/job-seeking-info/</guid>
+        
+        <category>thinking</category>
+        
+        <category>career</category>
+        
+        
+        <category>notebook</category>
+        
+      </item>
     
       <item>
         <title>mysql字段注释</title>
@@ -654,37 +679,6 @@ notebook的存储本质是个json file。
         <category>reading</category>
         
         <category>economy</category>
-        
-      </item>
-    
-      <item>
-        <title>Shell采用wait和后台执行实现多进程</title>
-        <description>
-&lt;a href=&quot;https://novarizark.github.io/2017/12/31/WRF-shandong-setup/&quot;&gt;山东半岛预报系统&lt;/a&gt;中后处理部分的NCL串行效率很低，大概要二十分钟到半个小时才能完成绘图。既然任务之间都是独立的，很自然的想法就是能否在shell的环境下实现进程级别的并行化。
-差了下其实很简单，只需要在语句后面加入 &amp;amp; 符号放到后台执行即可实现异步，但是后台执行无法捕捉结束位置，wait语句可以解决这个问题，其作用就是等待该语句之前的所有后台任务结束之后，再执行此语句后的任务。例子如下：
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180205-plot-precip.ncl &amp;amp;
-ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180207-plot-T2m.ncl &amp;amp;
-ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180207-plot-RH2m.ncl &amp;amp;
-ncl &lt;span class=&quot;nt&quot;&gt;-nQ&lt;/span&gt;  180207-plot-UV10m.ncl &amp;amp;
-&lt;span class=&quot;nb&quot;&gt;wait
-echo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Hello world!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-前面四个NCL语句会并行执行（&amp;amp;符号将该命令放入后台执行后立刻执行下一个语句），之后碰到wait，会等待前面四个后台任务中最慢的那个结束，再输出Hello world!
-
-原始脚本处理后，大概只需要三四分钟（不算坑爹慢的git push过程）即可完成所有的绘图操作。惊不惊喜？
-
-&lt;strong&gt;Updated 2018-02-17&lt;/strong&gt;
-</description>
-        <pubDate>Sat, 17 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/02/17/shell-parallel-task/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/02/17/shell-parallel-task/</guid>
-        
-        <category>server</category>
-        
-        <category>shell</category>
-        
-        
-        <category>linux</category>
         
       </item>
     
