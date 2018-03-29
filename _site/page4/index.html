@@ -166,6 +166,440 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/01/28/decoupling-cesm/">CESM air-sea decoupling测试</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
+    
+        <a href="/category/#meteorology" title="Category: meteorology" rel="category">meteorology</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#decoupling" title="Tag: decoupling" rel="tag">decoupling</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>在之前MM高原试验基础上，应黄老师要求增加北大西洋SST restoring的试验。因通量计算在海洋模块进行，所以应该在海洋模块计算之前修改并update。</p>
+
+<p>查到论坛<a href="https://bb.cgd.ucar.edu/how-prescribe-sst-annual-cycle-cesm-pop2">帖子</a>，以及HC师兄提供的code.</p>
+
+<p>看帖子似乎有namelist变量控制。找到一个NCAR的github主页<a href="https://ncar.github.io/POP/doc/build/html/users_guide/running-forcing-options.html">内容</a>,不过是针对只转海洋模式的情况。</p>
+
+<p>经查HC师兄的code，发现思路比较简单，就是在海洋模块每一次积分step后，用人工读入的文件做restoring。不过貌似还有可以优化的地方，读文件模块应该可以放到其他module，避免模式每一积分步都在读写。</p>
+
+<p>测试编译一次通过。Nice.关键是拿到对应的文件，并进一步优化一下程序流程。</p>
+
+<p>POP的history文件比较诡异，不仅有.h文件，还有.h.nday1文件。</p>
+
+<p>在faq找到了<a href="http://www.cesm.ucar.edu/models/cesm1.0/pop2/doc/faq/#tavg_files">关于nday1的说明</a></p>
+
+<blockquote>
+  <p>By default, the daily averaged fields are bundled into monthly timeseries files. These files are relatively small, because they contain only a handful of 2D fields. Out of the box, these fields are: Surface Potential Temperature (SST), SST2, Mixed-Layer Depth, and Maximum Mixed-Layer Depth.</p>
+</blockquote>
+
+<p>这个文件在之前run ctrl的时候并没有存下，那么接下来的问题就是月平均文件是否足以提供full layer海温，包括SST呢？</p>
+
+<p>瞄了一下h文件，发现第一层代表10m深的水，那么应该是没问题的了，直接restore 10m水深。</p>
+
+<p><strong>Updated 2018-01-28</strong></p>
+
+<p>继续看，存储位温的变量是TRACER，但这个变量比较诡异，是一个6维的数据，0 1 2 容易理解，是经纬度，和层次数，第1层为10m水深。3不知道是什么，4是previous/current时间帧，最后一维是iblock用于MPI分片。
+问题就是神奇的第3维。</p>
+
+<p>检查了下程序，发现第3维的循环控制变量bound为nt，step_mod.F90内有以下语句：</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="p">&amp;</span><span class="w">
+      </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delt</span><span class="o">*</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                                   </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_s</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="p">&amp;</span><span class="w">
+      </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_s</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delt</span><span class="o">*</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                                   </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+<p>进一步查找，发现prognostic.F90有以下定义</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">tracer_field</span><span class="p">),</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="w">   </span><span class="c1">! descriptors for each tracer</span><span class="w">
+
+</span><span class="c1">!......</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">short_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'TEMP'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">long_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'Potential temperature'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">units</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s1">'degC'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">tend_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'degC/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">flux_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'degC cm/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">scale_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_rtavg</span><span class="w">
+
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">short_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'SALT'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">long_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'Salinity'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">units</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s1">'msu (g/g)'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">tend_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gram/kilogram/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">flux_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gram/kilogram cm/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">scale_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000.0_rtavg</span><span class="w">
+
+</span></code></pre></div></div>
+<p>明白啦，1是位温，2是盐度。所以修改思路就很明确了：</p>
+<ol>
+  <li>读入SST文件和weight文件</li>
+  <li>在每一个step后对SST进行overwrite处理</li>
+</ol>
+
+<p>逐一解决！首先看怎么找个合适的地方把文件送进来。这种任务当然在模式initial的时候干。</p>
+
+<p>以read为关键词搜索，锁定文件IO位置。发现不少东西，比如pop设置了专门的forcing模块用于外强迫驱动。但因为forcing模块只有在单独海洋的时候才调用,为保证代码具有较高的可复用性，安全起见，我们还是首先考虑在initial module找读取外强迫场的语句。
+然后呢，在initial.F90发现了这么一段可爱的内容：</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">!-----------------------------------------------------------------------</span><span class="w">
+</span><span class="c1">!</span><span class="w">
+</span><span class="c1">!  read full 3-d t,s from input file</span><span class="w">
+</span><span class="c1">!</span><span class="w">
+</span><span class="c1">!-----------------------------------------------------------------------</span><span class="w">
+
+   </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">'ccsm_startup'</span><span class="p">,</span><span class="w"> </span><span class="s1">'file'</span><span class="p">)</span><span class="w">
+      </span><span class="n">first_step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="w">
+
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">'(a31,a)'</span><span class="p">)</span><span class="w"> </span><span class="s1">'Initial 3-d T,S read from file:'</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                                 </span><span class="nb">trim</span><span class="p">(</span><span class="n">init_ts_file</span><span class="p">)</span><span class="w">
+         </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">POP_stdout</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+
+      </span><span class="k">allocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="n">ny_block</span><span class="p">,</span><span class="n">km</span><span class="p">,</span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+
+      </span><span class="n">in_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_file</span><span class="p">(</span><span class="n">init_ts_file_fmt</span><span class="p">,</span><span class="w">             </span><span class="p">&amp;</span><span class="w">
+                               </span><span class="n">full_name</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">init_ts_file</span><span class="p">),</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                               </span><span class="n">record_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rec_type_dbl</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                               </span><span class="n">recl_words</span><span class="o">=</span><span class="n">nx_global</span><span class="o">*</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'open_read'</span><span class="p">)</span><span class="w">
+
+      </span><span class="n">i_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span><span class="n">nx_global</span><span class="p">)</span><span class="w">
+      </span><span class="n">j_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+      </span><span class="n">k_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'k'</span><span class="p">,</span><span class="n">km</span><span class="p">)</span><span class="w">
+
+      </span><span class="n">io_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'TEMPERATURE'</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim3</span><span class="o">=</span><span class="n">k_dim</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w">    </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">d3d_array</span><span class="o">=</span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+      </span><span class="n">io_salt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'SALINITY'</span><span class="p">,</span><span class="w">    </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim3</span><span class="o">=</span><span class="n">k_dim</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w">    </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">d3d_array</span><span class="o">=</span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'define'</span><span class="p">,</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'define'</span><span class="p">,</span><span class="n">io_salt</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'read'</span><span class="w">  </span><span class="p">,</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nblocks_clinic</span><span class="w">
+         </span><span class="n">TRACER</span><span class="p">(:,:,:,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(:,:,:,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'read'</span><span class="w">  </span><span class="p">,</span><span class="n">io_salt</span><span class="p">)</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nblocks_clinic</span><span class="w">
+         </span><span class="n">TRACER</span><span class="p">(:,:,:,</span><span class="mi">2</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(:,:,:,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_salt</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">deallocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'close'</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="n">blank_fmt</span><span class="p">)</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">'(a12,a)'</span><span class="p">)</span><span class="w"> </span><span class="s1">' file read: '</span><span class="p">,</span><span class="w"> </span><span class="nb">trim</span><span class="p">(</span><span class="n">init_ts_file</span><span class="p">)</span><span class="w">
+         </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">POP_stdout</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+
+</span></code></pre></div></div>
+<p>嘿嘿，和HC师兄的程序对比，如出一辙。那么我们仅仅需要在某一个合适的地方给出读取forcing场的语句就可以了。注意initial读取的时候是没有时间帧的，所以我们需要读入时间帧，并且把变量传参到step_mod或者main driver程序中。
+接下来我们看如何解决这两个问题。时间问题容易解决，HC师兄的程序里给出了，直接通过dim来指定时间维即可，关键是construct_io_field这个语句，查下这个语句的定义。在io_types.F90:</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">construct_io_field</span><span class="w"> </span><span class="p">(</span><span class="w">  </span><span class="p">&amp;</span><span class="w"> 
+       </span><span class="n">short_name</span><span class="p">,</span><span class="w">       </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">dim1</span><span class="p">,</span><span class="w"> </span><span class="n">dim2</span><span class="p">,</span><span class="w">       </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">dim3</span><span class="p">,</span><span class="w">             </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">time_dim</span><span class="p">,</span><span class="w">         </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">long_name</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">units</span><span class="p">,</span><span class="w">            </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">coordinates</span><span class="p">,</span><span class="w">      </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">grid_loc</span><span class="p">,</span><span class="w">         </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">valid_range</span><span class="p">,</span><span class="w">      </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">field_loc</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">field_id</span><span class="p">,</span><span class="w">         </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">field_type</span><span class="p">,</span><span class="w">       </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i0d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i1d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i2d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i3d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r0d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r1d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r2d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r3d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d0d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d1d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d2d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d3d_array</span><span class="p">)</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+    </span><span class="k">result</span><span class="w"> </span><span class="p">(</span><span class="n">descriptor</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>dim123时间都给考虑好了，意不意外，惊不惊喜？依葫芦画瓢往里送就行了。</p>
+
+<p>几个神奇的参数：</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="kt">character</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+    </span><span class="n">grid_loc</span><span class="w">                  </span><span class="c1">! position of field in staggered grid</span><span class="w">
+ 
+ </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">  </span><span class="c1">! for ghost cell updates</span><span class="w">
+    </span><span class="n">field_loc</span><span class="p">,</span><span class="w">               </span><span class="p">&amp;</span><span class="c1">! staggering location</span><span class="w">
+    </span><span class="n">field_type</span><span class="p">,</span><span class="w">              </span><span class="p">&amp;</span><span class="c1">! field type (scalar,vector,angle)</span><span class="w">
+    </span><span class="n">field_id</span><span class="w">                  </span><span class="c1">! previously defined id</span><span class="w">
+
+</span></code></pre></div></div>
+<p>首先的神奇之处是grid_loc，这什么鬼，虽然模板里给了3111代号，但是毕竟好奇，搜索下发现tavg.F90有如下语句：</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">grid_loc</span><span class="p">))</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+         </span><span class="c1">!*** try to decode field location from grid_loc</span><span class="w">
+         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="w">
+         </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_NEcorner</span><span class="w">
+         </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_Nface</span><span class="w">
+         </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_Eface</span><span class="w">
+         </span><span class="k">endif</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+</span></code></pre></div></div>
+<p>东西南北？看起来是位于格点什么位置的指示。还有那些r2d_array, d2d_array代表的是数据精度real,double之类（居然没写注释！也是醉了）
+查pop log发现了这个东西</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                                             2                                        30   
+                                          ________                                    31   
+                      y ^                |        |                                   32   
+                        |               3|   ijk  |1                                  33   
+                        +---&gt;            |        |                                   34   
+                            x            |________|                                   35   
+                                             4                                        36   
+</code></pre></div></div>
+<p>居然有这么可爱的图示……</p>
+
+<p><strong>Updated 2018-01-29</strong></p>
+
+<p>下面我们测试在main driver函数ocn_comp_mct.F90里读入一个既存的NC文件。为了效率，当然不能在run的时候每一步都读入，仅仅在initial的subroutine读入。initial和run都在ocn_mct的大module中，因此变量彼此应当可见互用。</p>
+
+<p>写的时候发现一堆全局变量满天飞，POP的软件工程做得真是醉醉的……</p>
+
+<p>增加namelist变量需要让bld namelist程序认识，根据<a href="https://bb.cgd.ucar.edu/how-add-new-namelist-variables">这个帖子操作</a></p>
+
+<p>增加两个subroutine，一个负责在initial的时候读取forcing文件，另一个负责在pop积分步后给出reset。</p>
+
+<p>写好后发现一个大坑，由于IO module默认没有对3D var+时间的变量进行处理，如果手动增加这一功能需要改动非常多的模块，只能退而求其次，仅仅对第一层temp进行处理了。具体代码：</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">! ***LZN: MOD START***</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">nml_error</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">decoupling_days</span><span class="o">=</span><span class="mi">30</span><span class="w">
+
+   </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="n">char_len</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_fmt</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_field_desc</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">io_temp</span><span class="p">,</span><span class="w"> </span><span class="n">io_ce</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_dim</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">t_dim</span><span class="p">,</span><span class="w"> </span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">k_dim</span><span class="w">
+   </span><span class="k">namelist</span><span class="w"> </span><span class="p">/</span><span class="n">ptempf_forcing_nml</span><span class="p">/</span><span class="w"> </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">ptempf_file_fmt</span><span class="w">
+   
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">WGT_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="n">WGT_DATA</span><span class="o">=</span><span class="mf">1.0</span><span class="w">
+
+
+   </span><span class="c1">! Read forcing file path from namelist file</span><span class="w">
+   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+      </span><span class="k">open</span><span class="w"> </span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="n">nml_filename</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="o">=</span><span class="s1">'old'</span><span class="p">,</span><span class="w"> </span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="p">/</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+      </span><span class="k">else</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+         </span><span class="k">read</span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">nml</span><span class="o">=</span><span class="n">ptempf_forcing_nml</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w"> 
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">close</span><span class="p">(</span><span class="n">nml_in</span><span class="p">)</span><span class="w">
+   </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+   </span><span class="c1">! broadcast the scalar to all MPI processors</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+      
+   </span><span class="n">ptempf_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_file</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">full_name</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">),&amp;</span><span class="w">
+               </span><span class="n">record_length</span><span class="o">=</span><span class="n">rec_type_real</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">recl_words</span><span class="o">=</span><span class="n">nx_global</span><span class="o">*</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'open_read'</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">i_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span><span class="n">nx_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">j_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">t_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,</span><span class="n">decoupling_days</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">io_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'TEMP'</span><span class="p">,</span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="n">dim3</span><span class="o">=</span><span class="n">t_dim</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">long_name</span><span class="o">=</span><span class="s1">'Potential Temperature'</span><span class="p">,</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="s1">'degC'</span><span class="p">,</span><span class="w"> </span><span class="n">grid_loc</span><span class="o">=</span><span class="s1">'3111'</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w"> </span><span class="n">r3d_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'define'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'read'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">!   ru_data = construct_io_field('ru', dim1=i_dim, dim2=j_dim,&amp;</span><span class="w">
+</span><span class="c1">!             long_name='nudging coefficients', units='1',&amp;</span><span class="w">
+</span><span class="c1">!             grid_loc=' 3111', field_loc = field_loc_center,&amp;</span><span class="w">
+</span><span class="c1">!             field_type = field_type_scalar, r2d_array = ru)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'define', ru_data)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'read', ru_data)</span><span class="w">
+
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'close'</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+</span><span class="c1">!   call destroy_io_field(ru_data)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_file</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">)</span><span class="w">
+
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+ 
+ </span><span class="c1">! fixing the SST!</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">int_kind</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">iblock</span><span class="w">
+    </span><span class="c1">! debug info</span><span class="w">
+    </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">iday_of_year</span><span class="p">,:)</span><span class="w"> 
+
+
+    </span><span class="c1">! Operation: override the runtime tracer(temp)</span><span class="w">
+    </span><span class="c1">!$OMP PARALLEL DO PRIVATE(iblock)</span><span class="w">
+    </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nblocks_clinic</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TEMP_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">))</span><span class="w">
+    </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+    </span><span class="c1">!$OMP END PARALLEL DO</span><span class="w">
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+ </span><span class="c1">! ***LZN: MOD END***</span><span class="w">
+</span></code></pre></div></div>
+<p>经测试一个月积分没有问题。</p>
+
+<p><strong>Updated 2018-01-29</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/28/decoupling-cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/25/pandas-csv/">利用pandas处理csv文件注意</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>写交易系统时为了让credentials在代码里不可见，用pandas读取csv获取，使用中发现一坑，把index_col设置后，竟然无法用<code class="highlighter-rouge">pd['$IND_NAME']</code>去引用对应idx的行，估计又是各种坑爹对象类型不匹配。
+解决方法也很简单，用pandas的loc方法：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">pd_cre</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'quandl'</span><span class="p">,</span><span class="s">'cred'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-01-25</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/25/pandas-csv/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/01/25/mercurius-system/">Mercurius交易策略系统搭建</a>
                 </h2>
                 <div class="label">
@@ -517,151 +951,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>&nbsp;
-    
-        <a href="/tag/#excel" title="Tag: excel" rel="tag">excel</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。
-pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。</p>
-
-<p>以应用情景为例，写入不同的sheets，具体如下：</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open a new xlsx writer</span>
-<span class="n">writer1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">out_dir</span><span class="o">+</span><span class="n">get_outfile_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spe</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
-    <span class="c"># parser data</span>
-    <span class="n">pt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">in_dir</span><span class="o">+</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="n">corr_algthm</span><span class="p">,</span> <span class="n">spe</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'10H'</span><span class="p">,</span> <span class="s">'12H'</span><span class="p">,</span> <span class="s">'14H'</span><span class="p">,</span> <span class="s">'16H'</span><span class="p">,</span> <span class="s">'max'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'time'</span><span class="p">)</span>
-    <span class="n">pt</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer1</span><span class="p">,</span> <span class="n">spe</span><span class="p">)</span>
-<span class="c"># save xlsx</span>
-<span class="n">writer1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-01-16</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/16/pandas-excel/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#imagemagic" title="Tag: imagemagic" rel="tag">imagemagic</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>给生成的wrf预报图去除白边，搜索发现imagemagick大神级命令直接搞定，当然算法本身不复杂，毕竟plot出的图边框都是255，但是有这个命令实在太方便了。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add border</span>
-convert aaa.png <span class="nt">-bordercolor</span> white <span class="nt">-border</span> 10%x10% bbb.png 
-<span class="c"># Delete border</span>
-convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-trim</span> ccc.png
-</code></pre></div></div>
-
-<p><strong>Updated 2018-01-16</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/16/linux-imagemagick/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -710,7 +999,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 17pt; color: #111;">server</a>
+                      <a href="/tag/#server" style="font-size: 18pt; color: #000;">server</a>
                     
                       
                       
@@ -731,14 +1020,14 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 11pt; color: #777;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 11.5pt; color: #666;">jekyll</a>
                     
                       
                       
@@ -1035,6 +1324,10 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a></li>
+                    
+                        <li><a href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a></li>
+                    
                         <li><a href="/2018/03/25/job-seeking-info/">工作信息搜集记录</a></li>
                     
                         <li><a href="/2018/03/22/mysql-comments/">mysql字段注释</a></li>
@@ -1050,10 +1343,6 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                         <li><a href="/2018/03/05/install-mysql/">CentOS mysql安装</a></li>
                     
                         <li><a href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a></li>
-                    
-                        <li><a href="/2018/02/28/trading-diary/">20180228交易笔记</a></li>
-                    
-                        <li><a href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -1080,7 +1369,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -1089,7 +1378,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -1197,7 +1486,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                             <span class="name">
                                 mysql
                             </span>
-                            <span class="badge">5</span>
+                            <span class="badge">6</span>
                         </a>
                     </li>
                     

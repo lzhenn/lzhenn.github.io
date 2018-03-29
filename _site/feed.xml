@@ -5,9 +5,111 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Mar 2018 11:05:44 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Mar 2018 11:05:44 +0800</lastBuildDate>
+    <pubDate>Thu, 29 Mar 2018 15:18:27 +0800</pubDate>
+    <lastBuildDate>Thu, 29 Mar 2018 15:18:27 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>我的技术博客有救了！</title>
+        <description>周三助教回到东校，决定去处理一下实验室服务器，看下我的wordpress博客内容到底还有没有救。因为&lt;a href=&quot;https://novarizark.github.io/2017/12/30/raid-rebuild/&quot;&gt;上次&lt;/a&gt;做了1号盘位的rebuild，这次测试将0号盘位degraded的旧硬盘换下。
+可是将0号盘位换下后，1号盘位显示为non-raid磁盘，而0号新盘直接不认，what the fuck。怀疑是上次rebuild没有完成，所以将旧硬盘再次换到0号位置让raid卡自己玩去。
+换上旧硬盘后可以正常识别到raid信息并进入系统。测试mysql数据库居然发现wp_posts数据都存在，太幸运了，我的技术博客有救了！果断导出。
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mysqldump &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt; localhost &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--database&lt;/span&gt; wordpress | gzip &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; backupfile.sql.gz
+gunzip &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; backupfile.sql.gz &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; bck.sql 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+之后在mysql下导入
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+查看中文时注意utf8编码
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+后面考虑写个python脚本将过去的日志转成markdown放到jekyll博客下。
+
+&lt;strong&gt;Updated 2018-03-26&lt;/strong&gt;
+</description>
+        <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/03/28/recover-techblog/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/03/28/recover-techblog/</guid>
+        
+        <category>server</category>
+        
+        <category>blog</category>
+        
+        <category>jekyll</category>
+        
+        
+        <category>hardware</category>
+        
+        <category>linux</category>
+        
+        <category>mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>Form principles from mistakes</title>
+        <description>如何按照达里奥的《原则》来处理生活、学习、工作、投资？Learn from mistakes非常重要。出错不怕，怕的是知错不改。策略法则的反脆弱性来自于不断试错和快速迭代。快速迭代要求知错而改，而不是在同一条道路上反复撞墙。
+这篇文章用于总结经历过的错误，并试图从错误中抽象避免下次出现同样问题的原则。
+
+勘误表
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;ID&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Date&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;目标&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;失败情况&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;失败原因&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;总结原则&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;20180105&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;因肠胃问题中山二院就医&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1. 没携带医保卡（实际并不需要，但不应遗漏）&lt;br /&gt;2. 没有携带病历&lt;br /&gt; 3.粪便检查没有携带纸巾，不得不外出购买&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;没有条理化检查任务所需准备&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1.条理化检查执行任务所需要的准备&lt;br /&gt; 2.随身携带纸巾是具有保险性质的操作&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;20180119&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;参加JW婚礼需要一双皮鞋&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;鞋码购买错误，造成不便&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;没有细致查看购买条款及介绍，没有联系客服&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;购买物品时反复查验其属性说明是否合乎要求&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;20180207&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;返程火车票学生票&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;学生证缺少注册章损失187元&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;学生证拿去注册后没有仔细查验注册章&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;仔细查验对后续任务有重要影响的任务完成情况&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;strong&gt;Updated 2018-03-26&lt;/strong&gt;
+</description>
+        <pubDate>Mon, 26 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/03/26/principle-from-mistakes/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/03/26/principle-from-mistakes/</guid>
+        
+        <category>thinking</category>
+        
+        <category>blog</category>
+        
+        
+        <category>principle</category>
+        
+      </item>
     
       <item>
         <title>工作信息搜集记录</title>
@@ -736,89 +838,6 @@ notebook的存储本质是个json file。
         <category>python</category>
         
         <category>notebook</category>
-        
-      </item>
-    
-      <item>
-        <title>20180228交易笔记</title>
-        <description>
-前几天与ZP和SC一起讨论了一下ETF和波动性的关系，逻辑上应该比较讲得通，记录一下。首先是在知乎上看到如下讨论：
-
-&lt;blockquote&gt;
-  ETF turnover rate 多少？ 正常在 5%左右， mutual fund 一年 turnover 多少？ 大概在 30%-40% 左右。 一旦市场出现大批量的卖家和买家，市场上 没有足够的liquidity 去吸收吧， 所以股价才会变动的很大。等到有一天，90%的钱都去了ETF， 应该来说 active 更容易找到 alpha, 但是在钱持续往etf 流的今天，难道不是ETF 的 holding 在完全没有 基本面的情况下不停的涨吗？ 一旦出现大批卖家， it is going to be a bloodbath.
-&lt;/blockquote&gt;
-
-有意思，但是逻辑线还是不清楚。想了想应该是这样:
-&lt;blockquote&gt;
-  &lt;strong&gt;ETF通过低换手率抑制了成分股的波动性，从某种意义上来说，使得市场的投机性降低，这是好的方面；但ETF本身对其标的流通股的吸收使得市场上可以自由交易的标的股数量减少。由于可供交易的流通股数量减少，潜在的大宗买卖对股价的影响增大（潜在波动性增大，盘前盘后若交易成功更容易出问题），而这种缺少流动性市场的大幅度调整可能会进一步影响ETF持仓者的预期，一旦预期一致转向将会造成大量抛盘从而引发系统性风险。&lt;/strong&gt;
-&lt;/blockquote&gt;
-
-比较好的应对策略：
-&lt;blockquote&gt;
-  正alpha小盘股+高beta指标股去养大盘etf看跌期权？
-&lt;/blockquote&gt;
-
-&lt;strong&gt;Updated 2018-02-27&lt;/strong&gt;
-</description>
-        <pubDate>Wed, 28 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/02/28/trading-diary/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/02/28/trading-diary/</guid>
-        
-        <category>investment</category>
-        
-        <category>stock</category>
-        
-        <category>ETF</category>
-        
-        <category>market&amp;nbspcrash</category>
-        
-        
-        <category>economy</category>
-        
-        <category>investment</category>
-        
-        <category>notebook</category>
-        
-      </item>
-    
-      <item>
-        <title>《非理性繁荣》和《1929年大崩盘》阅读笔记</title>
-        <description>寒假回家看完了两本书，一本是Kindle中文版的《非理性繁荣》，另一本也是中文版加尔布雷斯的《1929年大崩盘》。在家看完想趁热打铁写下笔记，奈何懒惰，现在补来。
-
-《非理性繁荣》作者罗伯特·席勒（Robert Shiller）是耶鲁大学的行为金融学教授，2013年诺奖得主。除了这本第一版预言了00年科网泡沫和第二版语言了08年金融危机畅销书之外(据&lt;a href=&quot;https://www.amazon.com/Irrational-Exuberance-Revised-Expanded-Third/dp/0691173125/ref=sr_1_1?ie=UTF8&amp;amp;qid=1519524992&amp;amp;sr=8-1&amp;amp;keywords=irrational+exuberance+by+robert+shiller&quot;&gt;亚马逊&lt;/a&gt;，这本书第三版发于2016年8月16日)，在Coursera和网易上还有他Financial Markets课程也非常有名。
-
-初读这本书，总会脑海里浮现出在Berkeley Mccone Hall五楼看到的那位地理系老教授：白发苍苍的老人坐在窗边，佝偻着腰背，盯着眼前的屏幕，缓缓敲击着键盘，时不时低头去找键盘上遥远的数字与标点符号。
-从本书内容上的理性中立客观，旁征博引细致入微的数据支持与证据链构建；直观感受上来讲，席勒教授就是这么一副兢兢业业老学者的形象。
-当然&lt;a href=&quot;https://book.douban.com/subject/26803982/&quot;&gt;豆瓣上&lt;/a&gt;第三版封面图的时候发现老人家居然这么帅的时候还是很惊讶，典型的Stereotype了。
-
-整本书大致先从历史角度去分析投机性泡沫形成，包括引发事件，预期自我实现的正反馈，市场信心转向等；之后分析了文化因素（欧美移民的重商文化）和行为心理因素（人性因素：贪婪和恐惧）的影响。再后则是分析人类对明显泡沫化的资产进行合理化解释归因的动机。最终给出了切实的投资建议。
-记忆比较深的还是老人家对股息的阐述，判断泡沫与否的一个简单方法就是看股息回报率（毫无疑问目前是泡沫期了）。最后关于疾病扩散模型的应用也非常有趣，描述了观点的传播和关注机制对泡沫的影响。
-老人家同时也强调市场见顶之后可能多年低迷的可能性，这无论对华尔街还是投机客来说都是致命的。所以老人家建议多元化投资、关注低市盈率、高股息的入场时机，以及增加储蓄率等。
-整部作品的基调非常像一部关于投机泡沫的大综述，理性中立客观，数据翔实，论据充分，尤其是用真实数据去评估人们一直以来的认知偏差，长期持股未必会有良好收益，如果在漫漫熊市中长期持股而不摊低成本，整个股指会经过十几年才能回到高位，非常之凄惨（不要忘了仅仅是股指，其中还有乐观主义偏差）。
-
-总之，重要的一点教训就是足够理性，谨慎乐观，注意风险敞口的控制，在最近几年的环境下应该是非常重要的素质。
-
-《1929年大崩盘》则是一部以叙事+数据+资料尽调的方式描述了1929年大崩溃的过程，整部作品读起来并不像《非理性繁荣》那般理中客，但是翔实复现了整个崩溃的过程，并做了简单的后果分析，没有进一步外延到与法西斯上台、以及随之而来的二战的关系。
-作品很短，着眼很多关于股市崩盘的特征，比如高位放量，波动性上升，反复磨顶等等，这给了大周期近顶部时的逃脱机会。最后还反驳了一下崩溃后自杀率上升的谣言，总之看下来感觉就是，只要前期不作死加杠杆资不抵债，勒紧裤腰带还是照样能过的。
-
-&lt;strong&gt;Updated 2018-02-27&lt;/strong&gt;
-</description>
-        <pubDate>Sat, 24 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/02/24/reading-record/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/02/24/reading-record/</guid>
-        
-        <category>blog</category>
-        
-        <category>thinking</category>
-        
-        <category>market&amp;nbspcrash</category>
-        
-        
-        <category>notebook</category>
-        
-        <category>reading</category>
-        
-        <category>economy</category>
         
       </item>
     
