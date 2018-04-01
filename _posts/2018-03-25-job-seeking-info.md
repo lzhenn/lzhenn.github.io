@@ -19,7 +19,7 @@ __交流信息表__
 |ZMS        |20180101   |SYSU           |PhD           |pros|1. ITMM 10月申请公租房，2k以下三室一厅<br/> 2. ITMM有职称后入手10k/m|
 |HXM        |20180114   |SYSU           |Asso. R       |cons|1. 被劝服<br/> 2. R系列压力大，待遇被削减，晋升机会偏小|
 |HCD        |20180119   |CUIT           |Lecturer      |pros|1. 根据自身和平行经验认可编制重要性<br/> 2. 根据平行经验认可SZ福利待遇（低价房源？）<br />3. 教职（讲师、副教授）6-8年合同<br /> 4. SZ空管终身住房|
-|CZS        |20180204   |SCSIO          |Assis. R      |pros|1. SCSIO环境问题<br/> 2. 认可编制的重要性</br>3.|
+|CZS        |20180204   |SCSIO          |Assis. R      |pros|1. SCSIO环境问题<br/> 2. 认可编制的重要性|
 |YX         |20180222   |SYSU           |Postdoc       |cons|1. 被劝服<br/> 2. 认可postdoc出站后出路存在问题|
 |HC         |20180225   |JNU            |Asso. Prof    |pros|1. 认可ITMM清闲<br /> 2. 否认高校人际简单，认可压力更大<br />3. 认可编制稀缺和价值<br/> 4.ITMM探亲假|
 |CJ         |20180225   |ITMM           |Office Dean   |pros|1. ITMM扩编需求，科研业务并举<br /> 2. 强调竞争继续白热化以及编制的稀缺性<br /> 3.强调M PhD的机会|
