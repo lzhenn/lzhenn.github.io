@@ -103,3 +103,8 @@ make[1]: pathf90: Command not found
 检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.
 
 **Updated 2018-04-01**
+
+据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。
+
+**Updated 2018-04-03**
+
