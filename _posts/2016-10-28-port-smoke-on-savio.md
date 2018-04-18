@@ -23,7 +23,7 @@ https://www.cmascenter.org/download/forms/step_1.cfm
 
 https://www.cmascenter.org/help/model_docs/porting_guide.cfm
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2016/10/Snap2.jpg"><img class="alignnone size-full wp-image-906" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2016/10/Snap2.jpg" alt="snap2" width="856" height="257" /></a>
+<a href="../uploads/2016/10/Snap2.jpg"><img class="alignnone size-full wp-image-906" src="../uploads/2016/10/Snap2.jpg" alt="snap2" width="856" height="257" /></a>
 
 选择好后，进入下载页，下载安装脚本（Installation script）、源码包以及测试例子数据三个内容。（其实他们用github托管哦）
 

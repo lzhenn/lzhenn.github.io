@@ -151,6 +151,78 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -166,11 +238,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a>
+                  <a class="post-link" href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-11
+                        <i class="fa fa-calendar"></i>2018-04-01
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -189,99 +261,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天打算创建Mercurius的数据库，神奇的是，输入create database后报错</p>
-
-<blockquote>
-  <p>ERROR 1006 (HY000): Can’t create database ‘mercurius’ (errno: 28)</p>
-</blockquote>
-
-<p>换了root账户也不行，查到的信息都是说mysql的数据库权限问题，检查后的确木有问题呀。
-注意到google出的关键词errno号不同，很多13号，而我是28号，深度搜索了一番，找到了答案：</p>
-<blockquote>
-  <p>This error means that your mysql server does not have enough free space. You need to check the file system size and please remove unwanted software(s) or installers or files.</p>
-</blockquote>
-
-<p>我去，坑我？磁盘满额？df查看一下，果然/根目录满额。奇怪～</p>
-
-<p>利用find找大文件：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-size</span> +800M
-</code></pre></div></div>
-
-<p>发现除了最早丢过来的安装包，就是gdm的log最大，cd过去一看，可了不得，13G的log，应该是图形界面出错后一直在写error，写到了3月5日，果断删掉～并且把安装包移走。目前解决，后面看是否还继续写log。</p>
-
-<p>慎重起见，将mysql的数据库路径进行迁移，然后发现进了个大坑。无论怎样按照<a href="http://blog.csdn.net/liuchunming033/article/details/51851667">网上的步骤</a>调整，都会遇到mysqld服务无法打开的结果。甚至rsync数据库然后做链接都不行。
-折腾了一下午，突然想到，不就是把mercurius数据库拿出来么，不动mysql本身的账户库还不行。好吧，最后给mercurius做了链接搞定，要注意所在的上层目录必须有root用户和用户组的读写权限。</p>
-
-<p><strong>Updated 2018-03-11</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/11/mysql-error-full-disk/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/06/mysql-basics/">mysql基本操作</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
     
         <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
@@ -302,7 +284,7 @@
     
         <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
     
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
     
   
 
@@ -312,287 +294,114 @@
                 </div>
                 <div class="excerpt">
                     
-<p>常用命令</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
-<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
-<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
-<span class="k">select</span> <span class="k">database</span><span class="p">();</span> <span class="o">#</span> <span class="k">show</span> <span class="n">what</span> <span class="k">is</span> <span class="n">the</span> <span class="n">selected</span> <span class="k">database</span>
-<span class="k">drop</span> <span class="k">database</span> <span class="n">if</span> <span class="k">exists</span> <span class="n">test</span><span class="p">;</span>
+<p>帮JL移植wrf3.8.1到天河2号。首先调整环境变量。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">.</span> /etc/bashrc
+<span class="k">fi</span>
+<span class="c"># edited on Apr 1, 2018 for WRF</span>
+<span class="c"># User specific aliases and functions</span>
+<span class="c">#bug fix</span>
+<span class="nb">source</span> /WORK/app/osenv/ln1/set2.sh
+<span class="nb">export </span><span class="nv">MODULEPATH</span><span class="o">=</span>/WORK/app/modulefiles
+
+<span class="c">#set COMMON input data path for CESM</span>
+<span class="c">#export COMMON_CESM_INPUT=/WORK/app/CESM_inputdata</span>
+
+<span class="c">#set Intel compiler and MPI</span>
+module load intel-compilers/13.0.0
+module load MPI/Intel/MPICH/3.1-icc13
+module load cmake/3.0.2
+
+<span class="c">#set hdf5 and netcdf4 for WRF</span>
+module load hdf5/1.8.13/03-CF-13
+module load netcdf/4.3.2/02-CF-13
+
+<span class="c">#set jasper</span>
+<span class="nb">export </span><span class="nv">JASPER</span><span class="o">=</span>/HOME/sio_goc017/WORKSPACE/jjl/soft/jasper-1.900.1
+<span class="nb">export </span><span class="nv">JASPERLIB</span><span class="o">=</span><span class="nv">$JASPER</span>/lib
+<span class="nb">export </span><span class="nv">JASPERINC</span><span class="o">=</span><span class="nv">$JASPER</span>/include
+
+<span class="c">#set WRF</span>
+<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
+<span class="nb">export </span><span class="nv">BUFR</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">CRTM</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">J</span><span class="o">=</span><span class="s2">"-j 12"</span>
+<span class="nb">export </span><span class="nv">MP_STACK_SIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">OMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">KMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
+<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+
+<span class="nv">MPI_BUFFER_SIZE</span><span class="o">=</span>128
 </code></pre></div></div>
-<p>建立好数据库之后，则可以开始建立tables啦，这个过程中需要有一些数据库的设计思路，大概是列出各种table，如下图：
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2ugsl2uej20nd0gbwka.jpg" alt="" /></p>
+<p>注意在编译cumulus模块的地方大概要等待20分钟之久。采用上述环境变量出错：</p>
 
-<p>然后我们仿照视频教程建立一个存储学生数据的table</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span>
-    <span class="o">-&gt;</span> <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">email</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">street</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="k">state</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="nv">"PA"</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">zip</span> <span class="n">mediumint</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">phone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">birth_date</span> <span class="n">date</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">date_entered</span> <span class="k">timestamp</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">lunch_cost</span> <span class="n">float</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">student_id</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
-</code></pre></div></div>
-<p>解释一下各关键词：</p>
-
-<p>varchar代表可变长度的string，not null表示不能是空值；</p>
-
-<p>state因为只有两个字母，所以，强制要求char(2)，并且给了default值为PA。mediumint有意思，查了一下，发现mysql提供非常多种类的数据类型，估计是考虑到数据库的空间利用效率的原因。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2v4f3uo0j20wc07c42m.jpg" alt="" />
-我们总结一下数据类型：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAR		fixed length character string
-VARCHAR		a character string with a length that is variable
-BLOB		contain 2^16 bytes of data
-BIGINT		2^63 to -2^63-1
-FLOAT		decimal spaces 1.1e38 to -1.1e38
-DOUBLE		decimal spaces, 1.7e308 to -1.7e308
-ENUM		A character stirng that has a limited number of total values, which you must define
-SET			(Seldom used) A set of legal possible character strings. Unlike ENUM, a SET can contain a multiple values in comparason to the one legal value with ENUM.
-DATE		YYYY-MM-DD
-TIME		HH:MM:SS
-DATETIME	YYYY-MM-DD HH:MM:SS
-TIMESTAMP	YYYYMMDDHHMMSS
-YEAR		YYYY
-</code></pre></div></div>
-<p>unsigned 表示非负值。</p>
-
-<p>sex的enum非常清楚了，只有两个选项。</p>
-
-<p>注意入学时间，用的timestamp类型，可以看到数据库软件本身提供了非常体贴的类型，不需要自己parser date string啦。</p>
-
-<p>最后一个student id，被定义为主键。</p>
-
-<p>然后我们看一下student中的情况</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">describe</span> <span class="n">student</span><span class="p">;</span>
-
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-<span class="o">|</span> <span class="n">Field</span>        <span class="o">|</span> <span class="k">Type</span>                  <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span>           <span class="o">|</span> <span class="n">Extra</span>                       <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-<span class="o">|</span> <span class="n">first_name</span>   <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">last_name</span>    <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">email</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>           <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">street</span>       <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">city</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="k">state</span>        <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>               <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="n">PA</span>                <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">zip</span>          <span class="o">|</span> <span class="n">mediumint</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">phone</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">birth_date</span>   <span class="o">|</span> <span class="n">date</span>                  <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">sex</span>          <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">)</span>         <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">date_entered</span> <span class="o">|</span> <span class="k">timestamp</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span> <span class="k">on</span> <span class="k">update</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">lunch_cost</span>   <span class="o">|</span> <span class="n">float</span>                 <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">student_id</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span>      <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span> <span class="n">auto_increment</span>              <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wrf.o: In <span class="k">function</span> <span class="sb">`</span>MAIN__<span class="s1">':
+wrf.f90:(.text+0x1f): undefined reference to `__intel_new_feature_proc_init'</span>
+libwrflib.a<span class="o">(</span>module_check_a_mundo.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>module_check_a_mundo_mp_check_nml_consistency_<span class="s1">':
+module_check_a_mundo.f90:(.text+0x31fa): undefined reference to `__intel_ssse3_rep_memmove'</span>
+module_check_a_mundo.f90:<span class="o">(</span>.text+0x35ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_etanew.o): In function `module_mp_etanew_mp_etanewinit_'</span>:
+module_mp_etanew.f90:<span class="o">(</span>.text+0xacb0<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_thompson.o): In function `module_mp_thompson_mp_table_ccnact_'</span>:
+module_mp_thompson.f90:<span class="o">(</span>.text+0x2ed74<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtm.o): In function `module_ra_rrtm_mp_rrtm_lookuptable_'</span>:
+module_ra_rrtm.f90:<span class="o">(</span>.text+0x256ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtmg_lw.o):module_ra_rrtmg_lw.f90:(.text+0x769bf): more undefined references to `__intel_ssse3_rep_memmove'</span> follow
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x1ee4): undefined reference to `_intel_fast_memmove'</span>
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose1d_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x26f5): undefined reference to `_intel_fast_memmove'</span>
+io_grib_share.f90:<span class="o">(</span>.text+0x29e3<span class="o">)</span>: undefined reference to <span class="sb">`</span>_intel_fast_memmove<span class="s1">'
+0.57user 4.84system 0:08.12elapsed 66%CPU (0avgtext+0avgdata 487696maxresident)k
+12392inputs+102200outputs (47major+183178minor)pagefaults 0swaps
+make[1]: [em_wrf] Error 1 (ignored)
+</span></code></pre></div></div>
+<p>Google以下，发现intel官网的<a href="https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/494782">trouble shooting page</a>
+以下内容：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I believe the message may be caused by mixing objects built with different compiler versions. The __intel_new_feature_proc_init entry point is only in recent compiler libraries; if you have code built with a recent compiler, but are linking to older run-time libraries, you might encounter such a problem.
 </code></pre></div></div>
 
-<p>查看table中field值的方法：</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="n">first_name</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
+<p>有道理，可能是之前编译的模块没有删掉。执行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$./clean -a
 </code></pre></div></div>
-<p>可以用逗号隔开多个fields。
-清空数据表</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">truncate</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>注意truncate和drop的区别，drop直接将table从database拿掉，truncate仅仅是清空field的content。
-我们总结一下层级关系</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>databases
-	tabels
-		fields
-			field rows (contents)
-</code></pre></div></div>
-
-<p>向student table中插入一条数据记录</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="n">value</span>
-    <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">'Dennis'</span><span class="p">,</span> <span class="s1">'Lee'</span><span class="p">,</span> <span class="s1">'dcooper@aol.com'</span><span class="p">,</span> <span class="s1">'123 Main St'</span><span class="p">,</span> <span class="s1">'Yakima'</span><span class="p">,</span> <span class="s1">'WA'</span><span class="p">,</span> <span class="mi">95294</span><span class="p">,</span> <span class="s1">'510-365-0383'</span><span class="p">,</span> <span class="s1">'1995-2-22'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="mi">3</span><span class="p">.</span><span class="mi">50</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>查看加入的数据记录</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slect</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>Foreign Key的概念</p>
-
-<p>表A中的Primary Key，出现在表B中，则为Foreign Key，可为空值，可重复出现。</p>
-
-<p>如果要对已有的表增加一条数据属性，使用alter table语句</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">test</span>
-    <span class="o">-&gt;</span> <span class="k">add</span> <span class="n">maxscore</span> <span class="n">int</span> <span class="k">not</span> <span class="k">null</span> <span class="k">after</span> <span class="k">type</span><span class="p">;</span>
-
-<span class="k">describe</span> <span class="n">test</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-<span class="o">|</span> <span class="n">Field</span>    <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-<span class="o">|</span> <span class="n">date</span>     <span class="o">|</span> <span class="n">date</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="k">type</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'Q'</span><span class="p">)</span>    <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">maxscore</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">class_id</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">test_id</span>  <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+<p>再次测试一下.出现难以理解的错误：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nup_em.f90(68): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
+   USE module_initialize_real, only : wrfu_initialize
+   -------^
+   real_em.f90(12): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
 
 </code></pre></div></div>
-<p>改变已有的数据表中的Field名，</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">score</span> <span class="n">change</span> <span class="n">event_id</span> <span class="n">test_id</span>
-    <span class="o">-&gt;</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
-</code></pre></div></div>
+<p>表示找不到include文件。到相关目录下检查发现文件确实存在，奇葩……重新执行compile语句后编译成功。怀疑是天河的文件系统不稳定造成。</p>
 
-<p><strong>Updated 2018-03-08</strong></p>
+<p>测试WPS编译出错。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make[1]: pathf90: Command not found
+</code></pre></div></div>
+<p>检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.</p>
+
+<p><strong>Updated 2018-04-01</strong></p>
+
+<p>据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。</p>
+
+<p><strong>Updated 2018-04-03</strong></p>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/06/mysql-basics/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/01/jinlin-wrf-tianhe2/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/05/install-mysql/">CentOS mysql安装</a>
+                  <a class="post-link" href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-05
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
-首先切换到root下安装：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
-</code></pre></div></div>
-<p>检查服务状态</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
-mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
-</code></pre></div></div>
-<p>启动服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
-</code></pre></div></div>
-
-<p>启动开机服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
-</code></pre></div></div>
-
-<p>之后给出提示信息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
-To do so, start the server, then issue the following commands:
-
-/usr/bin/mysqladmin -u root password 'new-password'
-/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
-
-Alternatively you can run:
-/usr/bin/mysql_secure_installation
-</code></pre></div></div>
-<p>采用第二种方法更加安全。</p>
-
-<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
-
-<p>然后的选项一路Y。</p>
-
-<p>登录mysql，在root用户下，直接</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
-</code></pre></div></div>
-<p>登陆后，我们查看一下用户列表。</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-</code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
-| Host      | User |
-+-----------+------+
-| 127.0.0.1 | root |
-| localhost | root |
-+-----------+------+
-2 rows in set (0.00 sec)
-</code></pre></div></div>
-<p>添加一个非root用户,密码为password</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-</code></pre></div></div>
-<p>给予新用户相应权限</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
-</code></pre></div></div>
-<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
-<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-03-05</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/05/install-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-04
+                        <i class="fa fa-calendar"></i>2018-03-30
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -630,7 +439,7 @@ Alternatively you can run:
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#jupyter&nbspnotebook" title="Tag: jupyter&nbspnotebook" rel="tag">jupyter&nbspnotebook</a>
+        <a href="/tag/#tensorflow" title="Tag: tensorflow" rel="tag">tensorflow</a>
     
   
 
@@ -640,49 +449,33 @@ Alternatively you can run:
                 </div>
                 <div class="excerpt">
                     
-<p>Jupyter Notebook极端强大，可以直接执行Markdown，执行之后即成为document html。</p>
-
-<p>感叹号(exclamation point)可以用于嵌入bash command:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">xxx</span>
+<p>开始测试tensorflow的图片分类器！
+按<a href="https://www.youtube.com/watch?v=gIhUePPFmpY">这个视频</a>来，发现train的一步出现问题</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:tensorflow:Couldn't understand architecture name ''
 </code></pre></div></div>
+<p>发现是指定的环境变量读不到，于是将给ARCH赋值的语句和python执行语句一起放到shell脚本里，问题解决。
+train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based，tf应该自动选用cuda解决了。</p>
 
-<p>Notebook built-in command叫做Magics，单百分号：Line Magics，双百分号：Cell Magics。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">lsmagic</span>
-</code></pre></div></div>
-<p>常用的magic func</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">HTML</span>  <span class="c">#其后的text会被render为html，可以放入iframe等拖视频过来。</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inlin</span> <span class="c">#将matplotlib绘图放到notebook的输出中。</span>
+<p>之后做测试，效果很好。</p>
 
-<span class="o">%%</span><span class="n">javascript</span>
-<span class="o">%%</span><span class="n">bash</span>
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fpwweqdx63j20fz0790t7.jpg" alt="" /></p>
 
-<span class="o">%</span> <span class="o">%</span><span class="n">timeit</span>   <span class="c">#可以测试function的速度</span>
-</code></pre></div></div>
-
-<p>甚至可以酷炫地render pandas dataframe，看图，效果真是酷炫到爆炸
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp0wdaobj5j20s50zzgx8.jpg" alt="" /></p>
-
-<p>更牛逼的是，居然可以通过file-&gt;download as存储为html pdf markdown等各种形式，简直牛逼到爆炸。
-我们测试一下，发现html直接把图片存成了一串散列值，markdown的话会把图片和md文件放在一个zip包里。</p>
-
-<p>notebook的存储本质是个json file。</p>
-
-<p><strong>Updated 2018-03-04</strong></p>
+<p><strong>Updated 2018-03-30</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/04/jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/30/tf-img-classifier/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/02/28/trading-diary/">20180228交易笔记</a>
+                  <a class="post-link" href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-28
+                        <i class="fa fa-calendar"></i>2018-03-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -701,9 +494,197 @@ Alternatively you can run:
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
     
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>周三助教回到东校，决定去处理一下实验室服务器，看下我的wordpress博客内容到底还有没有救。因为<a href="https://novarizark.github.io/2017/12/30/raid-rebuild/">上次</a>做了1号盘位的rebuild，这次测试将0号盘位degraded的旧硬盘换下。
+可是将0号盘位换下后，1号盘位显示为non-raid磁盘，而0号新盘直接不认，what the fuck。怀疑是上次rebuild没有完成，所以将旧硬盘再次换到0号位置让raid卡自己玩去。
+换上旧硬盘后可以正常识别到raid信息并进入系统。测试mysql数据库居然发现wp_posts数据都存在，太幸运了，我的技术博客有救了！果断导出。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysqldump <span class="nt">-h</span> localhost <span class="nt">-u</span> root <span class="nt">-p</span> <span class="nt">--database</span> wordpress | gzip <span class="o">&gt;</span> backupfile.sql.gz
+gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> bck.sql 
+</code></pre></div></div>
+
+<p>之后在mysql下导入</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">source</span> <span class="o">~/</span><span class="n">bck</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>查看中文时注意utf8编码</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span> <span class="k">names</span> <span class="n">utf8</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>后面考虑写个python脚本将过去的日志转成markdown放到jekyll博客下。</p>
+
+<p><strong>Updated 2018-03-28</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/28/recover-techblog/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>如何按照达里奥的《原则》来处理生活、学习、工作、投资？Learn from mistakes非常重要。出错不怕，怕的是知错不改。策略法则的反脆弱性来自于不断试错和快速迭代。快速迭代要求知错而改，而不是在同一条道路上反复撞墙。
+这篇文章用于总结经历过的错误，并试图从错误中抽象避免下次出现同样问题的原则。</p>
+
+<p>勘误表</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ID</th>
+      <th style="text-align: left">Date</th>
+      <th style="text-align: left">目标</th>
+      <th style="text-align: left">失败情况</th>
+      <th style="text-align: left">失败原因</th>
+      <th style="text-align: left">总结原则</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">20180105</td>
+      <td style="text-align: left">因肠胃问题中山二院就医</td>
+      <td style="text-align: left">1. 没携带医保卡（实际并不需要，但不应遗漏）<br />2. 没有携带病历<br /> 3.粪便检查没有携带纸巾，不得不外出购买</td>
+      <td style="text-align: left">没有条理化检查任务所需准备</td>
+      <td style="text-align: left">1.条理化检查执行任务所需要的准备<br /> 2.随身携带纸巾是具有保险性质的操作</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">20180119</td>
+      <td style="text-align: left">参加JW婚礼需要一双皮鞋</td>
+      <td style="text-align: left">鞋码购买错误，造成不便</td>
+      <td style="text-align: left">没有细致查看购买条款及介绍，没有联系客服</td>
+      <td style="text-align: left">购买物品时反复查验其属性说明是否合乎要求</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">20180207</td>
+      <td style="text-align: left">返程火车票学生票</td>
+      <td style="text-align: left">学生证缺少注册章损失187元</td>
+      <td style="text-align: left">学生证拿去注册后没有仔细查验注册章</td>
+      <td style="text-align: left">仔细查验对后续任务有重要影响的任务完成情况</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Updated 2018-03-26</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/26/principle-from-mistakes/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/25/job-seeking-info/">工作信息搜集记录</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
     
         <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
@@ -722,13 +703,9 @@ Alternatively you can run:
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
     
-        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
-    
-        <a href="/tag/#ETF" title="Tag: ETF" rel="tag">ETF</a>&nbsp;
-    
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
     
   
 
@@ -738,38 +715,169 @@ Alternatively you can run:
                 </div>
                 <div class="excerpt">
                     
-<p>前几天与ZP和SC一起讨论了一下ETF和波动性的关系，逻辑上应该比较讲得通，记录一下。首先是在知乎上看到如下讨论：</p>
+<p>人生有很多重要的选择，常常因信息不足而近似抓阄，又因无法反复尝试而带有巨大风险，交流和搜集信息是降低系统风险的不二法门。
+他人提供的后验概率能够降低系统熵，从而使得决策树剪枝切实可行，在这里搜集整理一下目前得到的关于找工作的信息。以为最终决策提供素材。</p>
 
-<blockquote>
-  <p>ETF turnover rate 多少？ 正常在 5%左右， mutual fund 一年 turnover 多少？ 大概在 30%-40% 左右。 一旦市场出现大批量的卖家和买家，市场上 没有足够的liquidity 去吸收吧， 所以股价才会变动的很大。等到有一天，90%的钱都去了ETF， 应该来说 active 更容易找到 alpha, 但是在钱持续往etf 流的今天，难道不是ETF 的 holding 在完全没有 基本面的情况下不停的涨吗？ 一旦出现大批卖家， it is going to be a bloodbath.</p>
-</blockquote>
+<p><strong>交流信息表</strong></p>
 
-<p>有意思，但是逻辑线还是不清楚。想了想应该是这样:</p>
-<blockquote>
-  <p><strong>ETF通过低换手率抑制了成分股的波动性，从某种意义上来说，使得市场的投机性降低，这是好的方面；但ETF本身对其标的流通股的吸收使得市场上可以自由交易的标的股数量减少。由于可供交易的流通股数量减少，潜在的大宗买卖对股价的影响增大（潜在波动性增大，盘前盘后若交易成功更容易出问题），而这种缺少流动性市场的大幅度调整可能会进一步影响ETF持仓者的预期，一旦预期一致转向将会造成大量抛盘从而引发系统性风险。</strong></p>
-</blockquote>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Date</th>
+      <th style="text-align: left">Affiliation</th>
+      <th style="text-align: left">Position</th>
+      <th style="text-align: left">Attitude</th>
+      <th style="text-align: left">Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ZMS</td>
+      <td style="text-align: left">20180101</td>
+      <td style="text-align: left">SYSU</td>
+      <td style="text-align: left">PhD</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. ITMM 10月申请公租房，2k以下三室一厅<br /> 2. ITMM有职称后入手10k/m</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HXM</td>
+      <td style="text-align: left">20180114</td>
+      <td style="text-align: left">SYSU</td>
+      <td style="text-align: left">Asso. R</td>
+      <td style="text-align: left">cons</td>
+      <td style="text-align: left">1. 被劝服<br /> 2. R系列压力大，待遇被削减，晋升机会偏小</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HCD</td>
+      <td style="text-align: left">20180119</td>
+      <td style="text-align: left">CUIT</td>
+      <td style="text-align: left">Lecturer</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. 根据自身和平行经验认可编制重要性<br /> 2. 根据平行经验认可SZ福利待遇（低价房源？）<br />3. 教职（讲师、副教授）6-8年合同<br /> 4. SZ空管终身住房</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CZS</td>
+      <td style="text-align: left">20180204</td>
+      <td style="text-align: left">SCSIO</td>
+      <td style="text-align: left">Assis. R</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. SCSIO环境问题<br /> 2. 认可编制的重要性</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">YX</td>
+      <td style="text-align: left">20180222</td>
+      <td style="text-align: left">SYSU</td>
+      <td style="text-align: left">Postdoc</td>
+      <td style="text-align: left">cons</td>
+      <td style="text-align: left">1. 被劝服<br /> 2. 认可postdoc出站后出路存在问题</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HC</td>
+      <td style="text-align: left">20180225</td>
+      <td style="text-align: left">JNU</td>
+      <td style="text-align: left">Asso. Prof</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. 认可ITMM清闲<br /> 2. 否认高校人际简单，认可压力更大<br />3. 认可编制稀缺和价值<br /> 4.ITMM探亲假</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CJ</td>
+      <td style="text-align: left">20180225</td>
+      <td style="text-align: left">ITMM</td>
+      <td style="text-align: left">Office Dean</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. ITMM扩编需求，科研业务并举<br /> 2. 强调竞争继续白热化以及编制的稀缺性<br /> 3.强调M PhD的机会</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">JXW</td>
+      <td style="text-align: left">20180226</td>
+      <td style="text-align: left">IPM, CMA</td>
+      <td style="text-align: left">Asso. R</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. 认可选择，但表示可惜<br /> 2. 不认可ITMM边缘化位置 <br /> 3. ITMM核心位置入职到手200k/a <br /> 4. 推荐SZ，住房（乐观主义偏差？），自由探索 <br />5. 提供SZ联系方式</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CSS</td>
+      <td style="text-align: left">20180301</td>
+      <td style="text-align: left">MCGILL</td>
+      <td style="text-align: left">Postdoc</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">工作后可quit选择postdoc，反之不行</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HYJ</td>
+      <td style="text-align: left">20180303</td>
+      <td style="text-align: left">CSU</td>
+      <td style="text-align: left">Postdoc</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. SZ务实，财政充裕，但是从业务岗起 <br /> 2.多有合作，提供SZ联系方式<br /></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LHW</td>
+      <td style="text-align: left">20180310</td>
+      <td style="text-align: left">SYSU</td>
+      <td style="text-align: left">PhD</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. 关注人才计划<br /> 2. FS中心缺人，待遇稍差<br /> 3.SZ要注意住房问题的后视偏差<br />4.市一级待遇比省一级高？<br />5. SZ员工宿舍较差？</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CYP</td>
+      <td style="text-align: left">20180312</td>
+      <td style="text-align: left">DG-CMA</td>
+      <td style="text-align: left">Engineer</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. 关注企业机会，天气宝 <br /> 2.FS中心缺人<br />3.TCent朋友离职做量化</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LX</td>
+      <td style="text-align: left">20180321</td>
+      <td style="text-align: left">BJU</td>
+      <td style="text-align: left">PhD</td>
+      <td style="text-align: left">cons</td>
+      <td style="text-align: left">1. 无法劝服，执意继续</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PB</td>
+      <td style="text-align: left">20180321</td>
+      <td style="text-align: left">IAP</td>
+      <td style="text-align: left">PhD</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. IAP首选稳定工作 <br />2. 同样计划稳定工作</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HCD</td>
+      <td style="text-align: left">20180325</td>
+      <td style="text-align: left">CUIT</td>
+      <td style="text-align: left">Lecturer</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">NUIST讲师有编制</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LMT</td>
+      <td style="text-align: left">20180326</td>
+      <td style="text-align: left">BJU</td>
+      <td style="text-align: left">PhD</td>
+      <td style="text-align: left">pros</td>
+      <td style="text-align: left">1. BJ毕业生热捧企业岗位<br /> 2. CAMS已经排斥BJU PhD</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>比较好的应对策略：</p>
-<blockquote>
-  <p>正alpha小盘股+高beta指标股去养大盘etf看跌期权？</p>
-</blockquote>
-
-<p><strong>Updated 2018-02-27</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/02/28/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/25/job-seeking-info/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a>
+                  <a class="post-link" href="/2018/03/22/mysql-comments/">mysql字段注释</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-24
+                        <i class="fa fa-calendar"></i>2018-03-22
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -788,11 +896,9 @@ Alternatively you can run:
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
     
-        <a href="/category/#reading" title="Category: reading" rel="category">reading</a>&nbsp;
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -809,11 +915,9 @@ Alternatively you can run:
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
     
   
 
@@ -822,29 +926,66 @@ Alternatively you can run:
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>寒假回家看完了两本书，一本是Kindle中文版的《非理性繁荣》，另一本也是中文版加尔布雷斯的《1929年大崩盘》。在家看完想趁热打铁写下笔记，奈何懒惰，现在补来。</p>
+                    
+<p>开始组建财报数据表，过程中有必要做一些注释说明字段，比如资产负债表中为了压缩存储空间，现金等字段单位用kdollar。
+差了下操作如下：</p>
 
-<p>《非理性繁荣》作者罗伯特·席勒（Robert Shiller）是耶鲁大学的行为金融学教授，2013年诺奖得主。除了这本第一版预言了00年科网泡沫和第二版语言了08年金融危机畅销书之外(据<a href="https://www.amazon.com/Irrational-Exuberance-Revised-Expanded-Third/dp/0691173125/ref=sr_1_1?ie=UTF8&amp;qid=1519524992&amp;sr=8-1&amp;keywords=irrational+exuberance+by+robert+shiller">亚马逊</a>，这本书第三版发于2016年8月16日)，在Coursera和网易上还有他Financial Markets课程也非常有名。</p>
+<p>创建表过程中</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">cash_equiv</span> <span class="n">int</span> <span class="k">null</span> <span class="k">comment</span> <span class="s1">'Cash and Equivalents (kdollars)'</span><span class="p">,</span>
+</code></pre></div></div>
 
-<p>初读这本书，总会脑海里浮现出在Berkeley Mccone Hall五楼看到的那位地理系老教授：白发苍苍的老人坐在窗边，佝偻着腰背，盯着眼前的屏幕，缓缓敲击着键盘，时不时低头去找键盘上遥远的数字与标点符号。
-从本书内容上的理性中立客观，旁征博引细致入微的数据支持与证据链构建；直观感受上来讲，席勒教授就是这么一副兢兢业业老学者的形象。
-当然<a href="https://book.douban.com/subject/26803982/">豆瓣上</a>第三版封面图的时候发现老人家居然这么帅的时候还是很惊讶，典型的Stereotype了。</p>
+<p>修改表过程中</p>
 
-<p>整本书大致先从历史角度去分析投机性泡沫形成，包括引发事件，预期自我实现的正反馈，市场信心转向等；之后分析了文化因素（欧美移民的重商文化）和行为心理因素（人性因素：贪婪和恐惧）的影响。再后则是分析人类对明显泡沫化的资产进行合理化解释归因的动机。最终给出了切实的投资建议。
-记忆比较深的还是老人家对股息的阐述，判断泡沫与否的一个简单方法就是看股息回报率（毫无疑问目前是泡沫期了）。最后关于疾病扩散模型的应用也非常有趣，描述了观点的传播和关注机制对泡沫的影响。
-老人家同时也强调市场见顶之后可能多年低迷的可能性，这无论对华尔街还是投机客来说都是致命的。所以老人家建议多元化投资、关注低市盈率、高股息的入场时机，以及增加储蓄率等。
-整部作品的基调非常像一部关于投机泡沫的大综述，理性中立客观，数据翔实，论据充分，尤其是用真实数据去评估人们一直以来的认知偏差，长期持股未必会有良好收益，如果在漫漫熊市中长期持股而不摊低成本，整个股指会经过十几年才能回到高位，非常之凄惨（不要忘了仅仅是股指，其中还有乐观主义偏差）。</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">eqbalance_sheet</span> <span class="k">modify</span> <span class="k">column</span> <span class="n">invest</span> <span class="n">int</span> <span class="k">comment</span> <span class="s1">'Investments (Deficit, kdollars)'</span><span class="p">;</span> 
+</code></pre></div></div>
 
-<p>总之，重要的一点教训就是足够理性，谨慎乐观，注意风险敞口的控制，在最近几年的环境下应该是非常重要的素质。</p>
+<p>添加字段过程中</p>
 
-<p>《1929年大崩盘》则是一部以叙事+数据+资料尽调的方式描述了1929年大崩溃的过程，整部作品读起来并不像《非理性繁荣》那般理中客，但是翔实复现了整个崩溃的过程，并做了简单的后果分析，没有进一步外延到与法西斯上台、以及随之而来的二战的关系。
-作品很短，着眼很多关于股市崩盘的特征，比如高位放量，波动性上升，反复磨顶等等，这给了大周期近顶部时的逃脱机会。最后还反驳了一下崩溃后自杀率上升的谣言，总之看下来感觉就是，只要前期不作死加杠杆资不抵债，勒紧裤腰带还是照样能过的。</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">alter</span> <span class="k">table</span> <span class="n">eq_balance_sheet</span> <span class="k">add</span> <span class="n">other_income</span> <span class="n">int</span> <span class="k">comment</span> <span class="s1">'Accumulated Other Comprehensive Income (kdollars)'</span><span class="p">;</span>
+</code></pre></div></div>
 
-<p><strong>Updated 2018-02-27</strong></p>
+<p>查看说明：</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">full</span> <span class="n">columns</span> <span class="k">from</span> <span class="n">eq_balance_sheet</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">Field</span>          <span class="o">|</span> <span class="k">Type</span>        <span class="o">|</span> <span class="k">Collation</span>       <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span> <span class="o">|</span> <span class="k">Privileges</span>                      <span class="o">|</span> <span class="k">Comment</span>                                           <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">rhid</span>           <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>    <span class="o">|</span> <span class="n">utf8_general_ci</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span>                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">symbol</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="n">utf8_general_ci</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span>                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">cash_equiv</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Cash</span> <span class="k">and</span> <span class="n">Equivalents</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                   <span class="o">|</span>
+<span class="o">|</span> <span class="n">invest_curr</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="n">cash_st_invest</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Cash</span> <span class="k">and</span> <span class="n">Short</span> <span class="n">Term</span> <span class="n">Investments</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="n">receivables</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Trade</span> <span class="k">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Trade</span> <span class="n">Receivables</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="n">inventory</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Inventory</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                              <span class="o">|</span>
+<span class="o">|</span> <span class="n">curr_ast</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Current</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                         <span class="o">|</span>
+<span class="o">|</span> <span class="n">ppe_net</span>        <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Property</span><span class="p">,</span> <span class="n">Plant</span> <span class="o">&amp;</span> <span class="n">Equipment</span> <span class="n">Net</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="n">goodwill</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Goodwill</span> <span class="k">and</span> <span class="n">Intangible</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>         <span class="o">|</span>
+<span class="o">|</span> <span class="n">invst_ncurr</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">tax_ast</span>        <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Tax</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">ast_ncurr</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Assets</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                     <span class="o">|</span>
+<span class="o">|</span> <span class="n">total_ast</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                           <span class="o">|</span>
+<span class="o">|</span> <span class="n">payables</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Trade</span> <span class="k">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Trade</span> <span class="n">Payables</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">debt_curr</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Debt</span> <span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                           <span class="o">|</span>
+<span class="o">|</span> <span class="n">curr_liab</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Current</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="n">debt_ncurr</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Debt</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                       <span class="o">|</span>
+<span class="o">|</span> <span class="n">total_debt</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Debt</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">def_revenue</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Deferred</span> <span class="n">Revenue</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                       <span class="o">|</span>
+<span class="o">|</span> <span class="n">tax_liab</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Tax</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                        <span class="o">|</span>
+<span class="o">|</span> <span class="n">dep_liab</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Deposit</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="n">liab_ncurr</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Liabilities</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">total_liab</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                      <span class="o">|</span>
+<span class="o">|</span> <span class="n">other_income</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Accumulated</span> <span class="n">Other</span> <span class="n">Comprehensive</span> <span class="n">Income</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">ret_earning</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Accumulated</span> <span class="n">Retained</span> <span class="n">Earnings</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">equity</span>         <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Shareholders</span> <span class="n">Equity</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="n">invest</span>         <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span>                   <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
+<span class="mi">28</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div></div>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/02/24/reading-record/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/22/mysql-comments/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -859,10 +1000,10 @@ Alternatively you can run:
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">2/7</span>
+          <span class="page_number ">2/43</span>
           
             <a href="/page3" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page7" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -890,6 +1031,265 @@ Alternatively you can run:
                       
                       
                       
+                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #222;">Blog&amp;CMS</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Living&amp;thinking" style="font-size: 11pt; color: #777;">Living&amp;thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Linux" style="font-size: 18pt; color: #000;">Linux</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Internet" style="font-size: 10.5pt; color: #777;">Internet</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Windows" style="font-size: 10.5pt; color: #777;">Windows</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Hardware" style="font-size: 10pt; color: #888;">Hardware</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NCL" style="font-size: 11pt; color: #777;">NCL</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Fortran" style="font-size: 9.5pt; color: #888;">Fortran</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PaperHub" style="font-size: 9.5pt; color: #999;">PaperHub</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Project" style="font-size: 10pt; color: #888;">Project</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Self-treat" style="font-size: 9pt; color: #999;">Self-treat</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Software" style="font-size: 10pt; color: #888;">Software</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#ClimateChange" style="font-size: 9.5pt; color: #999;">ClimateChange</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PaperReading" style="font-size: 10pt; color: #888;">PaperReading</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#2015" style="font-size: 9.5pt; color: #999;">2015</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#2014" style="font-size: 9pt; color: #999;">2014</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#COAP" style="font-size: 9.5pt; color: #999;">COAP</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Python" style="font-size: 11pt; color: #777;">Python</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#FriendsNotebook" style="font-size: 9pt; color: #999;">FriendsNotebook</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Season1" style="font-size: 9pt; color: #999;">Season1</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#ShanbeiNews" style="font-size: 11.5pt; color: #777;">ShanbeiNews</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Coursera" style="font-size: 9pt; color: #999;">Coursera</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#R" style="font-size: 9.5pt; color: #999;">R</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#GFDL_FMS" style="font-size: 9pt; color: #999;">GFDL_FMS</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#MATLAB" style="font-size: 9pt; color: #999;">MATLAB</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#EXCEL/VBA" style="font-size: 9pt; color: #999;">EXCEL/VBA</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#2016" style="font-size: 9pt; color: #999;">2016</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#AirQualityModeling" style="font-size: 9.5pt; color: #999;">AirQualityModeling</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Ecnomics" style="font-size: 9pt; color: #999;">Ecnomics</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#MacOS" style="font-size: 9pt; color: #999;">MacOS</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fullstackdevelopment" style="font-size: 9pt; color: #999;">fullstackdevelopment</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -897,14 +1297,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 18pt; color: #000;">server</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#raid" style="font-size: 9pt; color: #999;">raid</a>
+                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
                     
                       
                       
@@ -918,21 +1311,21 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 10.5pt; color: #777;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 11.5pt; color: #666;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 10pt; color: #888;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -974,7 +1367,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 18pt; color: #000;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 10.5pt; color: #777;">thinking</a>
                     
                       
                       
@@ -1016,7 +1409,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#javascript" style="font-size: 10pt; color: #888;">javascript</a>
+                      <a href="/tag/#javascript" style="font-size: 9pt; color: #999;">javascript</a>
                     
                       
                       
@@ -1037,7 +1430,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#pandas" style="font-size: 10pt; color: #888;">pandas</a>
+                      <a href="/tag/#pandas" style="font-size: 9pt; color: #999;">pandas</a>
                     
                       
                       
@@ -1051,14 +1444,14 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 14.5pt; color: #444;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 10pt; color: #888;">investment</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 11.5pt; color: #666;">career</a>
+                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
                     
                       
                       
@@ -1072,7 +1465,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 11pt; color: #777;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
                     
                       
                       
@@ -1080,13 +1473,6 @@ Alternatively you can run:
                       
                       
                       <a href="/tag/#quandl" style="font-size: 9pt; color: #999;">quandl</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 9pt; color: #999;">CESM</a>
                     
                       
                       
@@ -1114,7 +1500,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 11pt; color: #777;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
                     
                       
                       
@@ -1128,14 +1514,14 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#market&nbspcrash" style="font-size: 11pt; color: #777;">market&nbspcrash</a>
+                      <a href="/tag/#market&nbspcrash" style="font-size: 9.5pt; color: #888;">market&nbspcrash</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#shell" style="font-size: 10pt; color: #888;">shell</a>
+                      <a href="/tag/#shell" style="font-size: 9pt; color: #999;">shell</a>
                     
                       
                       
@@ -1156,14 +1542,14 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#centos" style="font-size: 10pt; color: #888;">centos</a>
+                      <a href="/tag/#centos" style="font-size: 9pt; color: #999;">centos</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#database" style="font-size: 12.5pt; color: #555;">database</a>
+                      <a href="/tag/#database" style="font-size: 10pt; color: #888;">database</a>
                     
                       
                       
@@ -1178,6 +1564,48 @@ Alternatively you can run:
                       
                       
                       <a href="/tag/#pymysql" style="font-size: 9pt; color: #999;">pymysql</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#tensorflow" style="font-size: 9pt; color: #999;">tensorflow</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#raid" style="font-size: 9pt; color: #999;">raid</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#MCMC" style="font-size: 9pt; color: #999;">MCMC</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Bayes" style="font-size: 9pt; color: #999;">Bayes</a>
                     
                       
                       
@@ -1222,25 +1650,25 @@ Alternatively you can run:
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                    
+                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                    
+                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                    
+                        <li><a href="/2018/04/13/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                    
+                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
+                    
+                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
+                    
+                        <li><a href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a></li>
+                    
+                        <li><a href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a></li>
+                    
                         <li><a href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a></li>
                     
                         <li><a href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a></li>
-                    
-                        <li><a href="/2018/03/25/job-seeking-info/">工作信息搜集记录</a></li>
-                    
-                        <li><a href="/2018/03/22/mysql-comments/">mysql字段注释</a></li>
-                    
-                        <li><a href="/2018/03/13/keyword-notebook/">学习与工作日记：关键词</a></li>
-                    
-                        <li><a href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a></li>
-                    
-                        <li><a href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a></li>
-                    
-                        <li><a href="/2018/03/06/mysql-basics/">mysql基本操作</a></li>
-                    
-                        <li><a href="/2018/03/05/install-mysql/">CentOS mysql安装</a></li>
-                    
-                        <li><a href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a></li>
                     
                 </ul>
             </div>
@@ -1254,6 +1682,339 @@ Alternatively you can run:
                 <ul class="content-ul" cate>
                     
                     <li>
+                        <a href="/category/#Blog&amp;CMS" class="categories-list-item" cate="Blog&amp;CMS">
+                            <span class="name">
+                                Blog&amp;CMS
+                            </span>
+                            <span class="badge">39</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#PHP&amp;mySQL" class="categories-list-item" cate="PHP&amp;mySQL">
+                            <span class="name">
+                                PHP&amp;mySQL
+                            </span>
+                            <span class="badge">10</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Living&amp;thinking" class="categories-list-item" cate="Living&amp;thinking">
+                            <span class="name">
+                                Living&amp;thinking
+                            </span>
+                            <span class="badge">12</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#CESM" class="categories-list-item" cate="CESM">
+                            <span class="name">
+                                CESM
+                            </span>
+                            <span class="badge">37</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Linux" class="categories-list-item" cate="Linux">
+                            <span class="name">
+                                Linux
+                            </span>
+                            <span class="badge">53</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#HPC" class="categories-list-item" cate="HPC">
+                            <span class="name">
+                                HPC
+                            </span>
+                            <span class="badge">16</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Internet" class="categories-list-item" cate="Internet">
+                            <span class="name">
+                                Internet
+                            </span>
+                            <span class="badge">11</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Windows" class="categories-list-item" cate="Windows">
+                            <span class="name">
+                                Windows
+                            </span>
+                            <span class="badge">11</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Hardware" class="categories-list-item" cate="Hardware">
+                            <span class="name">
+                                Hardware
+                            </span>
+                            <span class="badge">7</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NCL" class="categories-list-item" cate="NCL">
+                            <span class="name">
+                                NCL
+                            </span>
+                            <span class="badge">13</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Fortran" class="categories-list-item" cate="Fortran">
+                            <span class="name">
+                                Fortran
+                            </span>
+                            <span class="badge">5</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#PaperHub" class="categories-list-item" cate="PaperHub">
+                            <span class="name">
+                                PaperHub
+                            </span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Project" class="categories-list-item" cate="Project">
+                            <span class="name">
+                                Project
+                            </span>
+                            <span class="badge">7</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Self-treat" class="categories-list-item" cate="Self-treat">
+                            <span class="name">
+                                Self-treat
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Software" class="categories-list-item" cate="Software">
+                            <span class="name">
+                                Software
+                            </span>
+                            <span class="badge">8</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#ClimateChange" class="categories-list-item" cate="ClimateChange">
+                            <span class="name">
+                                ClimateChange
+                            </span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#PaperReading" class="categories-list-item" cate="PaperReading">
+                            <span class="name">
+                                PaperReading
+                            </span>
+                            <span class="badge">6</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#2015" class="categories-list-item" cate="2015">
+                            <span class="name">
+                                2015
+                            </span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#2014" class="categories-list-item" cate="2014">
+                            <span class="name">
+                                2014
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#English" class="categories-list-item" cate="English">
+                            <span class="name">
+                                English
+                            </span>
+                            <span class="badge">16</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#COAP" class="categories-list-item" cate="COAP">
+                            <span class="name">
+                                COAP
+                            </span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Python" class="categories-list-item" cate="Python">
+                            <span class="name">
+                                Python
+                            </span>
+                            <span class="badge">12</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#FriendsNotebook" class="categories-list-item" cate="FriendsNotebook">
+                            <span class="name">
+                                FriendsNotebook
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Season1" class="categories-list-item" cate="Season1">
+                            <span class="name">
+                                Season1
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#ShanbeiNews" class="categories-list-item" cate="ShanbeiNews">
+                            <span class="name">
+                                ShanbeiNews
+                            </span>
+                            <span class="badge">15</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Notebook" class="categories-list-item" cate="Notebook">
+                            <span class="name">
+                                Notebook
+                            </span>
+                            <span class="badge">6</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Coursera" class="categories-list-item" cate="Coursera">
+                            <span class="name">
+                                Coursera
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#R" class="categories-list-item" cate="R">
+                            <span class="name">
+                                R
+                            </span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&amp;GitHub" class="categories-list-item" cate="Git&amp;GitHub">
+                            <span class="name">
+                                Git&amp;GitHub
+                            </span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#GFDL_FMS" class="categories-list-item" cate="GFDL_FMS">
+                            <span class="name">
+                                GFDL_FMS
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#MATLAB" class="categories-list-item" cate="MATLAB">
+                            <span class="name">
+                                MATLAB
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#EXCEL/VBA" class="categories-list-item" cate="EXCEL/VBA">
+                            <span class="name">
+                                EXCEL/VBA
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#2016" class="categories-list-item" cate="2016">
+                            <span class="name">
+                                2016
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#AirQualityModeling" class="categories-list-item" cate="AirQualityModeling">
+                            <span class="name">
+                                AirQualityModeling
+                            </span>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Ecnomics" class="categories-list-item" cate="Ecnomics">
+                            <span class="name">
+                                Ecnomics
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#MacOS" class="categories-list-item" cate="MacOS">
+                            <span class="name">
+                                MacOS
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#fullstackdevelopment" class="categories-list-item" cate="fullstackdevelopment">
+                            <span class="name">
+                                fullstackdevelopment
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
                         <a href="/category/#network" class="categories-list-item" cate="network">
                             <span class="name">
                                 network
@@ -1263,20 +2024,11 @@ Alternatively you can run:
                     </li>
                     
                     <li>
-                        <a href="/category/#hardware" class="categories-list-item" cate="hardware">
-                            <span class="name">
-                                hardware
-                            </span>
-                            <span class="badge">2</span>
-                        </a>
-                    </li>
-                    
-                    <li>
                         <a href="/category/#linux" class="categories-list-item" cate="linux">
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -1285,7 +2037,7 @@ Alternatively you can run:
                             <span class="name">
                                 machine&nbsp;leanring
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -1312,7 +2064,7 @@ Alternatively you can run:
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -1339,7 +2091,7 @@ Alternatively you can run:
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -1348,7 +2100,7 @@ Alternatively you can run:
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">8</span>
                         </a>
                     </li>
                     
@@ -1366,7 +2118,7 @@ Alternatively you can run:
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -1384,7 +2136,7 @@ Alternatively you can run:
                             <span class="name">
                                 mysql
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -1394,6 +2146,15 @@ Alternatively you can run:
                                 algorithm
                             </span>
                             <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#hardware" class="categories-list-item" cate="hardware">
+                            <span class="name">
+                                hardware
+                            </span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -1407,7 +2168,11 @@ Alternatively you can run:
                     Links
                 </div>
                 <ul  class="content-ul">
+                    
                     <li><a href='http://www.ruanyifeng.com/home.html'>阮一峰的个人网站</a></li>
+                    <li><a href='https://yihui.name/'>谢益辉的个人网站</a></li>
+                    <li><a href='https://keenmisty.github.io/'>南村新造</a></li>
+                    
                 </ul>
             </div> 
 

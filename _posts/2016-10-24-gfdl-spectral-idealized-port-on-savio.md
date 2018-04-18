@@ -41,7 +41,7 @@ of course, use it! The problem really solved.
 
 So what is mkl?
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+<a href="../uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="../uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
 
 &nbsp;
 

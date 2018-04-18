@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>【python】学习笔记·基础篇</title>
+    <meta name="description" content="#20160202#print() 双引号单引号均可，字符串之间用逗号分隔会自动加入空格直接写变量名回车可以打印出变量值（类似matlab）name=input(‘please input your name…’)if结构if a&gt;1:    print aelse:    print -apython强制...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://202.116.70.212:80/2016/02/02/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">
+    <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f8f21649f9d39b36012bc6dac8898310";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">LZN's Blog</a>
+        <small>try to be a day-contributor!</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-clock-o"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-server"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/Side Projects/">
+                        
+                            <i class="fa fa-bar-chart"></i>Side Projects
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/sandbox/">
+                        
+                            <i class="fa fa-flask"></i>Sandbox
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/favorites/">
+                        
+                            <i class="fa fa-heart"></i>Favorites
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-id-card-o"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/comments/">
+                        
+                            <i class="fa fa-comments"></i>Comments
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>【python】学习笔记·基础篇</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-02-02
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>LZN
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>&nbsp;
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a-->
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
+    
+        <!--a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a-->
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        
+<p>#20160202#</p>
+
+<p>print() 双引号单引号均可，字符串之间用逗号分隔会自动加入空格</p>
+
+<p>直接写变量名回车可以打印出变量值（类似matlab）</p>
+
+<p>name=input(‘please input your name…’)</p>
+
+<p>if结构</p>
+<pre>if a&gt;1:
+    print a
+else:
+    print -a
+</pre>
+<p>python强制缩进，大小写敏感</p>
+
+<p>#20160204#</p>
+
+<p><img src="http://www.liaoxuefeng.com/files/attachments/001387245992536e2ba28125cf04f5c8985dbc94a02245e000/0" alt="rw-file-utf-8" /></p>
+
+<p><img src="http://www.liaoxuefeng.com/files/attachments/001387245979827634fd6204f9346a1ae6358d9ed051666000/0" alt="web-utf-8" /></p>
+
+<p>Python 3版本中，字符串是以Unicode编码的，也就是说，Python的字符串支持多语言</p>
+
+<p>ord()函数 字符–》编码</p>
+
+<p>chr()函数 编码–》字符</p>
+<pre><code class="python"><span class="prompt">&gt;&gt;&gt; </span><span class="string">'\u4e2d\u6587'</span>
+<span class="string">'中文'</span>
+</code></pre>
+<p>python默认字符串类型为str，一个字符对应若干字节；传输或者保存为byte类型，以字节为单位。</p>
+
+<p>x=b’xxx’</p>
+
+<p>字节码转回ASCII或utf-8 (decode方法)</p>
+
+<p>&gt;&gt;&gt;b’abc’.decode(‘ascii’)</p>
+
+<p>‘abc’</p>
+
+<p>取字符串长度函数 len()</p>
+
+<p>中文经过utf-8编码后占3个字节，英文仅占1个字节</p>
+
+<p>&gt;&gt;&gt;len(‘我们’.encode(‘utf-8’))</p>
+
+<p>6</p>
+
+<p>格式化输出</p>
+
+<p>&gt;&gt;&gt;‘hi, %s, you have %d’ % (‘xxx’, 100)</p>
+
+<p>‘hi, xxx, you have 100’</p>
+
+<p>%%用于转义</p>
+
+<p>【lists】</p>
+
+<p>&gt;&gt;&gt;classmates=[‘Alice’,’Bob’]</p>
+
+<p>&gt;&gt;&gt;classmates</p>
+
+<p>[‘Alice’,’Bob’]</p>
+
+<p>&gt;&gt;&gt;len(classmates)</p>
+
+<p>2</p>
+
+<p>若取用最后一个元素，用-1做索引；-2，-3类推</p>
+
+<p>追加元素，append方法</p>
+
+<p>&gt;&gt;&gt;classmates.append(‘Adam’)</p>
+
+<p>删除最后一个元素，pop方法</p>
+
+<p>&gt;&gt;&gt;classmates.pop</p>
+
+<p>指定位置</p>
+
+<p>&gt;&gt;&gt;classmates.pop(i)</p>
+
+<p>加入到指定位置，比如，index=1的位置</p>
+
+<p>&gt;&gt;&gt;classmates.insert(1,’Alex’)</p>
+
+<p>替换指定位置元素，直接赋值即可</p>
+
+<p>&gt;&gt;&gt;classmates[1]=’Frank’</p>
+
+<p>list可以放入不同的数据类型，甚至可以list套list，例如</p>
+
+<p>&gt;&gt;&gt;language=[‘VB’,’C++’,[‘php’,’asp’]]</p>
+
+<p>引用’asp’</p>
+
+<p>&gt;&gt;&gt;language[2][1]</p>
+
+<p>有序列别tuple，不可更改，小括号</p>
+
+<p>&gt;&gt;&gt;classmates=(‘Bob’,’Jane’,’Dennis’)</p>
+
+<p>引用依然用中括号。</p>
+
+<p>若定义只有一个元素的tuple，不能用 test=(1)的形式，小括号被解释为数学运算符，加入逗号消除歧义test=(1,)</p>
+
+<p><img src="http://www.liaoxuefeng.com/files/attachments/001387269768140c7d5ca167342402989dfc75343fe900b000/0" alt="tuple-1" /></p>
+
+<p>tuple指的是指向不变</p>
+
+<p>IF</p>
+
+<p>强制缩进代表块语句</p>
+<pre>if xxx:
+    xxxx
+elif xxx:
+    xxxx
+else:
+    xxxx</pre>
+<p>input输入的是str()类型，必须通过int()函数转换才能与数值类型进行比较。</p>
+
+<p>FOR</p>
+
+<p>遍历list</p>
+<pre>names=['Bob','Steve','John']
+for name in names:
+    print name</pre>
+<p>range(n)函数用于生成小于整数n的序列</p>
+
+<p>如0-100的序列求和</p>
+<pre>num=range(101)
+sum=0
+for x in num:
+    sum=sum+x
+print(sum)</pre>
+<p>WHILE</p>
+<pre>s=100
+sum=0
+while s&gt;0:
+    sum=sum+s
+    s=s-1</pre>
+<p>DICT和SET</p>
+
+<p>dictionary，key-value对</p>
+
+<p>dic={‘Mike’:100,’Alice’:90}</p>
+
+<p>dic[‘Mike’]</p>
+
+<p>dic[‘Mike’]=10</p>
+
+<p>判断key是否存在，用in</p>
+
+<p>&gt;&gt;&gt;‘Tom’ in dic</p>
+
+<p>False</p>
+
+<p>get方法</p>
+
+<p>&gt;&gt;&gt;dic.get(‘Tom’,-999)</p>
+
+<p>-999</p>
+
+<p>pop方法删除字典元素</p>
+
+<p>dic.pop(‘Mike’)</p>
+
+<p>和list比较，dict有以下几个特点：</p>
+<ol>
+	<li>查找和插入的速度极快，不会随着key的增加而增加；</li>
+	<li>需要占用大量的内存，内存浪费多。</li>
+</ol>
+<p>而list相反：</p>
+<ol>
+	<li>查找和插入的时间随着元素的增加而增加；</li>
+	<li>占用空间小，浪费内存很少。</li>
+</ol>
+<p>key是不可变对象，做Hash运算后确定value地址</p>
+
+<p>SET</p>
+
+<p>只保存key，用list初始化</p>
+
+<p>&gt;&gt;&gt;s=set([1,2,3])</p>
+
+<p>&gt;&gt;&gt;s</p>
+
+<p>{1,2,3}</p>
+
+<p>无重复，无序，集合，可以交集并集等</p>
+
+<p>&gt;&gt;&gt;s1=set([1,2,3])</p>
+
+<p>&gt;&gt;&gt;s2=set([2,3,4])</p>
+
+<p>&gt;&gt;&gt;s1 &amp; s2</p>
+
+<p>{2,3}</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>&gt;&gt;&gt;s1</td>
+      <td>s2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>{1,2,3,4}</p>
+
+<p>注意了解不可变对象的概念，<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000">最后一部分</a></p>
+
+<p>对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。</p>
+
+<p> </p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/02/02/e3-80-90dos-e3-80-91-e6-96-87-e4-bb-b6-e7-b3-bb-e/">【DOS】文件系统操作</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/02/05/e3-80-90python-e3-80-91-e4-b8-ad-e6-96-87-e7-bc-9/">【python】中文编码问题</a></p>
+        
+    </div>
+</div>
+
+
+<!--        <h2 id="comments">Comments</h2>
+    
+
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', // 可选。默认为 location.href
+  owner: 'Novarizark',
+  repo: 'Novarizark.github.io',
+  oauth: {
+    client_id: '08594414abfaba1aa8bd',
+    client_secret: '56bd0f234257f69ca94cafa5086af0ff2e43ac70',
+  },
+})
+gitment.render('container')
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://imsun.github.io/gitment/" rel="nofollow">comments powered by Gitment.</a></noscript>
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

@@ -13,12 +13,12 @@ author: LZN
 
 台式机决定取名为Blackleach，黑是主色调，坚韧而厚重，本因台式机性能优越希望取为Stormspire，但Black的属性久久萦绕脑海，不得已，故名。其实溯源的话，Blackleach是苏格兰一个地名，这套暗金装备全名为Blackleach Blade Bill (黑水之刃-比尔长刀)，因Blackleach这个地方生产Bill这种钩镰枪，故名。
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2014/09/blackleach.jpg"><img class="alignnone size-full wp-image-182" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2014/09/blackleach.jpg" alt="blackleach" width="674" height="222" /></a>
+<a href="../uploads/2014/09/blackleach.jpg"><img class="alignnone size-full wp-image-182" src="../uploads/2014/09/blackleach.jpg" alt="blackleach" width="674" height="222" /></a>
 
 笔记本取名为Wizardspike吧，level mana + 75% mana + 50% FCR + 75% 4R，换上浦科特的SSD后还是非常神似的嘛，哈哈！Wizardspike Bone Knife （巫师之刺-骸骨匕首），居家旅行，杀人越货，必备之选。
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2014/09/wizardspike.jpg"><img class="alignnone size-full wp-image-184" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2014/09/wizardspike.jpg" alt="wizardspike" width="833" height="212" /></a>
+<a href="../uploads/2014/09/wizardspike.jpg"><img class="alignnone size-full wp-image-184" src="../uploads/2014/09/wizardspike.jpg" alt="wizardspike" width="833" height="212" /></a>
 
 来张大合照啦，除了White Cube在烟台，其他都在这里啦。
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2014/09/IMG_20140922_202625.jpg"><img class="alignnone size-full wp-image-185" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2014/09/IMG_20140922_202625.jpg" alt="IMG_20140922_202625" width="3200" height="2368" /></a>
+<a href="../uploads/2014/09/IMG_20140922_202625.jpg"><img class="alignnone size-full wp-image-185" src="../uploads/2014/09/IMG_20140922_202625.jpg" alt="IMG_20140922_202625" width="3200" height="2368" /></a>

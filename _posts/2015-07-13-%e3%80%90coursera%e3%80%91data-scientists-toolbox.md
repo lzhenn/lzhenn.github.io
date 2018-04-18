@@ -26,7 +26,7 @@ mining the web
 
 处理技巧-数学和统计知识-专业知识
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2015/07/QQ图片20150713150848.jpg"><img class="alignnone  wp-image-613" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2015/07/QQ图片20150713150848.jpg" alt="QQ图片20150713150848" width="267" height="262" /></a>
+<a href="../uploads/2015/07/QQ图片20150713150848.jpg"><img class="alignnone  wp-image-613" src="../uploads/2015/07/QQ图片20150713150848.jpg" alt="QQ图片20150713150848" width="267" height="262" /></a>
 
 <strong>W1-L2
 </strong>

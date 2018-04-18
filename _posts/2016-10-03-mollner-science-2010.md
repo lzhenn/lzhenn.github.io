@@ -34,6 +34,6 @@ author: LZN
 
 维基百科复习下：https://zh.wikipedia.org/wiki/%E9%80%9F%E7%8E%87%E6%96%B9%E7%A8%8B
 
-<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2016/10/139718010280082228.jpg"><img class="alignnone wp-image-866 size-full" src="http://222.200.180.66:1234/L_Zealot/blog/wordpress/wp-content/uploads/2016/10/139718010280082228-e1476131794502.jpg" alt="139718010280082228" width="1280" height="948" /><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a>
+<a href="../uploads/2016/10/139718010280082228.jpg"><img class="alignnone wp-image-866 size-full" src="../uploads/2016/10/139718010280082228-e1476131794502.jpg" alt="139718010280082228" width="1280" height="948" /><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a>
 
 &nbsp;
