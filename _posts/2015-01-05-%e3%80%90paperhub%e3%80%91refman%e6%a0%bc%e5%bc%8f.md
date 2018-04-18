@@ -13,13 +13,13 @@ author: LZN
 
 第一步，确定ris或者enw导出在样式中被选中
 
-<a href="../uploads/2015/01/Snap2.jpg"><img class="alignnone size-full wp-image-378" src="../uploads/2015/01/Snap2.jpg" alt="Snap2" width="422" height="541" /></a>
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap2.jpg"><img class="alignnone size-full wp-image-378" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap2.jpg" alt="Snap2" width="422" height="541" /></a>
 
 第二步，选中文献，文件--&gt;导出，可以看到输出样式可选ris或者enw输出
 
-<a href="../uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-379" src="../uploads/2015/01/Snap3.jpg" alt="Snap3" width="577" height="537" /></a>
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-379" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg" alt="Snap3" width="577" height="537" /></a>
 
 一个导出文件的例子，其中L1 标签后面对应ris导出格式的本地pdf路径。
-<a href="../uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-380" src="../uploads/2015/01/QQ图片20150105185757.jpg" alt="QQ图片20150105185757" width="758" height="516" /></a>
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-380" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/QQ图片20150105185757.jpg" alt="QQ图片20150105185757" width="758" height="516" /></a>
 
 &nbsp;
