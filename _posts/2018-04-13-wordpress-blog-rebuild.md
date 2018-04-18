@@ -28,6 +28,10 @@ WHERE taxonomy = 'category'
 AND post_type = 'post' 
 ORDER by post_title;
 ```
+然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。
+
+```
+
 
 **Updated 2018-04-13**
 
