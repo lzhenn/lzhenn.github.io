@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "full-stack development [notebook]" 
-categories: Blog&amp;CMS
-tags: Blog&amp;CMS
+categories: blog
+tags: blog
 author: LZN
 ---
 

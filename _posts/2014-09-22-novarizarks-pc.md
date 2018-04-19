@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Novarizark's PC" 
-categories: Blog&amp;CMS Hardware Living&amp;thinking
-tags: Blog&amp;CMS Hardware Living&amp;thinking
+categories: blog Hardware Living&amp;thinking
+tags: blog Hardware Living&amp;thinking
 author: LZN
 ---
 

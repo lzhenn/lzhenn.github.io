@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【已解决】Dokuwiki搭建过程" 
-categories: Blog&amp;CMS
-tags: Blog&amp;CMS
+categories: blog
+tags: blog
 author: LZN
 ---
 

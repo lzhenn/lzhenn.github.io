@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Porting CESM1.2.2 on SAVIO" 
-categories: Blog&amp;CMS
-tags: Blog&amp;CMS
+categories: blog
+tags: blog
 author: LZN
 ---
 
