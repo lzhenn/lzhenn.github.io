@@ -238,6 +238,100 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-19
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+    
+        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+    
+        <a href="/tag/#markdown" title="Tag: markdown" rel="tag">markdown</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>接上篇<a href="https://novarizark.github.io/2018/04/04/raid-rebuild/">东校服务器RAID rebuild</a>,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。</p>
+
+<p>思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
+工具：pymysql</p>
+
+<p>google下，抽出post内容的几个关键语句如下：</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">--选出内容，唯一id，和category</span>
+<span class="o">&gt;</span><span class="k">SELECT</span> <span class="n">post_title</span><span class="p">,</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span><span class="p">,</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">wp_terms</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_taxonomy</span> <span class="k">ON</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">term_id</span> <span class="o">=</span> <span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_relationships</span> <span class="n">wpr</span> <span class="k">ON</span> <span class="n">wpr</span><span class="p">.</span><span class="n">term_taxonomy_id</span> <span class="o">=</span> 
+<span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_taxonomy_id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_posts</span> <span class="k">ON</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span>
+<span class="k">WHERE</span> <span class="n">taxonomy</span> <span class="o">=</span> <span class="s1">'category'</span> 
+<span class="k">AND</span> <span class="n">post_type</span> <span class="o">=</span> <span class="s1">'post'</span> 
+<span class="k">ORDER</span> <span class="k">by</span> <span class="n">post_title</span><span class="p">;</span>
+</code></pre></div></div>
+<p>然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。成功恢复了200+篇博客内容，后面大概修改下残缺，整理下tag就很好啦。</p>
+
+<p><strong>Updated 2018-04-13</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/19/wordpress-blog-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a>
                 </h2>
                 <div class="label">
@@ -525,102 +619,6 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/04/13/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-13
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>&nbsp;
-    
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
-    
-        <a href="/tag/#markdown" title="Tag: markdown" rel="tag">markdown</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>接上篇<a href="https://novarizark.github.io/2018/04/04/raid-rebuild/">东校服务器RAID rebuild</a>,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。</p>
-
-<p>思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
-工具：pymysql</p>
-
-<p>google下，抽出post内容的几个关键语句如下：</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="c1">--选出内容，唯一id，和category</span>
-<span class="o">&gt;</span><span class="k">SELECT</span> <span class="n">post_title</span><span class="p">,</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span><span class="p">,</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">name</span>
-<span class="k">FROM</span> <span class="n">wp_terms</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_taxonomy</span> <span class="k">ON</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">term_id</span> <span class="o">=</span> <span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_id</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_relationships</span> <span class="n">wpr</span> <span class="k">ON</span> <span class="n">wpr</span><span class="p">.</span><span class="n">term_taxonomy_id</span> <span class="o">=</span> 
-<span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_taxonomy_id</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_posts</span> <span class="k">ON</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span>
-<span class="k">WHERE</span> <span class="n">taxonomy</span> <span class="o">=</span> <span class="s1">'category'</span> 
-<span class="k">AND</span> <span class="n">post_type</span> <span class="o">=</span> <span class="s1">'post'</span> 
-<span class="k">ORDER</span> <span class="k">by</span> <span class="n">post_title</span><span class="p">;</span>
-</code></pre></div></div>
-<p>然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。</p>
-
-<p>```</p>
-
-<p><strong>Updated 2018-04-13</strong></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/04/13/wordpress-blog-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
                   <a class="post-link" href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a>
                 </h2>
                 <div class="label">
@@ -858,7 +856,7 @@
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #222;">Blog&amp;CMS</a>
+                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
                     
                       
                       
@@ -1411,20 +1409,6 @@
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#MCMC" style="font-size: 9pt; color: #999;">MCMC</a>
                     
                       
@@ -1440,6 +1424,20 @@
                       
                       
                       <a href="/tag/#keyword&nbspnotebook" style="font-size: 9pt; color: #999;">keyword&nbspnotebook</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
@@ -1477,13 +1475,13 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                    
                         <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
                     
                         <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
-                    
-                        <li><a href="/2018/04/13/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
                     
                         <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
                     
@@ -1513,7 +1511,7 @@
                             <span class="name">
                                 Blog&amp;CMS
                             </span>
-                            <span class="badge">39</span>
+                            <span class="badge">38</span>
                         </a>
                     </li>
                     

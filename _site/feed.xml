@@ -5,9 +5,58 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 18 Apr 2018 15:42:40 +0800</pubDate>
-    <lastBuildDate>Wed, 18 Apr 2018 15:42:40 +0800</lastBuildDate>
+    <pubDate>Thu, 19 Apr 2018 16:25:16 +0800</pubDate>
+    <lastBuildDate>Thu, 19 Apr 2018 16:25:16 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>从备份的wordpress数据库重建技术博客</title>
+        <description>
+接上篇&lt;a href=&quot;https://novarizark.github.io/2018/04/04/raid-rebuild/&quot;&gt;东校服务器RAID rebuild&lt;/a&gt;,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。
+
+思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
+工具：pymysql
+
+google下，抽出post内容的几个关键语句如下：
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;c1&quot;&gt;--选出内容，唯一id，和category&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_id&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_relationships&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_taxonomy_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_taxonomy_id&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_posts&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;taxonomy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'category'&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'post'&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。成功恢复了200+篇博客内容，后面大概修改下残缺，整理下tag就很好啦。
+
+&lt;strong&gt;Updated 2018-04-13&lt;/strong&gt;
+
+</description>
+        <pubDate>Thu, 19 Apr 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/04/19/wordpress-blog-rebuild/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/19/wordpress-blog-rebuild/</guid>
+        
+        <category>server</category>
+        
+        <category>blog</category>
+        
+        <category>database</category>
+        
+        <category>wordpress</category>
+        
+        <category>jekyll</category>
+        
+        <category>markdown</category>
+        
+        
+        <category>notebook</category>
+        
+        <category>mysql</category>
+        
+      </item>
     
       <item>
         <title>学习与工作日记：关键词</title>
@@ -158,57 +207,6 @@
         
         
         <category>machine&amp;nbsp;leanring</category>
-        
-      </item>
-    
-      <item>
-        <title>从备份的wordpress数据库重建技术博客</title>
-        <description>
-接上篇&lt;a href=&quot;https://novarizark.github.io/2018/04/04/raid-rebuild/&quot;&gt;东校服务器RAID rebuild&lt;/a&gt;,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。
-
-思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
-工具：pymysql
-
-google下，抽出post内容的几个关键语句如下：
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;c1&quot;&gt;--选出内容，唯一id，和category&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_id&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_relationships&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_taxonomy_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_taxonomy_id&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_posts&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;taxonomy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'category'&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'post'&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。
-
-```
-
-&lt;strong&gt;Updated 2018-04-13&lt;/strong&gt;
-
-</description>
-        <pubDate>Fri, 13 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/04/13/wordpress-blog-rebuild/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/13/wordpress-blog-rebuild/</guid>
-        
-        <category>server</category>
-        
-        <category>blog</category>
-        
-        <category>database</category>
-        
-        <category>wordpress</category>
-        
-        <category>jekyll</category>
-        
-        <category>markdown</category>
-        
-        
-        <category>notebook</category>
-        
-        <category>mysql</category>
         
       </item>
     

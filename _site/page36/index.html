@@ -238,85 +238,6 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM continue run出现Internal pop2 clock not in sync with Sync Clock的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>晚上查天河二号的spin-up任务，发现下午的时候居然断掉了，已经积分了99年，队列状态一直是CG状态卡死，貌似是某个节点的一个进程被kill掉了，其他节点陆续因为超时退出。</p>
-
-<p>好吧，不管那个CG。重新提交任务，continue run，没想到initial的时候给我弹出了，纳尼……</p>
-
-<p>查看log文件发现如下错误</p>
-
-<p><strong>Internal pop2 clock not in sync with Sync Clock</strong></p>
-
-<p>POP2的时钟不同步? 这么有意思，貌似之前碰到过，因为转的时间不久，索性直接重新start-up了，这次可是转了10天啊我擦嘞，要是重新返工岂不是要命了。果断google，然后发现了这个：</p>
-<blockquote>https://bb.cgd.ucar.edu/internal-pop2-clock-not-sync-sync-clock</blockquote>
-<p>这个意思是直接重走一遍cesm_setup就可以，clean再setup，改build状态，提交任务——依然出错。其他google出来的信息几乎没用，诶，又入无人之境……</p>
-
-<p>既然是初始化的时候时钟同步出问题，想到模式运行生成restart文件的时候会同步配置一个rpointer文件，应该是记录重启点的文件，果断查看，发现问题：只有ocn的相关rpointer文件中指向100年的1月1日，其他都是99年1月1日，明白了，应该是ocn模块指定rpointer的方式与其他module不同，先于其他模块指定了新的重启点，可是其他模块的重启文件还没生成呢。长舒一口气，改rpointer.ocn.restart里面的文件为99年咯，Okay，提交任务！</p>
-
-<p>这次依然提交不久就断掉了，万念俱灰有木有，查看log文件，发现错误不一样了，有点欣喜，说明改rpointer有效。新错误是：</p>
-
-<p><strong>nlfilename_rof does NOT exist:rof_in</strong></p>
-
-<p>这么奇葩，径流模式出问题，老子又不关心你丫的径流，小兔崽子还找事……看起来是找不到rof_in的什么东西，google直接没结果，想到刚刚cesm重新setup过，是不是改了build后的一些namelist？重新build尝试，目前可以运行了，长舒一口气……但愿今晚能顺利跑过断点～</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
                   <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM标准流输出</a>
                 </h2>
                 <div class="label">
@@ -503,15 +424,15 @@
                     
 <p>应老板项目要求，CAM的分辨率早晚要shift到F05的水平，前两天在学校四期平台上测试了下，默认配置，CAM4物理，96个核，900s积分时间，运行情况实在惨不忍睹：</p>
 
-<p><a href="../uploads/2014/10/QQ截图20141014222809.png"><img class="alignnone size-full wp-image-199" src="../uploads/2014/10/QQ截图20141014222809.png" alt="QQ截图20141014222809" width="1054" height="763" /></a></p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png"><img class="alignnone size-full wp-image-199" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png" alt="QQ截图20141014222809" width="1054" height="763" /></a></p>
 
 <p>运行一个月用了整整一晚上，十几分钟才能输出一天，一个文件1.2G，我擦嘞。</p>
 
 <p>转到天河二号，直接调用了1200个核心，物理包用的CAM5，大概三四分钟出来一天的样子，发现IO是个大瓶颈。测试改PE层，只有atm用1200个核心，其他用120个核心，依然是sequential执行，效果差不多。</p>
 
-<p><a href="../uploads/2014/10/QQ截图20141014220543.png"><img class="alignnone size-full wp-image-198" src="../uploads/2014/10/QQ截图20141014220543.png" alt="QQ截图20141014220543" width="1066" height="757" /></a></p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png"><img class="alignnone size-full wp-image-198" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png" alt="QQ截图20141014220543" width="1066" height="757" /></a></p>
 
-<p>决定尝试采用concurrent的方式进行，UG上给的1800+个核心，而且用了多线程的方式，还是先不冒险多线程了吧，atm缩减到768，其他大概凑天河二号节点情况24核心的倍数，具体配置如下，几个concurrent的层次模块与UG上一致。<a href="../uploads/2014/10/QQ截图20141014223453.png"><img class="alignnone size-full wp-image-202" src="../uploads/2014/10/QQ截图20141014223453.png" alt="QQ截图20141014223453" width="958" height="1575" /></a></p>
+<p>决定尝试采用concurrent的方式进行，UG上给的1800+个核心，而且用了多线程的方式，还是先不冒险多线程了吧，atm缩减到768，其他大概凑天河二号节点情况24核心的倍数，具体配置如下，几个concurrent的层次模块与UG上一致。<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png"><img class="alignnone size-full wp-image-202" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png" alt="QQ截图20141014223453" width="958" height="1575" /></a></p>
 
 <p> </p>
 
@@ -673,6 +594,67 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                 <hr>
               </li>
             
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/09/24/e7-ac-bc-e4-b8-ad-e9-b8-9f/">笼中鸟</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-09-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Living&amp;thinking" title="Category: Living&amp;thinking" rel="category">Living&amp;thinking</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Living&amp;thinking" title="Tag: Living&amp;thinking" rel="tag">Living&amp;thinking</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>今天感觉非常不好。欠缺太多，差了太多，非常失望落寞。刚刚用新装的google输入法打自己名字，只输入首字母，出现了“笼中鸟”这个词，呵呵，或许我就是这样的状态吧，其实自己禁锢了自己，自嘲一下。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/09/24/e7-ac-bc-e4-b8-ad-e9-b8-9f/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
         </ul>
 
 
@@ -714,7 +696,7 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #222;">Blog&amp;CMS</a>
+                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
                     
                       
                       
@@ -1267,20 +1249,6 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#MCMC" style="font-size: 9pt; color: #999;">MCMC</a>
                     
                       
@@ -1296,6 +1264,20 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                       
                       
                       <a href="/tag/#keyword&nbspnotebook" style="font-size: 9pt; color: #999;">keyword&nbspnotebook</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
@@ -1333,13 +1315,13 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                    
                         <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
                     
                         <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
-                    
-                        <li><a href="/2018/04/13/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
                     
                         <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
                     
@@ -1369,7 +1351,7 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                             <span class="name">
                                 Blog&amp;CMS
                             </span>
-                            <span class="badge">39</span>
+                            <span class="badge">38</span>
                         </a>
                     </li>
                     

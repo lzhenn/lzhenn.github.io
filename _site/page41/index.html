@@ -238,79 +238,6 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/">看CESM Tutorial CAM Physics (Video)的一点想法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#Living&amp;thinking" title="Category: Living&amp;thinking" rel="category">Living&amp;thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#Living&amp;thinking" title="Tag: Living&amp;thinking" rel="tag">Living&amp;thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天看完了Tutorial里关于Physics in CAM的视频。下载发现从2010年到2013年每一年的Tutorial释放出的pdf都差不多，但是13、12年却都没有这一场lecture的视频，这部还是从11年的resource里下到的。报告者是Neale，很年轻小伙，思维灵活，语速很快，基本跟不上，长相看起来很干练。有那么一两分像Prof. Yi Ming，当然啦，一个华人一个老外。</p>
-
-<p>快讲到最后几张ppt的时候Neale吐了个槽很好玩，大概意思是我们搞Atm Model真是悲了个剧啊，我们要处理云啊你造么，各种姿态各种高度各种分布各种奇葩的云啊你造么，云里面水也有冰也有雪也有霰也有水汽还有，固液气一家三口都在里面啊你造么，都是二话不说直接扔给我们搞Atm Model的来处理啊……哪像人家Ocean Model，天天转的都是液态水，海表蒸发出水汽了，人家不要了，直接扔给大气模块；海表冻出冰了，人家也不要了，这是冰雪模块干的事……</p>
-
-<p>一哂过后，想到前段时间在PNAS上看到的一篇文章，大概是说给CESM来了个Super-parameterization，看高CO2情景下的响应。所谓Super-Parameterization，实际就是在CESM的每一个大网格里都套了一个更小尺度的专门对付积云对流的模式，结果好像是发现在全球这个尺度的响应上，和CESM默认的Zhang方案有差不多的效果，说明CESM的对流参数化还是做得不错的。话说回来，Neale吐得槽以后能不能用这种类似方法来解决呢？即专门开发积云模式，然后做好接口工作套在全球模式里就可以了。广而言之，能否把参数化过程都独立成一个个的模块，由该领域的专业人员进行开发，使得这些模块独自能够运行（比如专门的边界层模式、辐射传输模式），也可以嵌入到CESM这种全球模式中。</p>
-
-<p>想来想去，其实现在已经有了呀。专门的边界层模式、辐射传输模式（RRTM不就是商业公司的产品么，由于太优秀了所以被引入气象模拟……）、积云模式等等，模块化必然也是全球模式的趋势吧：CESM等已经做了大圈层的模块化，如大气模块海洋模块冰雪模块等等，下一步圈层级模块内部物理过程的模块化应该也是必须的。当然，对全球模式来说，挑战还是很多的：首先必须要出台统一的接口标准，貌似ESMF、MCT这些就是干这个的，不过不了解，也不知道委员会成员的野心大不大，能搞出一套类似通信网络OSI 7层模型这种高大上的接口标准那就牛逼了；其次还是计算的问题，如果每一个大网格点都要在次网格的尺度上去转很多小模式，那计算时间肯定会暴涨，对计算机的计算能力也是个不小挑战。</p>
-
-<p>嗯~就YY这么多啦，还是要继续深入了解才行。全球模式开发越来越成为一个系统工程了，越来越向物理学中的LHC等大项目看齐了，这无疑是很好的嘛，这也应该是逐渐地把地学建立在牢靠的数学物理基础上的最佳方式了吧。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
                   <a class="post-link" href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM F Compset指定SST和CO2外强迫的方法</a>
                 </h2>
                 <div class="label">
@@ -586,11 +513,11 @@ http://www.cnblogs.com/fullhouse/archive/2011/07/17/2108786.html
                     
 <p>应包老师要求，在天河二号上进行CAM5的强可扩展性测试。进行一个节点测试的时候发现积分速度才2.7yr/day，着实吓了一大跳。CAM4可是12.7yr啊，速度还赶不上CAM4的1/4？？！！换其他计算节点后还是这个速度，看起来CAM5的计算量增加的不是一点半点啊。最后测试结果如下，基本只有CAM4四分之一的速度。</p>
 
-<p><a href="../uploads/2014/07/QQ图片20140730164146.jpg"><img class="alignnone size-medium wp-image-49" src="../uploads/2014/07/QQ图片20140730164146.jpg" alt="QQ图片20140730164146" width="600" /></a></p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ图片20140730164146.jpg"><img class="alignnone size-medium wp-image-49" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ图片20140730164146.jpg" alt="QQ图片20140730164146" width="600" /></a></p>
 
 <p>晚上看NCAR Tutorial的时候看到了几张图，从上到下分别是CAM5的物理过程，CAM4和CAM5的积分步流程。可以看到CAM5各个物理过程之间也存在通信（这才合理嘛！）。再加上辐射方案的改进，计算时间也大增，据包庆老师说辐射计算时间占到总计算时间的一半以上。CAM5会这么慢其实也合情合理吧。</p>
 
-<p><a href="../uploads/2014/07/图片1.png"><img class="alignnone size-medium wp-image-52" src="../uploads/2014/07/图片1.png" alt="图片1" width="600" /></a><a href="../uploads/2014/07/QQ截图20140731084017.gif"><img class="alignnone size-medium wp-image-50" src="../uploads/2014/07/QQ截图20140731084017.gif" alt="QQ截图20140731084017" width="600" /></a><a href="../uploads/2014/07/QQ截图20140731084049.jpg"><img class="alignnone size-medium wp-image-51" src="../uploads/2014/07/QQ截图20140731084049.jpg" alt="QQ截图20140731084049" width="600" /></a></p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/图片1.png"><img class="alignnone size-medium wp-image-52" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/图片1.png" alt="图片1" width="600" /></a><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084017.gif"><img class="alignnone size-medium wp-image-50" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084017.gif" alt="QQ截图20140731084017" width="600" /></a><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084049.jpg"><img class="alignnone size-medium wp-image-51" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084049.jpg" alt="QQ截图20140731084049" width="600" /></a></p>
 
                 </div>
                 <div class="read-all">
@@ -766,6 +693,67 @@ echo $var3</span></span>
                 <hr>
               </li>
             
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所链接天河二号终端流输出卡的问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>大气所包庆老师希望测试一下cam5在天河二号上的速度表现情况。连上去编译的时候发现非常卡，表现为编译命令行在终端输出一部分后卡在某个位置3-5分钟，之后才能继续正常继续运行。编译一次会卡这么十几二十个位置，实在让人没法接受。超算方面解释为网络问题。试着将输出流重定向到文本文件后，速度正常了。其他命令如top、w、yhq等也会出现类似卡顿。基本可以确定应该是因为某种网络或者说是超算登陆节点分时算法对网络延时处理的原因，远程终端的流输出过大时会进行限制，从而产生卡顿。经验就是，出现这类问题时，尽量减少远程终端上的流输出。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
         </ul>
 
 
@@ -807,7 +795,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #222;">Blog&amp;CMS</a>
+                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
                     
                       
                       
@@ -1360,20 +1348,6 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#MCMC" style="font-size: 9pt; color: #999;">MCMC</a>
                     
                       
@@ -1389,6 +1363,20 @@ echo $var3</span></span>
                       
                       
                       <a href="/tag/#keyword&nbspnotebook" style="font-size: 9pt; color: #999;">keyword&nbspnotebook</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
@@ -1426,13 +1414,13 @@ echo $var3</span></span>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                    
                         <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
                     
                         <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
-                    
-                        <li><a href="/2018/04/13/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
                     
                         <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
                     
@@ -1462,7 +1450,7 @@ echo $var3</span></span>
                             <span class="name">
                                 Blog&amp;CMS
                             </span>
-                            <span class="badge">39</span>
+                            <span class="badge">38</span>
                         </a>
                     </li>
                     
