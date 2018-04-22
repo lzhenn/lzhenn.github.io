@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "github技术博客搭建"
-categories: network
+categories: internet
 tags:  github blog jekyll
 author: LZN
 ---

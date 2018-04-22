@@ -219,10 +219,6 @@
                 
                     
                 
-                    
-                
-                    
-                
             </ul>
         </nav>
     </div>
@@ -238,11 +234,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl求线性回归系数的问题</a>
+                  <a class="post-link" href="/2014/11/07/a-walk-in-the-rain/">A Walk in the Rain</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-16
+                        <i class="fa fa-calendar"></i>2014-11-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -261,7 +257,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#Living&amp;thinking" title="Category: Living&amp;thinking" rel="category">Living&amp;thinking</a>
     
   
 
@@ -278,7 +274,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#Living&amp;thinking" title="Tag: Living&amp;thinking" rel="tag">Living&amp;thinking</a>
     
   
 
@@ -288,26 +284,28 @@
                 </div>
                 <div class="excerpt">
                     
-<p>求线性回归系数画图，直接用regCoef函数出现维度问题，出不来图。看了下varSummary，奇奇怪怪一大堆，估计是误差估计之类的东西。于是对返回变量做取值操作，没有问题。</p>
+<p>邮件收到了继续返工的消息，旁边又开始endless whisper，烦躁而且压抑，受不了只能戴上耳机听Yanni。a walk in the rain，之前没有注意到的一首，还是很不错的。HP同学推荐，说是感觉像是走在雨后的草地上，嗯，热情而阳光。</p>
 
-<p>例子：</p>
-<pre>391 reg_var4 = season_var4(0,:,:)
-392 reg_var4 = (/regCoef(sst_ts(i,:),season_var4_anoLLT)/)</pre>
+<p> </p>
+
+<p>光腚总菊一声令下，MP3都下不了咯，贴个链接：</p>
+
+<p>http://www.baidu.com/s?wd=a%20walk%20in%20the%20rain&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_5_dg&amp;rsv_pq=f40a682a0000744f&amp;rsv_t=782cZVhHu0LhKuwkr029%2Bsc1%2B%2BBZDvR19ANVw8dNJrzqLk7nxSrt&amp;bs=a%20walk%20in%20%E5%A4%A9%E6%B2%B3</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/07/a-walk-in-the-rain/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/">【已解决】NCL input in flex scanner failed错误</a>
+                  <a class="post-link" href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/">【已解决】vi获取系统命令标准流输出</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-02
+                        <i class="fa fa-calendar"></i>2014-11-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -326,7 +324,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -343,7 +341,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -353,24 +351,24 @@
                 </div>
                 <div class="excerpt">
                     
-<p>最近使用ncl总是在最后成图的时候出现input in flex scanner failed这种错误。可以肯定是GUI的问题，<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21254823">查了下资料感觉也无从下手</a>，错误触发原因看起来比高级图形接口更加底层，动弹不得。</p>
-
-<p>这个错误最初是由于把字号改大而出现的，于是我将字号改小，果然没问题……不太懂什么原因</p>
+<p>写一些脚本文件时，可能时常需要用到脚本文件所在目录的路径，而相对路径有的时候不一定可以（比如提交作业的脚本），而需要直接回显绝对路径，另开一个终端或者退出再复制当然可以，但是麻烦，查了下，vi原来有如此神奇的功能，可以直接捕获系统命令（甚至可能是自己写的程序脚本等？没有尝试过）的标准流输出，然后倒入编辑器。比如需要获得当前绝对路径的话，依次键入</p>
+<blockquote><strong>:.!pwd</strong></blockquote>
+<p>即可将当前绝对路径插入编辑点。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/">【已解决】ncl中的cd_calendar</a>
+                  <a class="post-link" href="/2014/11/03/e5-9c-a8wordpress-e6-96-87-e7-ab-a0-e5-8f-8a-e9-a/">【已解决】在Wordpress文章及页面中插入可被执行的php</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-02
+                        <i class="fa fa-calendar"></i>2014-11-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -389,7 +387,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -406,7 +406,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -416,45 +418,26 @@
                 </div>
                 <div class="excerpt">
                     
-<p>处理CFSR的数据，已经是团队其他成员处理过的了，由于她用的是GrADS，清一色的二进制bin+描述文件ctl，不是自描述的nc文件，ncl处理起来没有任何的metadata，所以都要自己指定。数据文件名是YYYYMM的，循环不是很好写，查了一下，<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/cd_calendar.shtml#Examples">cd_calendar</a>这个函数很好用，官网上给的例子是hours since和days since的，实际上用months也是可以的。</p>
-<pre> <strong>16    </strong> time = ispan(0,383,1)
- <strong>17    </strong> time@units  =   "months since 1979-01-01"
- <strong>18</strong>
- <strong>19    </strong> date = cd_calendar(time,-1)</pre>
-<p>得到的date变量返回integer形式的YYYYMM，从79年1月到10年12月，perfect！
-而且使用cd_calendar函数，发现之前做起来很麻烦（要算位置）的合成和截取，都可以很方便实现了。还是教程看得不够细致呀 = =</p>
+<p>Wordpress应该是考虑到安全的原因，文章及页面中的各种脚本，无论是服务器端的还是客户端的，都会把标签转义或者抽掉。虽然安全，但是很不方便管理员，查找了一下发现了这个插件：<strong>Allow PHP in Posts and Pages</strong></p>
 
-<p><span style="color: #808080;"><strong>#Up to 20151216#</strong></span></p>
+<p>用的人很多而且对代码执行还有权限检查，看起来应该没有什么问题，安装后接着就可使用了，不过php的标签做一下改变为方括号[]开闭，并把问号改为/即可。</p>
 
-<p>用cd_calendar可以很好地转换days since之类的时间格式，用于长序列数据的切片读取非常有效。例如下面的例子就可以截取197901-201312的SST片。</p>
-<pre> 29 ymstrt = 197901
- 30 ymlast = 201312 ; 
- 31
- 32 data_path = "../../data/sst/monthly"
- 33 ctrl_file1 = data_path+"sst_HadOIBl_bc_1.9x2.5_1850_2011_c130301.nc"
- 34 ctrl_in1 = addfile (ctrl_file1, "r") 
- 35
- 36 time = ctrl_in1-&gt;time
- 37 yyyymm = cd_calendar(time,-1)
- 38 istrt = ind(yyyymm .eq. ymstrt)
- 39 ilast = ind(yyyymm .eq. ymlast)
- 40 var1 = ctrl_in2-&gt;SST_cpl(istrt:ilast,:,:)</pre>
-<p><span style="color: #808080;"><strong>#Up to 20150107#</strong></span></p>
+<p>加了个<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?page_id=2">编辑者的资源</a>页面，其中的时间戳是php生成，实时更新的。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/03/e5-9c-a8wordpress-e6-96-87-e7-ab-a0-e5-8f-8a-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl中关于Land Sea Mask的问题</a>
+                  <a class="post-link" href="/2014/11/02/paperhub-v0-01-e5-86-85-e6-b5-8b-e5-95-a6/">【paperhub】专文——版本动态与使用者情况--v0.51--内测</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-22
+                        <i class="fa fa-calendar"></i>2014-11-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -473,7 +456,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -490,7 +477,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -500,35 +491,357 @@
                 </div>
                 <div class="excerpt">
                     
-<p>模式中为了防止海陆边界不连续造成积分不稳定，往往会将海温插值到陆地上，画图时当然不希望这些数据出现，求海温区域平均时也不希望出现，所以必须要处理下。
-根据目的是画图还是计算，处理的方式不一样。画图的话，我们希望海陆边缘不要出现<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141122160718.jpg"><img class="alignnone size-full wp-image-337" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141122160718.jpg" alt="QQ图片20141122160718" width="749" height="508" /></a></p>
+<table style="height: 115px;" width="466">
+<tbody>
+<tr>
+<th style="text-align: center;" colspan="3"><strong>版本路线表</strong></th>
+</tr>
+<tr>
+<td><strong>版本号</strong></td>
+<td><strong>更新日期</strong></td>
+<td><strong>重要改动备注</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.10</span></strong></td>
+<td><strong><span style="color: #008000;">20141102</span></strong></td>
+<td><strong>创建</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.11</span></strong></td>
+<td><strong><span style="color: #008000;">20141104</span></strong></td>
+<td><strong>容错性与友好性</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.12</span></strong></td>
+<td><strong><span style="color: #008000;">20141105</span></strong></td>
+<td><strong>友好性</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.13</span></strong></td>
+<td><strong><span style="color: #008000;">20141116</span></strong></td>
+<td><strong>友好性</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.20</span></strong></td>
+<td><strong><span style="color: #008000;">20141117</span></strong></td>
+<td><strong>功能：集中打包下载</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.21</span></strong></td>
+<td><strong><span style="color: #008000;">20141120</span></strong></td>
+<td><strong>容错性与友好性</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.22</span></strong></td>
+<td><strong><span style="color: #008000;">20141123</span></strong></td>
+<td><strong>bug fix</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.30</span></strong></td>
+<td><strong><span style="color: #008000;">20141125</span></strong></td>
+<td><strong>功能：参考文献格式生成</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.31</span></strong></td>
+<td><strong><span style="color: #008000;">20141126</span></strong></td>
+<td><strong>功能扩展</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.32</span></strong></td>
+<td><strong><span style="color: #008000;">20150113</span></strong></td>
+<td><strong>功能扩展</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.40</span></strong></td>
+<td><strong><span style="color: #008000;">20150321</span></strong></td>
+<td><strong>功能扩展:RIS解析</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.41</span></strong></td>
+<td><strong><span style="color: #008000;">20150402</span></strong></td>
+<td><strong>容错性:新文章命名</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.42</span></strong></td>
+<td><strong><span style="color: #008000;">20150403</span></strong></td>
+<td><strong>bug fix: ris结尾解析</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.43</span></strong></td>
+<td><strong><span style="color: #008000;">20150424</span></strong></td>
+<td><strong>bug fix: ris关键词解析</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.44</span></strong></td>
+<td><strong><span style="color: #008000;">20150519</span></strong></td>
+<td><strong>bug fix: Journal short解析
+</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.50</span></strong></td>
+<td><strong><span style="color: #008000;">20150714</span></strong></td>
+<td><strong>重要功能扩展
+</strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">v0.51</span></strong></td>
+<td><strong><span style="color: #008000;">20150728</span></strong></td>
+<td><strong>功能扩展； bug fix: record尸体处理
+</strong></td>
+</tr>
+</tbody>
+</table>
+<p>早就有计划做一个服务器端的文献管理、共享和备份的资料库，由于最近要开始大量阅读文献，再也受不了随意乱放的pdf。终于被逼做这件事情了，花了一整天的时间完成v0.01，距离最终理想目标还太远太远，但v0.01已经能够实现最基本的核心功能，只写了四个php文件加一个期刊简写的ascii文件，数据仓储直接用目录+enw实现，毕竟重要的还是文件名归类和云端备份，这两点都实现了。</p>
 
-<p>比如这样就很好。其实不需对原数据进行操作，只要改变绘图的属性让地图底图后画就可以：</p>
-<pre>res@mpFillDrawOrder="PostDraw"</pre>
-<p>如果要进行计算，就需要mask了，如果是规整的1x1的数据可以用landsea_mask解决</p>
-<pre>load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/<a href="http://www.ncl.ucar.edu/Document/Functions/Shea_util/shea_util.shtml">shea_util.ncl</a>"</pre>
-<pre>a    = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/addfile.shtml"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
-lsdata = a-&gt;LSMASK
-lsm  = <strong>landsea_mask</strong>(lsdata,data&amp;lat,data&amp;lon)
-data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml"><strong>mask</strong></a>(data,lsm.eq.1,False)
-data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml"><strong>mask</strong></a>(data,lsm.eq.3,False)</pre>
-<p>如果数据不是规整的1x1，需要先做一下插值处理，比如包含极点的场变量转换</p>
-<pre> var4    = f2fsh_Wrap(var4s1,(/180,360/))</pre>
+<p>目前实现的功能：</p>
+<ol>
+	<li><strong>上传google生成的endnote导入enw文件</strong></li>
+	<li><strong>解析enw文件结构，生成唯一标志的文件名</strong></li>
+	<li><strong>在enw文件中写入url及label，直接打开导入endnote</strong></li>
+	<li><strong>上传对应的pdf文件</strong></li>
+	<li><strong>采用唯一标志的文件名命名enw文件与pdf文件于仓储目录</strong></li>
+</ol>
+<p>测试：</p>
+
+<p>1.从google获得enw导入文件</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/1.jpg"><img class="alignnone size-full wp-image-277" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/1.jpg" alt="1" width="1256" height="726" /></a></p>
+
+<p>2.上传enw文件到Lab服务器</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/2.png"><img class="alignnone size-full wp-image-278" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/2.png" alt="2" width="476" height="70" /></a></p>
+
+<p>3.solve_enw.php解析enw文件并生成唯一标志的文件名，写url和label信息进入enw文件，并提供重新导出：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/3.jpg"><img class="alignnone size-full wp-image-279" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/3.jpg" alt="3" width="528" height="212" /></a></p>
+
+<p>4.上传对应pdf文件，并命名唯一化，唯一化命名可以在本地同样使用：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/4.png"><img class="alignnone size-full wp-image-280" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/4.png" alt="4" width="786" height="99" /></a></p>
+
+<p>5.enw和pdf命名唯一化后放入仓库：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/6.png"><img class="alignnone size-full wp-image-281" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/6.png" alt="6" width="718" height="243" /></a></p>
+
+<p>6.可以直接通过endnote中的url打开Lab服务器的在线文件：<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/7.jpg"><img class="alignnone size-full wp-image-282" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/7.jpg" alt="7" width="1916" height="960" /></a></p>
+
+<p>毕竟是v0.01，输入没有做合法性检查，美工几乎没有，距离自动通过doi进行解析下载以及引文信息生成还差太远。将来如果要实现类似endnote那种方便的查询增删功能，而且如果要共享涉及到账户用户权限的问题，不用关系数据库是不可能的，目前这种单纯用目录组织数据结构肯定行不通，可是mySQL一窍不通，我还是太水了，有空闲下来再慢慢玩吧，现在功能对我个人基本够用:-)</p>
+
+<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
+
+<p><strong>【注】文件名唯一标志：</strong></p>
+
+<p><span style="color: #00ccff;"><strong>%A1-%J-%V_%N_%Ps-%Pe</strong></span></p>
+
+<p><span style="color: #00ccff;"><strong>第一作者-期刊（简写）-卷号_期号_起始页-终了页</strong></span></p>
+
+<p><span style="color: #00ccff;"><strong>Giannini-Science-2003-302_5647_1027-1030</strong></span></p>
+
+<p><strong><span style="color: #008000;">#Up to 20141103#</span></strong></p>
+
+<p>考虑到工程量不大，决定重新命名版本号：</p>
+<ul>
+	<li><strong>miner mod  (细微更改)</strong> 占用第二位小数，例如友好性提高</li>
+	<li><strong>major mod  (重要更改)</strong> 占据第一位小数，例如功能添加</li>
+	<li><strong>kernel mod (内核更改)</strong> 占据个位数字，例如新技术的引入（mySQL、R等），数据库结构调整，正式发布版本等。</li>
+</ul>
+<p>目前最新版本为</p>
+
+<p><strong><em>v0.11</em></strong></p>
+
+<p>Miner Mods：</p>
+<ol>
+	<li><strong>增加了对仓储的重复性检查，仓储数据列表位于list.dat中，提高容错性与健壮性</strong></li>
+	<li><strong>考虑了对仅有vol编号或者doi编号的文献命名的，提高容错性与健壮性</strong></li>
+	<li><strong>在个别页面增加了主页跳转链接，提高用户友好性</strong></li>
+</ol>
+<p><strong><span style="color: #008000;"> </span></strong></p>
+
+<p>今天花了一个多小时时间，上传了80多篇文献，命名全部归一化，enw全部生成完毕，随时可以导入endnote。比起之前第一次手工整理时的效率，还是提升了很多的。</p>
+
+<p><strong>考虑：加入以日期命名的enw生成目录，以便将来定期整理文献时方便导入endnote。</strong></p>
+
+<p><strong><span style="color: #008000;">#Up to 20141104#</span></strong></p>
+
+<p><strong><em>v0.12</em></strong></p>
+
+<p>今天增加了一些更为客户友好的操作，提高文献归库效率</p>
+
+<p>Miner Mods：</p>
+<ol>
+	<li><strong>增加按日期命名的record目录，方便用户集中下载当日整理过的enw文件导入endnote</strong></li>
+	<li><strong>采用file_get_contents函数直接勾取google的enw文件，免除用户先下载后上传的麻烦</strong></li>
+	<li><strong>采用file_get_contents函数直接勾取pdf文件，免除用户先下载后上传的麻烦</strong></li>
+	<li><strong>在个别页面增加了主页跳转链接，提高用户友好性</strong></li>
+</ol>
+<p>Show一张endnote导入后的截图</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141105192017.jpg"><img class="alignnone size-full wp-image-301" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141105192017.jpg" alt="QQ图片20141105192017" width="1928" height="1056" /></a></p>
+
+<p><strong><span style="color: #008000;">#Up to 20141105#</span></strong></p>
+
+<p><strong><em>v0.13</em></strong></p>
+
+<p>增加更为客户友好的操作，提高文献归库效率</p>
+
+<p>Miner Mod：</p>
+<ol>
+	<li><strong>增加上传文献结束后直接进入文献的链接</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20141116#</span></strong></p>
+
+<p><em><strong>v0.20</strong></em></p>
+
+<p>用了一晚上的时间进行了Major mod，终于可以升级一级版本号啦。增加了文献打包下载的功能，php调用一堆系统函数实现，我真是弱爆了，数据量大的时候估计效率会是个问题，不过还好，个人使用的情况绝不会动辄几百篇文献地down吧，考虑版本公开后不允许批量下载pdf，只可以下载enw。目前计划公开版的版本本号为v1.xx</p>
+
+<p>增加的文件：</p>
+
+<p><em>package.php</em></p>
+
+<p><em>package_down.php</em></p>
+
+<p>打包页面示例：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141117213318.png"><img class="alignnone size-full wp-image-324" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141117213318.png" alt="QQ图片20141117213318" width="491" height="233" /><img class="alignnone size-full wp-image-325" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141117213445.png" alt="QQ图片20141117213445" width="350" height="275" /></a></p>
+
+<p>Major Mod：</p>
+<ol>
+	<li><strong>增加集中打包下载的功能</strong></li>
+</ol>
+<p>（提醒：需要加入文献删除功能了）</p>
+
+<p><strong><span style="color: #008000;">#Up to 20141117#</span></strong></p>
+
+<p><strong><em>v0.21</em></strong></p>
+
+<p>Miner Mods：</p>
+<ol>
+	<li><strong>增加了文献名模糊匹配搜索（子串匹配，大小写不敏感），提高文献归库效率</strong></li>
+	<li><strong>重复提交的文献提供旧文件链接，用户友好。</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20141120#</span></strong></p>
+
+<p><strong><em>v0.22</em></strong></p>
+
+<p>Miner Mods：</p>
+<ol>
+	<li><strong>修正集中打包下载buffer bug</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20141123#</span></strong></p>
+
+<p><strong><em>v0.30</em></strong></p>
+
+<p>晚上画图，ncl出图太慢，间隙用来给paperhub加入文献格式生成的功能，加着加着就忘了画图了，索性今天搞定这个major mod。目前仅仅对 paper to be submitted to Climate Dynamics进行了设置。引入了1页php和一个针对CD的期刊名缩略库short_ref_cd.dat。每增加一个submit的期刊就要引入一个缩略库，目前在没有办法将数据封装到json或者用关系数据库的情况下只能这样，当然也只能作为个权宜之计，以后submit的文章多了（如果能办到的话～），一堆文件看着都头疼……寒假如果可以的话，学学R，把组织格式shift到json上。</p>
+
+<p>Major Mods：</p>
+<ol>
+	<li><strong>加入针对投稿期刊的参考文献样式自动生成，目前仅针对Climate Dynamics，考虑到中文名缩写问题，生成first name缩写与不缩写两种形式，正式写入文章时需要调整下
+</strong></li>
+</ol>
+<p>范例图</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141125211320.png"><img class="alignnone size-full wp-image-341" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141125211320.png" alt="QQ图片20141125211320" width="498" height="245" /></a>index.php输入生成的唯一标志符，然后通过目录查询找到文件，解析enw生成参考文献格式</p>
+<pre><code>Chou Chia, Neelin J David (2004) Mechanisms of global warming impacts on regional tropical precipitation*. J Clim 17: 2688-2701.
+Chou C, Neelin JD (2004) Mechanisms of global warming impacts on regional tropical precipitation*. J Clim 17: 2688-2701. </code></pre>
+<p><strong><span style="color: #008000;">#Up to 20141125#</span></strong></p>
+
+<p><strong><em>v0.31</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>加入针对JC的参考文献样式自动生成</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20141126#</span></strong></p>
+
+<p><strong><em>v0.32</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>加入文献本地pdf附件的链接</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150113#</span></strong></p>
+
+<p><strong><em>v0.40</em></strong></p>
+
+<p>Major Mods：</p>
+<ol>
+	<li><strong>加入对RIS格式记录的解析与支持，重写了solve_enw.php核心函数，加入对RIS标志字段识别与解析，默认存储格式取决于输入格式（RIS--&gt;RIS,enw--&gt;enw）</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150321#</span></strong></p>
+
+<p><strong><em>v0.41</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>加入对online但未定vol/number/page文章的命名考虑，规则：
+</strong></li>
+</ol>
+<p>$author, $journal, strrev($year0)首字母ASCII码决定。范例：</p>
+<pre>Huang-GCB-2015-fv72_fn71_fp53.pdf</pre>
+<p><strong><span style="color: #008000;">#Up to 20150402#</span></strong></p>
+
+<p><strong><em>v0.42</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>BUG FIX: 修正了对RIS结尾标志符的判断问题</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150403#</span></strong></p>
+
+<p><strong><em>v0.43</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>BUG FIX: 修正了对RIS某类期刊关键词标志符的判断问题</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150426#</span></strong></p>
+
+<p><strong><em>v0.44</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>BUG FIX: 修正了对Nature子刊ris中对short term解析的问题
+</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150519#</span></strong></p>
+
+<p><strong><em>v0.50</em></strong></p>
+
+<p>要写文章，paperhub要更舒服才有动力！两天时间做了几处大改动。</p>
+
+<p>Major Mods：</p>
+<ol>
+	<li><strong>增加了对ris的参考文献格式生成</strong></li>
+	<li><strong>增加了对多行记录的参考文件格式生成</strong></li>
+	<li><strong>修改打包算法，按修改时间排序，直接在warehouse中选择操作，减少了record额外记录空间，并且能够精确定位文章</strong></li>
+	<li><strong>增加warehouse下僵尸记录检测删除，每次打开index.php自动检测</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150714#</span></strong></p>
+
+<p><strong><em>v0.51</em></strong></p>
+
+<p>Minor Mods：</p>
+<ol>
+	<li><strong>BUG FIX: 修正了对upload_page.php 中对record尸体目录的操作
+</strong></li>
+	<li><strong>功能扩展：集中打包页面更改为管理页面，增加记录删除功能，列表增加&lt;a&gt;标签指向warehouse文献pdf</strong></li>
+</ol>
+<p><strong><span style="color: #008000;">#Up to 20150519#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/02/paperhub-v0-01-e5-86-85-e6-b5-8b-e5-95-a6/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/">【已解决】Adobe Acrobat X安装</a>
+                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91wordp/">【已解决】Wordpress按修改顺序排列文章</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-17
+                        <i class="fa fa-calendar"></i>2014-11-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -547,7 +860,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -564,7 +877,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -574,22 +887,33 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                 </div>
                 <div class="excerpt">
                     
-<p>Acrobat X安装后出现Adobe Application Manager损坏的问题，安装包下有个amtlib.dll的动态链接库，复制到安装路径的根目录下即可解决问题。至此，Acrobat+Illustrator已经占据paper reading &amp; producing阵地，reading再有paperhub和endnote的助阵，终于把看文献的前期工作准备好了嗯～接下来……T_T</p>
+<p>确实按修改时间排序才是比较符合一般人浏览习惯的，<span style="color: #ff6600;"><strong>（原来除了我之外还有其他读者呀，好感动，不介意就冒个泡呗，留个nickname+邮箱就好，嘿嘿）</strong></span>查了下，改index.php下的loop中的一个属性即可，加在while主循环之前，主循环后再来个<span class="pln">wp_reset_query</span><span class="pun">();即可。粗体标注更改属性：</span></p>
+<pre class="wp-code-highlight prettyprint prettyprinted"><span class="pln">$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$args </span><span class="pun">=</span><span class="pln"> array</span><span class="pun">(</span><strong><span class="str">'orderby'</span><span class="pun">=&gt;</span><span class="pln">modified</span></strong><span class="pun"><strong>,</strong>
+</span><span class="str">              'showposts'</span><span class="pun">=&gt;</span><span class="lit">10</span><span class="pun">,
+              </span><span class="str">'paged'</span><span class="pun">=&gt;</span><span class="pln"> $paged
+	      </span><span class="pun">);</span><span class="pln">
+query_posts</span><span class="pun">(</span><span class="pln">$args</span><span class="pun">);</span></pre>
+<p> </p>
+
+<p>【参考资料】</p>
+
+<p>http://i7298.com/archives/55</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91wordp/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/">【已解决】CAM_F05 Resolution Out of Memory</a>
+                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/">【已解决】利用php函数强制下载链接（即不允许浏览器打开文本文件）</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-08
+                        <i class="fa fa-calendar"></i>2014-11-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -608,11 +932,13 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -629,11 +955,13 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -643,36 +971,20 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                 </div>
                 <div class="excerpt">
                     
-<p>之前在天河二号（包括学校超算集群）测试的F05的CAM，都没有出现什么问题，最近在天河二号上重新跑CAM5 F05，却出现了out of memory的错误，重新配置了CAM4，还是一样的错误：</p>
-<blockquote>Fatal error in PMPI_Alltoallv: Other MPI error, error stack:
-PMPI_Alltoallv(540)....................: MPI_Alltoallv(sbuf=0x806f43e0, scnts=0xe6c75e0, sdispls=0xe764390, dtype=0x4c000829, rbuf=0x805f7650, rcnts=0xe765ba0, rdispls=0xe7673b0, dtype=0x4c000829, comm=0x84000006) failed
-MPIR_Alltoallv_impl(378)...............:
-MPIR_Alltoallv(341)....................:
-MPIR_Alltoallv_intra(192)..............:
-MPIC_Waitall(720)......................:
-MPIR_Waitall_impl(163).................:
-MPIDI_CH3I_Progress(363)...............:
-MPID_nem_mpich_blocking_recv(906)......:
-MPID_nem_glex_poll(234)................:
-MPIDI_nem_glex_ER_progress_PUT(74).....:
-MPIDI_nem_glex_ER_recv_progress(378)...:
-MPID_nem_handle_pkt(635)...............:
-MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receive for message data (MPIDI_CH3_PKT_EAGER_SEND)</blockquote>
-<p>重新配置PE层，增多节点数，调整MPIBUFFER，都没用。目前搁置。forum上有贴子：</p>
+<p>今天做paperhub v0.01的时候，生成的enw文件会自动在浏览器中打开，而我们希望能够采用下载的形式在endnote中打开。百度了下，解决方法原来可以直接用php去修改html请求头:</p>
+<blockquote>$filename = '/path/'.$_GET['file'].'.txt'; //文件路径
+header("Content-Type: application/force-download");
+header("Content-Disposition: attachment; filename=".basename($filename));
+readfile($filename);</blockquote>
+<p>最初写在了solve_enw.php中，结果是整个页面的html流都返回了，原来是这样。于是又建立了一个down_enw.php文件，不输出html流，可以正常下载enw文件。</p>
 
-<p>https://bb.cgd.ucar.edu/node/1001941</p>
+<p>参考资料：</p>
 
-<p>eaton提到检查内存leak can be a very challenging exercise.</p>
-
-<p><strong>#Up to 20141108#</strong></p>
-
-<p>俊文寒假前将model统一升级到1.2.2后似乎没有这个问题了。不过我也退出折腾高分辨率啦，还是看paper学英语重要～嘿嘿</p>
-
-<p><strong>#Up to 20150519#</strong></p>
+<p>http://www.jb51.net/article/26907.htm</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -687,10 +999,10 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page30" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">31/43</span>
+          <span class="page_number ">31/41</span>
           
             <a href="/page32" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -698,6 +1010,1237 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
     <div class="right">
         <div class="wrap">
     
+            <!--Archives-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar"></i>
+                    Archives
+                </div>
+                <ul class="content-ul">
+                    
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2017">2017 (25)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2016">2016 (42)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2015">2015 (64)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2014">2014 (71)</a></li>
+                            
+                          
+                        
+                </ul>
+            </div>
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -718,7 +2261,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
                     
                       
                       
@@ -726,6 +2269,20 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wiki" style="font-size: 9pt; color: #999;">wiki</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9.5pt; color: #999;">wordpress</a>
                     
                       
                       
@@ -746,6 +2303,13 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
+                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#Linux" style="font-size: 18pt; color: #000;">Linux</a>
                     
                       
@@ -753,7 +2317,14 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                      <a href="/tag/#vim" style="font-size: 9pt; color: #999;">vim</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Shell" style="font-size: 9pt; color: #999;">Shell</a>
                     
                       
                       
@@ -803,13 +2374,6 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       <a href="/tag/#Project" style="font-size: 10pt; color: #888;">Project</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Self-treat" style="font-size: 9pt; color: #999;">Self-treat</a>
                     
                       
                       
@@ -992,13 +2556,6 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       <a href="/tag/#github" style="font-size: 9pt; color: #999;">github</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#blog" style="font-size: 10.5pt; color: #777;">blog</a>
                     
                       
                       
@@ -1292,19 +2849,11 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
 
- 
             <!--Principles-->
             <div class="side">
                 <div>
@@ -1315,7 +2864,8 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                     <li><small id="content-principle"></small></li>
                 </ul>
             </div> 
-            <!--Featured Articles-->
+            
+             <!--Featured Articles-->
             <div class="side">
                 <div>
                     <i class="fa fa-key" aria-hidden="true"></i>
@@ -1327,7 +2877,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
             </div>
 
 
-            
+           
             
             <!--Recent Posts-->
             <div class="side">
@@ -1369,11 +2919,11 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#Blog&amp;CMS" class="categories-list-item" cate="Blog&amp;CMS">
+                        <a href="/category/#blog" class="categories-list-item" cate="blog">
                             <span class="name">
-                                Blog&amp;CMS
+                                blog
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">27</span>
                         </a>
                     </li>
                     
@@ -1482,15 +3032,6 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                                 Project
                             </span>
                             <span class="badge">7</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Self-treat" class="categories-list-item" cate="Self-treat">
-                            <span class="name">
-                                Self-treat
-                            </span>
-                            <span class="badge">1</span>
                         </a>
                     </li>
                     
@@ -1702,9 +3243,9 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                     </li>
                     
                     <li>
-                        <a href="/category/#network" class="categories-list-item" cate="network">
+                        <a href="/category/#internet" class="categories-list-item" cate="internet">
                             <span class="name">
-                                network
+                                internet
                             </span>
                             <span class="badge">4</span>
                         </a>

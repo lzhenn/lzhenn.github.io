@@ -219,10 +219,6 @@
                 
                     
                 
-                    
-                
-                    
-                
             </ul>
         </nav>
     </div>
@@ -238,11 +234,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91wordp/">【已解决】Wordpress按修改顺序排列文章</a>
+                  <a class="post-link" href="/2014/10/23/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM进行branch run</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-02
+                        <i class="fa fa-calendar"></i>2014-10-23
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -261,7 +257,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Blog&amp;CMS" title="Category: Blog&amp;CMS" rel="category">Blog&amp;CMS</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -278,7 +274,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Blog&amp;CMS" title="Tag: Blog&amp;CMS" rel="tag">Blog&amp;CMS</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -288,33 +284,249 @@
                 </div>
                 <div class="excerpt">
                     
-<p>确实按修改时间排序才是比较符合一般人浏览习惯的，<span style="color: #ff6600;"><strong>（原来除了我之外还有其他读者呀，好感动，不介意就冒个泡呗，留个nickname+邮箱就好，嘿嘿）</strong></span>查了下，改index.php下的loop中的一个属性即可，加在while主循环之前，主循环后再来个<span class="pln">wp_reset_query</span><span class="pun">();即可。粗体标注更改属性：</span></p>
-<pre class="wp-code-highlight prettyprint prettyprinted"><span class="pln">$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$args </span><span class="pun">=</span><span class="pln"> array</span><span class="pun">(</span><strong><span class="str">'orderby'</span><span class="pun">=&gt;</span><span class="pln">modified</span></strong><span class="pun"><strong>,</strong>
-</span><span class="str">              'showposts'</span><span class="pun">=&gt;</span><span class="lit">10</span><span class="pun">,
-              </span><span class="str">'paged'</span><span class="pun">=&gt;</span><span class="pln"> $paged
-	      </span><span class="pun">);</span><span class="pln">
-query_posts</span><span class="pun">(</span><span class="pln">$args</span><span class="pun">);</span></pre>
+<p>coupled spin-up run终于快接近尾声了，可以开始进行Heat试验的branch run了。UG上给出了branch run的设置方法，不过as it always，依然洗练，依然是yellowstone+HPSS上的配置，坑爹啊……照着来了一遍，问题记录在这里：</p>
+
+<p>create_newcase，不要setup。</p>
+
+<p><strong><span style="color: #ff0000;">1.</span></strong></p>
+<blockquote>./xmlchange RUN_TYPE=branch
+
+./xmlchange RUN_REFCASE=B_CON
+
+./xmlchange RUN_STARTDATE=0150-01-01
+
+./xmlchange RUN_REFDATE=0150-01-01</blockquote>
+<p><strong><span style="color: #ff0000;">2.拷贝user_nl_*文件</span></strong></p>
+
+<p><strong><span style="color: #ff0000;">3.拷贝SourceMods文件</span></strong></p>
+
+<p><strong><span style="color: #ff0000;">4.cesm_setup</span></strong>，出错：</p>
+<blockquote>ERROR(Build::Namelist::_parse_next): expect a equal '=' sign instead got: .rtm.r.0150-01-01-00000.nc
+ERROR: rtm.buildnml.csh failed
+ERROR: /users/yangsong3/L_Zealot/couple/B_brch/preview_namelists failed: 25344</blockquote>
+<p>又是rtm出问题，goole之</p>
+
+<p>https://bb.cgd.ucar.edu/cesm-120-rtmbuildnmlcsh-branch-run</p>
+
+<p>表示居然是一个bug！按照帖子更改./Buildconf/rtm.buildnml.csh 58与62行：</p>
+<blockquote>set nrevsn_rtm = "nrevsn_rtm='${RUN_REFCASE}.rtm.r.${RUN_REFDATE}-${RUN_REFTOD}.nc'"</blockquote>
+<p>可以通过setup。</p>
+
+<p><span style="color: #ff0000;"><strong>4.编译</strong></span></p>
+
+<p><span style="color: #ff0000;"><strong>5.拷贝restart与ini文件 cp …./<em>0150</em> ./</strong></span></p>
+
+<p><span style="color: #ff0000;"><strong>6.提交作业</strong></span>，第一次错误：</p>
+
+<p>csh运行中出现如下提示：</p>
+<blockquote>File status unknown: B_CON.clm2.r.0150-01-01-00000.nc
+File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
+<p>出现错误，找不到rpointer文件</p>
+<blockquote>forrtl: severe (29): file not found, unit 98, file /users/yangsong3/L_Zealot/couple/B_brch/exe/rpointer.drv</blockquote>
+<p>拷贝 rpointer* 到目录下，并更改restart日期，重新提交作业。</p>
+
+<p>居然可以运行，逐日输出暂时没有发现问题！</p>
+
+<p><strong>#Up to 20141030#</strong></p>
+
+<p>cesm1.2.1已经修正cesm_setup中的bug</p>
+
+<p><strong>#Up to 20150106#</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/23/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/19/e6-90-ac-e7-a0-96-e6-9c-9f/">搬砖期……</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-19
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Living&amp;thinking" title="Category: Living&amp;thinking" rel="category">Living&amp;thinking</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Living&amp;thinking" title="Tag: Living&amp;thinking" rel="tag">Living&amp;thinking</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>还有10天就到月底了，这个月有好几个deadline，估计是没法全部完成了，spin-up了半个多月终于快完了，月底前必须要稀里哗啦把结果都搞出来发给何老师，paper的deadline指定是完成不了了，一张图都没有pannel出来，囧。还要上课，还要课堂展示，还要组会还要报告还要培训～Anyway，事情虽多，但是没有感到厌烦，内心还是很有斗志很有激情的，这种状态很好，最后十天加大工作强度提高效率，继续保持！</p>
+
+<p>heating试验结果发给何老师后将是一个段落，确定paper的figures后也是一个段落。一步步来，自顶向下，分而治之，问题终归能够解决。最近真的不再打怵改源码的事情了，接下来把技术巩固好，虽然在搬砖期，图书馆不能少去，英语和运动和文献涉猎要坚持，更不能忽略感情和保持稳定良好的心态，加油！</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/19/e6-90-ac-e7-a0-96-e6-9c-9f/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-ef-bc-8c-e8-b/">【已解决，转】vi多文件编辑</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-19
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>转自：http://www.cnblogs.com/end/archive/2012/06/12/2546757.html</p>
+
+<p>1、在同一窗口中打开多个文件：</p>
+
+<p>vi file1 file2 file3
+:n 切换到下一个文件 (n=next)
+:N 切换到上一个文件
+2、在不同窗口中打开多个文件：</p>
+
+<p>如果已经打开一个了一个文件，
+则在vi的命令输入状态下输入 :sp 另外一个文件的路径及文件名，
+如此就可以在一个窗口打开多个文件了。</p>
+
+<p>或者用 vi -o file1 file2 file3….用分割屏幕窗口方式同时打开多个文件。
+可以使用 ctrl + 两次按 w 或者ctrl + w 然后按上下键在上下窗口间切换。
+2.窗口分割实现编辑多文件
+*先使用vi打开一个文件，例如vi actinia_proenrule.sh
+*分割窗口打开另外的文件
+命令行模式下输入 sp 另外一个文件 就可以水平分割继续打开第二个文件，如果想纵向分割，可以使用vsp 文件名
+注：sp=split，vsp=vsplit. 上面的写法是vi支持的简略写法，v实际就是vertical，从中我们可以看出改命令的含义，另外vi不仅仅支持两个文件，还支持更多个文件同时在一个 大的窗口中显示编辑，同时还支持同时打开的两个文件是同一个文件。
+*窗口切换
+可以使用 ctrl +两次按 w，这样就可以在各个文件中切换</p>
+
+<p>之前觉得vi的多文档编辑用着很不方便，现在接触了几个，用过了MiniBufExplorer，发现看着不是很舒服。还是使用ｌｓ比较好看一些。</p>
+
+<p>:ls 展示全部的打开文档</p>
+
+<p>:xn 切换到向下的第x个文档</p>
+
+<p>n ctrl+6 ： 切换到第n个buffer</p>
+
+<p>ctrl+6 或 :e# 回到前一个编辑文件</p>
+
+<p>分屏</p>
+
+<p>:new xxx</p>
+
+<p>ctrl+w s 对当前文档内容分屏显示</p>
+
+<p>ctrl+w q 关闭所处分屏</p>
+
+<p>ctrl+w o 仅显示当前分屏内容</p>
+
+<p>ctrl+w j k 上下选择分屏</p>
+
+<p>个人觉得最值得用的命令就是ctrl+w w 快速在分屏的两个屏幕中切换</p>
+
 <p> </p>
 
-<p>【参考资料】</p>
+<p>下面写的还没用过~看了大家的分享觉得这几个还不错</p>
 
-<p>http://i7298.com/archives/55</p>
+<p>:n1,n2 co n3: 将n1行到n2行之间的内容拷贝到第n3行下
+:n1,n2 m n3:将n1行到n2行之间的内容移至到第n3行下
+:n1,n2 d: 将 n1行到n2行之间的内容删除
+:n1,n2 w!command: 将文件中n1行至n2行的内容作为command的输入并执行之，
+若不指定n1，n2，则表示将整个文件内容作为command的输入
+方式2的优点在可以直接使用nyy和pp命令在各个窗口的文件之间进行拷贝和粘贴，操作比较方便。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91wordp/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-ef-bc-8c-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/">【已解决】利用php函数强制下载链接（即不允许浏览器打开文本文件）</a>
+                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-02
+                        <i class="fa fa-calendar"></i>2014-10-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -333,239 +545,9 @@ query_posts</span><span class="pun">(</span><span class="pln">$args</span><span 
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
     
-        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
-    
-        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
-    
-        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天做paperhub v0.01的时候，生成的enw文件会自动在浏览器中打开，而我们希望能够采用下载的形式在endnote中打开。百度了下，解决方法原来可以直接用php去修改html请求头:</p>
-<blockquote>$filename = '/path/'.$_GET['file'].'.txt'; //文件路径
-header("Content-Type: application/force-download");
-header("Content-Disposition: attachment; filename=".basename($filename));
-readfile($filename);</blockquote>
-<p>最初写在了solve_enw.php中，结果是整个页面的html流都返回了，原来是这样。于是又建立了一个down_enw.php文件，不输出html流，可以正常下载enw文件。</p>
-
-<p>参考资料：</p>
-
-<p>http://www.jb51.net/article/26907.htm</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/">【已解决】restart改变CAM输出变量场</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>CESM模式运行过程中如果想要更改CAM的输出频率或者输出的变量场，单纯的restart是不行的，因为ug上说了，restart的话，pop和ice model会再次读取namelist，但是atm模块不理的，ug上给了一个巨坑爹的解决办法，先给case换个名字，再建个case做branch run。这不是扯淡么。</p>
-
-<p>不信邪，试了下这个办法是可以的，前提是之前run的时候一定要把restart文件记录下来。</p>
-
-<p>该env_run.xml几个变量，把run的类型改成branch，时间点指定到restart file上，改rpointer，改rtm的bug，其实跟branch run的方式一样，只不过不用重新建立case而已。</p>
-
-<p>当然不要忘了改user_nl_xxx</p>
-
-<p>done！</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM rebuild restart后不认SourceMods及namelist内容</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天下午画CAM5 Heat试验的图，发现不能通过显著性检验，非常令人费解。毕竟已经重复跑过多遍了，再次重来，而且还是时空代价这么高的CAM5，终归让人沮丧。检查强迫输入文件没问题，fortran源代码中inject的读写函数也没问题，想到最初检查03-09年的数据通过显著性是没有问题的，于是检查10年之后的输出……完全不能通过。</p>
-
-<p>返回查找log文件，发现25日那天我为了增快运行速度，更改pe_layers之后rebuild重启了一次，貌似rebuild过程中完全无视了我SourceMods中的内容！restart之后的结果转的其实是control，完全没有inject heating！简直无语了，为什么会这样。现在只能重新编译，在10年处restart试试看了。非常郁闷。</p>
-
-<p>突然想到couple的试验还没有检查，暗暗祈祷画了个响应场，傻眼了，发现all value=0，以为脚本出错，查错时发现最不愿看到的事情还是发生了，所有的branch run的结果和原始的control结果一模一样……OMG！又不认SourceMods！实在是非常不能够理解。测试在修改的代码里加入错误，运行build程序时确乎是能够读到错误的，说明是可以读到SourceMods的，非常的奇怪，莫非与cesm_setup被clean后或者第一次build的时候是不去读SourceMods的？为了做测试，更改了pe layers，clean了setup，在代码里故意注入iulog文件句柄输出，重新build。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141029#</span></strong></p>
-
-<p>今天来查看结果，还是不行。不知道为什么，即便编译的时候会去检查Sourcemods的错误以及后来测试加入iulog也是可以输出的，但就是不会去执行。</p>
-
-<p>今天中午回来索性直接查个遍。calday过1直接log输出heatf的所有数据。编译成功运行，查看输出——全部都是0！这种情况最大的可能当然是没有读取heatf的强迫文件。分明记得heatf的强迫在physics initial这个subroutine里呀，难道restart的时候就不会去做initial么？向上翻了翻代码，查了下restart的关键词，发现惊天地泣鬼神的三行语句：</p>
-<blockquote>750 if (nsrest .eq. 0) then
-751 call phys_inidat(cam_out, pbuf2d)
-752 end if</blockquote>
-<p>反查了下nsrest是什么，在control目录下，cam_control_mod这个module写的那叫一个清楚啊</p>
-<blockquote>11 integer :: nsrest ! run type flag (0=initial, 1=restart-continuation, 3=restart-branch.)</blockquote>
-<p>而我那可怜的读取外强迫文件的语句，被我扔在了phys_inidat这个subroutine下读取，OMG！原来你丫的inidat只在startup的case下采去读，我restart不出问题才怪，<span style="color: #ff0000;"><strong>物理包真正的initial在phys_init这个soubroutine里！</strong></span>找到这个问题，重新编译测试，没想到提交任务的时候c73节点down掉了，真是那个叫什么来着，屋漏偏逢连阴雨，哪壶不开提哪壶么……</p>
-
-<p>好在找到问题了，couple的问题也是一样的，当然也能迎刃而解。经测试，确实是这个问题造成的。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/27/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91coupl/">【更新中】couple Branch Run出现找不到目录的奇怪问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-27
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>&nbsp;
     
         <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
     
@@ -584,7 +566,9 @@ readfile($filename);</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>&nbsp;
     
         <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
     
@@ -596,30 +580,67 @@ readfile($filename);</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>spin-up了200年，看了下TS的变化，其实三十年就已经基本平衡了。150年以后的部分可以当cp_con来用肯定没问题。因为晓明姐需要地表比湿变量，所以打算从150年开始跑个restart。奇葩的是，改了restart文件到150年，跑得非常之慢，同样配置，之前12分钟左右出结果，现在要三十分钟。跑了一两年断掉了，出错</p>
-<blockquote>forrtl: severe (121): Cannot access current working directory for unit 65 （UNKNOWN）</blockquote>
-<p>某个未知文件找不到，莫名其妙。重新提交任务还是一样的错误。索性依葫芦画瓢来个branch run。提交上去貌似没问题，但是同样运行非常慢，也运行了两年挂掉了。提示错误一致，发生位置貌似在restart相关的源代码处。莫非生成restart文件的问题，断掉每年生成一个restart文件，并且不再用branchrun，开CONTINUE RUN，貌似现在可以跑。</p>
+<p>ncl写二进制文件非常方便，setfileoption+fbinrecwrite语句即可。处理模式输出的加热数据测试了一下，非常迅速搞定。随后需要用到fortran代码来读写二进制文件，没想到却遇到大问题。</p>
 
-<p><strong><span style="color: #008000;">#Up to 20141027#</span></strong></p>
+<p>ncl下采用fbinrecwrite写入的文件为fortran下的sequential读取方式（貌似这个才是符合ieee标准的），按照<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/fbinrecwrite.shtml">官网指示</a>，代码很容易编译通过，但是执行出错。ifort编译执行错误结果：</p>
+<blockquote>forrtl: severe (98): cannot allocate memory for the file buffer - out of memory, unit 100, file /users/yangsong3/L_Zealot/F/f90/CAM4_PTENDT_DIFF_mon.dat</blockquote>
+<p>采用gfortran编译，同样执行出错：</p>
+<blockquote>At line 12 of file read_heat_diff.f90 (unit = 100, file = '../data/model_post/CAM4_PTENDT_DIFF_mon.dat')
+Fortran runtime error: End of file</blockquote>
+<p>第一次在linux平台下编译自己写的fortran代码，多少还是有些心虚。ifort表示内存不足，gfortran表示读到文件末尾，有些莫名其妙，检查路径文件名，文件大小，读取方式，貌似都没问题，折腾许久没有结果。</p>
 
-<p>这几天发现这类错误非常随机，估计是IO问题造成，也有可能是NetCDF版本的问题（ug中提到的bug）。回来可以测试下更高版本的NetCDF。</p>
+<p>问题只能回溯到ncl那么简单的二进制写入上，fbinrecwrite看上去没什么问题，setfileoption中的几个选项值得怀疑，查了下BigEndian的问题，是这样描述的：</p>
+<blockquote>其实big endian是指低地址存放最高有效字节（MSB），而little endian则是低地址存放最低有效字节（LSB）。
 
-<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
+用文字说明可能比较抽象，下面用图像加以说明。比如数字0x12345678在两种不同字节序CPU中的存储顺序如下所示：
+
+<strong>Big Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   12  |   34  |   56  |   78   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+<strong>Little Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   78|   56  |   34  |   12   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</blockquote>
+<p>虽然看上去出错信息并不是这么指向的，但还是要试一试，查了下fortran在字节序处理的问题，果然，一行open语句赫然入眼：</p>
+
+<p>open(…,<strong><em>convert=”big_endian”</em></strong>)</p>
+
+<p>加入测试，我擦嘞……居然可以了，果然是字节序的问题。原来fortran默认的是非人的little endian，好吧……关键是运行出错给出的那些错误信息，完全无厘头，真是对编译器失望了。另外SGI编译器默认为BigEndian。</p>
+
+<p>另外fortran读ncl写出的多维二进制数据的时候，注意维数方向是相反的哦！如ncl数组（33，44），fortran（44，33）</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/sunshine1314/article/details/2309655 BigEndian和LittleEndian</p>
+
+<p>http://bbs.lasg.ac.cn/?action-viewthread-tid-13303</p>
+
+<p>http://www.360doc.com/content/11/0216/10/2609140_93438395.shtml</p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/27/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91coupl/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/26/google-hosts/">google hosts</a>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-26
+                        <i class="fa fa-calendar"></i>2014-10-18
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -638,7 +659,7 @@ readfile($filename);</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -655,7 +676,7 @@ readfile($filename);</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -665,17 +686,93 @@ readfile($filename);</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>hosts文件是个很好的东西哦，还可以屏蔽激活神马的烦心事</p>
+<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
+<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
+set shiftwidth=4
 
-<p>C:\Windows\System32\drivers\etc</p>
+set expandtab</blockquote>
+<p> </p>
 
-<p>实时更新：</p>
+<p>对于已经存在的文件：</p>
+<blockquote><strong>TAB替换为空格：</strong>
+:set ts=4
+:set expandtab
+:%retab!</blockquote>
+<p>多行缩进在命令行模式下</p>
+<blockquote>n&gt;</blockquote>
+<p>向右缩进n行，左用&lt;代替</p>
 
-<p>http://www.360kb.com/kb/2_122.html</p>
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
+
+<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/26/google-hosts/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/">【已解决】putty在vim下使用小键盘</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-18
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>putty默认在vim下小键盘是不启动的，启动方式：
+选项Terminal-&gt;Features里，找到Disable application keypad mode，选上</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -690,10 +787,10 @@ readfile($filename);</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page32" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">33/43</span>
+          <span class="page_number ">33/41</span>
           
             <a href="/page34" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -701,6 +798,1237 @@ readfile($filename);</blockquote>
     <div class="right">
         <div class="wrap">
     
+            <!--Archives-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar"></i>
+                    Archives
+                </div>
+                <ul class="content-ul">
+                    
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2017">2017 (25)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2016">2016 (42)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2015">2015 (64)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2014">2014 (71)</a></li>
+                            
+                          
+                        
+                </ul>
+            </div>
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -721,7 +2049,7 @@ readfile($filename);</blockquote>
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
                     
                       
                       
@@ -729,6 +2057,20 @@ readfile($filename);</blockquote>
                       
                       
                       <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wiki" style="font-size: 9pt; color: #999;">wiki</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9.5pt; color: #999;">wordpress</a>
                     
                       
                       
@@ -749,6 +2091,13 @@ readfile($filename);</blockquote>
                       
                       
                       
+                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#Linux" style="font-size: 18pt; color: #000;">Linux</a>
                     
                       
@@ -756,7 +2105,14 @@ readfile($filename);</blockquote>
                       
                       
                       
-                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                      <a href="/tag/#vim" style="font-size: 9pt; color: #999;">vim</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Shell" style="font-size: 9pt; color: #999;">Shell</a>
                     
                       
                       
@@ -806,13 +2162,6 @@ readfile($filename);</blockquote>
                       
                       
                       <a href="/tag/#Project" style="font-size: 10pt; color: #888;">Project</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Self-treat" style="font-size: 9pt; color: #999;">Self-treat</a>
                     
                       
                       
@@ -995,13 +2344,6 @@ readfile($filename);</blockquote>
                       
                       
                       <a href="/tag/#github" style="font-size: 9pt; color: #999;">github</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#blog" style="font-size: 10.5pt; color: #777;">blog</a>
                     
                       
                       
@@ -1295,19 +2637,11 @@ readfile($filename);</blockquote>
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
 
- 
             <!--Principles-->
             <div class="side">
                 <div>
@@ -1318,7 +2652,8 @@ readfile($filename);</blockquote>
                     <li><small id="content-principle"></small></li>
                 </ul>
             </div> 
-            <!--Featured Articles-->
+            
+             <!--Featured Articles-->
             <div class="side">
                 <div>
                     <i class="fa fa-key" aria-hidden="true"></i>
@@ -1330,7 +2665,7 @@ readfile($filename);</blockquote>
             </div>
 
 
-            
+           
             
             <!--Recent Posts-->
             <div class="side">
@@ -1372,11 +2707,11 @@ readfile($filename);</blockquote>
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#Blog&amp;CMS" class="categories-list-item" cate="Blog&amp;CMS">
+                        <a href="/category/#blog" class="categories-list-item" cate="blog">
                             <span class="name">
-                                Blog&amp;CMS
+                                blog
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">27</span>
                         </a>
                     </li>
                     
@@ -1485,15 +2820,6 @@ readfile($filename);</blockquote>
                                 Project
                             </span>
                             <span class="badge">7</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Self-treat" class="categories-list-item" cate="Self-treat">
-                            <span class="name">
-                                Self-treat
-                            </span>
-                            <span class="badge">1</span>
                         </a>
                     </li>
                     
@@ -1705,9 +3031,9 @@ readfile($filename);</blockquote>
                     </li>
                     
                     <li>
-                        <a href="/category/#network" class="categories-list-item" cate="network">
+                        <a href="/category/#internet" class="categories-list-item" cate="internet">
                             <span class="name">
-                                network
+                                internet
                             </span>
                             <span class="badge">4</span>
                         </a>

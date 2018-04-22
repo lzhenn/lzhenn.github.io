@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "给博客增加了一个随机展示内容的功能"
-categories: network javascript
+categories: internet javascript
 tags:  json ajax jekyll javascript blog
 author: LZN
 ---

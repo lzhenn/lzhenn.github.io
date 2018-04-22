@@ -69,6 +69,25 @@ layout: default
     <div class="right">
         <div class="wrap">
     
+            <!--Archives-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar"></i>
+                    Archives
+                </div>
+                <ul class="content-ul">
+                    {% assign counter = 0 %}
+                        {% for post in site.posts %}
+                          {% assign thisyear = post.date | date: "%Y" %}
+                          {% assign prevyear = post.previous.date | date: "%Y" %}
+                          {% assign counter = counter | plus: 1 %}
+                          {% if thisyear != prevyear %}
+                            <li><a data-scroll href="archive/#y{{ post.date | date: '%Y' }}">{{ thisyear }} ({{ counter }})</a></li>
+                            {% assign counter = 0 %}
+                          {% endif %}
+                        {% endfor %}
+                </ul>
+            </div>
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -114,7 +133,6 @@ layout: default
                 </div>
             </div>
 
- 
             <!--Principles-->
             <div class="side">
                 <div>
@@ -125,7 +143,8 @@ layout: default
                     <li><small id="content-principle"></small></li>
                 </ul>
             </div> 
-            <!--Featured Articles-->
+            
+             <!--Featured Articles-->
             <div class="side">
                 <div>
                     <i class="fa fa-key" aria-hidden="true"></i>
@@ -137,7 +156,7 @@ layout: default
             </div>
 
 
-            
+           
             
             <!--Recent Posts-->
             <div class="side">

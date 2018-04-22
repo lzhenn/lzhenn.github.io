@@ -219,10 +219,6 @@
                 
                     
                 
-                    
-                
-                    
-                
             </ul>
         </nav>
     </div>
@@ -235,151 +231,6 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/06/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·函数篇</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>built-in函数</p>
-
-<p>int() str() float() bool()</p>
-
-<p>函数名可以赋值给变量，相当于alias</p>
-
-<p>自定义函数</p>
-<pre>def function(x):
-    if x&lt;10:
-        print('too low')
-    else:
-        print('good')
-        return x+1</pre>
-<p>return用于返回函数，若无操作对象，则返回None，也可以返回多个值，tuple类型，也可以给多个变量</p>
-
-<p>若在当前目录test.py中定义了function()函数，可以通过模块方式引用</p>
-
-<p>&gt;&gt;&gt;from test import function</p>
-
-<p>无语句的缩进中可以用 pass过</p>
-
-<p>if x&gt;10:</p>
-
-<p>pass</p>
-
-<p>参数可以给予默认值</p>
-
-<p>power(x,n=2)</p>
-
-<p>n在调用时若不传递，则为2；不按顺序提供可选参数时，需要在调用时提供参数名。若默认参数指向可变对象，如list，则每次调用函数，均会使得可变对象发生改变。（传址）</p>
-<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L=None)</span>:</span>
-    <span class="keyword">if</span> L <span class="keyword">is</span> <span class="built_in">None</span>:
-        L = []
-    L.append(<span class="string">'END'</span>)
-    <span class="keyword">return</span> L</code></pre>
-<p>L每次默认参数均为None，这样可以避免该问题。</p>
-
-<p>可变参数标识，前缀*，可传入0-任意多参数</p>
-<pre>def sum_all(*numbers):
-    sum=0
-    for num in numbers:
-        sum=sum+num
-    return sum</pre>
-<p>可以传入任意多个数字</p>
-
-<p>如</p>
-
-<p>sum_all(2,3,5,4)</p>
-
-<p>若为list</p>
-
-<p>l=[3,4,5,6,8]</p>
-
-<p>sum_all(*l)</p>
-
-<p>挂前缀传入</p>
-
-<p> </p>
-
-<p>关键字参数，按字典进行组装</p>
-<pre>def test_student(name,gender,**kw)
-    print('name:',name,'gender:',gender,'other:',kw)</pre>
-<p>调用时若传入其他参数</p>
-
-<p>&gt;&gt;&gt;test_student(‘Mike’,’Male’,city=’Beijing’)</p>
-
-<p>name: Mike gender: Male other: {‘city’: ‘Beijing’}</p>
-
-<p>直接传入dict则获得dict的拷贝（传值）</p>
-
-<p>&gt;&gt;&gt;test_student(‘Mike’,’Male’,**extra)</p>
-
-<p>若通过*分隔，则定义了命名关键字参数</p>
-<pre>def test_student(name,gender,*,city)</pre>
-<p>命名关键字参数与位置参数不同，必须传入参数名</p>
-
-<p>参数定义的顺序必须是：<strong>必选参数、默认参数、可变参数/命名关键字参数和关键字参数。</strong></p>
-
-<p>复习</p>
-
-<p>*arg 可变参数，接受tuple</p>
-
-<p>**kw 关键字参数，接受dict</p>
-
-<p>递归超过一定栈帧长度会溢出，1000的阶乘是无法计算的。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/06/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
             
               <li>
                 <h2>
@@ -1013,6 +864,85 @@ function img_number()
                 <hr>
               </li>
             
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/">【ongoing】php返回图片方法获知邮件是否被查阅</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-12-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>突然想到能否有什么方法知道发出去的某封邮件是否被别人查阅，查了下，有人提到图片挂参的方法可以办到，回想之前IP验证和php自动发邮件，突然想到可以做这么一套东西，每天固定时间统计一下今天发出去的邮件多少被查阅了，然后做个报告发到邮箱。将来撒海网套磁的时候，绝对是利器啊。LOL</p>
+
+<p>说搞就搞：</p>
+
+<p>首先，测试一下php返回图片</p>
+
+<p>参照<a href="http://www.oschina.net/code/snippet_572802_11655">这个帖子</a>，bingo，原来是改一下http的header就可以。</p>
+
+<p>然后引入访问IP的检测，直接抄13年检测服务器访问沿海自动站IP的程序，调用IP138结果记录。</p>
+
+<p>居然就可以了～给php文件挂个参数标志是哪一个邮件，嗯嗯</p>
+
+<p>最后设置下crontab，每天固定时间把log发到邮箱，bingo～再写一个可以随时访问的查看页面，done～</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
         </ul>
 
 
@@ -1023,10 +953,10 @@ function img_number()
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page17" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">18/43</span>
+          <span class="page_number ">18/41</span>
           
             <a href="/page19" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1034,6 +964,1237 @@ function img_number()
     <div class="right">
         <div class="wrap">
     
+            <!--Archives-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar"></i>
+                    Archives
+                </div>
+                <ul class="content-ul">
+                    
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2017">2017 (25)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2016">2016 (42)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2015">2015 (64)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2014">2014 (71)</a></li>
+                            
+                          
+                        
+                </ul>
+            </div>
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -1054,7 +2215,7 @@ function img_number()
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
                     
                       
                       
@@ -1062,6 +2223,20 @@ function img_number()
                       
                       
                       <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wiki" style="font-size: 9pt; color: #999;">wiki</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9.5pt; color: #999;">wordpress</a>
                     
                       
                       
@@ -1082,6 +2257,13 @@ function img_number()
                       
                       
                       
+                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#Linux" style="font-size: 18pt; color: #000;">Linux</a>
                     
                       
@@ -1089,7 +2271,14 @@ function img_number()
                       
                       
                       
-                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                      <a href="/tag/#vim" style="font-size: 9pt; color: #999;">vim</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Shell" style="font-size: 9pt; color: #999;">Shell</a>
                     
                       
                       
@@ -1139,13 +2328,6 @@ function img_number()
                       
                       
                       <a href="/tag/#Project" style="font-size: 10pt; color: #888;">Project</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Self-treat" style="font-size: 9pt; color: #999;">Self-treat</a>
                     
                       
                       
@@ -1328,13 +2510,6 @@ function img_number()
                       
                       
                       <a href="/tag/#github" style="font-size: 9pt; color: #999;">github</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#blog" style="font-size: 10.5pt; color: #777;">blog</a>
                     
                       
                       
@@ -1628,19 +2803,11 @@ function img_number()
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
 
- 
             <!--Principles-->
             <div class="side">
                 <div>
@@ -1651,7 +2818,8 @@ function img_number()
                     <li><small id="content-principle"></small></li>
                 </ul>
             </div> 
-            <!--Featured Articles-->
+            
+             <!--Featured Articles-->
             <div class="side">
                 <div>
                     <i class="fa fa-key" aria-hidden="true"></i>
@@ -1663,7 +2831,7 @@ function img_number()
             </div>
 
 
-            
+           
             
             <!--Recent Posts-->
             <div class="side">
@@ -1705,11 +2873,11 @@ function img_number()
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#Blog&amp;CMS" class="categories-list-item" cate="Blog&amp;CMS">
+                        <a href="/category/#blog" class="categories-list-item" cate="blog">
                             <span class="name">
-                                Blog&amp;CMS
+                                blog
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">27</span>
                         </a>
                     </li>
                     
@@ -1818,15 +2986,6 @@ function img_number()
                                 Project
                             </span>
                             <span class="badge">7</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Self-treat" class="categories-list-item" cate="Self-treat">
-                            <span class="name">
-                                Self-treat
-                            </span>
-                            <span class="badge">1</span>
                         </a>
                     </li>
                     
@@ -2038,9 +3197,9 @@ function img_number()
                     </li>
                     
                     <li>
-                        <a href="/category/#network" class="categories-list-item" cate="network">
+                        <a href="/category/#internet" class="categories-list-item" cate="internet">
                             <span class="name">
-                                network
+                                internet
                             </span>
                             <span class="badge">4</span>
                         </a>

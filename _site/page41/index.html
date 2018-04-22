@@ -219,10 +219,6 @@
                 
                     
                 
-                    
-                
-                    
-                
             </ul>
         </nav>
     </div>
@@ -238,11 +234,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM F Compset指定SST和CO2外强迫的方法</a>
+                  <a class="post-link" href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/">【已解决】WordPress搭建过程</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-01
+                        <i class="fa fa-calendar"></i>2014-07-22
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -261,7 +257,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -278,7 +276,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -288,468 +288,64 @@
                 </div>
                 <div class="excerpt">
                     
-<p>打算开始在CESM的框架下做何编老师的试验，试着从CESM的scripts出发编译F Compset，结果神奇地发现居然还需要下载数据。问题是之前已经可以通过standalone的方式运行CAM5了呀，神奇的地球。决定用standalone的方式转转，对比下到底有什么不一样。</p>
+<p>安装过程的确不太轻松，可能最初php和mysql设置有问题吧。痛苦的安装过程记录一下，下学期有了新电脑正式建站的时候作参考。</p>
 
-<p>CESM的编译方式还是遇到些阻碍，问题及解决方法记录在这里。</p>
+<p>官方安装说明：http://codex.wordpress.org/zh-cn:%E5%AE%89%E8%A3%85WordPress</p>
 
-<p>1.F_2000_CAM5下载数据后编译失败，编译输出目录为out-of-box设置时config_machines.xml指定的位置。解决方案：xmlchange改env_build.xml重新指定编译输出目录。通过！</p>
+<p>1.下载解压后，查看 /etc/rc.d/init.d/mysqld status 是否启动，否则启动mysql
+#service mysqld start</p>
 
-<p>2.查看env_run.xml发现rundir也是默认的，果断要改。xmlchange同时改运行时间。</p>
+<p>按照说明运行mysql -u命令出现ERROR 1045 (28000)错误，其实可能是root没有密码，我没有多尝试，直接查到了mysql强行重新修改密码的方法，如下：</p>
+<blockquote>
+<p style="padding-left: 30px;">/etc/init.d/mysql stop (service mysqld stop )
+/usr/bin/mysqld_safe --skip-grant-tables
+另外开个SSH连接
+[root@localhost ~]# mysql
+mysql&gt;use mysql
+mysql&gt;update user set password=password("123456") where user="root";
+mysql&gt;flush privileges;
+mysql&gt;exit</p>
+<p style="padding-left: 30px;">pkill -KILL -t pts/0 可将pts为0的**用户(之前运行mysqld_safe的用户窗口)强制踢出
+正常启动 MySQL：/etc/init.d/mysql start (service mysqld start)</p>
+</blockquote>
+<p>打开install.php，出现提示</p>
+<blockquote>您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。</blockquote>
+<p>查到问题是php没有加载mysql模块所致，查看/etc/php.d/目录，如果只有dbase.ini,idpa.ini，而没有 mysql.ini,mysqli.ini,pdo.ini,pdo_mysql.ini,pdo_mysqli.ini,同时查看/usr/lib /php/modulse目录，如果没有 mysql.so,mysqli.so,pdo.so,pdo_mysql.so,pdo_sqlite.so,phpcpus.so,那么可判断为 php没有加载mysql模块。
+#yum install php-mysql</p>
 
-<p>3.修改user_nl_cam，加入针对CAM的namelist更改项目。最初直接把SST和CO2强迫都加这里，结果create_namelist都通过不了。还是一点点来吧。关于海温强迫的方法，standalnoe和F的方式是不一样的。参考帖子：</p>
+<p>php-pdo貌似centos已经默认安装。安装后/usr/lib/php/modulse目录下会有上述所需文件</p>
 
-<p>https://bb.cgd.ucar.edu/node/1001744</p>
+<p>配置/etc/php.ini，在任意地方加入下列语句</p>
 
-<p>UG上有一篇讲B SST OUT, F SST IN的，里面提出要修改env_run.xml。</p>
+<p>extension=mysql.so
+extension=mysqli.so</p>
 
-<p>CO2最初只修改了cam中的co2vmr这个变量，结果CLM崩了，应该是两边CO2不匹配，standalone实在不知道怎么对CLM进行修改，F下找到响应变量修改后，运行到第四天出现sigfault。后来发现居然有一个统一变量叫CCSM_CO2_PPMV啊！坑爹，修改后没问题。</p>
+<p>extension=pdo_mysql.so</p>
 
-<p>4.qsub提交任务的时候出问题，需要注意 run脚本中第一行 csh后面的-f参数需要去掉，这是最初移植的时候遗漏的问题。</p>
+<p>保存，重启apache，如果还是出现问题，重启了一下mysql，刷新网页，问题基本能够解决。</p>
 
-<p> </p>
+<p>Done！</p>
 
-<p> </p>
+<p>#20140729#</p>
 
-<p>以上问题最终的解决办法写在下面：</p>
-
-<ol>
-  <li>在 $CCSMROOT/scripts/ccsm_ut</li>
-</ol>
-
-<p>能够通过的步骤写在下面，以1999-2008变暖后的clim SST及CO2强迫为例：</p>
-<blockquote>$ create_newcase -case awcam5 -compset F_2000_CAM5 -res <strong>f19_f19 </strong>-mach sigon #注意$CCSMROOT/scripts已经加入PATH环境变量
-
-$ ./xmlchange EXEROOT=`pwd`/exe #反点号括起来的pwd会被执行，其输出并同/exe输入给exeroot变量
-
-$ ./xmlchange RUNDIR=`pwd`/exe
-
-$./cesm_setup
-
-$./awcam5.build</blockquote>
-<p>build后修改外强迫。</p>
-
-<p>首先是CO2：</p>
-<blockquote>$.xmlchange CCSM_CO2_PPMV=385.59 # 2009年数据，这个变量在env_run.xml当中</blockquote>
-<p>再是海温，首先将总input数据链接过来，防止路径被新提供的inputdata污染，再修改响应变量。</p>
-
-<p>$link_dirtree $CSMDATA ./input</p>
-
-<p>$./xmlchange DIN_LOC_ROOT=<code class="highlighter-rouge">pwd</code>/input</p>
-
-<p>cp处理后的SST数据到相应位置，修改响应namelist变量，包括起止年份及文件名称。这个名字太长，建议直接vi。</p>
-
-<p>$./qsub awcam5.run</p>
-
-<p>此外有一点发现是，F_2000采用的不是AMIP形式的观测资料强迫，而是气候态海温循环强迫。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/31/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM源码查阅技巧（Linux下文本文件处理技巧）</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>在经历两天完全没有头绪的痛苦过程后，终于想起来去年十一月刚刚开始试着移植CESM的时候在工作站上下载的CAM Tutorial。抓过来一看，果然有physics和接口的介绍，虽然Tutorial已经是09年的了，但当时居然已经是CAM5的版本……NCAR五年前就已经转的起来CAM5的物理包了么……天河二号上转起来都这么慢，反正Tianhe-2性能指标基本都是靠Phi顶起来的，也不奇怪。扯远了。</p>
-
-<p>这套tutorial的interface模块介绍写得正合我胃口，基本都是介绍CAM源码结构，运行流程的。看过Neale的Physics in CAM的Tutorial，对大致的物理过程运行流程清楚后，这个interface模块介绍的tutorial看起来还是很顺的。而且值得窃喜的三点是：</p>
-
-<p>1.我居然下载了它，因为目前CESM官网上已经删除了10年以前的培训材料。当然这会有一个比较大的问题，10年之后基本都是针对CESM的，每个模块都讲，但是都讲不细致。所以已经找不到针对CAM Interface的培训资料了。我很幸运。</p>
-
-<p>2.它里面举的例子居然是针对convect_deep.F90诶~就是要改你丫的嘛啊哈哈哈</p>
-
-<p>3.2009年NCAR就已经用起来CAM5了诶！啊哈哈哈！</p>
-
-<p>不扯了，说正题。其实就是为了记录一下vi已经linux的一些使用技巧，尤其是处理文本的时候（比如源代码）。</p>
-
-<p>vi下查找</p>
-<blockquote>:/the_content_you_search</blockquote>
-<p>查找下一个用n键</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140729#</span></strong></p>
-
-<p>在physics的主调用程序下查找所有的物理包，这个命令很好用。</p>
-<blockquote>grep call tphys*c.F90</blockquote>
-<p>tphys*c.F90通配了before和after coupling的两个物理包调用文件，grep这两个文件中的call语句（亮点！），因此抓出来的都是参数化过程。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140731#</span></strong></p>
-
-<p>上述语句配合管道符可以改写为</p>
-<blockquote>cat tpys*c.F90 | grep call</blockquote>
-<p><strong><span style="color: #008000;">#Up to 20140802#</span></strong></p>
-<div class="entry-content">
-
-<strong>统计源码行数：</strong>比如位于CAM的源码根目录下，统计CAM的源码总行数（去掉空格）
-<blockquote>$find ./ -name “*.F90″ |xargs cat|grep -v ^$|wc -l</blockquote>
-答案是——————————499742
-
-居然不到50万行，比我想象要少诶……
-
-参考资料中还有记录空行等命令格式
-
-http://www.cnblogs.com/fullhouse/archive/2011/07/17/2108786.html
-
-<strong><span style="color: #008000;">#Up to 20140815#</span></strong>
-
-</div>
+<p>mysql默认为空密码，重置密码方式：</p>
+<div><em>    3. 然后用空密码方式使用root用户登录 MySQL；</em></div>
+<div><em>    mysql -u root</em></div>
+<div><em>    4. 修改root用户的密码；</em></div>
+<div><em>    mysql&gt; update mysql.user set password=PASSWORD（'新密码'） where User='root'；</em></div>
+<div><em>    mysql&gt; flush privileges；</em></div>
+<div><em>    mysql&gt; quit</em></div>
+<div><em>    5. 重新启动MySQL，就可以使用新密码登录了</em></div>
+<div></div>
+<div>使用密码登陆的正确姿势</div>
+<div>mysql -u root -p 回车！！！</div>
+<div>输入新密码</div>
+<div>回车……</div>
+<div>奇葩吧</div>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/31/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】天河二号上CAM5强可扩展性测试</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>应包老师要求，在天河二号上进行CAM5的强可扩展性测试。进行一个节点测试的时候发现积分速度才2.7yr/day，着实吓了一大跳。CAM4可是12.7yr啊，速度还赶不上CAM4的1/4？？！！换其他计算节点后还是这个速度，看起来CAM5的计算量增加的不是一点半点啊。最后测试结果如下，基本只有CAM4四分之一的速度。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ图片20140730164146.jpg"><img class="alignnone size-medium wp-image-49" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ图片20140730164146.jpg" alt="QQ图片20140730164146" width="600" /></a></p>
-
-<p>晚上看NCAR Tutorial的时候看到了几张图，从上到下分别是CAM5的物理过程，CAM4和CAM5的积分步流程。可以看到CAM5各个物理过程之间也存在通信（这才合理嘛！）。再加上辐射方案的改进，计算时间也大增，据包庆老师说辐射计算时间占到总计算时间的一半以上。CAM5会这么慢其实也合情合理吧。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/图片1.png"><img class="alignnone size-medium wp-image-52" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/图片1.png" alt="图片1" width="600" /></a><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084017.gif"><img class="alignnone size-medium wp-image-50" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084017.gif" alt="QQ截图20140731084017" width="600" /></a><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084049.jpg"><img class="alignnone size-medium wp-image-51" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084049.jpg" alt="QQ截图20140731084049" width="600" /></a></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/30/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/">大气所学习小记20140729</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Living&amp;thinking" title="Category: Living&amp;thinking" rel="category">Living&amp;thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Living&amp;thinking" title="Tag: Living&amp;thinking" rel="tag">Living&amp;thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>早起公交，早饭。饭后去家乐福买了香皂和纸巾，发现把杯子丢在了宿舍，于是又买了一瓶水。</p>
-
-<p>到所里发现办公室没有开门，没钥匙。发短信问国魁师兄什么时间过来。没回。便先去了611孟军师兄的办公室小坐。九点多下来一次还是没人，好在十点钟有报告。</p>
-
-<p>报告内容：http://www.lasg.ac.cn/xsbg/2014/7/q1c61fkk14.htm。前两天杨老板发消息说中大八月份的一个报告便是这个。</p>
-
-<p>Prof. Wang没有讲数学细节，依然听不懂。大概内容是通过最大熵增原理去计算地表能量收支，可以理解为一个模型或者说通用方法。信息熵的观点引入到地学研究的一个成功范例。前面讲和Bulk Transfer Model的对比，一般陆面模式的Bulk Transfer Model缺点倒是记得清楚：1.计算过程中能量缺乏守恒性，2.存在梯度计算，测量误差很大，3.风速的不确定性，粗糙度的难以测量，4.一阶闭合本身就是近似，精确度有限。</p>
-
-<p>Model的数学基础有四点：1.贝叶斯概率论；2.信息熵；3.最大熵原理；4.最大熵增原理</p>
-
-<p>讲了一个简单的并联电路求分流的例子，大家都知道用欧姆定律。从最大熵原理的角度进行解析的话，系统会使得总的热耗散最小（why？），方程很好列，乘上个拉格朗日算子就解出来了。虽然我不知道怎么解……</p>
-
-<p>计算地面能量收支的过程基本类似：物理上，无非就是净辐射进来，感热潜热出去；冰面雪面水面冠层适当进行一些调整。根据这个物理情景构造热耗散函数，乘拉格朗日算子，如法炮制。解出来的结果是Prof. Wang Highlight的。参数就是热惯量，潜热的惯量又正比于感热的惯量，不知怎么又把方程的自由度限制了一下，发现只和入射净辐射、Ts和比湿有关。优点很明显，没有风速了，不用粗糙度了，也不用梯度了，pia的一下把测量中最困难的几个量给扔了，帅呆！</p>
-
-<p>最后拿这个model算了些东西，和观测对比，貌似日变化之类还是能对上的，强度差的挺大。又和NCEP提供的资料对比，发现两者差的更大了，但是NCEP的潜热通量看上去是觉得不对，六七八月南半球日极值到了500W，换算成蒸发有6-7mm，而且南半球的潜热通量要比北半球高；Prof. Wang的Model是整个反过来的，从直观上想一下，貌似还是应该北半球夏季蒸发多一点，潜热通量大一些吧。</p>
-
-<p>听完报告回办公室发现有人来了，放下包吃饭。吃完饭回来打算给办公室的师兄师姐分好丽友，刚刚拿出来，包庆老师就来找我。叫到他办公室，说有没有查邮件啊，我说没。说清华有个薛老师也是移植CESM有些问题，你和他交流下等等，他是做计算机出身的，基本超级计算领域清华应该是国内的top1了，可以学习啊云云。我说好好好。包老师办公室不大，也不小。有长沙发，开放式的办公桌，桌上应该是Mac Pro。其他地方没细看，应该有一部打印机。办公椅看上去非常舒服，整个人都可以陷进去一般，虽然包老师坐着，但给人一种埋在沙发里躺着的感觉，这么工作起来还是挺惬意的。以后我也搞这么个椅子，再适当运动运动。就不用总担心颈椎腰椎了。后来三点多钟到走廊走了走，恰巧包老师端着杯子上来，说三楼有现磨咖啡豆，你喝不喝咖啡，免费的，我们所已经共产主义了哈哈哈~包老师确实是很能干，也很会干的人，前途无量啊。</p>
-
-<p>下午准备晚上找何编聊的内容，张方案的源文件接近四千行代码，搜索cape十几二十个结果，看上去完全没头绪。反正文件锁定了，晚上再问问吧。对何编的试验设计还是有疑问，做了ppt备注。晚上一并去问问。</p>
-
-<p>下午吃过饭回来，发现门又锁了。从六点半直等到八点半，本来还想再过一遍ppt，结果师兄回来开门之前何编老师就打电话让我过去了。两个多小时等待期间背了背托福单词，又跑到四十号楼转了一圈参观。四十号楼和科研楼是连体的，在楼内直接可以走过去。发现人很少，走廊又没有窗户，很封闭的感觉，晚上还有些恐怖。开门后拿了电脑就去找何编，从科研楼509到40#楼711，路挺绕。</p>
-
-<p>问明白了试验设计，方案，何老师的基本思路还是希望我能把每个积分步中的物理过程调用的顺序搞清楚，接口搞明白，之后再往Ttendency上加这个Heating的强迫项，不是直接改张方案这么简单，shallow convection和large-scale 里面也有Q啊，不是说直接在张方案里注入就行。又解释了一番A那篇文章的试验设计。其实很多地方还是和我想的比较类似的，从物理合理的角度出发，方法可以自己确定，Annual Cycle这类信号肯定是会去掉的，作者没必要说那么详细。想来想去，还是自己读的太少。很多方法和技术的运用，基本是约定俗成的，看到response差不多了，也就应该明白怎么操作的了，没必要细究（或者说不细究也就明白了）。说到做Model的苦与乐。技术活居多，门槛高，动手要勤快，Paper不好发，但真正钻进去才是窥探物理本质，才有意思。对我来说，coding本身就是很有挑战性满足支配欲的事情嘛~更何况深入的是物理而不是回归来合成去看到似是而非的现象就扯所谓的本质。“为赋新词强说愁”。说到做model的好处，也很明显，本身门槛就高，做的人少，所以一旦有人会，那便很抢手，吃香。突然想到了前段时间flash编程突然大受欢迎，因为互联网发展，网页游戏繁荣，而会flash编程的人又太少，所以瞬间此类人才价格疯涨。不知道目前怎么样了，估计应该昙花一现吧，前端不是html5+css3的天下了么，毕竟IT新陈代谢太快了。又太久没关注了啊~</p>
-
-<p>说道这里，瞬间有些不太美好的感觉。做model会不会也昙花一现呢？风险高的几点就在于，首先气象这个领域出路太狭窄，太专太封闭；其次，而仅仅做model又很难从一般科研人员堆paper的路子爬上去，因此一旦气象科研的路数变了，或者整个领域出现了因宏观政策性调整等不确定因素造成的坍缩，做model的人很难将已经深入的专业知识转移到其他领域，从而威胁到个人及家庭的底层生存需求。</p>
-
-<p>话说回来，毕竟能做model能做技术活的人肯定要有较好的计算机、网络以及Linux等基础，动手能力自然不差。所以明确的路子还是支起一行副业，而且是与专业相关的比较靠谱。开网店、投资期货、炒股等基础投入大、风险高而且经验几乎没有，没有一定资本前还是暂且不作考虑。当然首先还是要踏踏实实地积累好本专业基础知识，试着发paper；同时继续保持对IT行业的高敏感度及热情，了解整个业界动向，不断学习新技术积累建站搭站、硬件及操作系统维护、网页编程、网站管理经验，拓展渠道试着去接手一些外包项目，多结交技术型人才，拓展信息源。大致能够理清三条线吧：1.夯实基础，深入数值模式；2.广泛涉猎，提好科学问题，paper发好、发多；3.保持对本专业及IT行业的热情，终身学习，试着发展相关副业。</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/30/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/">【已解决】shell中的数值计算</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>在天河二号上，想在bash中根据申请的节点数自动计算核心数，其实就是一个n= N*24这样简单的计算，但是bash中的变量是没有数据类型的，所以还是查了下资料才解决。很简单，用中括号，中括号包含的数学式子是可以被shell识别的。主要中括号最外面还要<strong>$</strong>展开一下，否则下例echo时会返回“100+200”</p>
-
-<p>例子：</p>
-<blockquote><span style="background-color: #ffffff;"><span style="color: #333399;">[root@localhost ~]# cat  test.sh</span></span>
-
-<span style="background-color: #ffffff;"><span style="color: #333399;">#!/bin/bash
-var1=100
-var2=200
-var3=$[$var1+$var2]
-echo $var3</span></span>
-
-<span style="background-color: #ffffff;"><span style="color: #333399;">[root@localhost ~]# sh test.sh
-</span></span></blockquote>
-<p><span style="background-color: #ffffff;"><span style="color: #333399;">300</span></span></p>
-
-<p>参考资料：http://www.baidu.com/link?url=GwzHXLxzHdFb549J1fGR5gcyoRlCuW48q6LH7yRqmbSfGYrFITZ6pIXMy-bJ3yImnZ6XPBBjL3wKt6xer1Fvqq</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所链接天河二号终端流输出卡的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>大气所包庆老师希望测试一下cam5在天河二号上的速度表现情况。连上去编译的时候发现非常卡，表现为编译命令行在终端输出一部分后卡在某个位置3-5分钟，之后才能继续正常继续运行。编译一次会卡这么十几二十个位置，实在让人没法接受。超算方面解释为网络问题。试着将输出流重定向到文本文件后，速度正常了。其他命令如top、w、yhq等也会出现类似卡顿。基本可以确定应该是因为某种网络或者说是超算登陆节点分时算法对网络延时处理的原因，远程终端的流输出过大时会进行限制，从而产生卡顿。经验就是，出现这类问题时，尽量减少远程终端上的流输出。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -764,10 +360,10 @@ echo $var3</span></span>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page40" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">41/43</span>
+          <span class="page_number ">41/41</span>
           
-            <a href="/page42" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <span class="next disable"><i class="fa fa-angle-right"></i></span>
+            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
           
         </div>
     </div>
@@ -775,6 +371,1237 @@ echo $var3</span></span>
     <div class="right">
         <div class="wrap">
     
+            <!--Archives-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-calendar"></i>
+                    Archives
+                </div>
+                <ul class="content-ul">
+                    
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2017">2017 (25)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2016">2016 (42)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2015">2015 (64)</a></li>
+                            
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2014">2014 (71)</a></li>
+                            
+                          
+                        
+                </ul>
+            </div>
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -795,7 +1622,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#Blog&amp;CMS" style="font-size: 15.5pt; color: #333;">Blog&amp;CMS</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
                     
                       
                       
@@ -803,6 +1630,20 @@ echo $var3</span></span>
                       
                       
                       <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wiki" style="font-size: 9pt; color: #999;">wiki</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wordpress" style="font-size: 9.5pt; color: #999;">wordpress</a>
                     
                       
                       
@@ -823,6 +1664,13 @@ echo $var3</span></span>
                       
                       
                       
+                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#Linux" style="font-size: 18pt; color: #000;">Linux</a>
                     
                       
@@ -830,7 +1678,14 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#HPC" style="font-size: 11.5pt; color: #666;">HPC</a>
+                      <a href="/tag/#vim" style="font-size: 9pt; color: #999;">vim</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Shell" style="font-size: 9pt; color: #999;">Shell</a>
                     
                       
                       
@@ -880,13 +1735,6 @@ echo $var3</span></span>
                       
                       
                       <a href="/tag/#Project" style="font-size: 10pt; color: #888;">Project</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Self-treat" style="font-size: 9pt; color: #999;">Self-treat</a>
                     
                       
                       
@@ -1069,13 +1917,6 @@ echo $var3</span></span>
                       
                       
                       <a href="/tag/#github" style="font-size: 9pt; color: #999;">github</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#blog" style="font-size: 10.5pt; color: #777;">blog</a>
                     
                       
                       
@@ -1369,19 +2210,11 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#wordpress" style="font-size: 9pt; color: #999;">wordpress</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
                 </div>
             </div>
 
- 
             <!--Principles-->
             <div class="side">
                 <div>
@@ -1392,7 +2225,8 @@ echo $var3</span></span>
                     <li><small id="content-principle"></small></li>
                 </ul>
             </div> 
-            <!--Featured Articles-->
+            
+             <!--Featured Articles-->
             <div class="side">
                 <div>
                     <i class="fa fa-key" aria-hidden="true"></i>
@@ -1404,7 +2238,7 @@ echo $var3</span></span>
             </div>
 
 
-            
+           
             
             <!--Recent Posts-->
             <div class="side">
@@ -1446,11 +2280,11 @@ echo $var3</span></span>
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#Blog&amp;CMS" class="categories-list-item" cate="Blog&amp;CMS">
+                        <a href="/category/#blog" class="categories-list-item" cate="blog">
                             <span class="name">
-                                Blog&amp;CMS
+                                blog
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">27</span>
                         </a>
                     </li>
                     
@@ -1559,15 +2393,6 @@ echo $var3</span></span>
                                 Project
                             </span>
                             <span class="badge">7</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#Self-treat" class="categories-list-item" cate="Self-treat">
-                            <span class="name">
-                                Self-treat
-                            </span>
-                            <span class="badge">1</span>
                         </a>
                     </li>
                     
@@ -1779,9 +2604,9 @@ echo $var3</span></span>
                     </li>
                     
                     <li>
-                        <a href="/category/#network" class="categories-list-item" cate="network">
+                        <a href="/category/#internet" class="categories-list-item" cate="internet">
                             <span class="name">
-                                network
+                                internet
                             </span>
                             <span class="badge">4</span>
                         </a>

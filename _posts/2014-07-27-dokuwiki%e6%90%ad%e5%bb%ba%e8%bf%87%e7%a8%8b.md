@@ -2,7 +2,7 @@
 layout: post
 title:  "【已解决】Dokuwiki搭建过程" 
 categories: blog
-tags: blog
+tags: blog wiki
 author: LZN
 ---
 
