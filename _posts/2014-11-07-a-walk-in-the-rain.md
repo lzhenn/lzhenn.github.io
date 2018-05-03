@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "A Walk in the Rain" 
-categories: Living&amp;thinking
-tags: Living&amp;thinking
+categories: thinking
+tags: thinking
 author: LZN
 ---
 
