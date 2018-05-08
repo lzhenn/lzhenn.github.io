@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "20180508交易笔记-油飞了"
+title:  "20180508交易笔记-油飞了以及其他"
 categories: economy investment notebook
 tags:   investment stock option market&nbspcrash
 author: LZN
