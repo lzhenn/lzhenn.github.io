@@ -234,6 +234,531 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/">【CESM】B compset CAM5_PM设置</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Since we don’t care about the chemical process when investigate the physical climate system, we hope to close the prognostic chemistry model in CAM5. For F compset, it is easy because a specific PM compset without active chemistry model has been provided by CESM. For B compset, there is no option like this.</p>
+
+<p>Therefore, we try to capture the differences in FC5PM and FC5. We first see the differences in output flow after create_newcase command.</p>
+<pre>6c6
+&lt;   2000_CAM5_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5) (FC5)
+---
+&gt;   2000_CAM5%PM_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5_PM) (FC5PM)
+8c8
+&lt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
+---
+&gt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: CAM prescribed modal aerosols: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
+23c23
+&lt;   CAM_CONFIG_OPTS: -phys cam5
+---
+&gt;   CAM_CONFIG_OPTS: -phys cam5 -chem none
+58,63c58,63
+&lt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_mach_pes.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_build.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_run.xml
+&lt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
+---
+&gt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_mach_pes.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_build.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_run.xml
+&gt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml</pre>
+<p>Clearly, a PM option has been added to the CAM5 component. We try put this full name to B compset.</p>
+
+<p>Things never get so smooth~</p>
+<pre>set_compset: no match for compset 2000_CAM5%PM_CLM40%SP_CICE_POP2_RTM_SGLC_SWAV
+            to see supported compsets issue</pre>
+<p>It seems that we have to change it in the specific configuration file.</p>
+
+<p>We then try to seek the differences in xml files. In <strong>env_build.xml,  </strong>we found an interesting differences:</p>
+<pre>40c40
+&lt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5_CTRL/bld" /&gt;
+---
+&gt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5PM_CTRL/bld" /&gt;
+72c72
+&lt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5" /&gt;
+---
+&gt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5 -chem none" /&gt;</pre>
+<p>That is fine. We then add argument “<strong><span style="color: #ff0000;"><em>-chem none</em></span></strong>” to the env_build.xml in B2000CAM5 case, setup and build, smoothly!</p>
+
+<p>Now we come to the atm_in differences between FC5 and FC5PM</p>
+<pre>1,3c1,8
+&lt; &amp;aerosol_nl
+&lt; dust_emis_fact = 0.35D0
+&lt; soil_erod = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/dst/dst_0.9x1.25_c100121.nc'
+---
+&gt; &amp;aerodep_flx_nl
+&gt; aerodep_flx_cycle_yr = 2000
+&gt; aerodep_flx_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
+&gt; aerodep_flx_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
+&gt; aerodep_flx_specifier = 'bc_a1DDF', 'bc_c1DDF', 'pom_a1DDF', 'pom_c1DDF', 'soa_a1DDF', 'soa_c1DDF', 'soa_a2DDF', 'soa_c2DDF',
+&gt; 'dst_a1DDF', 'dst_c1DDF', 'dst_a3DDF', 'dst_c3DDF', 'bc_a1SFWET', 'bc_c1SFWET', 'pom_a1SFWET', 'pom_c1SFWET',
+&gt; 'soa_a1SFWET', 'soa_c1SFWET', 'dst_a1SFWET', 'dst_c1SFWET', 'dst_a3SFWET', 'dst_c3SFWET'
+&gt; aerodep_flx_type = 'CYCLICAL'
+10d14
+&lt; print_energy_errors = .false.
+16,34d19
+&lt; aer_drydep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
+&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
+&lt; aer_wetdep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
+&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
+&lt; clim_soilw_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/clim_soilw.nc'
+&lt; depvel_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/depvel_monthly.nc'
+&lt; depvel_lnd_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/regrid_vegetation.nc'
+&lt; exo_coldens_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/phot/exo_coldens.nc'
+&lt; ext_frc_specifier = 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_elev_2000_c090726.nc',
+&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_elev_2000_c090726.nc',
+&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_elev_2000_c090726.nc',
+&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_elev_2000_c090726.nc',
+&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_elev_2000_c090726.nc',
+&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_elev_2000_c090726.nc',
+&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_elev_2000_c090726.nc'
+&lt; ext_frc_type = 'CYCLICAL'
+&lt; fstrat_list = ' '
+&lt; rsf_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/RSF_GT200nm_v3.0_c080416.nc'
+&lt; season_wes_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/season_wes.nc'
+36,54d20
+&lt; srf_emis_specifier = 'DMS -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/aerocom_mam3_dms_surf_2000_c090129.nc',
+&lt; 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_surf_2000_c090726.nc',
+&lt; 'SOAG -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_soag_1.5_surf_2000_c100217.nc',
+&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_surf_2000_c090726.nc',
+&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_surf_2000_c090726.nc',
+&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_surf_2000_c090726.nc',
+&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_surf_2000_c090726.nc',
+&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_surf_2000_c090726.nc',
+&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_surf_2000_c090726.nc'
+&lt; srf_emis_type = 'CYCLICAL'
+&lt; tracer_cnst_cycle_yr = 2000
+&lt; tracer_cnst_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/oxid'
+&lt; tracer_cnst_file = 'oxid_1.9x2.5_L26_1850-2005_c091123.nc'
+&lt; tracer_cnst_filelist = 'oxid_1.9x2.5_L26_clim_list.c090805.txt'
+&lt; tracer_cnst_specifier = 'O3','OH','NO3','HO2'
+&lt; tracer_cnst_type = 'CYCLICAL'
+&lt; use_cam_sulfchem = .false.
+&lt; xactive_prates = .false.
+&lt; xs_long_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/temp_prs_GT200nm_jpl06_c080930.nc'
+61d26
+&lt; flbc_list = ' '
+114c79
+&lt; cam_chempkg = 'trop_mam3'
+---
+&gt; cam_chempkg = 'none'
+137a103,114
+&gt; &amp;prescribed_aero_nl
+&gt; prescribed_aero_cycle_yr = 2000
+&gt; prescribed_aero_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
+&gt; prescribed_aero_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
+&gt; prescribed_aero_specifier = 'num_c1', 'bc_c1', 'dst_c1', 'ncl_c1', 'pom_c1', 'so4_c1', 'soa_c1', 'num_c2',
+&gt; 'ncl_c2', 'so4_c2', 'soa_c2', 'num_c3', 'dst_c3', 'ncl_c3', 'so4_c3', 'num_a1_logm',
+&gt; 'bc_a1_logm', 'dst_a1_logm', 'ncl_a1_logm', 'pom_a1_logm', 'so4_a1_logm', 'soa_a1_logm', 'num_a2_logm', 'ncl_a2_logm',
+&gt; 'so4_a2_logm', 'soa_a2_logm', 'num_a3_logm', 'dst_a3_logm', 'ncl_a3_logm', 'so4_a3_logm', 'num_a1_logv', 'bc_a1_logv',
+&gt; 'dst_a1_logv', 'ncl_a1_logv', 'pom_a1_logv', 'so4_a1_logv', 'soa_a1_logv', 'num_a2_logv', 'ncl_a2_logv', 'so4_a2_logv',
+&gt; 'soa_a2_logv', 'num_a3_logv', 'dst_a3_logv', 'ncl_a3_logv', 'so4_a3_logv'
+&gt; prescribed_aero_type = 'CYCLICAL'
+&gt; /
+150,158c127,135
+&lt; mode_defs = 'mam3_mode1:accum:=', 'A:num_a1:N:num_c1:num_mr:+',
+&lt; 'A:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
+&lt; 'A:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'A:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
+&lt; 'A:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'A:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
+&lt; 'mam3_mode2:aitken:=', 'A:num_a2:N:num_c2:num_mr:+',
+&lt; 'A:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
+&lt; 'A:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
+&lt; 'A:num_a3:N:num_c3:num_mr:+', 'A:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
+&lt; 'A:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'A:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
+---
+&gt; mode_defs = 'mam3_mode1:accum:=', 'N:num_a1:N:num_c1:num_mr:+',
+&gt; 'N:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
+&gt; 'N:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'N:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
+&gt; 'N:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'N:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
+&gt; 'mam3_mode2:aitken:=', 'N:num_a2:N:num_c2:num_mr:+',
+&gt; 'N:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
+&gt; 'N:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
+&gt; 'N:num_a3:N:num_c3:num_mr:+', 'N:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
+&gt; 'N:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'N:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
+191,193d167
+&lt; &amp;wetdep_inparm
+&lt; gas_wetdep_list = 'H2O2','SO2'
+&lt; /</pre>
+<p>Such a lot differences in input files as we expected.</p>
+
+<p>We test the <strong>atm_in</strong> differences between B with / without “-chem none” argument, everything goes fine!</p>
+
+<p>Now we run the model for several months to test the final results.</p>
+
+<p>Configuration:</p>
+
+<p>B2000_CAM5</p>
+
+<p>0.9x1.25</p>
+
+<p>Tianhe-2: 192PEs</p>
+
+<p> </p>
+
+<p>output with” phys cam5 -chem none”:</p>
+<pre> -rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:10</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-01.nc
+-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:30</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-02.nc
+
+</pre>
+<p>output without “phys cam5”:</p>
+<pre>-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:23</strong> B_CHEM_CAM5_TEST.cam.h0.0001-01.nc
+-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:49</strong> B_CHEM_CAM5_TEST.cam.h0.0001-02.nc</pre>
+<p>So without the aerosol active, it saves (49-23)-(30-10) = 6 min in each month. About 6/26*100% = 23% time saved.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91prefe/">【已解决】Preferable PE layers for BC5 compset on tianhe2</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/09/QQ图片20150924162913.jpg"><img class="alignnone size-full wp-image-728" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/09/QQ图片20150924162913.jpg" alt="QQ图片20150924162913" width="582" height="234" /></a></p>
+
+<p>72 #Change PE layers
+73 ./xmlchange NTASKS_ATM=480
+74 ./xmlchange NTHRDS_ATM=1
+75 ./xmlchange ROOTPE_ATM=0
+76
+77 ./xmlchange NTASKS_LND=240
+78 ./xmlchange NTHRDS_LND=1
+79 ./xmlchange ROOTPE_LND=120
+80
+81 ./xmlchange NTASKS_ICE=120
+82 ./xmlchange NTHRDS_ICE=1
+83 ./xmlchange ROOTPE_ICE=0
+84
+85 ./xmlchange NTASKS_OCN=96
+86 ./xmlchange NTHRDS_OCN=1
+87 ./xmlchange ROOTPE_OCN=480
+88
+89 ./xmlchange NTASKS_CPL=120
+90 ./xmlchange NTHRDS_CPL=1
+91 ./xmlchange ROOTPE_CPL=360
+92
+93 ./xmlchange NTASKS_GLC=240
+94 ./xmlchange NTHRDS_GLC=1
+95 ./xmlchange ROOTPE_GLC=0
+96
+97 ./xmlchange NTASKS_ROF=120
+98 ./xmlchange NTHRDS_ROF=1
+99 ./xmlchange ROOTPE_ROF=240
+100
+101 ./xmlchange NTASKS_WAV=120
+102 ./xmlchange NTHRDS_WAV=1
+103 ./xmlchange ROOTPE_WAV=360</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91prefe/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL脚本的参数传递</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-16
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>When used in conjunction with an NCL script, command line arguments can set a variable’s value, help determine initial conditions, and so forth:</p>
+<pre>% cat modelRun.ncl
+begin
+  [...]
+
+  if (.not. isvar("nyrStrt")) then      ; is nyrStrt on command line?
+      nyrSrt = 1960
+  end if
+
+  if (.not. isvar("nyrLast")) then      ; is nyrLast on command line?
+      nyrLast = 2002;
+  end if
+
+  print(nyrStrt)                        ; for illustrative purposes
+  print(nyrLast)
+
+  [...]
+end
+</pre>
+<p>(Variables nyrStrt and nyrLast are set on the command line)</p>
+<pre>% ncl nyrStrt=1900 nyrLast=1968 modelRun.ncl
+
+Variable: nyrStrt
+Type: integer
+Total Size: 4 bytes
+            1 values
+Number of Dimensions: 1
+Dimensions and sizes:   [1]
+Coordinates: 
+(0)     1900
+
+
+Variable: nyrStrt
+Type: integer
+Total Size: 4 bytes
+            1 values
+Number of Dimensions: 1
+Dimensions and sizes:   [1]
+Coordinates: 
+(0)     1968
+
+</pre>
+<p>Consider the following</p>
+<pre>ncl nyrStrt=1930 'fName="Model*"' gravity=9.8 opt=True cyclic=False latS=-30 latN=30 lonL=130 lonR=290 modelRun.ncl
+</pre>
+<p>When the number of CLOs is large, it might be clearer to enter only one or two per line. The Unix line continuation character, <b>&lt;/b&gt;, can be used to accomplish this:</b></p>
+<pre> ncl nyrStrt=1930      <b>\</b> 
+     'fName="Model*"'  <b>\</b>
+     gravity=9.8       <b>\</b>
+     latS=-30 latN=30  <b>\</b>
+     lonL=130 lonR=290 <b>\</b>
+     modelRun.ncl
+
+</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/15/e3-80-90shanbei-news-notes-e3-80-9120150915/">【Shanbei News Notes】20150915</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-15
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<h2 class="head-title"><a href="http://www.shanbay.com/read/article/37138/">China’s Economic Challenges Persist中国继续面临经济挑战</a></h2>
+<p>equity n. 产权，股票； 公正</p>
+
+<p>shift away 移走</p>
+
+<p>box office 票房</p>
+<h2 class="head-title"><a href="http://www.shanbay.com/read/article/37141/">Uncertainty About Possible US Interest Rate Hike Grows美国利率攀升的不确定性持续增长</a></h2>
+<p>The U.S. Federal Reserve 美联储</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/15/e3-80-90shanbei-news-notes-e3-80-9120150915/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/">【vim, 已解决】使用vim批量插入/删除 行首行尾</a>
                 </h2>
                 <div class="label">
@@ -372,1110 +897,6 @@
                 </div>
                 <div class="read-all">
                     <a  href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/">【solved, git&github】URL problem</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>When I pushed all ncl file in project to github, I got this error:</p>
-<pre>[yangsong3@localhost project]$ git push -u origin master
-Password:
-To https://Novarizark@github.com/Novarizark/project.git<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
- ! [rejected] master -&gt; master (non-fast-forward)
-error: failed to push some refs to 'https://Novarizark@github.com/Novarizark/pro ject.git'
-To prevent you from losing history, non-fast-forward updates were rejected
-Merge the remote changes before pushing again. See the 'Note about
-fast-forwards' section of 'git push --help' for details.</pre>
-<p>Google it, found the solution on Stackoverflow</p>
-<pre>You need to add the origin remote:
-
-    Delete the current one
-
-    git remote rm origin
-
-    Add the git remote link ex: (https://user@bitbucket.org/test.git or https://github.com/user/test.git)
-
-    git remote add origin link
-
-    git pull origin master (or other branch)</pre>
-<p>It is the Username@github made the bad result. So there should be other ways to solve the 403 or ssh error.</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/">【Coursera】R Language</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>&nbsp;
-    
-        <a href="/category/#Coursera" title="Category: Coursera" rel="category">Coursera</a>&nbsp;
-    
-        <a href="/category/#R" title="Category: R" rel="category">R</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>&nbsp;
-    
-        <a href="/tag/#Coursera" title="Tag: Coursera" rel="tag">Coursera</a>&nbsp;
-    
-        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p> </p>
-<table>
-<tbody>
-<tr>
-<td>
-<h3><strong>Background Material</strong></h3>
-<h4><strong>L4</strong></h4>
-get the current working directory
-
-<strong>&gt;getwd()  #same in MAC
-</strong>
-
-read the csv (comma-seperated values) file
-
-<strong>&gt;read.csv("xx.csv")</strong>
-
-list the file and directory under the current directory
-
-<strong>&gt;dir()</strong>
-
-change the working directory
-
-<strong>&gt;setwd("F:/workspace/")</strong>
-
-To list out all the functions in one script
-
-<strong>&gt;ls()</strong>
-<h3>Week1</h3>
-<h4>L4</h4>
-assignment
-
-<strong>&gt;x &lt;- 5</strong>
-
-comments
-
-<strong># hi, this is a comment</strong>
-<h4>L5</h4>
-5 basic "atomic" classes
-<ul>
-	<li>character</li>
-	<li>numeric (real numbers)</li>
-	<li>integer</li>
-	<li>complex</li>
-	<li>logical (True/False)</li>
-</ul>
-basic object: vector
-
-<strong>vector function: vector(type_of, length_of)</strong>
-
-basically, R think all number as real type, if you want a integer 1, type:
-
-<strong>1L</strong>
-
-Infinity:
-
-<strong>Inf</strong>
-
-not a number:
-
-0/0=NAN (or as missing value)
-
-R objects can have attributes:
-<ul>
-	<li>names, dimnames</li>
-	<li>dimensions</li>
-	<li>class (numeric)</li>
-	<li>length</li>
-</ul>
-function to modify attributes
-
-<strong>attributes()</strong>
-<h3>L6</h3>
-c() function is to create a vector:
-
-<strong>x &lt;- c(0.5,0.6)</strong>
-
-<strong>x &lt;- c(True, Flase)</strong>
-
-vector() function acts alike, with initial value 0 for numeric.
-
-<strong>x &lt;- vector("numeric", length = 10)</strong>
-
-mixed classes
-
-<strong>x&lt;- c(True, 3) # will be numeric</strong>
-
-Explicit Coercion
-
-<strong>&gt; x&lt;-0:2</strong>
-
-<strong>&gt; class(x)</strong>
-
-<strong>[1] "integer"</strong>
-
-<strong>&gt; as.logical(x)</strong>
-
-<strong>[1] FALSE TRUE TRUE</strong>
-
-we use list() to create list.
-
-<strong>&gt;y&lt;-list("a", 1, TRUE)</strong>
-<h3>L7</h3>
-create matrix
-
-<strong>&gt;m&lt;-matrix(nrows=2, ncols=3)</strong>
-
-<strong>&gt;attributes(m)</strong>
-
-$dim
-
-[1] 2 3
-
-matrix is <strong>column wise</strong>
-
-change vector to matrix
-
-&gt;m&lt;-1:10
-
-<strong>&gt;dim(m)&lt;-c(2,5)</strong>
-
-&nbsp;
-
-or use cbind or rbind
-
-&gt;x&lt;-1:3
-
-&gt;y&lt;-10:12
-
-&gt;cbind(x,y)
-
-1 10
-
-2 11
-
-2 12
-
-&gt;rbind(x,y)
-
-similar but in row
-<h3>L8</h3>
-factors are ordered or unordered, like key for the php array, factors could be treated as numeric vector with labels
-
-give an example
-
-&gt;x&lt;-factor(c("yes","yes","no"))
-
-&gt;x
-
-[1] yes yes no
-
-Levels: no yes
-
-&gt;table(x)
-
-yes no
-
-2     1
-
-&gt;unclass(x)
-
-221
-
-that is how factor x expressed in R underneath!
-
-The first level is called the baseline level, it is determined by the alphabet rank, however, you could change the order.
-
-<strong>&gt;x&lt;-factor(c("yes","yes","no"),levels=c("yes","no"))</strong>
-
-and yes will be in the first place.
-<h3>L9-Missing Values</h3>
-is.na()
-
-is.nan()
-
-NaN value all be treated as NA, but the converse is not true.
-<h3>L10-Data Frames</h3>
-tabular 表格的
-
-data frames ~ matrices
-
-list ~ vector
-
-Yes, that the class doesn't matter in data frames.
-
-Special attributes: <strong>row.names</strong>
-
-created by
-
-<strong>read.table() or read.csv()</strong>
-
-convert to matrix
-
-<strong>data.matrix()</strong>
-
-an example:
-
-<strong>&gt;x&lt;- data.frame(foo=1:4, bar = c(T,T,F,F))</strong>
-
-<strong>&gt;x</strong>
-
-<strong>   foo    bar</strong>
-
-<strong>1    1    TRUE</strong>
-
-<strong>2    2    TRUE</strong>
-
-<strong>3    3    FALSE</strong>
-
-<strong>4    4    FALSE</strong>
-<h3>L10-Names Attribute</h3>
-<strong>&gt;x &gt;- 1:3</strong>
-
-<strong>&gt; names(x) &lt;- c("foo","bar","norf")</strong>
-
-<strong>&gt;x</strong>
-
-<strong>foo bar norf</strong>
-
-<strong>   1     2     3</strong>
-<h3>L12-Reading Tabular Data</h3>
-<ul>
-	<li><strong>read.table, read.csv</strong></li>
-	<li><strong>readLines</strong></li>
-	<li><strong>source</strong>, for reading in R code files (inverse of dump)</li>
-	<li> <strong>dget</strong>, same as above, but for dparsed code (inverse of dput)</li>
-	<li><strong>load, </strong>for reading in saved workspaces</li>
-	<li><strong>unserialize, </strong>for reading single R objects in binary form</li>
-</ul>
-write
-<ul>
-	<li>write.table</li>
-	<li>writeLines</li>
-	<li>dump</li>
-	<li>dput</li>
-	<li>save</li>
-	<li>serialize</li>
-</ul>
-<h4><strong> read.table</strong></h4>
-<ul>
-	<li>file, the name of a file, or a connection</li>
-	<li>header, logical indicating if the file has a header line</li>
-	<li>sep, a string indicating how the columns are separated</li>
-	<li>colClasses, a character vector indicating the class of each column in the dataset</li>
-	<li>nrows, the number of rows in the dataset</li>
-	<li>comment.char, a character string indicating the comment character</li>
-	<li>skip, the number of lines to skip from the beginning</li>
-	<li>stringsAsFactors, should character variables be coded as factors?</li>
-</ul>
-no argument is fine, and the result would be in a data frame.
-
-read.table default separator is space.
-
-<strong>be sure to read the document of read.table</strong>
-<h3>L12-Reading Large Tables</h3>
-set the arguments!
-
-all numeric, one is fine:
-
-colClasses = "numeric"
-<h3>L13-Textual Data Format</h3>
-<h3>L17-Subsetting-Basics</h3>
-&gt;x &lt;- c("a","b","c")
-
-&gt;x[1]
-
-[1]  "a"
-
-&gt; x[1:3]
-
-&gt;x[x&gt;"a"]
-
-&gt;u &lt;- x&gt;"a"
-
-&gt;u
-
-[1] FALSE TRUE TRUE
-<h3>L17-Subsetting-Lists</h3>
-&gt;x &lt;- list (foo =1:4, bar =0.6)
-
-&gt;x[1]
-
-$foo
-
-[1] 1 2 3 4
-
-<strong>we got a list!</strong>
-
-&gt;x[[1]]
-
-[1]  1 2 3 4
-
-<strong>we got a sequence!</strong>
-
-&gt;x$bar
-
-[1]  0.6
-
-&gt;x[["bar"]] #this is equal
-
-&gt;x["bar"]  # we got a list
-
-&gt;x[c(1, 3)]
-
-&nbsp;
-
-&gt;name = "foo"
-
-&gt;x[[name]]
-
-this is useful
-<h3>L17-Subsetting-Matrices</h3>
-&gt;x[1, ]    # missing is fine
-
-No dropping forcing:
-
-&gt;x[1, 2, drop =FALSE]
-<h3>L18-partial matching</h3>
-&gt;x&lt;-list(aardvark=1:5)
-
-&gt;x$a
-
-[1] 1 2 3 4 5
-
-&gt;x[["a"]]
-
-NULL
-
-&gt;x[["a", exact = FALSE]]
-
-[1] 1 2 3 4 5
-<h3>L19-Removing NA Values</h3>
-&gt;x &lt;- c(1, 2, NA, 4, NA, 5)
-
-&gt;bad &lt;- is.na(x)
-
-&gt;x[!bad]
-
-&nbsp;
-
-&gt;good&lt;-complete.cases(x, y)
-<h3>L20-Vectorized Operations</h3>
-matrix
-
-x*y #by rank
-
-x%*%y # by true matrix multiplication
-<h3>Week1</h3>
-<h4>L2 if-else</h4>
-if(x&gt;3) {
-
-y&lt;-10
-
-}else{
-
-y&lt;-0
-
-}
-
-<strong>also true:</strong>
-
-y&lt;- if(x&gt;3) {
-
-10
-
-}else{
-
-0
-
-}
-<h4>L2 For loops</h4>
-for (i in 1:10){
-
-}
-
-&nbsp;
-
-x &lt;- c("a","b","c","d")
-
-for (i in seq_along(x)){
-
-print(x[i])
-
-}
-
-for (letter in x){
-
-print(letter)
-
-}
-<h4>L4 Functions</h4>
-set default value:
-
-abc = function(a = 10){
-
-}
-
-columnmean &lt;- function(y, removeNA = TRUE){
-
-nc &lt;- ncol(y)
-
-means &lt;- numeric(nc)
-
-for(i in 1:nc) {
-
-mean[i] &lt;- mean(y[,i], na.rm = removeNA)
-
-}
-
-}
-<h4>L6 Functions</h4>
-... argument indicate a variable number of arguments that are usually passed on to other funcitons.
-
-myplot &lt;- function(x, y, type = "l", ...) {
-
-plot (x, y, type = type, ...)
-
-}
-
-explicityly matching after dot dot dot
-<h4>L7 Functions could be made dynamically!</h4>
-<strong> lexical vs. dynamical scoping</strong>
-
-make.power &lt;- function(n) {
-
-pow &lt;- function(x) {
-
-x^n
-
-}
-
-pow
-
-}
-
-&nbsp;
-
-&gt;cube &lt;- make.power(3) # note cube is a function
-
-&gt; cube(3)
-
-[1] 27
-
-&nbsp;
-
-ls(environment(cube))
-<h4>L8 code style</h4>
-indenting 缩进
-<h4>L10 Date and times</h4>
-x &lt;- as.Date("1970-01-01")
-
-x &lt;- Sys.time()</td>
-<td>
-<h3><strong>Point</strong></h3>
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-here, we can see the sytle is very like windows/dos
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-cute assignment sign
-
-&nbsp;
-
-same comment sign as bash
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-complex! Like fortran
-
-&nbsp;
-
-&nbsp;
-
-interesting...
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Attributes! Like NCL!
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-be careful with c(), not like other language
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-in fact, I think this is really convenient
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-merge vectors to matrix, this is really user-friendly!
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Impressive! like PHP array, but much easier to understand
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Like NCL or MATLAB
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-See it? Plenty of data types, very user-friendly. You could imagine how simple when use data frames to process EXCEL type files.
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Briliant!!!
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Very like $$ in ncl
-
-&nbsp;
-
-&nbsp;
-
-Dim down or not, it is a problem</td>
-</tr>
-<tr>
-<td colspan="2"> <strong> Measure</strong></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/">【solved, git&github】first move to push my project</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Try to push paperhub project on Lab server to github. The following are steps and barriers when I did this.</p>
-
-<ol>
-  <li>
-    <p>create a new repo on github, same name as “paperhub”</p>
-  </li>
-  <li>
-    <p>Try one file down_enw.php</p>
-  </li>
-</ol>
-<pre><strong>$git init</strong> # to regard paperhub dir as a git repo
-<strong>$git add down_enw.php
-$git commit -m "first commit"
-$git push origin master</strong></pre>
-<p>Get error:</p>
-<pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git push origin master
-error: The requested URL returned error: <span class="m">403</span> Forbidden <span class="k">while</span> accessing https://github.com/Novarizark/paperhub.git
-
-fatal: HTTP request failed</code></pre>
-<p>Follow this:</p>
-
-<p><a href="http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/">http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/</a>
-<a href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed"> http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed</a></p>
-
-<p>Change:</p>
-<pre>$vi .git/config
-url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
-:wq</pre>
-<p>Another error:</p>
-<pre><code>(gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display:</code></pre>
-<p>Follow this:
-<a href="http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#">http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#</a></p>
-<pre><code>unset SSH_ASKPASS</code></pre>
-
-<p>Done!</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/">【solved】Teamserver huge .xsession-error problem</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>A few days ago I have found that the available disk space on Teamserver was shrunk to 60%. This is very weird because most datasets on the machine were uploaded by me and I know they only occupy about 30% in 22TB. Once I thought they might come from one of my teammate, uploading CMIP5 data or something. However, when I checked individual directory in home, I found nothing. Then I checked “ll -ah” in home. Holly shit! One file named “.xsession-error” takes up about 6TB, and still enlarging! So I google it and found it might be a bug of Linux, regardless of the distribution. Many people delete it or use file permission to restrict its expansion, without any source seeking. I followed them, while nothing happened to the available size from df command. I used DirStat and the original software to check this, nothing.
-What the fuck! I just let it alone and do my staff until I found there is only 2TB available today. Another similar file named as “.xsession-error.XXXXX” did the evil things. In fact this file was a text file, thus I “tail” it and found the flowing statement:</p>
-<pre>sslvpn_read_packet: SSL_read failed!
-Error while reading SSL packet
-keep alive recv failed!
-TCP_KEEP_ALIVE_SOCK_ENVENT
-sslvpn_read_packet: SSL_read failed!
-Error while reading SSL packet
-keep alive recv failed!
-TCP_KEEP_ALIVE_SOCK_ENVENT
-sslvpn_read_packet: SSL_read failed!</pre>
-<p>VPN! So it must be the vpn soft which aimed at connecting TH-2 that wrongly redirect the std out flow to this poor file and made the shit. Without any hesitate, I uninstall the VPN soft. Everything’s back to normal.</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -1704,7 +1125,27 @@ sslvpn_read_packet: SSL_read failed!</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
                             
                           
                         
@@ -2732,6 +2173,29 @@ sslvpn_read_packet: SSL_read failed!</pre>
                         
                 </ul>
             </div>
+            <!--Principles-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-location-arrow"></i>
+                    Principle
+                </div>
+                <ul class="content-ul">
+                    <li><small id="content-principle"></small></li>
+                </ul>
+            </div> 
+            
+             <!--Featured Articles-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    Featured Articles
+                </div>
+                <ul class="content-ul" recent>
+                        <li><a href="2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
+                </ul>
+            </div>
+
+            
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -2780,7 +2244,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#Living&amp;thinking" style="font-size: 11pt; color: #777;">Living&amp;thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
                     
                       
                       
@@ -3011,7 +2475,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#Ecnomics" style="font-size: 9pt; color: #999;">Ecnomics</a>
+                      <a href="/tag/#Economics" style="font-size: 9.5pt; color: #999;">Economics</a>
                     
                       
                       
@@ -3102,13 +2566,6 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 10.5pt; color: #777;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#housing" style="font-size: 9pt; color: #999;">housing</a>
                     
                       
@@ -3179,7 +2636,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10pt; color: #888;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
                     
                       
                       
@@ -3342,33 +2799,31 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#principle" style="font-size: 9pt; color: #999;">principle</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
+                    
                 </div>
             </div>
 
-            <!--Principles-->
-            <div class="side">
-                <div>
-                    <i class="fa fa-location-arrow"></i>
-                    Principle
-                </div>
-                <ul class="content-ul">
-                    <li><small id="content-principle"></small></li>
-                </ul>
-            </div> 
-            
-             <!--Featured Articles-->
-            <div class="side">
-                <div>
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                    Featured Articles
-                </div>
-                <ul class="content-ul" recent>
-                        <li><a href="2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
-                </ul>
-            </div>
-
-
-           
+                      
             
             <!--Recent Posts-->
             <div class="side">
@@ -3377,6 +2832,14 @@ sslvpn_read_packet: SSL_read failed!</pre>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                    
+                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                    
+                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                    
+                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
                     
                         <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
                     
@@ -3389,14 +2852,6 @@ sslvpn_read_packet: SSL_read failed!</pre>
                         <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
                     
                         <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
-                        <li><a href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a></li>
-                    
-                        <li><a href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a></li>
-                    
-                        <li><a href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a></li>
-                    
-                        <li><a href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a></li>
                     
                 </ul>
             </div>
@@ -3414,7 +2869,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">27</span>
+                            <span class="badge">28</span>
                         </a>
                     </li>
                     
@@ -3428,11 +2883,11 @@ sslvpn_read_packet: SSL_read failed!</pre>
                     </li>
                     
                     <li>
-                        <a href="/category/#Living&amp;thinking" class="categories-list-item" cate="Living&amp;thinking">
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
                             <span class="name">
-                                Living&amp;thinking
+                                thinking
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3707,9 +3162,9 @@ sslvpn_read_packet: SSL_read failed!</pre>
                     </li>
                     
                     <li>
-                        <a href="/category/#Ecnomics" class="categories-list-item" cate="Ecnomics">
+                        <a href="/category/#Economics" class="categories-list-item" cate="Economics">
                             <span class="name">
-                                Ecnomics
+                                Economics
                             </span>
                             <span class="badge">2</span>
                         </a>
@@ -3747,7 +3202,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -3783,7 +3238,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3819,7 +3274,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">8</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3837,7 +3292,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3873,7 +3328,52 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#liquidity" class="categories-list-item" cate="liquidity">
+                            <span class="name">
+                                liquidity
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#market" class="categories-list-item" cate="market">
+                            <span class="name">
+                                market
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Living&thinking" class="categories-list-item" cate="Living&thinking">
+                            <span class="name">
+                                Living&thinking
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#career" class="categories-list-item" cate="career">
+                            <span class="name">
+                                career
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#cesm" class="categories-list-item" cate="cesm">
+                            <span class="name">
+                                cesm
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

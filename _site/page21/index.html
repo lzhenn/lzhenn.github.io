@@ -234,6 +234,1110 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/">【solved, git&github】URL problem</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>When I pushed all ncl file in project to github, I got this error:</p>
+<pre>[yangsong3@localhost project]$ git push -u origin master
+Password:
+To https://Novarizark@github.com/Novarizark/project.git<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+ ! [rejected] master -&gt; master (non-fast-forward)
+error: failed to push some refs to 'https://Novarizark@github.com/Novarizark/pro ject.git'
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes before pushing again. See the 'Note about
+fast-forwards' section of 'git push --help' for details.</pre>
+<p>Google it, found the solution on Stackoverflow</p>
+<pre>You need to add the origin remote:
+
+    Delete the current one
+
+    git remote rm origin
+
+    Add the git remote link ex: (https://user@bitbucket.org/test.git or https://github.com/user/test.git)
+
+    git remote add origin link
+
+    git pull origin master (or other branch)</pre>
+<p>It is the Username@github made the bad result. So there should be other ways to solve the 403 or ssh error.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/">【Coursera】R Language</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>&nbsp;
+    
+        <a href="/category/#Coursera" title="Category: Coursera" rel="category">Coursera</a>&nbsp;
+    
+        <a href="/category/#R" title="Category: R" rel="category">R</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>&nbsp;
+    
+        <a href="/tag/#Coursera" title="Tag: Coursera" rel="tag">Coursera</a>&nbsp;
+    
+        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p> </p>
+<table>
+<tbody>
+<tr>
+<td>
+<h3><strong>Background Material</strong></h3>
+<h4><strong>L4</strong></h4>
+get the current working directory
+
+<strong>&gt;getwd()  #same in MAC
+</strong>
+
+read the csv (comma-seperated values) file
+
+<strong>&gt;read.csv("xx.csv")</strong>
+
+list the file and directory under the current directory
+
+<strong>&gt;dir()</strong>
+
+change the working directory
+
+<strong>&gt;setwd("F:/workspace/")</strong>
+
+To list out all the functions in one script
+
+<strong>&gt;ls()</strong>
+<h3>Week1</h3>
+<h4>L4</h4>
+assignment
+
+<strong>&gt;x &lt;- 5</strong>
+
+comments
+
+<strong># hi, this is a comment</strong>
+<h4>L5</h4>
+5 basic "atomic" classes
+<ul>
+	<li>character</li>
+	<li>numeric (real numbers)</li>
+	<li>integer</li>
+	<li>complex</li>
+	<li>logical (True/False)</li>
+</ul>
+basic object: vector
+
+<strong>vector function: vector(type_of, length_of)</strong>
+
+basically, R think all number as real type, if you want a integer 1, type:
+
+<strong>1L</strong>
+
+Infinity:
+
+<strong>Inf</strong>
+
+not a number:
+
+0/0=NAN (or as missing value)
+
+R objects can have attributes:
+<ul>
+	<li>names, dimnames</li>
+	<li>dimensions</li>
+	<li>class (numeric)</li>
+	<li>length</li>
+</ul>
+function to modify attributes
+
+<strong>attributes()</strong>
+<h3>L6</h3>
+c() function is to create a vector:
+
+<strong>x &lt;- c(0.5,0.6)</strong>
+
+<strong>x &lt;- c(True, Flase)</strong>
+
+vector() function acts alike, with initial value 0 for numeric.
+
+<strong>x &lt;- vector("numeric", length = 10)</strong>
+
+mixed classes
+
+<strong>x&lt;- c(True, 3) # will be numeric</strong>
+
+Explicit Coercion
+
+<strong>&gt; x&lt;-0:2</strong>
+
+<strong>&gt; class(x)</strong>
+
+<strong>[1] "integer"</strong>
+
+<strong>&gt; as.logical(x)</strong>
+
+<strong>[1] FALSE TRUE TRUE</strong>
+
+we use list() to create list.
+
+<strong>&gt;y&lt;-list("a", 1, TRUE)</strong>
+<h3>L7</h3>
+create matrix
+
+<strong>&gt;m&lt;-matrix(nrows=2, ncols=3)</strong>
+
+<strong>&gt;attributes(m)</strong>
+
+$dim
+
+[1] 2 3
+
+matrix is <strong>column wise</strong>
+
+change vector to matrix
+
+&gt;m&lt;-1:10
+
+<strong>&gt;dim(m)&lt;-c(2,5)</strong>
+
+&nbsp;
+
+or use cbind or rbind
+
+&gt;x&lt;-1:3
+
+&gt;y&lt;-10:12
+
+&gt;cbind(x,y)
+
+1 10
+
+2 11
+
+2 12
+
+&gt;rbind(x,y)
+
+similar but in row
+<h3>L8</h3>
+factors are ordered or unordered, like key for the php array, factors could be treated as numeric vector with labels
+
+give an example
+
+&gt;x&lt;-factor(c("yes","yes","no"))
+
+&gt;x
+
+[1] yes yes no
+
+Levels: no yes
+
+&gt;table(x)
+
+yes no
+
+2     1
+
+&gt;unclass(x)
+
+221
+
+that is how factor x expressed in R underneath!
+
+The first level is called the baseline level, it is determined by the alphabet rank, however, you could change the order.
+
+<strong>&gt;x&lt;-factor(c("yes","yes","no"),levels=c("yes","no"))</strong>
+
+and yes will be in the first place.
+<h3>L9-Missing Values</h3>
+is.na()
+
+is.nan()
+
+NaN value all be treated as NA, but the converse is not true.
+<h3>L10-Data Frames</h3>
+tabular 表格的
+
+data frames ~ matrices
+
+list ~ vector
+
+Yes, that the class doesn't matter in data frames.
+
+Special attributes: <strong>row.names</strong>
+
+created by
+
+<strong>read.table() or read.csv()</strong>
+
+convert to matrix
+
+<strong>data.matrix()</strong>
+
+an example:
+
+<strong>&gt;x&lt;- data.frame(foo=1:4, bar = c(T,T,F,F))</strong>
+
+<strong>&gt;x</strong>
+
+<strong>   foo    bar</strong>
+
+<strong>1    1    TRUE</strong>
+
+<strong>2    2    TRUE</strong>
+
+<strong>3    3    FALSE</strong>
+
+<strong>4    4    FALSE</strong>
+<h3>L10-Names Attribute</h3>
+<strong>&gt;x &gt;- 1:3</strong>
+
+<strong>&gt; names(x) &lt;- c("foo","bar","norf")</strong>
+
+<strong>&gt;x</strong>
+
+<strong>foo bar norf</strong>
+
+<strong>   1     2     3</strong>
+<h3>L12-Reading Tabular Data</h3>
+<ul>
+	<li><strong>read.table, read.csv</strong></li>
+	<li><strong>readLines</strong></li>
+	<li><strong>source</strong>, for reading in R code files (inverse of dump)</li>
+	<li> <strong>dget</strong>, same as above, but for dparsed code (inverse of dput)</li>
+	<li><strong>load, </strong>for reading in saved workspaces</li>
+	<li><strong>unserialize, </strong>for reading single R objects in binary form</li>
+</ul>
+write
+<ul>
+	<li>write.table</li>
+	<li>writeLines</li>
+	<li>dump</li>
+	<li>dput</li>
+	<li>save</li>
+	<li>serialize</li>
+</ul>
+<h4><strong> read.table</strong></h4>
+<ul>
+	<li>file, the name of a file, or a connection</li>
+	<li>header, logical indicating if the file has a header line</li>
+	<li>sep, a string indicating how the columns are separated</li>
+	<li>colClasses, a character vector indicating the class of each column in the dataset</li>
+	<li>nrows, the number of rows in the dataset</li>
+	<li>comment.char, a character string indicating the comment character</li>
+	<li>skip, the number of lines to skip from the beginning</li>
+	<li>stringsAsFactors, should character variables be coded as factors?</li>
+</ul>
+no argument is fine, and the result would be in a data frame.
+
+read.table default separator is space.
+
+<strong>be sure to read the document of read.table</strong>
+<h3>L12-Reading Large Tables</h3>
+set the arguments!
+
+all numeric, one is fine:
+
+colClasses = "numeric"
+<h3>L13-Textual Data Format</h3>
+<h3>L17-Subsetting-Basics</h3>
+&gt;x &lt;- c("a","b","c")
+
+&gt;x[1]
+
+[1]  "a"
+
+&gt; x[1:3]
+
+&gt;x[x&gt;"a"]
+
+&gt;u &lt;- x&gt;"a"
+
+&gt;u
+
+[1] FALSE TRUE TRUE
+<h3>L17-Subsetting-Lists</h3>
+&gt;x &lt;- list (foo =1:4, bar =0.6)
+
+&gt;x[1]
+
+$foo
+
+[1] 1 2 3 4
+
+<strong>we got a list!</strong>
+
+&gt;x[[1]]
+
+[1]  1 2 3 4
+
+<strong>we got a sequence!</strong>
+
+&gt;x$bar
+
+[1]  0.6
+
+&gt;x[["bar"]] #this is equal
+
+&gt;x["bar"]  # we got a list
+
+&gt;x[c(1, 3)]
+
+&nbsp;
+
+&gt;name = "foo"
+
+&gt;x[[name]]
+
+this is useful
+<h3>L17-Subsetting-Matrices</h3>
+&gt;x[1, ]    # missing is fine
+
+No dropping forcing:
+
+&gt;x[1, 2, drop =FALSE]
+<h3>L18-partial matching</h3>
+&gt;x&lt;-list(aardvark=1:5)
+
+&gt;x$a
+
+[1] 1 2 3 4 5
+
+&gt;x[["a"]]
+
+NULL
+
+&gt;x[["a", exact = FALSE]]
+
+[1] 1 2 3 4 5
+<h3>L19-Removing NA Values</h3>
+&gt;x &lt;- c(1, 2, NA, 4, NA, 5)
+
+&gt;bad &lt;- is.na(x)
+
+&gt;x[!bad]
+
+&nbsp;
+
+&gt;good&lt;-complete.cases(x, y)
+<h3>L20-Vectorized Operations</h3>
+matrix
+
+x*y #by rank
+
+x%*%y # by true matrix multiplication
+<h3>Week1</h3>
+<h4>L2 if-else</h4>
+if(x&gt;3) {
+
+y&lt;-10
+
+}else{
+
+y&lt;-0
+
+}
+
+<strong>also true:</strong>
+
+y&lt;- if(x&gt;3) {
+
+10
+
+}else{
+
+0
+
+}
+<h4>L2 For loops</h4>
+for (i in 1:10){
+
+}
+
+&nbsp;
+
+x &lt;- c("a","b","c","d")
+
+for (i in seq_along(x)){
+
+print(x[i])
+
+}
+
+for (letter in x){
+
+print(letter)
+
+}
+<h4>L4 Functions</h4>
+set default value:
+
+abc = function(a = 10){
+
+}
+
+columnmean &lt;- function(y, removeNA = TRUE){
+
+nc &lt;- ncol(y)
+
+means &lt;- numeric(nc)
+
+for(i in 1:nc) {
+
+mean[i] &lt;- mean(y[,i], na.rm = removeNA)
+
+}
+
+}
+<h4>L6 Functions</h4>
+... argument indicate a variable number of arguments that are usually passed on to other funcitons.
+
+myplot &lt;- function(x, y, type = "l", ...) {
+
+plot (x, y, type = type, ...)
+
+}
+
+explicityly matching after dot dot dot
+<h4>L7 Functions could be made dynamically!</h4>
+<strong> lexical vs. dynamical scoping</strong>
+
+make.power &lt;- function(n) {
+
+pow &lt;- function(x) {
+
+x^n
+
+}
+
+pow
+
+}
+
+&nbsp;
+
+&gt;cube &lt;- make.power(3) # note cube is a function
+
+&gt; cube(3)
+
+[1] 27
+
+&nbsp;
+
+ls(environment(cube))
+<h4>L8 code style</h4>
+indenting 缩进
+<h4>L10 Date and times</h4>
+x &lt;- as.Date("1970-01-01")
+
+x &lt;- Sys.time()</td>
+<td>
+<h3><strong>Point</strong></h3>
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+here, we can see the sytle is very like windows/dos
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+cute assignment sign
+
+&nbsp;
+
+same comment sign as bash
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+complex! Like fortran
+
+&nbsp;
+
+&nbsp;
+
+interesting...
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Attributes! Like NCL!
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+be careful with c(), not like other language
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+in fact, I think this is really convenient
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+merge vectors to matrix, this is really user-friendly!
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Impressive! like PHP array, but much easier to understand
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Like NCL or MATLAB
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+See it? Plenty of data types, very user-friendly. You could imagine how simple when use data frames to process EXCEL type files.
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Briliant!!!
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Very like $$ in ncl
+
+&nbsp;
+
+&nbsp;
+
+Dim down or not, it is a problem</td>
+</tr>
+<tr>
+<td colspan="2"> <strong> Measure</strong></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/">【solved, git&github】first move to push my project</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-06
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Try to push paperhub project on Lab server to github. The following are steps and barriers when I did this.</p>
+
+<ol>
+  <li>
+    <p>create a new repo on github, same name as “paperhub”</p>
+  </li>
+  <li>
+    <p>Try one file down_enw.php</p>
+  </li>
+</ol>
+<pre><strong>$git init</strong> # to regard paperhub dir as a git repo
+<strong>$git add down_enw.php
+$git commit -m "first commit"
+$git push origin master</strong></pre>
+<p>Get error:</p>
+<pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git push origin master
+error: The requested URL returned error: <span class="m">403</span> Forbidden <span class="k">while</span> accessing https://github.com/Novarizark/paperhub.git
+
+fatal: HTTP request failed</code></pre>
+<p>Follow this:</p>
+
+<p><a href="http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/">http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/</a>
+<a href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed"> http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed</a></p>
+
+<p>Change:</p>
+<pre>$vi .git/config
+url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
+:wq</pre>
+<p>Another error:</p>
+<pre><code>(gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display:</code></pre>
+<p>Follow this:
+<a href="http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#">http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#</a></p>
+<pre><code>unset SSH_ASKPASS</code></pre>
+
+<p>Done!</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/">【solved】Teamserver huge .xsession-error problem</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>A few days ago I have found that the available disk space on Teamserver was shrunk to 60%. This is very weird because most datasets on the machine were uploaded by me and I know they only occupy about 30% in 22TB. Once I thought they might come from one of my teammate, uploading CMIP5 data or something. However, when I checked individual directory in home, I found nothing. Then I checked “ll -ah” in home. Holly shit! One file named “.xsession-error” takes up about 6TB, and still enlarging! So I google it and found it might be a bug of Linux, regardless of the distribution. Many people delete it or use file permission to restrict its expansion, without any source seeking. I followed them, while nothing happened to the available size from df command. I used DirStat and the original software to check this, nothing.
+What the fuck! I just let it alone and do my staff until I found there is only 2TB available today. Another similar file named as “.xsession-error.XXXXX” did the evil things. In fact this file was a text file, thus I “tail” it and found the flowing statement:</p>
+<pre>sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!</pre>
+<p>VPN! So it must be the vpn soft which aimed at connecting TH-2 that wrongly redirect the std out flow to this poor file and made the shit. Without any hesitate, I uninstall the VPN soft. Everything’s back to normal.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/">【Shanbei News Notes】20150826</a>
                 </h2>
                 <div class="label">
@@ -366,325 +1470,6 @@
                 </div>
                 <div class="read-all">
                     <a  href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150823/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150822/">【Shanbei News Notes】20150822</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-23
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/36112/">China Worries Push Down Global Stocks 中国担忧推低全球股市</a></h2>
-<p>brokerage 证券公司</p>
-
-<p>faltering growth经济增长下行</p>
-
-<p>on edge 急切不安的</p>
-
-<p>stock market 股票市场</p>
-
-<p>devaluation 货币贬值</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150822/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/23/e3-80-90gitgithub-e3-80-91the-first-move-on-git-p/">【git&github】the first move on git push</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-23
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Finally we come to the deadline of data science course project on coursera. In fact, most of the questions are very easy to answer or cope with, except one aiming at try the git push. I got some problems when test this:</p>
-
-<p>As the question requests, I created a file named “HelloWorld.md” and write something in it. When I type the command</p>
-<pre>&gt;git push</pre>
-<p>Waiting for about 1 min, an error occors:</p>
-
-<p><strong>error:src refspec master does not match any</strong></p>
-
-<p>Then I found this was because no file in the dir yet. The solution is as follow:</p>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td class="gutter"></td>
-<td class="code">
-<div class="container">
-<div class="line number1 index0 alt2"><code class="shell functions">touch</code> <code class="shell plain">README</code></div>
-<div class="line number2 index1 alt1"><code class="shell plain">git add README </code></div>
-<div class="line number3 index2 alt2"><code class="shell plain">git commit -m </code><code class="shell string">'first commit'</code></div>
-<div class="line number4 index3 alt1"><code class="shell plain">git push origin master</code></div>
-</div></td>
-</tr>
-</tbody>
-</table>
-<p>Of course, we don’t need README, then I trid git add, commit and push commands, it works!</p>
-
-<p>Through, I am not really understand the exact reason.</p>
-
-<p>Referrence:</p>
-
-<p>http://www.open-open.com/lib/view/open1366080269265.html#_label0</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/23/e3-80-90gitgithub-e3-80-91the-first-move-on-git-p/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/19/e3-80-90shanbei-news-notes-e3-80-9120150819/">【Shanbei News Notes】20150819</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-19
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/35983/">New US Rules Promise Deep Cuts in Methane Emissions 最新的美国法规承诺大幅减少甲烷排放</a></h2>
-<p>fracking wells 水力压裂井</p>
-
-<p>volatile organic compounds VOC</p>
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/35971/">Hackers dump data from cheating website Ashley Madison online: reports 黑客从偷腥网站AsheleyMadison导出数据</a></h2>
-<p>cheating spouses webstie 已婚人士偷情网站</p>
-
-<p>follow through on 完成</p>
-
-<p>sprout up 涌现</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/19/e3-80-90shanbei-news-notes-e3-80-9120150819/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/14/e3-80-90solved-r-e3-80-91problems-during-installi/">【solved, R】problems during installing devtools</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
-    
-        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>&nbsp;
-    
-        <a href="/category/#R" title="Category: R" rel="category">R</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
-    
-        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>&nbsp;
-    
-        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Finished installing R and Rstudio, we come to the installation of Rtools. (Please check the <a href="https://class.coursera.org/datascitoolbox-031/lecture/55">tutorial vedio</a> in coursera) It seems all went fine before installing devtools. However, typing</p>
-<pre>&gt;install.packages("devtools")</pre>
-<p>really took a long time to download a series of packages. When finished, a pop-up info indicated an error: <strong>“https://class.coursera.org/datascitoolbox-031/lecture/55”</strong></p>
-
-<p>google it, and we found this would work:</p>
-<pre>Sys.setlocale('LC_ALL','C')</pre>
-
-<p>Reasons are complex, here post the reference:
-http://cos.name/cn/topic/157794/</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/14/e3-80-90solved-r-e3-80-91problems-during-installi/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -913,7 +1698,27 @@ http://cos.name/cn/topic/157794/</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
                             
                           
                         
@@ -1941,6 +2746,29 @@ http://cos.name/cn/topic/157794/</p>
                         
                 </ul>
             </div>
+            <!--Principles-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-location-arrow"></i>
+                    Principle
+                </div>
+                <ul class="content-ul">
+                    <li><small id="content-principle"></small></li>
+                </ul>
+            </div> 
+            
+             <!--Featured Articles-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    Featured Articles
+                </div>
+                <ul class="content-ul" recent>
+                        <li><a href="2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
+                </ul>
+            </div>
+
+            
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -1989,7 +2817,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#Living&amp;thinking" style="font-size: 11pt; color: #777;">Living&amp;thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
                     
                       
                       
@@ -2220,7 +3048,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#Ecnomics" style="font-size: 9pt; color: #999;">Ecnomics</a>
+                      <a href="/tag/#Economics" style="font-size: 9.5pt; color: #999;">Economics</a>
                     
                       
                       
@@ -2311,13 +3139,6 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 10.5pt; color: #777;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#housing" style="font-size: 9pt; color: #999;">housing</a>
                     
                       
@@ -2388,7 +3209,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10pt; color: #888;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
                     
                       
                       
@@ -2551,33 +3372,31 @@ http://cos.name/cn/topic/157794/</p>
                       
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#principle" style="font-size: 9pt; color: #999;">principle</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
+                    
                 </div>
             </div>
 
-            <!--Principles-->
-            <div class="side">
-                <div>
-                    <i class="fa fa-location-arrow"></i>
-                    Principle
-                </div>
-                <ul class="content-ul">
-                    <li><small id="content-principle"></small></li>
-                </ul>
-            </div> 
-            
-             <!--Featured Articles-->
-            <div class="side">
-                <div>
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                    Featured Articles
-                </div>
-                <ul class="content-ul" recent>
-                        <li><a href="2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
-                </ul>
-            </div>
-
-
-           
+                      
             
             <!--Recent Posts-->
             <div class="side">
@@ -2586,6 +3405,14 @@ http://cos.name/cn/topic/157794/</p>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                    
+                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                    
+                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                    
+                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
                     
                         <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
                     
@@ -2598,14 +3425,6 @@ http://cos.name/cn/topic/157794/</p>
                         <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
                     
                         <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
-                        <li><a href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a></li>
-                    
-                        <li><a href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a></li>
-                    
-                        <li><a href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a></li>
-                    
-                        <li><a href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a></li>
                     
                 </ul>
             </div>
@@ -2623,7 +3442,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">27</span>
+                            <span class="badge">28</span>
                         </a>
                     </li>
                     
@@ -2637,11 +3456,11 @@ http://cos.name/cn/topic/157794/</p>
                     </li>
                     
                     <li>
-                        <a href="/category/#Living&amp;thinking" class="categories-list-item" cate="Living&amp;thinking">
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
                             <span class="name">
-                                Living&amp;thinking
+                                thinking
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -2916,9 +3735,9 @@ http://cos.name/cn/topic/157794/</p>
                     </li>
                     
                     <li>
-                        <a href="/category/#Ecnomics" class="categories-list-item" cate="Ecnomics">
+                        <a href="/category/#Economics" class="categories-list-item" cate="Economics">
                             <span class="name">
-                                Ecnomics
+                                Economics
                             </span>
                             <span class="badge">2</span>
                         </a>
@@ -2956,7 +3775,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2992,7 +3811,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3028,7 +3847,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">8</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3046,7 +3865,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3082,7 +3901,52 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#liquidity" class="categories-list-item" cate="liquidity">
+                            <span class="name">
+                                liquidity
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#market" class="categories-list-item" cate="market">
+                            <span class="name">
+                                market
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Living&thinking" class="categories-list-item" cate="Living&thinking">
+                            <span class="name">
+                                Living&thinking
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#career" class="categories-list-item" cate="career">
+                            <span class="name">
+                                career
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#cesm" class="categories-list-item" cate="cesm">
+                            <span class="name">
+                                cesm
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

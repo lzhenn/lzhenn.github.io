@@ -234,6 +234,310 @@
             
               <li>
                 <h2>
+                  <a class="post-link" href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/">【已解决】pbs指定作业节点</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>之前捣鼓了半天没有成功，这次终于知道指定语法怎么写了。</p>
+
+<p>惯例，申请两个节点，每个节点16进程</p>
+<pre>#PBS -l nodes=2:ppn=16</pre>
+<p>如果需要指定到c72 c73两个节点，需要这么写就可以了：</p>
+<pre>#PBS -l nodes=c72:ppn=16+c73:ppn=16</pre>
+<p>但是这样在qstat上显示会有问题，显示进程数为0，不过不影响作业正常运行。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/">【已解决】Linux对时命令</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<pre>#ntpdate us.pool.ntp.org</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/">【已解决】自动生成pbs的create_newcase.sh</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-08
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>在上一篇<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=387">【已解决】shell大法好——用here document生成脚本</a>中介绍了如何使用here document自动生成脚本文件，折腾了一番，搞定了新的create_newcase.sh，可以自动生成pbs文件啦，不用每次调核心数调节点调路径啦。话说shell的if语法真是折腾，调试了快半个小时才通过三行if语句。注意各种空格！</p>
+
+<p>核心代码：</p>
+<pre>97 #Deal with que and nodes
+98 NNODES=$[NTASKS/16]
+99
+100 if [ $QUENAME = "ys" ]; then
+101 WALLTIME=999
+102 elif [ $QUENAME = "few" ]; then
+103 WALLTIME=720
+104 elif [ $QUENAME = "medium" ]; then
+105 WALLTIME=168
+106 else
+107 WALLTIME=48
+108 fi
+109
+110 #--------------------------------------
+111 #------Now generate the pbs file-------
+112 #--------------------------------------
+113 cat &lt;&lt; EOF &gt; run.pbs
+114 #!/bin/sh
+115 #PBS -N $CASENAME
+116 #PBS -q $QUENAME
+117 #PBS -l walltime=$WALLTIME:00:00
+118 #PBS -l nodes=$NNODES:ppn=16
+119 #PBS -r n
+120 #PBS -o cesmrun.log
+121 #PBS -e cesmrun.err
+122 echo "This jobs is "\$PBS_JOBID@\$PBS_QUEUE
+123 MPIBIN=/public/mpi/mvapich2-18-intel/bin
+124 EXEROOT=/users/yangsong3/L_Zealot/F/$CASENAME/exe
+125 cd \$EXEROOT
+126 \$MPIBIN/mpirun -np $NTASKS -hostfile \$PBS_NODEFILE ./cesm.exe &gt;&amp; ../run.log
+127 EOF</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/">【已解决】shell大法好——用here document生成脚本</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>CESM从新建一个case，更改pe layers，到最后提交run脚本执行，还是需要折腾一番的，尤其是四期动辄就对csh傻眼（貌似最近好了），还是提交标准的bash pbs妥当，不过更改pbs，又要费一番功夫。最好就是在create newcase的时候直接把bps生成好，change pe layers的脚本里也加入对pbs修改的语句，这样就可以省下很多功夫。按照【shell 生成文本】的关键词查了下资料。发现here document可以解决问题。</p>
+<blockquote>
+<div>例如下面的here.sh 文件</div>
+<div>cat &lt;&lt; EOF &gt; output.sh</div>
+<div>echo "hello"</div>
+<div>echo "world"</div>
+<div>EOF</div>
+<div>使用 sh here.sh 运行这个脚本文件，会得到output.sh 这个新文件，里面的内容如下</div>
+<div>echo "hello"</div>
+<div>echo "world"</div>
+<div></div></blockquote>
+<div>还是很简单的说～而且可以识别母脚本中的变量。另外here document还可以用来与数据库或者终端交互，功能确实强大。</div>
+<div></div>
+<div>参考资料：</div>
+<div>http://www.2cto.com/os/201307/231010.html</div>
+<div></div>
+<div>http://jeremiah.blog.51cto.com/539865/339211</div>
+<div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
                   <a class="post-link" href="/2015/01/05/e3-80-90paperhub-e3-80-91refman-e6-a0-bc-e5-bc-8f/">【paperhub】格式导出与pdf附件信息</a>
                 </h2>
                 <div class="label">
@@ -425,320 +729,6 @@ z3(14)= 15.
                 </div>
                 <div class="read-all">
                     <a  href="/2015/01/05/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/12/25/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e8-b/">【更新中】跳闸故障排查:Windows事件查看器</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>最近三天办公室计算机用电（桌位底插座对应线路）总是在凌晨跳闸，而其他路（包括空调）良好，非常奇怪。由于电脑一直开着，所以从系统日志入手查看问题。</p>
-
-<p>win7有eventvwr.exe，直接通过开始运行打开。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/12/QQ图片20141225101006.jpg"><img class="alignnone size-full wp-image-371" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/12/QQ图片20141225101006.jpg" alt="QQ图片20141225101006" width="1160" height="558" /></a></p>
-
-<p>可以看到左侧选中【windows日志】–&gt;【系统】，查看最近日志发现service control manager每个整点过三分会发出ID为7036的事件，而24日和25日这两天都是在凌晨4:03发出最后一个事件报告后缄默，23日在3:03发出最后一个事件报告后缄默。也就是说停电都发生在凌晨三点到五点之间。这样的凌晨时间，而又并非固定时间（可以锁定某些定时开启类电器），非常吊诡。</p>
-
-<p>参考资料</p>
-
-<p>http://blog.sina.com.cn/s/blog_518b64290100fewh.html</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/12/25/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/12/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim块选择</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>之前一直用“v”进入可视模式，今天查替换的资料，发现可以通过大写“V”进入可是模式，直接进入行选择，这样进行块复制会方便很多。其他块选择及辅助命令的说明记在这里：</p>
-<pre>v------------块选择，字符模式
-V------------块选择，行模式
-Ctrl+v-------块选择，矩形模式
-
-gg-----------移动到文件头
-G------------移动到文件尾
-0------------移动到行首
-$------------移动到行尾</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/12/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/12/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim注释语法高亮</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-20
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>vim默认注释为深蓝色，太暗太难看。查了下改成了亮绿色，发现有些关键词高亮也是亮绿，后改为亮蓝色，难看点也就这样吧……</p>
-
-<p>其中6是颜色号</p>
-<pre>highlight Comment ctermfg=6 guifg=6</pre>
-<table style="height: 115px; border-color: #969595;" border="1" width="180">
-<tbody>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;"><strong>颜色号</strong></span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;"><strong>颜色</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">0</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #999999;"><strong>Black</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">1</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ff0000;"><strong>Red</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">2</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #00ff00;"><strong>Green</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">3</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ff9900;"><strong>Yellow</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">4</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #0000ff;"><strong>Dark Blue</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">5</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ff00ff;"><strong>Pink</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">6</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #33cccc;"><strong>Light Blue</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">7</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;"><strong>White</strong></span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/12/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl求线性回归系数的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>求线性回归系数画图，直接用regCoef函数出现维度问题，出不来图。看了下varSummary，奇奇怪怪一大堆，估计是误差估计之类的东西。于是对返回变量做取值操作，没有问题。</p>
-
-<p>例子：</p>
-<pre>391 reg_var4 = season_var4(0,:,:)
-392 reg_var4 = (/regCoef(sst_ts(i,:),season_var4_anoLLT)/)</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -967,7 +957,27 @@ $------------移动到行尾</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (39)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
                             
                           
                         
@@ -1995,6 +2005,29 @@ $------------移动到行尾</pre>
                         
                 </ul>
             </div>
+            <!--Principles-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-location-arrow"></i>
+                    Principle
+                </div>
+                <ul class="content-ul">
+                    <li><small id="content-principle"></small></li>
+                </ul>
+            </div> 
+            
+             <!--Featured Articles-->
+            <div class="side">
+                <div>
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    Featured Articles
+                </div>
+                <ul class="content-ul" recent>
+                        <li><a href="2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
+                </ul>
+            </div>
+
+            
             <!--Tags Cloud-->
             <div class="side">
                 <div>
@@ -2043,7 +2076,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#Living&amp;thinking" style="font-size: 11pt; color: #777;">Living&amp;thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
                     
                       
                       
@@ -2274,7 +2307,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#Ecnomics" style="font-size: 9pt; color: #999;">Ecnomics</a>
+                      <a href="/tag/#Economics" style="font-size: 9.5pt; color: #999;">Economics</a>
                     
                       
                       
@@ -2365,13 +2398,6 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 10.5pt; color: #777;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#housing" style="font-size: 9pt; color: #999;">housing</a>
                     
                       
@@ -2442,7 +2468,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10pt; color: #888;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
                     
                       
                       
@@ -2605,33 +2631,31 @@ $------------移动到行尾</pre>
                       
                       <a href="/tag/#markdown" style="font-size: 9pt; color: #999;">markdown</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#principle" style="font-size: 9pt; color: #999;">principle</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
+                    
                 </div>
             </div>
 
-            <!--Principles-->
-            <div class="side">
-                <div>
-                    <i class="fa fa-location-arrow"></i>
-                    Principle
-                </div>
-                <ul class="content-ul">
-                    <li><small id="content-principle"></small></li>
-                </ul>
-            </div> 
-            
-             <!--Featured Articles-->
-            <div class="side">
-                <div>
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                    Featured Articles
-                </div>
-                <ul class="content-ul" recent>
-                        <li><a href="2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a></li>
-                </ul>
-            </div>
-
-
-           
+                      
             
             <!--Recent Posts-->
             <div class="side">
@@ -2640,6 +2664,14 @@ $------------移动到行尾</pre>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                    
+                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                    
+                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                    
+                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
                     
                         <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
                     
@@ -2652,14 +2684,6 @@ $------------移动到行尾</pre>
                         <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
                     
                         <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
-                        <li><a href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a></li>
-                    
-                        <li><a href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a></li>
-                    
-                        <li><a href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a></li>
-                    
-                        <li><a href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a></li>
                     
                 </ul>
             </div>
@@ -2677,7 +2701,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">27</span>
+                            <span class="badge">28</span>
                         </a>
                     </li>
                     
@@ -2691,11 +2715,11 @@ $------------移动到行尾</pre>
                     </li>
                     
                     <li>
-                        <a href="/category/#Living&amp;thinking" class="categories-list-item" cate="Living&amp;thinking">
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
                             <span class="name">
-                                Living&amp;thinking
+                                thinking
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -2970,9 +2994,9 @@ $------------移动到行尾</pre>
                     </li>
                     
                     <li>
-                        <a href="/category/#Ecnomics" class="categories-list-item" cate="Ecnomics">
+                        <a href="/category/#Economics" class="categories-list-item" cate="Economics">
                             <span class="name">
-                                Ecnomics
+                                Economics
                             </span>
                             <span class="badge">2</span>
                         </a>
@@ -3010,7 +3034,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -3046,7 +3070,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3082,7 +3106,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">8</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3100,7 +3124,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3136,7 +3160,52 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#liquidity" class="categories-list-item" cate="liquidity">
+                            <span class="name">
+                                liquidity
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#market" class="categories-list-item" cate="market">
+                            <span class="name">
+                                market
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Living&thinking" class="categories-list-item" cate="Living&thinking">
+                            <span class="name">
+                                Living&thinking
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#career" class="categories-list-item" cate="career">
+                            <span class="name">
+                                career
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#cesm" class="categories-list-item" cate="cesm">
+                            <span class="name">
+                                cesm
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     
