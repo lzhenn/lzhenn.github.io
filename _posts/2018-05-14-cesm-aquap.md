@@ -14,7 +14,7 @@ author: LZN
 
 这么说还需要自己写一个topo为0的文件。
 
-![一些资料](http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html)
+[一些资料](http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html)
 
 **Updated 2018-05-14**
 
