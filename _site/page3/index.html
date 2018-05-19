@@ -219,18 +219,256 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-01
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>帮JL移植wrf3.8.1到天河2号。首先调整环境变量。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">.</span> /etc/bashrc
+<span class="k">fi</span>
+<span class="c"># edited on Apr 1, 2018 for WRF</span>
+<span class="c"># User specific aliases and functions</span>
+<span class="c">#bug fix</span>
+<span class="nb">source</span> /WORK/app/osenv/ln1/set2.sh
+<span class="nb">export </span><span class="nv">MODULEPATH</span><span class="o">=</span>/WORK/app/modulefiles
+
+<span class="c">#set COMMON input data path for CESM</span>
+<span class="c">#export COMMON_CESM_INPUT=/WORK/app/CESM_inputdata</span>
+
+<span class="c">#set Intel compiler and MPI</span>
+module load intel-compilers/13.0.0
+module load MPI/Intel/MPICH/3.1-icc13
+module load cmake/3.0.2
+
+<span class="c">#set hdf5 and netcdf4 for WRF</span>
+module load hdf5/1.8.13/03-CF-13
+module load netcdf/4.3.2/02-CF-13
+
+<span class="c">#set jasper</span>
+<span class="nb">export </span><span class="nv">JASPER</span><span class="o">=</span>/HOME/sio_goc017/WORKSPACE/jjl/soft/jasper-1.900.1
+<span class="nb">export </span><span class="nv">JASPERLIB</span><span class="o">=</span><span class="nv">$JASPER</span>/lib
+<span class="nb">export </span><span class="nv">JASPERINC</span><span class="o">=</span><span class="nv">$JASPER</span>/include
+
+<span class="c">#set WRF</span>
+<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
+<span class="nb">export </span><span class="nv">BUFR</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">CRTM</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">J</span><span class="o">=</span><span class="s2">"-j 12"</span>
+<span class="nb">export </span><span class="nv">MP_STACK_SIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">OMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">KMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
+<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+
+<span class="nv">MPI_BUFFER_SIZE</span><span class="o">=</span>128
+</code></pre></div></div>
+<p>注意在编译cumulus模块的地方大概要等待20分钟之久。采用上述环境变量出错：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wrf.o: In <span class="k">function</span> <span class="sb">`</span>MAIN__<span class="s1">':
+wrf.f90:(.text+0x1f): undefined reference to `__intel_new_feature_proc_init'</span>
+libwrflib.a<span class="o">(</span>module_check_a_mundo.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>module_check_a_mundo_mp_check_nml_consistency_<span class="s1">':
+module_check_a_mundo.f90:(.text+0x31fa): undefined reference to `__intel_ssse3_rep_memmove'</span>
+module_check_a_mundo.f90:<span class="o">(</span>.text+0x35ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_etanew.o): In function `module_mp_etanew_mp_etanewinit_'</span>:
+module_mp_etanew.f90:<span class="o">(</span>.text+0xacb0<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_thompson.o): In function `module_mp_thompson_mp_table_ccnact_'</span>:
+module_mp_thompson.f90:<span class="o">(</span>.text+0x2ed74<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtm.o): In function `module_ra_rrtm_mp_rrtm_lookuptable_'</span>:
+module_ra_rrtm.f90:<span class="o">(</span>.text+0x256ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtmg_lw.o):module_ra_rrtmg_lw.f90:(.text+0x769bf): more undefined references to `__intel_ssse3_rep_memmove'</span> follow
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x1ee4): undefined reference to `_intel_fast_memmove'</span>
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose1d_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x26f5): undefined reference to `_intel_fast_memmove'</span>
+io_grib_share.f90:<span class="o">(</span>.text+0x29e3<span class="o">)</span>: undefined reference to <span class="sb">`</span>_intel_fast_memmove<span class="s1">'
+0.57user 4.84system 0:08.12elapsed 66%CPU (0avgtext+0avgdata 487696maxresident)k
+12392inputs+102200outputs (47major+183178minor)pagefaults 0swaps
+make[1]: [em_wrf] Error 1 (ignored)
+</span></code></pre></div></div>
+<p>Google以下，发现intel官网的<a href="https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/494782">trouble shooting page</a>
+以下内容：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I believe the message may be caused by mixing objects built with different compiler versions. The __intel_new_feature_proc_init entry point is only in recent compiler libraries; if you have code built with a recent compiler, but are linking to older run-time libraries, you might encounter such a problem.
+</code></pre></div></div>
+
+<p>有道理，可能是之前编译的模块没有删掉。执行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$./clean -a
+</code></pre></div></div>
+<p>再次测试一下.出现难以理解的错误：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nup_em.f90(68): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
+   USE module_initialize_real, only : wrfu_initialize
+   -------^
+   real_em.f90(12): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
+
+</code></pre></div></div>
+<p>表示找不到include文件。到相关目录下检查发现文件确实存在，奇葩……重新执行compile语句后编译成功。怀疑是天河的文件系统不稳定造成。</p>
+
+<p>测试WPS编译出错。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make[1]: pathf90: Command not found
+</code></pre></div></div>
+<p>检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.</p>
+
+<p><strong>Updated 2018-04-01</strong></p>
+
+<p>据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。</p>
+
+<p><strong>Updated 2018-04-03</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/01/jinlin-wrf-tianhe2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#tensorflow" title="Tag: tensorflow" rel="tag">tensorflow</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>开始测试tensorflow的图片分类器！
+按<a href="https://www.youtube.com/watch?v=gIhUePPFmpY">这个视频</a>来，发现train的一步出现问题</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:tensorflow:Couldn't understand architecture name ''
+</code></pre></div></div>
+<p>发现是指定的环境变量读不到，于是将给ARCH赋值的语句和python执行语句一起放到shell脚本里，问题解决。
+train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based，tf应该自动选用cuda解决了。</p>
+
+<p>之后做测试，效果很好。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fpwweqdx63j20fz0790t7.jpg" alt="" /></p>
+
+<p><strong>Updated 2018-03-30</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/30/tf-img-classifier/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -753,227 +991,6 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-12
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#AES&nbspEncrypt" title="Tag: AES&nbspEncrypt" rel="tag">AES&nbspEncrypt</a>&nbsp;
-    
-        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
-    
-        <a href="/tag/#pymysql" title="Tag: pymysql" rel="tag">pymysql</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#对称加密" id="markdown-toc-对称加密">对称加密</a></li>
-  <li><a href="#公钥非对称加密" id="markdown-toc-公钥非对称加密">公钥非对称加密</a></li>
-</ul>
-
-<p>终于把基本的数据库组织结构学的差不多啦，上午拖着需要补充的市场数据，测试导入数据！</p>
-
-<p>python3使用pymysql模块连接InnoDB数据库，连接过程中需要用户名密码，可是明文密码再上传github这是找死，决定研究下简单的加密解密过程，从外部读取密文，再decode后给入。</p>
-
-<h3 id="对称加密">对称加密</h3>
-<p>加密算法分对称加密和非对称加密。对称加密很好理解，就是经典的凯撒密码的套路，采用同样的密钥加密和解密（字幕平移法则）。
-<img src="https://bignerdcoding.com/uhttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2017/08/3799978773.jpeg" alt="" /></p>
-
-<p>DES是经典的对称加密算法，64bits为单位然后套轮函数循环，但是DES目前已经被攻破，三重DES（密钥1加密，密钥2解密，密钥3加密）还有应用价值。
-AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平移），MixColumns（混列），最后AddRoundKey（与原数据异或）。此为一轮AES。
-如果采用对称加密，推荐AES算法。</p>
-
-<h3 id="公钥非对称加密">公钥非对称加密</h3>
-<p>公钥加密是密码学领域非常牛逼的技术，即加密密钥和解密密钥可以不同，这样可以避免密钥配送过程中的风险。公钥丢失也不怕，神不神奇？</p>
-
-<p>比如用户浏览器和server之间非对称加密过程可以是这样：server给公钥，用户用公钥加密，将密文给server（公钥、密文都被窃取也无法获得明文），server将密文用私钥解密。
-经典非对称加密算法RSA。其<a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html">数学原理</a>在阮一峰的网站有介绍。不再赘述。</p>
-
-<p>以我们的应用情景来说，因为不涉及通讯，直接AES对称加密即可。</p>
-
-<p>构建如下类解决：</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AESCipher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="mi">32</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">):</span>
-        <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
-        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">iv</span> <span class="o">+</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enc</span><span class="p">):</span>
-        <span class="n">enc</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">]</span>
-        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpad</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enc</span><span class="p">[</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">:]))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span> <span class="o">*</span> <span class="nb">chr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_unpad</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:])]</span>
-</code></pre></div></div>
-
-<p><a href="https://bignerdcoding.com/archives/33.html">参考资料</a></p>
-
-<p><strong>Updated 2018-03-12</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/12/cryptography-python-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天打算创建Mercurius的数据库，神奇的是，输入create database后报错</p>
-
-<blockquote>
-  <p>ERROR 1006 (HY000): Can’t create database ‘mercurius’ (errno: 28)</p>
-</blockquote>
-
-<p>换了root账户也不行，查到的信息都是说mysql的数据库权限问题，检查后的确木有问题呀。
-注意到google出的关键词errno号不同，很多13号，而我是28号，深度搜索了一番，找到了答案：</p>
-<blockquote>
-  <p>This error means that your mysql server does not have enough free space. You need to check the file system size and please remove unwanted software(s) or installers or files.</p>
-</blockquote>
-
-<p>我去，坑我？磁盘满额？df查看一下，果然/根目录满额。奇怪～</p>
-
-<p>利用find找大文件：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-size</span> +800M
-</code></pre></div></div>
-
-<p>发现除了最早丢过来的安装包，就是gdm的log最大，cd过去一看，可了不得，13G的log，应该是图形界面出错后一直在写error，写到了3月5日，果断删掉～并且把安装包移走。目前解决，后面看是否还继续写log。</p>
-
-<p>慎重起见，将mysql的数据库路径进行迁移，然后发现进了个大坑。无论怎样按照<a href="http://blog.csdn.net/liuchunming033/article/details/51851667">网上的步骤</a>调整，都会遇到mysqld服务无法打开的结果。甚至rsync数据库然后做链接都不行。
-折腾了一下午，突然想到，不就是把mercurius数据库拿出来么，不动mysql本身的账户库还不行。好吧，最后给mercurius做了链接搞定，要注意所在的上层目录必须有root用户和用户组的读写权限。</p>
-
-<p><strong>Updated 2018-03-11</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/11/mysql-error-full-disk/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -984,10 +1001,10 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page2" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">3/41</span>
+          <span class="page_number ">3/42</span>
           
             <a href="/page4" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1218,7 +1235,17 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2289,7 +2316,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2893,6 +2920,13 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2905,6 +2939,10 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2922,10 +2960,6 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2942,7 +2976,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2960,7 +2994,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3446,7 +3480,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3485,6 +3519,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

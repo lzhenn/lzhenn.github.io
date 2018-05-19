@@ -219,18 +219,202 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/">【Linux】Windows上传文件名乱码解决</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-02-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>由于windows和linux对文件系统的编码方式不同，从windows上传或者从linux下载的文件名总存在乱码，解决方法很简单。实际上linux程序包里存在一个convmv的转换程序。</p>
+
+<p>首先，检测下是否有这个程序，如果没有，yum安装一下。</p>
+
+<p>转换命令</p>
+
+<p>convmv -f GBK -t UTF-8 -r yourdir/ –notest</p>
+
+<p>-f是源编码格式</p>
+
+<p>-t为目标编码格式</p>
+
+<p>–notest代表直接进行mv操作</p>
+
+<p>-r代表递归</p>
+
+<p>yourdir/为操作目录</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/">【mysql】测试wordpress与mysql数据库的关系</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-02-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>第一次建立wordpress站点的时候搞得不明不白，这次建站，决定测试一下进入mysql的具体流程</p>
+
+<p>经典步骤：</p>
+<pre>$ mysql -u adminusername -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5340 to server version: 3.23.54
+ 
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+ 
+mysql&gt; CREATE DATABASE databasename;
+Query OK, 1 row affected (0.00 sec)
+ 
+mysql&gt; GRANT ALL PRIVILEGES ON databasename.* TO "wordpressusername"@"hostname"
+    -&gt; IDENTIFIED BY "password";
+Query OK, 0 rows affected (0.00 sec)
+  
+mysql&gt; FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql&gt; EXIT
+Bye
+$</pre>
+<p>第一次测试，所有都用root用户名和密码，成功！</p>
+
+<p>第二次，一般用户下，一般用户名登录mysql，无法创建数据库。</p>
+
+<p>第三次，一般用户下，root登录，创建数据库，grant时用 ”yangsong3”@”localhost”，wordpress设置下用yangsong3，失败！</p>
+
+<p>用root，成功～说明wordpress实际是用的root用户名访问mysql的。</p>
+
+<p> </p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -668,360 +852,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/05/e3-80-90python-e3-80-91-e4-b8-ad-e6-96-87-e7-bc-9/">【python】中文编码问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-05
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
-    
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
-    
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>文件头加入如下内容</p>
-<pre><code class="ruby"><span class="comment">#!/usr/bin/env python3</span>
-<span class="comment"># -*- coding: utf-8 -*-</span>
-</code></pre>
-<p>第二行注释是为了告诉Python解释器，按照UTF-8编码读取源代码，否则，你在源代码中写的中文输出可能会有乱码。</p>
-
-<p>申明了UTF-8编码并不意味着你的<code>.py</code>文件就是UTF-8编码的，必须并且要确保文本编辑器正在使用UTF-8 without BOM编码</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/05/e3-80-90python-e3-80-91-e4-b8-ad-e6-96-87-e7-bc-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/02/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·基础篇</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-02
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>&nbsp;
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>#20160202#</p>
-
-<p>print() 双引号单引号均可，字符串之间用逗号分隔会自动加入空格</p>
-
-<p>直接写变量名回车可以打印出变量值（类似matlab）</p>
-
-<p>name=input(‘please input your name…’)</p>
-
-<p>if结构</p>
-<pre>if a&gt;1:
-    print a
-else:
-    print -a
-</pre>
-<p>python强制缩进，大小写敏感</p>
-
-<p>#20160204#</p>
-
-<p><img src="http://www.liaoxuefeng.com/files/attachments/001387245992536e2ba28125cf04f5c8985dbc94a02245e000/0" alt="rw-file-utf-8" /></p>
-
-<p><img src="http://www.liaoxuefeng.com/files/attachments/001387245979827634fd6204f9346a1ae6358d9ed051666000/0" alt="web-utf-8" /></p>
-
-<p>Python 3版本中，字符串是以Unicode编码的，也就是说，Python的字符串支持多语言</p>
-
-<p>ord()函数 字符–》编码</p>
-
-<p>chr()函数 编码–》字符</p>
-<pre><code class="python"><span class="prompt">&gt;&gt;&gt; </span><span class="string">'\u4e2d\u6587'</span>
-<span class="string">'中文'</span>
-</code></pre>
-<p>python默认字符串类型为str，一个字符对应若干字节；传输或者保存为byte类型，以字节为单位。</p>
-
-<p>x=b’xxx’</p>
-
-<p>字节码转回ASCII或utf-8 (decode方法)</p>
-
-<p>&gt;&gt;&gt;b’abc’.decode(‘ascii’)</p>
-
-<p>‘abc’</p>
-
-<p>取字符串长度函数 len()</p>
-
-<p>中文经过utf-8编码后占3个字节，英文仅占1个字节</p>
-
-<p>&gt;&gt;&gt;len(‘我们’.encode(‘utf-8’))</p>
-
-<p>6</p>
-
-<p>格式化输出</p>
-
-<p>&gt;&gt;&gt;‘hi, %s, you have %d’ % (‘xxx’, 100)</p>
-
-<p>‘hi, xxx, you have 100’</p>
-
-<p>%%用于转义</p>
-
-<p>【lists】</p>
-
-<p>&gt;&gt;&gt;classmates=[‘Alice’,’Bob’]</p>
-
-<p>&gt;&gt;&gt;classmates</p>
-
-<p>[‘Alice’,’Bob’]</p>
-
-<p>&gt;&gt;&gt;len(classmates)</p>
-
-<p>2</p>
-
-<p>若取用最后一个元素，用-1做索引；-2，-3类推</p>
-
-<p>追加元素，append方法</p>
-
-<p>&gt;&gt;&gt;classmates.append(‘Adam’)</p>
-
-<p>删除最后一个元素，pop方法</p>
-
-<p>&gt;&gt;&gt;classmates.pop</p>
-
-<p>指定位置</p>
-
-<p>&gt;&gt;&gt;classmates.pop(i)</p>
-
-<p>加入到指定位置，比如，index=1的位置</p>
-
-<p>&gt;&gt;&gt;classmates.insert(1,’Alex’)</p>
-
-<p>替换指定位置元素，直接赋值即可</p>
-
-<p>&gt;&gt;&gt;classmates[1]=’Frank’</p>
-
-<p>list可以放入不同的数据类型，甚至可以list套list，例如</p>
-
-<p>&gt;&gt;&gt;language=[‘VB’,’C++’,[‘php’,’asp’]]</p>
-
-<p>引用’asp’</p>
-
-<p>&gt;&gt;&gt;language[2][1]</p>
-
-<p>有序列别tuple，不可更改，小括号</p>
-
-<p>&gt;&gt;&gt;classmates=(‘Bob’,’Jane’,’Dennis’)</p>
-
-<p>引用依然用中括号。</p>
-
-<p>若定义只有一个元素的tuple，不能用 test=(1)的形式，小括号被解释为数学运算符，加入逗号消除歧义test=(1,)</p>
-
-<p><img src="http://www.liaoxuefeng.com/files/attachments/001387269768140c7d5ca167342402989dfc75343fe900b000/0" alt="tuple-1" /></p>
-
-<p>tuple指的是指向不变</p>
-
-<p>IF</p>
-
-<p>强制缩进代表块语句</p>
-<pre>if xxx:
-    xxxx
-elif xxx:
-    xxxx
-else:
-    xxxx</pre>
-<p>input输入的是str()类型，必须通过int()函数转换才能与数值类型进行比较。</p>
-
-<p>FOR</p>
-
-<p>遍历list</p>
-<pre>names=['Bob','Steve','John']
-for name in names:
-    print name</pre>
-<p>range(n)函数用于生成小于整数n的序列</p>
-
-<p>如0-100的序列求和</p>
-<pre>num=range(101)
-sum=0
-for x in num:
-    sum=sum+x
-print(sum)</pre>
-<p>WHILE</p>
-<pre>s=100
-sum=0
-while s&gt;0:
-    sum=sum+s
-    s=s-1</pre>
-<p>DICT和SET</p>
-
-<p>dictionary，key-value对</p>
-
-<p>dic={‘Mike’:100,’Alice’:90}</p>
-
-<p>dic[‘Mike’]</p>
-
-<p>dic[‘Mike’]=10</p>
-
-<p>判断key是否存在，用in</p>
-
-<p>&gt;&gt;&gt;‘Tom’ in dic</p>
-
-<p>False</p>
-
-<p>get方法</p>
-
-<p>&gt;&gt;&gt;dic.get(‘Tom’,-999)</p>
-
-<p>-999</p>
-
-<p>pop方法删除字典元素</p>
-
-<p>dic.pop(‘Mike’)</p>
-
-<p>和list比较，dict有以下几个特点：</p>
-<ol>
-	<li>查找和插入的速度极快，不会随着key的增加而增加；</li>
-	<li>需要占用大量的内存，内存浪费多。</li>
-</ol>
-<p>而list相反：</p>
-<ol>
-	<li>查找和插入的时间随着元素的增加而增加；</li>
-	<li>占用空间小，浪费内存很少。</li>
-</ol>
-<p>key是不可变对象，做Hash运算后确定value地址</p>
-
-<p>SET</p>
-
-<p>只保存key，用list初始化</p>
-
-<p>&gt;&gt;&gt;s=set([1,2,3])</p>
-
-<p>&gt;&gt;&gt;s</p>
-
-<p>{1,2,3}</p>
-
-<p>无重复，无序，集合，可以交集并集等</p>
-
-<p>&gt;&gt;&gt;s1=set([1,2,3])</p>
-
-<p>&gt;&gt;&gt;s2=set([2,3,4])</p>
-
-<p>&gt;&gt;&gt;s1 &amp; s2</p>
-
-<p>{2,3}</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>&gt;&gt;&gt;s1</td>
-      <td>s2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>{1,2,3,4}</p>
-
-<p>注意了解不可变对象的概念，<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000">最后一部分</a></p>
-
-<p>对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/02/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -1032,10 +862,10 @@ while s&gt;0:
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page17" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">18/41</span>
+          <span class="page_number ">18/42</span>
           
             <a href="/page19" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1266,7 +1096,17 @@ while s&gt;0:
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2337,7 +2177,7 @@ while s&gt;0:
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2941,6 +2781,13 @@ while s&gt;0:
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2953,6 +2800,10 @@ while s&gt;0:
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2970,10 +2821,6 @@ while s&gt;0:
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2990,7 +2837,7 @@ while s&gt;0:
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -3008,7 +2855,7 @@ while s&gt;0:
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3494,7 +3341,7 @@ while s&gt;0:
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3533,6 +3380,7 @@ while s&gt;0:
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

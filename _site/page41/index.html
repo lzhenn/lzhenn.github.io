@@ -219,18 +219,197 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/29/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim左列显示行号</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-29
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#vim" title="Tag: vim" rel="tag">vim</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#vi-vimrc" id="markdown-toc-vi-vimrc">vi ~/.vimrc</a></li>
+</ul>
+
+<p>打开</p>
+
+<p>:set nu</p>
+
+<p>关闭</p>
+
+<p>:set nonu</p>
+
+<p>但是想将这个设置写进VI的配置文件，就</p>
+
+<h1 id="vi-vimrc">vi ~/.vimrc</h1>
+
+<p>在这个文件中，添加</p>
+
+<p>set nu</p>
+
+<p>就行了</p>
+<p style="text-indent: 2em;">:set number
+:set nu 这个是简写</p>
+<p style="text-indent: 2em;"></p>
+<p style="text-indent: 2em;">参考：http://happyolucky.blog.163.com/blog/static/12235640020096235012610/</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/29/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/">【未解决】CESM1.2.2移植到中大hpc4平台出问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>有1.2.0的基础，想必1.2.2应该是好搞定的，很多配置文件可以从1.2.0里拷贝过来。如法炮制，在天河二号上应该也可以这么搞定。</p>
+
+<p>首先cd到新版的Machines目录下，然后拷贝旧版中的<em>config_machines.xml config_compilers.xml</em> 以及 <em>mkbatch.${MACH}</em>这三个配置文件过来（${MACH}代表自定义的机器名）</p>
+<blockquote>#cd ~/CESM/cesm1_2_2//scripts/ccsm_utils/Machines
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_machines.xml ./
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_compilers.xml ./
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/mkbatch.sigon ./</blockquote>
+<p>回到scripts目录，再采用create_newcase的方法进行X Compset的测试，</p>
+<blockquote>#./create_newcase -case testnew -res f45_g37 -compset X -mach sigon</blockquote>
+<p>结果出现了意想不到的错误：</p>
+
+<p><em>WARNING:</em>
+<em>    The perl module XML::LibXML is needed for XML parsing in the CESM script system.</em>
+<em>        Please contact your local systems administrators or IT staff and have them install it for</em>
+<em>        you, or install the module locally.</em></p>
+
+<p>回到1.2.0的目录测试，发现1.2.0是没有问题的。感觉像是新版加了perl的神马库去解析xml文件，google之，发现应该是这样。</p>
+
+<p>https://bb.cgd.ucar.edu/cesm-12-stempede-problem</p>
+
+<p>https://bb.cgd.ucar.edu/warning-cesm122</p>
+
+<p>按照贴子里的说法下载 XML::LibXML  安装，发现安装说明一头雾水完全看不懂，cpan命令无效，退出到workstation居然有cpan命令，呃……看起来是hpc4又没装神马东西，回来再慢慢捣鼓吧……</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -551,124 +730,6 @@ lib/ directory: This directory must be readable by the public for style sheets t
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/">【已解决】WordPress搭建过程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>安装过程的确不太轻松，可能最初php和mysql设置有问题吧。痛苦的安装过程记录一下，下学期有了新电脑正式建站的时候作参考。</p>
-
-<p>官方安装说明：http://codex.wordpress.org/zh-cn:%E5%AE%89%E8%A3%85WordPress</p>
-
-<p>1.下载解压后，查看 /etc/rc.d/init.d/mysqld status 是否启动，否则启动mysql
-#service mysqld start</p>
-
-<p>按照说明运行mysql -u命令出现ERROR 1045 (28000)错误，其实可能是root没有密码，我没有多尝试，直接查到了mysql强行重新修改密码的方法，如下：</p>
-<blockquote>
-<p style="padding-left: 30px;">/etc/init.d/mysql stop (service mysqld stop )
-/usr/bin/mysqld_safe --skip-grant-tables
-另外开个SSH连接
-[root@localhost ~]# mysql
-mysql&gt;use mysql
-mysql&gt;update user set password=password("123456") where user="root";
-mysql&gt;flush privileges;
-mysql&gt;exit</p>
-<p style="padding-left: 30px;">pkill -KILL -t pts/0 可将pts为0的**用户(之前运行mysqld_safe的用户窗口)强制踢出
-正常启动 MySQL：/etc/init.d/mysql start (service mysqld start)</p>
-</blockquote>
-<p>打开install.php，出现提示</p>
-<blockquote>您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。</blockquote>
-<p>查到问题是php没有加载mysql模块所致，查看/etc/php.d/目录，如果只有dbase.ini,idpa.ini，而没有 mysql.ini,mysqli.ini,pdo.ini,pdo_mysql.ini,pdo_mysqli.ini,同时查看/usr/lib /php/modulse目录，如果没有 mysql.so,mysqli.so,pdo.so,pdo_mysql.so,pdo_sqlite.so,phpcpus.so,那么可判断为 php没有加载mysql模块。
-#yum install php-mysql</p>
-
-<p>php-pdo貌似centos已经默认安装。安装后/usr/lib/php/modulse目录下会有上述所需文件</p>
-
-<p>配置/etc/php.ini，在任意地方加入下列语句</p>
-
-<p>extension=mysql.so
-extension=mysqli.so</p>
-
-<p>extension=pdo_mysql.so</p>
-
-<p>保存，重启apache，如果还是出现问题，重启了一下mysql，刷新网页，问题基本能够解决。</p>
-
-<p>Done！</p>
-
-<p>#20140729#</p>
-
-<p>mysql默认为空密码，重置密码方式：</p>
-<div><em>    3. 然后用空密码方式使用root用户登录 MySQL；</em></div>
-<div><em>    mysql -u root</em></div>
-<div><em>    4. 修改root用户的密码；</em></div>
-<div><em>    mysql&gt; update mysql.user set password=PASSWORD（'新密码'） where User='root'；</em></div>
-<div><em>    mysql&gt; flush privileges；</em></div>
-<div><em>    mysql&gt; quit</em></div>
-<div><em>    5. 重新启动MySQL，就可以使用新密码登录了</em></div>
-<div></div>
-<div>使用密码登陆的正确姿势</div>
-<div>mysql -u root -p 回车！！！</div>
-<div>输入新密码</div>
-<div>回车……</div>
-<div>奇葩吧</div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -679,10 +740,10 @@ extension=mysqli.so</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page40" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">41/41</span>
+          <span class="page_number ">41/42</span>
           
-            <span class="next disable"><i class="fa fa-angle-right"></i></span>
-            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
+            <a href="/page42" class="next"><i class="fa fa-angle-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -913,7 +974,17 @@ extension=mysqli.so</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -1984,7 +2055,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2588,6 +2659,13 @@ extension=mysqli.so</p>
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2600,6 +2678,10 @@ extension=mysqli.so</p>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2617,10 +2699,6 @@ extension=mysqli.so</p>
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2637,7 +2715,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2655,7 +2733,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3141,7 +3219,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3180,6 +3258,7 @@ extension=mysqli.so</p>
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

@@ -219,18 +219,170 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/">【已解决】NCL input in flex scanner failed错误</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-12-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>最近使用ncl总是在最后成图的时候出现input in flex scanner failed这种错误。可以肯定是GUI的问题，<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21254823">查了下资料感觉也无从下手</a>，错误触发原因看起来比高级图形接口更加底层，动弹不得。</p>
+
+<p>这个错误最初是由于把字号改大而出现的，于是我将字号改小，果然没问题……不太懂什么原因</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/">【已解决】ncl中的cd_calendar</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-12-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>处理CFSR的数据，已经是团队其他成员处理过的了，由于她用的是GrADS，清一色的二进制bin+描述文件ctl，不是自描述的nc文件，ncl处理起来没有任何的metadata，所以都要自己指定。数据文件名是YYYYMM的，循环不是很好写，查了一下，<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/cd_calendar.shtml#Examples">cd_calendar</a>这个函数很好用，官网上给的例子是hours since和days since的，实际上用months也是可以的。</p>
+<pre> <strong>16    </strong> time = ispan(0,383,1)
+ <strong>17    </strong> time@units  =   "months since 1979-01-01"
+ <strong>18</strong>
+ <strong>19    </strong> date = cd_calendar(time,-1)</pre>
+<p>得到的date变量返回integer形式的YYYYMM，从79年1月到10年12月，perfect！
+而且使用cd_calendar函数，发现之前做起来很麻烦（要算位置）的合成和截取，都可以很方便实现了。还是教程看得不够细致呀 = =</p>
+
+<p><span style="color: #808080;"><strong>#Up to 20151216#</strong></span></p>
+
+<p>用cd_calendar可以很好地转换days since之类的时间格式，用于长序列数据的切片读取非常有效。例如下面的例子就可以截取197901-201312的SST片。</p>
+<pre> 29 ymstrt = 197901
+ 30 ymlast = 201312 ; 
+ 31
+ 32 data_path = "../../data/sst/monthly"
+ 33 ctrl_file1 = data_path+"sst_HadOIBl_bc_1.9x2.5_1850_2011_c130301.nc"
+ 34 ctrl_in1 = addfile (ctrl_file1, "r") 
+ 35
+ 36 time = ctrl_in1-&gt;time
+ 37 yyyymm = cd_calendar(time,-1)
+ 38 istrt = ind(yyyymm .eq. ymstrt)
+ 39 ilast = ind(yyyymm .eq. ymlast)
+ 40 var1 = ctrl_in2-&gt;SST_cpl(istrt:ilast,:,:)</pre>
+<p><span style="color: #808080;"><strong>#Up to 20150107#</strong></span></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -570,136 +722,6 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/07/a-walk-in-the-rain/">A Walk in the Rain</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>邮件收到了继续返工的消息，旁边又开始endless whisper，烦躁而且压抑，受不了只能戴上耳机听Yanni。a walk in the rain，之前没有注意到的一首，还是很不错的。HP同学推荐，说是感觉像是走在雨后的草地上，嗯，热情而阳光。</p>
-
-<p> </p>
-
-<p>光腚总菊一声令下，MP3都下不了咯，贴个链接：</p>
-
-<p>http://www.baidu.com/s?wd=a%20walk%20in%20the%20rain&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_5_dg&amp;rsv_pq=f40a682a0000744f&amp;rsv_t=782cZVhHu0LhKuwkr029%2Bsc1%2B%2BBZDvR19ANVw8dNJrzqLk7nxSrt&amp;bs=a%20walk%20in%20%E5%A4%A9%E6%B2%B3</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/07/a-walk-in-the-rain/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/">【已解决】vi获取系统命令标准流输出</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>写一些脚本文件时，可能时常需要用到脚本文件所在目录的路径，而相对路径有的时候不一定可以（比如提交作业的脚本），而需要直接回显绝对路径，另开一个终端或者退出再复制当然可以，但是麻烦，查了下，vi原来有如此神奇的功能，可以直接捕获系统命令（甚至可能是自己写的程序脚本等？没有尝试过）的标准流输出，然后倒入编辑器。比如需要获得当前绝对路径的话，依次键入</p>
-<blockquote><strong>:.!pwd</strong></blockquote>
-<p>即可将当前绝对路径插入编辑点。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -710,10 +732,10 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page30" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">31/41</span>
+          <span class="page_number ">31/42</span>
           
             <a href="/page32" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -944,7 +966,17 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2015,7 +2047,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2619,6 +2651,13 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2631,6 +2670,10 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2648,10 +2691,6 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2668,7 +2707,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2686,7 +2725,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3172,7 +3211,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3211,6 +3250,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

@@ -219,18 +219,161 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/03/15/gfdl-moist-core-on-savio/">GFDL MOIST CORE on SAVIO</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-03-15
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>follow the dry core procedure, the first problem we meet is</p>
+
+<p><strong>#error: unknown fpp directive.</strong></p>
+<p class="p1"><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/shared/include/fms_platform.h</span></p>
+<p class="p1">and give two space before the first _, done.</p>
+<p class="p1">Next, the model was compiled smoothly, when it hit the link process, throw a problem</p>
+<p class="p1"><strong><span class="s1">atmos_model.o: In function `atmos_model_init':</span></strong></p>
+<p class="p1"><strong><span class="s1">/global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90:290: undefined reference to `omp_set_num_threads_'</span></strong></p>
+<p class="p1">compared  with dry core, comment corresponding lines</p>
+<p class="p1"><strong><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90</span></strong></p>
+<p class="p1">IT WORKS!</p>
+<p class="p1"></p>
+<p class="p1"></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/03/15/gfdl-moist-core-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/">捕捉shell执行的状态码</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-03-15
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>如果采用shell嵌套调用的方式执行一个复杂的自动化脚步，比如编译运行model，编译的过程很容易出错，那么外层脚本应考虑到这个问题并且在编译出错的情况下退出程序。这时上一条命令的状态码就派上用场了。</p>
+<pre>if [ $? -eq 0 ]        [$? 就是上一条命令执行的状态码]
+        then  
+            echo $i
+        fi</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -508,140 +651,6 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/01/15/e5-85-b3-e4-ba-8erm-e5-91-bd-e4-bb-a4-e6-9f-a5-e5/">关于rm命令查到的一些好玩内容</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-01-15
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>想找一下禁用rm -rf类命令误删操作的技巧，搜了几个页面，讲Linux下的危险命令挺好玩，记录下面：<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>https://www.oschina.net/news/46657/10-most-dangerous-commands-you-should-never-execute-on-linux</p>
-
-<p>http://www.ha97.com/5172.html</p>
-
-<p>http://www.jianshu.com/p/2de3f6aaa98f</p>
-
-<p>chattr命令很实用。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/01/15/e5-85-b3-e4-ba-8erm-e5-91-bd-e4-bb-a4-e6-9f-a5-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/01/12/e8-90-bd-e5-af-9e/">落寞</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-01-12
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>网易云搜了各个版本的卡农，然后一并播放。</p>
-
-<p>突然发现很久没有认真听音乐了，一边做着认为不属于自己责任内的事情，一边过着卡农，突然感到非常落寞。<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>可能太关注眼前的事情就会变得迷失吧，积极点。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/01/12/e8-90-bd-e5-af-9e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -652,10 +661,10 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page10" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">11/41</span>
+          <span class="page_number ">11/42</span>
           
             <a href="/page12" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -886,7 +895,17 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -1957,7 +1976,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2561,6 +2580,13 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2573,6 +2599,10 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2590,10 +2620,6 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2610,7 +2636,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2628,7 +2654,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3114,7 +3140,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3153,6 +3179,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

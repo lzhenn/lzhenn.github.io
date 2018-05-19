@@ -219,18 +219,244 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-12
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+    
+        <a href="/tag/#AES&nbspEncrypt" title="Tag: AES&nbspEncrypt" rel="tag">AES&nbspEncrypt</a>&nbsp;
+    
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
+    
+        <a href="/tag/#pymysql" title="Tag: pymysql" rel="tag">pymysql</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#对称加密" id="markdown-toc-对称加密">对称加密</a></li>
+  <li><a href="#公钥非对称加密" id="markdown-toc-公钥非对称加密">公钥非对称加密</a></li>
+</ul>
+
+<p>终于把基本的数据库组织结构学的差不多啦，上午拖着需要补充的市场数据，测试导入数据！</p>
+
+<p>python3使用pymysql模块连接InnoDB数据库，连接过程中需要用户名密码，可是明文密码再上传github这是找死，决定研究下简单的加密解密过程，从外部读取密文，再decode后给入。</p>
+
+<h3 id="对称加密">对称加密</h3>
+<p>加密算法分对称加密和非对称加密。对称加密很好理解，就是经典的凯撒密码的套路，采用同样的密钥加密和解密（字幕平移法则）。
+<img src="https://bignerdcoding.com/uhttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2017/08/3799978773.jpeg" alt="" /></p>
+
+<p>DES是经典的对称加密算法，64bits为单位然后套轮函数循环，但是DES目前已经被攻破，三重DES（密钥1加密，密钥2解密，密钥3加密）还有应用价值。
+AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平移），MixColumns（混列），最后AddRoundKey（与原数据异或）。此为一轮AES。
+如果采用对称加密，推荐AES算法。</p>
+
+<h3 id="公钥非对称加密">公钥非对称加密</h3>
+<p>公钥加密是密码学领域非常牛逼的技术，即加密密钥和解密密钥可以不同，这样可以避免密钥配送过程中的风险。公钥丢失也不怕，神不神奇？</p>
+
+<p>比如用户浏览器和server之间非对称加密过程可以是这样：server给公钥，用户用公钥加密，将密文给server（公钥、密文都被窃取也无法获得明文），server将密文用私钥解密。
+经典非对称加密算法RSA。其<a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html">数学原理</a>在阮一峰的网站有介绍。不再赘述。</p>
+
+<p>以我们的应用情景来说，因为不涉及通讯，直接AES对称加密即可。</p>
+
+<p>构建如下类解决：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AESCipher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="mi">32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">):</span>
+        <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+        <span class="n">iv</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
+        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">iv</span> <span class="o">+</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enc</span><span class="p">):</span>
+        <span class="n">enc</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span>
+        <span class="n">iv</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">]</span>
+        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpad</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enc</span><span class="p">[</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">:]))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span> <span class="o">*</span> <span class="nb">chr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_unpad</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:])]</span>
+</code></pre></div></div>
+
+<p><a href="https://bignerdcoding.com/archives/33.html">参考资料</a></p>
+
+<p><strong>Updated 2018-03-12</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/12/cryptography-python-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-11
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+    
+        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>今天打算创建Mercurius的数据库，神奇的是，输入create database后报错</p>
+
+<blockquote>
+  <p>ERROR 1006 (HY000): Can’t create database ‘mercurius’ (errno: 28)</p>
+</blockquote>
+
+<p>换了root账户也不行，查到的信息都是说mysql的数据库权限问题，检查后的确木有问题呀。
+注意到google出的关键词errno号不同，很多13号，而我是28号，深度搜索了一番，找到了答案：</p>
+<blockquote>
+  <p>This error means that your mysql server does not have enough free space. You need to check the file system size and please remove unwanted software(s) or installers or files.</p>
+</blockquote>
+
+<p>我去，坑我？磁盘满额？df查看一下，果然/根目录满额。奇怪～</p>
+
+<p>利用find找大文件：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-size</span> +800M
+</code></pre></div></div>
+
+<p>发现除了最早丢过来的安装包，就是gdm的log最大，cd过去一看，可了不得，13G的log，应该是图形界面出错后一直在写error，写到了3月5日，果断删掉～并且把安装包移走。目前解决，后面看是否还继续写log。</p>
+
+<p>慎重起见，将mysql的数据库路径进行迁移，然后发现进了个大坑。无论怎样按照<a href="http://blog.csdn.net/liuchunming033/article/details/51851667">网上的步骤</a>调整，都会遇到mysqld服务无法打开的结果。甚至rsync数据库然后做链接都不行。
+折腾了一下午，突然想到，不就是把mercurius数据库拿出来么，不动mysql本身的账户库还不行。好吧，最后给mercurius做了链接搞定，要注意所在的上层目录必须有root用户和用户组的读写权限。</p>
+
+<p><strong>Updated 2018-03-11</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/11/mysql-error-full-disk/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -739,168 +965,6 @@ Alternatively you can run:
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#reading" title="Category: reading" rel="category">reading</a>&nbsp;
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>寒假回家看完了两本书，一本是Kindle中文版的《非理性繁荣》，另一本也是中文版加尔布雷斯的《1929年大崩盘》。在家看完想趁热打铁写下笔记，奈何懒惰，现在补来。</p>
-
-<p>《非理性繁荣》作者罗伯特·席勒（Robert Shiller）是耶鲁大学的行为金融学教授，2013年诺奖得主。除了这本第一版预言了00年科网泡沫和第二版语言了08年金融危机畅销书之外(据<a href="https://www.amazon.com/Irrational-Exuberance-Revised-Expanded-Third/dp/0691173125/ref=sr_1_1?ie=UTF8&amp;qid=1519524992&amp;sr=8-1&amp;keywords=irrational+exuberance+by+robert+shiller">亚马逊</a>，这本书第三版发于2016年8月16日)，在Coursera和网易上还有他Financial Markets课程也非常有名。</p>
-
-<p>初读这本书，总会脑海里浮现出在Berkeley Mccone Hall五楼看到的那位地理系老教授：白发苍苍的老人坐在窗边，佝偻着腰背，盯着眼前的屏幕，缓缓敲击着键盘，时不时低头去找键盘上遥远的数字与标点符号。
-从本书内容上的理性中立客观，旁征博引细致入微的数据支持与证据链构建；直观感受上来讲，席勒教授就是这么一副兢兢业业老学者的形象。
-当然<a href="https://book.douban.com/subject/26803982/">豆瓣上</a>第三版封面图的时候发现老人家居然这么帅的时候还是很惊讶，典型的Stereotype了。</p>
-
-<p>整本书大致先从历史角度去分析投机性泡沫形成，包括引发事件，预期自我实现的正反馈，市场信心转向等；之后分析了文化因素（欧美移民的重商文化）和行为心理因素（人性因素：贪婪和恐惧）的影响。再后则是分析人类对明显泡沫化的资产进行合理化解释归因的动机。最终给出了切实的投资建议。
-记忆比较深的还是老人家对股息的阐述，判断泡沫与否的一个简单方法就是看股息回报率（毫无疑问目前是泡沫期了）。最后关于疾病扩散模型的应用也非常有趣，描述了观点的传播和关注机制对泡沫的影响。
-老人家同时也强调市场见顶之后可能多年低迷的可能性，这无论对华尔街还是投机客来说都是致命的。所以老人家建议多元化投资、关注低市盈率、高股息的入场时机，以及增加储蓄率等。
-整部作品的基调非常像一部关于投机泡沫的大综述，理性中立客观，数据翔实，论据充分，尤其是用真实数据去评估人们一直以来的认知偏差，长期持股未必会有良好收益，如果在漫漫熊市中长期持股而不摊低成本，整个股指会经过十几年才能回到高位，非常之凄惨（不要忘了仅仅是股指，其中还有乐观主义偏差）。</p>
-
-<p>总之，重要的一点教训就是足够理性，谨慎乐观，注意风险敞口的控制，在最近几年的环境下应该是非常重要的素质。</p>
-
-<p>《1929年大崩盘》则是一部以叙事+数据+资料尽调的方式描述了1929年大崩溃的过程，整部作品读起来并不像《非理性繁荣》那般理中客，但是翔实复现了整个崩溃的过程，并做了简单的后果分析，没有进一步外延到与法西斯上台、以及随之而来的二战的关系。
-作品很短，着眼很多关于股市崩盘的特征，比如高位放量，波动性上升，反复磨顶等等，这给了大周期近顶部时的逃脱机会。最后还反驳了一下崩溃后自杀率上升的谣言，总之看下来感觉就是，只要前期不作死加杠杆资不抵债，勒紧裤腰带还是照样能过的。</p>
-
-<p><strong>Updated 2018-02-27</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/24/reading-record/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p><a href="https://novarizark.github.io/2017/12/31/WRF-shandong-setup/">山东半岛预报系统</a>中后处理部分的NCL串行效率很低，大概要二十分钟到半个小时才能完成绘图。既然任务之间都是独立的，很自然的想法就是能否在shell的环境下实现进程级别的并行化。
-差了下其实很简单，只需要在语句后面加入 &amp; 符号放到后台执行即可实现异步，但是后台执行无法捕捉结束位置，wait语句可以解决这个问题，其作用就是等待该语句之前的所有后台任务结束之后，再执行此语句后的任务。例子如下：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ncl <span class="nt">-nQ</span>  180205-plot-precip.ncl &amp;
-ncl <span class="nt">-nQ</span>  180207-plot-T2m.ncl &amp;
-ncl <span class="nt">-nQ</span>  180207-plot-RH2m.ncl &amp;
-ncl <span class="nt">-nQ</span>  180207-plot-UV10m.ncl &amp;
-<span class="nb">wait
-echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span class="o">)</span>
-</code></pre></div></div>
-<p>前面四个NCL语句会并行执行（&amp;符号将该命令放入后台执行后立刻执行下一个语句），之后碰到wait，会等待前面四个后台任务中最慢的那个结束，再输出Hello world!</p>
-
-<p>原始脚本处理后，大概只需要三四分钟（不算坑爹慢的git push过程）即可完成所有的绘图操作。惊不惊喜？</p>
-
-<p><strong>Updated 2018-02-17</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/17/shell-parallel-task/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -911,10 +975,10 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page3" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">4/41</span>
+          <span class="page_number ">4/42</span>
           
             <a href="/page5" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1145,7 +1209,17 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2216,7 +2290,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2820,6 +2894,13 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2832,6 +2913,10 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2849,10 +2934,6 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2869,7 +2950,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2887,7 +2968,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3373,7 +3454,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3412,6 +3493,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

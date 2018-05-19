@@ -219,18 +219,175 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/18/2018-investment/">2017投资小结与2018年的交易逻辑</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-18
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>17年的交易逻辑的确太嫩了，若不是最后一个月通胀预期起来，恐怕一整年收益跑不过货币基金。最主要的三条经验教训如下：</p>
+
+<ol>
+  <li>信仰价投，左侧交易就代表要在市场非理性的时候拿得住，流动性保证和严格按照交易系统策略交易非常重要，止损位置应该在安全边际以下某一范围。如果胆小，仓位控制不超过10%，真破产就当作慈善了吧。毕竟杠铃策略完全可以保证无风险一端的基本cover激进端平均一年一个负面黑天鹅的损失。</li>
+  <li>逻辑对的情况下，却不能低估市场非理性的时间。上升期更是这样，不要猜顶，不轻易做空头。杠铃策略，与泡沫共舞，用正头寸收益养put。</li>
+  <li>尽管看准了不少标的，还是要记住，这是牛市给的，不要忘了最大的一个没看准的标的是USD，或许逻辑没错，时间尺度错了，但是教训应该是择时上恪守左侧交易为主，右侧控制好头寸的策略。</li>
+</ol>
+
+<p>2018年逻辑应该基本清晰：油价 通胀 波动率。标的也非常清晰，除了上述三点教训，还是要注意仓位控制和恪守逻辑和策略。不贪不惧，多看书少看盘。毕竟目标很简单，跑赢无风险4%而已，去年目标是不亏，最后却完成了今年的目标不是。</p>
+
+<p><strong>Updated 2018-01-18</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/18/2018-investment/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-16
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>&nbsp;
+    
+        <a href="/tag/#excel" title="Tag: excel" rel="tag">excel</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。
+pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。</p>
+
+<p>以应用情景为例，写入不同的sheets，具体如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open a new xlsx writer</span>
+<span class="n">writer1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">out_dir</span><span class="o">+</span><span class="n">get_outfile_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spe</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
+    <span class="c"># parser data</span>
+    <span class="n">pt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">in_dir</span><span class="o">+</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="n">corr_algthm</span><span class="p">,</span> <span class="n">spe</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'10H'</span><span class="p">,</span> <span class="s">'12H'</span><span class="p">,</span> <span class="s">'14H'</span><span class="p">,</span> <span class="s">'16H'</span><span class="p">,</span> <span class="s">'max'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'time'</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer1</span><span class="p">,</span> <span class="n">spe</span><span class="p">)</span>
+<span class="c"># save xlsx</span>
+<span class="n">writer1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-01-16</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/16/pandas-excel/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -535,164 +692,6 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
-
-<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
-总负债 L=a*(1+r)^n
-</code></pre></div></div>
-<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
-当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
-
-<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
-总负债 L=a*(1-k)*(1+r)^n
-</code></pre></div></div>
-<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
-若不破灭，要求总资产大于等于0，则要求k</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
-</code></pre></div></div>
-<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
-
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
-
-<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
-而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-02
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>想要让本地的个人博客服务开机后即启动，测试了下，路径敏感。
-修改rc.local</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> vi rc.local
-</code></pre></div></div>
-<p>其中加入</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$YOUR_REPO</span>
-<span class="nb">sudo </span>jekyll s
-</code></pre></div></div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/02/ubuntu-boot/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -703,10 +702,10 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page6" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">7/41</span>
+          <span class="page_number ">7/42</span>
           
             <a href="/page8" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -937,7 +936,17 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2008,7 +2017,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2612,6 +2621,13 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2624,6 +2640,10 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2641,10 +2661,6 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2661,7 +2677,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2679,7 +2695,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3165,7 +3181,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3204,6 +3220,7 @@ convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-tri
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

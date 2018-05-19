@@ -219,18 +219,230 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/07/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91firef/">【已解决】Firefox打开拼写检查</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-07-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>firefox工具–&gt;选项–&gt;高级中的拼写检查默认是打开的，但是似乎没有作用。查了一下，原来是没有字典。在文本框右键点击添加字典，即可。但是富文本框似乎不能检查。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/07/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91firef/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/07/21/e3-80-90-e8-bf-9b-e8-a1-8c-e4-b8-ad-e3-80-91cesm/">【已解决】CESM Tibetan Plateau无PBL加热试验</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-07-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>wzq师兄希望做一个没有青藏高原PBL加热的试验，因为有之前改deep convection的经验，这个应该不复杂。</p>
+
+<p>wzq tends to test an experiment without sensible heating from the TP. As I’ve got the experience from deep convection heating experiments,  this shouldn’t be very complex.</p>
+
+<p>首先希望能用model自身读入netcdf格式的TP mask文件。grep到了 control目录下的cam_initfiles.F90文件，其中是读init数据和topo数据的，果断就follow格式加入如下语句：</p>
+
+<p>First, we hope to get var from the netcdf file directly via the packeged method in the model. Using command ‘grep’, we located a source file called cam_initfiles.F90, which was programmed to read init data and topo data. Thus, we follow the style of this file to add the changes as follows:</p>
+<pre>20d19
+&lt; tpmask_file_get_id, &amp;! returns filehandle for tp mask file
+23c22
+&lt; type(file_desc_t), pointer :: fh_ini, fh_topo, fh_tpmask
+---
+&gt; type(file_desc_t), pointer :: fh_ini, fh_topo
+39,42d37
+&lt; function tpmask_file_get_id()
+&lt; type(file_desc_t), pointer :: tpmask_file_get_id
+&lt; tpmask_file_get_id =&gt; fh_tpmask
+&lt; end function tpmask_file_get_id
+59,61d53
+&lt; character(len=256) :: bnd_tpmask_loc ! filepath of topo file on local disk
+&lt;
+&lt; bnd_tpmask_loc = "/users/yangsong3/wzq/TP_noPBL_HEAT/data/TPmask.nc"
+72c64
+&lt; call getfil(bnd_topo, bnd_topo_loc) !getfil is check process
+---
+&gt; call getfil(bnd_topo, bnd_topo_loc)
+78,82d69
+&lt;
+&lt; ! 20150721 Add for TP mask
+&lt; allocate(fh_tpmask)
+&lt; call cam_pio_openfile(fh_tpmask, bnd_tpmask_loc, PIO_NOWRITE)
+&lt;
+106,110d92
+&lt;
+&lt;
+&lt; call pio_closefile(fh_tpmask)
+&lt; deallocate(fh_tpmask)
+&lt; nullify(fh_tpmask)</pre>
+<p>TPmask数据放到了case的新建data目录下，编译，成功！已经把文件打开了，然后去找读入topo文件的代码！<code></code></p>
+
+<p>We then put the TPmask.nc to a new foolder “data” in the case directory, and compile the model. Successed! We now go back to the code in cam_initfiles.F90 and find that there is no read data keyword for topo. However, a “readinitial” keyword operated to the initial data found in the file.</p>
+
+<p>grep the keyword with “readinitial”, we found a file called readinitial.F90. Check it! To our disappointment, it is only for the validation check. Next, we change another keyword “topo” to grep, we found <strong>startup_initialconds.F90</strong>, in this file, we then locate a sentence</p>
+<pre> call read_inidat(fh_ini, fh_topo, dyn_in)</pre>
+<p>Very interesting! we believe this could be the true method to read data from the topo file. Another grep!</p>
+
+<p>In fact, we found keyword “dycore” appeared in a number of files. Then we locate $SRC/dynamic/fv, then we grep <strong>inidat.F90. </strong>In this file, we finally found how the model deal with the topo field</p>
+<pre>    fieldname = 'PHIS'
+    readvar   = .false.
+    if (ideal_phys .or. aqua_planet) then
+       dyn_in%phis(:,:) = D0_0
+    else
+       allocate(phis_tmp(im, jm))
+       <strong>call infld(fieldname, ncid_topo, 'lon', 'lat', ifirstxy, ilastxy, jfirstxy, jlastxy, &amp;</strong>
+<strong>            dyn_in%phis, readvar, grid_map='dyn')</strong>
+       if (.not. readvar) &amp;
+            call endrun(trim(subname)//' ERROR: PHIS not found on topo dataset.')
+      <strong> call process_inidat(ncid_ini, ncid_topo, grid, dyn_in, 'PHIS')</strong>
+    end if</pre>
+<p>Apparently, infld is a method that read a field from a specific file. grep “infld” and locate the file ./control/<strong>ncdio_cam.F90 </strong>to refer the usage. Since “infld” is a common usage in many source files, we try to search it in the main interface of the physics package <strong>physpkg.F90, </strong>bingo! We got it in subroutine phys_initdat(). We are familiar with this source file because we have changed the deep convection in this file. Phys_initdata() is a subroutine that only be called during the startup run. Therefore, we add a infld in <strong>phy_init()</strong>, which would be called during every run type.</p>
+
+<p>Be careful with the “use module_name” statement, never leave a wild variable. Then we need to add another field to the surface field. Definition code is in <strong>comsrf.F90</strong></p>
+<pre>&lt;   public landm, sgh, tpmask, sgh30, fv, ram1, soilw, fsns, fsds
+---
+&gt;   public landm, sgh, sgh30, fv, ram1, soilw, fsns, fsds
+43d42
+&lt;   real(r8), allocatable:: tpmask(:,:)    ! Tibetan Platau Mask flag
+105d103
+&lt;        allocate (tpmask  (pcols,begchunk:endchunk))
+128d125
+&lt;        tpmask   (:,:) = nan</pre>
+<p>Try to build it again. Successful! Now we have read the TP mask in.</p>
+
+<p><strong>#Up to 20150722#</strong></p>
+
+<p>The final code has been uploaded to my <a href="https://github.com/Novarizark/project/tree/master/TP_HEAT_wzq-2015/SourceMods/src.cam">github</a>. So, no more update here.</p>
+
+<p><strong>#Up to 20150924#</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/07/21/e3-80-90-e8-bf-9b-e8-a1-8c-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -725,176 +937,6 @@ http://figshare.com
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/07/08/e3-80-90shanbei-news-notes-e3-80-9120150708/">【Shanbei News Notes】20150708</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/34414/">Lawyers: Cosby's Drugs-Sex Admission Could Aid Women's Cases 律师称：考斯比承认使用安眠酮，或有助于性侵指控</a></h2>
-<p>civil case 民事诉讼</p>
-
-<p>criminal charge field 刑事指控领域</p>
-
-<p>admission 承认</p>
-
-<p>bolster: to give support to sth</p>
-
-<p>file in 编入</p>
-<h3><a href="http://www.shanbay.com/read/article/34441/">Carnival Aims to Launch Miami-Cuba Cruises in May 2016 嘉年华集团获得美国政府批准于2016年五月开通迈阿密-古巴邮轮航线</a></h3>
-<p>a handful of 少量</p>
-
-<p>charter fight 包机</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/07/08/e3-80-90shanbei-news-notes-e3-80-9120150708/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/07/07/e3-80-90shanbei-news-notes-e3-80-9120150707/">【Shanbei News Notes】20150707</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h3><a href="http://www.shanbay.com/read/article/reviews/34402/">Analysts: Greece Now More Likely to Leave Euro 分析师：希腊目前更可能离开欧元区</a></h3>
-<p>deeper austerity and greater cuts in spending <strong>in exchange for</strong> additional loans （通过）更深入的财政紧缩和更大的削减开支以换取额外的贷款</p>
-
-<p>issue ious 发布借据 issue动词作“发布”意， iou=I owe you 借据，欠款</p>
-
-<p>repay loans denominated in the euro currency 以欧元的名目还贷</p>
-
-<p>go bust 破产</p>
-
-<p>resume bargaining 恢复谈判</p>
-
-<p>pressing 紧迫的</p>
-
-<p>Goldman Sachs 高盛集团</p>
-
-<p>egregious mismanagement 过分的管理不善</p>
-
-<p>parlous state 危险的境地</p>
-
-<p>a staunch opponent of debt relief 债务减免的坚决反对者</p>
-
-<p>or be forced to pay a “risk premium” [high interest rate] to get loans 被迫支付一个高的“风险溢价”（高息）以获得贷款</p>
-
-<p>she expects the crisis to cause volatility and sell-offs in European markets and have potentially serious long-term political implications for Europe 她预计这场危机将导致欧洲市场的波动和抛售，并有可能造成潜在的长期政治影响。</p>
-
-<p>reaction in the bond market has been “muted” so far 债券市场的反应一直是“静音状态”</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/07/07/e3-80-90shanbei-news-notes-e3-80-9120150707/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -905,10 +947,10 @@ http://figshare.com
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page22" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">23/41</span>
+          <span class="page_number ">23/42</span>
           
             <a href="/page24" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1139,7 +1181,17 @@ http://figshare.com
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2210,7 +2262,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2814,6 +2866,13 @@ http://figshare.com
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2826,6 +2885,10 @@ http://figshare.com
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2843,10 +2906,6 @@ http://figshare.com
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2863,7 +2922,7 @@ http://figshare.com
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2881,7 +2940,7 @@ http://figshare.com
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3367,7 +3426,7 @@ http://figshare.com
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3406,6 +3465,7 @@ http://figshare.com
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 

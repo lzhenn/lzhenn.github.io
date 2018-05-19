@@ -219,18 +219,197 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <div class="page clearfix" index>
+        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
+<div class="page clearfix"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/11/14/use-grads-to-read-cesm-output/">【ongoing】use grads to read cesm output</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-11-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Some points to be aware:</p>
+
+<p>2D fields, not same by binary output and netcdf (high efficiency) output, one point value missing, might be the polar point. Therefore, *.bin control and *.nc sensitive is not under the same structure.</p>
+
+<p>2D fields work fine under <strong>v1.9</strong> of grads. However, 3D fields might meet some trouble. Try to use the “standard” attribution, dimention to tackle this problem. An example from NCEP-DOE dataset:</p>
+
+<p>float level(level) ;
+level:units = “millibar” ;
+level:long_name = “Level” ;
+level:positive = “down” ;
+level:GRIB_id = 100s ;
+level:GRIB_name = “hPa” ;
+level:actual_range = 1000.f, 10.f ;
+level:axis = “Z” ;
+ </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/11/14/use-grads-to-read-cesm-output/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/">【NOT solved】GFDL atmosphere dycore porting</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Now we try to setup GFDL dycore model on our Neptune platform. Following steps has been used:</p>
+
+<ol>
+  <li>We exec the ./exp/fv/fms_runscript, then got the netcdf and mpi error. It seems that the model does not recognize the environmental variables associated with these lib. We add the flags directly to the compile sentence.</li>
+</ol>
+<pre>L35: $mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DUSE_LIMA -DSPMD -DLAND_BND_TRACERS" -a $sourcedir $pathnames /usr/local/include $sourcedir/shared/mpp/include $sourcedir/shared/include /home/yangsong3/soft/mpich314-intel/include /usr/netcdf-4331/include</pre>
+<p>And mkmf.template.ia64 file</p>
+<pre>LDFLAGS = -L/usr/local/lib -L/usr/netcdf-4331/lib -L/home/yangsong3/soft/mpich314-intel/lib #-lsma</pre>
+<p>We comment the “-lsma” flag because it is a flag specific to Cray machine.</p>
+
+<p>Next, we compile again, frequently got this</p>
+<pre>ifort:  '-i_dynamic' not supported</pre>
+<p>google it, got this</p>
+
+<p>https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/486830</p>
+<blockquote>Regarding 1:<strong> -i_dynamic</strong> (the underscore form) was a option spelling used many many releases ago that was later mapped to <strong>-i-dynamic</strong> (the hyphen form) and then that form was depreciated in more current releases and it now maps to<strong> -shared-intel</strong></blockquote>
+<p>So, we change it to <strong>-shared-intel</strong>, no more warning.</p>
+
+<p>However, when it compiles for a long time (5min), we got error again, lots of:</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_transmit_mpi.h:79: undefined reference to `mpi_recv_'</pre>
+<p>Then we change the ifort compile flag into mpif90, we got this</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_io_misc.inc:116: undefined reference to `nf_inq_libvers_'</pre>
+<p>It really sucks<strong><span style="color: #339966;">.</span></strong></p>
+
+<p>#Last Edited on 20151004#</p>
+
+<p><strong><span style="color: #339966;">We finally stop trying and turn to CAM dynamical core simulation and it works really smooth over the CESM construction.</span></strong></p>
+
+<p>#Last Edited on 20151114#</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -757,150 +936,6 @@ Coordinates:
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/">【vim, 已解决】使用vim批量插入/删除 行首行尾</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-13
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>设想这样一个应用情景，需要下载一批文件，不想写循环或者文件名分散或随机的情况，拿到了枚举list，可以下了吧。当然，我们还需要wget 以及重命名等任务。也就是说，我们需要在每一行前面或者后面加上关键词，比如wget空格，或者其他什么的</p>
-
-<p>vim可以很好解决这个问题，两个语句：</p>
-
-<p><strong>行首加入 :%s/^/Hello, this is your word/</strong></p>
-
-<p><strong>行尾加入 :%s/$/Bye, this is your word/</strong></p>
-
-<p>CTRL+V 可以很好解决局部问题</p>
-
-<p>或者</p>
-
-<p><strong>2-50行加入 :2,50 s/^/#/g</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/">【Shanbei News Notes】20150915</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-13
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/37042/">Trillenium takes virtual reality into online shopping Trillenium为网购带来虚拟现实体验</a></h2>
-<p><span id="A37042P86103S71040" class="sentence">“The current dot.com experience is pretty <span class="learning-all"><strong>sterile</strong>. 此处有“枯燥无味的”意思
-</span></span></p>
-
-<p>venture capical 风险投资（VC）</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -911,10 +946,10 @@ Coordinates:
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page19" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">20/41</span>
+          <span class="page_number ">20/42</span>
           
             <a href="/page21" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page41" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1145,7 +1180,17 @@ Coordinates:
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (43)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
                             
                           
                         
@@ -2216,7 +2261,7 @@ Coordinates:
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #333;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
                     
                       
                       
@@ -2820,6 +2865,13 @@ Coordinates:
                       
                       <a href="/tag/#option" style="font-size: 9pt; color: #999;">option</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                    
                 </div>
             </div>
 
@@ -2832,6 +2884,10 @@ Coordinates:
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                    
+                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                         <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
                     
@@ -2849,10 +2905,6 @@ Coordinates:
                     
                         <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
                     
-                        <li><a href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a></li>
-                    
-                        <li><a href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a></li>
-                    
                 </ul>
             </div>
 
@@ -2869,7 +2921,7 @@ Coordinates:
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">28</span>
+                            <span class="badge">29</span>
                         </a>
                     </li>
                     
@@ -2887,7 +2939,7 @@ Coordinates:
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3373,7 +3425,7 @@ Coordinates:
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3412,6 +3464,7 @@ Coordinates:
     </div>
 </div>
 <script src="/js/principles.js" charset="utf-8"></script>
+<script src="/js/cmatrix.js" charset="utf-8"></script>
 <!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
 <!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
 
