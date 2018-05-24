@@ -16,5 +16,15 @@ author: LZN
 
 [一些资料](http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html)
 
+修改轨道参数，固定黄赤交角为0度：
+``` python
+
+rb_mode='fixed_parameters'
+orb_obliq=0.0
+orb_eccen=0.0167239
+orb_mvelp=102.035
+
+```
+
 **Updated 2018-05-14**
 
