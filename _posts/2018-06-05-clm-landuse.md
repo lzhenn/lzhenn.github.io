@@ -10,7 +10,7 @@ author: LZN
 {:toc}
 
 In our hierarchy experiments, we hope to make the no_topo series experiments as simple as possible. Thus, it would be great if there is no vegetation on the ground. 
-In the CLM, we can be expected that there is an external forcing data to control the surface type of ground/vegetation. Then I found this in `lnd_in` file
+In the CLM, we expect there is an external forcing data to control the surface type of ground/vegetation. Then I found this in `lnd_in` file
 
 ``` python
 fsurdat = '/users/yangsong3/CESM/input/lnd/clm2/surfdata/surfdata_1.9x2.5_simyr2000_c091005.nc'
