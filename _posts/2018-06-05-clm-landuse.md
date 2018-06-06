@@ -28,7 +28,28 @@ The first dimension show the corresponding PFT (Plant Functional Types), which d
 
 ![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs0m9y9g3oj20kb0ie0ve.jpg)
 
-Thus, the only thing we need to do is to create a new file with change only in PCT_PFT(0,:,:)=100.0
+Thus, the only thing we need to do is to create a new file with change only in PCT_PFT(0,:,:)=100.0.
 
 **Updated 2018-06-05**
 
+When we tried to run the model, we got several errors.
+
+``` bash
+surfrd_wtxy_veg_all ERROR: sum(pct) over numpft+1 is not = 100.
+490    100.106661159475       0.106661159474527             4473
+```
+
+According to the error, it seems that the sum of pft is not 100. After checking the data, we found several variables:
+
+``` fortran
+pct_list=(/"PCT_LAKE", "PCT_WETLAND", "PCT_GLACIER", "PCT_URBAN"/)
+```
+So I remain all the pct about water, urban, and glacier, and make the bare ground equal to `100-sum(pct_list)`.
+
+Note that after changing all the landuse pct, the default CLM initial condition cannot satisfy the model, so we need to "cold" start the model. Use `env_run.xml` to set it.
+
+``` xml
+<entry id="CLM_FORCE_COLDSTART"   value="on"  />
+```
+
+**Updated 2018-06-06**
