@@ -100,6 +100,79 @@ According to the Paleo FAQ:
 To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass. If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.
 
 
+#### 1.3 Region mask file
+
+We check the POP default basin mask file, with the min=-14 and max=11, the masking figure can be found on the [NCL popmask page](https://www.ncl.ucar.edu/Applications/popmask.shtml).
+
+![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs8ekx208mj20jw0da0wp.jpg)
+
+And the `gx1v6_region_idx` is avaliable in the run folder:
+
+|  IDX| OCEAN NAME           |
+|-----|----------------------|
+|   1 | 'Southern Ocean    ' |
+|   2 | 'Pacific Ocean     ' |
+|   3 | 'Indian Ocean      ' |
+|   4 | 'Persian Gulf      ' |
+| -5  |'Red Sea           '  |
+|  6  |'Atlantic Ocean    '  |
+|  7  |'Mediterranean Sea '  |
+|  8  |'Labrador Sea      '  |
+|  9  |'GIN Sea           '  |
+| 10  |'Arctic Ocean      '  |
+| 11  |'Hudson Bay        '  |
+|-12  |'Baltic Sea        '  |
+|-13  |'Black Sea         '  |
+|-14  |'Caspian Sea       '  |
+
+Minus-zero Seas are for marginal seas.
+
+We then follow the guide for Deep Time simulation to change the idx:
+>**Deep Time:** Since deep time simulations have ocean configurations that differ profoundly from current day, deep time modelers will need to define their own ocean regions. Typically we recommend that they define two simple regions, Northern and Southern Hemisphere.
+
+We change `gx1v6_region_idx` to:
+
+|  IDX| OCEAN NAME           |
+|-----|----------------------|
+|   1 | 'Southern Ocean    ' |
+|   2 | 'Northern Ocean    ' |
+
+`region_mask_gx1v6` is modified accordingly.
+
+#### 1.4. Ocean initial condition
+
+The final work is to change the ocean initial condition. For `PURE_AQUA` and `SURF_AQUA`, the zonal-mean type should fit well.
+
+>**ZONAL-MEAN**    
+>**Initialize with a global, zonally averaged temperature/salinity distribution.** POP allows a zonally averaged temperature/salinity file to be used for initialization. This file is binary and the format can be found in the CCSM3/POP source code, subroutine initial.F
+
+Simply change the `pop2_in`:
+
+``` fortran
+init_ts_option = "zonal-mean"
+```
+
+However, it seems that this is a legacy configuration in CCSM3/POP. In POP2, I cannot find the zonal-mean option in the source code, so I conducted a simple test to prove this. Unfortunately, the model does not recognize the settings. Therefore, I have to change the default initial condition to fit the aqua-planet run.
+
+**Updated 2018-06-13**
+
+We should also use the recommended namelist settings for Deep Time Simulations to turn off the processes not so related to the climate physics:
+
+``` fortran
+overflows_on = .false.
+overflows_interactive = .false.
+lhoriz_varying_bckgrnd = .false.
+ldiag_velocity = .false.
+ltidal_mixing = .false.
+bckgrnd_vdc1 = 0.524
+bckgrnd_vdc2 = 0.313
+sw_absorption_type = 'jerlov'
+jerlov_water_type = 3
+chl_option = 'file'
+chl_filename = 'unknown-chl'
+chl_file_fmt = 'bin'
+```
+
 ### II. Land Model Modification
 ------------
 
@@ -113,5 +186,5 @@ To make it simple, we first tried to maintain the default Greenland replaced gri
 ------------
 
 
-**Updated 2018-06-07**
+**Updated 2018-06-13**
 
