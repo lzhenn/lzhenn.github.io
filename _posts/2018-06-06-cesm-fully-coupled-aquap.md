@@ -11,7 +11,7 @@ author: LZN
 
 The following sketch displays our hierarchical experiments to reveal the origin of large-scale circulations.
 
-![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs1suhdwwwj213s0tggpm.jpg)
+![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs9t8wpto1j213t0t4ws8.jpg)
 
 A series of articles have been archived to record the process:
 1. [Change CESM/CLM Surface to Pure Bare Ground](https://novarizark.github.io/2018/06/05/clm-landuse/)
@@ -53,9 +53,9 @@ Results from the file:
 ```
 
 60 means the deepest ocean bottom lies on the 60th model layer.
-Here we set all to Layer 25 in pure-aqua (2.6848km depth), and all land (0) to 1 (10m) in surf-aqua model.
+Here we set all to Layer 25 in `PURE_AQUA` (2.6848km depth), and all land (0) to 1 (10m) in `SURF_AQUA` model.
 
-However, the NCL had problem when writing the new file. We change to F90 to realize our goal. For example, below is the code to generate surf_aqua bathymetry data:
+However, the NCL had problem when writing the new file (See **[Appendix01](./#61-ncl-binary-file)** for details and solution). We change to F90 to realize our goal. For example, below is the code to generate `SURF_AQUA` bathymetry data:
 
 ``` fortran
 program change_bathymetry 
@@ -154,7 +154,10 @@ init_ts_option = "zonal-mean"
 
 However, it seems that this is a legacy configuration in CCSM3/POP. In POP2, I cannot find the zonal-mean option in the source code, so I conducted a simple test to prove this. Unfortunately, the model does not recognize the settings. Therefore, I have to change the default initial condition to fit the aqua-planet run.
 
-**Updated 2018-06-13**
+The default initial file for temperature and salinity is `ts_PHC2_jan_ic_gx1v6_20090205.ieeer8`. Thus, in the `SURF_AQUA` experiment, we use the poisson grid fill to fill the grid on the ground, and in the `PURE_AQUA` experiment, we fill all grid with zonal mean and mask out layer deeper than L26.
+
+![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs9tisw2n4j20om0ft41v.jpg)
+![](https://ws1.sinaimg.cn/large/73ebdc71gy1fs9tf8s9gcj20ox0fzgoe.jpg)
 
 We should also use the recommended namelist settings for Deep Time Simulations to turn off the processes not so related to the climate physics:
 
@@ -182,9 +185,25 @@ chl_file_fmt = 'bin'
 ### IV. Sea Ice Model Modification
 ------------
 
-### V. River Model Modification
+### V. Coupler Mapping Modification
 ------------
 
+All CESM Land/Sea mask info comes from the ocean data.
+
+
+
+
+### VI. Appendix
+
+#### 6.1 NCL Binary File
+
+We first found that when we use the NCL to write a direct binary file, the file records very large values near the top of the variable type (e.g. 21474836xx for int, and 3e317 for double). Therefore, we tried to use fortran to deal with the problem. Finally, we found this is actually we set the file option as Big_Endian in NCL only for read process. Solution is simple, also set for write process:
+
+``` fortran
+setfileoption("bin","WriteByteOrder","BigEndian")
+```
+
+Note to use `WriteByteOrder`.
 
 **Updated 2018-06-13**
 
