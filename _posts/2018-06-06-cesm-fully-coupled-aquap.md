@@ -176,8 +176,11 @@ chl_filename = 'unknown-chl'
 chl_file_fmt = 'bin'
 ```
 
-### II. Land Model Modification
+### II. Coupler Mapping Modification
 ------------
+
+All CESM Land/Sea mask info comes from the ocean data. In the [paleo resources](http://www.cesm.ucar.edu/models/paleo/faq/#cpl_map), they used `mk_SCRIPgrid.csh` etc script to generate the file.
+Actually, we do not need to use this procedure since we need to make all the globe covered by ocean. Therefore, we just need to modify 2 final files: `domain.lnd.fv1.9x2.5_gx1v6.090206.nc` and `domain.ocn.gx1v6.090206.nc`. and make variables `mask` and `frac` all set to 1.
 
 ### III. Atmospheric Model Modification
 ------------
@@ -185,10 +188,9 @@ chl_file_fmt = 'bin'
 ### IV. Sea Ice Model Modification
 ------------
 
-### V. Coupler Mapping Modification
+### V. Land Model Modification
 ------------
 
-All CESM Land/Sea mask info comes from the ocean data.
 
 
 
