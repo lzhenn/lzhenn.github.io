@@ -97,7 +97,7 @@ It can be seen that over the Northern Polar region, the grid system shifts the n
 According to the Paleo FAQ:
 >The ocean model requires that grid poles be placed over land. Numerically no computation can be done at the convergence point of all longitudes at the grid pole. The ocean model solves this problem by shifting the grid pole away from the geographic pole and placing it over a land mass. (Atmospheric models solve this problem by using numerical filters). Therefore if there is no land at the geographic pole, the numerical pole must be shifted over land elsewhere.
 
-To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass. If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.
+To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass **(It does not work! We have to maintain the polar land inside the ocean grid "black hole"!)**. If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.
 
 
 #### 1.3 Region mask file
@@ -232,45 +232,95 @@ setfileoption("bin","WriteByteOrder","BigEndian")
 
 Note to use `WriteByteOrder`.
 
-#### 6.2 Namelist Changes (Final)
+#### 6.2 Namelist Changes (SURF_AQUA Final)
 
 * env_run.xml
 
 ``` xml
-```
+<!--"atm domain file (char) " -->
+<entry id="ATM_DOMAIN_FILE"   value="domain.lnd.fv1.9x2.5_gx1v6.aqua.polar.180614.nc"  />
+<!--"lnd domain file (char) " -->
+<entry id="LND_DOMAIN_FILE"   value="domain.lnd.fv1.9x2.5_gx1v6.aqua.polar.180614.nc"  />
+<!--"ice domain file (char) " -->
+<entry id="ICE_DOMAIN_FILE"   value="domain.ocn.gx1v6.aqua.polar.180614.nc"  />
+<!--"ocn domain file (char) " -->
+<entry id="OCN_DOMAIN_FILE"   value="domain.ocn.gx1v6.aqua.polar.180614.nc"  />
 
-* user_nl_cpl
-
-``` fortran
+<!--"atm2ocn flux mapping file (char) " -->
+<entry id="ATM2OCN_FMAPNAME"   value="cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_aave.aqua.polar.180614.nc"  />
+<!--"atm2ocn state mapping file (char) " -->
+<entry id="ATM2OCN_SMAPNAME"   value="cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_blin.aqua.polar.180614.nc"  />
+<!--"atm2ocn vector mapping file (char) " -->
+<entry id="ATM2OCN_VMAPNAME"   value="cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_patc.aqua.polar.180614.nc"  />
+<!--"ocn2atm flux mapping file (char) " -->
+<entry id="OCN2ATM_FMAPNAME"   value="cpl/gridmaps/gx1v6/map_gx1v6_TO_fv19_25_aave.aqua.polar.180614.nc"  />
+<!--"ocn2atm state mapping file (char) " -->
+<entry id="OCN2ATM_SMAPNAME"   value="cpl/gridmaps/gx1v6/map_gx1v6_TO_fv19_25_aave.aqua.polar.180614.nc"  />
 ```
 
 * user_nl_pop2
 
 ``` fortran
+init_ts_file = '/users/yangsong3/CESM/input/ocn/pop/gx1v6/ic/ts_surf_aqua_polar_PHC2_jan_ic_gx1v6_20180613.ieeer8'
+region_mask_file = '/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/region_mask_aqua_polar_20180612.ieeei4'
+region_info_file = '/users/yangsong3/CESM/cesm1_2_2/models/ocn/pop2/input_templates/gx1v6_aqua_region_ids'
+topography_file = '/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_polar_20180607.ieeei4'
+n_transport_reg = 1
+diag_transp_freq_opt='never'
+diag_transport_file='/users/yangsong3/CESM/cesm1_2_2/models/ocn/pop2/input_templates/gx1v6_transport_contents_aqua'
+
+!-- dt_count sets the number of times the ocean is coupled per NCPL_BASE_PERIOD.
+dt_count=30
+
+overflows_on = .false.
+overflows_interactive = .false.
+lhoriz_varying_bckgrnd = .false.
+ldiag_velocity = .false.
+ltidal_mixing = .false.
+
+!--The new background vertical velocity parameters were determined by Gokhan and Christine to increase Kappa-v in the deeper ocean in absence of tidal mixing. The tidal mixing normally would do this.
+bckgrnd_vdc1 = 0.524
+bckgrnd_vdc2 = 0.313
+
+sw_absorption_type = 'jerlov'
+jerlov_water_type = 3
+chl_option = 'file'
+chl_filename = 'unknown-chl'
+chl_file_fmt = 'bin'
 ```
 
 
 * user_nl_atm
 
 ``` fortran
+bnd_topo       = '/users/yangsong3/CESM/input/atm/cam/topo/USGS-gtopo30_1.9x2.5_pure.nc' 
+ncdata='/users/yangsong3/L_Zealot/B/B20f19-surf-aqua/indata/B20f19-topo.cam.i.0010-01-01-00000.nc'
+!dtime=900
 ```
 
 
 * user_nl_clm
 
 ``` fortran
+finidat = '/users/yangsong3/L_Zealot/B/B20f19-surf-aqua/indata/B20f19-surf-aqua.clm2.r.0001-01-06-00000.nc' 
+fsurdat = '/users/yangsong3/CESM/input/lnd/clm2/surfdata/surfdata_1.9x2.5_bare_ground_simyr2000_c091005.nc'
+urban_hac='OFF'
 ```
 
 
 * user_nl_cice
 
 ``` fortran
+kmt_file = '/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_polar_20180607.ieeei4'
+ice_ic = 'none'
+xndt_dyn = 2
 ```
 
 
 * user_nl_rtm
 
 ``` fortran
+finidat_rtm=''
 ```
 
 
@@ -306,7 +356,19 @@ Oops! Big problem in the decomposition part to parallel computing.
 After long-time test and turn on the detailed debug info, we got another error indicating 
 > forrtl: error (73): floating divide by zero
 
-This is because when the atm model compute radiation, it faced with absolute zero longwave upward radiation. It is easy to find the problem is because the poler region inside the ocean grid circle has no value (no ocean and no land). Thus, we have to maintain some polar land to make the model run.
+Then I found the error occurs in the radiation module. This is because when the atm model compute radiation, it is faced with absolute zero inside polar region where the ocean grid cannot cover.
+
+Thus, **we have to maintain polar land inside the ocean grid "black hole" to make the model run.**
+
+#### 6.4 Script List
+
+**Ocean**
+
+* [Change Bathymetry (topography_20090204.ieeei4)](https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/f90/180607-change_bath_pop2.f90)
+* [Change Region Mask (region_mask_20090205.ieeei4)](https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/f90/180607-change_region_mask_pop2.f90)
+* [Change Initial Condition (ts_PHC2_jan_ic_gx1v6_20090205.ieeer)](https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/ncl/180613-change-temp-salt-surf-aqua-pop.ncl)
+
+**Coupler**
 
 **Updated 2018-06-14**
 

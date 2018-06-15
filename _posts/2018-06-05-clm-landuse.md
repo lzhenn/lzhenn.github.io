@@ -136,6 +136,7 @@ I used to cold start the model, it seems this can be a big problem:
 >CLM4 does not require an initial condition file and can be initialized with arbitrary initialization (finidat=" "). However, arbitrary initialization starts the model from essentially bare ground, with vegetation, soil carbon, soil nitrogen, and soil moisture set to zero. The land model will spin up all variables at once, but will therefore require many hundreds of years to come into equilibrium.
 
 Following the instruction, we first startup a `NO_TOPO` experiment with 5 day integration and our own bare ground surface data. Then, use `interpinic` to remap a `REAL_WORLD` restart file to our 5-day restart file:
+Path: `/users/yangsong3/CESM/cesm1_2_2/models/lnd/clm/tools/clm4_0/interpinic`
 ``` bash
 ./interpinic -i  /users/yangsong3/L_Zealot/B/B20f19-realworld/exe/B20f19-realworld.clm2.r.0021-01-01-00000.nc -o /users/yangsong3/L_Zealot/B/B20f19-topo/clm.r/B20f19-topo.clm2.r.interpinic.nc 
 ```
