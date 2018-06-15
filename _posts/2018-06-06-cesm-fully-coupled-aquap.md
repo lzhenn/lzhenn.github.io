@@ -179,20 +179,45 @@ chl_file_fmt = 'bin'
 ### II. Coupler Mapping Modification
 ------------
 
-All CESM Land/Sea mask info comes from the ocean data. In the [paleo resources](http://www.cesm.ucar.edu/models/paleo/faq/#cpl_map), they used `mk_SCRIPgrid.csh` etc script to generate the file.
-Actually, we do not need to use this procedure since we need to make all the globe covered by ocean. Therefore, we just need to modify 2 final files: `domain.lnd.fv1.9x2.5_gx1v6.090206.nc` and `domain.ocn.gx1v6.090206.nc`. and make variables `mask` and `frac` all set to 1.
+All CESM Land/Sea mask info comes from the ocean data. In the [paleo resources](http://www.cesm.ucar.edu/models/paleo/faq/#cpl_map), we follow the instrudctions to make our mapping and domain data.
+
+Notes:
+
+* Scripgrids data [download path](https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/share/scripgrids/)
+* Use NCL change `gx1v6_090205.nc` grid_imask variable
+* Use following command to generate mapping data:
+``` bash
+ ./gen_cesm_maps.sh -fatm /users/yangsong3/CESM/input/share/scripgrids/fv1.9x2.5_090205.nc -natm fv19_25 -focn /users/yangsong3/CESM/input/share/scripgrids/gx1v6_aqua_polar_180614.nc -nocn gx1PT --nogridcheck
+```
+* Following the instructing in `/users/yangsong3/CESM/cesm1_2_2/tools/mapping/gen_domain_files` to build `gen_domain` executable. **Note to change the following line in Macro if met MPI/NC variable not found problem:**
+``` makefile
+SFC:= mpif90
+```
+* Generate domain files:
+``` bash
+./gen_domain -m ../gen_mapping_files/map_gx1PT_TO_fv19_25_aave.180614.nc -o gx1PT -l fv19_25
+```
 
 ### III. Atmospheric Model Modification
 ------------
 
+Similar as Coupler generated mapping files, there is a land-sea mask file `/users/yangsong3/CESM/input/atm/cam/ocnfrac/domain.camocn.1.9x2.5_gx1v6_090403.nc`, using similar technique, change all `mask` and `frac` to 1 to present aqua-planet.
+
 ### IV. Sea Ice Model Modification
 ------------
+
+Force the model generate sea ice by itself:
+>Ice initial conditions files are not required for deep time paleoclimate cases. We recommend initializing the ice model with a ‘no ice’ initial state and allowing the model to simulate an ice state. Set ‘no ice’ in the ice model namelist (user_nl_cice).
+
+``` fortran
+ice_ic = 'none'
+```
+Please see **[Appendix02]()** for detailed namelist changes.
 
 ### V. Land Model Modification
 ------------
 
-
-
+Land model never works in the aqua-planet, so we just use the cpl-generated domain file to drive the model. However, in `NO_TOPO` series experiments, we [reset the surface data to bare ground](https://novarizark.github.io/2018/06/05/clm-landuse/).
 
 
 ### VI. Appendix
@@ -207,5 +232,81 @@ setfileoption("bin","WriteByteOrder","BigEndian")
 
 Note to use `WriteByteOrder`.
 
-**Updated 2018-06-13**
+#### 6.2 Namelist Changes (Final)
+
+* env_run.xml
+
+``` xml
+```
+
+* user_nl_cpl
+
+``` fortran
+```
+
+* user_nl_pop2
+
+``` fortran
+```
+
+
+* user_nl_atm
+
+``` fortran
+```
+
+
+* user_nl_clm
+
+``` fortran
+```
+
+
+* user_nl_cice
+
+``` fortran
+```
+
+
+* user_nl_rtm
+
+``` fortran
+```
+
+
+#### 6.3 Error Log
+
+>POP aborting...
+ (init_moc_ts_transport_arrays)  no transport regions have been detected --  che 
+  ck namelist transports_nml
+
+It seems the ocean transport diag met some problems.
+>The transport_contents input_template is used for diagnostic purposes only. In this file, the modeler can specify ocean locations (straits for example) for ocean transport computations that will be output in the ocean log files.
+
+I first tried to create my own `transport_contents` file, and we met end-of-file read crashes. It is clear that the number of diag locations is hard-coded in the model source code. So I then tried to change the namelist variable:
+
+```fortran
+ diag_transp_freq_opt = 'never'
+```
+
+The same error message as the beginning... Then I found the first line in the `transport_contents` file denotes the number of diag places. So I change it to zero. Another time, not work.
+
+I then found another namelist variable:
+``` fortran
+n_transport_reg=1
+```
+Originally, 2, and I change to 1. New error occurs!
+
+> (seq_map_avNormAvF)  ERROR: lsize_i ne lsize_f            0      245209
+MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR--parallelization strategy name  not supported.
+000.MCT(MPEU)::die.: from MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_()
+
+Oops! Big problem in the decomposition part to parallel computing.
+
+After long-time test and turn on the detailed debug info, we got another error indicating 
+> forrtl: error (73): floating divide by zero
+
+This is because when the atm model compute radiation, it faced with absolute zero longwave upward radiation. It is easy to find the problem is because the poler region inside the ocean grid circle has no value (no ocean and no land). Thus, we have to maintain some polar land to make the model run.
+
+**Updated 2018-06-14**
 
