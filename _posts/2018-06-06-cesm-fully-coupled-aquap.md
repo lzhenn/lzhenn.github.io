@@ -326,6 +326,8 @@ finidat_rtm=''
 
 #### 6.3 Error Log
 
+##### 6.3.1 Polar Land
+
 >POP aborting...
  (init_moc_ts_transport_arrays)  no transport regions have been detected --  che 
   ck namelist transports_nml
@@ -359,6 +361,10 @@ After long-time test and turn on the detailed debug info, we got another error i
 Then I found the error occurs in the radiation module. This is because when the atm model compute radiation, it is faced with absolute zero inside polar region where the ocean grid cannot cover.
 
 Thus, **we have to maintain polar land inside the ocean grid "black hole" to make the model run.**
+
+##### 6.3.2 Oceanic topography
+
+In the `PURE_AQUA` experiment, the model crashes after several months' integration. I have tried to change the initial condition, increase the timesteps, and modify the oceanic topography to add a smooth change from polar land to 2.7km depth ocean. All the trials failed. Finally, when I remain the sharp change from polar land to 300m depth water, and remain the oceanic topography deeper than 300m, the model runs smoothly. I have no idea why this happens but it seems to be a very wiered problem. Anyway, 300m-depth mixed layer is enough for our scientific question. 
 
 #### 6.4 Script List
 
