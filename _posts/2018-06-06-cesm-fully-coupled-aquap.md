@@ -10,8 +10,7 @@ author: LZN
 {:toc}
 
 The following sketch displays our hierarchical experiments to reveal the origin of large-scale circulations.
-
-![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs9t8wpto1j213t0t4ws8.jpg)
+![](http://ww1.sinaimg.cn/large/73ebdc71gy1fsz2xsez7pj20sn0kx10b.jpg)
 
 A series of articles have been archived to record the process:
 1. [Change CESM/CLM Surface to Pure Bare Ground](https://novarizark.github.io/2018/06/05/clm-landuse/)
