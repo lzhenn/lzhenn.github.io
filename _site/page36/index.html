@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/27/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ntfs/">【已解决】ntfs-3g移动硬盘自动挂载</a>
+                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-27
+                        <i class="fa fa-calendar"></i>2014-10-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,84 +264,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
     
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>&nbsp;
     
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>ntfs格式的硬盘要通过ntfs-3g在linux下才能挂载，开机挂载相应修改fstab即可。对于移动硬盘，为了能达到即插即用的效果，还需要做以下工作。</p>
-
-<p>用root权限建立/sbin/mount.ntfs文件，内容如下：</p>
-<blockquote>#!/bin/sh
-export LANG=en_US.UTF-8
-exec /sbin/mount.ntfs-3g "$@"</blockquote>
-<p>保存后重新插入移动硬盘，看看NTFS格式的分区是不是跟FAT32的分区一样自动加载了？</p>
-
-<p><strong>记得给/sbin/mount.ntfs文件权限哦 chmod a+x /sbin/mount.ntfs</strong></p>
-
-<p>参考资料</p>
-
-<p>http://blog.163.com/cmh_lj/blog/static/100812304201252522119264/</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/27/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ntfs/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/24/e7-ac-bc-e4-b8-ad-e9-b8-9f/">笼中鸟</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
     
   
 
@@ -356,7 +285,11 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>&nbsp;
+    
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
     
   
 
@@ -366,176 +299,67 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>今天感觉非常不好。欠缺太多，差了太多，非常失望落寞。刚刚用新装的google输入法打自己名字，只输入首字母，出现了“笼中鸟”这个词，呵呵，或许我就是这样的状态吧，其实自己禁锢了自己，自嘲一下。</p>
+<p>ncl写二进制文件非常方便，setfileoption+fbinrecwrite语句即可。处理模式输出的加热数据测试了一下，非常迅速搞定。随后需要用到fortran代码来读写二进制文件，没想到却遇到大问题。</p>
+
+<p>ncl下采用fbinrecwrite写入的文件为fortran下的sequential读取方式（貌似这个才是符合ieee标准的），按照<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/fbinrecwrite.shtml">官网指示</a>，代码很容易编译通过，但是执行出错。ifort编译执行错误结果：</p>
+<blockquote>forrtl: severe (98): cannot allocate memory for the file buffer - out of memory, unit 100, file /users/yangsong3/L_Zealot/F/f90/CAM4_PTENDT_DIFF_mon.dat</blockquote>
+<p>采用gfortran编译，同样执行出错：</p>
+<blockquote>At line 12 of file read_heat_diff.f90 (unit = 100, file = '../data/model_post/CAM4_PTENDT_DIFF_mon.dat')
+Fortran runtime error: End of file</blockquote>
+<p>第一次在linux平台下编译自己写的fortran代码，多少还是有些心虚。ifort表示内存不足，gfortran表示读到文件末尾，有些莫名其妙，检查路径文件名，文件大小，读取方式，貌似都没问题，折腾许久没有结果。</p>
+
+<p>问题只能回溯到ncl那么简单的二进制写入上，fbinrecwrite看上去没什么问题，setfileoption中的几个选项值得怀疑，查了下BigEndian的问题，是这样描述的：</p>
+<blockquote>其实big endian是指低地址存放最高有效字节（MSB），而little endian则是低地址存放最低有效字节（LSB）。
+
+用文字说明可能比较抽象，下面用图像加以说明。比如数字0x12345678在两种不同字节序CPU中的存储顺序如下所示：
+
+<strong>Big Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   12  |   34  |   56  |   78   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+<strong>Little Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   78|   56  |   34  |   12   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</blockquote>
+<p>虽然看上去出错信息并不是这么指向的，但还是要试一试，查了下fortran在字节序处理的问题，果然，一行open语句赫然入眼：</p>
+
+<p>open(…,<strong><em>convert=”big_endian”</em></strong>)</p>
+
+<p>加入测试，我擦嘞……居然可以了，果然是字节序的问题。原来fortran默认的是非人的little endian，好吧……关键是运行出错给出的那些错误信息，完全无厘头，真是对编译器失望了。另外SGI编译器默认为BigEndian。</p>
+
+<p>另外fortran读ncl写出的多维二进制数据的时候，注意维数方向是相反的哦！如ncl数组（33，44），fortran（44，33）</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/sunshine1314/article/details/2309655 BigEndian和LittleEndian</p>
+
+<p>http://bbs.lasg.ac.cn/?action-viewthread-tid-13303</p>
+
+<p>http://www.360doc.com/content/11/0216/10/2609140_93438395.shtml</p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/24/e7-ac-bc-e4-b8-ad-e9-b8-9f/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/22/novarizarks-pc/">Novarizark's PC</a>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>上学期自己买了E2414H，这学期的笔记本和台式机也都下来了，差不多装好了系统，起名，合照。White Cube和Crystal Shadow，伴我度过了九年岁月，我对这个世界很大一部分的了解和探索，都是通过她们实现的。新台式机和笔记本的名字想了好久，还是决定去纪念伴我度过了十多年的Blizzard的游戏——Diablo II，从二年级不懂事的小屁孩看老爸公司里的叔叔刷血鸟，到初中三年级和hunger的纯招NEC pass dy，再是中考结束整个暑假研究pass各种char各种build，一直甚至到大二实习还和烨琪一起开荒pass，太多记忆与怀念了。</p>
-
-<p>台式机决定取名为Blackleach，黑是主色调，坚韧而厚重，本因台式机性能优越希望取为Stormspire，但Black的属性久久萦绕脑海，不得已，故名。其实溯源的话，Blackleach是苏格兰一个地名，这套暗金装备全名为Blackleach Blade Bill (黑水之刃-比尔长刀)，因Blackleach这个地方生产Bill这种钩镰枪，故名。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/blackleach.jpg"><img class="alignnone size-full wp-image-182" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/blackleach.jpg" alt="blackleach" width="674" height="222" /></a></p>
-
-<p>笔记本取名为Wizardspike吧，level mana + 75% mana + 50% FCR + 75% 4R，换上浦科特的SSD后还是非常神似的嘛，哈哈！Wizardspike Bone Knife （巫师之刺-骸骨匕首），居家旅行，杀人越货，必备之选。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/wizardspike.jpg"><img class="alignnone size-full wp-image-184" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/wizardspike.jpg" alt="wizardspike" width="833" height="212" /></a></p>
-
-<p>来张大合照啦，除了White Cube在烟台，其他都在这里啦。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/IMG_20140922_202625.jpg"><img class="alignnone size-full wp-image-185" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/IMG_20140922_202625.jpg" alt="IMG_20140922_202625" width="3200" height="2368" /></a></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/22/novarizarks-pc/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM continue run的使用方法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>重复何老师试验，跑CAM5的物理，学校集群太慢，于是到天河二号上跑。CTRL试验跑的顺风顺水，一路到30年。SEN试验第一次在第八年断了，第二次第四年，第三次恼了，开continue run，发现错误提示是找不到rpointer文件，原来需要在开始跑的时候就在env_run.xml里设置好REST_N变量才行，默认给的是=$STOP_N。也就是仅仅在程序运行完成后的最后一年生成rpointer文件。只得改成1后继续从头运行，果然每年都生成了每个模块对应的rpointer（rpointer.xxx）。不出所料，程序到第六年又断掉了，把continue run设置为TRUE后可以正常运行。嗯嗯还不错~查看cam的输出发现输出文件莫名其妙大了一些，莫非会输出一些与重启运行有关的变量？</p>
-
-<p>后话是，continue run跑了10个月又挂了，开始怀疑编译存在问题……重新编译继续continue中，囧……</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140922#</span></strong></p>
-
-<p>经后来检查发现，确实是NetCDF 4.0.1的问题，CESM UG上建议采用4.1.2以上的版本，就是因为之前的版本存在corrept write的问题，尤其是在IO拥堵的情况下。Shift到4.3.2后，没有出现这类问题，但是4.3.2在天河二号上似乎还不能够使用ncdump，近期天河二号IO有很大改善，改回4.0.1后出问题的频率大大降低了。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141019#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/">【已解决】Grub2默认启动Windows的设置</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-20
+                        <i class="fa fa-calendar"></i>2014-10-18
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -581,33 +405,104 @@ exec /sbin/mount.ntfs-3g "$@"</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>前两天给X240s换了固态硬盘，重装系统后一直没再折腾。今天终于有空处理下CentOS7默认启动项的问题了。解决方法应该比较暴力：</p>
+<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
+<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
+set shiftwidth=4
 
-<p>grub2/grub.cfg下</p>
-<blockquote>if [ "${next_entry}" ] ; then
-set default="${next_entry}"
-set next_entry=
-save_env next_entry
-set boot_once=true
-else
-<strong>set <span style="color: #ff0000;">default=0</span></strong>
-fi</blockquote>
-<p>直接把${saved_entry}展开变量改成Windows所在列表号就可以。反正谁也不会动辄改动grub</p>
+set expandtab</blockquote>
+<p> </p>
+
+<p>对于已经存在的文件：</p>
+<blockquote><strong>TAB替换为空格：</strong>
+:set ts=4
+:set expandtab
+:%retab!</blockquote>
+<p>多行缩进在命令行模式下</p>
+<blockquote>n&gt;</blockquote>
+<p>向右缩进n行，左用&lt;代替</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
+
+<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/">【已解决】四期平台ys队列排队机制问题</a>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/">【已解决】putty在vim下使用小键盘</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-19
+                        <i class="fa fa-calendar"></i>2014-10-18
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>putty默认在vim下小键盘是不启动的，启动方式：
+选项Terminal-&gt;Features里，找到Disable application keypad mode，选上</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim针对ncl的语法高亮及自动补全</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -628,7 +523,7 @@ fi</blockquote>
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
     
   
 
@@ -647,7 +542,7 @@ fi</blockquote>
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
     
   
 
@@ -657,25 +552,166 @@ fi</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>前几天发现ys队列的排队机制存在问题，即若某节点已经被前一个任务独占，排队机制似乎没有摒除该节点，后一个任务依然可能被提交到该节点，造成负载过大。发邮件给学校超算中心后如石沉大海，没有回复。想到之前给杨老师集群做测试的时候，直接手动指定hostfiles，于是自己动手，丰衣足食。</p>
+<p>官网上查到了几个编辑器增强插件，浏览了一下，发现针对vim的属git上那个最好(Courtesy of Xin Xie [School of Marine and Atmospheric Sciencs, Stony Brook University].)</p>
 
-<p>先写hostfile文件，比如使用c74到c77四个节点，每个节点16个核心，hostfile可以这样写</p>
+<p>方法比较简单，相关文件已经打包放在文章最后，拷贝到~/.vim相应位置即可。需要注意.vimrc是放在主目录下的，且一定不要直接mv过去，否则会覆盖掉原有的设置，需要拷贝内容复制。</p>
 
-<p>c74:16</p>
+<p>命令补全快捷键是CTRL+n</p>
 
-<p>c75:16</p>
+<p>【参考资料】</p>
 
-<p>c76:16</p>
+<p>http://www.ncl.ucar.edu/Applications/editor.shtml#vim</p>
 
-<p>c77:16</p>
+<p>【附件】</p>
 
-<p>然后mpirun -hosts后面指定到这个文件。</p>
-
-<p>需要注意的是，提交pbs的话会被忽视这个设定，所以只能采用screen的方式运行脚本。pestat qstat下都不能查到任务号。</p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/ncl_vim_highlight.zip">ncl_vim_highlight</a></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM continue run出现Internal pop2 clock not in sync with Sync Clock的问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-17
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>晚上查天河二号的spin-up任务，发现下午的时候居然断掉了，已经积分了99年，队列状态一直是CG状态卡死，貌似是某个节点的一个进程被kill掉了，其他节点陆续因为超时退出。</p>
+
+<p>好吧，不管那个CG。重新提交任务，continue run，没想到initial的时候给我弹出了，纳尼……</p>
+
+<p>查看log文件发现如下错误</p>
+
+<p><strong>Internal pop2 clock not in sync with Sync Clock</strong></p>
+
+<p>POP2的时钟不同步? 这么有意思，貌似之前碰到过，因为转的时间不久，索性直接重新start-up了，这次可是转了10天啊我擦嘞，要是重新返工岂不是要命了。果断google，然后发现了这个：</p>
+<blockquote>https://bb.cgd.ucar.edu/internal-pop2-clock-not-sync-sync-clock</blockquote>
+<p>这个意思是直接重走一遍cesm_setup就可以，clean再setup，改build状态，提交任务——依然出错。其他google出来的信息几乎没用，诶，又入无人之境……</p>
+
+<p>既然是初始化的时候时钟同步出问题，想到模式运行生成restart文件的时候会同步配置一个rpointer文件，应该是记录重启点的文件，果断查看，发现问题：只有ocn的相关rpointer文件中指向100年的1月1日，其他都是99年1月1日，明白了，应该是ocn模块指定rpointer的方式与其他module不同，先于其他模块指定了新的重启点，可是其他模块的重启文件还没生成呢。长舒一口气，改rpointer.ocn.restart里面的文件为99年咯，Okay，提交任务！</p>
+
+<p>这次依然提交不久就断掉了，万念俱灰有木有，查看log文件，发现错误不一样了，有点欣喜，说明改rpointer有效。新错误是：</p>
+
+<p><strong>nlfilename_rof does NOT exist:rof_in</strong></p>
+
+<p>这么奇葩，径流模式出问题，老子又不关心你丫的径流，小兔崽子还找事……看起来是找不到rof_in的什么东西，google直接没结果，想到刚刚cesm重新setup过，是不是改了build后的一些namelist？重新build尝试，目前可以运行了，长舒一口气……但愿今晚能顺利跑过断点～</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM标准流输出</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-17
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>实现CESM额外的标准流输出其实并不困难，只要use cam_logfile就可以了，其实看一下cam_logfile.F90文件，就可以发现，里面主语句只有一个</p>
+<blockquote>iulog=6</blockquote>
+<p>因此write语句这样写就可以将额外的信息流输出到log文件：</p>
+<blockquote>write(iulog,*) "Hello World!"</blockquote>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -690,10 +726,10 @@ fi</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page35" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">36/42</span>
+          <span class="page_number ">36/43</span>
           
             <a href="/page37" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -934,7 +970,52 @@ fi</blockquote>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2033,14 +2114,14 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2201,7 +2282,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2285,6 +2366,13 @@ fi</blockquote>
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2292,7 +2380,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2313,7 +2401,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2341,7 +2429,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2481,7 +2569,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2600,7 +2688,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2616,6 +2704,27 @@ fi</blockquote>
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2629,25 +2738,25 @@ fi</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2683,7 +2792,7 @@ fi</blockquote>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2701,7 +2810,7 @@ fi</blockquote>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2737,7 +2846,7 @@ fi</blockquote>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2881,7 +2990,7 @@ fi</blockquote>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3034,7 +3143,7 @@ fi</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3070,7 +3179,7 @@ fi</blockquote>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3088,7 +3197,7 @@ fi</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3097,7 +3206,7 @@ fi</blockquote>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3169,7 +3278,16 @@ fi</blockquote>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

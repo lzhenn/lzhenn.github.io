@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/">【vim, 已解决】使用vim批量插入/删除 行首行尾</a>
+                  <a class="post-link" href="/2016/02/01/e3-80-90matlab-e3-80-91-e6-95-b0-e5-ad-97ocr/">【MATLAB】数字OCR</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-13
+                        <i class="fa fa-calendar"></i>2016-02-01
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,7 +264,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#MATLAB" title="Category: MATLAB" rel="category">MATLAB</a>
     
   
 
@@ -279,7 +281,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#MATLAB" title="Tag: MATLAB" rel="tag">MATLAB</a>
     
   
 
@@ -289,34 +291,80 @@
                 </div>
                 <div class="excerpt">
                     
-<p>设想这样一个应用情景，需要下载一批文件，不想写循环或者文件名分散或随机的情况，拿到了枚举list，可以下了吧。当然，我们还需要wget 以及重命名等任务。也就是说，我们需要在每一行前面或者后面加上关键词，比如wget空格，或者其他什么的</p>
+<p>之前截取了一些羽绒服的销量数据，以为能凑着这次<a href="http://met.sysu.edu.cn/?p=6153">广州飞雪的超强寒潮</a>写一点东西，最后发现数据并不是很有说服力。由于淘宝反爬虫的策略，因此过程中用浏览器配合按键精灵每小时截图，最后也是搜集到了不少位图数据，因此有一个问题就怎样在这些位图中将数字抽取出来，因为数字几乎没有干扰，这是个很基本的OCR（Optical Character Recognition，光学字符识别）问题。</p>
 
-<p>vim可以很好解决这个问题，两个语句：</p>
+<p>考虑还是用MATLAB做图像处理熟悉，简单查了下资料，思路很简单：</p>
 
-<p><strong>行首加入 :%s/^/Hello, this is your word/</strong></p>
+<ol>
+  <li>预处理，剪裁出需要识别的区域，灰度化，二值化。</li>
+</ol>
 
-<p><strong>行尾加入 :%s/$/Bye, this is your word/</strong></p>
+<p>2.（关键）字符分隔，这个其实很简单，向x轴y轴分别投影，找出0和正整数之间的过渡位置，即字符和间隙的分隔位置</p>
 
-<p>CTRL+V 可以很好解决局部问题</p>
+<ol>
+  <li>将图像字符串分隔为单个字符，分别向x轴y轴投影，记录投影特征，遍历10个阿拉伯数字</li>
+</ol>
 
-<p>或者</p>
+<p>4.待识别的新样本重复1和2的操作，计算与记录特征的标准偏差，设定一合理阈值偏差，小于该偏差即可认为识别成功。</p>
 
-<p><strong>2-50行加入 :2,50 s/^/#/g</strong></p>
+<p>对于标准的屏幕显示的数字（或者字母），可以想象上述过程基本能做到极高的识别率了。手写体识别估计就更复杂了，需要用到机器学习等方法，木有涉猎，暂且不表。</p>
+
+<p>识别部分程序代码如下</p>
+
+<pre><code>
+function img_number()
+    clear all;
+    close all;
+    echo off;
+	
+	
+	%---------------Read features---------------
+	x_mat=load('../feature/x_project.txt');
+	y_mat=load('../feature/y_project.txt');
+	
+    I = imread('../img/2016011920.bmp');
+    I=I(612:625,900:946,:);
+    I_int = rgb2gray(I);
+    
+    I_int=~im2bw(I_int,0.5);   %binary and reverse
+    I_x_pro = sum(I_int,1);    % project to the x axis
+    imshow(I_int)
+	num_x_start=strfind(I_x_pro~=0,[0 1])+1; %find the start point of a specific figure
+	num_x_end=strfind(I_x_pro==0,[0 1]); %find the end point of a specific figure
+	
+	I_y_pro = sum(I_int,2);   % project to the y axis
+    num_y_start=strfind(I_y_pro'~=0,[0 1])+1; %find the start point of a specific figure
+	num_y_end=strfind(I_y_pro'==0,[0 1]); %find the end point of a specific figure
+	
+	fig_num = size(num_x_start);   % how many figures in the image
+	fig_stdwidth = 6;
+	fig_stdheight = num_y_end-num_y_start+1;
+	for ii=1:fig_num(2)
+        I_std_ele_fig = imresize(I_int(num_y_start:num_y_end,num_x_start(ii):num_x_end(ii)), [fig_stdheight fig_stdwidth]);
+		std_x_pro = sum(I_std_ele_fig,1);
+		std_y_pro = sum(I_std_ele_fig,2)';
+		for jj=1:10
+			if(sum((std_x_pro-x_mat(jj,2:end)).^2)&lt;10 &amp; sum((std_y_pro-y_mat(jj,2:end)).^2)&lt;10)
+				jj-1
+			end
+		end 
+    end 
+</code></pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/01/e3-80-90matlab-e3-80-91-e6-95-b0-e5-ad-97ocr/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/">【Shanbei News Notes】20150915</a>
+                  <a class="post-link" href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/">【CESM】slab ocean coupling</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-13
+                        <i class="fa fa-calendar"></i>2015-12-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -335,78 +383,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
     
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/37042/">Trillenium takes virtual reality into online shopping Trillenium为网购带来虚拟现实体验</a></h2>
-<p><span id="A37042P86103S71040" class="sentence">“The current dot.com experience is pretty <span class="learning-all"><strong>sterile</strong>. 此处有“枯燥无味的”意思
-</span></span></p>
-
-<p>venture capical 风险投资（VC）</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/">【solved, git&github】URL problem</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
+        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
     
   
 
@@ -423,7 +402,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
     
   
 
@@ -433,989 +414,53 @@
                 </div>
                 <div class="excerpt">
                     
-<p>When I pushed all ncl file in project to github, I got this error:</p>
-<pre>[yangsong3@localhost project]$ git push -u origin master
-Password:
-To https://Novarizark@github.com/Novarizark/project.git<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
- ! [rejected] master -&gt; master (non-fast-forward)
-error: failed to push some refs to 'https://Novarizark@github.com/Novarizark/pro ject.git'
-To prevent you from losing history, non-fast-forward updates were rejected
-Merge the remote changes before pushing again. See the 'Note about
-fast-forwards' section of 'git push --help' for details.</pre>
-<p>Google it, found the solution on Stackoverflow</p>
-<pre>You need to add the origin remote:
-
-    Delete the current one
-
-    git remote rm origin
-
-    Add the git remote link ex: (https://user@bitbucket.org/test.git or https://github.com/user/test.git)
-
-    git remote add origin link
-
-    git pull origin master (or other branch)</pre>
-<p>It is the Username@github made the bad result. So there should be other ways to solve the 403 or ssh error.</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/">【Coursera】R Language</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>&nbsp;
-    
-        <a href="/category/#Coursera" title="Category: Coursera" rel="category">Coursera</a>&nbsp;
-    
-        <a href="/category/#R" title="Category: R" rel="category">R</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>&nbsp;
-    
-        <a href="/tag/#Coursera" title="Tag: Coursera" rel="tag">Coursera</a>&nbsp;
-    
-        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p> </p>
-<table>
-<tbody>
-<tr>
-<td>
-<h3><strong>Background Material</strong></h3>
-<h4><strong>L4</strong></h4>
-get the current working directory
-
-<strong>&gt;getwd()  #same in MAC
-</strong>
-
-read the csv (comma-seperated values) file
-
-<strong>&gt;read.csv("xx.csv")</strong>
-
-list the file and directory under the current directory
-
-<strong>&gt;dir()</strong>
-
-change the working directory
-
-<strong>&gt;setwd("F:/workspace/")</strong>
-
-To list out all the functions in one script
-
-<strong>&gt;ls()</strong>
-<h3>Week1</h3>
-<h4>L4</h4>
-assignment
-
-<strong>&gt;x &lt;- 5</strong>
-
-comments
-
-<strong># hi, this is a comment</strong>
-<h4>L5</h4>
-5 basic "atomic" classes
-<ul>
-	<li>character</li>
-	<li>numeric (real numbers)</li>
-	<li>integer</li>
-	<li>complex</li>
-	<li>logical (True/False)</li>
-</ul>
-basic object: vector
-
-<strong>vector function: vector(type_of, length_of)</strong>
-
-basically, R think all number as real type, if you want a integer 1, type:
-
-<strong>1L</strong>
-
-Infinity:
-
-<strong>Inf</strong>
-
-not a number:
-
-0/0=NAN (or as missing value)
-
-R objects can have attributes:
-<ul>
-	<li>names, dimnames</li>
-	<li>dimensions</li>
-	<li>class (numeric)</li>
-	<li>length</li>
-</ul>
-function to modify attributes
-
-<strong>attributes()</strong>
-<h3>L6</h3>
-c() function is to create a vector:
-
-<strong>x &lt;- c(0.5,0.6)</strong>
-
-<strong>x &lt;- c(True, Flase)</strong>
-
-vector() function acts alike, with initial value 0 for numeric.
-
-<strong>x &lt;- vector("numeric", length = 10)</strong>
-
-mixed classes
-
-<strong>x&lt;- c(True, 3) # will be numeric</strong>
-
-Explicit Coercion
-
-<strong>&gt; x&lt;-0:2</strong>
-
-<strong>&gt; class(x)</strong>
-
-<strong>[1] "integer"</strong>
-
-<strong>&gt; as.logical(x)</strong>
-
-<strong>[1] FALSE TRUE TRUE</strong>
-
-we use list() to create list.
-
-<strong>&gt;y&lt;-list("a", 1, TRUE)</strong>
-<h3>L7</h3>
-create matrix
-
-<strong>&gt;m&lt;-matrix(nrows=2, ncols=3)</strong>
-
-<strong>&gt;attributes(m)</strong>
-
-$dim
-
-[1] 2 3
-
-matrix is <strong>column wise</strong>
-
-change vector to matrix
-
-&gt;m&lt;-1:10
-
-<strong>&gt;dim(m)&lt;-c(2,5)</strong>
-
-&nbsp;
-
-or use cbind or rbind
-
-&gt;x&lt;-1:3
-
-&gt;y&lt;-10:12
-
-&gt;cbind(x,y)
-
-1 10
-
-2 11
-
-2 12
-
-&gt;rbind(x,y)
-
-similar but in row
-<h3>L8</h3>
-factors are ordered or unordered, like key for the php array, factors could be treated as numeric vector with labels
-
-give an example
-
-&gt;x&lt;-factor(c("yes","yes","no"))
-
-&gt;x
-
-[1] yes yes no
-
-Levels: no yes
-
-&gt;table(x)
-
-yes no
-
-2     1
-
-&gt;unclass(x)
-
-221
-
-that is how factor x expressed in R underneath!
-
-The first level is called the baseline level, it is determined by the alphabet rank, however, you could change the order.
-
-<strong>&gt;x&lt;-factor(c("yes","yes","no"),levels=c("yes","no"))</strong>
-
-and yes will be in the first place.
-<h3>L9-Missing Values</h3>
-is.na()
-
-is.nan()
-
-NaN value all be treated as NA, but the converse is not true.
-<h3>L10-Data Frames</h3>
-tabular 表格的
-
-data frames ~ matrices
-
-list ~ vector
-
-Yes, that the class doesn't matter in data frames.
-
-Special attributes: <strong>row.names</strong>
-
-created by
-
-<strong>read.table() or read.csv()</strong>
-
-convert to matrix
-
-<strong>data.matrix()</strong>
-
-an example:
-
-<strong>&gt;x&lt;- data.frame(foo=1:4, bar = c(T,T,F,F))</strong>
-
-<strong>&gt;x</strong>
-
-<strong>   foo    bar</strong>
-
-<strong>1    1    TRUE</strong>
-
-<strong>2    2    TRUE</strong>
-
-<strong>3    3    FALSE</strong>
-
-<strong>4    4    FALSE</strong>
-<h3>L10-Names Attribute</h3>
-<strong>&gt;x &gt;- 1:3</strong>
-
-<strong>&gt; names(x) &lt;- c("foo","bar","norf")</strong>
-
-<strong>&gt;x</strong>
-
-<strong>foo bar norf</strong>
-
-<strong>   1     2     3</strong>
-<h3>L12-Reading Tabular Data</h3>
-<ul>
-	<li><strong>read.table, read.csv</strong></li>
-	<li><strong>readLines</strong></li>
-	<li><strong>source</strong>, for reading in R code files (inverse of dump)</li>
-	<li> <strong>dget</strong>, same as above, but for dparsed code (inverse of dput)</li>
-	<li><strong>load, </strong>for reading in saved workspaces</li>
-	<li><strong>unserialize, </strong>for reading single R objects in binary form</li>
-</ul>
-write
-<ul>
-	<li>write.table</li>
-	<li>writeLines</li>
-	<li>dump</li>
-	<li>dput</li>
-	<li>save</li>
-	<li>serialize</li>
-</ul>
-<h4><strong> read.table</strong></h4>
-<ul>
-	<li>file, the name of a file, or a connection</li>
-	<li>header, logical indicating if the file has a header line</li>
-	<li>sep, a string indicating how the columns are separated</li>
-	<li>colClasses, a character vector indicating the class of each column in the dataset</li>
-	<li>nrows, the number of rows in the dataset</li>
-	<li>comment.char, a character string indicating the comment character</li>
-	<li>skip, the number of lines to skip from the beginning</li>
-	<li>stringsAsFactors, should character variables be coded as factors?</li>
-</ul>
-no argument is fine, and the result would be in a data frame.
-
-read.table default separator is space.
-
-<strong>be sure to read the document of read.table</strong>
-<h3>L12-Reading Large Tables</h3>
-set the arguments!
-
-all numeric, one is fine:
-
-colClasses = "numeric"
-<h3>L13-Textual Data Format</h3>
-<h3>L17-Subsetting-Basics</h3>
-&gt;x &lt;- c("a","b","c")
-
-&gt;x[1]
-
-[1]  "a"
-
-&gt; x[1:3]
-
-&gt;x[x&gt;"a"]
-
-&gt;u &lt;- x&gt;"a"
-
-&gt;u
-
-[1] FALSE TRUE TRUE
-<h3>L17-Subsetting-Lists</h3>
-&gt;x &lt;- list (foo =1:4, bar =0.6)
-
-&gt;x[1]
-
-$foo
-
-[1] 1 2 3 4
-
-<strong>we got a list!</strong>
-
-&gt;x[[1]]
-
-[1]  1 2 3 4
-
-<strong>we got a sequence!</strong>
-
-&gt;x$bar
-
-[1]  0.6
-
-&gt;x[["bar"]] #this is equal
-
-&gt;x["bar"]  # we got a list
-
-&gt;x[c(1, 3)]
-
-&nbsp;
-
-&gt;name = "foo"
-
-&gt;x[[name]]
-
-this is useful
-<h3>L17-Subsetting-Matrices</h3>
-&gt;x[1, ]    # missing is fine
-
-No dropping forcing:
-
-&gt;x[1, 2, drop =FALSE]
-<h3>L18-partial matching</h3>
-&gt;x&lt;-list(aardvark=1:5)
-
-&gt;x$a
-
-[1] 1 2 3 4 5
-
-&gt;x[["a"]]
-
-NULL
-
-&gt;x[["a", exact = FALSE]]
-
-[1] 1 2 3 4 5
-<h3>L19-Removing NA Values</h3>
-&gt;x &lt;- c(1, 2, NA, 4, NA, 5)
-
-&gt;bad &lt;- is.na(x)
-
-&gt;x[!bad]
-
-&nbsp;
-
-&gt;good&lt;-complete.cases(x, y)
-<h3>L20-Vectorized Operations</h3>
-matrix
-
-x*y #by rank
-
-x%*%y # by true matrix multiplication
-<h3>Week1</h3>
-<h4>L2 if-else</h4>
-if(x&gt;3) {
-
-y&lt;-10
-
-}else{
-
-y&lt;-0
-
-}
-
-<strong>also true:</strong>
-
-y&lt;- if(x&gt;3) {
-
-10
-
-}else{
-
-0
-
-}
-<h4>L2 For loops</h4>
-for (i in 1:10){
-
-}
-
-&nbsp;
-
-x &lt;- c("a","b","c","d")
-
-for (i in seq_along(x)){
-
-print(x[i])
-
-}
-
-for (letter in x){
-
-print(letter)
-
-}
-<h4>L4 Functions</h4>
-set default value:
-
-abc = function(a = 10){
-
-}
-
-columnmean &lt;- function(y, removeNA = TRUE){
-
-nc &lt;- ncol(y)
-
-means &lt;- numeric(nc)
-
-for(i in 1:nc) {
-
-mean[i] &lt;- mean(y[,i], na.rm = removeNA)
-
-}
-
-}
-<h4>L6 Functions</h4>
-... argument indicate a variable number of arguments that are usually passed on to other funcitons.
-
-myplot &lt;- function(x, y, type = "l", ...) {
-
-plot (x, y, type = type, ...)
-
-}
-
-explicityly matching after dot dot dot
-<h4>L7 Functions could be made dynamically!</h4>
-<strong> lexical vs. dynamical scoping</strong>
-
-make.power &lt;- function(n) {
-
-pow &lt;- function(x) {
-
-x^n
-
-}
-
-pow
-
-}
-
-&nbsp;
-
-&gt;cube &lt;- make.power(3) # note cube is a function
-
-&gt; cube(3)
-
-[1] 27
-
-&nbsp;
-
-ls(environment(cube))
-<h4>L8 code style</h4>
-indenting 缩进
-<h4>L10 Date and times</h4>
-x &lt;- as.Date("1970-01-01")
-
-x &lt;- Sys.time()</td>
-<td>
-<h3><strong>Point</strong></h3>
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-here, we can see the sytle is very like windows/dos
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-cute assignment sign
-
-&nbsp;
-
-same comment sign as bash
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-complex! Like fortran
-
-&nbsp;
-
-&nbsp;
-
-interesting...
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Attributes! Like NCL!
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-be careful with c(), not like other language
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-in fact, I think this is really convenient
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-merge vectors to matrix, this is really user-friendly!
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Impressive! like PHP array, but much easier to understand
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Like NCL or MATLAB
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-See it? Plenty of data types, very user-friendly. You could imagine how simple when use data frames to process EXCEL type files.
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Briliant!!!
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-Very like $$ in ncl
-
-&nbsp;
-
-&nbsp;
-
-Dim down or not, it is a problem</td>
-</tr>
-<tr>
-<td colspan="2"> <strong> Measure</strong></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/">【solved, git&github】first move to push my project</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Try to push paperhub project on Lab server to github. The following are steps and barriers when I did this.</p>
+<p>Here is a <a href="https://www.quora.com/What-are-slab-ocean-models-in-climate-science">quora answer </a>about the slab ocean</p>
+<blockquote><span class="rendered_qtext">Slab ocean models consider this whole upper layer as one single body of water, or a 'slab' with one single velocity vector (u,v), and density. The Navier-Stokes equation is modified accordingly to compute the resultant velocity of that slab based on wind forcing and coriolis force. The mixed-layer depth in such models is usually kept fixed. </span></blockquote>
+<p>Here is a <a href="https://bb.cgd.ucar.edu/faq-data-ocean-slab-mode-docn-som">FAQ </a>about the slab ocean model. Two things to note:</p>
 
 <ol>
   <li>
-    <p>create a new repo on github, same name as “paperhub”</p>
+    <p>SOM is a kind of data model, can be switched in a namelist variable F compset, env_run.xml.</p>
   </li>
   <li>
-    <p>Try one file down_enw.php</p>
+    <p>Some standard SOM forcing is available in the inputdata repository.</p>
   </li>
 </ol>
-<pre><strong>$git init</strong> # to regard paperhub dir as a git repo
-<strong>$git add down_enw.php
-$git commit -m "first commit"
-$git push origin master</strong></pre>
-<p>Get error:</p>
-<pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git push origin master
-error: The requested URL returned error: <span class="m">403</span> Forbidden <span class="k">while</span> accessing https://github.com/Novarizark/paperhub.git
 
-fatal: HTTP request failed</code></pre>
-<p>Follow this:</p>
+<p>Now we may start to test the slab ocean. compset choose: E_1850_CAM5</p>
 
-<p><a href="http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/">http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/</a>
-<a href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed"> http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed</a></p>
+<p>ERROR comes:</p>
+<blockquote>svn: URL 'https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/UNSET' non-existent in that revision</blockquote>
+<p>There should be something wrong with the set of the ocean forcing files. So come to <a href="https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/">this dir</a>, no problem.</p>
 
-<p>Change:</p>
-<pre>$vi .git/config
-url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
-:wq</pre>
-<p>Another error:</p>
-<pre><code>(gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display:</code></pre>
-<p>Follow this:
-<a href="http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#">http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#</a></p>
-<pre><code>unset SSH_ASKPASS</code></pre>
+<p>We need to set the specific foring files in the env_run.xml file. (check FAQ)</p>
 
-<p>Done!</p>
+<p>We choose <strong>pop_frc.b.c40.B1850CN.f19_g16.100105.nc for </strong>test.</p>
+
+<p>In env_run.xml, only give the name of the file is okay to continue.</p>
+
+<p>After downloading the file, you can build and submit the case. Yet there is no problem even after altering the physics into cam5 -chem none.</p>
+
+<p>Perfect!</p>
+
+<p> </p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/">【solved】Teamserver huge .xsession-error problem</a>
+                  <a class="post-link" href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/">【ongoing】php返回图片方法获知邮件是否被查阅</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-04
+                        <i class="fa fa-calendar"></i>2015-12-21
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -1436,7 +481,7 @@ url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -1455,7 +500,7 @@ url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -1465,22 +510,434 @@ url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
                 </div>
                 <div class="excerpt">
                     
-<p>A few days ago I have found that the available disk space on Teamserver was shrunk to 60%. This is very weird because most datasets on the machine were uploaded by me and I know they only occupy about 30% in 22TB. Once I thought they might come from one of my teammate, uploading CMIP5 data or something. However, when I checked individual directory in home, I found nothing. Then I checked “ll -ah” in home. Holly shit! One file named “.xsession-error” takes up about 6TB, and still enlarging! So I google it and found it might be a bug of Linux, regardless of the distribution. Many people delete it or use file permission to restrict its expansion, without any source seeking. I followed them, while nothing happened to the available size from df command. I used DirStat and the original software to check this, nothing.
-What the fuck! I just let it alone and do my staff until I found there is only 2TB available today. Another similar file named as “.xsession-error.XXXXX” did the evil things. In fact this file was a text file, thus I “tail” it and found the flowing statement:</p>
-<pre>sslvpn_read_packet: SSL_read failed!
-Error while reading SSL packet
-keep alive recv failed!
-TCP_KEEP_ALIVE_SOCK_ENVENT
-sslvpn_read_packet: SSL_read failed!
-Error while reading SSL packet
-keep alive recv failed!
-TCP_KEEP_ALIVE_SOCK_ENVENT
-sslvpn_read_packet: SSL_read failed!</pre>
-<p>VPN! So it must be the vpn soft which aimed at connecting TH-2 that wrongly redirect the std out flow to this poor file and made the shit. Without any hesitate, I uninstall the VPN soft. Everything’s back to normal.</p>
+<p>突然想到能否有什么方法知道发出去的某封邮件是否被别人查阅，查了下，有人提到图片挂参的方法可以办到，回想之前IP验证和php自动发邮件，突然想到可以做这么一套东西，每天固定时间统计一下今天发出去的邮件多少被查阅了，然后做个报告发到邮箱。将来撒海网套磁的时候，绝对是利器啊。LOL</p>
+
+<p>说搞就搞：</p>
+
+<p>首先，测试一下php返回图片</p>
+
+<p>参照<a href="http://www.oschina.net/code/snippet_572802_11655">这个帖子</a>，bingo，原来是改一下http的header就可以。</p>
+
+<p>然后引入访问IP的检测，直接抄13年检测服务器访问沿海自动站IP的程序，调用IP138结果记录。</p>
+
+<p>居然就可以了～给php文件挂个参数标志是哪一个邮件，嗯嗯</p>
+
+<p>最后设置下crontab，每天固定时间把log发到邮箱，bingo～再写一个可以随时访问的查看页面，done～</p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/11/14/use-grads-to-read-cesm-output/">【ongoing】use grads to read cesm output</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-11-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Some points to be aware:</p>
+
+<p>2D fields, not same by binary output and netcdf (high efficiency) output, one point value missing, might be the polar point. Therefore, *.bin control and *.nc sensitive is not under the same structure.</p>
+
+<p>2D fields work fine under <strong>v1.9</strong> of grads. However, 3D fields might meet some trouble. Try to use the “standard” attribution, dimention to tackle this problem. An example from NCEP-DOE dataset:</p>
+
+<p>float level(level) ;
+level:units = “millibar” ;
+level:long_name = “Level” ;
+level:positive = “down” ;
+level:GRIB_id = 100s ;
+level:GRIB_name = “hPa” ;
+level:actual_range = 1000.f, 10.f ;
+level:axis = “Z” ;
+ </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/11/14/use-grads-to-read-cesm-output/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/">【NOT solved】GFDL atmosphere dycore porting</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Now we try to setup GFDL dycore model on our Neptune platform. Following steps has been used:</p>
+
+<ol>
+  <li>We exec the ./exp/fv/fms_runscript, then got the netcdf and mpi error. It seems that the model does not recognize the environmental variables associated with these lib. We add the flags directly to the compile sentence.</li>
+</ol>
+<pre>L35: $mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DUSE_LIMA -DSPMD -DLAND_BND_TRACERS" -a $sourcedir $pathnames /usr/local/include $sourcedir/shared/mpp/include $sourcedir/shared/include /home/yangsong3/soft/mpich314-intel/include /usr/netcdf-4331/include</pre>
+<p>And mkmf.template.ia64 file</p>
+<pre>LDFLAGS = -L/usr/local/lib -L/usr/netcdf-4331/lib -L/home/yangsong3/soft/mpich314-intel/lib #-lsma</pre>
+<p>We comment the “-lsma” flag because it is a flag specific to Cray machine.</p>
+
+<p>Next, we compile again, frequently got this</p>
+<pre>ifort:  '-i_dynamic' not supported</pre>
+<p>google it, got this</p>
+
+<p>https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/486830</p>
+<blockquote>Regarding 1:<strong> -i_dynamic</strong> (the underscore form) was a option spelling used many many releases ago that was later mapped to <strong>-i-dynamic</strong> (the hyphen form) and then that form was depreciated in more current releases and it now maps to<strong> -shared-intel</strong></blockquote>
+<p>So, we change it to <strong>-shared-intel</strong>, no more warning.</p>
+
+<p>However, when it compiles for a long time (5min), we got error again, lots of:</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_transmit_mpi.h:79: undefined reference to `mpi_recv_'</pre>
+<p>Then we change the ifort compile flag into mpif90, we got this</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_io_misc.inc:116: undefined reference to `nf_inq_libvers_'</pre>
+<p>It really sucks<strong><span style="color: #339966;">.</span></strong></p>
+
+<p>#Last Edited on 20151004#</p>
+
+<p><strong><span style="color: #339966;">We finally stop trying and turn to CAM dynamical core simulation and it works really smooth over the CESM construction.</span></strong></p>
+
+<p>#Last Edited on 20151114#</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/">【CESM】B compset CAM5_PM设置</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Since we don’t care about the chemical process when investigate the physical climate system, we hope to close the prognostic chemistry model in CAM5. For F compset, it is easy because a specific PM compset without active chemistry model has been provided by CESM. For B compset, there is no option like this.</p>
+
+<p>Therefore, we try to capture the differences in FC5PM and FC5. We first see the differences in output flow after create_newcase command.</p>
+<pre>6c6
+&lt;   2000_CAM5_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5) (FC5)
+---
+&gt;   2000_CAM5%PM_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5_PM) (FC5PM)
+8c8
+&lt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
+---
+&gt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: CAM prescribed modal aerosols: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
+23c23
+&lt;   CAM_CONFIG_OPTS: -phys cam5
+---
+&gt;   CAM_CONFIG_OPTS: -phys cam5 -chem none
+58,63c58,63
+&lt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_mach_pes.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_build.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_run.xml
+&lt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
+---
+&gt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_mach_pes.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_build.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_run.xml
+&gt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml</pre>
+<p>Clearly, a PM option has been added to the CAM5 component. We try put this full name to B compset.</p>
+
+<p>Things never get so smooth~</p>
+<pre>set_compset: no match for compset 2000_CAM5%PM_CLM40%SP_CICE_POP2_RTM_SGLC_SWAV
+            to see supported compsets issue</pre>
+<p>It seems that we have to change it in the specific configuration file.</p>
+
+<p>We then try to seek the differences in xml files. In <strong>env_build.xml,  </strong>we found an interesting differences:</p>
+<pre>40c40
+&lt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5_CTRL/bld" /&gt;
+---
+&gt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5PM_CTRL/bld" /&gt;
+72c72
+&lt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5" /&gt;
+---
+&gt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5 -chem none" /&gt;</pre>
+<p>That is fine. We then add argument “<strong><span style="color: #ff0000;"><em>-chem none</em></span></strong>” to the env_build.xml in B2000CAM5 case, setup and build, smoothly!</p>
+
+<p>Now we come to the atm_in differences between FC5 and FC5PM</p>
+<pre>1,3c1,8
+&lt; &amp;aerosol_nl
+&lt; dust_emis_fact = 0.35D0
+&lt; soil_erod = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/dst/dst_0.9x1.25_c100121.nc'
+---
+&gt; &amp;aerodep_flx_nl
+&gt; aerodep_flx_cycle_yr = 2000
+&gt; aerodep_flx_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
+&gt; aerodep_flx_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
+&gt; aerodep_flx_specifier = 'bc_a1DDF', 'bc_c1DDF', 'pom_a1DDF', 'pom_c1DDF', 'soa_a1DDF', 'soa_c1DDF', 'soa_a2DDF', 'soa_c2DDF',
+&gt; 'dst_a1DDF', 'dst_c1DDF', 'dst_a3DDF', 'dst_c3DDF', 'bc_a1SFWET', 'bc_c1SFWET', 'pom_a1SFWET', 'pom_c1SFWET',
+&gt; 'soa_a1SFWET', 'soa_c1SFWET', 'dst_a1SFWET', 'dst_c1SFWET', 'dst_a3SFWET', 'dst_c3SFWET'
+&gt; aerodep_flx_type = 'CYCLICAL'
+10d14
+&lt; print_energy_errors = .false.
+16,34d19
+&lt; aer_drydep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
+&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
+&lt; aer_wetdep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
+&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
+&lt; clim_soilw_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/clim_soilw.nc'
+&lt; depvel_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/depvel_monthly.nc'
+&lt; depvel_lnd_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/regrid_vegetation.nc'
+&lt; exo_coldens_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/phot/exo_coldens.nc'
+&lt; ext_frc_specifier = 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_elev_2000_c090726.nc',
+&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_elev_2000_c090726.nc',
+&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_elev_2000_c090726.nc',
+&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_elev_2000_c090726.nc',
+&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_elev_2000_c090726.nc',
+&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_elev_2000_c090726.nc',
+&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_elev_2000_c090726.nc'
+&lt; ext_frc_type = 'CYCLICAL'
+&lt; fstrat_list = ' '
+&lt; rsf_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/RSF_GT200nm_v3.0_c080416.nc'
+&lt; season_wes_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/season_wes.nc'
+36,54d20
+&lt; srf_emis_specifier = 'DMS -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/aerocom_mam3_dms_surf_2000_c090129.nc',
+&lt; 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_surf_2000_c090726.nc',
+&lt; 'SOAG -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_soag_1.5_surf_2000_c100217.nc',
+&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_surf_2000_c090726.nc',
+&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_surf_2000_c090726.nc',
+&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_surf_2000_c090726.nc',
+&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_surf_2000_c090726.nc',
+&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_surf_2000_c090726.nc',
+&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_surf_2000_c090726.nc'
+&lt; srf_emis_type = 'CYCLICAL'
+&lt; tracer_cnst_cycle_yr = 2000
+&lt; tracer_cnst_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/oxid'
+&lt; tracer_cnst_file = 'oxid_1.9x2.5_L26_1850-2005_c091123.nc'
+&lt; tracer_cnst_filelist = 'oxid_1.9x2.5_L26_clim_list.c090805.txt'
+&lt; tracer_cnst_specifier = 'O3','OH','NO3','HO2'
+&lt; tracer_cnst_type = 'CYCLICAL'
+&lt; use_cam_sulfchem = .false.
+&lt; xactive_prates = .false.
+&lt; xs_long_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/temp_prs_GT200nm_jpl06_c080930.nc'
+61d26
+&lt; flbc_list = ' '
+114c79
+&lt; cam_chempkg = 'trop_mam3'
+---
+&gt; cam_chempkg = 'none'
+137a103,114
+&gt; &amp;prescribed_aero_nl
+&gt; prescribed_aero_cycle_yr = 2000
+&gt; prescribed_aero_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
+&gt; prescribed_aero_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
+&gt; prescribed_aero_specifier = 'num_c1', 'bc_c1', 'dst_c1', 'ncl_c1', 'pom_c1', 'so4_c1', 'soa_c1', 'num_c2',
+&gt; 'ncl_c2', 'so4_c2', 'soa_c2', 'num_c3', 'dst_c3', 'ncl_c3', 'so4_c3', 'num_a1_logm',
+&gt; 'bc_a1_logm', 'dst_a1_logm', 'ncl_a1_logm', 'pom_a1_logm', 'so4_a1_logm', 'soa_a1_logm', 'num_a2_logm', 'ncl_a2_logm',
+&gt; 'so4_a2_logm', 'soa_a2_logm', 'num_a3_logm', 'dst_a3_logm', 'ncl_a3_logm', 'so4_a3_logm', 'num_a1_logv', 'bc_a1_logv',
+&gt; 'dst_a1_logv', 'ncl_a1_logv', 'pom_a1_logv', 'so4_a1_logv', 'soa_a1_logv', 'num_a2_logv', 'ncl_a2_logv', 'so4_a2_logv',
+&gt; 'soa_a2_logv', 'num_a3_logv', 'dst_a3_logv', 'ncl_a3_logv', 'so4_a3_logv'
+&gt; prescribed_aero_type = 'CYCLICAL'
+&gt; /
+150,158c127,135
+&lt; mode_defs = 'mam3_mode1:accum:=', 'A:num_a1:N:num_c1:num_mr:+',
+&lt; 'A:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
+&lt; 'A:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'A:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
+&lt; 'A:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'A:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
+&lt; 'mam3_mode2:aitken:=', 'A:num_a2:N:num_c2:num_mr:+',
+&lt; 'A:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
+&lt; 'A:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
+&lt; 'A:num_a3:N:num_c3:num_mr:+', 'A:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
+&lt; 'A:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'A:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
+---
+&gt; mode_defs = 'mam3_mode1:accum:=', 'N:num_a1:N:num_c1:num_mr:+',
+&gt; 'N:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
+&gt; 'N:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'N:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
+&gt; 'N:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'N:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
+&gt; 'mam3_mode2:aitken:=', 'N:num_a2:N:num_c2:num_mr:+',
+&gt; 'N:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
+&gt; 'N:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
+&gt; 'N:num_a3:N:num_c3:num_mr:+', 'N:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
+&gt; 'N:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'N:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
+191,193d167
+&lt; &amp;wetdep_inparm
+&lt; gas_wetdep_list = 'H2O2','SO2'
+&lt; /</pre>
+<p>Such a lot differences in input files as we expected.</p>
+
+<p>We test the <strong>atm_in</strong> differences between B with / without “-chem none” argument, everything goes fine!</p>
+
+<p>Now we run the model for several months to test the final results.</p>
+
+<p>Configuration:</p>
+
+<p>B2000_CAM5</p>
+
+<p>0.9x1.25</p>
+
+<p>Tianhe-2: 192PEs</p>
+
+<p> </p>
+
+<p>output with” phys cam5 -chem none”:</p>
+<pre> -rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:10</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-01.nc
+-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:30</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-02.nc
+
+</pre>
+<p>output without “phys cam5”:</p>
+<pre>-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:23</strong> B_CHEM_CAM5_TEST.cam.h0.0001-01.nc
+-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:49</strong> B_CHEM_CAM5_TEST.cam.h0.0001-02.nc</pre>
+<p>So without the aerosol active, it saves (49-23)-(30-10) = 6 min in each month. About 6/26*100% = 23% time saved.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -1495,10 +952,10 @@ sslvpn_read_packet: SSL_read failed!</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page20" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">21/42</span>
+          <span class="page_number ">21/43</span>
           
             <a href="/page22" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1739,7 +1196,52 @@ sslvpn_read_packet: SSL_read failed!</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2838,14 +2340,14 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -3006,7 +2508,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -3090,6 +2592,13 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -3097,7 +2606,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -3118,7 +2627,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -3146,7 +2655,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -3286,7 +2795,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -3405,7 +2914,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -3421,6 +2930,27 @@ sslvpn_read_packet: SSL_read failed!</pre>
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -3434,25 +2964,25 @@ sslvpn_read_packet: SSL_read failed!</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -3488,7 +3018,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -3506,7 +3036,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -3542,7 +3072,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3686,7 +3216,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3839,7 +3369,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3875,7 +3405,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3893,7 +3423,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3902,7 +3432,7 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3974,7 +3504,16 @@ sslvpn_read_packet: SSL_read failed!</pre>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/">【已解决】restart改变CAM输出变量场</a>
+                  <a class="post-link" href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/">【已解决】Adobe Acrobat X安装</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-31
+                        <i class="fa fa-calendar"></i>2014-11-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,7 +264,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
     
   
 
@@ -279,7 +281,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
     
   
 
@@ -289,30 +291,22 @@
                 </div>
                 <div class="excerpt">
                     
-<p>CESM模式运行过程中如果想要更改CAM的输出频率或者输出的变量场，单纯的restart是不行的，因为ug上说了，restart的话，pop和ice model会再次读取namelist，但是atm模块不理的，ug上给了一个巨坑爹的解决办法，先给case换个名字，再建个case做branch run。这不是扯淡么。</p>
-
-<p>不信邪，试了下这个办法是可以的，前提是之前run的时候一定要把restart文件记录下来。</p>
-
-<p>该env_run.xml几个变量，把run的类型改成branch，时间点指定到restart file上，改rpointer，改rtm的bug，其实跟branch run的方式一样，只不过不用重新建立case而已。</p>
-
-<p>当然不要忘了改user_nl_xxx</p>
-
-<p>done！</p>
+<p>Acrobat X安装后出现Adobe Application Manager损坏的问题，安装包下有个amtlib.dll的动态链接库，复制到安装路径的根目录下即可解决问题。至此，Acrobat+Illustrator已经占据paper reading &amp; producing阵地，reading再有paperhub和endnote的助阵，终于把看文献的前期工作准备好了嗯～接下来……T_T</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM rebuild restart后不认SourceMods及namelist内容</a>
+                  <a class="post-link" href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/">【已解决】CAM_F05 Resolution Out of Memory</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-28
+                        <i class="fa fa-calendar"></i>2014-11-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -331,90 +325,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天下午画CAM5 Heat试验的图，发现不能通过显著性检验，非常令人费解。毕竟已经重复跑过多遍了，再次重来，而且还是时空代价这么高的CAM5，终归让人沮丧。检查强迫输入文件没问题，fortran源代码中inject的读写函数也没问题，想到最初检查03-09年的数据通过显著性是没有问题的，于是检查10年之后的输出……完全不能通过。</p>
-
-<p>返回查找log文件，发现25日那天我为了增快运行速度，更改pe_layers之后rebuild重启了一次，貌似rebuild过程中完全无视了我SourceMods中的内容！restart之后的结果转的其实是control，完全没有inject heating！简直无语了，为什么会这样。现在只能重新编译，在10年处restart试试看了。非常郁闷。</p>
-
-<p>突然想到couple的试验还没有检查，暗暗祈祷画了个响应场，傻眼了，发现all value=0，以为脚本出错，查错时发现最不愿看到的事情还是发生了，所有的branch run的结果和原始的control结果一模一样……OMG！又不认SourceMods！实在是非常不能够理解。测试在修改的代码里加入错误，运行build程序时确乎是能够读到错误的，说明是可以读到SourceMods的，非常的奇怪，莫非与cesm_setup被clean后或者第一次build的时候是不去读SourceMods的？为了做测试，更改了pe layers，clean了setup，在代码里故意注入iulog文件句柄输出，重新build。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141029#</span></strong></p>
-
-<p>今天来查看结果，还是不行。不知道为什么，即便编译的时候会去检查Sourcemods的错误以及后来测试加入iulog也是可以输出的，但就是不会去执行。</p>
-
-<p>今天中午回来索性直接查个遍。calday过1直接log输出heatf的所有数据。编译成功运行，查看输出——全部都是0！这种情况最大的可能当然是没有读取heatf的强迫文件。分明记得heatf的强迫在physics initial这个subroutine里呀，难道restart的时候就不会去做initial么？向上翻了翻代码，查了下restart的关键词，发现惊天地泣鬼神的三行语句：</p>
-<blockquote>750 if (nsrest .eq. 0) then
-751 call phys_inidat(cam_out, pbuf2d)
-752 end if</blockquote>
-<p>反查了下nsrest是什么，在control目录下，cam_control_mod这个module写的那叫一个清楚啊</p>
-<blockquote>11 integer :: nsrest ! run type flag (0=initial, 1=restart-continuation, 3=restart-branch.)</blockquote>
-<p>而我那可怜的读取外强迫文件的语句，被我扔在了phys_inidat这个subroutine下读取，OMG！原来你丫的inidat只在startup的case下采去读，我restart不出问题才怪，<span style="color: #ff0000;"><strong>物理包真正的initial在phys_init这个soubroutine里！</strong></span>找到这个问题，重新编译测试，没想到提交任务的时候c73节点down掉了，真是那个叫什么来着，屋漏偏逢连阴雨，哪壶不开提哪壶么……</p>
-
-<p>好在找到问题了，couple的问题也是一样的，当然也能迎刃而解。经测试，确实是这个问题造成的。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/27/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91coupl/">【更新中】couple Branch Run出现找不到目录的奇怪问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-27
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
     
         <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
     
-        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
     
   
 
@@ -430,10 +345,12 @@
 <span class="pageTag">
   <i class="fa fa-tags"></i>
   
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
     
         <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
     
-        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
     
   
 
@@ -443,97 +360,47 @@
                 </div>
                 <div class="excerpt">
                     
-<p>spin-up了200年，看了下TS的变化，其实三十年就已经基本平衡了。150年以后的部分可以当cp_con来用肯定没问题。因为晓明姐需要地表比湿变量，所以打算从150年开始跑个restart。奇葩的是，改了restart文件到150年，跑得非常之慢，同样配置，之前12分钟左右出结果，现在要三十分钟。跑了一两年断掉了，出错</p>
-<blockquote>forrtl: severe (121): Cannot access current working directory for unit 65 （UNKNOWN）</blockquote>
-<p>某个未知文件找不到，莫名其妙。重新提交任务还是一样的错误。索性依葫芦画瓢来个branch run。提交上去貌似没问题，但是同样运行非常慢，也运行了两年挂掉了。提示错误一致，发生位置貌似在restart相关的源代码处。莫非生成restart文件的问题，断掉每年生成一个restart文件，并且不再用branchrun，开CONTINUE RUN，貌似现在可以跑。</p>
+<p>之前在天河二号（包括学校超算集群）测试的F05的CAM，都没有出现什么问题，最近在天河二号上重新跑CAM5 F05，却出现了out of memory的错误，重新配置了CAM4，还是一样的错误：</p>
+<blockquote>Fatal error in PMPI_Alltoallv: Other MPI error, error stack:
+PMPI_Alltoallv(540)....................: MPI_Alltoallv(sbuf=0x806f43e0, scnts=0xe6c75e0, sdispls=0xe764390, dtype=0x4c000829, rbuf=0x805f7650, rcnts=0xe765ba0, rdispls=0xe7673b0, dtype=0x4c000829, comm=0x84000006) failed
+MPIR_Alltoallv_impl(378)...............:
+MPIR_Alltoallv(341)....................:
+MPIR_Alltoallv_intra(192)..............:
+MPIC_Waitall(720)......................:
+MPIR_Waitall_impl(163).................:
+MPIDI_CH3I_Progress(363)...............:
+MPID_nem_mpich_blocking_recv(906)......:
+MPID_nem_glex_poll(234)................:
+MPIDI_nem_glex_ER_progress_PUT(74).....:
+MPIDI_nem_glex_ER_recv_progress(378)...:
+MPID_nem_handle_pkt(635)...............:
+MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receive for message data (MPIDI_CH3_PKT_EAGER_SEND)</blockquote>
+<p>重新配置PE层，增多节点数，调整MPIBUFFER，都没用。目前搁置。forum上有贴子：</p>
 
-<p><strong><span style="color: #008000;">#Up to 20141027#</span></strong></p>
+<p>https://bb.cgd.ucar.edu/node/1001941</p>
 
-<p>这几天发现这类错误非常随机，估计是IO问题造成，也有可能是NetCDF版本的问题（ug中提到的bug）。回来可以测试下更高版本的NetCDF。</p>
+<p>eaton提到检查内存leak can be a very challenging exercise.</p>
 
-<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
+<p><strong>#Up to 20141108#</strong></p>
+
+<p>俊文寒假前将model统一升级到1.2.2后似乎没有这个问题了。不过我也退出折腾高分辨率啦，还是看paper学英语重要～嘿嘿</p>
+
+<p><strong>#Up to 20150519#</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/27/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91coupl/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/26/google-hosts/">google hosts</a>
+                  <a class="post-link" href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl高效输出netCDF格式文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-26
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>hosts文件是个很好的东西哦，还可以屏蔽激活神马的烦心事</p>
-
-<p>C:\Windows\System32\drivers\etc</p>
-
-<p>实时更新：</p>
-
-<p>http://www.360kb.com/kb/2_122.html</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/26/google-hosts/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL大文件支持</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-26
+                        <i class="fa fa-calendar"></i>2014-11-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -579,32 +446,70 @@
                 </div>
                 <div class="excerpt">
                     
-<p>写2GB以上文件</p>
+<p>从模式原始输出中抽变量出来，采用默认输出方式输出50年全球（144x96）的ZMDT，程序会卡半天，而且最后时不时还会弹出write failed的错误。查了下，发现这种默认的输出方式非常低效（虽然不知道为什么），高效的方式是完全自行定义维数名称、属性等等。测试下速度确实快很多，而且不存在上面的问题，但是代码量增加了三四十行左右。兹举例如下：</p>
+<blockquote>48 ;************************************************
+49 ; Write the file
+50 ;************************************************
+51
+52 ;Get dimsize
+53 dims=dimsizes(ctrl_var1p(0,:,:,:))
+54 nlvl=dims(0)
+55 nlat=dims(1)
+56 nlon=dims(2)
+57
+58 ;Set fileoption
+59 system("rm "+pdata_fn)
+60 fout = addfile(pdata_fn ,"c") ; open output netCDF file
+61 setfileoption(fout,"DefineMode",True)
+62
+63 ;Set All field attribution
+64 fileAtt = True
+65 fileAtt@creation_date=systemfunc("date")
+66 fileattdef(fout,fileAtt)
+67
+68 ;Define Coordinate
+69 dimNames =(/"time","lev_p","lat","lon"/)
+70 dimSizes =(/-1,nlvl,nlat,nlon/)
+71 dimUnlim =(/True,False,False,False/)
+72 filedimdef(fout,dimNames,dimSizes,dimUnlim)
+73
+74 ;Define var, type and dim
+75 filevardef(fout,"time",typeof(ctrl_var1p&amp;time),getvardims(ctrl_var1p&amp;time))
+76 filevardef(fout,"lev_p",typeof(ctrl_var1p&amp;lev_p),getvardims(ctrl_var1p&amp;lev_p))
+77 filevardef(fout,"lat",typeof(ctrl_var1p&amp;lat),getvardims(ctrl_var1p&amp;lat))
+78 filevardef(fout,"lon",typeof(ctrl_var1p&amp;lon),getvardims(ctrl_var1p&amp;lon))
+79 filevardef(fout,"ZMDT",typeof(ctrl_var1p),getvardims(ctrl_var1p))
+80
+81 ;Define Attribute
+82 filevarattdef(fout,"ZMDT",ctrl_var1p)
+83
+84 fout-&gt;time=(/ctrl_var1p&amp;time/)
+85 fout-&gt;lev_p=(/ctrl_var1p&amp;lev_p/)
+86 fout-&gt;lat=(/ctrl_var1p&amp;lat/)
+87 fout-&gt;lon=(/ctrl_var1p&amp;lon/)
+88 fout-&gt;ZMDT=(/ctrl_var1p/)</blockquote>
+<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
 
-<p>setfileoption(“nc”,”Format”,”LargeFile”)</p>
+<p>这种输出模式下，注意应到将时间维和坐标维度单列变量输出到nc文件，坐标维度应当设置degree定义方向，否则绘图时需要重设。</p>
 
-<p>or</p>
+<p>另外这种方法大部分时间还是比较高效的，但是有时会出现奇怪的远远超出一般用时的卡顿，在数据量较大时容易出现。</p>
 
-<p>setfileoption(“nc”,”Format”,”NetCDF4Classic”)</p>
-
-<p>参考</p>
-
-<p>http://www.ncl.ucar.edu/Support/talk_archives/2011/0599.html</p>
+<p><strong><span style="color: #008000;">#Up to 20141109#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/25/e4-b8-8e-e4-bd-95-e7-bc-96-e8-80-81-e5-b8-88-e5-9/">与何编老师合作的feedback试验过程总结</a>
+                  <a class="post-link" href="/2014/11/07/a-walk-in-the-rain/">A Walk in the Rain</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-25
+                        <i class="fa fa-calendar"></i>2014-11-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -650,21 +555,149 @@
                 </div>
                 <div class="excerpt">
                     
-<p>留个坑，回来慢慢填。</p>
+<p>邮件收到了继续返工的消息，旁边又开始endless whisper，烦躁而且压抑，受不了只能戴上耳机听Yanni。a walk in the rain，之前没有注意到的一首，还是很不错的。HP同学推荐，说是感觉像是走在雨后的草地上，嗯，热情而阳光。</p>
 
-<p>同何编老师进行feedback试验的合作，从七月底正式前往学习heating injection的技术到现在，整整三个月了。如今，何老师的初稿已经发过来了，我却徒挂一个第三作者的名字，从头到尾却没有一张自己做的图。心里很不是滋味。客观原因永远找不完，主观上自己的问题，必须要一一总结反思。</p>
+<p> </p>
 
-<p>1.Double Check的重要性！</p>
+<p>光腚总菊一声令下，MP3都下不了咯，贴个链接：</p>
 
-<p>2.不能够办到的事情，就不要承诺！</p>
-
-<p>3.如何在尽量不让他人感到被打扰与自己能够获取足够的信息顺利开展合作之间平衡，很难。</p>
-
-<p>4.事情不要因为看上去不容易做，就往后拖，越拖越烦，越拖越觉得难做，越拖越让人觉得你的能力存在问题。</p>
+<p>http://www.baidu.com/s?wd=a%20walk%20in%20the%20rain&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_5_dg&amp;rsv_pq=f40a682a0000744f&amp;rsv_t=782cZVhHu0LhKuwkr029%2Bsc1%2B%2BBZDvR19ANVw8dNJrzqLk7nxSrt&amp;bs=a%20walk%20in%20%E5%A4%A9%E6%B2%B3</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/25/e4-b8-8e-e4-bd-95-e7-bc-96-e8-80-81-e5-b8-88-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/07/a-walk-in-the-rain/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/">【已解决】vi获取系统命令标准流输出</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-11-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>写一些脚本文件时，可能时常需要用到脚本文件所在目录的路径，而相对路径有的时候不一定可以（比如提交作业的脚本），而需要直接回显绝对路径，另开一个终端或者退出再复制当然可以，但是麻烦，查了下，vi原来有如此神奇的功能，可以直接捕获系统命令（甚至可能是自己写的程序脚本等？没有尝试过）的标准流输出，然后倒入编辑器。比如需要获得当前绝对路径的话，依次键入</p>
+<blockquote><strong>:.!pwd</strong></blockquote>
+<p>即可将当前绝对路径插入编辑点。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/11/03/e5-9c-a8wordpress-e6-96-87-e7-ab-a0-e5-8f-8a-e9-a/">【已解决】在Wordpress文章及页面中插入可被执行的php</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-11-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Wordpress应该是考虑到安全的原因，文章及页面中的各种脚本，无论是服务器端的还是客户端的，都会把标签转义或者抽掉。虽然安全，但是很不方便管理员，查找了一下发现了这个插件：<strong>Allow PHP in Posts and Pages</strong></p>
+
+<p>用的人很多而且对代码执行还有权限检查，看起来应该没有什么问题，安装后接着就可使用了，不过php的标签做一下改变为方括号[]开闭，并把问号改为/即可。</p>
+
+<p>加了个<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?page_id=2">编辑者的资源</a>页面，其中的时间戳是php生成，实时更新的。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/11/03/e5-9c-a8wordpress-e6-96-87-e7-ab-a0-e5-8f-8a-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -679,10 +712,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page32" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">33/42</span>
+          <span class="page_number ">33/43</span>
           
             <a href="/page34" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -923,7 +956,52 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2022,14 +2100,14 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2190,7 +2268,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2274,6 +2352,13 @@
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2281,7 +2366,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2302,7 +2387,7 @@
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2330,7 +2415,7 @@
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2470,7 +2555,7 @@
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2589,7 +2674,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2605,6 +2690,27 @@
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2618,25 +2724,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2672,7 +2778,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2690,7 +2796,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2726,7 +2832,7 @@
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2870,7 +2976,7 @@
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3023,7 +3129,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3059,7 +3165,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3077,7 +3183,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3086,7 +3192,7 @@
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3158,7 +3264,16 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

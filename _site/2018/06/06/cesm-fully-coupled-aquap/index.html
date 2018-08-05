@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CESM Fully Coupled Aqua-Planet Experiments</title>
+    <meta name="description" content="  I. Ocean Model Modification          1.1 Binary ocean bottom topography file      1.2 Horizontal and vertical ocean grid files      1.3 Region mask file   ...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/06/06/cesm-fully-coupled-aquap/">
+    <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f8f21649f9d39b36012bc6dac8898310";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+
+
+</head>
+
+
+  <body>
+
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">LZN's Blog</a>
+        <small>Model Player</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-clock-o"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-server"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/Side Projects/">
+                        
+                            <i class="fa fa-bar-chart"></i>Side Projects
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/sandbox/">
+                        
+                            <i class="fa fa-flask"></i>Sandbox
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/favorites/">
+                        
+                            <i class="fa fa-heart"></i>Favorites
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-id-card-o"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/comments/">
+                        
+                            <i class="fa fa-comments"></i>Comments
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>CESM Fully Coupled Aqua-Planet Experiments</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2018-06-06
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>LZN
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a-->
+        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
+    
+        <!--a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a-->
+        <a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#i-ocean-model-modification" id="markdown-toc-i-ocean-model-modification">I. Ocean Model Modification</a>    <ul>
+      <li><a href="#11-binary-ocean-bottom-topography-file" id="markdown-toc-11-binary-ocean-bottom-topography-file">1.1 Binary ocean bottom topography file</a></li>
+      <li><a href="#12-horizontal-and-vertical-ocean-grid-files" id="markdown-toc-12-horizontal-and-vertical-ocean-grid-files">1.2 Horizontal and vertical ocean grid files</a></li>
+      <li><a href="#13-region-mask-file" id="markdown-toc-13-region-mask-file">1.3 Region mask file</a></li>
+      <li><a href="#14-ocean-initial-condition" id="markdown-toc-14-ocean-initial-condition">1.4. Ocean initial condition</a></li>
+    </ul>
+  </li>
+  <li><a href="#ii-coupler-mapping-modification" id="markdown-toc-ii-coupler-mapping-modification">II. Coupler Mapping Modification</a></li>
+  <li><a href="#iii-atmospheric-model-modification" id="markdown-toc-iii-atmospheric-model-modification">III. Atmospheric Model Modification</a></li>
+  <li><a href="#iv-sea-ice-model-modification" id="markdown-toc-iv-sea-ice-model-modification">IV. Sea Ice Model Modification</a></li>
+  <li><a href="#v-land-model-modification" id="markdown-toc-v-land-model-modification">V. Land Model Modification</a></li>
+  <li><a href="#vi-appendix" id="markdown-toc-vi-appendix">VI. Appendix</a>    <ul>
+      <li><a href="#61-ncl-binary-file" id="markdown-toc-61-ncl-binary-file">6.1 NCL Binary File</a></li>
+      <li><a href="#62-namelist-changes-surf_aqua-final" id="markdown-toc-62-namelist-changes-surf_aqua-final">6.2 Namelist Changes (SURF_AQUA Final)</a></li>
+      <li><a href="#63-error-log" id="markdown-toc-63-error-log">6.3 Error Log</a>        <ul>
+          <li><a href="#631-polar-land" id="markdown-toc-631-polar-land">6.3.1 Polar Land</a></li>
+          <li><a href="#632-oceanic-topography" id="markdown-toc-632-oceanic-topography">6.3.2 Oceanic topography</a></li>
+        </ul>
+      </li>
+      <li><a href="#64-script-list" id="markdown-toc-64-script-list">6.4 Script List</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>The following sketch displays our hierarchical experiments to reveal the origin of large-scale circulations.
+<img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fsz2xsez7pj20sn0kx10b.jpg" alt="" /></p>
+
+<p>A series of articles have been archived to record the process:</p>
+<ol>
+  <li><a href="https://novarizark.github.io/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
+  <li><a href="https://novarizark.github.io/2018/05/24/cesm-aquap/">CESM F Compset Aqua-Planet Test (in Chinese)</a></li>
+</ol>
+
+<p>Now, finally, we chose the red pill, try to go deep in the model configuration to change the land/sea cover and implement our pure-aqua and surf-aqua experiment. See the following sketch:</p>
+
+<p>The implementation of fully coupled aqua-planet experiment is not so straightforward since there is only official support for the prescribed SST aqua-planet. Therefore, as deep-time paleo simulation need to change the land/sea distribution, we seek to use the paleo toolkit to achieve our goal. See <a href="http://www.cesm.ucar.edu/models/paleo/faq/">reference</a>.</p>
+
+<h3 id="i-ocean-model-modification">I. Ocean Model Modification</h3>
+<hr />
+
+<p>We first begin with the ocean model, POP2. In the guide for deep-time simulation:</p>
+<blockquote>
+  <p>The deep time paleo modeler is responsible for creating the <strong>binary ocean bottom topography file, the horizontal and vertical ocean grid files, a region mask file, and the ocean initial conditions</strong>. In addition, several input template files may need to be changed. For example, if the land/ocean mask is changed, the input template file containing new indices for diagnostic transport calculations will need to be changed. The namelist input file (pop2_in and user_nl_pop2) will need to be changed as well. This section will describe methods that can be used to generate these new files.</p>
+</blockquote>
+
+<p>Okay, there are four files need to be created.</p>
+
+<ol>
+  <li>Binary ocean bottom topography file</li>
+  <li>Horizontal and vertical ocean grid files</li>
+  <li>Region mask file</li>
+  <li>Ocean initial condition</li>
+</ol>
+
+<h4 id="11-binary-ocean-bottom-topography-file">1.1 Binary ocean bottom topography file</h4>
+
+<p>In <code class="highlighter-rouge">pop2_in</code>, we see the namelist variable define oceanic bottom topography:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">topography_file</span> <span class="o">=</span> <span class="s">'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_20090204.ieeei4'</span>
+</code></pre></div></div>
+
+<p>This is an IEEE4 integer binary file. Since the <a href="https://github.com/Novarizark/paleoToolkit/blob/master/cesm1/ocn/mk_ocn_grid/paleotopo.f90">paleo toolkit</a> for changing the bathymetry is quite complex, we tried to use basic ncl script to change the value.</p>
+
+<p>Results from the file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span>   <span class="nb">max</span><span class="o">=</span><span class="mi">60</span>
+</code></pre></div></div>
+
+<p>60 means the deepest ocean bottom lies on the 60th model layer.
+Here we set all to Layer 25 in <code class="highlighter-rouge">PURE_AQUA</code> (2.6848km depth), and all land (0) to 1 (10m) in <code class="highlighter-rouge">SURF_AQUA</code> model.</p>
+
+<p>However, the NCL had problem when writing the new file (See <strong><a href="./#61-ncl-binary-file">Appendix01</a></strong> for details and solution). We change to F90 to realize our goal. For example, below is the code to generate <code class="highlighter-rouge">SURF_AQUA</code> bathymetry data:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">program</span><span class="w"> </span><span class="n">change_bathymetry</span><span class="w"> 
+    </span><span class="k">implicit</span><span class="w"> </span><span class="k">none</span><span class="w">
+    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">fin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">fout</span><span class="o">=</span><span class="w"> </span><span class="mi">101</span><span class="w">
+    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">nlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">122880</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ii</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">bath</span><span class="p">(</span><span class="n">nlen</span><span class="p">)</span><span class="o">=</span><span class="mi">0</span><span class="w">
+    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">filename</span><span class="o">=</span><span class="s2">"/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_20090204.ieeei4"</span><span class="w">
+    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">outname</span><span class="o">=</span><span class="s2">"/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_20180607.ieeei4"</span><span class="w">
+    
+    </span><span class="k">open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">fin</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">form</span><span class="o">=</span><span class="s2">"unformatted"</span><span class="p">,</span><span class="w"> </span><span class="n">access</span><span class="o">=</span><span class="s2">"direct"</span><span class="p">,</span><span class="w"> </span><span class="n">recl</span><span class="o">=</span><span class="n">nlen</span><span class="p">,</span><span class="w"> </span><span class="n">convert</span><span class="o">=</span><span class="s2">"big_endian"</span><span class="p">)</span><span class="w">
+    </span><span class="k">read</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span><span class="w"> </span><span class="n">rec</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">bath</span><span class="w"> 
+    </span><span class="k">close</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span><span class="w">
+    </span><span class="k">do</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nlen</span><span class="w">
+        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bath</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+            </span><span class="n">bath</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span><span class="w">
+        </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+    </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+    </span><span class="k">open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">fout</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="n">outname</span><span class="p">,</span><span class="w"> </span><span class="n">form</span><span class="o">=</span><span class="s2">"unformatted"</span><span class="p">,</span><span class="w"> </span><span class="n">access</span><span class="o">=</span><span class="s2">"direct"</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="o">=</span><span class="s2">"write"</span><span class="p">,</span><span class="w"> </span><span class="n">recl</span><span class="o">=</span><span class="n">nlen</span><span class="p">,</span><span class="w"> </span><span class="n">convert</span><span class="o">=</span><span class="s2">"big_endian"</span><span class="p">)</span><span class="w">
+    </span><span class="k">write</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span><span class="w"> </span><span class="n">rec</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">bath</span><span class="w">
+    </span><span class="k">close</span><span class="p">(</span><span class="n">fout</span><span class="p">)</span><span class="w">
+
+</span><span class="k">end</span><span class="w"> </span><span class="k">program</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using the above program, we rewrote two files with <code class="highlighter-rouge">SURF_AQUA</code> and <code class="highlighter-rouge">PURE_AQUA</code> settings.</p>
+
+<h4 id="12-horizontal-and-vertical-ocean-grid-files">1.2 Horizontal and vertical ocean grid files</h4>
+
+<p>We first check the horizontal grid system.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fs86oih7d2j20iy0lon87.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fs86ua17h6j20i30ln4a2.jpg" alt="" /></p>
+
+<p>It can be seen that over the Northern Polar region, the grid system shifts the north pole onto the Greenland Island, and both NH and SH grid poles are located over the landmass.</p>
+
+<p>According to the Paleo FAQ:</p>
+<blockquote>
+  <p>The ocean model requires that grid poles be placed over land. Numerically no computation can be done at the convergence point of all longitudes at the grid pole. The ocean model solves this problem by shifting the grid pole away from the geographic pole and placing it over a land mass. (Atmospheric models solve this problem by using numerical filters). Therefore if there is no land at the geographic pole, the numerical pole must be shifted over land elsewhere.</p>
+</blockquote>
+
+<p>To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass <strong>(It does not work! We have to maintain the polar land inside the ocean grid “black hole”!)</strong>. If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.</p>
+
+<h4 id="13-region-mask-file">1.3 Region mask file</h4>
+
+<p>We check the POP default basin mask file, with the min=-14 and max=11, the masking figure can be found on the <a href="https://www.ncl.ucar.edu/Applications/popmask.shtml">NCL popmask page</a>.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fs8ekx208mj20jw0da0wp.jpg" alt="" /></p>
+
+<p>And the <code class="highlighter-rouge">gx1v6_region_idx</code> is avaliable in the run folder:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>IDX</th>
+      <th>OCEAN NAME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>‘Southern Ocean    ‘</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>‘Pacific Ocean     ‘</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>‘Indian Ocean      ‘</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>‘Persian Gulf      ‘</td>
+    </tr>
+    <tr>
+      <td>-5</td>
+      <td>‘Red Sea           ‘</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>‘Atlantic Ocean    ‘</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>‘Mediterranean Sea ‘</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>‘Labrador Sea      ‘</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>‘GIN Sea           ‘</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>‘Arctic Ocean      ‘</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>‘Hudson Bay        ‘</td>
+    </tr>
+    <tr>
+      <td>-12</td>
+      <td>‘Baltic Sea        ‘</td>
+    </tr>
+    <tr>
+      <td>-13</td>
+      <td>‘Black Sea         ‘</td>
+    </tr>
+    <tr>
+      <td>-14</td>
+      <td>‘Caspian Sea       ‘</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Minus-zero Seas are for marginal seas.</p>
+
+<p>We then follow the guide for Deep Time simulation to change the idx:</p>
+<blockquote>
+  <p><strong>Deep Time:</strong> Since deep time simulations have ocean configurations that differ profoundly from current day, deep time modelers will need to define their own ocean regions. Typically we recommend that they define two simple regions, Northern and Southern Hemisphere.</p>
+</blockquote>
+
+<p>We change <code class="highlighter-rouge">gx1v6_region_idx</code> to:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>IDX</th>
+      <th>OCEAN NAME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>‘Southern Ocean    ‘</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>‘Northern Ocean    ‘</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">region_mask_gx1v6</code> is modified accordingly.</p>
+
+<h4 id="14-ocean-initial-condition">1.4. Ocean initial condition</h4>
+
+<p>The final work is to change the ocean initial condition. For <code class="highlighter-rouge">PURE_AQUA</code> and <code class="highlighter-rouge">SURF_AQUA</code>, the zonal-mean type should fit well.</p>
+
+<blockquote>
+  <p><strong>ZONAL-MEAN</strong>  <br />
+<strong>Initialize with a global, zonally averaged temperature/salinity distribution.</strong> POP allows a zonally averaged temperature/salinity file to be used for initialization. This file is binary and the format can be found in the CCSM3/POP source code, subroutine initial.F</p>
+</blockquote>
+
+<p>Simply change the <code class="highlighter-rouge">pop2_in</code>:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">init_ts_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zonal-mean"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>However, it seems that this is a legacy configuration in CCSM3/POP. In POP2, I cannot find the zonal-mean option in the source code, so I conducted a simple test to prove this. Unfortunately, the model does not recognize the settings. Therefore, I have to change the default initial condition to fit the aqua-planet run.</p>
+
+<p>The default initial file for temperature and salinity is <code class="highlighter-rouge">ts_PHC2_jan_ic_gx1v6_20090205.ieeer8</code>. Thus, in the <code class="highlighter-rouge">SURF_AQUA</code> experiment, we use the poisson grid fill to fill the grid on the ground, and in the <code class="highlighter-rouge">PURE_AQUA</code> experiment, we fill all grid with zonal mean and mask out layer deeper than L26.</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fs9tisw2n4j20om0ft41v.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fs9tf8s9gcj20ox0fzgoe.jpg" alt="" /></p>
+
+<p>We should also use the recommended namelist settings for Deep Time Simulations to turn off the processes not so related to the climate physics:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">overflows_on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">overflows_interactive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">lhoriz_varying_bckgrnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">ldiag_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">ltidal_mixing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">bckgrnd_vdc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.524</span><span class="w">
+</span><span class="n">bckgrnd_vdc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.313</span><span class="w">
+</span><span class="n">sw_absorption_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'jerlov'</span><span class="w">
+</span><span class="n">jerlov_water_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="n">chl_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'file'</span><span class="w">
+</span><span class="n">chl_filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'unknown-chl'</span><span class="w">
+</span><span class="n">chl_file_fmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bin'</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="ii-coupler-mapping-modification">II. Coupler Mapping Modification</h3>
+<hr />
+
+<p>All CESM Land/Sea mask info comes from the ocean data. In the <a href="http://www.cesm.ucar.edu/models/paleo/faq/#cpl_map">paleo resources</a>, we follow the instrudctions to make our mapping and domain data.</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>Scripgrids data <a href="https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/share/scripgrids/">download path</a></li>
+  <li>Use NCL change <code class="highlighter-rouge">gx1v6_090205.nc</code> grid_imask variable</li>
+  <li>Use following command to generate mapping data:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./gen_cesm_maps.sh <span class="nt">-fatm</span> /users/yangsong3/CESM/input/share/scripgrids/fv1.9x2.5_090205.nc <span class="nt">-natm</span> fv19_25 <span class="nt">-focn</span> /users/yangsong3/CESM/input/share/scripgrids/gx1v6_aqua_polar_180614.nc <span class="nt">-nocn</span> gx1PT <span class="nt">--nogridcheck</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Following the instructing in <code class="highlighter-rouge">/users/yangsong3/CESM/cesm1_2_2/tools/mapping/gen_domain_files</code> to build <code class="highlighter-rouge">gen_domain</code> executable. <strong>Note to change the following line in Macro if met MPI/NC variable not found problem:</strong>
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">SFC</span><span class="o">:=</span> mpif90
+</code></pre></div>    </div>
+  </li>
+  <li>Generate domain files:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gen_domain <span class="nt">-m</span> ../gen_mapping_files/map_gx1PT_TO_fv19_25_aave.180614.nc <span class="nt">-o</span> gx1PT <span class="nt">-l</span> fv19_25
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="iii-atmospheric-model-modification">III. Atmospheric Model Modification</h3>
+<hr />
+
+<p>Similar as Coupler generated mapping files, there is a land-sea mask file <code class="highlighter-rouge">/users/yangsong3/CESM/input/atm/cam/ocnfrac/domain.camocn.1.9x2.5_gx1v6_090403.nc</code>, using similar technique, change all <code class="highlighter-rouge">mask</code> and <code class="highlighter-rouge">frac</code> to 1 to present aqua-planet.</p>
+
+<h3 id="iv-sea-ice-model-modification">IV. Sea Ice Model Modification</h3>
+<hr />
+
+<p>Force the model generate sea ice by itself:</p>
+<blockquote>
+  <p>Ice initial conditions files are not required for deep time paleoclimate cases. We recommend initializing the ice model with a ‘no ice’ initial state and allowing the model to simulate an ice state. Set ‘no ice’ in the ice model namelist (user_nl_cice).</p>
+</blockquote>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ice_ic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'none'</span><span class="w">
+</span></code></pre></div></div>
+<p>Please see <strong><a href="">Appendix02</a></strong> for detailed namelist changes.</p>
+
+<h3 id="v-land-model-modification">V. Land Model Modification</h3>
+<hr />
+
+<p>Land model never works in the aqua-planet, so we just use the cpl-generated domain file to drive the model. However, in <code class="highlighter-rouge">NO_TOPO</code> series experiments, we <a href="https://novarizark.github.io/2018/06/05/clm-landuse/">reset the surface data to bare ground</a>.</p>
+
+<h3 id="vi-appendix">VI. Appendix</h3>
+
+<h4 id="61-ncl-binary-file">6.1 NCL Binary File</h4>
+
+<p>We first found that when we use the NCL to write a direct binary file, the file records very large values near the top of the variable type (e.g. 21474836xx for int, and 3e317 for double). Therefore, we tried to use fortran to deal with the problem. Finally, we found this is actually we set the file option as Big_Endian in NCL only for read process. Solution is simple, also set for write process:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">setfileoption</span><span class="p">(</span><span class="s2">"bin"</span><span class="p">,</span><span class="s2">"WriteByteOrder"</span><span class="p">,</span><span class="s2">"BigEndian"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Note to use <code class="highlighter-rouge">WriteByteOrder</code>.</p>
+
+<h4 id="62-namelist-changes-surf_aqua-final">6.2 Namelist Changes (SURF_AQUA Final)</h4>
+
+<ul>
+  <li>env_run.xml</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--"atm domain file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"ATM_DOMAIN_FILE"</span>   <span class="na">value=</span><span class="s">"domain.lnd.fv1.9x2.5_gx1v6.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"lnd domain file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"LND_DOMAIN_FILE"</span>   <span class="na">value=</span><span class="s">"domain.lnd.fv1.9x2.5_gx1v6.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"ice domain file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"ICE_DOMAIN_FILE"</span>   <span class="na">value=</span><span class="s">"domain.ocn.gx1v6.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"ocn domain file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"OCN_DOMAIN_FILE"</span>   <span class="na">value=</span><span class="s">"domain.ocn.gx1v6.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+
+<span class="c">&lt;!--"atm2ocn flux mapping file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"ATM2OCN_FMAPNAME"</span>   <span class="na">value=</span><span class="s">"cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_aave.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"atm2ocn state mapping file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"ATM2OCN_SMAPNAME"</span>   <span class="na">value=</span><span class="s">"cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_blin.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"atm2ocn vector mapping file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"ATM2OCN_VMAPNAME"</span>   <span class="na">value=</span><span class="s">"cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_patc.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"ocn2atm flux mapping file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"OCN2ATM_FMAPNAME"</span>   <span class="na">value=</span><span class="s">"cpl/gridmaps/gx1v6/map_gx1v6_TO_fv19_25_aave.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+<span class="c">&lt;!--"ocn2atm state mapping file (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"OCN2ATM_SMAPNAME"</span>   <span class="na">value=</span><span class="s">"cpl/gridmaps/gx1v6/map_gx1v6_TO_fv19_25_aave.aqua.polar.180614.nc"</span>  <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>user_nl_pop2</li>
+</ul>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">init_ts_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/input/ocn/pop/gx1v6/ic/ts_surf_aqua_polar_PHC2_jan_ic_gx1v6_20180613.ieeer8'</span><span class="w">
+</span><span class="n">region_mask_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/region_mask_aqua_polar_20180612.ieeei4'</span><span class="w">
+</span><span class="n">region_info_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/cesm1_2_2/models/ocn/pop2/input_templates/gx1v6_aqua_region_ids'</span><span class="w">
+</span><span class="n">topography_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_polar_20180607.ieeei4'</span><span class="w">
+</span><span class="n">n_transport_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="n">diag_transp_freq_opt</span><span class="o">=</span><span class="s1">'never'</span><span class="w">
+</span><span class="n">diag_transport_file</span><span class="o">=</span><span class="s1">'/users/yangsong3/CESM/cesm1_2_2/models/ocn/pop2/input_templates/gx1v6_transport_contents_aqua'</span><span class="w">
+
+</span><span class="c1">!-- dt_count sets the number of times the ocean is coupled per NCPL_BASE_PERIOD.</span><span class="w">
+</span><span class="n">dt_count</span><span class="o">=</span><span class="mi">30</span><span class="w">
+
+</span><span class="n">overflows_on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">overflows_interactive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">lhoriz_varying_bckgrnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">ldiag_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+</span><span class="n">ltidal_mixing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="w">
+
+</span><span class="c1">!--The new background vertical velocity parameters were determined by Gokhan and Christine to increase Kappa-v in the deeper ocean in absence of tidal mixing. The tidal mixing normally would do this.</span><span class="w">
+</span><span class="n">bckgrnd_vdc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.524</span><span class="w">
+</span><span class="n">bckgrnd_vdc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.313</span><span class="w">
+
+</span><span class="n">sw_absorption_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'jerlov'</span><span class="w">
+</span><span class="n">jerlov_water_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="n">chl_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'file'</span><span class="w">
+</span><span class="n">chl_filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'unknown-chl'</span><span class="w">
+</span><span class="n">chl_file_fmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bin'</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>user_nl_atm</li>
+</ul>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bnd_topo</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/input/atm/cam/topo/USGS-gtopo30_1.9x2.5_pure.nc'</span><span class="w"> 
+</span><span class="n">ncdata</span><span class="o">=</span><span class="s1">'/users/yangsong3/L_Zealot/B/B20f19-surf-aqua/indata/B20f19-topo.cam.i.0010-01-01-00000.nc'</span><span class="w">
+</span><span class="c1">!dtime=900</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>user_nl_clm</li>
+</ul>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">finidat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/L_Zealot/B/B20f19-surf-aqua/indata/B20f19-surf-aqua.clm2.r.0001-01-06-00000.nc'</span><span class="w"> 
+</span><span class="n">fsurdat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/input/lnd/clm2/surfdata/surfdata_1.9x2.5_bare_ground_simyr2000_c091005.nc'</span><span class="w">
+</span><span class="n">urban_hac</span><span class="o">=</span><span class="s1">'OFF'</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>user_nl_cice</li>
+</ul>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kmt_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_polar_20180607.ieeei4'</span><span class="w">
+</span><span class="n">ice_ic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'none'</span><span class="w">
+</span><span class="n">xndt_dyn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>user_nl_rtm</li>
+</ul>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">finidat_rtm</span><span class="o">=</span><span class="s1">''</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="63-error-log">6.3 Error Log</h4>
+
+<h5 id="631-polar-land">6.3.1 Polar Land</h5>
+
+<blockquote>
+  <p>POP aborting…
+ (init_moc_ts_transport_arrays)  no transport regions have been detected –  che 
+  ck namelist transports_nml</p>
+</blockquote>
+
+<p>It seems the ocean transport diag met some problems.</p>
+<blockquote>
+  <p>The transport_contents input_template is used for diagnostic purposes only. In this file, the modeler can specify ocean locations (straits for example) for ocean transport computations that will be output in the ocean log files.</p>
+</blockquote>
+
+<p>I first tried to create my own <code class="highlighter-rouge">transport_contents</code> file, and we met end-of-file read crashes. It is clear that the number of diag locations is hard-coded in the model source code. So I then tried to change the namelist variable:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">diag_transp_freq_opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'never'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The same error message as the beginning… Then I found the first line in the <code class="highlighter-rouge">transport_contents</code> file denotes the number of diag places. So I change it to zero. Another time, not work.</p>
+
+<p>I then found another namelist variable:</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_transport_reg</span><span class="o">=</span><span class="mi">1</span><span class="w">
+</span></code></pre></div></div>
+<p>Originally, 2, and I change to 1. New error occurs!</p>
+
+<blockquote>
+  <p>(seq_map_avNormAvF)  ERROR: lsize_i ne lsize_f            0      245209
+MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strategy name  not supported.
+000.MCT(MPEU)::die.: from MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_()</p>
+</blockquote>
+
+<p>Oops! Big problem in the decomposition part to parallel computing.</p>
+
+<p>After long-time test and turn on the detailed debug info, we got another error indicating</p>
+<blockquote>
+  <p>forrtl: error (73): floating divide by zero</p>
+</blockquote>
+
+<p>Then I found the error occurs in the radiation module. This is because when the atm model compute radiation, it is faced with absolute zero inside polar region where the ocean grid cannot cover.</p>
+
+<p>Thus, <strong>we have to maintain polar land inside the ocean grid “black hole” to make the model run.</strong></p>
+
+<h5 id="632-oceanic-topography">6.3.2 Oceanic topography</h5>
+
+<p>In the <code class="highlighter-rouge">PURE_AQUA</code> experiment, the model crashes after several months’ integration. I have tried to change the initial condition, increase the timesteps, and modify the oceanic topography to add a smooth change from polar land to 2.7km depth ocean. All the trials failed. Finally, when I remain the sharp change from polar land to 300m depth water, and remain the oceanic topography deeper than 300m, the model runs smoothly. I have no idea why this happens but it seems to be a very wiered problem. Anyway, 300m-depth mixed layer is enough for our scientific question.</p>
+
+<h4 id="64-script-list">6.4 Script List</h4>
+
+<p><strong>Ocean</strong></p>
+
+<ul>
+  <li><a href="https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/f90/180607-change_bath_pop2.f90">Change Bathymetry (topography_20090204.ieeei4)</a></li>
+  <li><a href="https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/f90/180607-change_region_mask_pop2.f90">Change Region Mask (region_mask_20090205.ieeei4)</a></li>
+  <li><a href="https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/ncl/180613-change-temp-salt-surf-aqua-pop.ncl">Change Initial Condition (ts_PHC2_jan_ic_gx1v6_20090205.ieeer)</a></li>
+</ul>
+
+<p><strong>Coupler</strong></p>
+
+<p><strong>Updated 2018-06-14</strong></p>
+
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></p>
+        
+    </div>
+</div>
+
+
+<!--        <h2 id="comments">Comments</h2>
+    
+
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', // 可选。默认为 location.href
+  owner: 'Novarizark',
+  repo: 'Novarizark.github.io',
+  oauth: {
+    client_id: '08594414abfaba1aa8bd',
+    client_secret: '56bd0f234257f69ca94cafa5086af0ff2e43ac70',
+  },
+})
+gitment.render('container')
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://imsun.github.io/gitment/" rel="nofollow">comments powered by Gitment.</a></noscript>
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

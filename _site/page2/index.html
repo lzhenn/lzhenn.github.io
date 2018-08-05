@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a>
+                  <a class="post-link" href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-19
+                        <i class="fa fa-calendar"></i>2018-06-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,9 +264,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
     
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -281,17 +283,13 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
     
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
     
-        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>&nbsp;
-    
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
-    
-        <a href="/tag/#markdown" title="Tag: markdown" rel="tag">markdown</a>
+        <a href="/tag/#parted" title="Tag: parted" rel="tag">parted</a>
     
   
 
@@ -301,43 +299,44 @@
                 </div>
                 <div class="excerpt">
                     
-<p>接上篇<a href="https://novarizark.github.io/2018/04/04/raid-rebuild/">东校服务器RAID rebuild</a>,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。</p>
+<p>Orion要用来做天池比赛的服务器啦，安多一块硬盘用来存雷达数据。放上后需要用parted做分区，然后mkfs格式化，过程和CentOS差不多。这里做一下记录：</p>
 
-<p>思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
-工具：pymysql</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lzhenn@thinkstation:~<span class="nv">$ </span><span class="nb">sudo </span>parted /dev/sdb
+<span class="o">(</span>parted<span class="o">)</span> mklabel GPT                                                      
+<span class="o">(</span>parted<span class="o">)</span> mkpart primary 0% 100%                                           
+<span class="o">(</span>parted<span class="o">)</span> print                                                            
+Model: ATA HGST HUS724040AL <span class="o">(</span>scsi<span class="o">)</span>
+Disk /dev/sdb: 4001GB
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: 512B/4096B
+Partition Table: gpt
+Disk Flags: 
 
-<p>google下，抽出post内容的几个关键语句如下：</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="c1">--选出内容，唯一id，和category</span>
-<span class="o">&gt;</span><span class="k">SELECT</span> <span class="n">post_title</span><span class="p">,</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span><span class="p">,</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">name</span>
-<span class="k">FROM</span> <span class="n">wp_terms</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_taxonomy</span> <span class="k">ON</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">term_id</span> <span class="o">=</span> <span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_id</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_relationships</span> <span class="n">wpr</span> <span class="k">ON</span> <span class="n">wpr</span><span class="p">.</span><span class="n">term_taxonomy_id</span> <span class="o">=</span> 
-<span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_taxonomy_id</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_posts</span> <span class="k">ON</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span>
-<span class="k">WHERE</span> <span class="n">taxonomy</span> <span class="o">=</span> <span class="s1">'category'</span> 
-<span class="k">AND</span> <span class="n">post_type</span> <span class="o">=</span> <span class="s1">'post'</span> 
-<span class="k">ORDER</span> <span class="k">by</span> <span class="n">post_title</span><span class="p">;</span>
+Number  Start   End     Size    File system  Name     Flags
+ 1      1049kB  4001GB  4001GB               primary
+<span class="o">(</span>parted<span class="o">)</span> quit
+lzhenn@thinkstation:~<span class="nv">$ </span>partprobe  <span class="c"># let the core know the partation</span>
+lzhenn@thinkstation:~<span class="nv">$ </span>mkfs.ext4 /dev/sdb1 <span class="c"># format</span>
+                     
 </code></pre></div></div>
-<p>然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。成功恢复了200+篇博客内容，后面大概修改下残缺，整理下tag就很好啦。</p>
+<p>format后，建立fstab并mount -a即可。与CentOS完全一致。</p>
 
-<p><strong>Updated 2018-04-13</strong></p>
+<p><strong>Updated 2018-06-05</strong></p>
 
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/04/19/wordpress-blog-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/06/05/ubuntu-parted/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a>
+                  <a class="post-link" href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-17
+                        <i class="fa fa-calendar"></i>2018-06-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -356,11 +355,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
+        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
     
   
 
@@ -377,9 +372,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
     
-        <a href="/tag/#keyword&nbspnotebook" title="Tag: keyword&nbspnotebook" rel="tag">keyword&nbspnotebook</a>
+        <a href="/tag/#clm" title="Tag: clm" rel="tag">clm</a>&nbsp;
+    
+        <a href="/tag/#pft" title="Tag: pft" rel="tag">pft</a>
     
   
 
@@ -389,349 +386,496 @@
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc">
-  <li><a href="#20180312" id="markdown-toc-20180312">20180312</a></li>
-  <li><a href="#20180313" id="markdown-toc-20180313">20180313</a></li>
-  <li><a href="#20180417" id="markdown-toc-20180417">20180417</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
 </ul>
 
-<h3 id="20180312">20180312</h3>
+<p>In our hierarchy experiments, we hope to make the <a href="https://novarizark.github.io/2018/06/06/cesm-fully-coupled-aquap/">NO_TOPO series experiments</a> as simple as possible. Thus, it would be great if there is no vegetation on the ground. 
+In the CLM, we expect there is an external forcing data to control the surface type of ground/vegetation. Then I found this in <code class="highlighter-rouge">lnd_in</code> file</p>
 
-<ul>
-  <li>Blockchain
-    <ul>
-      <li>Block–&gt;Header–&gt;Nonce–&gt;Hash</li>
-      <li>Double Spending–&gt;6 Confirmation</li>
-    </ul>
-  </li>
-  <li>Encryption Algorithm
-    <ul>
-      <li>Symmetric-key
-        <ul>
-          <li>DES–&gt;3DES–&gt;AES</li>
-        </ul>
-      </li>
-      <li>Public-key Cryptography
-        <ul>
-          <li>RSA</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Python Class
-    <ul>
-      <li>__init(self,a,b,c)__ –&gt; cls=class(a, b, c) –&gt; cls.a</li>
-      <li>method(self) –&gt; cls.method() –&gt;class.method(cls)</li>
-    </ul>
-  </li>
-</ul>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fsurdat</span> <span class="o">=</span> <span class="s">'/users/yangsong3/CESM/input/lnd/clm2/surfdata/surfdata_1.9x2.5_simyr2000_c091005.nc'</span>
+</code></pre></div></div>
 
-<h3 id="20180313">20180313</h3>
+<p>If you <code class="highlighter-rouge">ncdump</code> that file, you will see this variable:</p>
 
-<ul>
-  <li>pymysql
-    <ul>
-      <li>with connection.cursor() as cursor</li>
-      <li>connection.commit()</li>
-      <li>connection.close()</li>
-    </ul>
-  </li>
-  <li>python-for-teens
-    <ul>
-      <li>string</li>
-      <li>if structure</li>
-    </ul>
-  </li>
-</ul>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">double</span> <span class="n">PCT_PFT</span><span class="p">(</span><span class="n">lsmpft</span><span class="p">,</span> <span class="n">lsmlat</span><span class="p">,</span> <span class="n">lsmlon</span><span class="p">)</span> <span class="p">;</span>
+		<span class="n">PCT_PFT</span><span class="p">:</span><span class="n">long_name</span> <span class="o">=</span> <span class="s">"percent plant functional type of gridcell"</span> <span class="p">;</span>
+		<span class="n">PCT_PFT</span><span class="p">:</span><span class="n">units</span> <span class="o">=</span> <span class="s">"unitless"</span> <span class="p">;</span>
+</code></pre></div></div>
 
-<h3 id="20180417">20180417</h3>
+<p>The first dimension show the corresponding PFT (Plant Functional Types), which define the types and fraction of different landcovers a certain grid (Mosaic method). There is the code table:</p>
 
-<ul>
-  <li>Bayesian Model
-    <ul>
-      <li>Bayesian Model</li>
-      <li>Markov Chain</li>
-      <li>Mento Carlo</li>
-      <li>Markov Chain Mento Carlo (MCMC)</li>
-    </ul>
-  </li>
-</ul>
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fs0m9y9g3oj20kb0ie0ve.jpg" alt="" /></p>
 
-<p><strong>Updated 2018-04-14</strong></p>
+<p>Thus, the only thing we need to do is to create a new file with change only in PCT_PFT(0,:,:)=100.0.</p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/04/17/keyword-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p><strong>Updated 2018-06-05</strong></p>
 
-                    <div class="label-card">
-                    
+<p>When we tried to run the model, we got several errors.</p>
 
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>surfrd_wtxy_veg_all ERROR: sum<span class="o">(</span>pct<span class="o">)</span> over numpft+1 is not <span class="o">=</span> 100.
+490    100.106661159475       0.106661159474527             4473
+</code></pre></div></div>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
+<p>According to the error, it seems that the sum of pft is not 100. After checking the data, we found several variables:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pct_list</span><span class="o">=</span><span class="p">(/</span><span class="s2">"PCT_LAKE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PCT_WETLAND"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PCT_GLACIER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PCT_URBAN"</span><span class="p">/)</span><span class="w">
+</span></code></pre></div></div>
+<p>So I remain all the pct about water, urban, and glacier, and make the bare ground equal to <code class="highlighter-rouge">100-sum(pct_list)</code>.</p>
+
+<p>Note that after changing all the landuse pct, the default CLM initial condition cannot satisfy the model, so we need to “cold” start the model. Use <code class="highlighter-rouge">env_run.xml</code> to set it.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"CLM_FORCE_COLDSTART"</span>   <span class="na">value=</span><span class="s">"on"</span>  <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-06-06</strong></p>
+
+<p>Some issues happened after 10+ years integration. In no_topo experiment, the model exit with error in 0013-03, with Error message:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(shr_sys_abort) ERROR: remap transport: bad departure points 
   
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
+(shr_sys_abort) WARNING: calling shr_mpi_abort() and stopping
+ Warning: Departure points out of bounds in remap
+ my_task, i, j =          31          20          13     
+application called MPI_Abort(MPI_COMM_WORLD, 1001) - process 0
+ dpx, dpy =  -28367.4880120091        54137.9986747345     
+ HTN(i,j), HTN(i+1,j) =   30148.1831506031        30030.4921250813     
+ HTE(i,j), HTE(i,j+1) =   46470.5086842257        46750.9484318852     
+ istep1, my_task, iblk =     1310809          31           2      
+ Global block:         241    
+ Global i and j:          19         372    
+</code></pre></div></div>
 
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>明文密码丢到程序里当然是很傻逼的事情（参见斯导新片《头号玩家》），所以访问数据库用了AES加密（<a href="https://novarizark.github.io/2018/03/12/cryptography-python-mysql/">参见</a>）。</p>
-
-<p>数据库可是个好东西，慢慢很多程序都要开始访问数据库了，那么我们自己的加密模块能否不通过动态方式添加搜索路径，像import其他模块那样引用呢？答案当然是可以的，在bashrc中修改PYTHONPATH环境变量就可以啦。</p>
-
-<p>当然这不是推荐方法，因为具有外部依赖性。推荐方法是在site-packages目录下增加一个扩展名为.pth的文件，在里面写入增加的搜索路径。这里有<a href="https://blog.csdn.net/liang19890820/article/details/76219560">很好的介绍</a>。</p>
-
-<p><strong>Updated 2018-04-14</strong></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/04/14/python-search-path/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
-    
-        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
-    
-        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>&nbsp;
-    
-        <a href="/tag/#MCMC" title="Tag: MCMC" rel="tag">MCMC</a>&nbsp;
-    
-        <a href="/tag/#Bayes" title="Tag: Bayes" rel="tag">Bayes</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>帮老板审稿，这稿子用了个非常牛逼的Bayesian Model+MCMC做降水的突变检验，很明显是个ML的方法，这么好的机会，肯定要抓着搞明白。</p>
-
-<p>整理一些资料如下：</p>
-
-<ol>
-  <li><strong><a href="https://blog.csdn.net/pongba/article/details/2958094">贝叶斯方法介绍</a></strong>: 这是篇非常好的科普，从贝叶斯老爷的逆概问题讨论形式化的贝叶斯概型。</li>
-  <li><strong><a href="https://site.douban.com/182577/widget/notes/10567181/note/292072927/">MC, MC, MCMC</a></strong>: 蒙特卡洛、马尔可夫链，到马尔可夫链蒙特卡洛方法。</li>
-  <li><strong><a href="https://zh.wikipedia.org/wiki/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0">似然函数</a></strong>:终于明白了似然函数是什么意思，表征观测结果对应预期分布的似然性。定性的说，一个硬币投了一百次有90次正面，那么这个硬币正常的似然性很低很低。</li>
-  <li><strong><a href="">最大似然估计</a></strong>:对同一个似然函数，如果存在一个参数值，使得它的函数值达到最大的话，那么这个值就是最为“合理”的参数值。</li>
-  <li><strong><a href="http://sunyi514.github.io/2016/03/05/mcmc%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0/">MCMC方法小记</a></strong>：好例子!</li>
-  <li><strong><a href="http://xccds1977.blogspot.kr/2014/07/mcmc.html">理解MCMC</a></strong>:好例子！</li>
-</ol>
-
-<p><strong>Updated 2018-04-14</strong></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/04/14/bayes-mcmc/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a>&nbsp;
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>东校实验室服务器坏掉了一块RAID 1的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。</p>
-
-<p>原RAID没出问题的磁盘被降级为foreign状态，</p>
-
-<p>后查到<a href="https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh">官方文档</a></p>
+<p>After searching, it seems that the CICE model encountered a CFL violation problem:</p>
 
 <blockquote>
-  <p>Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.</p>
+  <p>This is essentially a CFL violation in the CICE model. You would need to reduce the timestep. In the CESM, the CICE timestep is tied to the coupling interval with the atmosphere. Have a look at ATM_NCPL and ICE_NCPL. Try doubling ATM_NCPL and this should help. For high resolution (0.1-degree) you can use xndt_dyn or ndtd depending on the version of the code. This allows you to take multiple dynamic timesteps per thermodynamic timestep.</p>
 </blockquote>
 
-<p>按F按键后导入foreign配置，开始进入系统。</p>
+<p>I found ATM_NCPL in env_run.xml:</p>
 
-<p>进入系统后发现0号盘位闪橙色灯，也处于降级出错状态，妈蛋，这下有的玩了。于是联系L老师再次采购硬盘。
-<strong>Updated 2017-12-30</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--"base period associated with NCPL coupling frequency, valid values: hour,day,year,decade (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"NCPL_BASE_PERIOD"</span>   <span class="na">value=</span><span class="s">"day"</span>  <span class="nt">/&gt;</span>    
 
-<p>3月硬盘到货，测试直接将0盘位换成新硬盘，发现无法自动rebuild，无法识别1盘位的系统盘。</p>
+<span class="c">&lt;!--"number of atm coupling intervals per NCPL_BASE_PERIOD (integer) (char) " --&gt;</span>
+<span class="nt">&lt;entry</span> <span class="na">id=</span><span class="s">"ATM_NCPL"</span>   <span class="na">value=</span><span class="s">"48"</span>  <span class="nt">/&gt;</span>
+</code></pre></div></div>
+<p>Since the atm run in <code class="highlighter-rouge">dtime=1800s</code>, double the <code class="highlighter-rouge">ATM_NCPL</code> is meaningless.</p>
 
-<p>重新装回旧有硬盘后能够进入系统，但是只放置1盘位新硬盘，启动后出现无法找到superblock的错误。</p>
+<p><a href="http://www.cesm.ucar.edu/models/cesm1.0/cice/doc/node35.html">Another strategy</a> is to double the CICE dynamic timesteps per thermodynamic timestep.</p>
 
-<p>怀疑能进入系统的好机会不多，迅速备份了技术博客后，关掉所有的crontab减少读写，希冀RAID卡能够将所有的数据rebuild到1盘位。等下周来看。</p>
+<blockquote>
+  <p>The dynamics timestep should be reduced to integrate past this problem. Set
+<code class="highlighter-rouge">xndt_dyn = 2</code>
+in the namelist and restart the model. When the job completes set the value back to 1.</p>
+</blockquote>
 
-<p><strong>Updated 2018-03-28</strong></p>
+<p>That is quite interesting, set it back when pass the unstable point? How could there be this operation?!</p>
 
-<p>所以希冀是自欺欺人的。满心以为自动rebuild后，可以更换下0盘位，发现还是老样子。</p>
+<p>Still confused, then I turned to <code class="highlighter-rouge">NO_TOPO_SCON</code> and found another similar error happened in the ocean model:</p>
 
-<p>想到新招数偷天换日，将2号盘位的non-RAID disk取下，更换上新硬盘后，把新硬盘做全局热备。<a href="https://wenku.baidu.com/view/993960dfbb4cf7ec4afed023.html">参考资料</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POP Exiting...
+POP_SolversChronGear: solver not converged
+POP_SolverRun: error in ChronGear
+POP_BarotropicDriver: error in solver 
+Step: error in barotropic
+</code></pre></div></div>
 
-<p>没想到改全局热备后并没有rebuild，而且再次出现找不到superblock无法进入系统的情况。没招了，只有试图解决这个问题。测试<a href="https://linuxexpresso.wordpress.com/2010/03/31/repair-a-broken-ext4-superblock-in-ubuntu/">这个解决方案</a></p>
+<p>And I searched and found the POP FAQ:</p>
 
-<p>发现牛逼的是所有的备份superblock都挂了。这是没救了？</p>
+<blockquote>
+  <p>If your case has been running successfully for a period of time, but then the ocean model suddenly fails to converge, you might have encountered a time-stepping instability. If so, you will need to decrease the ocean timestep and restart your case. We recommend you back up at least one month prior to the time of nonconvergence, <strong>decrease the ocean-model timestep by about 15-20%</strong>, and then restart your case.</p>
+</blockquote>
 
-<p>尝试检查了一下fstab，发现奇怪的地方，fstab中将sda1挂载到/用户/data下，由于data存储较大，<strong>怀疑是2号位硬盘找不到，然后把系统盘sdb误认为是sda才出现superblock不匹配的地方。（上次更换0盘位也出现相同错误，可能更换或取下硬盘后影响了系统自检虚拟磁盘的顺序）</strong></p>
+<p>And the method to change the timestep:</p>
+<blockquote>
+  <p>To change the size of the POP2 timestep, you simply change the value of dt_count in your $CASE/user_nl_pop2 file.</p>
+</blockquote>
 
-<p>尝试给回2盘位，可以进入系统；随后尝试删除fstab中对应语句，拔出2盘位，也可以进入系统，有戏，果然是这个原因！</p>
+<blockquote>
+  <p>To decrease the POP2 timestep, you must increase the POP2 time_manager_nml namelist variable dt_count.</p>
+</blockquote>
 
-<p>接下来把2盘位更换为新硬盘，由于之前做了热备，现在显示为foreign状态，import foreign configure后，可以进入系统。进入系统后没有看到2盘位在闪烁，说明没有自动rebuild。</p>
+<blockquote>
+  <p>For example, if the ocean grid in your case is gx1v6, then the default value for dt_count is 23. In order decrease the timestep by roughly 15%, you would increase dt_count to 26. To do this, put the following line in your <code class="highlighter-rouge">$CASE/user_nl_pop2</code> file:</p>
+</blockquote>
 
-<p>关机，将处于2盘位的新硬盘拿下并替换0盘位就硬盘，开机发现提示进入配置页面，进入后发现0盘位开始rebuild，Yeah！成功！</p>
+<blockquote>
+  <p><code class="highlighter-rouge">dt_count = 26</code>
+You do not need to rebuild the executable in order to change dt_count.</p>
+</blockquote>
 
-<p>下午助教，去课室发现竟然没人，问了一下才知道换课了，磨叽了一会儿回去差不多两小时，发现rebuild居然卡在37%，奇怪。不管了，今天没时间耗着了，必须搞完。于是重启，突然想到为何不尝试一下之前的1号盘是否能读出。如果1号盘可用的话，那么直接rebuild到更新的时间点岂不是更好。</p>
+<p>Considering doubling the CICE dynamic timesteps will significantly increase the integration time. I tried the following method:</p>
 
-<p>于是将0盘位换成之前的1号盘，果然可以！慎重起见，迅速备份技术博客，17年2月之后一直到8月底最后一篇博客，一点都不少，太好了！之后设置rebuild到这个盘就去吃饭了，当晚SH说0盘位掉线了，好吧，好在技术博客救回来了。下次去恢复到2月份的系统。</p>
+<ul>
+  <li>In <code class="highlighter-rouge">user_nl_pop2</code>:</li>
+</ul>
 
-<p><strong>Updated 2018-04-04</strong></p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dt_count</span><span class="o">=</span><span class="mi">26</span><span class="w">
+</span></code></pre></div></div>
 
+<ul>
+  <li>Turn off cold start of the CLM and use 5-day clm2.r file to remap a new file with bare ground.</li>
+</ul>
+
+<p>According to the <a href="http://www.cesm.ucar.edu/models/paleo/faq/#lnd">paleo FAQ</a>:</p>
+
+<blockquote>
+  <p>However, if you have changed your land cover in your new simulation (for example, if you have changed your land ice distribution), you will first need to create a new clm2.r file that conforms to the new land cover assignments in your modified surface datafile.  Creating a new clm2.r file is a two step process.  Step 1:  Run a short (e.g., 5 day) startup simulation with arbitrary initial conditions and your new surface dataset. The 5 day simulation will produce a restart file that is consistent with the ice distribution in your new surface dataset, which is different from the original experiment that you wish to branch from.  Use the tool, interpinic, to re-map the restart data from the original simulation to the new restart file created by the 5-day run.</p>
+</blockquote>
+
+<p>I used to cold start the model, it seems this can be a big problem:</p>
+<blockquote>
+  <p>CLM4 does not require an initial condition file and can be initialized with arbitrary initialization (finidat=” “). However, arbitrary initialization starts the model from essentially bare ground, with vegetation, soil carbon, soil nitrogen, and soil moisture set to zero. The land model will spin up all variables at once, but will therefore require many hundreds of years to come into equilibrium.</p>
+</blockquote>
+
+<p>Following the instruction, we first startup a <code class="highlighter-rouge">NO_TOPO</code> experiment with 5 day integration and our own bare ground surface data. Then, use <code class="highlighter-rouge">interpinic</code> to remap a <code class="highlighter-rouge">REAL_WORLD</code> restart file to our 5-day restart file:
+Path: <code class="highlighter-rouge">/users/yangsong3/CESM/cesm1_2_2/models/lnd/clm/tools/clm4_0/interpinic</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./interpinic <span class="nt">-i</span>  /users/yangsong3/L_Zealot/B/B20f19-realworld/exe/B20f19-realworld.clm2.r.0021-01-01-00000.nc <span class="nt">-o</span> /users/yangsong3/L_Zealot/B/B20f19-topo/clm.r/B20f19-topo.clm2.r.interpinic.nc 
+</code></pre></div></div>
+
+<p>After that, I thought for a while and tried to comment out the pop timestep change, turn off CLM cold start, and use frequent restart file output (10 year).</p>
+
+<h3 id="references">References</h3>
+
+<ul>
+  <li><a href="https://bb.cgd.ucar.edu/error-remap-transport-bad-departure-points">https://bb.cgd.ucar.edu/error-remap-transport-bad-departure-points</a></li>
+  <li><a href="http://www.cesm.ucar.edu/models/cesm1.0/cice/doc/node35.html">http://www.cesm.ucar.edu/models/cesm1.0/cice/doc/node35.html</a></li>
+  <li><a href="http://www.cesm.ucar.edu/models/paleo/faq/#lnd">http://www.cesm.ucar.edu/models/paleo/faq/#lnd</a></li>
+</ul>
+
+<p><strong>Updated 2018-06-11</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/04/04/raid-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/06/05/clm-landuse/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a>
+                  <a class="post-link" href="/2018/06/02/ill-again/">我TM又病了</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-03
+                        <i class="fa fa-calendar"></i>2018-06-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>&nbsp;
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>两个月烧了三次，我都想给自己跪下了。真是哔了狗了，怀疑第一次感冒联合几种耐药菌感染，上次支气管炎抗生素又没吃够疗程，丫就潜伏下来了，这次劳累过后，再次烧了起来，扁桃体痛如刀割，左右陆续溃疡，随后又不得不取消了AOGS的行程，其实出发在周日，我当成了周六，今天周六已经基本恢复，票却也退了，残念就残念吧，想想咳咳咳还要做报告，不折腾也挺好，免得再复发。过程记录如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>date</th>
+      <th>record</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5.28</td>
+      <td>午休后，下午再办逐渐感觉劳累，晚上回宿舍后开始低烧，全身酸痛</td>
+    </tr>
+    <tr>
+      <td>5.29</td>
+      <td>0点体温37.7，8点37.4，随后去校医，拿了5天量头孢，回宿舍，低烧，全身酸痛</td>
+    </tr>
+    <tr>
+      <td>5.30</td>
+      <td>凌晨3点，37.2，早晨7:46，37.4；晚上19:15 37.5, 依然低烧</td>
+    </tr>
+    <tr>
+      <td>5.31</td>
+      <td>早晨起感觉略有退烧，下午到办公室，还是觉得冷，不舒适，看到老板不去，并且推了报告给我，决定取消夏威夷行程</td>
+    </tr>
+    <tr>
+      <td>6.1</td>
+      <td>退烧，咳嗽加重，去校医复查，又拿了五天抗生素，还有止咳药孟鲁斯特钠，这货感觉奇效。</td>
+    </tr>
+    <tr>
+      <td>6.2</td>
+      <td>基本恢复，但是夏威夷残念了。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>坚持一个周抗生素，然后慢慢调节肠道菌落吧，诶。后面悠着点，不能太累。</p>
+
+<p>May the luck be with me.</p>
+
+<p>再次复发！症状要轻很多，感觉可能是某些没想到的病症，后来查到跳蚤可以传播立克次体为病原体的疾病，比如战壕热，Q热什么的，这种反复发作有点类似战壕热，只不过症状基本为上感，发热也轻很多。希望这是最后一次了。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>date</th>
+      <th>record</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6.18</td>
+      <td>端午，本科同学聚会，有劳累不适感</td>
+    </tr>
+    <tr>
+      <td>6.19</td>
+      <td>出现肠胃症状，略有腹痛不适，前往省局开会，期间开始流涕。</td>
+    </tr>
+    <tr>
+      <td>6.20</td>
+      <td>流涕，偶尔有黄绿色脓涕，但基本以透明粘稠状为主。</td>
+    </tr>
+    <tr>
+      <td>6.21</td>
+      <td>开始有轻微咳嗽，没有发热症状，但是会某些时候畏寒，疲乏</td>
+    </tr>
+    <tr>
+      <td>6.22</td>
+      <td>助教，有畏寒，疲乏，手脚发热感，咳嗽略有加重</td>
+    </tr>
+    <tr>
+      <td>6.23</td>
+      <td>团队活动，手脚发热显著，依然咳嗽</td>
+    </tr>
+    <tr>
+      <td>6.24</td>
+      <td>咳嗽好转，开始大量咳痰，没有畏寒和手脚发热感</td>
+    </tr>
+    <tr>
+      <td>6.25</td>
+      <td>轻微咳嗽，没有发热畏寒，好转。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Updated 2018-06-02</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/06/02/ill-again/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-05-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
+    
+        <a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>开始测试Aqua-Planet试验，直接按照aqua的设置run没有任何问题，但是发现SST没有annual cycle，询问师姐：</p>
+<blockquote>
+  <p>你是用的cesm的default的 aqua compset吗 如果是的话，那么好像是不需要额外读入sst文件的，而是直接在code里指定需要哪种sst profile就可以，具体是通过修改ocn_comp.F90 中 sst_option，这里不同的sst_option代表不同的profile；关于topo，好像你是需要在user_nl_cam里指定一个新的topo文件的(把高度啥的设为0)</p>
+</blockquote>
+
+<p>这么说还需要自己写一个topo为0的文件。</p>
+
+<p><a href="http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html">一些资料</a></p>
+
+<p>修改轨道参数，固定黄赤交角为0度：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">rb_mode</span><span class="o">=</span><span class="s">'fixed_parameters'</span>
+<span class="n">orb_obliq</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">orb_eccen</span><span class="o">=</span><span class="mf">0.0167239</span>
+<span class="n">orb_mvelp</span><span class="o">=</span><span class="mf">102.035</span>
+
+</code></pre></div></div>
+
+<p><strong>Updated 2018-05-14</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/05/24/cesm-aquap/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/05/17/thinking-young-world/">十年绚烂</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-05-17
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>不知道什么时候开始，觉得一天天，一周周，一月月过得越来越快，小学的时候，一周五天，一学期四个月多么漫长啊，而如今，不知不觉间几个月就没了。</p>
+
+<p>老了。熬夜撑不住了，早晨也时常六点多就醒。25岁真的是人生的顶峰，随后就是下坡路。20-30岁，这短暂的十年真的是人生最美好的十年。</p>
+
+<p>朱老板听了位列福布斯30-30一哥们的报告，激动得语无伦次，对其口才风度能力气质佩服的五体投地。默默查了下30-30，指的是福布斯评选出的30位30岁以下的精英青年。一眼望去，创业者居多，翻了翻后面，体育健儿，知名艺人也位列其上。猛然意识到，他们与我，是同龄人。</p>
+
+<p>同龄人！时至2018，第一批90后只剩下两年就30岁了。连第一批00后今年都要大学入学了！盯着那一串名单，愈发感到恐惧和沮丧。且不说零星可见的00后艺人，对艺人和运动员这两个群体来说，如果在20-30岁阶段不能够成为业界明珠，那么这一辈子，也极少可能再向上走了吧。
+曾经觉得年轻，觉得未来充满了选择，充满了机遇，充满了可能性，而事实却远非如此。我们可以设想，即便人感受时间的流逝是线性的，即便机遇和可能性随着年龄增长也是线性减少的，这种希望也应该线性地减少才对。
+可吊诡的呢，是人感受到的时间流逝，随着年龄增长是越来越快的；而很多机遇和选择，随着时间流逝甚至可能是指数递减的，比如对艺人来说，18岁和27岁可能遇到的机会，决然是不同的。
+但是希望这种事情，却可以被称为执念，随着时间流逝，并不会以某种圆润的曲线下降。直到有一天，现实狠狠地甩了一巴掌，按王小波的话，就像挨了锤的牛一样。这个时候才会发现，自己只有希望的泡泡，却没有希望的内容。这也是为什么在各种语言的描述中，希望总是破灭的，而不是消失，减弱之类的修饰。</p>
+
+<p>我该庆幸自己意识到这一点了么？回望过去六年，我在做什么，获得了什么，争取到了什么？</p>
+
+<p>时间那么公平，所有人，无论是谁，过了一年就是长了一岁。中午看到李迅雷文章，年轻人越来越少的中国。是噢，我还把自己当年轻人。我的同龄人，都是85-95这批回声婴儿潮里的孩子，如今，真的是在二十几岁最好的年华，如今都在各自工作岗位上，奉献自己的青春汗水。这批人里，早有能够凭一张打码自拍一夜赚数百万收入，也有无数屌丝无产者，甚至，将来可能还有一批负资产人士。五年之后，我们30多岁了，十年之后，更是集体奔四。五年十年，过起来只会越来越快，年轻人，真的越来越少。</p>
+
+<p>下午见闻小编发来运单截图，中奖书籍发货了。看着手写运单清秀的字迹，《你的名字》剧照做头像，突然很感慨，我们这批人里，多少还把自己当作孩子，然而历史的行程从不曾暂停，工作岗位上的我们，已经是中流砥柱。如此形势，是危，也是机。</p>
+
+<p><strong>Updated 2018-05-17</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/05/17/thinking-young-world/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-05-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -775,7 +919,7 @@
     
         <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
     
-        <a href="/tag/#ETF" title="Tag: ETF" rel="tag">ETF</a>&nbsp;
+        <a href="/tag/#option" title="Tag: option" rel="tag">option</a>&nbsp;
     
         <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
     
@@ -787,31 +931,33 @@
                 </div>
                 <div class="excerpt">
                     
+<p>原油这次真的起飞了。昨晚油价一路窜高，布油一路突突到76刀+，创下三年半来新高。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fr3q64rs8mj20rx0lx424.jpg" alt="" /></p>
+
+<p>之前的逻辑在不断地验真，去年到现在，最主要的资本利得基本都是油给的。对于高信噪比的趋势交易，真的没必要天天盯盘，更重要的是信心和布局。70+其实基本已经在平衡价位了，现在投机性交易者正在助推价格继续上涨，后续布油一旦触碰到80，打算减半仓。</p>
+
+<p>昨天看投研帮文章表示商品/权益类资产价格比值达到历史新低，该指标均指回归无非两种途径：A权益类资产大跌，B商品价格大涨。直觉应该买个大盘的put对冲下，不过仔细想了想自己的商品标的和权益类资产的对冲手段似乎没什么问题，瞄了下九月到期的QQQ的put，尼玛100股要600多刀，宰人呢这是。决定财报季过后适当减仓，继续观望。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fr3qdqtsdaj20ec09yq5d.jpg" alt="" /></p>
+
+<p>消息面上中美贸易战继续来来去去过招，川普要撕毁伊核协议，基本面上还是美利坚继续复苏扩张，上月非农虽然不及预期，但是失业率跌倒4%以下(当然每次危机前也近似这么漂亮的数字)，欧洲有整体熄火的迹象，国内各指标基本保持稳定，去杠杆总基调下资金面依然紧张。</p>
+
+<p>总之16-18全球应该是经历了一次信贷脉冲下的小复苏，根本问题当然没有解决，而且更严重了，没错，债务问题。短暂的波动并不能代替长期的趋势，时先生那句“债务是一条带血的主线”依然萦绕耳畔。短期来看，油飞了，通胀预期也跟着起来了，但17年后长债收益率和黄金出现背离，反映着黄金隐含的通胀预期与TIPS反应的通胀预期的背离，金银波动率逐渐走低。Fed措辞似乎开始接受低通胀，并且对未来的经济增长和通胀预期表示隐忧。虽然大趋势上依然固执于通胀走强，但短期考虑以期权策略做多波动性。</p>
+
+<p>另外最近开始看东野圭吾的《解忧杂货铺》。坦白说，看他第一本《拉普拉斯的魔女》，对其行文的印象就是灰暗的白描和冷淡的叙事，实则压抑。作品吸引我的地方往往在于其对人物心理和动机的揭示以及对现实社会背景的折射。比如魔女中弑夫者的价值观（大致印象）:</p>
+
 <blockquote>
-  <p>逻辑对的情况下，该如何把握节奏？</p>
+  <p>找年龄差不多的男人结婚，老了之后，两个老人相互照顾多累呀。如果找个有钱的老男人嫁了，老男人寿命不久，死了之后自己依然年轻，还能继承一大笔遗产……</p>
 </blockquote>
 
-<p>这段时间最大的感受就逻辑假设在不断验真，可节奏把握的确是一件颇具奇技淫巧，难以搞定的风骚操作。其实本质还是资金仓位管理以及择时判据，逻辑对的情况下（big picture）有定量分析加持才行。</p>
+<p>《解忧杂货铺》就更有意思了，现时背景下在失去的二十年里成长的一代年轻人，利用跨时空书信教育70年代石油危机时的父辈要去珍惜工作机会，继承家业的机会，告诉他们再过30年连大学生出来都可能找不到工作（误入杂货铺的三人就是找不到工作四处偷窃的社会青年）。依托时代背景塑造人物再折射时代背景，叙事行文的淡漠情感，其书近几年在国内的流行和畅销程度，其实可以反映出很多有意思的事情。愿意或者不愿，我们都将见证即将到来的这个时代。</p>
 
-<p>从16年下半年就看空科技股，当然这节奏是严重不对的，不断学习过程中看到smart beta痴痴买入ETF的策略加上投机性买入对价格的不断推升可以持续如此之久。终于憋到今年2月份第一次利率冲击，波动性回归，市场进入震荡格局。</p>
-
-<p>这几天F的信息泄露+川普对A的税收大棒挥起，科技股终于出现像样的下跌了，大概瞄了下QQQ应该是回到去年十一月的水平，会买么？我还不会。FAANG只有PE到20以下我才会心动，G目前EPS 18股价1k，55的PE；被干的F目前PE 29，至少跌倒20以内，才会下手。只有apple目前17+。</p>
-
-<p>看了下最近的资金曲线，基本维持窄幅震荡，大概只有3%左右最大回撤，相比指数的跌宕起伏平缓很多。重新审视了下仓位、标的的分散性和风险敞口，依然不觉得有什么问题。风险投资占总资产比重已经下降到24%左右。</p>
-
-<p>逻辑上接下来应该去验真第二轮的利率上升冲击、国际经贸形势变换冲击以及地缘政治关系紧张冲击等，适当加一些吃backwardation rolling的标的后继续走佛系路线：观察，等待。</p>
-
-<p>我想也可以抛出结论了：</p>
-
-<blockquote>
-  <p>客观交易系统还不成熟的前提下，不要在乎节奏，减少操作，注意风险敞口和布局即可。</p>
-</blockquote>
-
-<p><strong>Updated 2018-04-03</strong></p>
+<p><strong>Updated 2018-05-08</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/04/03/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/05/08/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -826,10 +972,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">2/42</span>
+          <span class="page_number ">2/43</span>
           
             <a href="/page3" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1070,7 +1216,52 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2169,14 +2360,14 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2337,7 +2528,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2421,6 +2612,13 @@
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2428,7 +2626,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2449,7 +2647,7 @@
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2477,7 +2675,7 @@
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2617,7 +2815,7 @@
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2736,7 +2934,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2752,6 +2950,27 @@
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2765,25 +2984,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2819,7 +3038,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2837,7 +3056,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2873,7 +3092,7 @@
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3017,7 +3236,7 @@
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3170,7 +3389,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3206,7 +3425,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3224,7 +3443,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3233,7 +3452,7 @@
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3305,7 +3524,16 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

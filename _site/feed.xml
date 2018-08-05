@@ -5,46 +5,1090 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 May 2018 10:12:27 +0800</pubDate>
-    <lastBuildDate>Fri, 18 May 2018 10:12:27 +0800</lastBuildDate>
+    <pubDate>Sun, 05 Aug 2018 13:55:03 +0800</pubDate>
+    <lastBuildDate>Sun, 05 Aug 2018 13:55:03 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
-        <title>十年绚烂</title>
+        <title>EC2迁移II：财务系统</title>
         <description>
-不知道什么时候开始，觉得一天天，一周周，一月月过得越来越快，小学的时候，一周五天，一学期四个月多么漫长啊，而如今，不知不觉间几个月就没了。
+这段时间忙忙乱乱，一直没有将财务系统迁移过来，已经一个多月没有更新资产负债表了，趁着得闲，尽快处理下，记录下迁移过程。话说突然觉得有钱还是好啊，如果不在乎每月十几二十刀，也用不着每年迁移一次AWS吧，重新调配环境确实还是很蛋疼的事情。
 
-老了。熬夜撑不住了，早晨也时常六点多就醒。25岁真的是人生的顶峰，随后就是下坡路。20-30岁，这短暂的十年真的是人生最美好的十年。
+首先尝试直接运行&lt;code class=&quot;highlighter-rouge&quot;&gt;routine_balance_sheet.py&lt;/code&gt;，按提示安装所需库
 
-朱老板听了位列福布斯30-30一哥们的报告，激动得语无伦次，对其口才风度能力气质佩服的五体投地。默默查了下30-30，指的是福布斯评选出的30位30岁以下的精英青年。一眼望去，创业者居多，翻了翻后面，体育健儿，知名艺人也位列其上。猛然意识到，他们与我，是同龄人。
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pip install httplib2
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pip install quandl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-同龄人！时至2018，第一批90后只剩下两年就30岁了。连第一批00后今年都要大学入学了！盯着那一串名单，愈发感到恐惧和沮丧。且不说零星可见的00后艺人，对艺人和运动员这两个群体来说，如果在20-30岁阶段不能够成为业界明珠，那么这一辈子，也极少可能再向上走了吧。
-曾经觉得年轻，觉得未来充满了选择，充满了机遇，充满了可能性，而事实却远非如此。我们可以设想，即便人感受时间的流逝是线性的，即便机遇和可能性随着年龄增长也是线性减少的，这种希望也应该线性地减少才对。
-可吊诡的呢，是人感受到的时间流逝，随着年龄增长是越来越快的；而很多机遇和选择，随着时间流逝甚至可能是指数递减的，比如对艺人来说，18岁和27岁可能遇到的机会，决然是不同的。
-但是希望这种事情，却可以被称为执念，随着时间流逝，并不会以某种圆润的曲线下降。直到有一天，现实狠狠地甩了一巴掌，按王小波的话，就像挨了锤的牛一样。这个时候才会发现，自己只有希望的泡泡，却没有希望的内容。这也是为什么在各种语言的描述中，希望总是破灭的，而不是消失，减弱之类的修饰。
+安装quandl出错，提示requests不能够卸载：
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Cannot uninstall 'requests'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-我该庆幸自己意识到这一点了么？回望过去六年，我在做什么，获得了什么，争取到了什么？
+解决办法，保留原有安全装包的情况下安装：
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; pip install &lt;span class=&quot;nt&quot;&gt;--ignore-installed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; ipython
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+随后&lt;a href=&quot;https://developers.google.com/sheets/api/quickstart/python&quot;&gt;安装google sheets python api&lt;/a&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; google-api-python-client oauth2client
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-时间那么公平，所有人，无论是谁，过了一年就是长了一岁。中午看到李迅雷文章，年轻人越来越少的中国。是噢，我还把自己当年轻人。我的同龄人，都是85-95这批回声婴儿潮里的孩子，如今，真的是在二十几岁最好的年华，如今都在各自工作岗位上，奉献自己的青春汗水。这批人里，早有能够凭一张打码自拍一夜赚数百万收入，也有无数屌丝无产者，甚至，将来可能还有一批负资产人士。五年之后，我们30多岁了，十年之后，更是集体奔四。五年十年，过起来只会越来越快，年轻人，真的越来越少。
+可以执行，但是执行中存在numpy警告。
 
-下午见闻小编发来运单截图，中奖书籍发货了。看着手写运单清秀的字迹，《你的名字》剧照做头像，突然很感慨，我们这批人里，多少还把自己当作孩子，然而历史的行程从不曾暂停，工作岗位上的我们，已经是中流砥柱。如此形势，是危，也是机。
+&lt;strong&gt;Updated 2018-08-03&lt;/strong&gt;
 
-&lt;strong&gt;Updated 2018-05-17&lt;/strong&gt;
 </description>
-        <pubDate>Thu, 17 May 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/05/17/thinking-young-world/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/05/17/thinking-young-world/</guid>
+        <pubDate>Fri, 03 Aug 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/08/03/EC2-diggler-quandl-goole-sheet/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/08/03/EC2-diggler-quandl-goole-sheet/</guid>
+        
+        <category>EC2</category>
+        
+        <category>Notebook</category>
+        
+        
+        <category>Linux</category>
+        
+        <category>Hardware</category>
+        
+        <category>Notebook</category>
+        
+      </item>
+    
+      <item>
+        <title>WRF SST Update problem solved</title>
+        <description>
+When I tried to use the realtime SST update in WRF runtime, I met the problem:
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; None of the following are allowed to be TRUE :
+  ( internal_time_loop .EQ. 1 )                F   
+  ( config_flags%grid_fdda .NE. 0 )            F   
+  ( config_flags%sst_update .EQ. 1 )           T   
+  ( config_flags%all_ic_times )                F   
+  ( config_flags%smooth_cg_topo )              F   
+  ( config_flags%polar )                       F   
+-------------- FATAL CALLED ---------------
+FATAL CALLED FROM FILE:  &amp;lt;stdin&amp;gt;  LINE:     431 
+ Problems, we cannot have excluded middle data from WPS 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+delete namelist variable in &lt;code class=&quot;highlighter-rouge&quot;&gt;namelist.wps&lt;/code&gt;
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;process_only_bdy&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+and rebuild the &lt;code class=&quot;highlighter-rouge&quot;&gt;met_em*&lt;/code&gt; files.
+
+&lt;strong&gt;Updated 2018-07-18&lt;/strong&gt;
+
+</description>
+        <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/07/10/wrf-workflow/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/07/10/wrf-workflow/</guid>
+        
+        <category>server</category>
+        
+        <category>WRF</category>
+        
+        
+        <category>WRF</category>
+        
+        <category>notebook</category>
+        
+      </item>
+    
+      <item>
+        <title>《枪炮、病菌与钢铁》阅读笔记</title>
+        <description>&lt;img src=&quot;https://img1.doubanio.com/view/ark_article_cover/retina/public/25809579.jpg?v=1474619881.0&quot; alt=&quot;&quot; /&gt;
+
+两个多月断断续续，用微信读书看了贾雷德·戴蒙德《枪炮、病菌与钢铁》一书。从风格来讲，这种颇似文献大综述的作品并不耐读。内容上往往是详尽而全面地罗列证据，从而可以足够坚实地证明作者结论。因此能坚持将整部书读完实属不易。
+但是呢，如果说证明的过程是枯燥繁琐而却必不可少的，那么作者所提出的问题却是十分扣人心弦的，证明的逻辑可以说是精妙绝伦的，而给出的结论同样也是发人深省的。
+
+作者所提出的最核心的问题相当于&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%9D%8E%E7%BA%A6%E7%91%9F%E9%9A%BE%E9%A2%98&quot;&gt;李约瑟问题&lt;/a&gt;的泛化，概括来说，即设问当今世界区域发展不平衡的历史路径依赖问题。具体而言，即可拆解如：
+
+&lt;blockquote&gt;
+  为什么现代社会中的财富和权力的分配，是以今天这种面貌呈现，而非其他形式？为何越过大洋进行杀戮、征服和灭绝的，不是美洲、非洲的土著，而是欧洲人和亚洲人？各族群间的生活差异为何如此之大？ 对于现代人类、国家间的种种不平等现象，史学家往往存而不论的问题。
+&lt;/blockquote&gt;
+
+作者博学程度令人惊叹，详细的考据做到了出神入化的地步，关于这种细致考据的优缺点已经多有讨论，个人当然还是认为瑕不掩瑜的。这本书更让我惊叹的其实更在于思维方法论和和结论的泛化性方面。
+
+作者思维的精妙之处在于“回环论证”，这算是我杜撰的说法，具体而言，回环思考某种程度上可以说是逆向思维的延拓。举几个例子：
+
+&lt;ol&gt;
+  &lt;li&gt;盯着K线，大A股到底了么，是否要建仓/加仓？投研帮里给了个逆向思维看待这个问题，把图形做个180度翻转后问自己，大A磨顶了么，是否需要清仓/减仓？这其实是一个很好的独辟蹊径并且用理论说服自己的方法。&lt;/li&gt;
+  &lt;li&gt;换位思考。可能这是应用最多的了。站在老板的角度考虑，如果我已经规划跳槽，对他利益影响最大的地方在哪，该怎样尽量平滑过渡？把自己想成他，会容易很多。&lt;/li&gt;
+  &lt;li&gt;狡黠诡辩的孟子。先来一段感受下：
+    &lt;blockquote&gt;
+      生亦我所欲，所欲有甚（6）于（7）生者，故（8）不为苟得（9）也；死亦我所恶（10），所恶有甚于死者，故患（11）有所不辟（12）也。如使（13）人之（14）所欲莫（15）甚于生，则（16）凡（17）可以得生（18）者何不用也（19）？使人之所恶莫甚于死者，则凡可以避患者何不为（20）也？由是则生而（21）有不用也，由是则可以避患而有不为也。是故（22）所欲有甚于生者，所恶有甚于死者。
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+《枪炮》一书中的回环论证比孟子更牛的地方在于进一步做到了递归演绎。
+
+为什么是欧洲干掉了美洲，而不是反过来？–&amp;gt;直接原因：美洲人口稀疏，技术落后，缺乏足够的针对不同病菌的抗体；欧洲反之。
+
+进一步，为什么美洲人口就少了？技术就落后了？对抗病菌能力就弱了？–&amp;gt;环境问题+&lt;strong&gt;人口稀疏&lt;/strong&gt;，缺少分工，缺少驯化动物，无法解放生产力，类似&lt;a href=&quot;https://zh.wikipedia.org/zh-hk/马尔萨斯陷阱&quot;&gt;马尔萨斯陷阱&lt;/a&gt;.
+
+我们回溯一下：由于初始环境限制+人口稀疏，因此无法通过分工、驯化动物解放生产力，因此不能通过社会总生产力的提高养活更多的人，因此无法进一步发展出复杂的社会结构及分工，不能使人口进一步增长，各种传染病感染机会偏少，群体不能获得针对种类足够丰富的病菌的免疫力……
+
+我们感受下：从简单的逆向思维（当然这是最重要的一步），到正反对比论证，到回环递归演绎（核心是人口-技术，人口-群体抵抗力的正反馈），三重境界，妙哉！
+
+另一方面让我再次重视的则是事物发展的初始环境及历史路径依赖。我们从种族缩小到个人，时也命也运也，诚然如是。但是认识到这点，并不是消极的宿命论，而是秉持做到限制条件下的最优化的方法论，是无愧于生。
+
+除此之外，将地球上不同种族间发生的事情逻辑泛化到宇宙不同文明，就是“黑暗森林”假说的简化模型例证。
+
+&lt;strong&gt;Updated 2018-07-08&lt;/strong&gt;
+</description>
+        <pubDate>Sun, 08 Jul 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/07/08/reading-record/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/07/08/reading-record/</guid>
         
         <category>blog</category>
         
         <category>thinking</category>
         
-        <category>career</category>
         
+        <category>notebook</category>
+        
+        <category>reading</category>
+        
+        <category>economy</category>
+        
+      </item>
+    
+      <item>
+        <title>EC2迁移：从Razortail到Diggler</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#预安装&quot; id=&quot;markdown-toc-预安装&quot;&gt;预安装&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+Razortail的免费期马上要过了，用菇菇的信息注册了新的AWS账户，开了新的节点，叫做Diggler吧.主机位置也从韩国首尔搬到了新加坡，希望坡县的丢包率能低一点，可悲。
+
+&lt;img src=&quot;http://ww1.sinaimg.cn/large/73ebdc71gy1fsyws2e8q9j20mb05bt94.jpg&quot; alt=&quot;&quot; /&gt;
+
+&lt;img src=&quot;http://ww1.sinaimg.cn/large/73ebdc71gy1fsywu80c5tj20g5054mxe.jpg&quot; alt=&quot;&quot; /&gt;
+
+记录下配置过程。参考之前&lt;a href=&quot;https://novarizark.github.io/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/&quot;&gt;Razortail的记录&lt;/a&gt;。
+
+&lt;h4 id=&quot;预安装&quot;&gt;预安装&lt;/h4&gt;
+
+git安装
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$sudo&lt;/span&gt; yum install git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+配置ssh
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ssh&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-keygen&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+安装SS依赖(参考最&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-libev&quot;&gt;新版本依赖&lt;/a&gt;)
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum install &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; gcc gettext-devel unzip autoconf automake make zlib-devel libtool xmlto asciidoc udns-devel libev-devel
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum install &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; pcre pcre-devel perl perl-devel cpio expat-devel openssl-devel mbedtls-devel
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum install gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+安装libsodium到系统默认搜索路径
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
+./configure
+make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make check
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+Follow the instructions in &lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-libev&quot;&gt;SS Severlibv Version&lt;/a&gt;.
+
+注意用sudo ldconfig来更新lib配置。
+
+安装ss后的配置：
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;server&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;server_port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;xxxxx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;local_port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yourpwd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;timeout&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;method&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aes-256-cfb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fast_open&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+注意去掉旧版本中的local_address字段。
+
+&lt;strong&gt;Updated 2018-07-05&lt;/strong&gt;
+
+</description>
+        <pubDate>Thu, 05 Jul 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/07/05/EC2-diggler/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/07/05/EC2-diggler/</guid>
+        
+        <category>EC2</category>
+        
+        <category>Notebook</category>
+        
+        
+        <category>Linux</category>
+        
+        <category>Hardware</category>
+        
+        <category>Notebook</category>
+        
+      </item>
+    
+      <item>
+        <title>20180625交易笔记-东边日出西边雨</title>
+        <description>
+这一个多月来宏观形势云诡波谲，不可谓不精彩绝伦。还是先说说自己的持仓情况。
+
+具体标的方面，Oil相关减仓约1/3，投入贵金以及债类资产。油价应已经进入平衡价位，基于前期权益类资产和商品类资产价格比值考虑，均值回归模型下如果美油跌至60左右我会考虑再适当加仓。
+纳指继续推高，科技龙头和小盘股齐飞，维持QDII定投，小盘股方面GNC这种死狗都开始反弹了，适当减了点补仓。鹅飞了，创造出单支标的盈利记录，真的是没有想到的事情，之前还买了put套保，看不懂，不看好可持续性，已减半仓。德银PB不到0.3，市值不及城商行，佛系地加了点。减仓HK ETF标的，买入put套保，逻辑是金管局跟；不列颠ETF一直半死不活，股息4%+了，继续看好，后期可以持续加仓。其他标的并不明朗，后期适当增配些通胀挂钩债券和短期利率债货币基金。
+
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71gy1fsn8gv1kuvj20s90ivdid.jpg&quot; alt=&quot;&quot; /&gt;
+
+宏观层面，USD爆发：
+
+&lt;blockquote&gt;
+  美元指数的这一波持续上行始于4月中旬，从4月17日到6月15日，美元指数升值幅度约为6.0%，同期美元对人民币双边汇率升值约2.2%；但端午节后的四个交易日，美元指数的最大升值幅度仅为0.8%，但美元对人民币双边汇率的升值幅度则达到了1.2%。
+HKD/RMB也从四月中旬的0.8升值到了0.83.近几天USD指数下跌，RMB并没有像样反弹，反倒补跌。
+&lt;/blockquote&gt;
+
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fsnfz8426vj20ry0iltb3.jpg&quot; alt=&quot;&quot; /&gt;
+
+川怼见完三哥，回到家就向中国加税。之前在财新群里看到有人讲，国内外主流媒体从川怼上台到贸易战开打，前期都做了错误的预判，值得反思。
+
+区域性因素考虑，南美诸国有超跌超卖倾向，待探底稳定后可布局相应ETF长期持有。
+
+最近定投的大A相关基金跌成狗，直接把支付宝年收益拉到负了，坑爹，看了基本标的情况不觉得有太大问题，考虑下收入和现金流，大概减了30%额度，剩下继续坚持，每月也没多少钱。
+
+昨晚放出降准消息，可以说是非常失望了，过去一两年景气周期以来，哪怕是加息25基点，也有逆转民众预期的可能，如今这般面多了放水，水多了加面的局面，继续苟且。等了两年，我是寒心了，重新捡起英语，锻炼好身体，深挖洞广积粮。
+
+言尽于此。
+
+&lt;strong&gt;Updated 2018-06-25&lt;/strong&gt;
+</description>
+        <pubDate>Mon, 25 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/06/25/trading-diary/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/06/25/trading-diary/</guid>
+        
+        <category>investment</category>
+        
+        <category>stock</category>
+        
+        
+        <category>economy</category>
+        
+        <category>investment</category>
+        
+        <category>notebook</category>
+        
+      </item>
+    
+      <item>
+        <title>CESM Fully Coupled Aqua-Planet Experiments</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#i-ocean-model-modification&quot; id=&quot;markdown-toc-i-ocean-model-modification&quot;&gt;I. Ocean Model Modification&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#11-binary-ocean-bottom-topography-file&quot; id=&quot;markdown-toc-11-binary-ocean-bottom-topography-file&quot;&gt;1.1 Binary ocean bottom topography file&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#12-horizontal-and-vertical-ocean-grid-files&quot; id=&quot;markdown-toc-12-horizontal-and-vertical-ocean-grid-files&quot;&gt;1.2 Horizontal and vertical ocean grid files&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#13-region-mask-file&quot; id=&quot;markdown-toc-13-region-mask-file&quot;&gt;1.3 Region mask file&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#14-ocean-initial-condition&quot; id=&quot;markdown-toc-14-ocean-initial-condition&quot;&gt;1.4. Ocean initial condition&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ii-coupler-mapping-modification&quot; id=&quot;markdown-toc-ii-coupler-mapping-modification&quot;&gt;II. Coupler Mapping Modification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#iii-atmospheric-model-modification&quot; id=&quot;markdown-toc-iii-atmospheric-model-modification&quot;&gt;III. Atmospheric Model Modification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#iv-sea-ice-model-modification&quot; id=&quot;markdown-toc-iv-sea-ice-model-modification&quot;&gt;IV. Sea Ice Model Modification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#v-land-model-modification&quot; id=&quot;markdown-toc-v-land-model-modification&quot;&gt;V. Land Model Modification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#vi-appendix&quot; id=&quot;markdown-toc-vi-appendix&quot;&gt;VI. Appendix&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#61-ncl-binary-file&quot; id=&quot;markdown-toc-61-ncl-binary-file&quot;&gt;6.1 NCL Binary File&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#62-namelist-changes-surf_aqua-final&quot; id=&quot;markdown-toc-62-namelist-changes-surf_aqua-final&quot;&gt;6.2 Namelist Changes (SURF_AQUA Final)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#63-error-log&quot; id=&quot;markdown-toc-63-error-log&quot;&gt;6.3 Error Log&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#631-polar-land&quot; id=&quot;markdown-toc-631-polar-land&quot;&gt;6.3.1 Polar Land&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#632-oceanic-topography&quot; id=&quot;markdown-toc-632-oceanic-topography&quot;&gt;6.3.2 Oceanic topography&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#64-script-list&quot; id=&quot;markdown-toc-64-script-list&quot;&gt;6.4 Script List&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+The following sketch displays our hierarchical experiments to reveal the origin of large-scale circulations.
+&lt;img src=&quot;http://ww1.sinaimg.cn/large/73ebdc71gy1fsz2xsez7pj20sn0kx10b.jpg&quot; alt=&quot;&quot; /&gt;
+
+A series of articles have been archived to record the process:
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://novarizark.github.io/2018/06/05/clm-landuse/&quot;&gt;Change CESM/CLM Surface to Pure Bare Ground&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://novarizark.github.io/2018/05/24/cesm-aquap/&quot;&gt;CESM F Compset Aqua-Planet Test (in Chinese)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+Now, finally, we chose the red pill, try to go deep in the model configuration to change the land/sea cover and implement our pure-aqua and surf-aqua experiment. See the following sketch:
+
+The implementation of fully coupled aqua-planet experiment is not so straightforward since there is only official support for the prescribed SST aqua-planet. Therefore, as deep-time paleo simulation need to change the land/sea distribution, we seek to use the paleo toolkit to achieve our goal. See &lt;a href=&quot;http://www.cesm.ucar.edu/models/paleo/faq/&quot;&gt;reference&lt;/a&gt;.
+
+&lt;h3 id=&quot;i-ocean-model-modification&quot;&gt;I. Ocean Model Modification&lt;/h3&gt;
+&lt;hr /&gt;
+
+We first begin with the ocean model, POP2. In the guide for deep-time simulation:
+&lt;blockquote&gt;
+  The deep time paleo modeler is responsible for creating the &lt;strong&gt;binary ocean bottom topography file, the horizontal and vertical ocean grid files, a region mask file, and the ocean initial conditions&lt;/strong&gt;. In addition, several input template files may need to be changed. For example, if the land/ocean mask is changed, the input template file containing new indices for diagnostic transport calculations will need to be changed. The namelist input file (pop2_in and user_nl_pop2) will need to be changed as well. This section will describe methods that can be used to generate these new files.
+&lt;/blockquote&gt;
+
+Okay, there are four files need to be created.
+
+&lt;ol&gt;
+  &lt;li&gt;Binary ocean bottom topography file&lt;/li&gt;
+  &lt;li&gt;Horizontal and vertical ocean grid files&lt;/li&gt;
+  &lt;li&gt;Region mask file&lt;/li&gt;
+  &lt;li&gt;Ocean initial condition&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;11-binary-ocean-bottom-topography-file&quot;&gt;1.1 Binary ocean bottom topography file&lt;/h4&gt;
+
+In &lt;code class=&quot;highlighter-rouge&quot;&gt;pop2_in&lt;/code&gt;, we see the namelist variable define oceanic bottom topography:
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;topography_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_20090204.ieeei4'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+This is an IEEE4 integer binary file. Since the &lt;a href=&quot;https://github.com/Novarizark/paleoToolkit/blob/master/cesm1/ocn/mk_ocn_grid/paleotopo.f90&quot;&gt;paleo toolkit&lt;/a&gt; for changing the bathymetry is quite complex, we tried to use basic ncl script to change the value.
+
+Results from the file:
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+60 means the deepest ocean bottom lies on the 60th model layer.
+Here we set all to Layer 25 in &lt;code class=&quot;highlighter-rouge&quot;&gt;PURE_AQUA&lt;/code&gt; (2.6848km depth), and all land (0) to 1 (10m) in &lt;code class=&quot;highlighter-rouge&quot;&gt;SURF_AQUA&lt;/code&gt; model.
+
+However, the NCL had problem when writing the new file (See &lt;strong&gt;&lt;a href=&quot;./#61-ncl-binary-file&quot;&gt;Appendix01&lt;/a&gt;&lt;/strong&gt; for details and solution). We change to F90 to realize our goal. For example, below is the code to generate &lt;code class=&quot;highlighter-rouge&quot;&gt;SURF_AQUA&lt;/code&gt; bathymetry data:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;program&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;change_bathymetry&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;implicit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fin&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;101&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;122880&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;integer&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;integer&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;integer&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;character&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_20090204.ieeei4&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;character&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_20180607.ieeei4&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;unformatted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;direct&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;big_endian&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bath&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;unformatted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;direct&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;big_endian&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bath&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;program&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+Using the above program, we rewrote two files with &lt;code class=&quot;highlighter-rouge&quot;&gt;SURF_AQUA&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;PURE_AQUA&lt;/code&gt; settings.
+
+&lt;h4 id=&quot;12-horizontal-and-vertical-ocean-grid-files&quot;&gt;1.2 Horizontal and vertical ocean grid files&lt;/h4&gt;
+
+We first check the horizontal grid system.
+
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fs86oih7d2j20iy0lon87.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fs86ua17h6j20i30ln4a2.jpg&quot; alt=&quot;&quot; /&gt;
+
+It can be seen that over the Northern Polar region, the grid system shifts the north pole onto the Greenland Island, and both NH and SH grid poles are located over the landmass.
+
+According to the Paleo FAQ:
+&lt;blockquote&gt;
+  The ocean model requires that grid poles be placed over land. Numerically no computation can be done at the convergence point of all longitudes at the grid pole. The ocean model solves this problem by shifting the grid pole away from the geographic pole and placing it over a land mass. (Atmospheric models solve this problem by using numerical filters). Therefore if there is no land at the geographic pole, the numerical pole must be shifted over land elsewhere.
+&lt;/blockquote&gt;
+
+To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass &lt;strong&gt;(It does not work! We have to maintain the polar land inside the ocean grid “black hole”!)&lt;/strong&gt;. If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.
+
+&lt;h4 id=&quot;13-region-mask-file&quot;&gt;1.3 Region mask file&lt;/h4&gt;
+
+We check the POP default basin mask file, with the min=-14 and max=11, the masking figure can be found on the &lt;a href=&quot;https://www.ncl.ucar.edu/Applications/popmask.shtml&quot;&gt;NCL popmask page&lt;/a&gt;.
+
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fs8ekx208mj20jw0da0wp.jpg&quot; alt=&quot;&quot; /&gt;
+
+And the &lt;code class=&quot;highlighter-rouge&quot;&gt;gx1v6_region_idx&lt;/code&gt; is avaliable in the run folder:
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;IDX&lt;/th&gt;
+      &lt;th&gt;OCEAN NAME&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;‘Southern Ocean    ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;‘Pacific Ocean     ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;‘Indian Ocean      ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;‘Persian Gulf      ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-5&lt;/td&gt;
+      &lt;td&gt;‘Red Sea           ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;‘Atlantic Ocean    ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;‘Mediterranean Sea ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;‘Labrador Sea      ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;‘GIN Sea           ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;‘Arctic Ocean      ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;11&lt;/td&gt;
+      &lt;td&gt;‘Hudson Bay        ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-12&lt;/td&gt;
+      &lt;td&gt;‘Baltic Sea        ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-13&lt;/td&gt;
+      &lt;td&gt;‘Black Sea         ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-14&lt;/td&gt;
+      &lt;td&gt;‘Caspian Sea       ‘&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+Minus-zero Seas are for marginal seas.
+
+We then follow the guide for Deep Time simulation to change the idx:
+&lt;blockquote&gt;
+  &lt;strong&gt;Deep Time:&lt;/strong&gt; Since deep time simulations have ocean configurations that differ profoundly from current day, deep time modelers will need to define their own ocean regions. Typically we recommend that they define two simple regions, Northern and Southern Hemisphere.
+&lt;/blockquote&gt;
+
+We change &lt;code class=&quot;highlighter-rouge&quot;&gt;gx1v6_region_idx&lt;/code&gt; to:
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;IDX&lt;/th&gt;
+      &lt;th&gt;OCEAN NAME&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;‘Southern Ocean    ‘&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;‘Northern Ocean    ‘&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;code class=&quot;highlighter-rouge&quot;&gt;region_mask_gx1v6&lt;/code&gt; is modified accordingly.
+
+&lt;h4 id=&quot;14-ocean-initial-condition&quot;&gt;1.4. Ocean initial condition&lt;/h4&gt;
+
+The final work is to change the ocean initial condition. For &lt;code class=&quot;highlighter-rouge&quot;&gt;PURE_AQUA&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;SURF_AQUA&lt;/code&gt;, the zonal-mean type should fit well.
+
+&lt;blockquote&gt;
+  &lt;strong&gt;ZONAL-MEAN&lt;/strong&gt;  &lt;br /&gt;
+&lt;strong&gt;Initialize with a global, zonally averaged temperature/salinity distribution.&lt;/strong&gt; POP allows a zonally averaged temperature/salinity file to be used for initialization. This file is binary and the format can be found in the CCSM3/POP source code, subroutine initial.F
+&lt;/blockquote&gt;
+
+Simply change the &lt;code class=&quot;highlighter-rouge&quot;&gt;pop2_in&lt;/code&gt;:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;init_ts_option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;zonal-mean&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+However, it seems that this is a legacy configuration in CCSM3/POP. In POP2, I cannot find the zonal-mean option in the source code, so I conducted a simple test to prove this. Unfortunately, the model does not recognize the settings. Therefore, I have to change the default initial condition to fit the aqua-planet run.
+
+The default initial file for temperature and salinity is &lt;code class=&quot;highlighter-rouge&quot;&gt;ts_PHC2_jan_ic_gx1v6_20090205.ieeer8&lt;/code&gt;. Thus, in the &lt;code class=&quot;highlighter-rouge&quot;&gt;SURF_AQUA&lt;/code&gt; experiment, we use the poisson grid fill to fill the grid on the ground, and in the &lt;code class=&quot;highlighter-rouge&quot;&gt;PURE_AQUA&lt;/code&gt; experiment, we fill all grid with zonal mean and mask out layer deeper than L26.
+
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fs9tisw2n4j20om0ft41v.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71gy1fs9tf8s9gcj20ox0fzgoe.jpg&quot; alt=&quot;&quot; /&gt;
+
+We should also use the recommended namelist settings for Deep Time Simulations to turn off the processes not so related to the climate physics:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;overflows_on&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;overflows_interactive&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lhoriz_varying_bckgrnd&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ldiag_velocity&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ltidal_mixing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bckgrnd_vdc1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.524&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bckgrnd_vdc2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.313&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sw_absorption_type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'jerlov'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jerlov_water_type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chl_option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'file'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chl_filename&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'unknown-chl'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chl_file_fmt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'bin'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ii-coupler-mapping-modification&quot;&gt;II. Coupler Mapping Modification&lt;/h3&gt;
+&lt;hr /&gt;
+
+All CESM Land/Sea mask info comes from the ocean data. In the &lt;a href=&quot;http://www.cesm.ucar.edu/models/paleo/faq/#cpl_map&quot;&gt;paleo resources&lt;/a&gt;, we follow the instrudctions to make our mapping and domain data.
+
+Notes:
+
+&lt;ul&gt;
+  &lt;li&gt;Scripgrids data &lt;a href=&quot;https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/share/scripgrids/&quot;&gt;download path&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Use NCL change &lt;code class=&quot;highlighter-rouge&quot;&gt;gx1v6_090205.nc&lt;/code&gt; grid_imask variable&lt;/li&gt;
+  &lt;li&gt;Use following command to generate mapping data:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ./gen_cesm_maps.sh &lt;span class=&quot;nt&quot;&gt;-fatm&lt;/span&gt; /users/yangsong3/CESM/input/share/scripgrids/fv1.9x2.5_090205.nc &lt;span class=&quot;nt&quot;&gt;-natm&lt;/span&gt; fv19_25 &lt;span class=&quot;nt&quot;&gt;-focn&lt;/span&gt; /users/yangsong3/CESM/input/share/scripgrids/gx1v6_aqua_polar_180614.nc &lt;span class=&quot;nt&quot;&gt;-nocn&lt;/span&gt; gx1PT &lt;span class=&quot;nt&quot;&gt;--nogridcheck&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Following the instructing in &lt;code class=&quot;highlighter-rouge&quot;&gt;/users/yangsong3/CESM/cesm1_2_2/tools/mapping/gen_domain_files&lt;/code&gt; to build &lt;code class=&quot;highlighter-rouge&quot;&gt;gen_domain&lt;/code&gt; executable. &lt;strong&gt;Note to change the following line in Macro if met MPI/NC variable not found problem:&lt;/strong&gt;
+    &lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;SFC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; mpif90
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Generate domain files:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./gen_domain &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; ../gen_mapping_files/map_gx1PT_TO_fv19_25_aave.180614.nc &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; gx1PT &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; fv19_25
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;iii-atmospheric-model-modification&quot;&gt;III. Atmospheric Model Modification&lt;/h3&gt;
+&lt;hr /&gt;
+
+Similar as Coupler generated mapping files, there is a land-sea mask file &lt;code class=&quot;highlighter-rouge&quot;&gt;/users/yangsong3/CESM/input/atm/cam/ocnfrac/domain.camocn.1.9x2.5_gx1v6_090403.nc&lt;/code&gt;, using similar technique, change all &lt;code class=&quot;highlighter-rouge&quot;&gt;mask&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;frac&lt;/code&gt; to 1 to present aqua-planet.
+
+&lt;h3 id=&quot;iv-sea-ice-model-modification&quot;&gt;IV. Sea Ice Model Modification&lt;/h3&gt;
+&lt;hr /&gt;
+
+Force the model generate sea ice by itself:
+&lt;blockquote&gt;
+  Ice initial conditions files are not required for deep time paleoclimate cases. We recommend initializing the ice model with a ‘no ice’ initial state and allowing the model to simulate an ice state. Set ‘no ice’ in the ice model namelist (user_nl_cice).
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ice_ic&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'none'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+Please see &lt;strong&gt;&lt;a href=&quot;&quot;&gt;Appendix02&lt;/a&gt;&lt;/strong&gt; for detailed namelist changes.
+
+&lt;h3 id=&quot;v-land-model-modification&quot;&gt;V. Land Model Modification&lt;/h3&gt;
+&lt;hr /&gt;
+
+Land model never works in the aqua-planet, so we just use the cpl-generated domain file to drive the model. However, in &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_TOPO&lt;/code&gt; series experiments, we &lt;a href=&quot;https://novarizark.github.io/2018/06/05/clm-landuse/&quot;&gt;reset the surface data to bare ground&lt;/a&gt;.
+
+&lt;h3 id=&quot;vi-appendix&quot;&gt;VI. Appendix&lt;/h3&gt;
+
+&lt;h4 id=&quot;61-ncl-binary-file&quot;&gt;6.1 NCL Binary File&lt;/h4&gt;
+
+We first found that when we use the NCL to write a direct binary file, the file records very large values near the top of the variable type (e.g. 21474836xx for int, and 3e317 for double). Therefore, we tried to use fortran to deal with the problem. Finally, we found this is actually we set the file option as Big_Endian in NCL only for read process. Solution is simple, also set for write process:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;setfileoption&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;bin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;WriteByteOrder&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;BigEndian&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+Note to use &lt;code class=&quot;highlighter-rouge&quot;&gt;WriteByteOrder&lt;/code&gt;.
+
+&lt;h4 id=&quot;62-namelist-changes-surf_aqua-final&quot;&gt;6.2 Namelist Changes (SURF_AQUA Final)&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;env_run.xml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;atm domain file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ATM_DOMAIN_FILE&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;domain.lnd.fv1.9x2.5_gx1v6.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;lnd domain file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LND_DOMAIN_FILE&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;domain.lnd.fv1.9x2.5_gx1v6.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;ice domain file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ICE_DOMAIN_FILE&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;domain.ocn.gx1v6.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;ocn domain file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OCN_DOMAIN_FILE&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;domain.ocn.gx1v6.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;atm2ocn flux mapping file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ATM2OCN_FMAPNAME&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_aave.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;atm2ocn state mapping file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ATM2OCN_SMAPNAME&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_blin.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;atm2ocn vector mapping file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ATM2OCN_VMAPNAME&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cpl/gridmaps/fv1.9x2.5/map_fv19_25_TO_gx1v6_patc.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;ocn2atm flux mapping file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OCN2ATM_FMAPNAME&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cpl/gridmaps/gx1v6/map_gx1v6_TO_fv19_25_aave.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;ocn2atm state mapping file (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OCN2ATM_SMAPNAME&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cpl/gridmaps/gx1v6/map_gx1v6_TO_fv19_25_aave.aqua.polar.180614.nc&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user_nl_pop2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;init_ts_file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/input/ocn/pop/gx1v6/ic/ts_surf_aqua_polar_PHC2_jan_ic_gx1v6_20180613.ieeer8'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region_mask_file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/region_mask_aqua_polar_20180612.ieeei4'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region_info_file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/cesm1_2_2/models/ocn/pop2/input_templates/gx1v6_aqua_region_ids'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;topography_file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_polar_20180607.ieeei4'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_transport_reg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diag_transp_freq_opt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'never'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diag_transport_file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/cesm1_2_2/models/ocn/pop2/input_templates/gx1v6_transport_contents_aqua'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;!-- dt_count sets the number of times the ocean is coupled per NCPL_BASE_PERIOD.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt_count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;overflows_on&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;overflows_interactive&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lhoriz_varying_bckgrnd&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ldiag_velocity&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ltidal_mixing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;.false.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;!--The new background vertical velocity parameters were determined by Gokhan and Christine to increase Kappa-v in the deeper ocean in absence of tidal mixing. The tidal mixing normally would do this.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bckgrnd_vdc1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.524&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bckgrnd_vdc2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.313&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sw_absorption_type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'jerlov'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jerlov_water_type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chl_option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'file'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chl_filename&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'unknown-chl'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chl_file_fmt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'bin'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user_nl_atm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;bnd_topo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/input/atm/cam/topo/USGS-gtopo30_1.9x2.5_pure.nc'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ncdata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/L_Zealot/B/B20f19-surf-aqua/indata/B20f19-topo.cam.i.0010-01-01-00000.nc'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;!dtime=900&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user_nl_clm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;finidat&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/L_Zealot/B/B20f19-surf-aqua/indata/B20f19-surf-aqua.clm2.r.0001-01-06-00000.nc'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fsurdat&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/input/lnd/clm2/surfdata/surfdata_1.9x2.5_bare_ground_simyr2000_c091005.nc'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urban_hac&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'OFF'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user_nl_cice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;kmt_file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_surf_aqua_polar_20180607.ieeei4'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ice_ic&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'none'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xndt_dyn&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user_nl_rtm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;finidat_rtm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;63-error-log&quot;&gt;6.3 Error Log&lt;/h4&gt;
+
+&lt;h5 id=&quot;631-polar-land&quot;&gt;6.3.1 Polar Land&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  POP aborting…
+ (init_moc_ts_transport_arrays)  no transport regions have been detected –  che 
+  ck namelist transports_nml
+&lt;/blockquote&gt;
+
+It seems the ocean transport diag met some problems.
+&lt;blockquote&gt;
+  The transport_contents input_template is used for diagnostic purposes only. In this file, the modeler can specify ocean locations (straits for example) for ocean transport computations that will be output in the ocean log files.
+&lt;/blockquote&gt;
+
+I first tried to create my own &lt;code class=&quot;highlighter-rouge&quot;&gt;transport_contents&lt;/code&gt; file, and we met end-of-file read crashes. It is clear that the number of diag locations is hard-coded in the model source code. So I then tried to change the namelist variable:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diag_transp_freq_opt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'never'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+The same error message as the beginning… Then I found the first line in the &lt;code class=&quot;highlighter-rouge&quot;&gt;transport_contents&lt;/code&gt; file denotes the number of diag places. So I change it to zero. Another time, not work.
+
+I then found another namelist variable:
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;n_transport_reg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+Originally, 2, and I change to 1. New error occurs!
+
+&lt;blockquote&gt;
+  (seq_map_avNormAvF)  ERROR: lsize_i ne lsize_f            0      245209
+MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strategy name  not supported.
+000.MCT(MPEU)::die.: from MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_()
+&lt;/blockquote&gt;
+
+Oops! Big problem in the decomposition part to parallel computing.
+
+After long-time test and turn on the detailed debug info, we got another error indicating
+&lt;blockquote&gt;
+  forrtl: error (73): floating divide by zero
+&lt;/blockquote&gt;
+
+Then I found the error occurs in the radiation module. This is because when the atm model compute radiation, it is faced with absolute zero inside polar region where the ocean grid cannot cover.
+
+Thus, &lt;strong&gt;we have to maintain polar land inside the ocean grid “black hole” to make the model run.&lt;/strong&gt;
+
+&lt;h5 id=&quot;632-oceanic-topography&quot;&gt;6.3.2 Oceanic topography&lt;/h5&gt;
+
+In the &lt;code class=&quot;highlighter-rouge&quot;&gt;PURE_AQUA&lt;/code&gt; experiment, the model crashes after several months’ integration. I have tried to change the initial condition, increase the timesteps, and modify the oceanic topography to add a smooth change from polar land to 2.7km depth ocean. All the trials failed. Finally, when I remain the sharp change from polar land to 300m depth water, and remain the oceanic topography deeper than 300m, the model runs smoothly. I have no idea why this happens but it seems to be a very wiered problem. Anyway, 300m-depth mixed layer is enough for our scientific question.
+
+&lt;h4 id=&quot;64-script-list&quot;&gt;6.4 Script List&lt;/h4&gt;
+
+&lt;strong&gt;Ocean&lt;/strong&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/f90/180607-change_bath_pop2.f90&quot;&gt;Change Bathymetry (topography_20090204.ieeei4)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/f90/180607-change_region_mask_pop2.f90&quot;&gt;Change Region Mask (region_mask_20090205.ieeei4)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Novarizark/project/blob/master/PRE_PRO_SHARE/ncl/180613-change-temp-salt-surf-aqua-pop.ncl&quot;&gt;Change Initial Condition (ts_PHC2_jan_ic_gx1v6_20090205.ieeer)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;strong&gt;Coupler&lt;/strong&gt;
+
+&lt;strong&gt;Updated 2018-06-14&lt;/strong&gt;
+
+</description>
+        <pubDate>Wed, 06 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/06/06/cesm-fully-coupled-aquap/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/06/06/cesm-fully-coupled-aquap/</guid>
+        
+        <category>cesm</category>
+        
+        <category>aqua-planet</category>
+        
+        
+        <category>cesm</category>
+        
+      </item>
+    
+      <item>
+        <title>Ubuntu下用parted分区4TB硬盘</title>
+        <description>
+Orion要用来做天池比赛的服务器啦，安多一块硬盘用来存雷达数据。放上后需要用parted做分区，然后mkfs格式化，过程和CentOS差不多。这里做一下记录：
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lzhenn@thinkstation:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;parted /dev/sdb
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;parted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; mklabel GPT                                                      
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;parted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; mkpart primary 0% 100%                                           
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;parted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print                                                            
+Model: ATA HGST HUS724040AL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;scsi&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Disk /dev/sdb: 4001GB
+Sector size &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;logical/physical&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: 512B/4096B
+Partition Table: gpt
+Disk Flags: 
+
+Number  Start   End     Size    File system  Name     Flags
+ 1      1049kB  4001GB  4001GB               primary
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;parted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; quit
+lzhenn@thinkstation:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;partprobe  &lt;span class=&quot;c&quot;&gt;# let the core know the partation&lt;/span&gt;
+lzhenn@thinkstation:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkfs.ext4 /dev/sdb1 &lt;span class=&quot;c&quot;&gt;# format&lt;/span&gt;
+                     
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+format后，建立fstab并mount -a即可。与CentOS完全一致。
+
+&lt;strong&gt;Updated 2018-06-05&lt;/strong&gt;
+
+</description>
+        <pubDate>Tue, 05 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/06/05/ubuntu-parted/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/06/05/ubuntu-parted/</guid>
+        
+        <category>Linux</category>
+        
+        <category>Hardware</category>
+        
+        <category>ubuntu</category>
+        
+        <category>parted</category>
+        
+        
+        <category>Hardware</category>
+        
+        <category>Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Change CESM/CLM Surface to Pure Bare Ground</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#references&quot; id=&quot;markdown-toc-references&quot;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+In our hierarchy experiments, we hope to make the &lt;a href=&quot;https://novarizark.github.io/2018/06/06/cesm-fully-coupled-aquap/&quot;&gt;NO_TOPO series experiments&lt;/a&gt; as simple as possible. Thus, it would be great if there is no vegetation on the ground. 
+In the CLM, we expect there is an external forcing data to control the surface type of ground/vegetation. Then I found this in &lt;code class=&quot;highlighter-rouge&quot;&gt;lnd_in&lt;/code&gt; file
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fsurdat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/users/yangsong3/CESM/input/lnd/clm2/surfdata/surfdata_1.9x2.5_simyr2000_c091005.nc'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+If you &lt;code class=&quot;highlighter-rouge&quot;&gt;ncdump&lt;/code&gt; that file, you will see this variable:
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	&lt;span class=&quot;n&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PCT_PFT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lsmpft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lsmlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lsmlon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;PCT_PFT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;long_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;percent plant functional type of gridcell&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;PCT_PFT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;unitless&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+The first dimension show the corresponding PFT (Plant Functional Types), which define the types and fraction of different landcovers a certain grid (Mosaic method). There is the code table:
+
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fs0m9y9g3oj20kb0ie0ve.jpg&quot; alt=&quot;&quot; /&gt;
+
+Thus, the only thing we need to do is to create a new file with change only in PCT_PFT(0,:,:)=100.0.
+
+&lt;strong&gt;Updated 2018-06-05&lt;/strong&gt;
+
+When we tried to run the model, we got several errors.
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;surfrd_wtxy_veg_all ERROR: sum&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;pct&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; over numpft+1 is not &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 100.
+490    100.106661159475       0.106661159474527             4473
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+According to the error, it seems that the sum of pft is not 100. After checking the data, we found several variables:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pct_list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(/&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;PCT_LAKE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;PCT_WETLAND&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;PCT_GLACIER&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;PCT_URBAN&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+So I remain all the pct about water, urban, and glacier, and make the bare ground equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;100-sum(pct_list)&lt;/code&gt;.
+
+Note that after changing all the landuse pct, the default CLM initial condition cannot satisfy the model, so we need to “cold” start the model. Use &lt;code class=&quot;highlighter-rouge&quot;&gt;env_run.xml&lt;/code&gt; to set it.
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;CLM_FORCE_COLDSTART&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;on&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;strong&gt;Updated 2018-06-06&lt;/strong&gt;
+
+Some issues happened after 10+ years integration. In no_topo experiment, the model exit with error in 0013-03, with Error message:
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(shr_sys_abort) ERROR: remap transport: bad departure points 
+  
+(shr_sys_abort) WARNING: calling shr_mpi_abort() and stopping
+ Warning: Departure points out of bounds in remap
+ my_task, i, j =          31          20          13     
+application called MPI_Abort(MPI_COMM_WORLD, 1001) - process 0
+ dpx, dpy =  -28367.4880120091        54137.9986747345     
+ HTN(i,j), HTN(i+1,j) =   30148.1831506031        30030.4921250813     
+ HTE(i,j), HTE(i,j+1) =   46470.5086842257        46750.9484318852     
+ istep1, my_task, iblk =     1310809          31           2      
+ Global block:         241    
+ Global i and j:          19         372    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+After searching, it seems that the CICE model encountered a CFL violation problem:
+
+&lt;blockquote&gt;
+  This is essentially a CFL violation in the CICE model. You would need to reduce the timestep. In the CESM, the CICE timestep is tied to the coupling interval with the atmosphere. Have a look at ATM_NCPL and ICE_NCPL. Try doubling ATM_NCPL and this should help. For high resolution (0.1-degree) you can use xndt_dyn or ndtd depending on the version of the code. This allows you to take multiple dynamic timesteps per thermodynamic timestep.
+&lt;/blockquote&gt;
+
+I found ATM_NCPL in env_run.xml:
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;base period associated with NCPL coupling frequency, valid values: hour,day,year,decade (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NCPL_BASE_PERIOD&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;day&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;    
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&quot;number of atm coupling intervals per NCPL_BASE_PERIOD (integer) (char) &quot; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entry&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ATM_NCPL&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;48&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+Since the atm run in &lt;code class=&quot;highlighter-rouge&quot;&gt;dtime=1800s&lt;/code&gt;, double the &lt;code class=&quot;highlighter-rouge&quot;&gt;ATM_NCPL&lt;/code&gt; is meaningless.
+
+&lt;a href=&quot;http://www.cesm.ucar.edu/models/cesm1.0/cice/doc/node35.html&quot;&gt;Another strategy&lt;/a&gt; is to double the CICE dynamic timesteps per thermodynamic timestep.
+
+&lt;blockquote&gt;
+  The dynamics timestep should be reduced to integrate past this problem. Set
+&lt;code class=&quot;highlighter-rouge&quot;&gt;xndt_dyn = 2&lt;/code&gt;
+in the namelist and restart the model. When the job completes set the value back to 1.
+&lt;/blockquote&gt;
+
+That is quite interesting, set it back when pass the unstable point? How could there be this operation?!
+
+Still confused, then I turned to &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_TOPO_SCON&lt;/code&gt; and found another similar error happened in the ocean model:
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;POP Exiting...
+POP_SolversChronGear: solver not converged
+POP_SolverRun: error in ChronGear
+POP_BarotropicDriver: error in solver 
+Step: error in barotropic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+And I searched and found the POP FAQ:
+
+&lt;blockquote&gt;
+  If your case has been running successfully for a period of time, but then the ocean model suddenly fails to converge, you might have encountered a time-stepping instability. If so, you will need to decrease the ocean timestep and restart your case. We recommend you back up at least one month prior to the time of nonconvergence, &lt;strong&gt;decrease the ocean-model timestep by about 15-20%&lt;/strong&gt;, and then restart your case.
+&lt;/blockquote&gt;
+
+And the method to change the timestep:
+&lt;blockquote&gt;
+  To change the size of the POP2 timestep, you simply change the value of dt_count in your $CASE/user_nl_pop2 file.
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  To decrease the POP2 timestep, you must increase the POP2 time_manager_nml namelist variable dt_count.
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  For example, if the ocean grid in your case is gx1v6, then the default value for dt_count is 23. In order decrease the timestep by roughly 15%, you would increase dt_count to 26. To do this, put the following line in your &lt;code class=&quot;highlighter-rouge&quot;&gt;$CASE/user_nl_pop2&lt;/code&gt; file:
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;code class=&quot;highlighter-rouge&quot;&gt;dt_count = 26&lt;/code&gt;
+You do not need to rebuild the executable in order to change dt_count.
+&lt;/blockquote&gt;
+
+Considering doubling the CICE dynamic timesteps will significantly increase the integration time. I tried the following method:
+
+&lt;ul&gt;
+  &lt;li&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;user_nl_pop2&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dt_count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Turn off cold start of the CLM and use 5-day clm2.r file to remap a new file with bare ground.&lt;/li&gt;
+&lt;/ul&gt;
+
+According to the &lt;a href=&quot;http://www.cesm.ucar.edu/models/paleo/faq/#lnd&quot;&gt;paleo FAQ&lt;/a&gt;:
+
+&lt;blockquote&gt;
+  However, if you have changed your land cover in your new simulation (for example, if you have changed your land ice distribution), you will first need to create a new clm2.r file that conforms to the new land cover assignments in your modified surface datafile.  Creating a new clm2.r file is a two step process.  Step 1:  Run a short (e.g., 5 day) startup simulation with arbitrary initial conditions and your new surface dataset. The 5 day simulation will produce a restart file that is consistent with the ice distribution in your new surface dataset, which is different from the original experiment that you wish to branch from.  Use the tool, interpinic, to re-map the restart data from the original simulation to the new restart file created by the 5-day run.
+&lt;/blockquote&gt;
+
+I used to cold start the model, it seems this can be a big problem:
+&lt;blockquote&gt;
+  CLM4 does not require an initial condition file and can be initialized with arbitrary initialization (finidat=” “). However, arbitrary initialization starts the model from essentially bare ground, with vegetation, soil carbon, soil nitrogen, and soil moisture set to zero. The land model will spin up all variables at once, but will therefore require many hundreds of years to come into equilibrium.
+&lt;/blockquote&gt;
+
+Following the instruction, we first startup a &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_TOPO&lt;/code&gt; experiment with 5 day integration and our own bare ground surface data. Then, use &lt;code class=&quot;highlighter-rouge&quot;&gt;interpinic&lt;/code&gt; to remap a &lt;code class=&quot;highlighter-rouge&quot;&gt;REAL_WORLD&lt;/code&gt; restart file to our 5-day restart file:
+Path: &lt;code class=&quot;highlighter-rouge&quot;&gt;/users/yangsong3/CESM/cesm1_2_2/models/lnd/clm/tools/clm4_0/interpinic&lt;/code&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./interpinic &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt;  /users/yangsong3/L_Zealot/B/B20f19-realworld/exe/B20f19-realworld.clm2.r.0021-01-01-00000.nc &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /users/yangsong3/L_Zealot/B/B20f19-topo/clm.r/B20f19-topo.clm2.r.interpinic.nc 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+After that, I thought for a while and tried to comment out the pop timestep change, turn off CLM cold start, and use frequent restart file output (10 year).
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bb.cgd.ucar.edu/error-remap-transport-bad-departure-points&quot;&gt;https://bb.cgd.ucar.edu/error-remap-transport-bad-departure-points&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cesm.ucar.edu/models/cesm1.0/cice/doc/node35.html&quot;&gt;http://www.cesm.ucar.edu/models/cesm1.0/cice/doc/node35.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cesm.ucar.edu/models/paleo/faq/#lnd&quot;&gt;http://www.cesm.ucar.edu/models/paleo/faq/#lnd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;strong&gt;Updated 2018-06-11&lt;/strong&gt;
+</description>
+        <pubDate>Tue, 05 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/06/05/clm-landuse/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/06/05/clm-landuse/</guid>
+        
+        <category>cesm</category>
+        
+        <category>clm</category>
+        
+        <category>pft</category>
+        
+        
+        <category>cesm</category>
+        
+      </item>
+    
+      <item>
+        <title>我TM又病了</title>
+        <description>
+两个月烧了三次，我都想给自己跪下了。真是哔了狗了，怀疑第一次感冒联合几种耐药菌感染，上次支气管炎抗生素又没吃够疗程，丫就潜伏下来了，这次劳累过后，再次烧了起来，扁桃体痛如刀割，左右陆续溃疡，随后又不得不取消了AOGS的行程，其实出发在周日，我当成了周六，今天周六已经基本恢复，票却也退了，残念就残念吧，想想咳咳咳还要做报告，不折腾也挺好，免得再复发。过程记录如下：
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;date&lt;/th&gt;
+      &lt;th&gt;record&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.28&lt;/td&gt;
+      &lt;td&gt;午休后，下午再办逐渐感觉劳累，晚上回宿舍后开始低烧，全身酸痛&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.29&lt;/td&gt;
+      &lt;td&gt;0点体温37.7，8点37.4，随后去校医，拿了5天量头孢，回宿舍，低烧，全身酸痛&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.30&lt;/td&gt;
+      &lt;td&gt;凌晨3点，37.2，早晨7:46，37.4；晚上19:15 37.5, 依然低烧&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.31&lt;/td&gt;
+      &lt;td&gt;早晨起感觉略有退烧，下午到办公室，还是觉得冷，不舒适，看到老板不去，并且推了报告给我，决定取消夏威夷行程&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.1&lt;/td&gt;
+      &lt;td&gt;退烧，咳嗽加重，去校医复查，又拿了五天抗生素，还有止咳药孟鲁斯特钠，这货感觉奇效。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.2&lt;/td&gt;
+      &lt;td&gt;基本恢复，但是夏威夷残念了。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+坚持一个周抗生素，然后慢慢调节肠道菌落吧，诶。后面悠着点，不能太累。
+
+May the luck be with me.
+
+再次复发！症状要轻很多，感觉可能是某些没想到的病症，后来查到跳蚤可以传播立克次体为病原体的疾病，比如战壕热，Q热什么的，这种反复发作有点类似战壕热，只不过症状基本为上感，发热也轻很多。希望这是最后一次了。
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;date&lt;/th&gt;
+      &lt;th&gt;record&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.18&lt;/td&gt;
+      &lt;td&gt;端午，本科同学聚会，有劳累不适感&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.19&lt;/td&gt;
+      &lt;td&gt;出现肠胃症状，略有腹痛不适，前往省局开会，期间开始流涕。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.20&lt;/td&gt;
+      &lt;td&gt;流涕，偶尔有黄绿色脓涕，但基本以透明粘稠状为主。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.21&lt;/td&gt;
+      &lt;td&gt;开始有轻微咳嗽，没有发热症状，但是会某些时候畏寒，疲乏&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.22&lt;/td&gt;
+      &lt;td&gt;助教，有畏寒，疲乏，手脚发热感，咳嗽略有加重&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.23&lt;/td&gt;
+      &lt;td&gt;团队活动，手脚发热显著，依然咳嗽&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.24&lt;/td&gt;
+      &lt;td&gt;咳嗽好转，开始大量咳痰，没有畏寒和手脚发热感&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.25&lt;/td&gt;
+      &lt;td&gt;轻微咳嗽，没有发热畏寒，好转。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;strong&gt;Updated 2018-06-02&lt;/strong&gt;
+</description>
+        <pubDate>Sat, 02 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/06/02/ill-again/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/06/02/ill-again/</guid>
+        
+        <category>thinking</category>
         
         <category>blog</category>
         
+        
         <category>thinking</category>
+        
+        <category>blog</category>
         
       </item>
     
@@ -60,12 +1104,21 @@
 
 &lt;a href=&quot;http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html&quot;&gt;一些资料&lt;/a&gt;
 
+修改轨道参数，固定黄赤交角为0度：
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;n&quot;&gt;rb_mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'fixed_parameters'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;orb_obliq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;orb_eccen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0167239&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;orb_mvelp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;102.035&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;strong&gt;Updated 2018-05-14&lt;/strong&gt;
 
 </description>
-        <pubDate>Mon, 14 May 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/05/14/cesm-aquap/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/05/14/cesm-aquap/</guid>
+        <pubDate>Thu, 24 May 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/05/24/cesm-aquap/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/05/24/cesm-aquap/</guid>
         
         <category>cesm</category>
         
@@ -73,473 +1126,6 @@
         
         
         <category>cesm</category>
-        
-      </item>
-    
-      <item>
-        <title>20180508交易笔记-油飞了以及其他</title>
-        <description>
-原油这次真的起飞了。昨晚油价一路窜高，布油一路突突到76刀+，创下三年半来新高。
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71gy1fr3q64rs8mj20rx0lx424.jpg&quot; alt=&quot;&quot; /&gt;
-
-之前的逻辑在不断地验真，去年到现在，最主要的资本利得基本都是油给的。对于高信噪比的趋势交易，真的没必要天天盯盘，更重要的是信心和布局。70+其实基本已经在平衡价位了，现在投机性交易者正在助推价格继续上涨，后续布油一旦触碰到80，打算减半仓。
-
-昨天看投研帮文章表示商品/权益类资产价格比值达到历史新低，该指标均指回归无非两种途径：A权益类资产大跌，B商品价格大涨。直觉应该买个大盘的put对冲下，不过仔细想了想自己的商品标的和权益类资产的对冲手段似乎没什么问题，瞄了下九月到期的QQQ的put，尼玛100股要600多刀，宰人呢这是。决定财报季过后适当减仓，继续观望。
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71gy1fr3qdqtsdaj20ec09yq5d.jpg&quot; alt=&quot;&quot; /&gt;
-
-消息面上中美贸易战继续来来去去过招，川普要撕毁伊核协议，基本面上还是美利坚继续复苏扩张，上月非农虽然不及预期，但是失业率跌倒4%以下(当然每次危机前也近似这么漂亮的数字)，欧洲有整体熄火的迹象，国内各指标基本保持稳定，去杠杆总基调下资金面依然紧张。
-
-总之16-18全球应该是经历了一次信贷脉冲下的小复苏，根本问题当然没有解决，而且更严重了，没错，债务问题。短暂的波动并不能代替长期的趋势，时先生那句“债务是一条带血的主线”依然萦绕耳畔。短期来看，油飞了，通胀预期也跟着起来了，但17年后长债收益率和黄金出现背离，反映着黄金隐含的通胀预期与TIPS反应的通胀预期的背离，金银波动率逐渐走低。Fed措辞似乎开始接受低通胀，并且对未来的经济增长和通胀预期表示隐忧。虽然大趋势上依然固执于通胀走强，但短期考虑以期权策略做多波动性。
-
-另外最近开始看东野圭吾的《解忧杂货铺》。坦白说，看他第一本《拉普拉斯的魔女》，对其行文的印象就是灰暗的白描和冷淡的叙事，实则压抑。作品吸引我的地方往往在于其对人物心理和动机的揭示以及对现实社会背景的折射。比如魔女中弑夫者的价值观（大致印象）:
-
-&lt;blockquote&gt;
-  找年龄差不多的男人结婚，老了之后，两个老人相互照顾多累呀。如果找个有钱的老男人嫁了，老男人寿命不久，死了之后自己依然年轻，还能继承一大笔遗产……
-&lt;/blockquote&gt;
-
-《解忧杂货铺》就更有意思了，现时背景下在失去的二十年里成长的一代年轻人，利用跨时空书信教育70年代石油危机时的父辈要去珍惜工作机会，继承家业的机会，告诉他们再过30年连大学生出来都可能找不到工作（误入杂货铺的三人就是找不到工作四处偷窃的社会青年）。依托时代背景塑造人物再折射时代背景，叙事行文的淡漠情感，其书近几年在国内的流行和畅销程度，其实可以反映出很多有意思的事情。愿意或者不愿，我们都将见证即将到来的这个时代。
-
-&lt;strong&gt;Updated 2018-05-08&lt;/strong&gt;
-</description>
-        <pubDate>Tue, 08 May 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/05/08/trading-diary/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/05/08/trading-diary/</guid>
-        
-        <category>investment</category>
-        
-        <category>stock</category>
-        
-        <category>option</category>
-        
-        <category>market&amp;nbspcrash</category>
-        
-        
-        <category>economy</category>
-        
-        <category>investment</category>
-        
-        <category>notebook</category>
-        
-      </item>
-    
-      <item>
-        <title>病了快一个月</title>
-        <description>
-史铁生在回答记者问题的时候说，他职业是生病，业余写一点东西。对我上个月来说，已经差不多如此了。
-
-4月从HK回来就感觉不太对，特别容易疲乏。大概病程记录如下：
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;date&lt;/th&gt;
-      &lt;th&gt;record&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.14&lt;/td&gt;
-      &lt;td&gt;下雨初感微冷&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.15&lt;/td&gt;
-      &lt;td&gt;广州图书馆，感觉冷，走回来后非常乏力；&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.16&lt;/td&gt;
-      &lt;td&gt;去暨南大学，烨琪回来开会，晚上吃饭开始流鼻涕，等到南校区，劳累感非常明显；&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.17&lt;/td&gt;
-      &lt;td&gt;开始出现显著感冒症状，嗓子痛，鼻塞，流清涕；&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.18&lt;/td&gt;
-      &lt;td&gt;同前一天，无大变化，东校助教，返程感觉特别劳累；&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.19&lt;/td&gt;
-      &lt;td&gt;明显感到不适，下午傍晚有发热感，睡觉有发热；&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.20&lt;/td&gt;
-      &lt;td&gt;早起依然有轻微发热，右侧扁桃体溃疡，午饭后疲劳，下午发热明显，晚饭洗澡后明显发热&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.21&lt;/td&gt;
-      &lt;td&gt;症状明显缓解，但是出现咽鼓管水肿，听声沉闷。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.22&lt;/td&gt;
-      &lt;td&gt;珠海组会，整日并无明显不适，晚餐吃海鲜，量略大。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.23&lt;/td&gt;
-      &lt;td&gt;晚上跑步4.05km，感觉疲劳&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.24&lt;/td&gt;
-      &lt;td&gt;早晨起来发现零星似被臭虫叮咬痕迹依然有疲劳感，晚上仅仅做了少量哑铃运动&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.25&lt;/td&gt;
-      &lt;td&gt;全身被叮！包括左手手心！整个人都要崩溃了，这尼玛在米帝就是噩梦，完全让人对睡觉恐惧的虫子！去顺克隆买了杀虫剂消杀。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.27&lt;/td&gt;
-      &lt;td&gt;去校医检查，拿了若干外用药、地氯雷他定及泼尼松，回来后感觉没必要吃激素吧，就先放着泼尼松没吃，开始轻微咳嗽，晚上没有在意，去跑了5km，明显劳累，速度不及。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.28&lt;/td&gt;
-      &lt;td&gt;咳嗽有些加重，没有在意。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.29&lt;/td&gt;
-      &lt;td&gt;晚上依然有被叮咬痕迹，咳嗽继续加重，不敢再运动，大量喝水吃VC。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4.30&lt;/td&gt;
-      &lt;td&gt;嗓音开始嘶哑，咳嗽加重再次出痰，有些乏力，入夜低烧，平躺咳嗽非常严重，只睡了4-5小时。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.1&lt;/td&gt;
-      &lt;td&gt;低烧，嗓音嘶哑，不停咳嗽，是夜再次发烧，38度左右，黄绿色痰和鼻涕，平躺后止不住咳嗽喘息，加上对虫子的恐惧，把床头灯移到腿部开着防止虫咬，垫高枕头后凌晨四点才昏昏睡去，痛苦至极。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.2&lt;/td&gt;
-      &lt;td&gt;早晨退烧，校医检查，体温36.2，血常规中性粒细胞比例偏高，白细胞计数略偏高，确诊为支气管炎。再次拿了氯雷他定和感咳双清。入夜再次低烧，37.6，躺下后再次止不住咳，五点半入睡，痛苦至极。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.3&lt;/td&gt;
-      &lt;td&gt;早晨退烧，咳嗽依然没有好转，去校医描述情况，开了头孢和阿斯美。发现吃阿斯美并没效果，甚至连中枢神经抑制的效果都没有，晚上再次没法入睡，这次更猛，六点钟。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.4&lt;/td&gt;
-      &lt;td&gt;白天咳嗽有所减轻，但入夜平躺依旧，夜里无法入睡，直到天亮，六点多昏昏睡去，给导师发消息请假会议，凌晨发现叮咬的虫子居然是跳蚤！&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.5&lt;/td&gt;
-      &lt;td&gt;白天咳嗽明显减轻，入夜依然咳，但是整体有减轻，垫高枕头有明显好转，大概2点入睡。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.6&lt;/td&gt;
-      &lt;td&gt;咳嗽明显减轻，夜间也明显减轻，下午晚上到办公室看了《辩护人》，重温了《黑客帝国》。已经能够基本正常入睡。&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5.7&lt;/td&gt;
-      &lt;td&gt;只有零星咳嗽，终于好转。&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-前后真的差不多一个月了，感冒 过敏 再加上虫子叮，从来没有这么惨过。今天发现非农竞猜居然中了二等奖，也算是时来运转人品守恒吧。希望接下来一切回到正轨！
-
-&lt;strong&gt;Updated 2018-05-07&lt;/strong&gt;
-</description>
-        <pubDate>Mon, 07 May 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/05/07/ill-health-blog/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/05/07/ill-health-blog/</guid>
-        
-        <category>thinking</category>
-        
-        <category>blog</category>
-        
-        
-        <category>thinking</category>
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Savio update: CESM changes</title>
-        <description>
-John发邮件说Berkeley SAVIO机器上的CESM不能用了，因为Savio升级了整个系统到Sci Linux7，出错信息：
-
-&lt;blockquote&gt;
-  perl: symbol lookup error: /global/home/groups/co_aiolos/soft/perl5/lib/perl5/x86_64-linux-thread-multi/auto/XML/LibXML/LibXML.so: undefined symbol: Perl_Gthr_key_ptr
-&lt;/blockquote&gt;
-
-很明显是perl XMLlib编译运行库不匹配才会造成这个问题，差了下Sci Linux7 gcc库为485，6好像还是44x。但没有root权限不能直接yum update，按&lt;a href=&quot;https://bb.cgd.ucar.edu/cesm-runtime-error-cant-locate-loadable-object-module-xmllibxml-inc&quot;&gt;论坛贴子&lt;/a&gt;，到CPAN&lt;a href=&quot;http://search.cpan.org/dist/XML-LibXML/LibXML.pod&quot;&gt;下载源代码编译&lt;/a&gt;后，重新制定环境变量依然不行，后采用偷天换日的办法，把.so和几个库文件放到源gcc44x版本的编译目录下，居然就可以了。
-
-&lt;strong&gt;Updated 2018-05-02&lt;/strong&gt;
-
-</description>
-        <pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/05/02/cesm-savio-update/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/05/02/cesm-savio-update/</guid>
-        
-        <category>server</category>
-        
-        <category>cesm</category>
-        
-        
-        <category>hardware</category>
-        
-        <category>linux</category>
-        
-        <category>notebook</category>
-        
-        <category>cesm</category>
-        
-      </item>
-    
-      <item>
-        <title>流动性，以及缺少流动性市场中的生存策略</title>
-        <description>
-无论对市场，企业，还是家庭或个人，良好的流动性都是财务健康，经济健康的指标。
-为什么这么说呢？拿个人做比方，如果你每个月都拿出一大笔钱去存定期，实际手头现金留存极少的话，万一遇到自己或家庭成员的大笔医疗开支、必要的大额消费、绝佳的投资机会等情形，将会十分捉襟见肘，如果不想忍受提前取出固定期存款的利率惩罚，就需要去找亲朋好友拆借，毫无疑问这是两难且十分痛苦的。
-因此，个人愿意去付出溢价来购买高流动性的资产（现金、股债基金等），即便它们可能有更低的预期收益或者更高的风险。比如对手头持现的人来说，相当于利用这笔财富的投资机会去购买其随时使用的权利，这也是为什么投资大佬们都把手头所持有的现金称作“dry powder (干火药)”，随时上膛，随时发射。
-当然，对于我个人来说，是从来不会去买固定期限产品的。
-
-同时，缺少流动性的市场也是不受待见的，比如开盘后画锯齿状甚至一字线的股票，往往就代表着交投稀缺甚至没有成交，市场价格就会出现非常不平滑的波动。wikipedia上对市场流动性的定义为：
-&lt;blockquote&gt;
-  资产能够以一个合理的价格顺利变现的能力，它是一种所投资的时间尺度（变为现金的难易程度）和价格尺度（与公平市场价格相比的折扣）之间的关系。通常简称流通性。
-&lt;/blockquote&gt;
-
-卖家买家交投活跃的市场被称为“深市场”，这样的市场中，大额订单不容易对市价造成影响。
-
-正常情况下，无论买家还是卖家，都喜欢流动性好的市场。但是，流动性差的市场也是普遍存在的，相比于证券，债券市场，比如房地产（不动产）市场，租赁市场，甚至人才市场，婚恋市场，都可以说是流动性较差的市场。那么在流动性差的市场中，何种生存策略比较好呢？结合市场特征思考后，大概总结如下：
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;strong&gt;主动搜寻交易机会&lt;/strong&gt;
-流动性差的市场是个幺蛾子市场，对卖家来说，买家是稀缺的；对买家来说，卖家是稀缺的。因此，对于急于交易变现的一方，就不得不面对所谓的折价出售或溢价购买，更严重的是，一旦交易期本身还存在季节性的话，错过旺季往往会造成严重的折价损失。显然，真正稀缺的是交易的机会。因此，无论买家还是卖家，主动寻求交易机会非常重要。
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;strong&gt;客观认识市场流动性现状，把握交易机会&lt;/strong&gt;
-生活中能看到许多人都没有认识到流动性枯竭严重性的例子，比如，人们总是对未来过于乐观，因此超前消费，借入自己事实上还不上的贷款，最终由于种种原因违约乃至破产。婚恋或求职方面，往往也有很多挑三拣四者，尤其对婚恋市场中的女方而言，眼光高而缺乏足够准确的自我定位，往往就在犹豫和否决中错过无数机会，而旧社会普遍的印象而言，年龄的增长对于婚恋市场中的单身女性是极端不利的。因此客观认识到自己处在怎样深度的一个市场，当机会出现的时候，应当展现出足够的积极态度和采用足够智慧的策略。
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;strong&gt;提高商品本身的不可替代性&lt;/strong&gt;
-这一点不必多言，交易标的的价值才是最核心的定价因素。
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;strong&gt;Updated 2018-04-13&lt;/strong&gt;
-
-</description>
-        <pubDate>Sun, 29 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/04/29/liquility-market-strategy/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/29/liquility-market-strategy/</guid>
-        
-        <category>principle</category>
-        
-        <category>investment</category>
-        
-        <category>Economics</category>
-        
-        
-        <category>liquidity</category>
-        
-        <category>market</category>
-        
-        <category>Living&amp;thinking</category>
-        
-        <category>career</category>
-        
-      </item>
-    
-      <item>
-        <title>从备份的wordpress数据库重建技术博客</title>
-        <description>
-接上篇&lt;a href=&quot;https://novarizark.github.io/2018/04/04/raid-rebuild/&quot;&gt;东校服务器RAID rebuild&lt;/a&gt;,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。
-
-思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
-工具：pymysql
-
-google下，抽出post内容的几个关键语句如下：
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;c1&quot;&gt;--选出内容，唯一id，和category&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_terms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_id&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_term_relationships&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_taxonomy_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;wp_term_taxonomy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;term_taxonomy_id&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wp_posts&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object_id&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;taxonomy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'category'&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'post'&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。成功恢复了200+篇博客内容，后面大概修改下残缺，整理下tag就很好啦。
-
-&lt;strong&gt;Updated 2018-04-13&lt;/strong&gt;
-
-</description>
-        <pubDate>Thu, 19 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/04/19/wordpress-blog-rebuild/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/19/wordpress-blog-rebuild/</guid>
-        
-        <category>server</category>
-        
-        <category>blog</category>
-        
-        <category>database</category>
-        
-        <category>wordpress</category>
-        
-        <category>jekyll</category>
-        
-        <category>markdown</category>
-        
-        
-        <category>notebook</category>
-        
-        <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>学习与工作日记：关键词</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#20180312&quot; id=&quot;markdown-toc-20180312&quot;&gt;20180312&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#20180313&quot; id=&quot;markdown-toc-20180313&quot;&gt;20180313&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#20180417&quot; id=&quot;markdown-toc-20180417&quot;&gt;20180417&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;20180312&quot;&gt;20180312&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Blockchain
-    &lt;ul&gt;
-      &lt;li&gt;Block–&amp;gt;Header–&amp;gt;Nonce–&amp;gt;Hash&lt;/li&gt;
-      &lt;li&gt;Double Spending–&amp;gt;6 Confirmation&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Encryption Algorithm
-    &lt;ul&gt;
-      &lt;li&gt;Symmetric-key
-        &lt;ul&gt;
-          &lt;li&gt;DES–&amp;gt;3DES–&amp;gt;AES&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Public-key Cryptography
-        &lt;ul&gt;
-          &lt;li&gt;RSA&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Python Class
-    &lt;ul&gt;
-      &lt;li&gt;__init(self,a,b,c)__ –&amp;gt; cls=class(a, b, c) –&amp;gt; cls.a&lt;/li&gt;
-      &lt;li&gt;method(self) –&amp;gt; cls.method() –&amp;gt;class.method(cls)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;20180313&quot;&gt;20180313&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;pymysql
-    &lt;ul&gt;
-      &lt;li&gt;with connection.cursor() as cursor&lt;/li&gt;
-      &lt;li&gt;connection.commit()&lt;/li&gt;
-      &lt;li&gt;connection.close()&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;python-for-teens
-    &lt;ul&gt;
-      &lt;li&gt;string&lt;/li&gt;
-      &lt;li&gt;if structure&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;20180417&quot;&gt;20180417&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Bayesian Model
-    &lt;ul&gt;
-      &lt;li&gt;Bayesian Model&lt;/li&gt;
-      &lt;li&gt;Markov Chain&lt;/li&gt;
-      &lt;li&gt;Mento Carlo&lt;/li&gt;
-      &lt;li&gt;Markov Chain Mento Carlo (MCMC)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;strong&gt;Updated 2018-04-14&lt;/strong&gt;
-</description>
-        <pubDate>Tue, 17 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/04/17/keyword-notebook/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/17/keyword-notebook/</guid>
-        
-        <category>blog</category>
-        
-        <category>keyword&amp;nbspnotebook</category>
-        
-        
-        <category>notebook</category>
-        
-        <category>linux</category>
-        
-        <category>algorithm</category>
-        
-      </item>
-    
-      <item>
-        <title>为python增加默认的库搜索路径</title>
-        <description>
-明文密码丢到程序里当然是很傻逼的事情（参见斯导新片《头号玩家》），所以访问数据库用了AES加密（&lt;a href=&quot;https://novarizark.github.io/2018/03/12/cryptography-python-mysql/&quot;&gt;参见&lt;/a&gt;）。
-
-数据库可是个好东西，慢慢很多程序都要开始访问数据库了，那么我们自己的加密模块能否不通过动态方式添加搜索路径，像import其他模块那样引用呢？答案当然是可以的，在bashrc中修改PYTHONPATH环境变量就可以啦。
-
-当然这不是推荐方法，因为具有外部依赖性。推荐方法是在site-packages目录下增加一个扩展名为.pth的文件，在里面写入增加的搜索路径。这里有&lt;a href=&quot;https://blog.csdn.net/liang19890820/article/details/76219560&quot;&gt;很好的介绍&lt;/a&gt;。
-
-&lt;strong&gt;Updated 2018-04-14&lt;/strong&gt;
-
-</description>
-        <pubDate>Sat, 14 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/04/14/python-search-path/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/14/python-search-path/</guid>
-        
-        <category>python_import</category>
-        
-        
-        <category>python</category>
-        
-        <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>贝叶斯模型, MC, MC, 与MCMC</title>
-        <description>
-帮老板审稿，这稿子用了个非常牛逼的Bayesian Model+MCMC做降水的突变检验，很明显是个ML的方法，这么好的机会，肯定要抓着搞明白。
-
-整理一些资料如下：
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.csdn.net/pongba/article/details/2958094&quot;&gt;贝叶斯方法介绍&lt;/a&gt;&lt;/strong&gt;: 这是篇非常好的科普，从贝叶斯老爷的逆概问题讨论形式化的贝叶斯概型。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://site.douban.com/182577/widget/notes/10567181/note/292072927/&quot;&gt;MC, MC, MCMC&lt;/a&gt;&lt;/strong&gt;: 蒙特卡洛、马尔可夫链，到马尔可夫链蒙特卡洛方法。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0&quot;&gt;似然函数&lt;/a&gt;&lt;/strong&gt;:终于明白了似然函数是什么意思，表征观测结果对应预期分布的似然性。定性的说，一个硬币投了一百次有90次正面，那么这个硬币正常的似然性很低很低。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;&quot;&gt;最大似然估计&lt;/a&gt;&lt;/strong&gt;:对同一个似然函数，如果存在一个参数值，使得它的函数值达到最大的话，那么这个值就是最为“合理”的参数值。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://sunyi514.github.io/2016/03/05/mcmc%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0/&quot;&gt;MCMC方法小记&lt;/a&gt;&lt;/strong&gt;：好例子!&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://xccds1977.blogspot.kr/2014/07/mcmc.html&quot;&gt;理解MCMC&lt;/a&gt;&lt;/strong&gt;:好例子！&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;strong&gt;Updated 2018-04-14&lt;/strong&gt;
-
-</description>
-        <pubDate>Sat, 14 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/04/14/bayes-mcmc/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/04/14/bayes-mcmc/</guid>
-        
-        <category>machine&amp;nbsp;learning</category>
-        
-        <category>CUDA</category>
-        
-        <category>deep&amp;nbsp;learning</category>
-        
-        <category>MCMC</category>
-        
-        <category>Bayes</category>
-        
-        
-        <category>machine&amp;nbsp;leanring</category>
         
       </item>
     

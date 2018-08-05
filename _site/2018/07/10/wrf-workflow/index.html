@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CESM测试Aqua Planet试验</title>
-    <meta name="description" content="开始测试Aqua-Planet试验，直接按照aqua的设置run没有任何问题，但是发现SST没有annual cycle，询问师姐：  你是用的cesm的default的 aqua compset吗 如果是的话，那么好像是不需要额外读入sst文件的，而是直接在code里指定需要哪种sst profile就可以，具...">
+    <title>WRF SST Update problem solved</title>
+    <meta name="description" content="When I tried to use the realtime SST update in WRF runtime, I met the problem: None of the following are allowed to be TRUE :  ( internal_time_loop .EQ. 1 ) ...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2018/05/14/cesm-aquap/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/07/10/wrf-workflow/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,6 +224,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -231,11 +234,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>CESM测试Aqua Planet试验</h1>
+        <h1>WRF SST Update problem solved</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-05-14
+                <i class="fa fa-calendar"></i>2018-07-10
             </div>
 
             <div class="label-card">
@@ -256,7 +259,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
+        <a href="/category/#WRF" title="Category: WRF" rel="category">WRF</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -273,11 +278,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a-->
-        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
+        <!--a href="/tag/#server" title="Tag: server" rel="tag">server</a-->
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
     
-        <!--a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a-->
-        <a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a>
+        <!--a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a-->
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
     
   
 
@@ -289,16 +294,28 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         
-<p>开始测试Aqua-Planet试验，直接按照aqua的设置run没有任何问题，但是发现SST没有annual cycle，询问师姐：</p>
-<blockquote>
-  <p>你是用的cesm的default的 aqua compset吗 如果是的话，那么好像是不需要额外读入sst文件的，而是直接在code里指定需要哪种sst profile就可以，具体是通过修改ocn_comp.F90 中 sst_option，这里不同的sst_option代表不同的profile；关于topo，好像你是需要在user_nl_cam里指定一个新的topo文件的(把高度啥的设为0)</p>
-</blockquote>
+<p>When I tried to use the realtime SST update in WRF runtime, I met the problem:</p>
 
-<p>这么说还需要自己写一个topo为0的文件。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> None of the following are allowed to be TRUE :
+  ( internal_time_loop .EQ. 1 )                F   
+  ( config_flags%grid_fdda .NE. 0 )            F   
+  ( config_flags%sst_update .EQ. 1 )           T   
+  ( config_flags%all_ic_times )                F   
+  ( config_flags%smooth_cg_topo )              F   
+  ( config_flags%polar )                       F   
+-------------- FATAL CALLED ---------------
+FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431 
+ Problems, we cannot have excluded middle data from WPS 
 
-<p><a href="http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html">一些资料</a></p>
+</code></pre></div></div>
 
-<p><strong>Updated 2018-05-14</strong></p>
+<p>delete namelist variable in <code class="highlighter-rouge">namelist.wps</code></p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">process_only_bdy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span></code></pre></div></div>
+
+<p>and rebuild the <code class="highlighter-rouge">met_em*</code> files.</p>
+
+<p><strong>Updated 2018-07-18</strong></p>
 
 
         </article>
@@ -320,6 +337,60 @@
                     
                 
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
                 
                     
                 
@@ -368,48 +439,6 @@
                     
                 
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
                 
                     
                 
@@ -418,30 +447,6 @@
             
         
             
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
             
                 
                     
@@ -479,27 +484,6 @@
                     
                 
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
                 
                     
                 
@@ -513,35 +497,18 @@
                 
             
         
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2018/05/17/thinking-young-world/">十年绚烂</a></p>
+        <p><strong>下一篇</strong> <a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></p>
         
     </div>
 </div>
@@ -584,8 +551,6 @@ gitment.render('container')
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

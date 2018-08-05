@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/10/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-b/">【已解决】统计某目录下源码文件的代码行数</a>
+                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/">【已解决】rsync命令的使用</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-10
+                        <i class="fa fa-calendar"></i>2014-08-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,78 +266,7 @@
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>比如位于CAM的源码根目录下，统计CAM的源码总行数（去掉空格）</p>
-<blockquote>$find ./ -name "*.F90" |xargs cat|grep -v ^$|wc -l</blockquote>
-<p>答案是——————————499742</p>
-
-<p>居然不到50万行，比我想象要少诶……</p>
-
-<p>参考资料中还有记录空行等命令格式</p>
-
-<p>http://www.cnblogs.com/fullhouse/archive/2011/07/17/2108786.html</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/10/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM Source Code Modified编译后运行无输出</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
     
         <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
     
@@ -354,7 +285,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
     
         <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
     
@@ -366,26 +299,102 @@
                 </div>
                 <div class="excerpt">
                     
-<p>学校四期平台，程序能够成功编译和运行，但是提交任务后不输出。del掉后log文件出现</p>
-
-<p>Could not chdir to home directory /users/XXXX: No such file or directory</p>
-
-<p>后来或者索性没有输出。应该是节点通信错误，无法找到文件系统？多次尝试重新提交有时可以解决该问题。</p>
+<p>同步CESM的input数据到hpc4，但是已有的文件不希望被覆盖掉，scp不能用，只能采用rsync命令。以从东校区工作站传回数据为例</p>
+<blockquote><strong>rsync -vzrtopg --progress -e 'ssh -p 80' workstation@222.200.180.66:/home/workstation/L_Zealot ./</strong></blockquote>
+<p>参数解释：</p>
+<blockquote>-v, --verbose 详细模式输出
+-z, --compress 对备份的文件在传输时进行压缩处理
+-r, --recursive 对子目录以递归模式处理
+-t, --times 保持文件时间信息
+-p, --perms 保持文件权限
+-o, --owner 保持文件属主信息
+-g, --group 保持文件属组信息
+--progress 在传输时现实传输过程
+-e 'ssh -p 80' ssh方式传输，端口80</blockquote>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/06/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam-e/">【已解决】CAM增加自定义输出变量</a>
+                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所拷贝回CESM Input Data硬盘挂载问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-06
+                        <i class="fa fa-calendar"></i>2014-08-31
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>从大气所带回来的硬盘用Orico的硬盘座接e-SATA口，windows下直接提示要格式化，这还得了，记得当初这个分区是我做的，ext4格式，重启到Linux下，fdisk -l傻眼了，居然成了NTFS格式，测试mount -t ntfs-3g或ext4都不行，百般无奈以为出现坏道了。结果双击文件系统下的2TB文件系统却可以挂载了，显示为ext格式。无语……</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
+
+<p>到超算中心拷贝出现同样问题，钟英师姐帮忙发现其实问题很好解决，直接不使用-t参数指定的话，系统会自动检测类型挂载。反正不知道系统怎么检测出的，能挂上就是了……以在/dev/sdc5为例</p>
+<blockquote>mount /dev/sdc5 ./</blockquote>
+<p>DONE！</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140903#</span></strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/">【已解决】CESM-CAM积分步长调节</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -431,32 +440,59 @@
                 </div>
                 <div class="excerpt">
                     
-<p>做何老师在FGOALS上的试验，需要把加热率的输出，但是不在Master list里，要hard-coded进去。官方文档（CAM3 ug）和tutorial上都有介绍方法，不过写的都很简单，甚至连在哪一个文件里改都没有介绍。几经周折，发现大部分输出都在cam的physics包下的cam_diagnostics.F90下。预计是就把三条语句直接加在了这里，结果运行后长时间没有输出，看起来不对。</p>
+<h3>CAM Standalone</h3>
+<p>namelist修改加入</p>
 
-<p>之后的思路是仿照已经在master list里的变量加入history output的方法，去查找这些非默认加入的变量，在cam_diagnostics.F90这些变量的响应位置加入对加热率的输出，结果出现了编译不通过的情况。具体错误为大致数组没有声明。</p>
+<p>dtime=1200, nsplit=6, nspltrac=2, nspltvrm=2</p>
 
-<p>查看physpkg.F90，发现加热率在每一个物理包运行后都会被physics_update归零，所以变量应该只能在调用deep_convect后而update前进行输出，于是吧addfld和add_defalult加载cam_diagnostics文件下，而outfld加在刚刚所说的位置。目前可以输出，还没有检查输出是否有问题。</p>
+<p>第一句是把积分时长调整到1200s每步</p>
 
-<p><strong><span style="color: #008000;">#Up to 201408071349#</span></strong></p>
+<p>后面三个如果不加入会报错，出错信息中会有建议更改的数值，看起来估计是与物理步长中与动力步长的匹配有关，但是依然搞不清楚这几个变量的意义……</p>
 
-<p>回到住宿处用ncl查看，将26层全部输出，确实中高空都是有数值的，看起来问题不大。但是量级上达到0.1K/kg/s，1分钟加热6摄氏度？考虑到对流的时间尺度，或许是这样吧……等回来真正开始做试验的时候具体看看。</p>
+<p>以上几个namelist的解释：</p>
+<pre><strong>nsplit----</strong>Number of dynamics timesteps per physics timestep. If zero, a best-estimate
+will be automatically calculated.</pre>
+<pre><strong>nspltrac</strong>----Number of tracer advection timesteps per physics timestep.
+Nsplit is partitioned into nspltrac and nsplit/nspltrac,
+with the latter being the number of dynamics timesteps per
+tracer timestep, possibly rounded upward; after initialization,
+the code quantity nsplit is redefined to be the number of
+dynamics timesteps per tracer timestep.</pre>
+<pre><strong>nspltvrm----</strong>Number of vertical re-mapping timesteps per physics timestep.
+Nspltrac is partitioned into nspltvrm and nspltrac/nspltvrm,
+with the latter being the number of tracer timesteps per
+re-mapping timestep, possibly rounded upward; after initialization,
+the code quantity nspltrac is redefined to be the number of
+tracer timesteps per re-mapping timestep.</pre>
+<h3>CESM Script</h3>
+<p>这个除了需要处理standalone中的变量外，还需要更改run_env.xml中存在相应的字段：</p>
+<blockquote>&lt;entry id="NCPL_BASE_PERIOD"   value="day"  /&gt;
 
-<p><strong><span style="color: #008000;">#Up to 201408072319#</span></strong></p>
+&lt;entry id="ATM_NCPL"   value="48"  /&gt;</blockquote>
+<p>上面那行的设置代表coupler耦合频率的单位，value对应为日，下面那行是在coupler耦合单位内，ATM通过coupler和其他模块耦合的次数，值为48，即每天耦合48次，可以理解为积分步长为1800s（半小时），如果要更改积分步长为900s，将48改为96即可。同时我们可以注意到这个值在后面的语句中分别被赋给了LND OCN等其他模块，保证各个模块的耦合频率一致。如果没有正确修改dtime, nsplit, nspltrac, nspltvrm这些变量，则会出现<strong>Bad namelist settings for FV subcycling报错。</strong></p>
+
+<p>当然，这里还有疑问就算，我们即便把standalone里修改的几个变量拿过来，也仅仅是修改了CAM的积分步而已，其他分量并没有修改，是会自动更改么？还是怎样？目前测试积分了三年，没有出现问题。</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
+
+<p>前段时间忘了更新了。对于F05的配置，似乎直接在user_nl_cam中修改dtime=900就可以，什么都不用动……似乎split与dtime呈一定的倍数关系，dtime减半并不影响这个倍数关系的调整。当然，依然没有搞懂……</p>
+
+<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/06/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】天河二号CESM自动编译环境搭建</a>
+                  <a class="post-link" href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/">【已解决】SSH多机无密码访问</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-03
+                        <i class="fa fa-calendar"></i>2014-08-26
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -477,7 +513,7 @@
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
     
         <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
     
@@ -498,7 +534,7 @@
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
     
         <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
     
@@ -510,26 +546,28 @@
                 </div>
                 <div class="excerpt">
                     
-<p>今晚想在天河二号上把bw和aw的几个case跑起来，顺道把所有的脚本都规整一遍，以便将来自动化。</p>
+<p>ssh无密码访问是实现MPI、以及自动化批处理如scp ssh远程命令等操作的必要设置。单机A对B单向或者B对A双向的操作类似，网上一查一大堆。一对多方向容易搞混，注意复制公钥方向。如A要无密码访问B，将A的公钥(id_rsa.pub)复制到B机的authorized_keys下。</p>
 
-<p>没想到困难多多。第一次编译倒是顺利，适当修改run脚本后，yhbatch却提交不了任务。回去查看mkbatch，把与PBS相关的都给干掉后，结果生成的run文件直接没有yhrun语句。无语了。好在第一次编译的程序可以通过yhrun提交任务，哪知道提交半小时一个输出也没有。情况和最初用14编译器编译时一样，节点直接down掉。查看了一下ifort -v，果然又是14编译器作怪！为什么会这样呢，环境变量里分明设置好了。</p>
+<p><strong>注意authorized_keys权限为600，.ssh目录权限700</strong></p>
 
-<p>后来发现，原来之前从ln20 ssh到了ln22，返回后就出现了这个问题。而直接登陆ln20不进行ssh则不存在问题。实在是诡异……</p>
+<p>参考资料：</p>
+
+<p>http://blog.sina.com.cn/s/blog_75b0e2ad010185id.html</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM输出频率和变量的调节</a>
+                  <a class="post-link" href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/">关于办户口迁移囧事的一点思考</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-02
+                        <i class="fa fa-calendar"></i>2014-08-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -547,81 +585,6 @@
 <span class="categories">
   <i class="fa fa-th-list"></i>
   
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>在被上一篇（http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=64）文章中所出现的问题折腾很久后，决定不再直接转30年那么久，还是一点点先调整再说。默认转5天，为了检测，就需要把输出也调节为逐日输出。这一点在CESM的users’ guide上写的比较清楚。</p>
-
-<p>比如逐日输出，标准输出变量场中加入QFLX变量，cesm_setup前将以下namelist变量的修改加入user_nl_cam</p>
-<blockquote>
-<p style="padding-left: 30px;">nhtfrq= -24</p>
-<p style="padding-left: 30px;">fincl1='QFLX'</p>
-</blockquote>
-<p>之后采用cesm_setup可以验证namelist的修改是否正确。</p>
-
-<p>假设运行5days，希望每天生成一个文件的话，加入如下语句</p>
-<blockquote>
-<p style="padding-left: 30px;">mfilt=1</p>
-</blockquote>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/">看CESM Tutorial CAM Physics (Video)的一点想法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
     
         <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
     
@@ -640,8 +603,6 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
         <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
     
   
@@ -652,19 +613,182 @@
                 </div>
                 <div class="excerpt">
                     
-<p>今天看完了Tutorial里关于Physics in CAM的视频。下载发现从2010年到2013年每一年的Tutorial释放出的pdf都差不多，但是13、12年却都没有这一场lecture的视频，这部还是从11年的resource里下到的。报告者是Neale，很年轻小伙，思维灵活，语速很快，基本跟不上，长相看起来很干练。有那么一两分像Prof. Yi Ming，当然啦，一个华人一个老外。</p>
+<p>记得本科把户口从烟台迁到东校的时候，就非常不顺利，跑了初家派出所两三次费尽口舌。没想到，这次从东校迁到南校，也被坑了一把。</p>
 
-<p>快讲到最后几张ppt的时候Neale吐了个槽很好玩，大概意思是我们搞Atm Model真是悲了个剧啊，我们要处理云啊你造么，各种姿态各种高度各种分布各种奇葩的云啊你造么，云里面水也有冰也有雪也有霰也有水汽还有，固液气一家三口都在里面啊你造么，都是二话不说直接扔给我们搞Atm Model的来处理啊……哪像人家Ocean Model，天天转的都是液态水，海表蒸发出水汽了，人家不要了，直接扔给大气模块；海表冻出冰了，人家也不要了，这是冰雪模块干的事……</p>
+<p>按照新生手册说法，只需要把身份证复印件和录取通知复印件准备好，交到学校（学院）处，学校自会处理这种校内升学的户口迁移。看到这些安排一时偷乐，想到俊文说他们那一级还要自己去东校办理，看来我们这一次赶上改革了，群众路线，办事人性化了嘛。没想到结果依然不是一般的折腾。</p>
 
-<p>一哂过后，想到前段时间在PNAS上看到的一篇文章，大概是说给CESM来了个Super-parameterization，看高CO2情景下的响应。所谓Super-Parameterization，实际就是在CESM的每一个大网格里都套了一个更小尺度的专门对付积云对流的模式，结果好像是发现在全球这个尺度的响应上，和CESM默认的Zhang方案有差不多的效果，说明CESM的对流参数化还是做得不错的。话说回来，Neale吐得槽以后能不能用这种类似方法来解决呢？即专门开发积云模式，然后做好接口工作套在全球模式里就可以了。广而言之，能否把参数化过程都独立成一个个的模块，由该领域的专业人员进行开发，使得这些模块独自能够运行（比如专门的边界层模式、辐射传输模式），也可以嵌入到CESM这种全球模式中。</p>
+<p>21日报到，准备好材料交付报到处户籍科，被告知哪里说只需要身份证和录取通知复印件呀，必须要有户口迁移证才行，我说新生手册写的啊。不行不行不行，要自己去办。好吧，看起来还是老样子，不知是群众路线群不到我们这些本科毕业的干部身份呢还是根本就没改革，但丫的新生手册怎么不说清楚。</p>
 
-<p>想来想去，其实现在已经有了呀。专门的边界层模式、辐射传输模式（RRTM不就是商业公司的产品么，由于太优秀了所以被引入气象模拟……）、积云模式等等，模块化必然也是全球模式的趋势吧：CESM等已经做了大圈层的模块化，如大气模块海洋模块冰雪模块等等，下一步圈层级模块内部物理过程的模块化应该也是必须的。当然，对全球模式来说，挑战还是很多的：首先必须要出台统一的接口标准，貌似ESMF、MCT这些就是干这个的，不过不了解，也不知道委员会成员的野心大不大，能搞出一套类似通信网络OSI 7层模型这种高大上的接口标准那就牛逼了；其次还是计算的问题，如果每一个大网格点都要在次网格的尺度上去转很多小模式，那计算时间肯定会暴涨，对计算机的计算能力也是个不小挑战。</p>
+<p>22日随亚娜珊珊回东校办户口迁移，先学校保卫办后小谷围派出所，没想到派出所没人，办得很迅速，一上午就搞定，以为后面就简单了，下午也懒得回南校，去新开的行政楼餐厅吃了一顿，名副其实郡城的价格四饭的味道，下午在东校实验室折腾杨老师的网站DEMO，不表。</p>
 
-<p>嗯~就YY这么多啦，还是要继续深入了解才行。全球模式开发越来越成为一个系统工程了，越来越向物理学中的LHC等大项目看齐了，这无疑是很好的嘛，这也应该是逐渐地把地学建立在牢靠的数学物理基础上的最佳方式了吧。</p>
+<p>23，24日周末，考虑到南校保卫办不上班，懒得白跑一趟。25下午开学典礼，顺道去保卫办交表。没想到进去就傻眼了——录取通知复印件、迁移证复印件、一寸照片、身份证复印件，一件不能少。我吐槽说之前没通知啊，新生手册就写说录取通知+身份证复印件啊，哪里知道这么折腾。周围不少同学也是相同遭遇，一肚子不满。</p>
+
+<p>不满也没用，白跑就是白跑，还是得回去要通知书上联复印。这种囧事，学校或者说相关部门吧，做的不到位是必然难辞其咎，但毕竟大环境如此，这种小事碰上再正常不过，客观因素改变不了。不妨从个人的角度来想想，如何能够避免麻烦，其实也很简单，找亚娜细细询问一下需要准备的材料，或者打个电话到保卫办问清楚，也就是了。归根结底，自己在已知被提供的资料不足的情况下依然消极被动地对待，想当然地认为XXX，也是造成最终麻烦的重要主观因素。前事不忘后事之师，这次吸取教训了，希望自己下次遇到类似情况能够足够重视，以免更大的麻烦。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/24/cesm1_2_0-e6-ba-90-e7-a0-81-e8-a1-8c-e6-95-b0-e7-b/">CESM1_2_0源码行数统计</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>跑起来了Heating的试验，outfld也没出来到能画图的地步，忙里偷闲，用上次提到的统计行数的办法（http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=92），统计了一下cesm1.2.0总代码行数，结果如下</p>
+<blockquote><strong>1,199,145</strong></blockquote>
+<p>居然一共才不到120万行，与我想象的有差距啊。一个active的CAM就占到了接近一半，地球系统这个东西还是大气比较复杂 ……</p>
+
+<p>其中，各个分量模块（包括接口等）及Active分量的行数如下</p>
+<table style="height: 47px;" width="354">
+<tbody>
+<tr>
+<td rowspan="2">
+<h3 style="text-align: center;">atm</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">511,843</span></strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">CAM</span></strong></td>
+<td><span style="color: #ff6600;"><strong>499,741</strong></span></td>
+</tr>
+<tr>
+<td>
+<h3 style="text-align: center;"><strong>csm_share</strong></h3>
+</td>
+<td colspan="2"><span style="color: #ff6600;"><strong>34,142</strong></span></td>
+</tr>
+<tr>
+<td>
+<h3 style="text-align: center;">dead_share</h3>
+</td>
+<td colspan="2"><span style="color: #ff6600;"><strong>341</strong></span></td>
+</tr>
+<tr>
+<td>
+<h3 style="text-align: center;">drv</h3>
+</td>
+<td colspan="2"><span style="color: #ff6600;"><strong>25,439</strong></span></td>
+</tr>
+<tr>
+<td rowspan="2">
+<h3 style="text-align: center;">glc</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">93,206</span></strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">CISM</span></strong></td>
+<td><span style="color: #ff6600;"><strong>22,370</strong></span></td>
+</tr>
+<tr>
+<td rowspan="2">
+<h3 style="text-align: center;">ice</h3>
+</td>
+<td colspan="2"><span style="color: #ff6600;"><strong>75,558</strong></span></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">CICE</span></strong></td>
+<td><span style="color: #ff6600;"><strong>72,950</strong></span></td>
+</tr>
+<tr>
+<td rowspan="2">
+<h3 style="text-align: center;">lnd</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">216,309</span></strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">CLM</span></strong></td>
+<td><span style="color: #ff6600;"><strong>175,937</strong></span>
+<span style="color: #ff6600;"><strong><span style="color: #3366ff;"> CLM4.0</span> 71,250</strong></span>
+<span style="color: #ff6600;"><strong><span style="color: #3366ff;"> CLM4.5</span> 93,857</strong></span></td>
+</tr>
+<tr>
+<td rowspan="2">
+<h3 style="text-align: center;">ocn</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">144,761</span></strong></td>
+</tr>
+<tr>
+<td><span style="color: #3366ff;"><strong>POP2</strong></span></td>
+<td><span style="color: #ff6600;"><strong>142,292</strong></span></td>
+</tr>
+<tr>
+<td rowspan="2">
+<h3 style="text-align: center;">rof</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">10,126</span></strong></td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff;">RTM</span></strong></td>
+<td><span style="color: #ff6600;"><strong>7,778</strong></span></td>
+</tr>
+<tr>
+<td>
+<h3 style="text-align: center;">utils</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">86,072</span></strong></td>
+</tr>
+<tr>
+<td>
+<h3 style="text-align: center;">wav</h3>
+</td>
+<td colspan="2"><strong><span style="color: #ff6600;">1,348</span></strong></td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/24/cesm1_2_0-e6-ba-90-e7-a0-81-e8-a1-8c-e6-95-b0-e7-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -679,10 +803,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page38" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">39/42</span>
+          <span class="page_number ">39/43</span>
           
             <a href="/page40" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -923,7 +1047,52 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2022,14 +2191,14 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2190,7 +2359,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2274,6 +2443,13 @@
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2281,7 +2457,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2302,7 +2478,7 @@
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2330,7 +2506,7 @@
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2470,7 +2646,7 @@
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2589,7 +2765,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2605,6 +2781,27 @@
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2618,25 +2815,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2672,7 +2869,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2690,7 +2887,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2726,7 +2923,7 @@
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2870,7 +3067,7 @@
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3023,7 +3220,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3059,7 +3256,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3077,7 +3274,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3086,7 +3283,7 @@
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3158,7 +3355,16 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

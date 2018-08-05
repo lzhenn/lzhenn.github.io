@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,141 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/09/06/e3-80-90cesm-e3-80-91couple-the-sp-cam-with-pop/">【CESM】couple the SP-CAM with POP</a>
+                  <a class="post-link" href="/2016/10/24/setup-savioberkeley/">Setup SAVIO@Berkeley</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-09-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>试图将SP-CAM和POP耦合起来，依然采用修改env_build atm physics的方式进行，build到链接一步出错，居然是CRM下有module名和POP下重名。（moudule grid）</p>
-
-<p>找到相应module改名，sed查找所有use module的地方改名，修改module定义的源文件名，build，done！</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/09/06/e3-80-90cesm-e3-80-91couple-the-sp-cam-with-pop/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/09/03/linux-e4-b8-8b-e5-88-87-e6-8d-a2shell-e7-8e-af-e5/">Linux下切换shell环境</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-09-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>默认为bash，支持的环境存储在</p>
-
-<p>/etc/shells,vi可以查看。</p>
-
-<p>若切换，用chsh命令，有问题，ypchsh命令。</p>
-
-<p>重新登录tty后生效。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/09/03/linux-e4-b8-8b-e5-88-87-e6-8d-a2shell-e7-8e-af-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/05/14/e3-80-90python-e3-80-91matplotlib-e9-85-8d-e7-bd/">【python】matplotlib配置文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-14
+                        <i class="fa fa-calendar"></i>2016-10-24
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -419,119 +291,51 @@
                 </div>
                 <div class="excerpt">
                     
-<p>开始用python画图啦，发现matplotlib功能强大到令人发指，ug整整两千多页！我了个去！除了地图数据可能不及NCL强大，一般性的line bar等等图画起来简直是炫爆了。</p>
+<p>SAVIO is Berkeley’s high performance clusters.</p>
 
-<p>有相应的配置文件可以设置默认样式，寻找配置文件可以先import matplotlib，然后</p>
+<p>http://research-it.berkeley.edu/services/high-performance-computing/user-guide</p>
 
-<p>[1] matplotlib.matplotlib_fname()</p>
+<ol>
+  <li>set up vim/project</li>
+</ol>
 
-<p>可以找到相应的配置文件路径。</p>
+<p>2.set up existing module</p>
+
+<p>#——— Load specific modules ————–
+module load intel/2013_sp1.4.211
+module load openmpi/1.6.5-intel</p>
+
+<p>#module load netcdf/4.3.2-intel-p System admin only provide C++ lib</p>
+
+<p>module load nco/4.4.6-intel-p
+module load ncview/2.1.2</p>
+
+<ol>
+  <li>set up NetCDF</li>
+</ol>
+
+<p>$nf-config –all</p>
+
+<p>$nc-config –all</p>
+
+<p>can be used to check the installation status.</p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/14/e3-80-90python-e3-80-91matplotlib-e9-85-8d-e7-bd/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/24/setup-savioberkeley/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/">【Supermarket】执行情况计划及进度</a>
+                  <a class="post-link" href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/">GFDL Spectral Idealized port on SAVIO</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-10
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>2016.5.14执行计划应完成</p>
-<ul>
-	<li>逐日客流时间序列（四门店同图）</li>
-	<li>小波分析其中一两店，给出图</li>
-	<li>平均周变化
-<ul>
-	<li>排除节假日调休的周变化，如果来得及</li>
-	<li>排除超过1个标准差的周变化，如果来得及</li>
-</ul>
-</li>
-	<li>平均日变化
-<ul>
-	<li>工作日和周末各自的日变化<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
-</ul>
-</li>
-	<li>尝试套用ARIMA模型进行预测</li>
-</ul>
-<p>下一步计划：</p>
-<ul>
-	<li>特殊事件因子
-<ul>
-	<li>法定节假日及调休</li>
-	<li>高温热浪、强降水、寒潮</li>
-	<li>促销活动</li>
-</ul>
-</li>
-</ul>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/">查看进程及对应IP</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-02
+                        <i class="fa fa-calendar"></i>2016-10-24
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -552,7 +356,9 @@
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
+    
+        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
     
   
 
@@ -571,7 +377,9 @@
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
+    
+        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
     
   
 
@@ -580,32 +388,59 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#lsof--pnl-m--i4" id="markdown-toc-lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a></li>
-</ul>
+                    
+<p>copy and paste to create</p>
 
-<h1 id="lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></h1>
+<p><strong>mkmf.template.savio.without_mpi</strong> in ./bin/</p>
 
-<p>php       10684      500    3u  IPv4 1890733      0t0  TCP 202.116.70.21:48785-&gt;140.90.101.63:80 (SYN_SENT)
-sshd      10692        0    3r  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
-sshd      10702      500    3u  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
-sshd      10702      500    9u  IPv4 1890569      0t0  TCP 127.0.0.1:6010 (LISTEN)
-sshd      10754        0    3r  IPv4 1890641      0t0  TCP 202.116.70.21:22-&gt;202.116.70.153:60307 (ESTABLISHED)</p>
+<p>change:</p>
+
+<p>FC CC MPI and NetCDF pathes.</p>
+
+<p>in ./full_dynamics, change:</p>
+
+<p><strong>compile_full_dynamics_on_savio.csh </strong> to fit savio (usually, just change platform name is okay).</p>
+
+<p>when compile, error:</p>
+<h5><span style="color: #ff0000;">ifort: error #10031 error: could not write to argument file</span></h5>
+<p>google it:</p>
+
+<p>https://software.intel.com/en-us/forums/intel-math-kernel-library/topic/281453</p>
+<blockquote>The MKL libraries are in different directories than the compiler runtime and other libraries. By default, the compiler will not search for libraries in the MKL <b>lib</b> directory. Use the <b>-mkl</b> compiler option for simple jobs, and use the MKL Link Line Advisor for more intricate jobs.</blockquote>
+<p>When I tried <strong>-mkl</strong> it doesn’t work and appeared another error.</p>
+
+<p>Fortunately, when I tried to module load ant TAB it, a module called</p>
+
+<p><strong>mkl/2013_sp1.4.211</strong></p>
+
+<p>just came into my eye.</p>
+
+<p>of course, use it! The problem really solved.</p>
+
+<p> </p>
+
+<p>So what is mkl?</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p> </p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/">【python】Ipython安装</a>
+                  <a class="post-link" href="/2016/10/17/externalities-and-the-coase-theorem/">Externalities and the Coase Theorem</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-02
+                        <i class="fa fa-calendar"></i>2016-10-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -624,7 +459,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+        <a href="/category/#Economics" title="Category: Economics" rel="category">Economics</a>
     
   
 
@@ -641,7 +476,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <a href="/tag/#Economics" title="Tag: Economics" rel="tag">Economics</a>
     
   
 
@@ -651,21 +486,306 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                 </div>
                 <div class="excerpt">
                     
-<p>想安装ipython，直接用pip貌似出错</p>
+<p>Coursera</p>
 
-<p>pip install ipython，出错</p>
+<p>The price changes, the quantity of the demand changes, not the demand change!</p>
 
-<p>OSError: [Errno 2] No such file or directory: ‘/usr/local/lib/python2.7/site-packages/setuptools-1.4.2-py2.7.egg’<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+<p>compliment of xxx / complementary good互补品</p>
 
-<p>根据<a href="http://ipython.org/ipython-doc/stable/install/install.html">官方安装说明</a>，加入</p>
+<p>Change in demand: demand curve change!</p>
 
-<p>pip install “ipython[all]”</p>
-
-<p>即可。</p>
+<p>inferior good 低档商品</p>
+<h2><span class="keyword">ceteris paribus其他条件不变<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></span></h2>
+<ul>
+	<li></li>
+	<li>Externalities
+<ul>
+	<li>Positive
+<ul>
+	<li>Example: Education</li>
+</ul>
+</li>
+	<li>Negative
+<ul>
+	<li>Example: Pollution</li>
+	<li>Measure Example: Pigouivain tax--&gt;Pareto Optimality</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<ul>
+	<li>Coase theorem
+<ul>
+	<li>
+<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的两个前提条件：明确<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>和<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>　钢铁厂生产钢，自己付出的代价是铁矿石、煤炭、劳动等，但这些只是“<a href="http://baike.baidu.com/view/354998.htm" target="_blank">私人成本</a>”；在<a href="http://baike.baidu.com/view/610395.htm" target="_blank">生产过程</a>中排放的污水、废气、废渣，则是社会付出的代价。如果仅计算私人成本，生产钢铁也许是合算的，但如果从社会的角度看，可能就不合算了。于是，经济学家提出要通过征税解决这个问题，即政府出面干预，赋税使得成本高了，生产量自然会小些。但是，恰当地规定税率和有效地征税，也要花费许多成本。于是，科斯提出：政府只要明确产权就可以了。如果把产权“判给”河边居民，钢铁厂不给居民们赔偿费就别想在此设厂开工；若付出了赔偿费，成本高了，产量就会减少。如果把<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>到钢铁厂，如果居民认为付给钢铁厂一些“赎金”可以使其减少污染，由此换来健康上的好处大于那些赎金的价值，他们就会用“收买”的办法“利诱”厂方减少生产从而减少污染。当厂家多生产钢铁的<a href="http://baike.baidu.com/view/297033.htm" target="_blank">赢利</a>与少生产钢铁但接受“赎买”的收益相等时，它就会减少生产。从理论上说，无论是厂方赔偿，还是居民赎买，最后达成交易时的钢产量和污染排放量会是相同的。但是，<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>归属不同，在<a href="http://baike.baidu.com/view/9601472.htm" target="_blank">收入分配</a>上当然是不同的：谁得到了产权，谁可以从中获益，而另一方则必须支付费用来“收买”对方。<strong>总之，无论财富分配如何不同，公平与否，只要划分得清楚，资源的利用和配置是相同的——都会生产那么多钢铁、排放那么多污染，而用不着政府从中“插一杠子”。那么政府做什么呢?明确产权，并且有效地保护产权。</strong></div>
+<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理表明，<strong>市场的真谛不是价格，而是产权。只要有了产权，人们自然会“议出”合理的价格来。</strong></div>
+<div class="para"></div>
+<div class="para">但是，明确产权只是通过市场交易实现资源最优配置的一个必要条件，却不是充分条件。另一个必要条件就是“不存在<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>”。交易成本，简单地说是为达成一项交易、做成一笔买卖所要付出的时间、精力和产品之外的金钱，如市场调查、情报搜集、质量检验、条件谈判、讨价还价、起草合同、聘请律师、请客吃饭，直到最后执行合同、完成一笔交易，都是费时费力的。就河水污染这个问题而论，居民有权索偿，但可能会漫天要价，把污染造成的“肠炎”说成“胃癌”；在钢铁厂有权索要“赎买金”的情况下，它可能把减少生产的<a href="http://baike.baidu.com/view/654238.htm" target="_blank">损失</a>一元说成十元。无论哪种情况，对方都要调查研究一番。如果只是一家工厂和一户居民，事情还好办。当事人的数目一大，麻烦就更多，因为有了“合理分担”的问题。如果是多个厂家，谁排了污水、排了多少，他们如何分摊赔偿金或如何分享“赎买金”就要先扯皮一番；如果是多户居民，谁受害重谁受害轻，怎么分担费用或分享赔偿，也可打得不可开交。正是这些<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>，可能使得前面所说的那种由私人交易达到的资源配置无法实现——或是大家一看有这么多麻烦，望而却步。所以说，<a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的“逆反”形式是：如果存在交易成本，即使<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>明确，私人间的交易也不能实现资源的最优配置。</div>
+<div class="para">科斯定理的两个前提条件各有所指，但并不是完全独立、没有联系。最根本的是明确产权对减少交易成本的决定性作用。产权不明确，后果就是扯皮永远扯不清楚，意味着交易成本无穷大，任何交易都做不成；而<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>得清楚，即使存在交易成本，人们在一方面可以通过交易来解决各种问题，另一方面还可以有效地选择最有利的<a href="http://baike.baidu.com/view/3823397.htm" target="_blank">交易方式</a>，使交易成本最小化。</div></li>
+</ul>
+</li>
+</ul>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/17/externalities-and-the-coase-theorem/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/10/15/fortran-direct-recl-problem/">Fortran direct recl problem</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-10-15
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>recl = n or recl = 4*n?</p>
+
+<p>this is a problem from a non-standard extensions of fortran: VMS fortran.<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>http://www-mipl.jpl.nasa.gov/portguide/subsection3.9.7.html</p>
+
+<p>https://docs.oracle.com/cd/E19957-01/805-4939/6j4m0vnct/index.html#c40004b91a0e</p>
+
+<p> </p>
+
+<p>typically, using ifort, dont do that.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/10/15/fortran-direct-recl-problem/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/10/13/mac-os-e7-bb-88-e7-ab-af-e4-b8-8elinux-e7-bb-88-e7/">Mac OS终端与Linux终端的使用区别</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-10-13
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>John给了组里Mac Mini的账号，后面确实要开始用Mac工作了，先把NCL配置好，使用过程中发现了一些和Linux终端不同的地方，配置过程记录在这里：</p>
+
+<p>1.登录终端后默认载入环境变量的位置不同：Mac为.bash_profile，Linux为.bashrc</p>
+
+<p>2.配置终端显示颜色：</p>
+
+<p>alias ls=’ls -G’</p>
+
+<p>http://www.2cto.com/os/201205/133944.html</p>
+
+<p>3.配置vim</p>
+
+<p>git clone https://github.com/Novarizark/config_files</p>
+
+<ol>
+  <li>
+    <p>git clone project</p>
+  </li>
+  <li>
+    <p>按NCL官网 http://ncl.ucar.edu/Download/macosx.shtml 步骤安装NCL</p>
+  </li>
+</ol>
+
+<p>5.1  注意登录时看到remote server禁止x11访问，</p>
+
+<p>WARNING! The remote SSH server rejected X11 forwarding request</p>
+
+<p>调整xhost发现似乎有错误，应该是有东西没装，先不管。</p>
+
+<p>5.2 安装XQuartz，</p>
+
+<p>Mac下用curl命令下载，格式</p>
+
+<p><strong>curl -o 文件名 ‘url’</strong></p>
+
+<p><strong>curl -O ‘url’</strong></p>
+
+<p>https://cnbin.github.io/blog/2015/06/14/mac-os-zhong-duan-xia-shi-yong-curl-ming-ling-xia-zai-wen-jian/<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>gcc与gfortran出现错误用brew doctor解决。</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/10/13/mac-os-e7-bb-88-e7-ab-af-e4-b8-8elinux-e7-bb-88-e7/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/10/04/smoke-learn/">SMOKE-learn</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-10-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>HKUST使用空间查看：</p>
+
+<p>quota -uvs huangyeq<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p> </p>
+
+<p>Assign files是一堆设置环境变量的文件。</p>
+
+<p>SMKROOT</p>
+
+<p> </p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/10/04/smoke-learn/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -680,10 +800,10 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page15" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">16/42</span>
+          <span class="page_number ">16/43</span>
           
             <a href="/page17" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -924,7 +1044,52 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2023,14 +2188,14 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2191,7 +2356,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2275,6 +2440,13 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2282,7 +2454,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2303,7 +2475,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2331,7 +2503,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2471,7 +2643,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2590,7 +2762,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2606,6 +2778,27 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2619,25 +2812,25 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2673,7 +2866,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2691,7 +2884,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2727,7 +2920,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2871,7 +3064,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3024,7 +3217,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3060,7 +3253,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3078,7 +3271,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3087,7 +3280,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3159,7 +3352,16 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

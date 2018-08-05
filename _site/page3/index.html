@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a>
+                  <a class="post-link" href="/2018/05/07/ill-health-blog/">病了快一个月</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-01
+                        <i class="fa fa-calendar"></i>2018-05-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,326 +264,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>&nbsp;
     
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>帮JL移植wrf3.8.1到天河2号。首先调整环境变量。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">.</span> /etc/bashrc
-<span class="k">fi</span>
-<span class="c"># edited on Apr 1, 2018 for WRF</span>
-<span class="c"># User specific aliases and functions</span>
-<span class="c">#bug fix</span>
-<span class="nb">source</span> /WORK/app/osenv/ln1/set2.sh
-<span class="nb">export </span><span class="nv">MODULEPATH</span><span class="o">=</span>/WORK/app/modulefiles
-
-<span class="c">#set COMMON input data path for CESM</span>
-<span class="c">#export COMMON_CESM_INPUT=/WORK/app/CESM_inputdata</span>
-
-<span class="c">#set Intel compiler and MPI</span>
-module load intel-compilers/13.0.0
-module load MPI/Intel/MPICH/3.1-icc13
-module load cmake/3.0.2
-
-<span class="c">#set hdf5 and netcdf4 for WRF</span>
-module load hdf5/1.8.13/03-CF-13
-module load netcdf/4.3.2/02-CF-13
-
-<span class="c">#set jasper</span>
-<span class="nb">export </span><span class="nv">JASPER</span><span class="o">=</span>/HOME/sio_goc017/WORKSPACE/jjl/soft/jasper-1.900.1
-<span class="nb">export </span><span class="nv">JASPERLIB</span><span class="o">=</span><span class="nv">$JASPER</span>/lib
-<span class="nb">export </span><span class="nv">JASPERINC</span><span class="o">=</span><span class="nv">$JASPER</span>/include
-
-<span class="c">#set WRF</span>
-<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
-<span class="nb">export </span><span class="nv">BUFR</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">CRTM</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">J</span><span class="o">=</span><span class="s2">"-j 12"</span>
-<span class="nb">export </span><span class="nv">MP_STACK_SIZE</span><span class="o">=</span>4000000000
-<span class="nb">export </span><span class="nv">OMP_STACKSIZE</span><span class="o">=</span>4000000000
-<span class="nb">export </span><span class="nv">KMP_STACKSIZE</span><span class="o">=</span>4000000000
-<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
-<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
-
-<span class="nv">MPI_BUFFER_SIZE</span><span class="o">=</span>128
-</code></pre></div></div>
-<p>注意在编译cumulus模块的地方大概要等待20分钟之久。采用上述环境变量出错：</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wrf.o: In <span class="k">function</span> <span class="sb">`</span>MAIN__<span class="s1">':
-wrf.f90:(.text+0x1f): undefined reference to `__intel_new_feature_proc_init'</span>
-libwrflib.a<span class="o">(</span>module_check_a_mundo.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>module_check_a_mundo_mp_check_nml_consistency_<span class="s1">':
-module_check_a_mundo.f90:(.text+0x31fa): undefined reference to `__intel_ssse3_rep_memmove'</span>
-module_check_a_mundo.f90:<span class="o">(</span>.text+0x35ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_mp_etanew.o): In function `module_mp_etanew_mp_etanewinit_'</span>:
-module_mp_etanew.f90:<span class="o">(</span>.text+0xacb0<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_mp_thompson.o): In function `module_mp_thompson_mp_table_ccnact_'</span>:
-module_mp_thompson.f90:<span class="o">(</span>.text+0x2ed74<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_ra_rrtm.o): In function `module_ra_rrtm_mp_rrtm_lookuptable_'</span>:
-module_ra_rrtm.f90:<span class="o">(</span>.text+0x256ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_ra_rrtmg_lw.o):module_ra_rrtmg_lw.f90:(.text+0x769bf): more undefined references to `__intel_ssse3_rep_memmove'</span> follow
-/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose_grib_<span class="s1">':
-io_grib_share.f90:(.text+0x1ee4): undefined reference to `_intel_fast_memmove'</span>
-/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose1d_grib_<span class="s1">':
-io_grib_share.f90:(.text+0x26f5): undefined reference to `_intel_fast_memmove'</span>
-io_grib_share.f90:<span class="o">(</span>.text+0x29e3<span class="o">)</span>: undefined reference to <span class="sb">`</span>_intel_fast_memmove<span class="s1">'
-0.57user 4.84system 0:08.12elapsed 66%CPU (0avgtext+0avgdata 487696maxresident)k
-12392inputs+102200outputs (47major+183178minor)pagefaults 0swaps
-make[1]: [em_wrf] Error 1 (ignored)
-</span></code></pre></div></div>
-<p>Google以下，发现intel官网的<a href="https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/494782">trouble shooting page</a>
-以下内容：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I believe the message may be caused by mixing objects built with different compiler versions. The __intel_new_feature_proc_init entry point is only in recent compiler libraries; if you have code built with a recent compiler, but are linking to older run-time libraries, you might encounter such a problem.
-</code></pre></div></div>
-
-<p>有道理，可能是之前编译的模块没有删掉。执行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$./clean -a
-</code></pre></div></div>
-<p>再次测试一下.出现难以理解的错误：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nup_em.f90(68): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
-   USE module_initialize_real, only : wrfu_initialize
-   -------^
-   real_em.f90(12): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
-
-</code></pre></div></div>
-<p>表示找不到include文件。到相关目录下检查发现文件确实存在，奇葩……重新执行compile语句后编译成功。怀疑是天河的文件系统不稳定造成。</p>
-
-<p>测试WPS编译出错。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make[1]: pathf90: Command not found
-</code></pre></div></div>
-<p>检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.</p>
-
-<p><strong>Updated 2018-04-01</strong></p>
-
-<p>据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。</p>
-
-<p><strong>Updated 2018-04-03</strong></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/04/01/jinlin-wrf-tianhe2/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#tensorflow" title="Tag: tensorflow" rel="tag">tensorflow</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>开始测试tensorflow的图片分类器！
-按<a href="https://www.youtube.com/watch?v=gIhUePPFmpY">这个视频</a>来，发现train的一步出现问题</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:tensorflow:Couldn't understand architecture name ''
-</code></pre></div></div>
-<p>发现是指定的环境变量读不到，于是将给ARCH赋值的语句和python执行语句一起放到shell脚本里，问题解决。
-train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based，tf应该自动选用cuda解决了。</p>
-
-<p>之后做测试，效果很好。</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fpwweqdx63j20fz0790t7.jpg" alt="" /></p>
-
-<p><strong>Updated 2018-03-30</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/30/tf-img-classifier/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>周三助教回到东校，决定去处理一下实验室服务器，看下我的wordpress博客内容到底还有没有救。因为<a href="https://novarizark.github.io/2017/12/30/raid-rebuild/">上次</a>做了1号盘位的rebuild，这次测试将0号盘位degraded的旧硬盘换下。
-可是将0号盘位换下后，1号盘位显示为non-raid磁盘，而0号新盘直接不认，what the fuck。怀疑是上次rebuild没有完成，所以将旧硬盘再次换到0号位置让raid卡自己玩去。
-换上旧硬盘后可以正常识别到raid信息并进入系统。测试mysql数据库居然发现wp_posts数据都存在，太幸运了，我的技术博客有救了！果断导出。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysqldump <span class="nt">-h</span> localhost <span class="nt">-u</span> root <span class="nt">-p</span> <span class="nt">--database</span> wordpress | gzip <span class="o">&gt;</span> backupfile.sql.gz
-gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> bck.sql 
-</code></pre></div></div>
-
-<p>之后在mysql下导入</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">source</span> <span class="o">~/</span><span class="n">bck</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>查看中文时注意utf8编码</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span> <span class="k">names</span> <span class="n">utf8</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>后面考虑写个python脚本将过去的日志转成markdown放到jekyll博客下。</p>
-
-<p><strong>Updated 2018-03-28</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/28/recover-techblog/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-26
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -609,66 +294,132 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>如何按照达里奥的《原则》来处理生活、学习、工作、投资？Learn from mistakes非常重要。出错不怕，怕的是知错不改。策略法则的反脆弱性来自于不断试错和快速迭代。快速迭代要求知错而改，而不是在同一条道路上反复撞墙。
-这篇文章用于总结经历过的错误，并试图从错误中抽象避免下次出现同样问题的原则。</p>
+                    
+<p>史铁生在回答记者问题的时候说，他职业是生病，业余写一点东西。对我上个月来说，已经差不多如此了。</p>
 
-<p>勘误表</p>
+<p>4月从HK回来就感觉不太对，特别容易疲乏。大概病程记录如下：</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">ID</th>
-      <th style="text-align: left">Date</th>
-      <th style="text-align: left">目标</th>
-      <th style="text-align: left">失败情况</th>
-      <th style="text-align: left">失败原因</th>
-      <th style="text-align: left">总结原则</th>
+      <th>date</th>
+      <th>record</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">1</td>
-      <td style="text-align: left">20180105</td>
-      <td style="text-align: left">因肠胃问题中山二院就医</td>
-      <td style="text-align: left">1. 没携带医保卡（实际并不需要，但不应遗漏）<br />2. 没有携带病历<br /> 3.粪便检查没有携带纸巾，不得不外出购买</td>
-      <td style="text-align: left">没有条理化检查任务所需准备</td>
-      <td style="text-align: left">1.条理化检查执行任务所需要的准备<br /> 2.随身携带纸巾是具有保险性质的操作</td>
+      <td>4.14</td>
+      <td>下雨初感微冷</td>
     </tr>
     <tr>
-      <td style="text-align: left">2</td>
-      <td style="text-align: left">20180119</td>
-      <td style="text-align: left">参加JW婚礼需要一双皮鞋</td>
-      <td style="text-align: left">鞋码购买错误，造成不便</td>
-      <td style="text-align: left">没有细致查看购买条款及介绍，没有联系客服</td>
-      <td style="text-align: left">购买物品时反复查验其属性说明是否合乎要求</td>
+      <td>4.15</td>
+      <td>广州图书馆，感觉冷，走回来后非常乏力；</td>
     </tr>
     <tr>
-      <td style="text-align: left">3</td>
-      <td style="text-align: left">20180207</td>
-      <td style="text-align: left">返程火车票学生票</td>
-      <td style="text-align: left">学生证缺少注册章损失187元</td>
-      <td style="text-align: left">学生证拿去注册后没有仔细查验注册章</td>
-      <td style="text-align: left">仔细查验对后续任务有重要影响的任务完成情况</td>
+      <td>4.16</td>
+      <td>去暨南大学，烨琪回来开会，晚上吃饭开始流鼻涕，等到南校区，劳累感非常明显；</td>
+    </tr>
+    <tr>
+      <td>4.17</td>
+      <td>开始出现显著感冒症状，嗓子痛，鼻塞，流清涕；</td>
+    </tr>
+    <tr>
+      <td>4.18</td>
+      <td>同前一天，无大变化，东校助教，返程感觉特别劳累；</td>
+    </tr>
+    <tr>
+      <td>4.19</td>
+      <td>明显感到不适，下午傍晚有发热感，睡觉有发热；</td>
+    </tr>
+    <tr>
+      <td>4.20</td>
+      <td>早起依然有轻微发热，右侧扁桃体溃疡，午饭后疲劳，下午发热明显，晚饭洗澡后明显发热</td>
+    </tr>
+    <tr>
+      <td>4.21</td>
+      <td>症状明显缓解，但是出现咽鼓管水肿，听声沉闷。</td>
+    </tr>
+    <tr>
+      <td>4.22</td>
+      <td>珠海组会，整日并无明显不适，晚餐吃海鲜，量略大。</td>
+    </tr>
+    <tr>
+      <td>4.23</td>
+      <td>晚上跑步4.05km，感觉疲劳</td>
+    </tr>
+    <tr>
+      <td>4.24</td>
+      <td>早晨起来发现零星似被臭虫叮咬痕迹依然有疲劳感，晚上仅仅做了少量哑铃运动</td>
+    </tr>
+    <tr>
+      <td>4.25</td>
+      <td>全身被叮！包括左手手心！整个人都要崩溃了，这尼玛在米帝就是噩梦，完全让人对睡觉恐惧的虫子！去顺克隆买了杀虫剂消杀。</td>
+    </tr>
+    <tr>
+      <td>4.27</td>
+      <td>去校医检查，拿了若干外用药、地氯雷他定及泼尼松，回来后感觉没必要吃激素吧，就先放着泼尼松没吃，开始轻微咳嗽，晚上没有在意，去跑了5km，明显劳累，速度不及。</td>
+    </tr>
+    <tr>
+      <td>4.28</td>
+      <td>咳嗽有些加重，没有在意。</td>
+    </tr>
+    <tr>
+      <td>4.29</td>
+      <td>晚上依然有被叮咬痕迹，咳嗽继续加重，不敢再运动，大量喝水吃VC。</td>
+    </tr>
+    <tr>
+      <td>4.30</td>
+      <td>嗓音开始嘶哑，咳嗽加重再次出痰，有些乏力，入夜低烧，平躺咳嗽非常严重，只睡了4-5小时。</td>
+    </tr>
+    <tr>
+      <td>5.1</td>
+      <td>低烧，嗓音嘶哑，不停咳嗽，是夜再次发烧，38度左右，黄绿色痰和鼻涕，平躺后止不住咳嗽喘息，加上对虫子的恐惧，把床头灯移到腿部开着防止虫咬，垫高枕头后凌晨四点才昏昏睡去，痛苦至极。</td>
+    </tr>
+    <tr>
+      <td>5.2</td>
+      <td>早晨退烧，校医检查，体温36.2，血常规中性粒细胞比例偏高，白细胞计数略偏高，确诊为支气管炎。再次拿了氯雷他定和感咳双清。入夜再次低烧，37.6，躺下后再次止不住咳，五点半入睡，痛苦至极。</td>
+    </tr>
+    <tr>
+      <td>5.3</td>
+      <td>早晨退烧，咳嗽依然没有好转，去校医描述情况，开了头孢和阿斯美。发现吃阿斯美并没效果，甚至连中枢神经抑制的效果都没有，晚上再次没法入睡，这次更猛，六点钟。</td>
+    </tr>
+    <tr>
+      <td>5.4</td>
+      <td>白天咳嗽有所减轻，但入夜平躺依旧，夜里无法入睡，直到天亮，六点多昏昏睡去，给导师发消息请假会议，凌晨发现叮咬的虫子居然是跳蚤！</td>
+    </tr>
+    <tr>
+      <td>5.5</td>
+      <td>白天咳嗽明显减轻，入夜依然咳，但是整体有减轻，垫高枕头有明显好转，大概2点入睡。</td>
+    </tr>
+    <tr>
+      <td>5.6</td>
+      <td>咳嗽明显减轻，夜间也明显减轻，下午晚上到办公室看了《辩护人》，重温了《黑客帝国》。已经能够基本正常入睡。</td>
+    </tr>
+    <tr>
+      <td>5.7</td>
+      <td>只有零星咳嗽，终于好转。</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Updated 2018-03-26</strong></p>
+<p>前后真的差不多一个月了，感冒 过敏 再加上虫子叮，从来没有这么惨过。今天发现非农竞猜居然中了二等奖，也算是时来运转人品守恒吧。希望接下来一切回到正轨！</p>
+
+<p><strong>Updated 2018-05-07</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/26/principle-from-mistakes/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/05/07/ill-health-blog/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/25/job-seeking-info/">工作信息搜集记录</a>
+                  <a class="post-link" href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-25
+                        <i class="fa fa-calendar"></i>2018-05-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -687,219 +438,13 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
     
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
     
-        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>人生有很多重要的选择，常常因信息不足而近似抓阄，又因无法反复尝试而带有巨大风险，交流和搜集信息是降低系统风险的不二法门。
-他人提供的后验概率能够降低系统熵，从而使得决策树剪枝切实可行，在这里搜集整理一下目前得到的关于找工作的信息。以为最终决策提供素材。</p>
-
-<p><strong>交流信息表</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Name</th>
-      <th style="text-align: left">Date</th>
-      <th style="text-align: left">Affiliation</th>
-      <th style="text-align: left">Position</th>
-      <th style="text-align: left">Attitude</th>
-      <th style="text-align: left">Information</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">ZMS</td>
-      <td style="text-align: left">20180101</td>
-      <td style="text-align: left">SYSU</td>
-      <td style="text-align: left">PhD</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. ITMM 10月申请公租房，2k以下三室一厅<br /> 2. ITMM有职称后入手10k/m</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">HXM</td>
-      <td style="text-align: left">20180114</td>
-      <td style="text-align: left">SYSU</td>
-      <td style="text-align: left">Asso. R</td>
-      <td style="text-align: left">cons</td>
-      <td style="text-align: left">1. 被劝服<br /> 2. R系列压力大，待遇被削减，晋升机会偏小</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">HCD</td>
-      <td style="text-align: left">20180119</td>
-      <td style="text-align: left">CUIT</td>
-      <td style="text-align: left">Lecturer</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. 根据自身和平行经验认可编制重要性<br /> 2. 根据平行经验认可SZ福利待遇（低价房源？）<br />3. 教职（讲师、副教授）6-8年合同<br /> 4. SZ空管终身住房</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">CZS</td>
-      <td style="text-align: left">20180204</td>
-      <td style="text-align: left">SCSIO</td>
-      <td style="text-align: left">Assis. R</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. SCSIO环境问题<br /> 2. 认可编制的重要性</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">YX</td>
-      <td style="text-align: left">20180222</td>
-      <td style="text-align: left">SYSU</td>
-      <td style="text-align: left">Postdoc</td>
-      <td style="text-align: left">cons</td>
-      <td style="text-align: left">1. 被劝服<br /> 2. 认可postdoc出站后出路存在问题</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">HC</td>
-      <td style="text-align: left">20180225</td>
-      <td style="text-align: left">JNU</td>
-      <td style="text-align: left">Asso. Prof</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. 认可ITMM清闲<br /> 2. 否认高校人际简单，认可压力更大<br />3. 认可编制稀缺和价值<br /> 4.ITMM探亲假</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">CJ</td>
-      <td style="text-align: left">20180225</td>
-      <td style="text-align: left">ITMM</td>
-      <td style="text-align: left">Office Dean</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. ITMM扩编需求，科研业务并举<br /> 2. 强调竞争继续白热化以及编制的稀缺性<br /> 3.强调M PhD的机会</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">JXW</td>
-      <td style="text-align: left">20180226</td>
-      <td style="text-align: left">IPM, CMA</td>
-      <td style="text-align: left">Asso. R</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. 认可选择，但表示可惜<br /> 2. 不认可ITMM边缘化位置 <br /> 3. ITMM核心位置入职到手200k/a <br /> 4. 推荐SZ，住房（乐观主义偏差？），自由探索 <br />5. 提供SZ联系方式</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">CSS</td>
-      <td style="text-align: left">20180301</td>
-      <td style="text-align: left">MCGILL</td>
-      <td style="text-align: left">Postdoc</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">工作后可quit选择postdoc，反之不行</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">HYJ</td>
-      <td style="text-align: left">20180303</td>
-      <td style="text-align: left">CSU</td>
-      <td style="text-align: left">Postdoc</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. SZ务实，财政充裕，但是从业务岗起 <br /> 2.多有合作，提供SZ联系方式<br /></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">LHW</td>
-      <td style="text-align: left">20180310</td>
-      <td style="text-align: left">SYSU</td>
-      <td style="text-align: left">PhD</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. 关注人才计划<br /> 2. FS中心缺人，待遇稍差<br /> 3.SZ要注意住房问题的后视偏差<br />4.市一级待遇比省一级高？<br />5. SZ员工宿舍较差？</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">CYP</td>
-      <td style="text-align: left">20180312</td>
-      <td style="text-align: left">DG-CMA</td>
-      <td style="text-align: left">Engineer</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. 关注企业机会，天气宝 <br /> 2.FS中心缺人<br />3.TCent朋友离职做量化</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">LX</td>
-      <td style="text-align: left">20180321</td>
-      <td style="text-align: left">BJU</td>
-      <td style="text-align: left">PhD</td>
-      <td style="text-align: left">cons</td>
-      <td style="text-align: left">1. 无法劝服，执意继续</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">PB</td>
-      <td style="text-align: left">20180321</td>
-      <td style="text-align: left">IAP</td>
-      <td style="text-align: left">PhD</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. IAP首选稳定工作 <br />2. 同样计划稳定工作</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">HCD</td>
-      <td style="text-align: left">20180325</td>
-      <td style="text-align: left">CUIT</td>
-      <td style="text-align: left">Lecturer</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">NUIST讲师有编制</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">LMT</td>
-      <td style="text-align: left">20180326</td>
-      <td style="text-align: left">BJU</td>
-      <td style="text-align: left">PhD</td>
-      <td style="text-align: left">pros</td>
-      <td style="text-align: left">1. BJ毕业生热捧企业岗位<br /> 2. CAMS已经排斥BJU PhD</td>
-    </tr>
-  </tbody>
-</table>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/25/job-seeking-info/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/22/mysql-comments/">mysql字段注释</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
     
   
 
@@ -918,7 +463,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
     
         <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
     
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>
     
   
 
@@ -928,65 +473,419 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                 </div>
                 <div class="excerpt">
                     
-<p>开始组建财报数据表，过程中有必要做一些注释说明字段，比如资产负债表中为了压缩存储空间，现金等字段单位用kdollar。
-差了下操作如下：</p>
+<p>John发邮件说Berkeley SAVIO机器上的CESM不能用了，因为Savio升级了整个系统到Sci Linux7，出错信息：</p>
 
-<p>创建表过程中</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">cash_equiv</span> <span class="n">int</span> <span class="k">null</span> <span class="k">comment</span> <span class="s1">'Cash and Equivalents (kdollars)'</span><span class="p">,</span>
-</code></pre></div></div>
+<blockquote>
+  <p>perl: symbol lookup error: /global/home/groups/co_aiolos/soft/perl5/lib/perl5/x86_64-linux-thread-multi/auto/XML/LibXML/LibXML.so: undefined symbol: Perl_Gthr_key_ptr</p>
+</blockquote>
 
-<p>修改表过程中</p>
+<p>很明显是perl XMLlib编译运行库不匹配才会造成这个问题，差了下Sci Linux7 gcc库为485，6好像还是44x。但没有root权限不能直接yum update，按<a href="https://bb.cgd.ucar.edu/cesm-runtime-error-cant-locate-loadable-object-module-xmllibxml-inc">论坛贴子</a>，到CPAN<a href="http://search.cpan.org/dist/XML-LibXML/LibXML.pod">下载源代码编译</a>后，重新制定环境变量依然不行，后采用偷天换日的办法，把.so和几个库文件放到源gcc44x版本的编译目录下，居然就可以了。</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">eqbalance_sheet</span> <span class="k">modify</span> <span class="k">column</span> <span class="n">invest</span> <span class="n">int</span> <span class="k">comment</span> <span class="s1">'Investments (Deficit, kdollars)'</span><span class="p">;</span> 
-</code></pre></div></div>
-
-<p>添加字段过程中</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">alter</span> <span class="k">table</span> <span class="n">eq_balance_sheet</span> <span class="k">add</span> <span class="n">other_income</span> <span class="n">int</span> <span class="k">comment</span> <span class="s1">'Accumulated Other Comprehensive Income (kdollars)'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>查看说明：</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">full</span> <span class="n">columns</span> <span class="k">from</span> <span class="n">eq_balance_sheet</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">Field</span>          <span class="o">|</span> <span class="k">Type</span>        <span class="o">|</span> <span class="k">Collation</span>       <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span> <span class="o">|</span> <span class="k">Privileges</span>                      <span class="o">|</span> <span class="k">Comment</span>                                           <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">rhid</span>           <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>    <span class="o">|</span> <span class="n">utf8_general_ci</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span>                                                   <span class="o">|</span>
-<span class="o">|</span> <span class="n">symbol</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="n">utf8_general_ci</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span>                                                   <span class="o">|</span>
-<span class="o">|</span> <span class="n">cash_equiv</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Cash</span> <span class="k">and</span> <span class="n">Equivalents</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                   <span class="o">|</span>
-<span class="o">|</span> <span class="n">invest_curr</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
-<span class="o">|</span> <span class="n">cash_st_invest</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Cash</span> <span class="k">and</span> <span class="n">Short</span> <span class="n">Term</span> <span class="n">Investments</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
-<span class="o">|</span> <span class="n">receivables</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Trade</span> <span class="k">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Trade</span> <span class="n">Receivables</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
-<span class="o">|</span> <span class="n">inventory</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Inventory</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                              <span class="o">|</span>
-<span class="o">|</span> <span class="n">curr_ast</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Current</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                         <span class="o">|</span>
-<span class="o">|</span> <span class="n">ppe_net</span>        <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Property</span><span class="p">,</span> <span class="n">Plant</span> <span class="o">&amp;</span> <span class="n">Equipment</span> <span class="n">Net</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>        <span class="o">|</span>
-<span class="o">|</span> <span class="n">goodwill</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Goodwill</span> <span class="k">and</span> <span class="n">Intangible</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>         <span class="o">|</span>
-<span class="o">|</span> <span class="n">invst_ncurr</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">tax_ast</span>        <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Tax</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">ast_ncurr</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Assets</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                     <span class="o">|</span>
-<span class="o">|</span> <span class="n">total_ast</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Assets</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                           <span class="o">|</span>
-<span class="o">|</span> <span class="n">payables</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Trade</span> <span class="k">and</span> <span class="n">Non</span><span class="o">-</span><span class="n">Trade</span> <span class="n">Payables</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>           <span class="o">|</span>
-<span class="o">|</span> <span class="n">debt_curr</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Debt</span> <span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                           <span class="o">|</span>
-<span class="o">|</span> <span class="n">curr_liab</span>      <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Current</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
-<span class="o">|</span> <span class="n">debt_ncurr</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Debt</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                       <span class="o">|</span>
-<span class="o">|</span> <span class="n">total_debt</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Debt</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">def_revenue</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="k">Deferred</span> <span class="n">Revenue</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                       <span class="o">|</span>
-<span class="o">|</span> <span class="n">tax_liab</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Tax</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                        <span class="o">|</span>
-<span class="o">|</span> <span class="n">dep_liab</span>       <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Deposit</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                    <span class="o">|</span>
-<span class="o">|</span> <span class="n">liab_ncurr</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Liabilities</span> <span class="n">Non</span><span class="o">-</span><span class="k">Current</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">total_liab</span>     <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Total</span> <span class="n">Liabilities</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span>                      <span class="o">|</span>
-<span class="o">|</span> <span class="n">other_income</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Accumulated</span> <span class="n">Other</span> <span class="n">Comprehensive</span> <span class="n">Income</span> <span class="p">(</span><span class="n">kdollars</span><span class="p">)</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">ret_earning</span>    <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Accumulated</span> <span class="n">Retained</span> <span class="n">Earnings</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">equity</span>         <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Shareholders</span> <span class="n">Equity</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span>           <span class="o">|</span>
-<span class="o">|</span> <span class="n">invest</span>         <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>     <span class="o">|</span> <span class="k">NULL</span>            <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>       <span class="o">|</span> <span class="k">select</span><span class="p">,</span><span class="k">insert</span><span class="p">,</span><span class="k">update</span><span class="p">,</span><span class="k">references</span> <span class="o">|</span> <span class="n">Investments</span> <span class="p">(</span><span class="n">Deficit</span><span class="p">,</span> <span class="n">kdollars</span><span class="p">)</span>                   <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------------+-------------+-----------------+------+-----+---------+-------+---------------------------------+---------------------------------------------------+</span>
-<span class="mi">28</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
-</code></pre></div></div>
+<p><strong>Updated 2018-05-02</strong></p>
 
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/22/mysql-comments/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/05/02/cesm-savio-update/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-29
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#liquidity" title="Category: liquidity" rel="category">liquidity</a>&nbsp;
+    
+        <a href="/category/#market" title="Category: market" rel="category">market</a>&nbsp;
+    
+        <a href="/category/#Living&thinking" title="Category: Living&thinking" rel="category">Living&thinking</a>&nbsp;
+    
+        <a href="/category/#career" title="Category: career" rel="category">career</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#principle" title="Tag: principle" rel="tag">principle</a>&nbsp;
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#Economics" title="Tag: Economics" rel="tag">Economics</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>无论对市场，企业，还是家庭或个人，良好的流动性都是财务健康，经济健康的指标。
+为什么这么说呢？拿个人做比方，如果你每个月都拿出一大笔钱去存定期，实际手头现金留存极少的话，万一遇到自己或家庭成员的大笔医疗开支、必要的大额消费、绝佳的投资机会等情形，将会十分捉襟见肘，如果不想忍受提前取出固定期存款的利率惩罚，就需要去找亲朋好友拆借，毫无疑问这是两难且十分痛苦的。
+因此，个人愿意去付出溢价来购买高流动性的资产（现金、股债基金等），即便它们可能有更低的预期收益或者更高的风险。比如对手头持现的人来说，相当于利用这笔财富的投资机会去购买其随时使用的权利，这也是为什么投资大佬们都把手头所持有的现金称作“dry powder (干火药)”，随时上膛，随时发射。
+当然，对于我个人来说，是从来不会去买固定期限产品的。</p>
+
+<p>同时，缺少流动性的市场也是不受待见的，比如开盘后画锯齿状甚至一字线的股票，往往就代表着交投稀缺甚至没有成交，市场价格就会出现非常不平滑的波动。wikipedia上对市场流动性的定义为：</p>
+<blockquote>
+  <p>资产能够以一个合理的价格顺利变现的能力，它是一种所投资的时间尺度（变为现金的难易程度）和价格尺度（与公平市场价格相比的折扣）之间的关系。通常简称流通性。</p>
+</blockquote>
+
+<p>卖家买家交投活跃的市场被称为“深市场”，这样的市场中，大额订单不容易对市价造成影响。</p>
+
+<p>正常情况下，无论买家还是卖家，都喜欢流动性好的市场。但是，流动性差的市场也是普遍存在的，相比于证券，债券市场，比如房地产（不动产）市场，租赁市场，甚至人才市场，婚恋市场，都可以说是流动性较差的市场。那么在流动性差的市场中，何种生存策略比较好呢？结合市场特征思考后，大概总结如下：</p>
+
+<ol>
+  <li>
+    <p><strong>主动搜寻交易机会</strong>
+流动性差的市场是个幺蛾子市场，对卖家来说，买家是稀缺的；对买家来说，卖家是稀缺的。因此，对于急于交易变现的一方，就不得不面对所谓的折价出售或溢价购买，更严重的是，一旦交易期本身还存在季节性的话，错过旺季往往会造成严重的折价损失。显然，真正稀缺的是交易的机会。因此，无论买家还是卖家，主动寻求交易机会非常重要。</p>
+  </li>
+  <li>
+    <p><strong>客观认识市场流动性现状，把握交易机会</strong>
+生活中能看到许多人都没有认识到流动性枯竭严重性的例子，比如，人们总是对未来过于乐观，因此超前消费，借入自己事实上还不上的贷款，最终由于种种原因违约乃至破产。婚恋或求职方面，往往也有很多挑三拣四者，尤其对婚恋市场中的女方而言，眼光高而缺乏足够准确的自我定位，往往就在犹豫和否决中错过无数机会，而旧社会普遍的印象而言，年龄的增长对于婚恋市场中的单身女性是极端不利的。因此客观认识到自己处在怎样深度的一个市场，当机会出现的时候，应当展现出足够的积极态度和采用足够智慧的策略。</p>
+  </li>
+  <li>
+    <p><strong>提高商品本身的不可替代性</strong>
+这一点不必多言，交易标的的价值才是最核心的定价因素。</p>
+  </li>
+</ol>
+
+<p><strong>Updated 2018-04-13</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/29/liquility-market-strategy/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-19
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+    
+        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+    
+        <a href="/tag/#markdown" title="Tag: markdown" rel="tag">markdown</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>接上篇<a href="https://novarizark.github.io/2018/04/04/raid-rebuild/">东校服务器RAID rebuild</a>,接下来的任务是如何把wordpress的数据库内容导出，转成jekyll的markdown文档。</p>
+
+<p>思路应该很简单直接，sql抽出来内容 日期 关键词（我当时只做了category分类，可以考虑直接充当关键词和分类，后续再调整），然后按jekyll的post格式给出即可。
+工具：pymysql</p>
+
+<p>google下，抽出post内容的几个关键语句如下：</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">--选出内容，唯一id，和category</span>
+<span class="o">&gt;</span><span class="k">SELECT</span> <span class="n">post_title</span><span class="p">,</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span><span class="p">,</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">wp_terms</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_taxonomy</span> <span class="k">ON</span> <span class="n">wp_terms</span><span class="p">.</span><span class="n">term_id</span> <span class="o">=</span> <span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_term_relationships</span> <span class="n">wpr</span> <span class="k">ON</span> <span class="n">wpr</span><span class="p">.</span><span class="n">term_taxonomy_id</span> <span class="o">=</span> 
+<span class="n">wp_term_taxonomy</span><span class="p">.</span><span class="n">term_taxonomy_id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">wp_posts</span> <span class="k">ON</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">wpr</span><span class="p">.</span><span class="n">object_id</span>
+<span class="k">WHERE</span> <span class="n">taxonomy</span> <span class="o">=</span> <span class="s1">'category'</span> 
+<span class="k">AND</span> <span class="n">post_type</span> <span class="o">=</span> <span class="s1">'post'</span> 
+<span class="k">ORDER</span> <span class="k">by</span> <span class="n">post_title</span><span class="p">;</span>
+</code></pre></div></div>
+<p>然后用python重新组织为markdown博客的形式，tag和category用相同的关键词。成功恢复了200+篇博客内容，后面大概修改下残缺，整理下tag就很好啦。</p>
+
+<p><strong>Updated 2018-04-13</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/19/wordpress-blog-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-17
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#keyword&nbspnotebook" title="Tag: keyword&nbspnotebook" rel="tag">keyword&nbspnotebook</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#20180312" id="markdown-toc-20180312">20180312</a></li>
+  <li><a href="#20180313" id="markdown-toc-20180313">20180313</a></li>
+  <li><a href="#20180417" id="markdown-toc-20180417">20180417</a></li>
+</ul>
+
+<h3 id="20180312">20180312</h3>
+
+<ul>
+  <li>Blockchain
+    <ul>
+      <li>Block–&gt;Header–&gt;Nonce–&gt;Hash</li>
+      <li>Double Spending–&gt;6 Confirmation</li>
+    </ul>
+  </li>
+  <li>Encryption Algorithm
+    <ul>
+      <li>Symmetric-key
+        <ul>
+          <li>DES–&gt;3DES–&gt;AES</li>
+        </ul>
+      </li>
+      <li>Public-key Cryptography
+        <ul>
+          <li>RSA</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Python Class
+    <ul>
+      <li>__init(self,a,b,c)__ –&gt; cls=class(a, b, c) –&gt; cls.a</li>
+      <li>method(self) –&gt; cls.method() –&gt;class.method(cls)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="20180313">20180313</h3>
+
+<ul>
+  <li>pymysql
+    <ul>
+      <li>with connection.cursor() as cursor</li>
+      <li>connection.commit()</li>
+      <li>connection.close()</li>
+    </ul>
+  </li>
+  <li>python-for-teens
+    <ul>
+      <li>string</li>
+      <li>if structure</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="20180417">20180417</h3>
+
+<ul>
+  <li>Bayesian Model
+    <ul>
+      <li>Bayesian Model</li>
+      <li>Markov Chain</li>
+      <li>Mento Carlo</li>
+      <li>Markov Chain Mento Carlo (MCMC)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Updated 2018-04-14</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/17/keyword-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>明文密码丢到程序里当然是很傻逼的事情（参见斯导新片《头号玩家》），所以访问数据库用了AES加密（<a href="https://novarizark.github.io/2018/03/12/cryptography-python-mysql/">参见</a>）。</p>
+
+<p>数据库可是个好东西，慢慢很多程序都要开始访问数据库了，那么我们自己的加密模块能否不通过动态方式添加搜索路径，像import其他模块那样引用呢？答案当然是可以的，在bashrc中修改PYTHONPATH环境变量就可以啦。</p>
+
+<p>当然这不是推荐方法，因为具有外部依赖性。推荐方法是在site-packages目录下增加一个扩展名为.pth的文件，在里面写入增加的搜索路径。这里有<a href="https://blog.csdn.net/liang19890820/article/details/76219560">很好的介绍</a>。</p>
+
+<p><strong>Updated 2018-04-14</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/14/python-search-path/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -1001,10 +900,10 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page2" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">3/42</span>
+          <span class="page_number ">3/43</span>
           
             <a href="/page4" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1245,7 +1144,52 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2344,14 +2288,14 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2512,7 +2456,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2596,6 +2540,13 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2603,7 +2554,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2624,7 +2575,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2652,7 +2603,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2792,7 +2743,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2911,7 +2862,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2927,6 +2878,27 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2940,25 +2912,25 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2994,7 +2966,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -3012,7 +2984,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -3048,7 +3020,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3192,7 +3164,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3345,7 +3317,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3381,7 +3353,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3399,7 +3371,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3408,7 +3380,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3480,7 +3452,16 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

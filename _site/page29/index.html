@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/03/09/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM绘制、修改模式地形高度</a>
+                  <a class="post-link" href="/2015/05/11/annamalai-jc-2013/">Annamalai-JC-2013</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-03-09
+                        <i class="fa fa-calendar"></i>2015-05-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,7 +264,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
+    
+        <a href="/category/#2015" title="Category: 2015" rel="category">2015</a>
     
   
 
@@ -279,7 +283,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
+    
+        <a href="/tag/#2015" title="Tag: 2015" rel="tag">2015</a>
     
   
 
@@ -289,24 +295,179 @@
                 </div>
                 <div class="excerpt">
                     
-<p>修改inputdata/cam/topo下USGS的地形数据。变量为PHIS（地表位势高度[m^2/s^2]），除以9.81[m/s^2]即可。</p>
+<h4><span style="color: #339966;"><strong>2015/04/23</strong></span></h4>
+<pre><strong>题目：Global Warming Shifts the Monsoon Circulation, Drying South Asia</strong>
+<strong>原文：<a href="http://222.200.180.66:1234/L_Zealot/paperhub/warehouse/Annamalai-JC-2013-26_9_2701-2718.pdf">Annamalai-JC-2013-26_9_2701-2718.pdf</a></strong></pre>
+<p><strong>笔记：</strong>本文对近几十年来南亚地区季风降水减少的原因进行了探索。前人研究已经指出，随着人类活动造成的气候变化，全球的降水有了微弱的增多，但主要的降水增长在中高纬度地区，北纬10-20纬度带上降水却有着显著的减少(<a href="http://222.200.180.66:1234/L_Zealot/paperhub/warehouse/Zhang-Nature-2007-448_7152_461-465.pdf">Zhang et al. 2007</a>)。而南亚季风区正处于这一纬度带，过去几十年里经历了降水的减少。</p>
 
-<p>参见<a href="https://www2.cesm.ucar.edu/working-groups/pwg/documentation/cesm1-paleo-ug/near-modern/atmosphere">这里</a>，这是一个古气候模拟的用户手册。</p>
+<p>作者随后从观测资料和CM2.1 historical run去考察了降水减少的情况，发现与此同时，西北太平洋地区的降水确实增加的，出现了反位相变化。而这种长期的降水变化，在不包括人类强迫的PI Control试验中是不能看到的。于是作者提出他们的假说：人类强迫下（主要是CO2）西北太平洋降水的增多会引起大气环流异常，导致南亚地区降水减少。</p>
+
+<p>为了证明这一假说，作者通过4组AGCM试验来考察印太地区海温增暖对南亚地区降水的影响，结果发现，无论是SST的趋势加在西北太平洋，还是整个印太暖池，南亚地区的降水都是减少的，而西北太平洋地区的降水是增加的。作者通过对湿静力能收支的诊断，发现南亚地区蒸发的减少以及西北太平洋地区蒸发的增多对两个区域都有较大贡献。而环流方面，西北太平洋出现的气旋性变化使得出现从副热带地区指向南亚地区的北方扰动，这一扰动使得异常的冷平流和干平流进入南亚地区，造成南亚地区降水的减少。最后的讨论部分作者指出，2xCO2和4xCO2情景下，南亚地区降水是增多的。说明transient响应可能和平衡态是不一致的，未来究竟如何，还是存疑的。</p>
+
+<p><strong>亮点和借鉴：</strong></p>
+
+<p><strong>1.从观测去找信号，提出假设，进而用model去验证是非常重要的能力，一定要重视和锻炼 （套路）</strong></p>
+
+<p><strong>2.MSE的诊断方法可以借鉴，Moisture advection的诊断方法可以借鉴</strong></p>
+
+<p><strong>3.考察观测现象时，将CMIP5的结果引入，指出人类活动的影响，这种方法在研究人类活动对全球变化的作用时非常值得借鉴</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/03/09/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/05/11/annamalai-jc-2013/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/02/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/">【已解决】Linux下查看目录树</a>
+                  <a class="post-link" href="/2015/05/05/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-9/">【已解决】用ncl6.3.0计算Q1</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-02-28
+                        <i class="fa fa-calendar"></i>2015-05-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>NCL v6.3.0发布后，发现新增了advect_variable函数，这对于一些复杂诊断方程的计算无疑非常方便，于是决定用ncl来计算Q1.没想到advect_variable函数与垂直积分函数一样，运行后告诉我找不到这个函数，这什么情况，新feature没加好就发布还说有了有了……坑爹啊。</p>
+
+<p>后来用<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/center_finite_diff_n.shtml">center_finite_diff_n</a>中央差分函数配合完成，计算效率感觉比之前错误得用EC monthly数据算时高非常多（主要是short2flt函数慢），何况NCEP-DOE这套资料还是daily，1度和2.5度分辨率差这么多？没仔细算数据规模，不知道为什么……</p>
+
+<p>写程序时基本没有出什么错误，对这类诊断方程编程时，最需要注意的就是统一国际单位制，量纲要分析正确。还有平流项是严重的非线性项，一定要用daily算再平均到monthly哦～</p>
+
+<p>第一次出图，1979年年均菲律宾海一带Q1与Day200时的Q1，一看就是对的吧:-)</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150505183500.jpg"><img class="alignnone size-full wp-image-482" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150505183500.jpg" alt="QQ图片20150505183500" width="420" height="374" /></a></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/05/05/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/04/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pdfa/">【已解决】PDF/A标准文章标注问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-04-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>CD的文章默认都是这个。改下设置就可以</p>
+
+<p>打开PDF文件，依次点击“编辑”、“首选项”、“文档”(种类)中选择“从不”选项并确定，默认的为“使用 PDF/A 模式下</p>
+
+<p>参考资料：http://blog.sciencenet.cn/blog-211702-415720.html</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/04/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pdfa/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/04/20/e5-85-b3-e4-ba-8eshell-e5-be-aa-e7-8e-afwget-e4-b/">关于shell循环wget与tar</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-04-20
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -352,35 +513,29 @@
                 </div>
                 <div class="excerpt">
                     
-<p>希望查看某一项目的目录结构，有目录树的形式最好了。查了下，这个可以</p>
-<pre>find . -type d -print</pre>
-<p>但是效果并不美观
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ截图20150228195715.png"><img class="alignnone size-full wp-image-408" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ截图20150228195715.png" alt="QQ截图20150228195715" width="740" height="314" /></a></p>
-
-<p>终极解决方案是root下装个tree命令</p>
-<pre>yum install tree</pre>
-<p>然后tree就可以了</p>
-
-<p>效果：
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ图片20150228195852.png"><img class="alignnone size-full wp-image-409" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ图片20150228195852.png" alt="QQ图片20150228195852" width="934" height="1152" /></a></p>
-
-<p>如果只显示目录：</p>
-<pre>tree -d</pre>
+<p>又到了批量下数据的时候，linux批量wget真是顺畅无比，脚本直接用C/C++语法即可。</p>
+<pre>#!/bin/bash
+for ((i=1979;i&lt;2014;i++))
+{
+  wget xxxxx.$i.xxxx
+}</pre>
+<p>批量解压文件，依然用循环解决</p>
+<pre>for tar in *.tar.gz; do tar -xvf $tar; done</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/02/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/04/20/e5-85-b3-e4-ba-8eshell-e5-be-aa-e7-8e-afwget-e4-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/">【已解决】pbs指定作业节点</a>
+                  <a class="post-link" href="/2015/04/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-9/">【已解决】矢量+位图混编eps保证位图质量转最小体积pdf</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-24
+                        <i class="fa fa-calendar"></i>2015-04-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -399,9 +554,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
     
   
 
@@ -418,9 +571,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
     
   
 
@@ -430,28 +581,38 @@
                 </div>
                 <div class="excerpt">
                     
-<p>之前捣鼓了半天没有成功，这次终于知道指定语法怎么写了。</p>
+<p>帮YQ妹妹做简历，她用PS出eps版，高质量位图+矢量（主要是文字）混编，投简历要求肯定是<strong>标准A4 pdf，保证图像质量，体积又不能大（1-2MB吧，至多）</strong>，传过来的单页eps就接近50M，介么有挑战性的任务……</p>
 
-<p>惯例，申请两个节点，每个节点16进程</p>
-<pre>#PBS -l nodes=2:ppn=16</pre>
-<p>如果需要指定到c72 c73两个节点，需要这么写就可以了：</p>
-<pre>#PBS -l nodes=c72:ppn=16+c73:ppn=16</pre>
-<p>但是这样在qstat上显示会有问题，显示进程数为0，不过不影响作业正常运行。</p>
+<p>实现步骤还是比较简单的，尝试错误多次找到最佳组合：</p>
+
+<p>AI存pdf，选项如下：</p>
+
+<p>1.最小文件</p>
+
+<p>2.150dpi彩图压缩</p>
+
+<p>3.最高质量</p>
+
+<p>出品pdf 530KB，满足需求！相比印刷质量出品10MB，压缩20倍，基本不影响浏览打印效果。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/04/Snap1.gif"><img class="alignnone size-full wp-image-454" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/04/Snap1.gif" alt="Snap1" width="677" height="561" /></a></p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/04/Snap2.jpg"><img class="alignnone size-full wp-image-457" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/04/Snap2.jpg" alt="Snap2" width="1137" height="804" /></a></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/04/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/">【已解决】Linux对时命令</a>
+                  <a class="post-link" href="/2015/04/05/php-e9-81-8d-e5-8e-86-e7-9b-ae-e5-bd-95/">php遍历目录</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-21
+                        <i class="fa fa-calendar"></i>2015-04-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -470,7 +631,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -487,7 +648,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -497,183 +658,17 @@
                 </div>
                 <div class="excerpt">
                     
-<pre>#ntpdate us.pool.ntp.org</pre>
+<p>整理所有报告用于下载，希望用php自动遍历目录读入，采用scandir函数实现。直接返回目录到字符串数组，第0与第1个元素是”.”和”..”，空过即可。</p>
+
+<p> </p>
+
+<p>参考资料：</p>
+
+<p>http://www.jb51.net/article/43186.htm</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/">【已解决】自动生成pbs的create_newcase.sh</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>在上一篇<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=387">【已解决】shell大法好——用here document生成脚本</a>中介绍了如何使用here document自动生成脚本文件，折腾了一番，搞定了新的create_newcase.sh，可以自动生成pbs文件啦，不用每次调核心数调节点调路径啦。话说shell的if语法真是折腾，调试了快半个小时才通过三行if语句。注意各种空格！</p>
-
-<p>核心代码：</p>
-<pre>97 #Deal with que and nodes
-98 NNODES=$[NTASKS/16]
-99
-100 if [ $QUENAME = "ys" ]; then
-101 WALLTIME=999
-102 elif [ $QUENAME = "few" ]; then
-103 WALLTIME=720
-104 elif [ $QUENAME = "medium" ]; then
-105 WALLTIME=168
-106 else
-107 WALLTIME=48
-108 fi
-109
-110 #--------------------------------------
-111 #------Now generate the pbs file-------
-112 #--------------------------------------
-113 cat &lt;&lt; EOF &gt; run.pbs
-114 #!/bin/sh
-115 #PBS -N $CASENAME
-116 #PBS -q $QUENAME
-117 #PBS -l walltime=$WALLTIME:00:00
-118 #PBS -l nodes=$NNODES:ppn=16
-119 #PBS -r n
-120 #PBS -o cesmrun.log
-121 #PBS -e cesmrun.err
-122 echo "This jobs is "\$PBS_JOBID@\$PBS_QUEUE
-123 MPIBIN=/public/mpi/mvapich2-18-intel/bin
-124 EXEROOT=/users/yangsong3/L_Zealot/F/$CASENAME/exe
-125 cd \$EXEROOT
-126 \$MPIBIN/mpirun -np $NTASKS -hostfile \$PBS_NODEFILE ./cesm.exe &gt;&amp; ../run.log
-127 EOF</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/">【已解决】shell大法好——用here document生成脚本</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>CESM从新建一个case，更改pe layers，到最后提交run脚本执行，还是需要折腾一番的，尤其是四期动辄就对csh傻眼（貌似最近好了），还是提交标准的bash pbs妥当，不过更改pbs，又要费一番功夫。最好就是在create newcase的时候直接把bps生成好，change pe layers的脚本里也加入对pbs修改的语句，这样就可以省下很多功夫。按照【shell 生成文本】的关键词查了下资料。发现here document可以解决问题。</p>
-<blockquote>
-<div>例如下面的here.sh 文件</div>
-<div>cat &lt;&lt; EOF &gt; output.sh</div>
-<div>echo "hello"</div>
-<div>echo "world"</div>
-<div>EOF</div>
-<div>使用 sh here.sh 运行这个脚本文件，会得到output.sh 这个新文件，里面的内容如下</div>
-<div>echo "hello"</div>
-<div>echo "world"</div>
-<div></div></blockquote>
-<div>还是很简单的说～而且可以识别母脚本中的变量。另外here document还可以用来与数据库或者终端交互，功能确实强大。</div>
-<div></div>
-<div>参考资料：</div>
-<div>http://www.2cto.com/os/201307/231010.html</div>
-<div></div>
-<div>http://jeremiah.blog.51cto.com/539865/339211</div>
-<div></div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/04/05/php-e9-81-8d-e5-8e-86-e7-9b-ae-e5-bd-95/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -688,10 +683,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page28" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">29/42</span>
+          <span class="page_number ">29/43</span>
           
             <a href="/page30" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -932,7 +927,52 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2031,14 +2071,14 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2199,7 +2239,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2283,6 +2323,13 @@
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2290,7 +2337,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2311,7 +2358,7 @@
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2339,7 +2386,7 @@
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2479,7 +2526,7 @@
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2598,7 +2645,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2614,6 +2661,27 @@
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2627,25 +2695,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2681,7 +2749,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2699,7 +2767,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2735,7 +2803,7 @@
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2879,7 +2947,7 @@
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3032,7 +3100,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3068,7 +3136,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3086,7 +3154,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3095,7 +3163,7 @@
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3167,7 +3235,16 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

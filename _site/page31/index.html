@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,322 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/">【已解决】NCL input in flex scanner failed错误</a>
+                  <a class="post-link" href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/">【已解决】Linux对时命令</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-02
+                        <i class="fa fa-calendar"></i>2015-01-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<pre>#ntpdate us.pool.ntp.org</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/">【已解决】自动生成pbs的create_newcase.sh</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-08
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>在上一篇<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=387">【已解决】shell大法好——用here document生成脚本</a>中介绍了如何使用here document自动生成脚本文件，折腾了一番，搞定了新的create_newcase.sh，可以自动生成pbs文件啦，不用每次调核心数调节点调路径啦。话说shell的if语法真是折腾，调试了快半个小时才通过三行if语句。注意各种空格！</p>
+
+<p>核心代码：</p>
+<pre>97 #Deal with que and nodes
+98 NNODES=$[NTASKS/16]
+99
+100 if [ $QUENAME = "ys" ]; then
+101 WALLTIME=999
+102 elif [ $QUENAME = "few" ]; then
+103 WALLTIME=720
+104 elif [ $QUENAME = "medium" ]; then
+105 WALLTIME=168
+106 else
+107 WALLTIME=48
+108 fi
+109
+110 #--------------------------------------
+111 #------Now generate the pbs file-------
+112 #--------------------------------------
+113 cat &lt;&lt; EOF &gt; run.pbs
+114 #!/bin/sh
+115 #PBS -N $CASENAME
+116 #PBS -q $QUENAME
+117 #PBS -l walltime=$WALLTIME:00:00
+118 #PBS -l nodes=$NNODES:ppn=16
+119 #PBS -r n
+120 #PBS -o cesmrun.log
+121 #PBS -e cesmrun.err
+122 echo "This jobs is "\$PBS_JOBID@\$PBS_QUEUE
+123 MPIBIN=/public/mpi/mvapich2-18-intel/bin
+124 EXEROOT=/users/yangsong3/L_Zealot/F/$CASENAME/exe
+125 cd \$EXEROOT
+126 \$MPIBIN/mpirun -np $NTASKS -hostfile \$PBS_NODEFILE ./cesm.exe &gt;&amp; ../run.log
+127 EOF</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/">【已解决】shell大法好——用here document生成脚本</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>CESM从新建一个case，更改pe layers，到最后提交run脚本执行，还是需要折腾一番的，尤其是四期动辄就对csh傻眼（貌似最近好了），还是提交标准的bash pbs妥当，不过更改pbs，又要费一番功夫。最好就是在create newcase的时候直接把bps生成好，change pe layers的脚本里也加入对pbs修改的语句，这样就可以省下很多功夫。按照【shell 生成文本】的关键词查了下资料。发现here document可以解决问题。</p>
+<blockquote>
+<div>例如下面的here.sh 文件</div>
+<div>cat &lt;&lt; EOF &gt; output.sh</div>
+<div>echo "hello"</div>
+<div>echo "world"</div>
+<div>EOF</div>
+<div>使用 sh here.sh 运行这个脚本文件，会得到output.sh 这个新文件，里面的内容如下</div>
+<div>echo "hello"</div>
+<div>echo "world"</div>
+<div></div></blockquote>
+<div>还是很简单的说～而且可以识别母脚本中的变量。另外here document还可以用来与数据库或者终端交互，功能确实强大。</div>
+<div></div>
+<div>参考资料：</div>
+<div>http://www.2cto.com/os/201307/231010.html</div>
+<div></div>
+<div>http://jeremiah.blog.51cto.com/539865/339211</div>
+<div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/05/e3-80-90paperhub-e3-80-91refman-e6-a0-bc-e5-bc-8f/">【paperhub】格式导出与pdf附件信息</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>研究了半天终于搞明白了怎么用endnote导出ris或者enw，这样终于可以弄清楚几个关键属性对应的keyword了，又可以扩展paperhub的功能。目前考虑加入本地附件链接，doi怎么搞目前还没头绪。</p>
+
+<p>第一步，确定ris或者enw导出在样式中被选中</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap2.jpg"><img class="alignnone size-full wp-image-378" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap2.jpg" alt="Snap2" width="422" height="541" /></a></p>
+
+<p>第二步，选中文献，文件–&gt;导出，可以看到输出样式可选ris或者enw输出</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-379" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg" alt="Snap3" width="577" height="537" /></a></p>
+
+<p>一个导出文件的例子，其中L1 标签后面对应ris导出格式的本地pdf路径。
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-380" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/QQ图片20150105185757.jpg" alt="QQ图片20150105185757" width="758" height="516" /></a></p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/05/e3-80-90paperhub-e3-80-91refman-e6-a0-bc-e5-bc-8f/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/05/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91ncl-e/">【更新中】ncl读取ASCII文件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -289,24 +602,80 @@
                 </div>
                 <div class="excerpt">
                     
-<p>最近使用ncl总是在最后成图的时候出现input in flex scanner failed这种错误。可以肯定是GUI的问题，<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21254823">查了下资料感觉也无从下手</a>，错误触发原因看起来比高级图形接口更加底层，动弹不得。</p>
+<p>帮CDH做sst forcing的试验，需要用ncl读入个规整的index （35x12），回归出sst anomalies pattern，测试了下asciiread函数，非常好用，有点类似MATLAB的load函数，能够直接识别分隔符。</p>
 
-<p>这个错误最初是由于把字号改大而出现的，于是我将字号改小，果然没问题……不太懂什么原因</p>
+<p>拷个example过来</p>
+
+<p><b>Example 1</b></p>
+
+<p>Assume you have an ASCII data file called “data.asc”:</p>
+<pre> 1.  2.  3.
+ 4.  5.  6.
+ 7.  8.  9.
+10. 11. 12.
+13. 14. 15.
+</pre>
+<p>You can read it various ways as shown with the following NCL script:</p>
+<pre>begin  
+  z1 = <strong>asciiread</strong>("data.asc",(/5,3/),"float")
+  z2 = <strong>asciiread</strong>("data.asc",(/4,2/),"float")
+end
+</pre>
+<p>The results of <tt>z1</tt> and <tt>z2</tt> would be:</p>
+<pre>z1(0,0) = 1.
+z1(0,1) = 2.
+z1(0,2) = 3.
+z1(1,0) = 4.
+z1(1,1) = 5.
+z1(1,2) = 6.
+z1(2,0) = 7.
+.
+.
+.
+z1(4,0) = 13.
+z1(4,1) = 14.
+
+
+z2(0,0) = 1.
+z2(0,1) = 2.
+z2(1,0) = 3.
+z2(1,1) = 4.
+z2(2,0) = 5.
+z2(2,1) = 6.
+z2(3,0) = 7.
+z2(3,1) = 8.
+</pre>
+<p>Example of using -1:</p>
+<pre>begin
+	z3 = <strong>asciiread</strong>("data.asc",-1,"float")
+end
+</pre>
+<pre>z3(0) = 1.
+z3(1) = 2.
+z3(2) = 3.
+.
+.
+.
+z3(14)= 15.
+</pre>
+<p>The above <tt>z3</tt> could be reshaped via use of <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/onedtond.shtml"><strong>onedtond</strong></a>:</p>
+<pre>     Z3 = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/onedtond.shtml"><strong>onedtond</strong></a>(z3, (/5,3/) )
+</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/01/05/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/">【已解决】ncl中的cd_calendar</a>
+                  <a class="post-link" href="/2014/12/25/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e8-b/">【更新中】跳闸故障排查:Windows事件查看器</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-02
+                        <i class="fa fa-calendar"></i>2014-12-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -325,7 +694,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
     
   
 
@@ -342,7 +713,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
     
   
 
@@ -352,372 +725,21 @@
                 </div>
                 <div class="excerpt">
                     
-<p>处理CFSR的数据，已经是团队其他成员处理过的了，由于她用的是GrADS，清一色的二进制bin+描述文件ctl，不是自描述的nc文件，ncl处理起来没有任何的metadata，所以都要自己指定。数据文件名是YYYYMM的，循环不是很好写，查了一下，<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/cd_calendar.shtml#Examples">cd_calendar</a>这个函数很好用，官网上给的例子是hours since和days since的，实际上用months也是可以的。</p>
-<pre> <strong>16    </strong> time = ispan(0,383,1)
- <strong>17    </strong> time@units  =   "months since 1979-01-01"
- <strong>18</strong>
- <strong>19    </strong> date = cd_calendar(time,-1)</pre>
-<p>得到的date变量返回integer形式的YYYYMM，从79年1月到10年12月，perfect！
-而且使用cd_calendar函数，发现之前做起来很麻烦（要算位置）的合成和截取，都可以很方便实现了。还是教程看得不够细致呀 = =</p>
+<p>最近三天办公室计算机用电（桌位底插座对应线路）总是在凌晨跳闸，而其他路（包括空调）良好，非常奇怪。由于电脑一直开着，所以从系统日志入手查看问题。</p>
 
-<p><span style="color: #808080;"><strong>#Up to 20151216#</strong></span></p>
+<p>win7有eventvwr.exe，直接通过开始运行打开。</p>
 
-<p>用cd_calendar可以很好地转换days since之类的时间格式，用于长序列数据的切片读取非常有效。例如下面的例子就可以截取197901-201312的SST片。</p>
-<pre> 29 ymstrt = 197901
- 30 ymlast = 201312 ; 
- 31
- 32 data_path = "../../data/sst/monthly"
- 33 ctrl_file1 = data_path+"sst_HadOIBl_bc_1.9x2.5_1850_2011_c130301.nc"
- 34 ctrl_in1 = addfile (ctrl_file1, "r") 
- 35
- 36 time = ctrl_in1-&gt;time
- 37 yyyymm = cd_calendar(time,-1)
- 38 istrt = ind(yyyymm .eq. ymstrt)
- 39 ilast = ind(yyyymm .eq. ymlast)
- 40 var1 = ctrl_in2-&gt;SST_cpl(istrt:ilast,:,:)</pre>
-<p><span style="color: #808080;"><strong>#Up to 20150107#</strong></span></p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/12/QQ图片20141225101006.jpg"><img class="alignnone size-full wp-image-371" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/12/QQ图片20141225101006.jpg" alt="QQ图片20141225101006" width="1160" height="558" /></a></p>
+
+<p>可以看到左侧选中【windows日志】–&gt;【系统】，查看最近日志发现service control manager每个整点过三分会发出ID为7036的事件，而24日和25日这两天都是在凌晨4:03发出最后一个事件报告后缄默，23日在3:03发出最后一个事件报告后缄默。也就是说停电都发生在凌晨三点到五点之间。这样的凌晨时间，而又并非固定时间（可以锁定某些定时开启类电器），非常吊诡。</p>
+
+<p>参考资料</p>
+
+<p>http://blog.sina.com.cn/s/blog_518b64290100fewh.html</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl中关于Land Sea Mask的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>模式中为了防止海陆边界不连续造成积分不稳定，往往会将海温插值到陆地上，画图时当然不希望这些数据出现，求海温区域平均时也不希望出现，所以必须要处理下。
-根据目的是画图还是计算，处理的方式不一样。画图的话，我们希望海陆边缘不要出现<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141122160718.jpg"><img class="alignnone size-full wp-image-337" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141122160718.jpg" alt="QQ图片20141122160718" width="749" height="508" /></a></p>
-
-<p>比如这样就很好。其实不需对原数据进行操作，只要改变绘图的属性让地图底图后画就可以：</p>
-<pre>res@mpFillDrawOrder="PostDraw"</pre>
-<p>如果要进行计算，就需要mask了，如果是规整的1x1的数据可以用landsea_mask解决</p>
-<pre>load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/<a href="http://www.ncl.ucar.edu/Document/Functions/Shea_util/shea_util.shtml">shea_util.ncl</a>"</pre>
-<pre>a    = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/addfile.shtml"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
-lsdata = a-&gt;LSMASK
-lsm  = <strong>landsea_mask</strong>(lsdata,data&amp;lat,data&amp;lon)
-data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml"><strong>mask</strong></a>(data,lsm.eq.1,False)
-data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml"><strong>mask</strong></a>(data,lsm.eq.3,False)</pre>
-<p>如果数据不是规整的1x1，需要先做一下插值处理，比如包含极点的场变量转换</p>
-<pre> var4    = f2fsh_Wrap(var4s1,(/180,360/))</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/">【已解决】Adobe Acrobat X安装</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Acrobat X安装后出现Adobe Application Manager损坏的问题，安装包下有个amtlib.dll的动态链接库，复制到安装路径的根目录下即可解决问题。至此，Acrobat+Illustrator已经占据paper reading &amp; producing阵地，reading再有paperhub和endnote的助阵，终于把看文献的前期工作准备好了嗯～接下来……T_T</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/">【已解决】CAM_F05 Resolution Out of Memory</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>之前在天河二号（包括学校超算集群）测试的F05的CAM，都没有出现什么问题，最近在天河二号上重新跑CAM5 F05，却出现了out of memory的错误，重新配置了CAM4，还是一样的错误：</p>
-<blockquote>Fatal error in PMPI_Alltoallv: Other MPI error, error stack:
-PMPI_Alltoallv(540)....................: MPI_Alltoallv(sbuf=0x806f43e0, scnts=0xe6c75e0, sdispls=0xe764390, dtype=0x4c000829, rbuf=0x805f7650, rcnts=0xe765ba0, rdispls=0xe7673b0, dtype=0x4c000829, comm=0x84000006) failed
-MPIR_Alltoallv_impl(378)...............:
-MPIR_Alltoallv(341)....................:
-MPIR_Alltoallv_intra(192)..............:
-MPIC_Waitall(720)......................:
-MPIR_Waitall_impl(163).................:
-MPIDI_CH3I_Progress(363)...............:
-MPID_nem_mpich_blocking_recv(906)......:
-MPID_nem_glex_poll(234)................:
-MPIDI_nem_glex_ER_progress_PUT(74).....:
-MPIDI_nem_glex_ER_recv_progress(378)...:
-MPID_nem_handle_pkt(635)...............:
-MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receive for message data (MPIDI_CH3_PKT_EAGER_SEND)</blockquote>
-<p>重新配置PE层，增多节点数，调整MPIBUFFER，都没用。目前搁置。forum上有贴子：</p>
-
-<p>https://bb.cgd.ucar.edu/node/1001941</p>
-
-<p>eaton提到检查内存leak can be a very challenging exercise.</p>
-
-<p><strong>#Up to 20141108#</strong></p>
-
-<p>俊文寒假前将model统一升级到1.2.2后似乎没有这个问题了。不过我也退出折腾高分辨率啦，还是看paper学英语重要～嘿嘿</p>
-
-<p><strong>#Up to 20150519#</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl高效输出netCDF格式文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>从模式原始输出中抽变量出来，采用默认输出方式输出50年全球（144x96）的ZMDT，程序会卡半天，而且最后时不时还会弹出write failed的错误。查了下，发现这种默认的输出方式非常低效（虽然不知道为什么），高效的方式是完全自行定义维数名称、属性等等。测试下速度确实快很多，而且不存在上面的问题，但是代码量增加了三四十行左右。兹举例如下：</p>
-<blockquote>48 ;************************************************
-49 ; Write the file
-50 ;************************************************
-51
-52 ;Get dimsize
-53 dims=dimsizes(ctrl_var1p(0,:,:,:))
-54 nlvl=dims(0)
-55 nlat=dims(1)
-56 nlon=dims(2)
-57
-58 ;Set fileoption
-59 system("rm "+pdata_fn)
-60 fout = addfile(pdata_fn ,"c") ; open output netCDF file
-61 setfileoption(fout,"DefineMode",True)
-62
-63 ;Set All field attribution
-64 fileAtt = True
-65 fileAtt@creation_date=systemfunc("date")
-66 fileattdef(fout,fileAtt)
-67
-68 ;Define Coordinate
-69 dimNames =(/"time","lev_p","lat","lon"/)
-70 dimSizes =(/-1,nlvl,nlat,nlon/)
-71 dimUnlim =(/True,False,False,False/)
-72 filedimdef(fout,dimNames,dimSizes,dimUnlim)
-73
-74 ;Define var, type and dim
-75 filevardef(fout,"time",typeof(ctrl_var1p&amp;time),getvardims(ctrl_var1p&amp;time))
-76 filevardef(fout,"lev_p",typeof(ctrl_var1p&amp;lev_p),getvardims(ctrl_var1p&amp;lev_p))
-77 filevardef(fout,"lat",typeof(ctrl_var1p&amp;lat),getvardims(ctrl_var1p&amp;lat))
-78 filevardef(fout,"lon",typeof(ctrl_var1p&amp;lon),getvardims(ctrl_var1p&amp;lon))
-79 filevardef(fout,"ZMDT",typeof(ctrl_var1p),getvardims(ctrl_var1p))
-80
-81 ;Define Attribute
-82 filevarattdef(fout,"ZMDT",ctrl_var1p)
-83
-84 fout-&gt;time=(/ctrl_var1p&amp;time/)
-85 fout-&gt;lev_p=(/ctrl_var1p&amp;lev_p/)
-86 fout-&gt;lat=(/ctrl_var1p&amp;lat/)
-87 fout-&gt;lon=(/ctrl_var1p&amp;lon/)
-88 fout-&gt;ZMDT=(/ctrl_var1p/)</blockquote>
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
-
-<p>这种输出模式下，注意应到将时间维和坐标维度单列变量输出到nc文件，坐标维度应当设置degree定义方向，否则绘图时需要重设。</p>
-
-<p>另外这种方法大部分时间还是比较高效的，但是有时会出现奇怪的远远超出一般用时的卡顿，在数据量较大时容易出现。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141109#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/12/25/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -732,10 +754,10 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page30" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">31/42</span>
+          <span class="page_number ">31/43</span>
           
             <a href="/page32" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -976,7 +998,52 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2075,14 +2142,14 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2243,7 +2310,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2327,6 +2394,13 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2334,7 +2408,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2355,7 +2429,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2383,7 +2457,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2523,7 +2597,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2642,7 +2716,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2658,6 +2732,27 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2671,25 +2766,25 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2725,7 +2820,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2743,7 +2838,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2779,7 +2874,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2923,7 +3018,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3076,7 +3171,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3112,7 +3207,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3130,7 +3225,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3139,7 +3234,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3211,7 +3306,16 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,188 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/15/gfdl-moist-core-on-savio/">GFDL MOIST CORE on SAVIO</a>
+                  <a class="post-link" href="/2017/07/11/porting-dart-on-cori/">porting DART on CORI</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-15
+                        <i class="fa fa-calendar"></i>2017-07-11
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>When porting DART on CORI, the compiling process of CESM got error:</p>
+
+<p>cannot find -lmemkind</p>
+<pre>I checked my error log and found that the compiler cannot find some libraries. After loading memkind, the CESM component can be compiled successfully. It's strange because I cannot find command line like "<strong>module load memkind</strong>" in your related config files. I am working forward and will inform you later.</pre>
+<div>After building, when trying to run the model, got segment fault.</div>
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/07/11/porting-dart-on-cori/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/">AWS EC2搭建VPS</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-07-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#EC2" title="Tag: EC2" rel="tag">EC2</a>&nbsp;
+    
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>起名为Razortail，剃刀之尾，继续纪念我的D2青春。</p>
+
+<p>私钥需要好好保存。</p>
+
+<p>按这里的来：http://celerysoft.github.io/2016-01-15.html</p>
+
+<p>configure ss出问题，asciidoc找不到，挂–disable-documentation参数。</p>
+
+<p>之后又出现</p>
+
+<p>configure: error: Couldn’t find libudns. Try installing libudns-dev or udns-devel</p>
+
+<p>错误，看起来还是缺库，尝试yum安装，发现找不到这个lib。尝试添加remi的yum源：</p>
+
+<p>https://rpms.remirepo.net/wizard/</p>
+
+<p>重新尝试了centos7情景下先安装的yum库</p>
+
+<p>https://www.ifshow.com/centos-7-installation-and-configuration-shadowsocks/</p>
+
+<p>成功configure！</p>
+
+<p>安装后，运行ss-server出现libsodium.so.18 库找不到，从lib下ln到lib64解决，运行出现问题</p>
+
+<p>2017-07-03 14:34:01 ERROR: bind: Cannot assign requested address</p>
+
+<p>经查，居然要把config文件的ip设置为0.0.0.0，无语。</p>
+
+<p>之后可用，启动服务即可。</p>
+<pre>systemctl start ss.service
+systemctl enable ss.service</pre>
+<p>停止服务：</p>
+<pre>systemctl stop ss.service</pre>
+<p>取消shadowsocks开机自启</p>
+<pre>systemctl disable ss.service</pre>
+<p>查看日志文件</p>
+<pre>less /var/log/shadowsocks.log</pre>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/05/31/porting-cesm1-2-2-on-savio/">Porting CESM1.2.2 on SAVIO</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-05-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -289,34 +468,43 @@
                 </div>
                 <div class="excerpt">
                     
-<p>follow the dry core procedure, the first problem we meet is</p>
+<p>When move all the code from HPC4 to savio, and config all machine related environmental variables, the create_newcase got the error:</p>
+<p class="p1"><strong><span class="s1">The perl module XML::LibXML is needed for XML parsing in the CESM script system</span></strong></p>
+<p class="p1">search</p>
+<p>https://bb.cgd.ucar.edu/warning-cesm122</p>
 
-<p><strong>#error: unknown fpp directive.</strong></p>
-<p class="p1"><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/shared/include/fms_platform.h</span></p>
-<p class="p1">and give two space before the first _, done.</p>
-<p class="p1">Next, the model was compiled smoothly, when it hit the link process, throw a problem</p>
-<p class="p1"><strong><span class="s1">atmos_model.o: In function `atmos_model_init':</span></strong></p>
-<p class="p1"><strong><span class="s1">/global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90:290: undefined reference to `omp_set_num_threads_'</span></strong></p>
-<p class="p1">compared  with dry core, comment corresponding lines</p>
-<p class="p1"><strong><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90</span></strong></p>
-<p class="p1">IT WORKS!</p>
-<p class="p1"></p>
-<p class="p1"></p>
+<p>cesm_setup后出现新错误</p>
+
+<p><strong>gmake: c: Command not found</strong></p>
+
+<p>https://bb.cgd.ucar.edu/porting-cesm-120-local-cluster-linux-intel-or-pgi125表示增加几个flag即可，后对比Macro文件发现少很多东西。</p>
+
+<p>原来 config_machine.xml中</p>
+
+<p>&lt;COMPILERS&gt;intel14&lt;/COMPILERS&gt;</p>
+
+<p>我写成intel13在config_compiler的时候找不到标的。换成intel后即可。</p>
+
+<p>后到最后连接过程出现错误</p>
+
+<p>ld: cannot find -lrefblas</p>
+
+<p>找不到库文件，经查为lapack的一个lib flag。需要重命名之。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/15/gfdl-moist-core-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/05/31/porting-cesm1-2-2-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/">捕捉shell执行的状态码</a>
+                  <a class="post-link" href="/2017/05/11/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/">团队服务器升级php</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-15
+                        <i class="fa fa-calendar"></i>2017-05-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -335,272 +523,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>如果采用shell嵌套调用的方式执行一个复杂的自动化脚步，比如编译运行model，编译的过程很容易出错，那么外层脚本应考虑到这个问题并且在编译出错的情况下退出程序。这时上一条命令的状态码就派上用场了。</p>
-<pre>if [ $? -eq 0 ]        [$? 就是上一条命令执行的状态码]
-        then  
-            echo $i
-        fi</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/03/14/full-stack-development-notebook/">full-stack development [notebook]</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/03/14/full-stack-development-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/02/28/anaconda-e4-b8-8b-e4-bd-bf-e7-94-a8pip-e5-8c-85/">anaconda下使用pip包</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-02-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>发现conda下缺少一些pip包，其实用conda自己的pip安装就可以。</p>
-
-<p>anaconda2-4.1.1/bin/pip</p>
-
-<p>也可以把之前版本python的pip包复制过来</p>
-
-<p>/lib/python2.7/site-packages</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/02/28/anaconda-e4-b8-8b-e4-bd-bf-e7-94-a8pip-e5-8c-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/02/07/e4-ba-a4-e6-98-93-e6-97-a5-e8-ae-b0/">交易日记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-02-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>&nbsp;
-    
-        <a href="/category/#Economics" title="Category: Economics" rel="category">Economics</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>&nbsp;
-    
-        <a href="/tag/#Economics" title="Tag: Economics" rel="tag">Economics</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>#170206</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2017/02/Snap9.jpg"><img class="alignnone size-full wp-image-961" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2017/02/Snap9.jpg" alt="Snap9" width="1269" height="754" /></a></p>
-
-<p>30日均线在17年初反转，12日均线持续在30日均线上方。趋势持续？工行多单浮盈近2%，设了上下2元双向挂单。<strong>如趋势持续涨过274元，计划存金宝出1/3（4000元），用于空单投机。</strong></p>
-
-<p>应该做日尺度上的小波分析，确定关注几日尺度的MA技术指标。<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>#170208</p>
-
-<p>昨日横盘良久，开了少量美元空单并设置止损（<strong>没有遵循274线！</strong>），没想到当晚就被止损，国际金涨到1240上方。国内现货也到276，但工行纸黄金没有跟涨！少量白银已挂止损单。存金宝计划卖出7g。33g多头继续持仓（抗浮盈）。2g纸黄金抗浮盈。趋势似乎不会轻易反转，适当减仓后，继续持仓持现观望，<strong>做空要慎重！</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/02/07/e4-ba-a4-e6-98-93-e6-97-a5-e8-ae-b0/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/01/19/php-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6-e9-99-90-e/">php上传文件限制</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-01-19
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
     
         <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
@@ -619,6 +542,8 @@
   <i class="fa fa-tags"></i>
   
     
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
         <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
@@ -629,24 +554,163 @@
                 </div>
                 <div class="excerpt">
                     
-<p>之前团队服务器一直没修改好，后来查了下，有一个限制没搞定。</p>
-
-<p>修改上传限制如下：</p>
-
-<p>/etc/httpd/conf/httpd.conf 阿帕奇服务修改：</p>
-
-<p>LimitRequestBody 52428800<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>php.in修改：</p>
-
-<p>upload_max_filesize = 8m ;望文生意，即允许上传文件大小的最大值。默认为2M
-post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包括表单里的所有值。默认为8M</p>
-
-<p><strong>注意post项目要大于等于upload设定的阈值。</strong></p>
+<p>注意先卸载php与依赖关系，然后改用remi的yum源，直接yum install高版本php和所有的依赖包即可。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/01/19/php-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6-e9-99-90-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/05/11/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/05/08/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/">团队服务器升级ssh</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-05-08
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>注意先解决依赖关系，编译参数如下：</p>
+
+<p>./configure –sysconfdir=/etc/ssh  –with-zlib –with-md5-passwords</p>
+
+<p>make</p>
+
+<p>make install</p>
+
+<p>然后重启sshd服务，基本没什么大问题。</p>
+
+<p>后发现X11 forwarding不可用，调整/etc/sshd_config X11Forwarding为yes还是不行。</p>
+
+<p>最后发现之前删掉了hosts文件，加入</p>
+
+<p>127.0.0.1 localhost.locoldoman localhost</p>
+
+<p>后成功</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/05/08/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/05/08/e5-8e-9f-e6-b2-b9-e6-8a-95-e6-9c-ba/">原油投机</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-05-08
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>NASDAQ OIL</p>
+
+<p>仓位：1200*0.7=840</p>
+
+<p>开仓：300 @ 5.00</p>
+
+<p>止损：4.80</p>
+
+<p>第一加仓位：5.20 止损提升至5.05</p>
+
+<p>止盈：6.0</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/05/08/e5-8e-9f-e6-b2-b9-e6-8a-95-e6-9c-ba/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -661,10 +725,10 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page10" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">11/42</span>
+          <span class="page_number ">11/43</span>
           
             <a href="/page12" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -905,7 +969,52 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2004,14 +2113,14 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2172,7 +2281,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2256,6 +2365,13 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2263,7 +2379,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2284,7 +2400,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2312,7 +2428,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2452,7 +2568,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2571,7 +2687,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2587,6 +2703,27 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2600,25 +2737,25 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2654,7 +2791,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2672,7 +2809,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2708,7 +2845,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -2852,7 +2989,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3005,7 +3142,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3041,7 +3178,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3059,7 +3196,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3068,7 +3205,7 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3140,7 +3277,16 @@ post_max_size = 8m ;指通过表单POST给PHP的所能接收的最大值，包�
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

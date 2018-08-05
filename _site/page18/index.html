@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,102 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/">【Linux】Windows上传文件名乱码解决</a>
+                  <a class="post-link" href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/">【Supermarket】执行情况计划及进度</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-26
+                        <i class="fa fa-calendar"></i>2016-05-10
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>2016.5.14执行计划应完成</p>
+<ul>
+	<li>逐日客流时间序列（四门店同图）</li>
+	<li>小波分析其中一两店，给出图</li>
+	<li>平均周变化
+<ul>
+	<li>排除节假日调休的周变化，如果来得及</li>
+	<li>排除超过1个标准差的周变化，如果来得及</li>
+</ul>
+</li>
+	<li>平均日变化
+<ul>
+	<li>工作日和周末各自的日变化<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
+</ul>
+</li>
+	<li>尝试套用ARIMA模型进行预测</li>
+</ul>
+<p>下一步计划：</p>
+<ul>
+	<li>特殊事件因子
+<ul>
+	<li>法定节假日及调休</li>
+	<li>高温热浪、强降水、寒潮</li>
+	<li>促销活动</li>
+</ul>
+</li>
+</ul>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/">查看进程及对应IP</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-05-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +357,7 @@
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
     
   
 
@@ -283,7 +376,7 @@
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
     
   
 
@@ -292,428 +385,32 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>由于windows和linux对文件系统的编码方式不同，从windows上传或者从linux下载的文件名总存在乱码，解决方法很简单。实际上linux程序包里存在一个convmv的转换程序。</p>
+                    <ul id="markdown-toc">
+  <li><a href="#lsof--pnl-m--i4" id="markdown-toc-lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a></li>
+</ul>
 
-<p>首先，检测下是否有这个程序，如果没有，yum安装一下。</p>
+<h1 id="lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></h1>
 
-<p>转换命令</p>
-
-<p>convmv -f GBK -t UTF-8 -r yourdir/ –notest</p>
-
-<p>-f是源编码格式</p>
-
-<p>-t为目标编码格式</p>
-
-<p>–notest代表直接进行mv操作</p>
-
-<p>-r代表递归</p>
-
-<p>yourdir/为操作目录</p>
+<p>php       10684      500    3u  IPv4 1890733      0t0  TCP 202.116.70.21:48785-&gt;140.90.101.63:80 (SYN_SENT)
+sshd      10692        0    3r  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
+sshd      10702      500    3u  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
+sshd      10702      500    9u  IPv4 1890569      0t0  TCP 127.0.0.1:6010 (LISTEN)
+sshd      10754        0    3r  IPv4 1890641      0t0  TCP 202.116.70.21:22-&gt;202.116.70.153:60307 (ESTABLISHED)</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/">【mysql】测试wordpress与mysql数据库的关系</a>
+                  <a class="post-link" href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/">【python】Ipython安装</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>第一次建立wordpress站点的时候搞得不明不白，这次建站，决定测试一下进入mysql的具体流程</p>
-
-<p>经典步骤：</p>
-<pre>$ mysql -u adminusername -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 5340 to server version: 3.23.54
- 
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
- 
-mysql&gt; CREATE DATABASE databasename;
-Query OK, 1 row affected (0.00 sec)
- 
-mysql&gt; GRANT ALL PRIVILEGES ON databasename.* TO "wordpressusername"@"hostname"
-    -&gt; IDENTIFIED BY "password";
-Query OK, 0 rows affected (0.00 sec)
-  
-mysql&gt; FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
-
-mysql&gt; EXIT
-Bye
-$</pre>
-<p>第一次测试，所有都用root用户名和密码，成功！</p>
-
-<p>第二次，一般用户下，一般用户名登录mysql，无法创建数据库。</p>
-
-<p>第三次，一般用户下，root登录，创建数据库，grant时用 ”yangsong3”@”localhost”，wordpress设置下用yangsong3，失败！</p>
-
-<p>用root，成功～说明wordpress实际是用的root用户名访问mysql的。</p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/">【shell】文本处理-金价</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>awk工具可以很好的用来剔除html标签</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>awk ‘BEGIN {FS=”&gt;”} NR==19 {print $2}’ gold-1602041300</td>
-      <td>awk ‘BEGIN {FS=”&lt;”} {print $1}’</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>分别把左侧关标签和右侧开标签作为分隔符，最后print $1即可。</p>
-
-<p>字符串变量截取${var:7}，从第八个字符开始向后。</p>
-
-<p>参考：http://blog.csdn.net/misskissc/article/details/8217877</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/20/wordpress-e7-a6-81-e7-94-a8-e6-89-be-e5-9b-9e-e5-a/">wordpress禁用找回密码</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-20
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>转自http://www.wpmee.com/disable_reset_lost_password/</p>
-
-<p> </p>
-
-<p>今天给大家分享一个<a title="查看更多关于wordpress优化的教程" href="http://www.wpmee.com/tag/wordpress%E4%BC%98%E5%8C%96/" target="_blank">wordpress优化</a>中的一个防黑小妙招，禁用密码找回功能，为什么要禁用如此优秀的功能呢？因为可能被有心之人滥用，如果你也像wordpress迷一样装了<a title="postfix发信程序的安装教程" href="http://www.wpmee.com/lnmp1-0-centos-postfix/" target="_blank">postfix发信</a>程序，那么很有可能被无数个发信线程卡死。所以如果你只是单用户的站点，直接禁用了吧。</p>
-
-<p>将下面的代码添加到你主题的functions.php中即可：</p>
-<div class="dp-highlighter nogutter">
-<ol class="dp-c" start="0">
-	<li class="alt"><span class="comment">/* </span></li>
-	<li><span class="comment">*禁用密码找回功能 </span></li>
-	<li class="alt"><span class="comment">*http://www.wpmee.com/disable_reset_lost_password/</span></li>
-	<li><span class="comment">*/</span></li>
-	<li class="alt"><span class="keyword">function</span> disable_reset_lost_password()</li>
-	<li> {</li>
-	<li class="alt">   <span class="keyword">return</span> false;</li>
-	<li> }</li>
-	<li class="alt">add_filter( 'allow_password_reset', 'disable_reset_lost_password');</li>
-</ol>
-</div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/20/wordpress-e7-a6-81-e7-94-a8-e6-89-be-e5-9b-9e-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/08/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·高级篇</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>&nbsp;
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>L=[‘Mary’,’Steve’,’Mike’,’Dennis’]</p>
-
-<p>L[0:3]切片操作，从0开始，到3（不包括3脚标）</p>
-
-<p>&gt;&gt;&gt;L[0:3]</p>
-
-<p>‘Mary’,’Steve’,’Mike’</p>
-
-<p>支持负数切片，如[-2:-1]，为倒数第一个。</p>
-
-<p>L[:10]，前十个元素</p>
-
-<p>L[:10:2]，前十个元素，每隔一个取一个</p>
-
-<p>[0,2,4,6,8]</p>
-
-<p>L[::5]所有数，每五个取一个</p>
-
-<p>字符串，tuple都可以进行切片</p>
-
-<p>&gt;&gt;&gt;‘ABCD’[:2]</p>
-
-<p>‘AB’</p>
-
-<p>迭代</p>
-
-<p>用循环遍历的操作称为迭代，可迭代对象范围很广，包括dict</p>
-
-<p>如</p>
-
-<p>for key in dict:</p>
-
-<p>for value in dict.value():</p>
-
-<p>都可以</p>
-
-<p>同时迭代key和value</p>
-
-<p>for  k,v in dict.items():</p>
-
-<p>带索引迭代</p>
-
-<p>&gt;&gt;&gt;for i,value in enumerate(L):</p>
-
-<p>多引用</p>
-
-<p>&gt;&gt;&gt;for i,j in [(1,2), (3,4), (5,6)]</p>
-
-<p>列表生成器</p>
-
-<p>如[1 4 9 16]</p>
-
-<p>[x*x for x in range(1,5)]</p>
-
-<p>[x*x for x in range(1,11) if x%2==0]</p>
-
-<p>[4, 16, 36, 64, 100]</p>
-
-<p>[m+n for m in ‘ABC’ for n in ‘CDE’]</p>
-
-<p>遍历目录</p>
-
-<p>import os</p>
-
-<p>[d for d in os.listdir(‘.’)]</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/08/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/06/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·函数篇</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-06
+                        <i class="fa fa-calendar"></i>2016-05-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -759,95 +456,258 @@ $</pre>
                 </div>
                 <div class="excerpt">
                     
-<p>built-in函数</p>
+<p>想安装ipython，直接用pip貌似出错</p>
 
-<p>int() str() float() bool()</p>
+<p>pip install ipython，出错</p>
 
-<p>函数名可以赋值给变量，相当于alias</p>
+<p>OSError: [Errno 2] No such file or directory: ‘/usr/local/lib/python2.7/site-packages/setuptools-1.4.2-py2.7.egg’<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
 
-<p>自定义函数</p>
-<pre>def function(x):
-    if x&lt;10:
-        print('too low')
-    else:
-        print('good')
-        return x+1</pre>
-<p>return用于返回函数，若无操作对象，则返回None，也可以返回多个值，tuple类型，也可以给多个变量</p>
+<p>根据<a href="http://ipython.org/ipython-doc/stable/install/install.html">官方安装说明</a>，加入</p>
 
-<p>若在当前目录test.py中定义了function()函数，可以通过模块方式引用</p>
+<p>pip install “ipython[all]”</p>
 
-<p>&gt;&gt;&gt;from test import function</p>
-
-<p>无语句的缩进中可以用 pass过</p>
-
-<p>if x&gt;10:</p>
-
-<p>pass</p>
-
-<p>参数可以给予默认值</p>
-
-<p>power(x,n=2)</p>
-
-<p>n在调用时若不传递，则为2；不按顺序提供可选参数时，需要在调用时提供参数名。若默认参数指向可变对象，如list，则每次调用函数，均会使得可变对象发生改变。（传址）</p>
-<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L=None)</span>:</span>
-    <span class="keyword">if</span> L <span class="keyword">is</span> <span class="built_in">None</span>:
-        L = []
-    L.append(<span class="string">'END'</span>)
-    <span class="keyword">return</span> L</code></pre>
-<p>L每次默认参数均为None，这样可以避免该问题。</p>
-
-<p>可变参数标识，前缀*，可传入0-任意多参数</p>
-<pre>def sum_all(*numbers):
-    sum=0
-    for num in numbers:
-        sum=sum+num
-    return sum</pre>
-<p>可以传入任意多个数字</p>
-
-<p>如</p>
-
-<p>sum_all(2,3,5,4)</p>
-
-<p>若为list</p>
-
-<p>l=[3,4,5,6,8]</p>
-
-<p>sum_all(*l)</p>
-
-<p>挂前缀传入</p>
-
-<p> </p>
-
-<p>关键字参数，按字典进行组装</p>
-<pre>def test_student(name,gender,**kw)
-    print('name:',name,'gender:',gender,'other:',kw)</pre>
-<p>调用时若传入其他参数</p>
-
-<p>&gt;&gt;&gt;test_student(‘Mike’,’Male’,city=’Beijing’)</p>
-
-<p>name: Mike gender: Male other: {‘city’: ‘Beijing’}</p>
-
-<p>直接传入dict则获得dict的拷贝（传值）</p>
-
-<p>&gt;&gt;&gt;test_student(‘Mike’,’Male’,**extra)</p>
-
-<p>若通过*分隔，则定义了命名关键字参数</p>
-<pre>def test_student(name,gender,*,city)</pre>
-<p>命名关键字参数与位置参数不同，必须传入参数名</p>
-
-<p>参数定义的顺序必须是：<strong>必选参数、默认参数、可变参数/命名关键字参数和关键字参数。</strong></p>
-
-<p>复习</p>
-
-<p>*arg 可变参数，接受tuple</p>
-
-<p>**kw 关键字参数，接受dict</p>
-
-<p>递归超过一定栈帧长度会溢出，1000的阶乘是无法计算的。</p>
+<p>即可。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/06/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/">yh数据处理</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-04-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>iconv转码函数非常好用，可以直接在命令行下进行数据转码，例子：</p>
+
+<p>iconv weawher_coop1 -f gbk -t UTF-8 -o weather_coop1.utf-8</p>
+
+<p>split函数可以按行分隔文件：</p>
+
+<p>split -l 10000 -d -a 4 weather_coop1.utf-8 ./splited-noreject/weather<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>10000行一个文件，后缀为4位数字。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/">【未解决】python安装pandas等数据处理类库</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-04-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>首先按照<a href="http://youerning.blog.51cto.com/10513771/1711008">这个网站</a>yum这些东西，然后pip安装，</p>
+
+<p>出现错误：Command “python setup.py egg_info” failed with error code 1 in /tmp/pip-build-Cblre2/pandas/</p>
+
+<p>之后的剧情就是个坑了，查了个资料，说把python用yum给remove了，然后编译安装新版本的就行，我居然TMD信以为真，remove过程中突然出现一个提示说cannot remove yum，纳尼……啥时候要remove yum。</p>
+
+<p>不管了，编译安装python2.7，发现yum还是不能安装pandas，这个时候我做了个最错误的决定，将系统原有的/usr/下所有python的lib include全删了，用2.7去替换……天真如我啊啊啊 = =</p>
+
+<p>之后yum就不正常了，出现：</p>
+
+<p>No module named yum这种错误</p>
+
+<p>查了下，正确安装新版本python的姿势：</p>
+
+<p>http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7</p>
+
+<p>原来系统安装的python 与许多组件有依赖关系，随意搞掉是不可以的，吐血。于是找办法去解决，下载了python，yum等几个关联包，重新rpm安装，再运行yum出现新错误：No module named rpm，纳尼……</p>
+
+<p>想到之前自己删除了所有原本的python相关库，估计是这个问题。</p>
+
+<p>折腾半天，去workstation上yum update了，然后scp所有/usr下与python相关的文件夹过来……</p>
+
+<p>yum可以用了，update过程中出现许多不匹配的错误，这应该是workstation上rpm管理的软件信息与team server不同造成……</p>
+
+<p>yum update后，似乎没什么问题了。</p>
+
+<p>附带官方所有软件包地址：http://mirror.centos.org/centos/6/os/x86_64/Packages/</p>
+
+<p>重新编译安装python2.7，按照<a href="http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7">这个帖子</a>，需要安装setuptools和PIP，之后用PIP安装pandas等库，成功！</p>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter"></td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">matplotlib -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number2 index1 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">numpy -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number3 index2 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">pandas -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number4 index3 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">seaborn scipy</code></div>
+</div></td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/">VBA学习笔记</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-03-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#EXCEL/VBA" title="Category: EXCEL/VBA" rel="category">EXCEL/VBA</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#EXCEL/VBA" title="Tag: EXCEL/VBA" rel="tag">EXCEL/VBA</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>打开开发工具功能选项卡</p>
+
+<p>文件–&gt;选项–&gt;自定义功能区</p>
+
+<p>选定区域，F5，定位，可以定位选中到想要的区域</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -862,10 +722,10 @@ $</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page17" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">18/42</span>
+          <span class="page_number ">18/43</span>
           
             <a href="/page19" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1106,7 +966,52 @@ $</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2205,14 +2110,14 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2373,7 +2278,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2457,6 +2362,13 @@ $</pre>
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2464,7 +2376,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2485,7 +2397,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2513,7 +2425,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2653,7 +2565,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2772,7 +2684,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2788,6 +2700,27 @@ $</pre>
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2801,25 +2734,25 @@ $</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2855,7 +2788,7 @@ $</pre>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2873,7 +2806,7 @@ $</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2909,7 +2842,7 @@ $</pre>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3053,7 +2986,7 @@ $</pre>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3206,7 +3139,7 @@ $</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3242,7 +3175,7 @@ $</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3260,7 +3193,7 @@ $</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3269,7 +3202,7 @@ $</pre>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3341,7 +3274,16 @@ $</pre>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

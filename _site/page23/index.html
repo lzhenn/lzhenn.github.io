@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,858 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/07/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91firef/">【已解决】Firefox打开拼写检查</a>
+                  <a class="post-link" href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/">【Coursera】R Language</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-25
+                        <i class="fa fa-calendar"></i>2015-09-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>&nbsp;
+    
+        <a href="/category/#Coursera" title="Category: Coursera" rel="category">Coursera</a>&nbsp;
+    
+        <a href="/category/#R" title="Category: R" rel="category">R</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>&nbsp;
+    
+        <a href="/tag/#Coursera" title="Tag: Coursera" rel="tag">Coursera</a>&nbsp;
+    
+        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p> </p>
+<table>
+<tbody>
+<tr>
+<td>
+<h3><strong>Background Material</strong></h3>
+<h4><strong>L4</strong></h4>
+get the current working directory
+
+<strong>&gt;getwd()  #same in MAC
+</strong>
+
+read the csv (comma-seperated values) file
+
+<strong>&gt;read.csv("xx.csv")</strong>
+
+list the file and directory under the current directory
+
+<strong>&gt;dir()</strong>
+
+change the working directory
+
+<strong>&gt;setwd("F:/workspace/")</strong>
+
+To list out all the functions in one script
+
+<strong>&gt;ls()</strong>
+<h3>Week1</h3>
+<h4>L4</h4>
+assignment
+
+<strong>&gt;x &lt;- 5</strong>
+
+comments
+
+<strong># hi, this is a comment</strong>
+<h4>L5</h4>
+5 basic "atomic" classes
+<ul>
+	<li>character</li>
+	<li>numeric (real numbers)</li>
+	<li>integer</li>
+	<li>complex</li>
+	<li>logical (True/False)</li>
+</ul>
+basic object: vector
+
+<strong>vector function: vector(type_of, length_of)</strong>
+
+basically, R think all number as real type, if you want a integer 1, type:
+
+<strong>1L</strong>
+
+Infinity:
+
+<strong>Inf</strong>
+
+not a number:
+
+0/0=NAN (or as missing value)
+
+R objects can have attributes:
+<ul>
+	<li>names, dimnames</li>
+	<li>dimensions</li>
+	<li>class (numeric)</li>
+	<li>length</li>
+</ul>
+function to modify attributes
+
+<strong>attributes()</strong>
+<h3>L6</h3>
+c() function is to create a vector:
+
+<strong>x &lt;- c(0.5,0.6)</strong>
+
+<strong>x &lt;- c(True, Flase)</strong>
+
+vector() function acts alike, with initial value 0 for numeric.
+
+<strong>x &lt;- vector("numeric", length = 10)</strong>
+
+mixed classes
+
+<strong>x&lt;- c(True, 3) # will be numeric</strong>
+
+Explicit Coercion
+
+<strong>&gt; x&lt;-0:2</strong>
+
+<strong>&gt; class(x)</strong>
+
+<strong>[1] "integer"</strong>
+
+<strong>&gt; as.logical(x)</strong>
+
+<strong>[1] FALSE TRUE TRUE</strong>
+
+we use list() to create list.
+
+<strong>&gt;y&lt;-list("a", 1, TRUE)</strong>
+<h3>L7</h3>
+create matrix
+
+<strong>&gt;m&lt;-matrix(nrows=2, ncols=3)</strong>
+
+<strong>&gt;attributes(m)</strong>
+
+$dim
+
+[1] 2 3
+
+matrix is <strong>column wise</strong>
+
+change vector to matrix
+
+&gt;m&lt;-1:10
+
+<strong>&gt;dim(m)&lt;-c(2,5)</strong>
+
+&nbsp;
+
+or use cbind or rbind
+
+&gt;x&lt;-1:3
+
+&gt;y&lt;-10:12
+
+&gt;cbind(x,y)
+
+1 10
+
+2 11
+
+2 12
+
+&gt;rbind(x,y)
+
+similar but in row
+<h3>L8</h3>
+factors are ordered or unordered, like key for the php array, factors could be treated as numeric vector with labels
+
+give an example
+
+&gt;x&lt;-factor(c("yes","yes","no"))
+
+&gt;x
+
+[1] yes yes no
+
+Levels: no yes
+
+&gt;table(x)
+
+yes no
+
+2     1
+
+&gt;unclass(x)
+
+221
+
+that is how factor x expressed in R underneath!
+
+The first level is called the baseline level, it is determined by the alphabet rank, however, you could change the order.
+
+<strong>&gt;x&lt;-factor(c("yes","yes","no"),levels=c("yes","no"))</strong>
+
+and yes will be in the first place.
+<h3>L9-Missing Values</h3>
+is.na()
+
+is.nan()
+
+NaN value all be treated as NA, but the converse is not true.
+<h3>L10-Data Frames</h3>
+tabular 表格的
+
+data frames ~ matrices
+
+list ~ vector
+
+Yes, that the class doesn't matter in data frames.
+
+Special attributes: <strong>row.names</strong>
+
+created by
+
+<strong>read.table() or read.csv()</strong>
+
+convert to matrix
+
+<strong>data.matrix()</strong>
+
+an example:
+
+<strong>&gt;x&lt;- data.frame(foo=1:4, bar = c(T,T,F,F))</strong>
+
+<strong>&gt;x</strong>
+
+<strong>   foo    bar</strong>
+
+<strong>1    1    TRUE</strong>
+
+<strong>2    2    TRUE</strong>
+
+<strong>3    3    FALSE</strong>
+
+<strong>4    4    FALSE</strong>
+<h3>L10-Names Attribute</h3>
+<strong>&gt;x &gt;- 1:3</strong>
+
+<strong>&gt; names(x) &lt;- c("foo","bar","norf")</strong>
+
+<strong>&gt;x</strong>
+
+<strong>foo bar norf</strong>
+
+<strong>   1     2     3</strong>
+<h3>L12-Reading Tabular Data</h3>
+<ul>
+	<li><strong>read.table, read.csv</strong></li>
+	<li><strong>readLines</strong></li>
+	<li><strong>source</strong>, for reading in R code files (inverse of dump)</li>
+	<li> <strong>dget</strong>, same as above, but for dparsed code (inverse of dput)</li>
+	<li><strong>load, </strong>for reading in saved workspaces</li>
+	<li><strong>unserialize, </strong>for reading single R objects in binary form</li>
+</ul>
+write
+<ul>
+	<li>write.table</li>
+	<li>writeLines</li>
+	<li>dump</li>
+	<li>dput</li>
+	<li>save</li>
+	<li>serialize</li>
+</ul>
+<h4><strong> read.table</strong></h4>
+<ul>
+	<li>file, the name of a file, or a connection</li>
+	<li>header, logical indicating if the file has a header line</li>
+	<li>sep, a string indicating how the columns are separated</li>
+	<li>colClasses, a character vector indicating the class of each column in the dataset</li>
+	<li>nrows, the number of rows in the dataset</li>
+	<li>comment.char, a character string indicating the comment character</li>
+	<li>skip, the number of lines to skip from the beginning</li>
+	<li>stringsAsFactors, should character variables be coded as factors?</li>
+</ul>
+no argument is fine, and the result would be in a data frame.
+
+read.table default separator is space.
+
+<strong>be sure to read the document of read.table</strong>
+<h3>L12-Reading Large Tables</h3>
+set the arguments!
+
+all numeric, one is fine:
+
+colClasses = "numeric"
+<h3>L13-Textual Data Format</h3>
+<h3>L17-Subsetting-Basics</h3>
+&gt;x &lt;- c("a","b","c")
+
+&gt;x[1]
+
+[1]  "a"
+
+&gt; x[1:3]
+
+&gt;x[x&gt;"a"]
+
+&gt;u &lt;- x&gt;"a"
+
+&gt;u
+
+[1] FALSE TRUE TRUE
+<h3>L17-Subsetting-Lists</h3>
+&gt;x &lt;- list (foo =1:4, bar =0.6)
+
+&gt;x[1]
+
+$foo
+
+[1] 1 2 3 4
+
+<strong>we got a list!</strong>
+
+&gt;x[[1]]
+
+[1]  1 2 3 4
+
+<strong>we got a sequence!</strong>
+
+&gt;x$bar
+
+[1]  0.6
+
+&gt;x[["bar"]] #this is equal
+
+&gt;x["bar"]  # we got a list
+
+&gt;x[c(1, 3)]
+
+&nbsp;
+
+&gt;name = "foo"
+
+&gt;x[[name]]
+
+this is useful
+<h3>L17-Subsetting-Matrices</h3>
+&gt;x[1, ]    # missing is fine
+
+No dropping forcing:
+
+&gt;x[1, 2, drop =FALSE]
+<h3>L18-partial matching</h3>
+&gt;x&lt;-list(aardvark=1:5)
+
+&gt;x$a
+
+[1] 1 2 3 4 5
+
+&gt;x[["a"]]
+
+NULL
+
+&gt;x[["a", exact = FALSE]]
+
+[1] 1 2 3 4 5
+<h3>L19-Removing NA Values</h3>
+&gt;x &lt;- c(1, 2, NA, 4, NA, 5)
+
+&gt;bad &lt;- is.na(x)
+
+&gt;x[!bad]
+
+&nbsp;
+
+&gt;good&lt;-complete.cases(x, y)
+<h3>L20-Vectorized Operations</h3>
+matrix
+
+x*y #by rank
+
+x%*%y # by true matrix multiplication
+<h3>Week1</h3>
+<h4>L2 if-else</h4>
+if(x&gt;3) {
+
+y&lt;-10
+
+}else{
+
+y&lt;-0
+
+}
+
+<strong>also true:</strong>
+
+y&lt;- if(x&gt;3) {
+
+10
+
+}else{
+
+0
+
+}
+<h4>L2 For loops</h4>
+for (i in 1:10){
+
+}
+
+&nbsp;
+
+x &lt;- c("a","b","c","d")
+
+for (i in seq_along(x)){
+
+print(x[i])
+
+}
+
+for (letter in x){
+
+print(letter)
+
+}
+<h4>L4 Functions</h4>
+set default value:
+
+abc = function(a = 10){
+
+}
+
+columnmean &lt;- function(y, removeNA = TRUE){
+
+nc &lt;- ncol(y)
+
+means &lt;- numeric(nc)
+
+for(i in 1:nc) {
+
+mean[i] &lt;- mean(y[,i], na.rm = removeNA)
+
+}
+
+}
+<h4>L6 Functions</h4>
+... argument indicate a variable number of arguments that are usually passed on to other funcitons.
+
+myplot &lt;- function(x, y, type = "l", ...) {
+
+plot (x, y, type = type, ...)
+
+}
+
+explicityly matching after dot dot dot
+<h4>L7 Functions could be made dynamically!</h4>
+<strong> lexical vs. dynamical scoping</strong>
+
+make.power &lt;- function(n) {
+
+pow &lt;- function(x) {
+
+x^n
+
+}
+
+pow
+
+}
+
+&nbsp;
+
+&gt;cube &lt;- make.power(3) # note cube is a function
+
+&gt; cube(3)
+
+[1] 27
+
+&nbsp;
+
+ls(environment(cube))
+<h4>L8 code style</h4>
+indenting 缩进
+<h4>L10 Date and times</h4>
+x &lt;- as.Date("1970-01-01")
+
+x &lt;- Sys.time()</td>
+<td>
+<h3><strong>Point</strong></h3>
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+here, we can see the sytle is very like windows/dos
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+cute assignment sign
+
+&nbsp;
+
+same comment sign as bash
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+complex! Like fortran
+
+&nbsp;
+
+&nbsp;
+
+interesting...
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Attributes! Like NCL!
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+be careful with c(), not like other language
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+in fact, I think this is really convenient
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+merge vectors to matrix, this is really user-friendly!
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Impressive! like PHP array, but much easier to understand
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Like NCL or MATLAB
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+See it? Plenty of data types, very user-friendly. You could imagine how simple when use data frames to process EXCEL type files.
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Briliant!!!
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Very like $$ in ncl
+
+&nbsp;
+
+&nbsp;
+
+Dim down or not, it is a problem</td>
+</tr>
+<tr>
+<td colspan="2"> <strong> Measure</strong></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/07/e3-80-90coursera-e3-80-91r-language/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/">【solved, git&github】first move to push my project</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-06
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +1113,7 @@
     
         <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
     
-        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
     
   
 
@@ -283,6 +1132,105 @@
     
         <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
     
+        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Try to push paperhub project on Lab server to github. The following are steps and barriers when I did this.</p>
+
+<ol>
+  <li>
+    <p>create a new repo on github, same name as “paperhub”</p>
+  </li>
+  <li>
+    <p>Try one file down_enw.php</p>
+  </li>
+</ol>
+<pre><strong>$git init</strong> # to regard paperhub dir as a git repo
+<strong>$git add down_enw.php
+$git commit -m "first commit"
+$git push origin master</strong></pre>
+<p>Get error:</p>
+<pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git push origin master
+error: The requested URL returned error: <span class="m">403</span> Forbidden <span class="k">while</span> accessing https://github.com/Novarizark/paperhub.git
+
+fatal: HTTP request failed</code></pre>
+<p>Follow this:</p>
+
+<p><a href="http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/">http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/</a>
+<a href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed"> http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed</a></p>
+
+<p>Change:</p>
+<pre>$vi .git/config
+url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
+:wq</pre>
+<p>Another error:</p>
+<pre><code>(gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display:</code></pre>
+<p>Follow this:
+<a href="http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#">http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#</a></p>
+<pre><code>unset SSH_ASKPASS</code></pre>
+
+<p>Done!</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/">【solved】Teamserver huge .xsession-error problem</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
         <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
     
   
@@ -293,321 +1241,33 @@
                 </div>
                 <div class="excerpt">
                     
-<p>firefox工具–&gt;选项–&gt;高级中的拼写检查默认是打开的，但是似乎没有作用。查了一下，原来是没有字典。在文本框右键点击添加字典，即可。但是富文本框似乎不能检查。</p>
+<p>A few days ago I have found that the available disk space on Teamserver was shrunk to 60%. This is very weird because most datasets on the machine were uploaded by me and I know they only occupy about 30% in 22TB. Once I thought they might come from one of my teammate, uploading CMIP5 data or something. However, when I checked individual directory in home, I found nothing. Then I checked “ll -ah” in home. Holly shit! One file named “.xsession-error” takes up about 6TB, and still enlarging! So I google it and found it might be a bug of Linux, regardless of the distribution. Many people delete it or use file permission to restrict its expansion, without any source seeking. I followed them, while nothing happened to the available size from df command. I used DirStat and the original software to check this, nothing.
+What the fuck! I just let it alone and do my staff until I found there is only 2TB available today. Another similar file named as “.xsession-error.XXXXX” did the evil things. In fact this file was a text file, thus I “tail” it and found the flowing statement:</p>
+<pre>sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!</pre>
+<p>VPN! So it must be the vpn soft which aimed at connecting TH-2 that wrongly redirect the std out flow to this poor file and made the shit. Without any hesitate, I uninstall the VPN soft. Everything’s back to normal.</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/07/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91firef/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/07/21/e3-80-90-e8-bf-9b-e8-a1-8c-e4-b8-ad-e3-80-91cesm/">【已解决】CESM Tibetan Plateau无PBL加热试验</a>
+                  <a class="post-link" href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/">【Shanbei News Notes】20150826</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>wzq师兄希望做一个没有青藏高原PBL加热的试验，因为有之前改deep convection的经验，这个应该不复杂。</p>
-
-<p>wzq tends to test an experiment without sensible heating from the TP. As I’ve got the experience from deep convection heating experiments,  this shouldn’t be very complex.</p>
-
-<p>首先希望能用model自身读入netcdf格式的TP mask文件。grep到了 control目录下的cam_initfiles.F90文件，其中是读init数据和topo数据的，果断就follow格式加入如下语句：</p>
-
-<p>First, we hope to get var from the netcdf file directly via the packeged method in the model. Using command ‘grep’, we located a source file called cam_initfiles.F90, which was programmed to read init data and topo data. Thus, we follow the style of this file to add the changes as follows:</p>
-<pre>20d19
-&lt; tpmask_file_get_id, &amp;! returns filehandle for tp mask file
-23c22
-&lt; type(file_desc_t), pointer :: fh_ini, fh_topo, fh_tpmask
----
-&gt; type(file_desc_t), pointer :: fh_ini, fh_topo
-39,42d37
-&lt; function tpmask_file_get_id()
-&lt; type(file_desc_t), pointer :: tpmask_file_get_id
-&lt; tpmask_file_get_id =&gt; fh_tpmask
-&lt; end function tpmask_file_get_id
-59,61d53
-&lt; character(len=256) :: bnd_tpmask_loc ! filepath of topo file on local disk
-&lt;
-&lt; bnd_tpmask_loc = "/users/yangsong3/wzq/TP_noPBL_HEAT/data/TPmask.nc"
-72c64
-&lt; call getfil(bnd_topo, bnd_topo_loc) !getfil is check process
----
-&gt; call getfil(bnd_topo, bnd_topo_loc)
-78,82d69
-&lt;
-&lt; ! 20150721 Add for TP mask
-&lt; allocate(fh_tpmask)
-&lt; call cam_pio_openfile(fh_tpmask, bnd_tpmask_loc, PIO_NOWRITE)
-&lt;
-106,110d92
-&lt;
-&lt;
-&lt; call pio_closefile(fh_tpmask)
-&lt; deallocate(fh_tpmask)
-&lt; nullify(fh_tpmask)</pre>
-<p>TPmask数据放到了case的新建data目录下，编译，成功！已经把文件打开了，然后去找读入topo文件的代码！<code></code></p>
-
-<p>We then put the TPmask.nc to a new foolder “data” in the case directory, and compile the model. Successed! We now go back to the code in cam_initfiles.F90 and find that there is no read data keyword for topo. However, a “readinitial” keyword operated to the initial data found in the file.</p>
-
-<p>grep the keyword with “readinitial”, we found a file called readinitial.F90. Check it! To our disappointment, it is only for the validation check. Next, we change another keyword “topo” to grep, we found <strong>startup_initialconds.F90</strong>, in this file, we then locate a sentence</p>
-<pre> call read_inidat(fh_ini, fh_topo, dyn_in)</pre>
-<p>Very interesting! we believe this could be the true method to read data from the topo file. Another grep!</p>
-
-<p>In fact, we found keyword “dycore” appeared in a number of files. Then we locate $SRC/dynamic/fv, then we grep <strong>inidat.F90. </strong>In this file, we finally found how the model deal with the topo field</p>
-<pre>    fieldname = 'PHIS'
-    readvar   = .false.
-    if (ideal_phys .or. aqua_planet) then
-       dyn_in%phis(:,:) = D0_0
-    else
-       allocate(phis_tmp(im, jm))
-       <strong>call infld(fieldname, ncid_topo, 'lon', 'lat', ifirstxy, ilastxy, jfirstxy, jlastxy, &amp;</strong>
-<strong>            dyn_in%phis, readvar, grid_map='dyn')</strong>
-       if (.not. readvar) &amp;
-            call endrun(trim(subname)//' ERROR: PHIS not found on topo dataset.')
-      <strong> call process_inidat(ncid_ini, ncid_topo, grid, dyn_in, 'PHIS')</strong>
-    end if</pre>
-<p>Apparently, infld is a method that read a field from a specific file. grep “infld” and locate the file ./control/<strong>ncdio_cam.F90 </strong>to refer the usage. Since “infld” is a common usage in many source files, we try to search it in the main interface of the physics package <strong>physpkg.F90, </strong>bingo! We got it in subroutine phys_initdat(). We are familiar with this source file because we have changed the deep convection in this file. Phys_initdata() is a subroutine that only be called during the startup run. Therefore, we add a infld in <strong>phy_init()</strong>, which would be called during every run type.</p>
-
-<p>Be careful with the “use module_name” statement, never leave a wild variable. Then we need to add another field to the surface field. Definition code is in <strong>comsrf.F90</strong></p>
-<pre>&lt;   public landm, sgh, tpmask, sgh30, fv, ram1, soilw, fsns, fsds
----
-&gt;   public landm, sgh, sgh30, fv, ram1, soilw, fsns, fsds
-43d42
-&lt;   real(r8), allocatable:: tpmask(:,:)    ! Tibetan Platau Mask flag
-105d103
-&lt;        allocate (tpmask  (pcols,begchunk:endchunk))
-128d125
-&lt;        tpmask   (:,:) = nan</pre>
-<p>Try to build it again. Successful! Now we have read the TP mask in.</p>
-
-<p><strong>#Up to 20150722#</strong></p>
-
-<p>The final code has been uploaded to my <a href="https://github.com/Novarizark/project/tree/master/TP_HEAT_wzq-2015/SourceMods/src.cam">github</a>. So, no more update here.</p>
-
-<p><strong>#Up to 20150924#</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/07/21/e3-80-90-e8-bf-9b-e8-a1-8c-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/07/15/e3-80-90r-e3-80-91installing-r-on-windows/">【R】Installing R on Windows</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-15
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
-    
-        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>&nbsp;
-    
-        <a href="/category/#R" title="Category: R" rel="category">R</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
-    
-        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>&nbsp;
-    
-        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h3>R</h3>
-<p>Download from http://cran.r-project.org/</p>
-
-<p>Choose the “Basic”</p>
-
-<p>Wait the download 10+ min, and click, click, click… Done</p>
-<h3>RStudio</h3>
-<p>Download from https://www.rstudio.com/products/rstudio/download/</p>
-
-<p>choose the PC version and for OS Windows</p>
-
-<p>Download (a few minutes) and install, easy!</p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/07/15/e3-80-90r-e3-80-91installing-r-on-windows/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/07/13/e4-bf-ae-e6-94-b9vim-e6-b3-a8-e9-87-8a-e9-a2-9c-e/">修改vim注释颜色以及ls目录颜色</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-13
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>vim下的注释和ls出来的目录字体颜色都是深蓝色的，在终端黑色背景下看起来非常累，修改这个颜色也很简单。</p>
-
-<p>vim注释颜色修改：</p>
-<pre>$vi ~/.vimrc
-hi Comment ctermfg=6;
-:wq</pre>
-<p>这样就可以把注释改成青色的了。</p>
-
-<p>ls出来的目录颜色修改，黄色</p>
-<pre>$vi ~/.bashrc
-LS_COLORS=$LS_COLORS:'di=0;33:'; 
-export LS_COLORS
-:wq</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/07/13/e4-bf-ae-e6-94-b9vim-e6-b3-a8-e9-87-8a-e9-a2-9c-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/07/13/e3-80-90shanbei-news-notes-e3-80-9120150713/">【Shanbei News Notes】20150713</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-13
+                        <i class="fa fa-calendar"></i>2015-08-26
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -657,48 +1317,24 @@ export LS_COLORS
                 </div>
                 <div class="excerpt">
                     
-<h3><a href="http://www.shanbay.com/read/article/34603/">Taiwan courts tech start-ups to drive economic growth 台湾吸引科技创业公司以期获得经济增长</a></h3>
-<p>home-grown 本土的</p>
+<p><span id="A36247P260670S229194" class="sentence"> and certainly I’m asking is how, just how this gets <strong>stemmed</strong></span></p>
 
-<p>e-commerce 电子商务</p>
-
-<p>Qualcomm 高通</p>
-
-<p>reduce export-driven economy’s reliance 降低对出口导向型经济的依赖性</p>
-
-<p>hold the key to 对…起决定性作用</p>
-
-<p>lose out to 输给</p>
-
-<p>in a bid to 为了</p>
-<h3><a href="http://www.shanbay.com/read/article/34579/"> Eurozone Discusses Latest Greek Bailout Proposals 欧元区讨论最新的希腊紧急财政援助计划</a></h3>
-<p>ahead of = before
-on substance 在实质问题上</p>
-
-<p>hard line 强硬路线</p>
-
-<p>hang back 由于</p>
-
-<p>conciliatory tone 和解的语调</p>
-
-<p>satisfy their demand 满足他们的要求</p>
-
-<p> </p>
+<p>stem是茎的意思，也有“起源于”的意思</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/07/13/e3-80-90shanbei-news-notes-e3-80-9120150713/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/07/13/e3-80-90coursera-e3-80-91data-scientists-toolbox/">【Coursera】Data Scientist's Toolbox</a>
+                  <a class="post-link" href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150823/">【Shanbei News Notes】20150823</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-13
+                        <i class="fa fa-calendar"></i>2015-08-23
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -717,9 +1353,9 @@ on substance 在实质问题上</p>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>&nbsp;
+        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
     
-        <a href="/category/#Coursera" title="Category: Coursera" rel="category">Coursera</a>
+        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
     
   
 
@@ -736,9 +1372,9 @@ on substance 在实质问题上</p>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>&nbsp;
+        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
     
-        <a href="/tag/#Coursera" title="Tag: Coursera" rel="tag">Coursera</a>
+        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
     
   
 
@@ -748,191 +1384,93 @@ on substance 在实质问题上</p>
                 </div>
                 <div class="excerpt">
                     
-<table>
-<tbody>
-<tr>
-<td><strong>Material</strong><strong>W1-L1</strong>core: how to use data to solve questionsdata deluge 数据泛滥 Big data统计学是毕业生职场的敲门砖We are lucky: explosive data growing利用数据设计算法、分析预报获得结论的比赛 projectWhy R
+<h2 class="head-title"><a href="http://www.shanbay.com/read/article/36136/">Banned From Protest, Kazakhstanis Joke, Grumble Over Currency's Fall</a></h2>
+<p>哈萨克斯坦货币贬值备受抱怨，但是不允许反对示威</p>
 
-1. various packages
+<p><span id="A36136P254142S224232" class="sentence">Kazakhstan <strong><span class="unlearned active">weathered</span></strong> a 19-percent devaluation of the tenge in February last year 经受住
+</span></p>
 
-2. free
-
-3.
-
-<strong>Stack Overflow</strong>
-
-mining the web
-
-处理技巧-数学和统计知识-专业知识
-
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/07/QQ图片20150713150848.jpg"><img class="alignnone  wp-image-613" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/07/QQ图片20150713150848.jpg" alt="QQ图片20150713150848" width="267" height="262" /></a>
-
-<strong>W1-L2
-</strong>
-
-利用R的IDE RStudio
-
-R script xxx.R
-
-# 注释符号
-
-Rmd R markdown document
-
-portfolio github仓库
-
-<strong>W1-L3</strong>
-
-use message board
-
-Often the fastest answer is the one you find yourself
-
-R帮助
-
-？function_name
-
-help.search("rnorm")
-
-args("rnorm")
-
---&gt; fuction (n, mean = 0, sd =1)
-
-NULL
-
-直接输入函数名称，可以得到函数的解释
-
-提问的艺术：
-
-Provide the minimum information
-
-good question:
-
-R 2.15.0 lm() function on Mac OS X 10.6.3 seg fault
-
-<strong>W1-L4</strong>
-
-数据的分散性决定了Hacking Skills的重要性
-
-Cross Validated
-
-永远学习，永远勇于接受新事物！
-
-采用Stack overflow搜索关于R的内容时，要采用标签 如[r]，仅用r作为关键词会搜索到很多无用的东西
-
-用google的时候：
-
-"[data type] data analysis"
-
-"[data type] R package" (better)
-
-<strong>W1-L5</strong>
-
-subsetting data 抽取数据
-
-readlines function
-
-lapply 很有趣的函数，对一个列表中的所有元素采用某一个函数去执行
-
-<strong>W1-L6</strong>
-
-clustering 聚类分析
-
-<strong>W1-L7</strong>
-
-数据科学家最基本的素质：reproducible research
-
-需要用到LaTex
-
-<strong>W1-L8</strong>
-
-likelihoods 似然估计
-
-common distribution 常用概率分布
-
-confidence interval 置信区间
-
-hypothesis test 假设检验
-
-bootstrapping 自助法 * 自抽样？
-
-power 统计功效
-
-<strong>W1-L9</strong>
-
-回归分析的调整分析 adjusting analysis
-
-<strong>W1-L10</strong>
-
-boosting
-
-bagging
-
-<strong>W1-L11</strong>
-
-Shiny 交互式R共享
-
-<strong>W1-L12</strong>
-
-Windows下安装R
-
-<strong>www.Rseek.org</strong>
-
-<strong>W2-L2</strong>
-
-Command Line Interface:
-
-<strong>command flags arguments</strong>
-
-cp -r ./ ../test
-
-<strong>W2-L3</strong>
-
-Introduction to Git
-
-$git config --list
-
-$git config --global user.name ""
-
-$git config --global user.email ""
-
-&nbsp;
-
-<strong>W2-L7</strong>
-
-markdown
-
-readme<strong>.md</strong>
-
-##hello   (## means secondary heading)
-
-* hello
-
-* world (unordered list)
-
-<strong>W2-L8</strong>
-
-R packages
-
-install.packages("slidify")
-
-library("xxx")    #load the function
-
-W3-L4
-
-http://figshare.com
-
-&nbsp;</td>
-<td><strong>Point</strong></td>
-</tr>
-<tr>
-<td colspan="2"> <strong> Measure</strong></td>
-</tr>
-</tbody>
-</table>
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/07/13/e3-80-90coursera-e3-80-91data-scientists-toolbox/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150823/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150822/">【Shanbei News Notes】20150822</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-08-23
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
+    
+        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
+    
+        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<h2 class="head-title"><a href="http://www.shanbay.com/read/article/36112/">China Worries Push Down Global Stocks 中国担忧推低全球股市</a></h2>
+<p>brokerage 证券公司</p>
+
+<p>faltering growth经济增长下行</p>
+
+<p>on edge 急切不安的</p>
+
+<p>stock market 股票市场</p>
+
+<p>devaluation 货币贬值</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150822/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -947,10 +1485,10 @@ http://figshare.com
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page22" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">23/42</span>
+          <span class="page_number ">23/43</span>
           
             <a href="/page24" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1191,7 +1729,52 @@ http://figshare.com
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2290,14 +2873,14 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2458,7 +3041,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2542,6 +3125,13 @@ http://figshare.com
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2549,7 +3139,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2570,7 +3160,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2598,7 +3188,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2738,7 +3328,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2857,7 +3447,7 @@ http://figshare.com
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2873,6 +3463,27 @@ http://figshare.com
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2886,25 +3497,25 @@ http://figshare.com
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2940,7 +3551,7 @@ http://figshare.com
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2958,7 +3569,7 @@ http://figshare.com
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -2994,7 +3605,7 @@ http://figshare.com
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3138,7 +3749,7 @@ http://figshare.com
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3291,7 +3902,7 @@ http://figshare.com
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3327,7 +3938,7 @@ http://figshare.com
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3345,7 +3956,7 @@ http://figshare.com
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3354,7 +3965,7 @@ http://figshare.com
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3426,7 +4037,16 @@ http://figshare.com
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     

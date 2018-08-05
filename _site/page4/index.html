@@ -37,10 +37,11 @@
 
   <body>
 
+    <canvas id="c"  style="postion:fixed;left:0px;top:0px;width:100%;"></canvas>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>try to be a day-contributor!</small>
+        <small>Model Player</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -223,14 +224,15 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
 </header>
 
 
-        <!--<canvas id="c"  style="postion:relative;"></canvas>-->
-<div class="page clearfix"  index>
+        <div class="page clearfix" style="postion:absolute;top:0px;"  index>
     <div class="left">
         <h1>Welcome to LZN's Blog!</h1>
         <small>Wind distinguishes a candle but energizes fire.</small>
@@ -239,11 +241,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a>
+                  <a class="post-link" href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-12
+                        <i class="fa fa-calendar"></i>2018-04-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -262,15 +264,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
     
   
 
@@ -287,13 +281,15 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
     
-        <a href="/tag/#AES&nbspEncrypt" title="Tag: AES&nbspEncrypt" rel="tag">AES&nbspEncrypt</a>&nbsp;
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
     
-        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>&nbsp;
     
-        <a href="/tag/#pymysql" title="Tag: pymysql" rel="tag">pymysql</a>
+        <a href="/tag/#MCMC" title="Tag: MCMC" rel="tag">MCMC</a>&nbsp;
+    
+        <a href="/tag/#Bayes" title="Tag: Bayes" rel="tag">Bayes</a>
     
   
 
@@ -302,77 +298,37 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#对称加密" id="markdown-toc-对称加密">对称加密</a></li>
-  <li><a href="#公钥非对称加密" id="markdown-toc-公钥非对称加密">公钥非对称加密</a></li>
-</ul>
+                    
+<p>帮老板审稿，这稿子用了个非常牛逼的Bayesian Model+MCMC做降水的突变检验，很明显是个ML的方法，这么好的机会，肯定要抓着搞明白。</p>
 
-<p>终于把基本的数据库组织结构学的差不多啦，上午拖着需要补充的市场数据，测试导入数据！</p>
+<p>整理一些资料如下：</p>
 
-<p>python3使用pymysql模块连接InnoDB数据库，连接过程中需要用户名密码，可是明文密码再上传github这是找死，决定研究下简单的加密解密过程，从外部读取密文，再decode后给入。</p>
+<ol>
+  <li><strong><a href="https://blog.csdn.net/pongba/article/details/2958094">贝叶斯方法介绍</a></strong>: 这是篇非常好的科普，从贝叶斯老爷的逆概问题讨论形式化的贝叶斯概型。</li>
+  <li><strong><a href="https://site.douban.com/182577/widget/notes/10567181/note/292072927/">MC, MC, MCMC</a></strong>: 蒙特卡洛、马尔可夫链，到马尔可夫链蒙特卡洛方法。</li>
+  <li><strong><a href="https://zh.wikipedia.org/wiki/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0">似然函数</a></strong>:终于明白了似然函数是什么意思，表征观测结果对应预期分布的似然性。定性的说，一个硬币投了一百次有90次正面，那么这个硬币正常的似然性很低很低。</li>
+  <li><strong><a href="">最大似然估计</a></strong>:对同一个似然函数，如果存在一个参数值，使得它的函数值达到最大的话，那么这个值就是最为“合理”的参数值。</li>
+  <li><strong><a href="http://sunyi514.github.io/2016/03/05/mcmc%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0/">MCMC方法小记</a></strong>：好例子!</li>
+  <li><strong><a href="http://xccds1977.blogspot.kr/2014/07/mcmc.html">理解MCMC</a></strong>:好例子！</li>
+</ol>
 
-<h3 id="对称加密">对称加密</h3>
-<p>加密算法分对称加密和非对称加密。对称加密很好理解，就是经典的凯撒密码的套路，采用同样的密钥加密和解密（字幕平移法则）。
-<img src="https://bignerdcoding.com/uhttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2017/08/3799978773.jpeg" alt="" /></p>
+<p><strong>Updated 2018-04-14</strong></p>
 
-<p>DES是经典的对称加密算法，64bits为单位然后套轮函数循环，但是DES目前已经被攻破，三重DES（密钥1加密，密钥2解密，密钥3加密）还有应用价值。
-AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平移），MixColumns（混列），最后AddRoundKey（与原数据异或）。此为一轮AES。
-如果采用对称加密，推荐AES算法。</p>
-
-<h3 id="公钥非对称加密">公钥非对称加密</h3>
-<p>公钥加密是密码学领域非常牛逼的技术，即加密密钥和解密密钥可以不同，这样可以避免密钥配送过程中的风险。公钥丢失也不怕，神不神奇？</p>
-
-<p>比如用户浏览器和server之间非对称加密过程可以是这样：server给公钥，用户用公钥加密，将密文给server（公钥、密文都被窃取也无法获得明文），server将密文用私钥解密。
-经典非对称加密算法RSA。其<a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html">数学原理</a>在阮一峰的网站有介绍。不再赘述。</p>
-
-<p>以我们的应用情景来说，因为不涉及通讯，直接AES对称加密即可。</p>
-
-<p>构建如下类解决：</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AESCipher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="mi">32</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">):</span>
-        <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
-        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">iv</span> <span class="o">+</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enc</span><span class="p">):</span>
-        <span class="n">enc</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">]</span>
-        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpad</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enc</span><span class="p">[</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">:]))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span> <span class="o">*</span> <span class="nb">chr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_unpad</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:])]</span>
-</code></pre></div></div>
-
-<p><a href="https://bignerdcoding.com/archives/33.html">参考资料</a></p>
-
-<p><strong>Updated 2018-03-12</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/12/cryptography-python-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/14/bayes-mcmc/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a>
+                  <a class="post-link" href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-11
+                        <i class="fa fa-calendar"></i>2018-04-04
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -391,11 +347,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>
     
   
 
@@ -412,11 +364,9 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+        <a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a>&nbsp;
     
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
     
   
 
@@ -426,465 +376,66 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                 </div>
                 <div class="excerpt">
                     
-<p>今天打算创建Mercurius的数据库，神奇的是，输入create database后报错</p>
+<p>东校实验室服务器坏掉了一块RAID 1的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。</p>
+
+<p>原RAID没出问题的磁盘被降级为foreign状态，</p>
+
+<p>后查到<a href="https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh">官方文档</a></p>
 
 <blockquote>
-  <p>ERROR 1006 (HY000): Can’t create database ‘mercurius’ (errno: 28)</p>
+  <p>Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.</p>
 </blockquote>
 
-<p>换了root账户也不行，查到的信息都是说mysql的数据库权限问题，检查后的确木有问题呀。
-注意到google出的关键词errno号不同，很多13号，而我是28号，深度搜索了一番，找到了答案：</p>
-<blockquote>
-  <p>This error means that your mysql server does not have enough free space. You need to check the file system size and please remove unwanted software(s) or installers or files.</p>
-</blockquote>
+<p>按F按键后导入foreign配置，开始进入系统。</p>
 
-<p>我去，坑我？磁盘满额？df查看一下，果然/根目录满额。奇怪～</p>
+<p>进入系统后发现0号盘位闪橙色灯，也处于降级出错状态，妈蛋，这下有的玩了。于是联系L老师再次采购硬盘。
+<strong>Updated 2017-12-30</strong></p>
 
-<p>利用find找大文件：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-size</span> +800M
-</code></pre></div></div>
+<p>3月硬盘到货，测试直接将0盘位换成新硬盘，发现无法自动rebuild，无法识别1盘位的系统盘。</p>
 
-<p>发现除了最早丢过来的安装包，就是gdm的log最大，cd过去一看，可了不得，13G的log，应该是图形界面出错后一直在写error，写到了3月5日，果断删掉～并且把安装包移走。目前解决，后面看是否还继续写log。</p>
+<p>重新装回旧有硬盘后能够进入系统，但是只放置1盘位新硬盘，启动后出现无法找到superblock的错误。</p>
 
-<p>慎重起见，将mysql的数据库路径进行迁移，然后发现进了个大坑。无论怎样按照<a href="http://blog.csdn.net/liuchunming033/article/details/51851667">网上的步骤</a>调整，都会遇到mysqld服务无法打开的结果。甚至rsync数据库然后做链接都不行。
-折腾了一下午，突然想到，不就是把mercurius数据库拿出来么，不动mysql本身的账户库还不行。好吧，最后给mercurius做了链接搞定，要注意所在的上层目录必须有root用户和用户组的读写权限。</p>
+<p>怀疑能进入系统的好机会不多，迅速备份了技术博客后，关掉所有的crontab减少读写，希冀RAID卡能够将所有的数据rebuild到1盘位。等下周来看。</p>
 
-<p><strong>Updated 2018-03-11</strong></p>
+<p><strong>Updated 2018-03-28</strong></p>
+
+<p>所以希冀是自欺欺人的。满心以为自动rebuild后，可以更换下0盘位，发现还是老样子。</p>
+
+<p>想到新招数偷天换日，将2号盘位的non-RAID disk取下，更换上新硬盘后，把新硬盘做全局热备。<a href="https://wenku.baidu.com/view/993960dfbb4cf7ec4afed023.html">参考资料</a></p>
+
+<p>没想到改全局热备后并没有rebuild，而且再次出现找不到superblock无法进入系统的情况。没招了，只有试图解决这个问题。测试<a href="https://linuxexpresso.wordpress.com/2010/03/31/repair-a-broken-ext4-superblock-in-ubuntu/">这个解决方案</a></p>
+
+<p>发现牛逼的是所有的备份superblock都挂了。这是没救了？</p>
+
+<p>尝试检查了一下fstab，发现奇怪的地方，fstab中将sda1挂载到/用户/data下，由于data存储较大，<strong>怀疑是2号位硬盘找不到，然后把系统盘sdb误认为是sda才出现superblock不匹配的地方。（上次更换0盘位也出现相同错误，可能更换或取下硬盘后影响了系统自检虚拟磁盘的顺序）</strong></p>
+
+<p>尝试给回2盘位，可以进入系统；随后尝试删除fstab中对应语句，拔出2盘位，也可以进入系统，有戏，果然是这个原因！</p>
+
+<p>接下来把2盘位更换为新硬盘，由于之前做了热备，现在显示为foreign状态，import foreign configure后，可以进入系统。进入系统后没有看到2盘位在闪烁，说明没有自动rebuild。</p>
+
+<p>关机，将处于2盘位的新硬盘拿下并替换0盘位就硬盘，开机发现提示进入配置页面，进入后发现0盘位开始rebuild，Yeah！成功！</p>
+
+<p>下午助教，去课室发现竟然没人，问了一下才知道换课了，磨叽了一会儿回去差不多两小时，发现rebuild居然卡在37%，奇怪。不管了，今天没时间耗着了，必须搞完。于是重启，突然想到为何不尝试一下之前的1号盘是否能读出。如果1号盘可用的话，那么直接rebuild到更新的时间点岂不是更好。</p>
+
+<p>于是将0盘位换成之前的1号盘，果然可以！慎重起见，迅速备份技术博客，17年2月之后一直到8月底最后一篇博客，一点都不少，太好了！之后设置rebuild到这个盘就去吃饭了，当晚SH说0盘位掉线了，好吧，好在技术博客救回来了。下次去恢复到2月份的系统。</p>
+
+<p><strong>Updated 2018-04-04</strong></p>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/11/mysql-error-full-disk/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/04/raid-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/06/mysql-basics/">mysql基本操作</a>
+                  <a class="post-link" href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>常用命令</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
-<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
-<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
-<span class="k">select</span> <span class="k">database</span><span class="p">();</span> <span class="o">#</span> <span class="k">show</span> <span class="n">what</span> <span class="k">is</span> <span class="n">the</span> <span class="n">selected</span> <span class="k">database</span>
-<span class="k">drop</span> <span class="k">database</span> <span class="n">if</span> <span class="k">exists</span> <span class="n">test</span><span class="p">;</span>
-</code></pre></div></div>
-<p>建立好数据库之后，则可以开始建立tables啦，这个过程中需要有一些数据库的设计思路，大概是列出各种table，如下图：
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2ugsl2uej20nd0gbwka.jpg" alt="" /></p>
-
-<p>然后我们仿照视频教程建立一个存储学生数据的table</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span>
-    <span class="o">-&gt;</span> <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">email</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">street</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="k">state</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="nv">"PA"</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">zip</span> <span class="n">mediumint</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">phone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">birth_date</span> <span class="n">date</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">date_entered</span> <span class="k">timestamp</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">lunch_cost</span> <span class="n">float</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">student_id</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
-</code></pre></div></div>
-<p>解释一下各关键词：</p>
-
-<p>varchar代表可变长度的string，not null表示不能是空值；</p>
-
-<p>state因为只有两个字母，所以，强制要求char(2)，并且给了default值为PA。mediumint有意思，查了一下，发现mysql提供非常多种类的数据类型，估计是考虑到数据库的空间利用效率的原因。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2v4f3uo0j20wc07c42m.jpg" alt="" />
-我们总结一下数据类型：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAR		fixed length character string
-VARCHAR		a character string with a length that is variable
-BLOB		contain 2^16 bytes of data
-BIGINT		2^63 to -2^63-1
-FLOAT		decimal spaces 1.1e38 to -1.1e38
-DOUBLE		decimal spaces, 1.7e308 to -1.7e308
-ENUM		A character stirng that has a limited number of total values, which you must define
-SET			(Seldom used) A set of legal possible character strings. Unlike ENUM, a SET can contain a multiple values in comparason to the one legal value with ENUM.
-DATE		YYYY-MM-DD
-TIME		HH:MM:SS
-DATETIME	YYYY-MM-DD HH:MM:SS
-TIMESTAMP	YYYYMMDDHHMMSS
-YEAR		YYYY
-</code></pre></div></div>
-<p>unsigned 表示非负值。</p>
-
-<p>sex的enum非常清楚了，只有两个选项。</p>
-
-<p>注意入学时间，用的timestamp类型，可以看到数据库软件本身提供了非常体贴的类型，不需要自己parser date string啦。</p>
-
-<p>最后一个student id，被定义为主键。</p>
-
-<p>然后我们看一下student中的情况</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">describe</span> <span class="n">student</span><span class="p">;</span>
-
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-<span class="o">|</span> <span class="n">Field</span>        <span class="o">|</span> <span class="k">Type</span>                  <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span>           <span class="o">|</span> <span class="n">Extra</span>                       <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-<span class="o">|</span> <span class="n">first_name</span>   <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">last_name</span>    <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">email</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>           <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">street</span>       <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">city</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="k">state</span>        <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>               <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="n">PA</span>                <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">zip</span>          <span class="o">|</span> <span class="n">mediumint</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">phone</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">birth_date</span>   <span class="o">|</span> <span class="n">date</span>                  <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">sex</span>          <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">)</span>         <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">date_entered</span> <span class="o">|</span> <span class="k">timestamp</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span> <span class="k">on</span> <span class="k">update</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">lunch_cost</span>   <span class="o">|</span> <span class="n">float</span>                 <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">student_id</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span>      <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span> <span class="n">auto_increment</span>              <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-
-</code></pre></div></div>
-
-<p>查看table中field值的方法：</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="n">first_name</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>可以用逗号隔开多个fields。
-清空数据表</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">truncate</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>注意truncate和drop的区别，drop直接将table从database拿掉，truncate仅仅是清空field的content。
-我们总结一下层级关系</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>databases
-	tabels
-		fields
-			field rows (contents)
-</code></pre></div></div>
-
-<p>向student table中插入一条数据记录</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="n">value</span>
-    <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">'Dennis'</span><span class="p">,</span> <span class="s1">'Lee'</span><span class="p">,</span> <span class="s1">'dcooper@aol.com'</span><span class="p">,</span> <span class="s1">'123 Main St'</span><span class="p">,</span> <span class="s1">'Yakima'</span><span class="p">,</span> <span class="s1">'WA'</span><span class="p">,</span> <span class="mi">95294</span><span class="p">,</span> <span class="s1">'510-365-0383'</span><span class="p">,</span> <span class="s1">'1995-2-22'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="mi">3</span><span class="p">.</span><span class="mi">50</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>查看加入的数据记录</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slect</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>Foreign Key的概念</p>
-
-<p>表A中的Primary Key，出现在表B中，则为Foreign Key，可为空值，可重复出现。</p>
-
-<p>如果要对已有的表增加一条数据属性，使用alter table语句</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">test</span>
-    <span class="o">-&gt;</span> <span class="k">add</span> <span class="n">maxscore</span> <span class="n">int</span> <span class="k">not</span> <span class="k">null</span> <span class="k">after</span> <span class="k">type</span><span class="p">;</span>
-
-<span class="k">describe</span> <span class="n">test</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-<span class="o">|</span> <span class="n">Field</span>    <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-<span class="o">|</span> <span class="n">date</span>     <span class="o">|</span> <span class="n">date</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="k">type</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'Q'</span><span class="p">)</span>    <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">maxscore</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">class_id</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">test_id</span>  <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-
-</code></pre></div></div>
-<p>改变已有的数据表中的Field名，</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">score</span> <span class="n">change</span> <span class="n">event_id</span> <span class="n">test_id</span>
-    <span class="o">-&gt;</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-03-08</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/06/mysql-basics/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/05/install-mysql/">CentOS mysql安装</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-05
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
-首先切换到root下安装：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
-</code></pre></div></div>
-<p>检查服务状态</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
-mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
-</code></pre></div></div>
-<p>启动服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
-</code></pre></div></div>
-
-<p>启动开机服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
-</code></pre></div></div>
-
-<p>之后给出提示信息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
-To do so, start the server, then issue the following commands:
-
-/usr/bin/mysqladmin -u root password 'new-password'
-/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
-
-Alternatively you can run:
-/usr/bin/mysql_secure_installation
-</code></pre></div></div>
-<p>采用第二种方法更加安全。</p>
-
-<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
-
-<p>然后的选项一路Y。</p>
-
-<p>登录mysql，在root用户下，直接</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
-</code></pre></div></div>
-<p>登陆后，我们查看一下用户列表。</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-</code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
-| Host      | User |
-+-----------+------+
-| 127.0.0.1 | root |
-| localhost | root |
-+-----------+------+
-2 rows in set (0.00 sec)
-</code></pre></div></div>
-<p>添加一个非root用户,密码为password</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-</code></pre></div></div>
-<p>给予新用户相应权限</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
-</code></pre></div></div>
-<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
-<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-03-05</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/05/install-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#jupyter&nbspnotebook" title="Tag: jupyter&nbspnotebook" rel="tag">jupyter&nbspnotebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Jupyter Notebook极端强大，可以直接执行Markdown，执行之后即成为document html。</p>
-
-<p>感叹号(exclamation point)可以用于嵌入bash command:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">xxx</span>
-</code></pre></div></div>
-
-<p>Notebook built-in command叫做Magics，单百分号：Line Magics，双百分号：Cell Magics。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">lsmagic</span>
-</code></pre></div></div>
-<p>常用的magic func</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">HTML</span>  <span class="c">#其后的text会被render为html，可以放入iframe等拖视频过来。</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inlin</span> <span class="c">#将matplotlib绘图放到notebook的输出中。</span>
-
-<span class="o">%%</span><span class="n">javascript</span>
-<span class="o">%%</span><span class="n">bash</span>
-
-<span class="o">%</span> <span class="o">%</span><span class="n">timeit</span>   <span class="c">#可以测试function的速度</span>
-</code></pre></div></div>
-
-<p>甚至可以酷炫地render pandas dataframe，看图，效果真是酷炫到爆炸
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp0wdaobj5j20s50zzgx8.jpg" alt="" /></p>
-
-<p>更牛逼的是，居然可以通过file-&gt;download as存储为html pdf markdown等各种形式，简直牛逼到爆炸。
-我们测试一下，发现html直接把图片存成了一串散列值，markdown的话会把图片和md文件放在一个zip包里。</p>
-
-<p>notebook的存储本质是个json file。</p>
-
-<p><strong>Updated 2018-03-04</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/04/jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/28/trading-diary/">20180228交易笔记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-28
+                        <i class="fa fa-calendar"></i>2018-04-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -940,27 +491,350 @@ Alternatively you can run:
                 </div>
                 <div class="excerpt">
                     
-<p>前几天与ZP和SC一起讨论了一下ETF和波动性的关系，逻辑上应该比较讲得通，记录一下。首先是在知乎上看到如下讨论：</p>
-
 <blockquote>
-  <p>ETF turnover rate 多少？ 正常在 5%左右， mutual fund 一年 turnover 多少？ 大概在 30%-40% 左右。 一旦市场出现大批量的卖家和买家，市场上 没有足够的liquidity 去吸收吧， 所以股价才会变动的很大。等到有一天，90%的钱都去了ETF， 应该来说 active 更容易找到 alpha, 但是在钱持续往etf 流的今天，难道不是ETF 的 holding 在完全没有 基本面的情况下不停的涨吗？ 一旦出现大批卖家， it is going to be a bloodbath.</p>
+  <p>逻辑对的情况下，该如何把握节奏？</p>
 </blockquote>
 
-<p>有意思，但是逻辑线还是不清楚。想了想应该是这样:</p>
+<p>这段时间最大的感受就逻辑假设在不断验真，可节奏把握的确是一件颇具奇技淫巧，难以搞定的风骚操作。其实本质还是资金仓位管理以及择时判据，逻辑对的情况下（big picture）有定量分析加持才行。</p>
+
+<p>从16年下半年就看空科技股，当然这节奏是严重不对的，不断学习过程中看到smart beta痴痴买入ETF的策略加上投机性买入对价格的不断推升可以持续如此之久。终于憋到今年2月份第一次利率冲击，波动性回归，市场进入震荡格局。</p>
+
+<p>这几天F的信息泄露+川普对A的税收大棒挥起，科技股终于出现像样的下跌了，大概瞄了下QQQ应该是回到去年十一月的水平，会买么？我还不会。FAANG只有PE到20以下我才会心动，G目前EPS 18股价1k，55的PE；被干的F目前PE 29，至少跌倒20以内，才会下手。只有apple目前17+。</p>
+
+<p>看了下最近的资金曲线，基本维持窄幅震荡，大概只有3%左右最大回撤，相比指数的跌宕起伏平缓很多。重新审视了下仓位、标的的分散性和风险敞口，依然不觉得有什么问题。风险投资占总资产比重已经下降到24%左右。</p>
+
+<p>逻辑上接下来应该去验真第二轮的利率上升冲击、国际经贸形势变换冲击以及地缘政治关系紧张冲击等，适当加一些吃backwardation rolling的标的后继续走佛系路线：观察，等待。</p>
+
+<p>我想也可以抛出结论了：</p>
+
 <blockquote>
-  <p><strong>ETF通过低换手率抑制了成分股的波动性，从某种意义上来说，使得市场的投机性降低，这是好的方面；但ETF本身对其标的流通股的吸收使得市场上可以自由交易的标的股数量减少。由于可供交易的流通股数量减少，潜在的大宗买卖对股价的影响增大（潜在波动性增大，盘前盘后若交易成功更容易出问题），而这种缺少流动性市场的大幅度调整可能会进一步影响ETF持仓者的预期，一旦预期一致转向将会造成大量抛盘从而引发系统性风险。</strong></p>
+  <p>客观交易系统还不成熟的前提下，不要在乎节奏，减少操作，注意风险敞口和布局即可。</p>
 </blockquote>
 
-<p>比较好的应对策略：</p>
-<blockquote>
-  <p>正alpha小盘股+高beta指标股去养大盘etf看跌期权？</p>
-</blockquote>
-
-<p><strong>Updated 2018-02-27</strong></p>
+<p><strong>Updated 2018-04-03</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/02/28/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/03/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-04-01
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>帮JL移植wrf3.8.1到天河2号。首先调整环境变量。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">.</span> /etc/bashrc
+<span class="k">fi</span>
+<span class="c"># edited on Apr 1, 2018 for WRF</span>
+<span class="c"># User specific aliases and functions</span>
+<span class="c">#bug fix</span>
+<span class="nb">source</span> /WORK/app/osenv/ln1/set2.sh
+<span class="nb">export </span><span class="nv">MODULEPATH</span><span class="o">=</span>/WORK/app/modulefiles
+
+<span class="c">#set COMMON input data path for CESM</span>
+<span class="c">#export COMMON_CESM_INPUT=/WORK/app/CESM_inputdata</span>
+
+<span class="c">#set Intel compiler and MPI</span>
+module load intel-compilers/13.0.0
+module load MPI/Intel/MPICH/3.1-icc13
+module load cmake/3.0.2
+
+<span class="c">#set hdf5 and netcdf4 for WRF</span>
+module load hdf5/1.8.13/03-CF-13
+module load netcdf/4.3.2/02-CF-13
+
+<span class="c">#set jasper</span>
+<span class="nb">export </span><span class="nv">JASPER</span><span class="o">=</span>/HOME/sio_goc017/WORKSPACE/jjl/soft/jasper-1.900.1
+<span class="nb">export </span><span class="nv">JASPERLIB</span><span class="o">=</span><span class="nv">$JASPER</span>/lib
+<span class="nb">export </span><span class="nv">JASPERINC</span><span class="o">=</span><span class="nv">$JASPER</span>/include
+
+<span class="c">#set WRF</span>
+<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
+<span class="nb">export </span><span class="nv">BUFR</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">CRTM</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">J</span><span class="o">=</span><span class="s2">"-j 12"</span>
+<span class="nb">export </span><span class="nv">MP_STACK_SIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">OMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">KMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
+<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+
+<span class="nv">MPI_BUFFER_SIZE</span><span class="o">=</span>128
+</code></pre></div></div>
+<p>注意在编译cumulus模块的地方大概要等待20分钟之久。采用上述环境变量出错：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wrf.o: In <span class="k">function</span> <span class="sb">`</span>MAIN__<span class="s1">':
+wrf.f90:(.text+0x1f): undefined reference to `__intel_new_feature_proc_init'</span>
+libwrflib.a<span class="o">(</span>module_check_a_mundo.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>module_check_a_mundo_mp_check_nml_consistency_<span class="s1">':
+module_check_a_mundo.f90:(.text+0x31fa): undefined reference to `__intel_ssse3_rep_memmove'</span>
+module_check_a_mundo.f90:<span class="o">(</span>.text+0x35ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_etanew.o): In function `module_mp_etanew_mp_etanewinit_'</span>:
+module_mp_etanew.f90:<span class="o">(</span>.text+0xacb0<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_thompson.o): In function `module_mp_thompson_mp_table_ccnact_'</span>:
+module_mp_thompson.f90:<span class="o">(</span>.text+0x2ed74<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtm.o): In function `module_ra_rrtm_mp_rrtm_lookuptable_'</span>:
+module_ra_rrtm.f90:<span class="o">(</span>.text+0x256ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtmg_lw.o):module_ra_rrtmg_lw.f90:(.text+0x769bf): more undefined references to `__intel_ssse3_rep_memmove'</span> follow
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x1ee4): undefined reference to `_intel_fast_memmove'</span>
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose1d_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x26f5): undefined reference to `_intel_fast_memmove'</span>
+io_grib_share.f90:<span class="o">(</span>.text+0x29e3<span class="o">)</span>: undefined reference to <span class="sb">`</span>_intel_fast_memmove<span class="s1">'
+0.57user 4.84system 0:08.12elapsed 66%CPU (0avgtext+0avgdata 487696maxresident)k
+12392inputs+102200outputs (47major+183178minor)pagefaults 0swaps
+make[1]: [em_wrf] Error 1 (ignored)
+</span></code></pre></div></div>
+<p>Google以下，发现intel官网的<a href="https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/494782">trouble shooting page</a>
+以下内容：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I believe the message may be caused by mixing objects built with different compiler versions. The __intel_new_feature_proc_init entry point is only in recent compiler libraries; if you have code built with a recent compiler, but are linking to older run-time libraries, you might encounter such a problem.
+</code></pre></div></div>
+
+<p>有道理，可能是之前编译的模块没有删掉。执行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$./clean -a
+</code></pre></div></div>
+<p>再次测试一下.出现难以理解的错误：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nup_em.f90(68): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
+   USE module_initialize_real, only : wrfu_initialize
+   -------^
+   real_em.f90(12): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
+
+</code></pre></div></div>
+<p>表示找不到include文件。到相关目录下检查发现文件确实存在，奇葩……重新执行compile语句后编译成功。怀疑是天河的文件系统不稳定造成。</p>
+
+<p>测试WPS编译出错。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make[1]: pathf90: Command not found
+</code></pre></div></div>
+<p>检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.</p>
+
+<p><strong>Updated 2018-04-01</strong></p>
+
+<p>据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。</p>
+
+<p><strong>Updated 2018-04-03</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/04/01/jinlin-wrf-tianhe2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#tensorflow" title="Tag: tensorflow" rel="tag">tensorflow</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>开始测试tensorflow的图片分类器！
+按<a href="https://www.youtube.com/watch?v=gIhUePPFmpY">这个视频</a>来，发现train的一步出现问题</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:tensorflow:Couldn't understand architecture name ''
+</code></pre></div></div>
+<p>发现是指定的环境变量读不到，于是将给ARCH赋值的语句和python执行语句一起放到shell脚本里，问题解决。
+train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based，tf应该自动选用cuda解决了。</p>
+
+<p>之后做测试，效果很好。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fpwweqdx63j20fz0790t7.jpg" alt="" /></p>
+
+<p><strong>Updated 2018-03-30</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/30/tf-img-classifier/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>周三助教回到东校，决定去处理一下实验室服务器，看下我的wordpress博客内容到底还有没有救。因为<a href="https://novarizark.github.io/2017/12/30/raid-rebuild/">上次</a>做了1号盘位的rebuild，这次测试将0号盘位degraded的旧硬盘换下。
+可是将0号盘位换下后，1号盘位显示为non-raid磁盘，而0号新盘直接不认，what the fuck。怀疑是上次rebuild没有完成，所以将旧硬盘再次换到0号位置让raid卡自己玩去。
+换上旧硬盘后可以正常识别到raid信息并进入系统。测试mysql数据库居然发现wp_posts数据都存在，太幸运了，我的技术博客有救了！果断导出。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysqldump <span class="nt">-h</span> localhost <span class="nt">-u</span> root <span class="nt">-p</span> <span class="nt">--database</span> wordpress | gzip <span class="o">&gt;</span> backupfile.sql.gz
+gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> bck.sql 
+</code></pre></div></div>
+
+<p>之后在mysql下导入</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">source</span> <span class="o">~/</span><span class="n">bck</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>查看中文时注意utf8编码</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span> <span class="k">names</span> <span class="n">utf8</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>后面考虑写个python脚本将过去的日志转成markdown放到jekyll博客下。</p>
+
+<p><strong>Updated 2018-03-28</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/28/recover-techblog/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -975,10 +849,10 @@ Alternatively you can run:
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page3" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">4/42</span>
+          <span class="page_number ">4/43</span>
           
             <a href="/page5" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page42" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1219,7 +1093,52 @@ Alternatively you can run:
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (45)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
                             
                           
                         
@@ -2318,14 +2237,14 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2486,7 +2405,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2570,6 +2489,13 @@ Alternatively you can run:
                       
                       
                       
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                    
+                      
+                      
+                      
+                      
+                      
                       <a href="/tag/#aws" style="font-size: 9pt; color: #999;">aws</a>
                     
                       
@@ -2577,7 +2503,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
                     
                       
                       
@@ -2598,7 +2524,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#ubuntu" style="font-size: 9pt; color: #999;">ubuntu</a>
+                      <a href="/tag/#ubuntu" style="font-size: 9.5pt; color: #999;">ubuntu</a>
                     
                       
                       
@@ -2626,7 +2552,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#WRF" style="font-size: 9pt; color: #999;">WRF</a>
+                      <a href="/tag/#WRF" style="font-size: 9.5pt; color: #999;">WRF</a>
                     
                       
                       
@@ -2766,7 +2692,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#stock" style="font-size: 9.5pt; color: #888;">stock</a>
+                      <a href="/tag/#stock" style="font-size: 10pt; color: #888;">stock</a>
                     
                       
                       
@@ -2885,7 +2811,7 @@ Alternatively you can run:
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9pt; color: #999;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2901,6 +2827,27 @@ Alternatively you can run:
                       
                       <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#clm" style="font-size: 9pt; color: #999;">clm</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#pft" style="font-size: 9pt; color: #999;">pft</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
+                    
                 </div>
             </div>
 
@@ -2914,25 +2861,25 @@ Alternatively you can run:
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2018/05/17/thinking-young-world/">十年绚烂</a></li>
+                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
-                        <li><a href="/2018/05/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
-                        <li><a href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a></li>
+                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
-                        <li><a href="/2018/05/07/ill-health-blog/">病了快一个月</a></li>
+                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
-                        <li><a href="/2018/05/02/cesm-savio-update/">Savio update: CESM changes</a></li>
+                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
-                        <li><a href="/2018/04/29/liquility-market-strategy/">流动性，以及缺少流动性市场中的生存策略</a></li>
+                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
                     
-                        <li><a href="/2018/04/19/wordpress-blog-rebuild/">从备份的wordpress数据库重建技术博客</a></li>
+                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
                     
-                        <li><a href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a></li>
+                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
                     
-                        <li><a href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a></li>
+                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
                     
-                        <li><a href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a></li>
+                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2968,7 +2915,7 @@ Alternatively you can run:
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">15</span>
                         </a>
                     </li>
                     
@@ -2986,7 +2933,7 @@ Alternatively you can run:
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">53</span>
+                            <span class="badge">57</span>
                         </a>
                     </li>
                     
@@ -3022,7 +2969,7 @@ Alternatively you can run:
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">7</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3166,7 +3113,7 @@ Alternatively you can run:
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">6</span>
+                            <span class="badge">9</span>
                         </a>
                     </li>
                     
@@ -3319,7 +3266,7 @@ Alternatively you can run:
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3355,7 +3302,7 @@ Alternatively you can run:
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3373,7 +3320,7 @@ Alternatively you can run:
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">16</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3382,7 +3329,7 @@ Alternatively you can run:
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">1</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -3454,7 +3401,16 @@ Alternatively you can run:
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">4</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#WRF" class="categories-list-item" cate="WRF">
+                            <span class="name">
+                                WRF
+                            </span>
+                            <span class="badge">1</span>
                         </a>
                     </li>
                     
