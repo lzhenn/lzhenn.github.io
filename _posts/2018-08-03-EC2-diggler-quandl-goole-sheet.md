@@ -32,7 +32,7 @@ sudo -H pip install --ignore-installed -U ipython
 pip install --upgrade google-api-python-client oauth2client
 ```
 
-可以执行，但是执行中存在numpy警告。
+可以执行，但是执行中存在numpy警告。随后发现quandl将所有的exchange rate的数据做了premium权限设定，这下没法用免费的了，查了下发现[免费的echange rate API](http://free.currencyconverterapi.com/api/v5/convert?q=USD_CNY&compact=y).更换后可用。
 
 **Updated 2018-08-03**
 
