@@ -8,7 +8,7 @@ author: LZN
 
 * content
 {:toc}
-![](![](https://ws1.sinaimg.cn/large/73ebdc71ly1fuygxfm5kuj20u0179wy5.jpg){:height="33%" width="33%" align="center"}
+![](https://ws1.sinaimg.cn/large/73ebdc71ly1fuygxfm5kuj20u0179wy5.jpg){:height="33%" width="33%" align="center"}
 
 最近读完了吴晓波的《激荡十年，水大鱼大》一书，内容上讲述了从2008到2018十年间中国民营企业家的经历和故事。新书，时效性很强，同时很多事情几乎都是最近几年发生，随着年龄的增长和对经济社会关注的提升，亲切感、代入感与认同感也很强。概念清晰，行文流畅，语气平和而不失力道，逻辑抽象与语言组织的功底十分了得。唯一缺陷是编年史容易写成流水账，总让人感觉罗列堆砌人物和事件，不过也是难免之事，整体愿意给八分。
 
