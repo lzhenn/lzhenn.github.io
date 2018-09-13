@@ -29,10 +29,10 @@ function showMercurius(){
                 var obj = JSON.parse(test.responseText);  
                 var count = Object.keys(obj).length;
                 
-				for (var ii = 1; ii < count; ii++) {
+				for (var ii = 1; ii <= count; ii++) {
         			data.push('<tr>');
         			
-					data.push('<td>'+obj['target'+ii].tgt_name+ '</td>');
+					data.push('<td><a href="https://raw.githubusercontent.com/Novarizark/mercurius/master/routine_output/'+obj['target'+ii].tgt_name.trim()+'.png">'+obj['target'+ii].tgt_name+ '</td>');
 					data.push('<td>'+obj['target'+ii].update_date+ '</td>');
 					action=obj['target'+ii].action;
 					if ((action.search('Buy')>=0)||(action.search('Full')>=0)){
