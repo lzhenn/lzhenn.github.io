@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/01/e3-80-90matlab-e3-80-91-e6-95-b0-e5-ad-97ocr/">【MATLAB】数字OCR</a>
+                  <a class="post-link" href="/2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-01
+                        <i class="fa fa-calendar"></i>2017-12-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#MATLAB" title="Category: MATLAB" rel="category">MATLAB</a>
+        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -281,7 +371,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#MATLAB" title="Tag: MATLAB" rel="tag">MATLAB</a>
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>&nbsp;
+    
+        <a href="/tag/#forecast&nbsp;system" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a>
     
   
 
@@ -290,81 +382,342 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>之前截取了一些羽绒服的销量数据，以为能凑着这次<a href="http://met.sysu.edu.cn/?p=6153">广州飞雪的超强寒潮</a>写一点东西，最后发现数据并不是很有说服力。由于淘宝反爬虫的策略，因此过程中用浏览器配合按键精灵每小时截图，最后也是搜集到了不少位图数据，因此有一个问题就怎样在这些位图中将数字抽取出来，因为数字几乎没有干扰，这是个很基本的OCR（Optical Character Recognition，光学字符识别）问题。</p>
+                    <ul id="markdown-toc">
+  <li><a href="#编译wrf" id="markdown-toc-编译wrf">编译WRF</a></li>
+  <li><a href="#编译wps" id="markdown-toc-编译wps">编译WPS</a></li>
+  <li><a href="#下载geog包并解压" id="markdown-toc-下载geog包并解压">下载geog包并解压。</a></li>
+  <li><a href="#调整wps设置" id="markdown-toc-调整wps设置">调整wps设置</a></li>
+  <li><a href="#执行wps" id="markdown-toc-执行wps">执行wps</a></li>
+  <li><a href="#调整wrf设置" id="markdown-toc-调整wrf设置">调整WRF设置</a></li>
+  <li><a href="#执行real" id="markdown-toc-执行real">执行real</a></li>
+  <li><a href="#执行wrf" id="markdown-toc-执行wrf">执行wrf</a></li>
+  <li><a href="#计划任务" id="markdown-toc-计划任务">计划任务</a></li>
+</ul>
 
-<p>考虑还是用MATLAB做图像处理熟悉，简单查了下资料，思路很简单：</p>
+<p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
 
-<ol>
-  <li>预处理，剪裁出需要识别的区域，灰度化，二值化。</li>
-</ol>
+<h3 id="编译wrf">编译WRF</h3>
 
-<p>2.（关键）字符分隔，这个其实很简单，向x轴y轴分别投影，找出0和正整数之间的过渡位置，即字符和间隙的分隔位置</p>
+<p>configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</p>
 
-<ol>
-  <li>将图像字符串分隔为单个字符，分别向x轴y轴投影，记录投影特征，遍历10个阿拉伯数字</li>
-</ol>
+<p>之后直接执行编译</p>
 
-<p>4.待识别的新样本重复1和2的操作，计算与记录特征的标准偏差，设定一合理阈值偏差，小于该偏差即可认为识别成功。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./compile <span class="nt">-j</span> 8 em_real
+</code></pre></div></div>
+<p>执行编译过程卡住。更换15. 不包括avx指令集后成功。</p>
 
-<p>对于标准的屏幕显示的数字（或者字母），可以想象上述过程基本能做到极高的识别率了。手写体识别估计就更复杂了，需要用到机器学习等方法，木有涉猎，暂且不表。</p>
+<h3 id="编译wps">编译WPS</h3>
 
-<p>识别部分程序代码如下</p>
+<p>编译wps发现无法编译出ungrib，经过多次测试，分别</p>
 
-<pre><code>
-function img_number()
-    clear all;
-    close all;
-    echo off;
-	
-	
-	%---------------Read features---------------
-	x_mat=load('../feature/x_project.txt');
-	y_mat=load('../feature/y_project.txt');
-	
-    I = imread('../img/2016011920.bmp');
-    I=I(612:625,900:946,:);
-    I_int = rgb2gray(I);
-    
-    I_int=~im2bw(I_int,0.5);   %binary and reverse
-    I_x_pro = sum(I_int,1);    % project to the x axis
-    imshow(I_int)
-	num_x_start=strfind(I_x_pro~=0,[0 1])+1; %find the start point of a specific figure
-	num_x_end=strfind(I_x_pro==0,[0 1]); %find the end point of a specific figure
-	
-	I_y_pro = sum(I_int,2);   % project to the y axis
-    num_y_start=strfind(I_y_pro'~=0,[0 1])+1; %find the start point of a specific figure
-	num_y_end=strfind(I_y_pro'==0,[0 1]); %find the end point of a specific figure
-	
-	fig_num = size(num_x_start);   % how many figures in the image
-	fig_stdwidth = 6;
-	fig_stdheight = num_y_end-num_y_start+1;
-	for ii=1:fig_num(2)
-        I_std_ele_fig = imresize(I_int(num_y_start:num_y_end,num_x_start(ii):num_x_end(ii)), [fig_stdheight fig_stdwidth]);
-		std_x_pro = sum(I_std_ele_fig,1);
-		std_y_pro = sum(I_std_ele_fig,2)';
-		for jj=1:10
-			if(sum((std_x_pro-x_mat(jj,2:end)).^2)&lt;10 &amp; sum((std_y_pro-y_mat(jj,2:end)).^2)&lt;10)
-				jj-1
-			end
-		end 
-    end 
-</code></pre>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install libpng-devel
+yum install jasper-devel
+</code></pre></div></div>
+<p>将devel包安装完整后成功。</p>
+
+<h3 id="下载geog包并解压">下载geog包并解压。</h3>
+
+<p><strong>Updated 2017-12-31</strong></p>
+
+<h3 id="调整wps设置">调整wps设置</h3>
+
+<p>完整namelist.wps</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&amp;</span><span class="n">share</span><span class="w">
+ </span><span class="n">wrf_core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ARW'</span><span class="p">,</span><span class="w">
+ </span><span class="n">max_dom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_date</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="w">
+ </span><span class="n">interval_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">21600</span><span class="w">
+ </span><span class="n">active_grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="w">
+ </span><span class="n">subgrid_ratio_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+ </span><span class="n">subgrid_ratio_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+ </span><span class="n">io_form_geogrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+ </span><span class="n">opt_output_from_geogrid_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'./'</span><span class="p">,</span><span class="w">
+ </span><span class="n">debug_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">/</span><span class="w">
+
+</span><span class="p">&amp;</span><span class="n">geogrid</span><span class="w">
+ </span><span class="n">parent_id</span><span class="w">         </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">2</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_grid_ratio</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">i_parent_start</span><span class="w">    </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">140</span><span class="p">,</span><span class="w">  </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">140</span><span class="p">,</span><span class="w">
+ </span><span class="n">j_parent_start</span><span class="w">    </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">80</span><span class="p">,</span><span class="w">  </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w">
+ </span><span class="n">s_we</span><span class="w">              </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_we</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">241</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+ </span><span class="n">s_sn</span><span class="w">              </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_sn</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+ </span><span class="c1">!</span><span class="w">
+ </span><span class="c1">!!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><span class="w">
+ </span><span class="c1">! The default datasets used to produce the HGT_M, GREENFRAC,</span><span class="w">
+ </span><span class="c1">! and LU_INDEX/LANDUSEF fields have changed in WPS v3.8. The HGT_M field</span><span class="w">
+ </span><span class="c1">! is now interpolated from 30-arc-second USGS GMTED2010, the GREENFRAC</span><span class="w">
+ </span><span class="c1">! field is interpolated from MODIS FPAR, and the LU_INDEX/LANDUSEF fields</span><span class="w">
+ </span><span class="c1">! are interpolated from 21-class MODIS.</span><span class="w">
+ </span><span class="c1">!</span><span class="w">
+ </span><span class="c1">! To match the output given by the default namelist.wps.all_options </span><span class="w">
+ </span><span class="c1">! in WPS v3.7.1, the following setting for geog_data_res may be used:</span><span class="w">
+ </span><span class="c1">!</span><span class="w">
+ </span><span class="c1">! geog_data_res = 'gtopo_10m+usgs_10m+nesdis_greenfrac+10m','gtopo_2m+usgs_2m+nesdis_greenfrac+2m',</span><span class="w">
+ </span><span class="c1">!</span><span class="w">
+ </span><span class="c1">!!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><span class="w">
+ </span><span class="c1">!</span><span class="w">
+ </span><span class="n">geog_data_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'default'</span><span class="p">,</span><span class="w">
+ </span><span class="n">dx</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">
+ </span><span class="n">dy</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">
+ </span><span class="n">map_proj</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'lambert'</span><span class="p">,</span><span class="w">
+ </span><span class="n">ref_lat</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mf">37.00</span><span class="p">,</span><span class="w">
+ </span><span class="n">ref_lon</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mf">110.00</span><span class="p">,</span><span class="w">
+ </span><span class="n">ref_x</span><span class="w">     </span><span class="o">=</span><span class="w">  </span><span class="mf">55.0</span><span class="p">,</span><span class="w">
+ </span><span class="n">ref_y</span><span class="w">     </span><span class="o">=</span><span class="w">  </span><span class="mf">35.0</span><span class="p">,</span><span class="w">
+ </span><span class="n">truelat1</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mf">30.0</span><span class="p">,</span><span class="w">
+ </span><span class="n">truelat2</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mf">60.0</span><span class="p">,</span><span class="w">
+ </span><span class="n">stand_lon</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mf">110.0</span><span class="p">,</span><span class="w">
+ </span><span class="n">geog_data_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/home/lzhenn/wrf-surface-data/geog'</span><span class="w">
+ </span><span class="n">opt_geogrid_tbl_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'geogrid/'</span><span class="w">
+</span><span class="p">/</span><span class="w">
+ </span><span class="n">geog_data_res</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'modis_lakes+10m'</span><span class="p">,</span><span class="s1">'modis_lakes+2m'</span><span class="p">,</span><span class="w">
+ </span><span class="n">geog_data_res</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'usgs_lakes+10m'</span><span class="p">,</span><span class="s1">'usgs_lakes+2m'</span><span class="p">,</span><span class="w">
+
+</span><span class="p">&amp;</span><span class="n">ungrib</span><span class="w">
+ </span><span class="n">out_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'WPS'</span><span class="p">,</span><span class="w">
+ </span><span class="n">prefix</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'GFS'</span><span class="p">,</span><span class="w">
+</span><span class="p">/</span><span class="w">
+
+</span><span class="p">&amp;</span><span class="n">metgrid</span><span class="w">
+ </span><span class="n">fg_name</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">'GFS'</span><span class="p">,</span><span class="w"> </span><span class="s1">'SST'</span><span class="w">
+ </span><span class="n">constants_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'./TAVGSFC'</span><span class="w">
+ </span><span class="n">io_form_metgrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> 
+ </span><span class="n">opt_output_from_metgrid_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'./'</span><span class="p">,</span><span class="w">
+ </span><span class="n">opt_metgrid_tbl_path</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">'metgrid/'</span><span class="p">,</span><span class="w">
+ </span><span class="n">process_only_bdy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+</span><span class="p">/</span><span class="w">
+
+</span><span class="p">&amp;</span><span class="n">mod_levs</span><span class="w">
+ </span><span class="n">press_pa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">201300</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">200100</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">100000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">95000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">90000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">85000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">80000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">75000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">70000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">65000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">60000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">55000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">50000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">45000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">40000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">35000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">30000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">25000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">20000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+             </span><span class="mi">15000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">10000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
+              </span><span class="mi">5000</span><span class="w"> </span><span class="p">,</span><span class="w">   </span><span class="mi">1000</span><span class="w">
+</span><span class="p">/</span><span class="w">
+
+</span><span class="p">&amp;</span><span class="n">plotfmt</span><span class="w">
+ </span><span class="n">ix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
+ </span><span class="n">jx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
+ </span><span class="n">ioff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
+ </span><span class="n">joff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
+</span><span class="p">/</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>domain设置如下：
+<img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn6ptmsx25j20ug0o9dk8.jpg" alt="" /></p>
+
+<h3 id="执行wps">执行wps</h3>
+<p>设置从HKUST ENVR下载GFS输入文件<a href="http://envf.ust.hk/dataop/data/model_input/gfs_1.00deg_realtime/">GFS data archive</a></p>
+
+<p>测试加入gfs的SST数据，参考</p>
+
+<p><a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html">http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html</a></p>
+
+<p>后发现并不能用，出现segfault，之后更改namelist和，对应GFS数据为SST变量Vtable，以及SST前缀，sst问题解决。</p>
+
+<p>met data生成过程一切顺利。</p>
+
+<p><strong>Updated 2018-01-06</strong></p>
+
+<h3 id="调整wrf设置">调整WRF设置</h3>
+
+<p>根据俊文和海洋局的配置调整namelist.input设置，过程中发现V3.9提供了经过测试的参数化suite，果断采用。CONUS代表北美大陆配置。</p>
+<h3 id="执行real">执行real</h3>
+<p>调整后real过程出错</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 5   --- ERROR: If sst_update /= 0, one of the auxinput4_interval settings must be /= 0
+ 6   --- Set auxinput4_interval_s to the same value as interval_seconds (usually a pretty good guess).
+</code></pre></div></div>
+<p>修改后，执行过程出现段错误。</p>
+
+<p>测试修改环境变量。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># set WRF</span>
+<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
+
+<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
+<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+</code></pre></div></div>
+<p>通过第一断点。新错误：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------</span> FATAL CALLED <span class="nt">---------------</span>
+FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431 
+ Problems, we cannot have excluded middle data from WPS 
+ <span class="nt">-------------------------------------------</span>
+ application called MPI_Abort<span class="o">(</span>MPI_COMM_WORLD, 1<span class="o">)</span> - process 0
+ <span class="o">[</span><span class="nb">unset</span><span class="o">]</span>: write_line error<span class="p">;</span> <span class="nv">fd</span><span class="o">=</span><span class="nt">-1</span> <span class="nv">buf</span><span class="o">=</span>:cmd<span class="o">=</span>abort <span class="nv">exitcode</span><span class="o">=</span>1
+ :
+ system msg <span class="k">for </span>write_line failure : Bad file descriptor
+
+</code></pre></div></div>
+<p>将SST Update设置为0后可以顺利执行完real。</p>
+
+<h3 id="执行wrf">执行wrf</h3>
+<p>执行过程直接出错,有一个gwd_opt设置为1后可行。</p>
+
+<p>顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。
+最终采用的wrf namelist.input</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">&amp;</span><span class="n">time_control</span><span class="w">
+ </span><span class="n">run_days</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+ </span><span class="n">run_hours</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">run_minutes</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">run_seconds</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_year</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_month</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_day</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_hour</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_minute</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">start_second</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_year</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_month</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_day</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_hour</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_minute</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">end_second</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
+ </span><span class="n">interval_seconds</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">21600</span><span class="w">
+ </span><span class="n">input_from_file</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="w">
+ </span><span class="n">history_interval</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">  </span><span class="mi">60</span><span class="p">,</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w">
+ </span><span class="n">frames_per_outfile</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+ </span><span class="n">restart</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="w">
+ </span><span class="n">restart_interval</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+ </span><span class="n">io_form_history</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">io_form_restart</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">io_form_input</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">io_form_auxinput4</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+ </span><span class="n">io_form_boundary</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="n">auxinput4_interval</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+ </span><span class="n">debug_level</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">domains</span><span class="w">
+ </span><span class="n">time_step</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w">
+ </span><span class="n">time_step_fract_num</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">time_step_fract_den</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">max_dom</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_we</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">241</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_sn</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
+ </span><span class="n">e_vert</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">   </span><span class="mi">39</span><span class="p">,</span><span class="w">  </span><span class="mi">39</span><span class="p">,</span><span class="w">  </span><span class="mi">39</span><span class="p">,</span><span class="w"> 
+ </span><span class="n">p_top_requested</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_metgrid_levels</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_metgrid_soil_levels</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">eta_levels</span><span class="w">			     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0000</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9979</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9956</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9931</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.9904</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9875</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9844</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9807</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.9763</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9711</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9649</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9575</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.9488</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9385</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9263</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9120</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.8951</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8753</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8521</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8251</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.7937</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7597</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7229</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6833</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.6410</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5960</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5484</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4985</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.4467</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3934</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3393</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2850</span><span class="p">,</span><span class="w">
+				       </span><span class="mf">0.2316</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1801</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1324</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0903</span><span class="p">,</span><span class="w">
+                                       </span><span class="mf">0.0542</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0241</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0000</span><span class="w">
+ </span><span class="n">dx</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">   </span><span class="mi">9000</span><span class="p">,</span><span class="w">   </span><span class="mi">3000</span><span class="p">,</span><span class="w">	</span><span class="mi">1000</span><span class="p">,</span><span class="w">
+ </span><span class="n">dy</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w"> 	</span><span class="mi">9000</span><span class="p">,</span><span class="w">   </span><span class="mi">3000</span><span class="p">,</span><span class="w">	</span><span class="mi">1000</span><span class="p">,</span><span class="w">
+ 
+ </span><span class="n">grid_id</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">	   </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_id</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w">	   </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">i_parent_start</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">140</span><span class="p">,</span><span class="w">    </span><span class="mi">80</span><span class="p">,</span><span class="w">  </span><span class="mi">140</span><span class="p">,</span><span class="w">
+ </span><span class="n">j_parent_start</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">80</span><span class="p">,</span><span class="w">    </span><span class="mi">50</span><span class="p">,</span><span class="w">  </span><span class="mi">110</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_grid_ratio</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">    </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">parent_time_step_ratio</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">    </span><span class="mi">3</span><span class="p">,</span><span class="w">
+ </span><span class="n">feedback</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">smooth_option</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">physics</span><span class="w">
+ </span><span class="n">physics_suite</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="s1">'CONUS'</span><span class="w">
+ 
+ </span><span class="n">cu_physics</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">     </span><span class="mi">6</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+
+ </span><span class="n">radt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">    </span><span class="mi">30</span><span class="p">,</span><span class="w">    </span><span class="mi">30</span><span class="p">,</span><span class="w">  </span><span class="mi">30</span><span class="p">,</span><span class="w">
+ </span><span class="n">bldt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">cudt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w">    </span><span class="mi">5</span><span class="p">,</span><span class="w">
+ </span><span class="n">icloud</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_soil_layers</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">num_land_cat</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+ </span><span class="n">sf_urban_physics</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">sst_update</span><span class="w">	            		     </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">fdda</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">dynamics</span><span class="w">
+ </span><span class="n">w_damping</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">diff_opt</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">km_opt</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">      </span><span class="mi">4</span><span class="p">,</span><span class="w">      </span><span class="mi">4</span><span class="p">,</span><span class="w">    </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">diff_6th_opt</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">diff_6th_factor</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">   </span><span class="mf">0.12</span><span class="p">,</span><span class="w">   </span><span class="mf">0.12</span><span class="p">,</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">
+ </span><span class="n">base_temp</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mf">290.</span><span class="w">                          
+ </span><span class="n">damp_opt</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                            
+ </span><span class="n">zdamp</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mf">5000.</span><span class="p">,</span><span class="w">  </span><span class="mf">5000.</span><span class="p">,</span><span class="w">  </span><span class="mf">5000.</span><span class="p">,</span><span class="mf">5000.</span><span class="p">,</span><span class="w">
+ </span><span class="n">dampcoef</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w">    </span><span class="mf">0.2</span><span class="p">,</span><span class="w">    </span><span class="mf">0.2</span><span class="w">   </span><span class="mf">0.2</span><span class="w">
+ </span><span class="n">khdif</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">kvdif</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">non_hydrostatic</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true..true.</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w">
+ </span><span class="n">moist_adv_opt</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">       
+ </span><span class="n">scalar_adv_opt</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">       
+ </span><span class="n">gwd_opt</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">bdy_control</span><span class="w">
+ </span><span class="n">spec_bdy_width</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+ </span><span class="n">spec_zone</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="n">relax_zone</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+ </span><span class="n">specified</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="kc">.false.</span><span class="p">,</span><span class="kc">.false.</span><span class="p">,</span><span class="w">
+ </span><span class="n">nested</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">grib2</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+
+ </span><span class="p">&amp;</span><span class="n">namelist_quilt</span><span class="w">
+ </span><span class="n">nio_tasks_per_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+ </span><span class="n">nio_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="p">/</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="计划任务">计划任务</h3>
+<p>之后crontab配合自动运行脚本，每晚0:45开始执行，利用12Z数据，积分步长120s，尝试做未来5天预报。
+自动运行脚本：
+``` bash
+#!/bin/sh</p>
+
+<p>LID=<code class="highlighter-rouge">date -d '1 days ago' +%Y%m%d</code>
+LID_NLS=<code class="highlighter-rouge">date -d '1 days ago' +%Y-%m-%d</code>
+LID_NLE=<code class="highlighter-rouge">date -d '-4 days ago' +%Y-%m-%d</code> # 5 days later, for forecast</p>
+
+<p>WPSDIR=/home/lzhenn/package/WPS
+WRFDIR=/home/lzhenn/array/lzhenn/WRFV3/run
+LOGFILE=/home/lzhenn/workspace/wrf-sdpwfe/sys-log/${LID}.log
+GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/01/e3-80-90matlab-e3-80-91-e6-95-b0-e5-ad-97ocr/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/12/31/WRF-shandong-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/">【CESM】slab ocean coupling</a>
+                  <a class="post-link" href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-12-28
+                        <i class="fa fa-calendar"></i>2017-12-30
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -383,9 +736,9 @@ function img_number()
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
     
-        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
     
   
 
@@ -402,9 +755,173 @@ function img_number()
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
     
-        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
+    
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
+    
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#记得装desktop版本的ubuntu否则没有xserver比较蛋疼" id="markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</a></li>
+  <li><a href="#安装英伟达显卡驱动要关掉x-server" id="markdown-toc-安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</a></li>
+  <li><a href="#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本" id="markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</a></li>
+</ul>
+
+<h3 id="记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</h3>
+<h3 id="安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</h3>
+<p>默认进入命令行启动</p>
+
+<p>http://blog.topspeedsnail.com/archives/4922</p>
+
+<p>注意16.04用这句：</p>
+
+<p>$sudo systemctl set-default multi-user.target</p>
+
+<p>这是每次开机默认进入命令行模式的方法。单词关闭用</p>
+
+<p>sudo /etc/init.d/lightdm stop</p>
+
+<p>然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）</p>
+
+<p>驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）</p>
+
+<p>http://blog.csdn.net/u012759136/article/details/53355781</p>
+
+<p>照着来没问题了吧，错了……build driver的时候直接说unable……我去</p>
+
+<p>差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）</p>
+
+<p>http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;lang=us&amp;type=GeForce</p>
+
+<p>这里下载17.11的版本</p>
+
+<h3 id="安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</h3>
+<p>直接运行安装，居然自带了驱动……去死吧……</p>
+
+<p>后面说我有几个库没装好，记录如下</p>
+
+<p>Missing recommended library: libGLU.so</p>
+
+<p>Missing recommended library: libX11.so</p>
+
+<p>Missing recommended library: libXi.so</p>
+
+<p>Missing recommended library: libXmu.so</p>
+
+<p>搜索下直接apt-get搞定</p>
+
+<p>$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
+
+<p>官方参考</p>
+
+<p>https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/</p>
+
+<p>重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。</p>
+
+<p>http://blog.csdn.net/shiorioxy/article/details/52652831</p>
+
+<p>http://blog.csdn.net/jhszh418762259/article/details/52958287</p>
+
+<p>之后写几个配置</p>
+
+<p>环境变量设置</p>
+
+<p>sudo vim ~/.bashrc</p>
+
+<p>在末尾添加</p>
+
+<p>export CUDA_HOME=/usr/local/cuda-8.0</p>
+
+<p>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</p>
+
+<p>export PATH=/usr/local/cuda-8.0/bin:$PATH</p>
+
+<p>保存退出。</p>
+
+<p>然后刷新。</p>
+
+<p>source ~/.bashrc</p>
+
+<p>动态链接库设置</p>
+
+<p>创建文件：</p>
+
+<p>sudo vim /etc/ld.so.conf.d/cuda.conf</p>
+
+<p>写入：/usr/local/cuda/lib64</p>
+
+<p>保存之后使其立即生效：</p>
+
+<p>sudo ldconfig -v</p>
+
+<p>之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。</p>
+
+<p>许久之后，安全完成。</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/ubuntu-cuda-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
     
   
 
@@ -414,530 +931,139 @@ function img_number()
                 </div>
                 <div class="excerpt">
                     
-<p>Here is a <a href="https://www.quora.com/What-are-slab-ocean-models-in-climate-science">quora answer </a>about the slab ocean</p>
-<blockquote><span class="rendered_qtext">Slab ocean models consider this whole upper layer as one single body of water, or a 'slab' with one single velocity vector (u,v), and density. The Navier-Stokes equation is modified accordingly to compute the resultant velocity of that slab based on wind forcing and coriolis force. The mixed-layer depth in such models is usually kept fixed. </span></blockquote>
-<p>Here is a <a href="https://bb.cgd.ucar.edu/faq-data-ocean-slab-mode-docn-som">FAQ </a>about the slab ocean model. Two things to note:</p>
+<p>还是要搬家啦～</p>
 
+<p>经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。</p>
+
+<p>需求端：</p>
 <ol>
   <li>
-    <p>SOM is a kind of data model, can be switched in a namelist variable F compset, env_run.xml.</p>
+    <p>类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整</p>
   </li>
   <li>
-    <p>Some standard SOM forcing is available in the inputdata repository.</p>
+    <p>足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制</p>
+  </li>
+  <li>
+    <p>安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶</p>
   </li>
 </ol>
 
-<p>Now we may start to test the slab ocean. compset choose: E_1850_CAM5</p>
+<p>考虑供给端：</p>
+<ol>
+  <li>
+    <p>EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃</p>
+  </li>
+  <li>
+    <p>简书，不灵活，放弃</p>
+  </li>
+  <li>
+    <p>csdn，已经被边缘化了，放弃</p>
+  </li>
+  <li>
+    <p>github，嘿嘿，就是你了</p>
+  </li>
+</ol>
 
-<p>ERROR comes:</p>
-<blockquote>svn: URL 'https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/UNSET' non-existent in that revision</blockquote>
-<p>There should be something wrong with the set of the ocean forcing files. So come to <a href="https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/">this dir</a>, no problem.</p>
+<p>思想准备结束，开始搭建
+follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm">这个</a>来</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--orphan</span> gh-pages
+</code></pre></div></div>
+<p>语句出错，果然又是git版本问题……坑爹centos</p>
 
-<p>We need to set the specific foring files in the env_run.xml file. (check FAQ)</p>
+<p>突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。</p>
 
-<p>We choose <strong>pop_frc.b.c40.B1850CN.f19_g16.100105.nc for </strong>test.</p>
+<p>https://pages.github.com/</p>
 
-<p>In env_run.xml, only give the name of the file is okay to continue.</p>
+<p>相当有效。</p>
 
-<p>After downloading the file, you can build and submit the case. Yet there is no problem even after altering the physics into cam5 -chem none.</p>
+<p>然后costumize</p>
 
-<p>Perfect!</p>
+<p>https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/</p>
 
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/">【ongoing】php返回图片方法获知邮件是否被查阅</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-12-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>突然想到能否有什么方法知道发出去的某封邮件是否被别人查阅，查了下，有人提到图片挂参的方法可以办到，回想之前IP验证和php自动发邮件，突然想到可以做这么一套东西，每天固定时间统计一下今天发出去的邮件多少被查阅了，然后做个报告发到邮箱。将来撒海网套磁的时候，绝对是利器啊。LOL</p>
-
-<p>说搞就搞：</p>
-
-<p>首先，测试一下php返回图片</p>
-
-<p>参照<a href="http://www.oschina.net/code/snippet_572802_11655">这个帖子</a>，bingo，原来是改一下http的header就可以。</p>
-
-<p>然后引入访问IP的检测，直接抄13年检测服务器访问沿海自动站IP的程序，调用IP138结果记录。</p>
-
-<p>居然就可以了～给php文件挂个参数标志是哪一个邮件，嗯嗯</p>
-
-<p>最后设置下crontab，每天固定时间把log发到邮箱，bingo～再写一个可以随时访问的查看页面，done～</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/11/14/use-grads-to-read-cesm-output/">【ongoing】use grads to read cesm output</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-11-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Some points to be aware:</p>
-
-<p>2D fields, not same by binary output and netcdf (high efficiency) output, one point value missing, might be the polar point. Therefore, *.bin control and *.nc sensitive is not under the same structure.</p>
-
-<p>2D fields work fine under <strong>v1.9</strong> of grads. However, 3D fields might meet some trouble. Try to use the “standard” attribution, dimention to tackle this problem. An example from NCEP-DOE dataset:</p>
-
-<p>float level(level) ;
-level:units = “millibar” ;
-level:long_name = “Level” ;
-level:positive = “down” ;
-level:GRIB_id = 100s ;
-level:GRIB_name = “hPa” ;
-level:actual_range = 1000.f, 10.f ;
-level:axis = “Z” ;
- </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/11/14/use-grads-to-read-cesm-output/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/">【NOT solved】GFDL atmosphere dycore porting</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Now we try to setup GFDL dycore model on our Neptune platform. Following steps has been used:</p>
+<p>模板找到了几个，Jekll安装似乎有点麻烦。</p>
 
 <ol>
-  <li>We exec the ./exp/fv/fms_runscript, then got the netcdf and mpi error. It seems that the model does not recognize the environmental variables associated with these lib. We add the flags directly to the compile sentence.</li>
+  <li>安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示</li>
 </ol>
-<pre>L35: $mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DUSE_LIMA -DSPMD -DLAND_BND_TRACERS" -a $sourcedir $pathnames /usr/local/include $sourcedir/shared/mpp/include $sourcedir/shared/include /home/yangsong3/soft/mpich314-intel/include /usr/netcdf-4331/include</pre>
-<p>And mkmf.template.ia64 file</p>
-<pre>LDFLAGS = -L/usr/local/lib -L/usr/netcdf-4331/lib -L/home/yangsong3/soft/mpich314-intel/lib #-lsma</pre>
-<p>We comment the “-lsma” flag because it is a flag specific to Cray machine.</p>
 
-<p>Next, we compile again, frequently got this</p>
-<pre>ifort:  '-i_dynamic' not supported</pre>
-<p>google it, got this</p>
+<blockquote>
+  <p>YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&gt;= 2.0).</p>
+</blockquote>
 
-<p>https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/486830</p>
-<blockquote>Regarding 1:<strong> -i_dynamic</strong> (the underscore form) was a option spelling used many many releases ago that was later mapped to <strong>-i-dynamic</strong> (the hyphen form) and then that form was depreciated in more current releases and it now maps to<strong> -shared-intel</strong></blockquote>
-<p>So, we change it to <strong>-shared-intel</strong>, no more warning.</p>
+<blockquote>
+  <p>There are no versions of psych (&gt;= 0) compatible with your Ruby &amp; RubyGems. psych requires Ruby version &gt;= 2.2.2. The current ruby version is 1.8.</p>
+</blockquote>
 
-<p>However, when it compiles for a long time (5min), we got error again, lots of:</p>
-<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_transmit_mpi.h:79: undefined reference to `mpi_recv_'</pre>
-<p>Then we change the ifort compile flag into mpif90, we got this</p>
-<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_io_misc.inc:116: undefined reference to `nf_inq_libvers_'</pre>
-<p>It really sucks<strong><span style="color: #339966;">.</span></strong></p>
+<p>真是操蛋的centos，不折腾了还是装在ubuntu下好了。</p>
 
-<p>#Last Edited on 20151004#</p>
+<p>ubuntu下一条apt-get install ruby直接搞定。</p>
 
-<p><strong><span style="color: #339966;">We finally stop trying and turn to CAM dynamical core simulation and it works really smooth over the CESM construction.</span></strong></p>
+<p>安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。</p>
 
-<p>#Last Edited on 20151114#</p>
+<p>can’t find header files for ruby at /usr/lib/ruby/include/ruby.h</p>
 
-<p> </p>
+<p>之后</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$jekyll</span> new myblog
+</code></pre></div></div>
+<p>发现第一次执行非常慢，不过问题不大</p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/">【CESM】B compset CAM5_PM设置</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p>然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1</p>
 
-                    <div class="label-card">
-                    
+<p>_config.yml文件下修改host为内网（公网）IP即可。</p>
 
+<p>找到一些不错的介绍防火墙的内容</p>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
-    
-  
+<p>https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/</p>
 
-  <!-- <span class="point">•</span> -->
-</span>
+<p>搞定内网调试，开始看官方文档调戏github</p>
 
+<p>https://help.github.com/articles/about-jekyll-themes-on-github/</p>
 
-                    </div>
+<p>花了一下午时间找了个好模板</p>
 
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
-    
-  
+<p>https://github.com/Gaohaoyang/gaohaoyang.github.io</p>
 
-</span>
+<p>直接开服务，出错</p>
 
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Since we don’t care about the chemical process when investigate the physical climate system, we hope to close the prognostic chemistry model in CAM5. For F compset, it is easy because a specific PM compset without active chemistry model has been provided by CESM. For B compset, there is no option like this.</p>
+<blockquote>
+  <p>Could not locate Gemfile or .bundle/ directory</p>
+</blockquote>
 
-<p>Therefore, we try to capture the differences in FC5PM and FC5. We first see the differences in output flow after create_newcase command.</p>
-<pre>6c6
-&lt;   2000_CAM5_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5) (FC5)
----
-&gt;   2000_CAM5%PM_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5_PM) (FC5PM)
-8c8
-&lt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
----
-&gt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: CAM prescribed modal aerosols: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
-23c23
-&lt;   CAM_CONFIG_OPTS: -phys cam5
----
-&gt;   CAM_CONFIG_OPTS: -phys cam5 -chem none
-58,63c58,63
-&lt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM
-&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
-&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_mach_pes.xml
-&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_build.xml
-&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_run.xml
-&lt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
----
-&gt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM
-&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml
-&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_mach_pes.xml
-&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_build.xml
-&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_run.xml
-&gt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml</pre>
-<p>Clearly, a PM option has been added to the CAM5 component. We try put this full name to B compset.</p>
+<p>不管三七二十一，把示例里面的文件丢过来</p>
 
-<p>Things never get so smooth~</p>
-<pre>set_compset: no match for compset 2000_CAM5%PM_CLM40%SP_CICE_POP2_RTM_SGLC_SWAV
-            to see supported compsets issue</pre>
-<p>It seems that we have to change it in the specific configuration file.</p>
+<p>之后新的错误</p>
 
-<p>We then try to seek the differences in xml files. In <strong>env_build.xml,  </strong>we found an interesting differences:</p>
-<pre>40c40
-&lt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5_CTRL/bld" /&gt;
----
-&gt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5PM_CTRL/bld" /&gt;
-72c72
-&lt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5" /&gt;
----
-&gt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5 -chem none" /&gt;</pre>
-<p>That is fine. We then add argument “<strong><span style="color: #ff0000;"><em>-chem none</em></span></strong>” to the env_build.xml in B2000CAM5 case, setup and build, smoothly!</p>
+<blockquote>
+  <p>Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.</p>
+</blockquote>
 
-<p>Now we come to the atm_in differences between FC5 and FC5PM</p>
-<pre>1,3c1,8
-&lt; &amp;aerosol_nl
-&lt; dust_emis_fact = 0.35D0
-&lt; soil_erod = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/dst/dst_0.9x1.25_c100121.nc'
----
-&gt; &amp;aerodep_flx_nl
-&gt; aerodep_flx_cycle_yr = 2000
-&gt; aerodep_flx_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
-&gt; aerodep_flx_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
-&gt; aerodep_flx_specifier = 'bc_a1DDF', 'bc_c1DDF', 'pom_a1DDF', 'pom_c1DDF', 'soa_a1DDF', 'soa_c1DDF', 'soa_a2DDF', 'soa_c2DDF',
-&gt; 'dst_a1DDF', 'dst_c1DDF', 'dst_a3DDF', 'dst_c3DDF', 'bc_a1SFWET', 'bc_c1SFWET', 'pom_a1SFWET', 'pom_c1SFWET',
-&gt; 'soa_a1SFWET', 'soa_c1SFWET', 'dst_a1SFWET', 'dst_c1SFWET', 'dst_a3SFWET', 'dst_c3SFWET'
-&gt; aerodep_flx_type = 'CYCLICAL'
-10d14
-&lt; print_energy_errors = .false.
-16,34d19
-&lt; aer_drydep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
-&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
-&lt; aer_wetdep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
-&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
-&lt; clim_soilw_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/clim_soilw.nc'
-&lt; depvel_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/depvel_monthly.nc'
-&lt; depvel_lnd_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/regrid_vegetation.nc'
-&lt; exo_coldens_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/phot/exo_coldens.nc'
-&lt; ext_frc_specifier = 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_elev_2000_c090726.nc',
-&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_elev_2000_c090726.nc',
-&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_elev_2000_c090726.nc',
-&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_elev_2000_c090726.nc',
-&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_elev_2000_c090726.nc',
-&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_elev_2000_c090726.nc',
-&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_elev_2000_c090726.nc'
-&lt; ext_frc_type = 'CYCLICAL'
-&lt; fstrat_list = ' '
-&lt; rsf_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/RSF_GT200nm_v3.0_c080416.nc'
-&lt; season_wes_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/season_wes.nc'
-36,54d20
-&lt; srf_emis_specifier = 'DMS -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/aerocom_mam3_dms_surf_2000_c090129.nc',
-&lt; 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_surf_2000_c090726.nc',
-&lt; 'SOAG -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_soag_1.5_surf_2000_c100217.nc',
-&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_surf_2000_c090726.nc',
-&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_surf_2000_c090726.nc',
-&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_surf_2000_c090726.nc',
-&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_surf_2000_c090726.nc',
-&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_surf_2000_c090726.nc',
-&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_surf_2000_c090726.nc'
-&lt; srf_emis_type = 'CYCLICAL'
-&lt; tracer_cnst_cycle_yr = 2000
-&lt; tracer_cnst_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/oxid'
-&lt; tracer_cnst_file = 'oxid_1.9x2.5_L26_1850-2005_c091123.nc'
-&lt; tracer_cnst_filelist = 'oxid_1.9x2.5_L26_clim_list.c090805.txt'
-&lt; tracer_cnst_specifier = 'O3','OH','NO3','HO2'
-&lt; tracer_cnst_type = 'CYCLICAL'
-&lt; use_cam_sulfchem = .false.
-&lt; xactive_prates = .false.
-&lt; xs_long_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/temp_prs_GT200nm_jpl06_c080930.nc'
-61d26
-&lt; flbc_list = ' '
-114c79
-&lt; cam_chempkg = 'trop_mam3'
----
-&gt; cam_chempkg = 'none'
-137a103,114
-&gt; &amp;prescribed_aero_nl
-&gt; prescribed_aero_cycle_yr = 2000
-&gt; prescribed_aero_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
-&gt; prescribed_aero_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
-&gt; prescribed_aero_specifier = 'num_c1', 'bc_c1', 'dst_c1', 'ncl_c1', 'pom_c1', 'so4_c1', 'soa_c1', 'num_c2',
-&gt; 'ncl_c2', 'so4_c2', 'soa_c2', 'num_c3', 'dst_c3', 'ncl_c3', 'so4_c3', 'num_a1_logm',
-&gt; 'bc_a1_logm', 'dst_a1_logm', 'ncl_a1_logm', 'pom_a1_logm', 'so4_a1_logm', 'soa_a1_logm', 'num_a2_logm', 'ncl_a2_logm',
-&gt; 'so4_a2_logm', 'soa_a2_logm', 'num_a3_logm', 'dst_a3_logm', 'ncl_a3_logm', 'so4_a3_logm', 'num_a1_logv', 'bc_a1_logv',
-&gt; 'dst_a1_logv', 'ncl_a1_logv', 'pom_a1_logv', 'so4_a1_logv', 'soa_a1_logv', 'num_a2_logv', 'ncl_a2_logv', 'so4_a2_logv',
-&gt; 'soa_a2_logv', 'num_a3_logv', 'dst_a3_logv', 'ncl_a3_logv', 'so4_a3_logv'
-&gt; prescribed_aero_type = 'CYCLICAL'
-&gt; /
-150,158c127,135
-&lt; mode_defs = 'mam3_mode1:accum:=', 'A:num_a1:N:num_c1:num_mr:+',
-&lt; 'A:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
-&lt; 'A:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'A:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
-&lt; 'A:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'A:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
-&lt; 'mam3_mode2:aitken:=', 'A:num_a2:N:num_c2:num_mr:+',
-&lt; 'A:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
-&lt; 'A:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
-&lt; 'A:num_a3:N:num_c3:num_mr:+', 'A:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
-&lt; 'A:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'A:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
----
-&gt; mode_defs = 'mam3_mode1:accum:=', 'N:num_a1:N:num_c1:num_mr:+',
-&gt; 'N:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
-&gt; 'N:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'N:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
-&gt; 'N:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'N:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
-&gt; 'mam3_mode2:aitken:=', 'N:num_a2:N:num_c2:num_mr:+',
-&gt; 'N:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
-&gt; 'N:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
-&gt; 'N:num_a3:N:num_c3:num_mr:+', 'N:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
-&gt; 'N:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'N:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
-191,193d167
-&lt; &amp;wetdep_inparm
-&lt; gas_wetdep_list = 'H2O2','SO2'
-&lt; /</pre>
-<p>Such a lot differences in input files as we expected.</p>
+<blockquote>
+  <p>Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`</p>
+</blockquote>
 
-<p>We test the <strong>atm_in</strong> differences between B with / without “-chem none” argument, everything goes fine!</p>
+<p>按要求安装之后也不成功。google发现如下stackoverflow帖子</p>
 
-<p>Now we run the model for several months to test the final results.</p>
+<p>https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed</p>
 
-<p>Configuration:</p>
+<p>居然有github-pages这种东西……</p>
 
-<p>B2000_CAM5</p>
+<p>装完之后，拿掉gemfile即可。</p>
 
-<p>0.9x1.25</p>
+<p>摸索修改之后，发现这个评论解决方案</p>
 
-<p>Tianhe-2: 192PEs</p>
+<p>https://imsun.net/posts/gitment-introduction/</p>
 
-<p> </p>
+<p>问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。</p>
 
-<p>output with” phys cam5 -chem none”:</p>
-<pre> -rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:10</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-01.nc
--rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:30</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-02.nc
+<p>参考</p>
 
-</pre>
-<p>output without “phys cam5”:</p>
-<pre>-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:23</strong> B_CHEM_CAM5_TEST.cam.h0.0001-01.nc
--rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:49</strong> B_CHEM_CAM5_TEST.cam.h0.0001-02.nc</pre>
-<p>So without the aerosol active, it saves (49-23)-(30-10) = 6 min in each month. About 6/26*100% = 23% time saved.</p>
+<p>http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/</p>
+
+<p>http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/12/30/tech-blog-github-page/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -952,10 +1078,10 @@ level:axis = “Z” ;
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page20" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">21/43</span>
+          <span class="page_number ">21/87</span>
           
             <a href="/page22" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1241,7 +1367,32 @@ level:axis = “Z” ;
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2312,7 +2463,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2340,7 +2491,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2508,7 +2659,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2592,7 +2743,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2620,7 +2771,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2739,7 +2890,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2951,6 +3102,27 @@ level:axis = “Z” ;
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2964,6 +3136,16 @@ level:axis = “Z” ;
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2973,16 +3155,6 @@ level:axis = “Z” ;
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -3036,7 +3208,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -3072,7 +3244,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3216,7 +3388,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3324,7 +3496,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3369,7 +3541,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3405,7 +3577,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3423,7 +3595,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3432,7 +3604,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3566,7 +3738,7 @@ level:axis = “Z” ;
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

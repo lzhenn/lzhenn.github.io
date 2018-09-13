@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/01/03/start-with-jupyter-notebook/">Start with Jupyter notebook</a>
+                  <a class="post-link" href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-01-03
+                        <i class="fa fa-calendar"></i>2018-02-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -281,7 +369,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
     
   
 
@@ -291,40 +381,35 @@
                 </div>
                 <div class="excerpt">
                     
-<p>开始照着youtube和coursera的视频教程正式学习python啦。</p>
+<p><a href="https://novarizark.github.io/2017/12/31/WRF-shandong-setup/">山东半岛预报系统</a>中后处理部分的NCL串行效率很低，大概要二十分钟到半个小时才能完成绘图。既然任务之间都是独立的，很自然的想法就是能否在shell的环境下实现进程级别的并行化。
+差了下其实很简单，只需要在语句后面加入 &amp; 符号放到后台执行即可实现异步，但是后台执行无法捕捉结束位置，wait语句可以解决这个问题，其作用就是等待该语句之前的所有后台任务结束之后，再执行此语句后的任务。例子如下：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ncl <span class="nt">-nQ</span>  180205-plot-precip.ncl &amp;
+ncl <span class="nt">-nQ</span>  180207-plot-T2m.ncl &amp;
+ncl <span class="nt">-nQ</span>  180207-plot-RH2m.ncl &amp;
+ncl <span class="nt">-nQ</span>  180207-plot-UV10m.ncl &amp;
+<span class="nb">wait
+echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span class="o">)</span>
+</code></pre></div></div>
+<p>前面四个NCL语句会并行执行（&amp;符号将该命令放入后台执行后立刻执行下一个语句），之后碰到wait，会等待前面四个后台任务中最慢的那个结束，再输出Hello world!</p>
 
-<p>command mode: Adding deleting command cells</p>
+<p>原始脚本处理后，大概只需要三四分钟（不算坑爹慢的git push过程）即可完成所有的绘图操作。惊不惊喜？</p>
 
-<p>edit mode</p>
-
-<p>shortcuts:</p>
-<p style="padding-left: 30px;"><strong>ctrl+enter:</strong> execute the command and stay there</p>
-<p style="padding-left: 30px;"><strong>alt+enter:</strong> execute the command and create one next</p>
-<p style="padding-left: 30px;"><strong>shift+enter:</strong> execute and move to the next cell (or create one in the last)</p>
-<p>markdown:</p>
-
-<p>change the cell type to markdown type</p>
-
-<p>! prefix means the following command is bash command.</p>
-
-<p>% magic command</p>
-
-<p> </p>
+<p><strong>Updated 2018-02-17</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/01/03/start-with-jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/02/17/shell-parallel-task/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/12/20/linux-e6-8f-90-e5-8f-96-e8-b7-af-e5-be-84-e5-86-85/">Linux提取路径内容</a>
+                  <a class="post-link" href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-12-20
+                        <i class="fa fa-calendar"></i>2018-02-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -343,7 +428,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -360,7 +445,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
     
   
 
@@ -370,32 +457,34 @@
                 </div>
                 <div class="excerpt">
                     
-<p>提取路径中的文件名 basename $PATH，路径名 dirname $PATH</p>
+<p>拖了几次Yahoo的美股daily数据，发现有很多Symbol对应的标的没有数据，对应的文件大小为3Byte。打算做一下清理，查了下删除语句：</p>
 
-<p>${}也可以较好实现：<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-size</span> <span class="nt">-4</span> <span class="nt">-exec</span> rm <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div></div>
+<p>减号代表小于，不带单位默认为byte。exec是find的参数，具体描述</p>
 
-<p>${var##*/} 文件名</p>
+<blockquote>
+  <p>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ { } \;，注意{   }和\；之间的空格。</p>
+</blockquote>
 
-<p>${var%/*} 路径名</p>
+<p>至于为啥后面要有个大括号 空格 反斜线 然后再分号？如此冗余设计实在让人不爽。查了一下<a href="https://www.crifan.com/linux_shell_empty_curly_bracket_meaning/">这个帖子</a>刨根问底了一番。具体来说，大括号代表占位符，表示对find出的列表元素，每次展开遍历其中一个，反斜线代表参数范围结束符，分号后面是其他参数了。</p>
 
-<p>具体参见：</p>
-
-<p>http://blog.csdn.net/ljianhui/article/details/43128465</p>
+<p><strong>Updated 2018-02-14</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/12/20/linux-e6-8f-90-e5-8f-96-e8-b7-af-e5-be-84-e5-86-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/02/14/shell-delete-size/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/11/29/pop-output-file/">POP output file</a>
+                  <a class="post-link" href="/2018/02/07/trading-diary/">20180207交易笔记</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-29
+                        <i class="fa fa-calendar"></i>2018-02-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -414,7 +503,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -431,7 +524,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
+    
+        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
     
   
 
@@ -441,783 +538,33 @@
                 </div>
                 <div class="excerpt">
                     
-<p>pop output files are named as pop.h.xxxx, tavg= averaged over certain time period.</p>
-<div align="CENTER">
-<table border="1" cellpadding="3"><caption><strong>Table:</strong> Current available tavg fields</caption>
-<tbody>
-<tr>
-<td align="LEFT" valign="TOP"><b>Name</b></td>
-<td align="LEFT" valign="TOP"><b>Units</b></td>
-<td align="LEFT" valign="TOP"><b>Description</b></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SHF</td>
-<td align="LEFT" valign="TOP"><i>W/m<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Surface Heat Flux</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SFWF</td>
-<td align="LEFT" valign="TOP"><i>mm/day</i></td>
-<td align="LEFT" valign="TOP">Surface Freshwater Flux (p-e)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SSH</td>
-<td align="LEFT" valign="TOP"><i>cm</i></td>
-<td align="LEFT" valign="TOP">Sea Surface Height</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">H2
-(SSH2 in CESM1)</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">SSH<sup>2</sup></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">H3</td>
-<td align="LEFT" valign="TOP">unitless</td>
-<td align="LEFT" valign="TOP"><i>(Δ<sub>x</sub>(SSH))<sup>2</sup> + (Δ<sub>y</sub>(SSH))<sup>2</sup></i></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP"><strong>TAUX</strong></td>
-<td align="LEFT" valign="TOP"><strong><i>dyne/cm<sup>2</sup></i></strong></td>
-<td align="LEFT" valign="TOP"><strong>Zonal windstress</strong></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP"><strong>TAUY</strong></td>
-<td align="LEFT" valign="TOP"><strong><i>dyne/cm<sup>2</sup></i></strong></td>
-<td align="LEFT" valign="TOP"><strong>Meridional windstress</strong></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP"><strong>UVEL</strong></td>
-<td align="LEFT" valign="TOP"><strong><i>cm/s</i></strong></td>
-<td align="LEFT" valign="TOP"><strong>Zonal Velocity</strong></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP"><strong>VVEL</strong></td>
-<td align="LEFT" valign="TOP"><strong><i>cm/s</i></strong></td>
-<td align="LEFT" valign="TOP"><strong>Meridional Velocity</strong></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">KE</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Horizontal Kinetic Energy (U<sup>2</sup> + V<sup>2</sup>)/2</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TEMP</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>C</i></td>
-<td align="LEFT" valign="TOP">Potential Temperature</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SALT</td>
-<td align="LEFT" valign="TOP"><i>g/g</i></td>
-<td align="LEFT" valign="TOP">Salinity</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TEMP2</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>C<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Temperature<sup>2</sup></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SALT2</td>
-<td align="LEFT" valign="TOP"><i>(g/g)<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Salt<sup>2</sup></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UET</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>C/s</i></td>
-<td align="LEFT" valign="TOP">East Flux of Heat</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNT</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>C/s</i></td>
-<td align="LEFT" valign="TOP">North Flux of Heat</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WTT</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>C/s</i></td>
-<td align="LEFT" valign="TOP">Top Flux of Heat</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UES</td>
-<td align="LEFT" valign="TOP"><i>g/g/s</i></td>
-<td align="LEFT" valign="TOP">East Flux of Salt</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNS</td>
-<td align="LEFT" valign="TOP"><i>g/g/s</i></td>
-<td align="LEFT" valign="TOP">North Flux of Salt</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WTS</td>
-<td align="LEFT" valign="TOP"><i>g/g/s</i></td>
-<td align="LEFT" valign="TOP">Top Flux of Salt</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UEU</td>
-<td align="LEFT" valign="TOP"><i>cm/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">East Flux of Zonal Momentum</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNU</td>
-<td align="LEFT" valign="TOP"><i>cm/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">North Flux of Zonal Momentum</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UEV</td>
-<td align="LEFT" valign="TOP"><i>cm/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">East Flux of Meridional Momentum</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNV</td>
-<td align="LEFT" valign="TOP"><i>cm/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">North Flux of Meridional Momentum</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">PV</td>
-<td align="LEFT" valign="TOP"><i>1/s</i></td>
-<td align="LEFT" valign="TOP">Potential Vorticity</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">Q</td>
-<td align="LEFT" valign="TOP"><i>g/cm<sup>4</sup></i></td>
-<td align="LEFT" valign="TOP">z-derivative of potential density</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">PD</td>
-<td align="LEFT" valign="TOP"><i>g/cm<sup>3</sup></i></td>
-<td align="LEFT" valign="TOP">Potential density referenced to surface</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UDP</td>
-<td align="LEFT" valign="TOP"><i>erg</i></td>
-<td align="LEFT" valign="TOP">Pressure work</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">PEC</td>
-<td align="LEFT" valign="TOP"><i>g/cm<sup>3</sup></i></td>
-<td align="LEFT" valign="TOP">Potential energy release due to convection</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">NCNV</td>
-<td align="LEFT" valign="TOP"><i>adjustments/s</i></td>
-<td align="LEFT" valign="TOP">Convective adjustments per second</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WTU</td>
-<td align="LEFT" valign="TOP"><i>cm/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Top flux of Zonal Momentum</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WTV</td>
-<td align="LEFT" valign="TOP"><i>cm/s<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Top flux of Meridional Momentum</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ST</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>Cg/g</i></td>
-<td align="LEFT" valign="TOP">Temperature*Salinity</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">RHO</td>
-<td align="LEFT" valign="TOP"><i>g/cm<sup>3</sup></i></td>
-<td align="LEFT" valign="TOP">In-situ density</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p> </p>
-<div align="CENTER">
-<table style="height: 6452px;" border="1" width="584" cellpadding="3"><caption><strong>Table:</strong> Additional available <b>CESM1</b> tavg fields</caption>
-<tbody>
-<tr>
-<td align="LEFT" valign="TOP"><b>Name</b></td>
-<td align="LEFT" valign="TOP"><b>Units</b></td>
-<td align="LEFT" valign="TOP"><b>Description</b></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">QFLUX</td>
-<td align="LEFT" valign="TOP"><i>Watts/m<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">Internal Ocean Heat Flux Due to Ice Formation;
-heat of fusion &gt; 0 or ice-melting potential &lt; 0</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">BSF</td>
-<td align="LEFT" valign="TOP"><i>Sv</i></td>
-<td align="LEFT" valign="TOP">Barotropic Stream Function</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TFW_T</td>
-<td align="LEFT" valign="TOP"><i>Watts/m<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">T flux due to freshwater flux</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TFW_S</td>
-<td align="LEFT" valign="TOP"><i>kg/m<sup>2</sup>/s</i></td>
-<td align="LEFT" valign="TOP">S flux due to freshwater flux (kg of salt/m^2/s)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">RESID_T</td>
-<td align="LEFT" valign="TOP"><i>Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Free-Surface Residual Flux (T)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">RESID_S</td>
-<td align="LEFT" valign="TOP"><i>kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Free-Surface Residual Flux (S)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">QSW_HTP</td>
-<td align="LEFT" valign="TOP"><i>Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Solar Short-Wave Heat Flux in top layer</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">QSW_HBL</td>
-<td align="LEFT" valign="TOP"><i>Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Solar Short-Wave Heat Flux in boundary layer</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SHF_QSW</td>
-<td align="LEFT" valign="TOP"><i>Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Solar Short-Wave Heat Flux</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">PREC_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Precipitation Flux from Coupler (rain+snow)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SNOW_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Snow Flux from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">EVAP_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Evaporation Flux from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">MELT_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Melt Flux from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ROFF_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Runoff Flux from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">IOFF_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Ice Flux from Coupler due to Land-Model Snow Capping</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SALT_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Salt Flux from Coupler (kg of salt/m^2/s)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SENH_F</td>
-<td align="LEFT" valign="TOP"><i> kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Sensible Heat Flux from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">LWUP_F</td>
-<td align="LEFT" valign="TOP"><i> Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Longwave Heat Flux (up) from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">LWDN_F</td>
-<td align="LEFT" valign="TOP"><i> Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Longwave Heat Flux (down) from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">MELTH_F</td>
-<td align="LEFT" valign="TOP"><i> Watts/m<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Melt Heat Flux from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">IFRAC</td>
-<td align="LEFT" valign="TOP"><i> unitless fraction </i></td>
-<td align="LEFT" valign="TOP">Ice Fraction from Coupler</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP"><strong>HMXL and</strong>
-<strong> HMXL_2</strong></td>
-<td align="LEFT" valign="TOP"><strong><i> cm </i></strong></td>
-<td align="LEFT" valign="TOP"><strong>Mixed-Layer Depth<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></strong></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">XMXL and
-XMXL_2</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Maximum Mixed-Layer Depth</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TMXL</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Minimum Mixed-Layer Depth</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">HBLT</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Boundary-Layer Depth</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">XBLT</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Maximum Boundary-Layer Depth</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TBLT</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Minimum Boundary-Layer Depth</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">FW</td>
-<td align="LEFT" valign="TOP"><i> cm/s </i></td>
-<td align="LEFT" valign="TOP">Freshwater Flux</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ADVT</td>
-<td align="LEFT" valign="TOP"><i> cm/<sup>o</sup>C/s </i></td>
-<td align="LEFT" valign="TOP">Vertically-Integrated T Advection Tendency</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ADVS</td>
-<td align="LEFT" valign="TOP"><i>cm g/km/s </i></td>
-<td align="LEFT" valign="TOP">Vertically-Integrated S Advection Tendency</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">dTEMP_POS_2D</td>
-<td align="LEFT" valign="TOP"><i> <sup>o</sup>C </i></td>
-<td align="LEFT" valign="TOP">max positive column temperature timestep diff</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">dTEMP_NEG_2D</td>
-<td align="LEFT" valign="TOP"><i> <sup>o</sup>C </i></td>
-<td align="LEFT" valign="TOP">max negative column temperature timestep diff</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">KAPPA_ISOP</td>
-<td align="LEFT" valign="TOP"><i> cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Isopycnal diffusion coefficient</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">KAPPA_THIC</td>
-<td align="LEFT" valign="TOP"><i> cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Thickness diffusion coefficient</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">HOR_DIFF</td>
-<td align="LEFT" valign="TOP"><i> cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Horizontal diffusion coefficient</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">DIA_DEPTH</td>
-<td align="LEFT" valign="TOP"><i>cm </i></td>
-<td align="LEFT" valign="TOP">Depth of the Diabatic Region at the Surface</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TLT</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Transition Layer Thickness</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">INT_DEPTH</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Depth at which the Interior Region Starts</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UISOP</td>
-<td align="LEFT" valign="TOP"><i>cm/s </i></td>
-<td align="LEFT" valign="TOP">Bolus Velocity in grid-x direction (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VISOP</td>
-<td align="LEFT" valign="TOP"><i>cm/s </i></td>
-<td align="LEFT" valign="TOP">Bolus Velocity in grid-y direction (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WISOP</td>
-<td align="LEFT" valign="TOP"><i>cm/s </i></td>
-<td align="LEFT" valign="TOP">Vertical Bolus Velocity (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ADVT_ISOP</td>
-<td align="LEFT" valign="TOP"><i> cm/<sup>o</sup>C/s </i></td>
-<td align="LEFT" valign="TOP">Vertically-Integrated T Eddy-Induced Advection Tendency (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ADVS_ISOP</td>
-<td align="LEFT" valign="TOP"><i>cm g/km/s </i></td>
-<td align="LEFT" valign="TOP">Vertically-Integrated S Eddy-Induced Advection Tendency (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNT_ISOP</td>
-<td align="LEFT" valign="TOP"><i><sup>o</sup>C/s </i></td>
-<td align="LEFT" valign="TOP">Heat Flux Tendency in grid-y Dir due to Eddy-Induced Vel (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNS_ISOP</td>
-<td align="LEFT" valign="TOP"><i>g/km/s </i></td>
-<td align="LEFT" valign="TOP">Salt Flux Tendency in grid-y Dir due to Eddy-Induced Vel (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">KVMIX</td>
-<td align="LEFT" valign="TOP"><i> cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Vertical diabatic diffusivity due to background
-or Tidal Mixing + background</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">KVMIX_M</td>
-<td align="LEFT" valign="TOP"><i> cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Vertical viscosity due to background
-or Tidal Mixing + background</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TPOWER</td>
-<td align="LEFT" valign="TOP"><i>erg/s </i></td>
-<td align="LEFT" valign="TOP">Energy Used by Vertical Mixing</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VVC_BCK</td>
-<td align="LEFT" valign="TOP"><i> cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Vertical viscosity due to background</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">USUBM</td>
-<td align="LEFT" valign="TOP"><i>cm/s </i></td>
-<td align="LEFT" valign="TOP">Submeso velocity in grid-x direction (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VSUBM</td>
-<td align="LEFT" valign="TOP"><i>cm/s </i></td>
-<td align="LEFT" valign="TOP">Submeso velocity in grid-y direction (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WSUBM</td>
-<td align="LEFT" valign="TOP"><i>cm/s </i></td>
-<td align="LEFT" valign="TOP">Vertical submeso velocity (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ADVT_SUBM</td>
-<td align="LEFT" valign="TOP"><i> cm/<sup>o</sup>C/s </i></td>
-<td align="LEFT" valign="TOP">Vertically-Integrated T submeso Advection Tendency (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">ADVS_SUBM</td>
-<td align="LEFT" valign="TOP"><i>cm g/km/s </i></td>
-<td align="LEFT" valign="TOP">Vertically-Integrated S submeso Advection Tendency (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNT_SUBM</td>
-<td align="LEFT" valign="TOP"><i> <sup>o</sup>C/s </i></td>
-<td align="LEFT" valign="TOP">Heat Flux Tendency in grid-y Dir due to submeso Vel (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VNS_SUBM</td>
-<td align="LEFT" valign="TOP"><i> <sup>o</sup>C/s </i></td>
-<td align="LEFT" valign="TOP">Salt Flux Tendency in grid-y Dir due to submeso Vel (diagnostic)</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">HLS_SUBM</td>
-<td align="LEFT" valign="TOP"><i> cm </i></td>
-<td align="LEFT" valign="TOP">Horizontal length scale used in submeso</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VDC_T</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">total diabatic vertical TEMP diffusivity</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VDC_S</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">total diabatic vertical SALT diffusivity</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">UVEL2</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Velocity in grid-x direction</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VVEL2</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Velocity in grid-y direction</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">WVEL2</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Vertical Velocity<sup>2</sup></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">RHO_VINT</td>
-<td align="LEFT" valign="TOP"><i>g/cm<sup>2</sup> </i></td>
-<td align="LEFT" valign="TOP">Vertical Integral of In-Situ Density</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SFWF_WRST</td>
-<td align="LEFT" valign="TOP"><i>kg/m<sup>2</sup>/s </i></td>
-<td align="LEFT" valign="TOP">Virtual Salt Flux due to weak restoring</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TAUX2</td>
-<td align="LEFT" valign="TOP"><i>dyne<sup>2</sup>/cm<sup>4</sup> </i></td>
-<td align="LEFT" valign="TOP">Windstress<sup>2</sup> in grid-x direction</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">TAUY2</td>
-<td align="LEFT" valign="TOP"><i>dyne<sup>2</sup>/cm<sup>4</sup> </i></td>
-<td align="LEFT" valign="TOP">Windstress<sup>2</sup> in grid-y direction</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">SSH2
-(H2 in LANL POP)</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup></i></td>
-<td align="LEFT" valign="TOP">SSH<sup>2</sup></td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VVC</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s</i></td>
-<td align="LEFT" valign="TOP">total vertical momentum viscosity</td>
-</tr>
-<tr>
-<td align="LEFT" valign="TOP">VDC_BCK</td>
-<td align="LEFT" valign="TOP"><i>cm<sup>2</sup>/s</i></td>
-<td align="LEFT" valign="TOP">Vertical diabatic diffusivity due to background</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>因为不是day trader，也懒得做短线投机，所以一直觉得没必要写交易日记。不过参与market就是一个假设验证的过程，正巧这几天全球股市暴跌，波动性复活，也不妨投资过程中把整理到的资料和自己的一些想法时不时记录下来，以后也是很好的参考。</p>
+
+<p>之前在<a href="https://novarizark.github.io/2018/01/18/2018-investment/">2018年的交易逻辑</a>一文中已经对今年的大概逻辑体系总结为 油价 通胀预期 以及波动性回归。具体而言就是油价中枢抬升推动通胀（或预期），随后对应着全球央行的货币政策收紧（或预期），之后是普遍的利率中枢抬升，流动性收缩，权益类资产价格受到打压，久违的波动性上升。逻辑都没错，但没想到这么快。</p>
+
+<p>周二一早醒来就看到ZP的消息“妈的这是股灾了”。我还在想不知道之前网格一路拉到怀疑人生的VIX解套没，打开交易软件一看连续五六格网格止盈单全部挂出去了，直愣愣涨了一倍。
+portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都在跌。可是瞄了一眼总亏损居然全都是xiv这一个标的贡献的，如果没有这个标的的话，做多波动性的仓位直接在股灾时给予正盈利。
+若不是long xiv也踩了黑天鹅，这波实实在在践行Taleb的杠铃策略gain from disoder。对冲踩上了，醉了醉了。</p>
+
+<p>瞄了下新闻，发现long xiv的厮们全在盘后狠抛，直接砸下90%，我勒个去。搜了下发现这货如果跌80%+会直接清盘，看起来是躲不开了。此处应总结的原则还是，下手前对对标的无论如何了解都不为过。
+上周四居然还有5.2亿跑步long xiv，这下估计埋惨了。</p>
+
+<p>交易xiv的逻辑是，满市场都是被动指数型ETF和机器人的时候，波动性自然下降。所谓的smart beta造成了大量的etf标的集中在为数不多的stock上，反倒集中了风险。预期一致转向波动率增大就是这个结果。具体瞄瞄知乎<a href="https://www.zhihu.com/question/266741454/answer/313475488">这个帖子</a>。
+瞄了下几乎没什么交易量的边缘化个股，果然跌幅远远小于大盘。interesting，或许后面会有一波风格转换。</p>
+
+<p>接下来怎么做？做一下假设验证：</p>
+
+<ol>
+  <li>历史回溯的话市场转向一般是双顶，后顶低于前顶，在下一次高位时减仓高债务中小个股。</li>
+  <li>网格挂VIX</li>
+  <li>低位买入一定金银对冲</li>
+  <li>保持持现率75%以上</li>
+</ol>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/11/29/pop-output-file/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/11/28/shell-e5-91-bd-e4-bb-a4-e5-88-a0-e9-99-a4-e6-8c-87/">Shell命令删除指定大小文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>空文件</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>find ./ -size 0</td>
-      <td>xarg rm</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>51字节大小文件</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>find ./ -size 51c</td>
-      <td>xarg rm</td>
-    </tr>
-  </tbody>
-</table>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/11/28/shell-e5-91-bd-e4-bb-a4-e5-88-a0-e9-99-a4-e6-8c-87/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/11/28/cmaq-output-files/">CMAQ output files</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>CMAQ以ACONC为中缀的输出文件中每天有25个时次，非常诡异，经查UG，</p>
-
-<p>CONC为瞬时文件，最常用；</p>
-
-<p>ACONC通常为小时平均文件；</p>
-
-<p>CGRID为restart文件。</p>
-
-<p>经查ncdump，CONC文件TSTEP在第25步<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>输出了第24时次（下一个输出文件起始时刻）的数据，因此读取的时候丢掉最后一个时次即可。</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/11/28/cmaq-output-files/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/11/08/overseas/">Overseas</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>通</p>
-
-<p>lizhenning7</p>
-
-<p>C6H12+as it always</p>
-
-<p>A<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>lzhenning</p>
-
-<p>sorxxxC6H12xxxx</p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/11/08/overseas/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/02/07/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -1232,10 +579,10 @@ or Tidal Mixing + background</td>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page13" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">14/43</span>
+          <span class="page_number ">14/87</span>
           
             <a href="/page15" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1521,7 +868,32 @@ or Tidal Mixing + background</td>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2592,7 +1964,7 @@ or Tidal Mixing + background</td>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2620,7 +1992,7 @@ or Tidal Mixing + background</td>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2788,7 +2160,7 @@ or Tidal Mixing + background</td>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2872,7 +2244,7 @@ or Tidal Mixing + background</td>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2900,7 +2272,7 @@ or Tidal Mixing + background</td>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -3019,7 +2391,7 @@ or Tidal Mixing + background</td>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -3231,6 +2603,27 @@ or Tidal Mixing + background</td>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -3244,6 +2637,16 @@ or Tidal Mixing + background</td>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -3253,16 +2656,6 @@ or Tidal Mixing + background</td>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -3316,7 +2709,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -3352,7 +2745,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3496,7 +2889,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3604,7 +2997,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3649,7 +3042,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3685,7 +3078,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3703,7 +3096,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3712,7 +3105,7 @@ or Tidal Mixing + background</td>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3846,7 +3239,7 @@ or Tidal Mixing + background</td>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

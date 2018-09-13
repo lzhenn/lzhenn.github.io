@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/24/setup-savioberkeley/">Setup SAVIO@Berkeley</a>
+                  <a class="post-link" href="/2018/01/28/decoupling-cesm/">CESM air-sea decoupling测试</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-24
+                        <i class="fa fa-calendar"></i>2018-01-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
+    
+        <a href="/category/#meteorology" title="Category: meteorology" rel="category">meteorology</a>
     
   
 
@@ -280,6 +370,452 @@
 <span class="pageTag">
   <i class="fa fa-tags"></i>
   
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#decoupling" title="Tag: decoupling" rel="tag">decoupling</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>在之前MM高原试验基础上，应黄老师要求增加北大西洋SST restoring的试验。因通量计算在海洋模块进行，所以应该在海洋模块计算之前修改并update。</p>
+
+<p>查到论坛<a href="https://bb.cgd.ucar.edu/how-prescribe-sst-annual-cycle-cesm-pop2">帖子</a>，以及HC师兄提供的code.</p>
+
+<p>看帖子似乎有namelist变量控制。找到一个NCAR的github主页<a href="https://ncar.github.io/POP/doc/build/html/users_guide/running-forcing-options.html">内容</a>,不过是针对只转海洋模式的情况。</p>
+
+<p>经查HC师兄的code，发现思路比较简单，就是在海洋模块每一次积分step后，用人工读入的文件做restoring。不过貌似还有可以优化的地方，读文件模块应该可以放到其他module，避免模式每一积分步都在读写。</p>
+
+<p>测试编译一次通过。Nice.关键是拿到对应的文件，并进一步优化一下程序流程。</p>
+
+<p>POP的history文件比较诡异，不仅有.h文件，还有.h.nday1文件。</p>
+
+<p>在faq找到了<a href="http://www.cesm.ucar.edu/models/cesm1.0/pop2/doc/faq/#tavg_files">关于nday1的说明</a></p>
+
+<blockquote>
+  <p>By default, the daily averaged fields are bundled into monthly timeseries files. These files are relatively small, because they contain only a handful of 2D fields. Out of the box, these fields are: Surface Potential Temperature (SST), SST2, Mixed-Layer Depth, and Maximum Mixed-Layer Depth.</p>
+</blockquote>
+
+<p>这个文件在之前run ctrl的时候并没有存下，那么接下来的问题就是月平均文件是否足以提供full layer海温，包括SST呢？</p>
+
+<p>瞄了一下h文件，发现第一层代表10m深的水，那么应该是没问题的了，直接restore 10m水深。</p>
+
+<p><strong>Updated 2018-01-28</strong></p>
+
+<p>继续看，存储位温的变量是TRACER，但这个变量比较诡异，是一个6维的数据，0 1 2 容易理解，是经纬度，和层次数，第1层为10m水深。3不知道是什么，4是previous/current时间帧，最后一维是iblock用于MPI分片。
+问题就是神奇的第3维。</p>
+
+<p>检查了下程序，发现第3维的循环控制变量bound为nt，step_mod.F90内有以下语句：</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="p">&amp;</span><span class="w">
+      </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delt</span><span class="o">*</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                                   </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_s</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="p">&amp;</span><span class="w">
+      </span><span class="n">SBUFF_SUM</span><span class="p">(:,:,</span><span class="n">iblock</span><span class="p">,</span><span class="n">index_o2x_So_s</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delt</span><span class="o">*</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                                   </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+<p>进一步查找，发现prognostic.F90有以下定义</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">tracer_field</span><span class="p">),</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="w">   </span><span class="c1">! descriptors for each tracer</span><span class="w">
+
+</span><span class="c1">!......</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">short_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'TEMP'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">long_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'Potential temperature'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">units</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s1">'degC'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">tend_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'degC/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">flux_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'degC cm/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">scale_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_rtavg</span><span class="w">
+
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">short_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'SALT'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">long_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'Salinity'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">units</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s1">'msu (g/g)'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">tend_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gram/kilogram/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">flux_units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gram/kilogram cm/s'</span><span class="w">
+      </span><span class="n">tracer_d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">scale_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000.0_rtavg</span><span class="w">
+
+</span></code></pre></div></div>
+<p>明白啦，1是位温，2是盐度。所以修改思路就很明确了：</p>
+<ol>
+  <li>读入SST文件和weight文件</li>
+  <li>在每一个step后对SST进行overwrite处理</li>
+</ol>
+
+<p>逐一解决！首先看怎么找个合适的地方把文件送进来。这种任务当然在模式initial的时候干。</p>
+
+<p>以read为关键词搜索，锁定文件IO位置。发现不少东西，比如pop设置了专门的forcing模块用于外强迫驱动。但因为forcing模块只有在单独海洋的时候才调用,为保证代码具有较高的可复用性，安全起见，我们还是首先考虑在initial module找读取外强迫场的语句。
+然后呢，在initial.F90发现了这么一段可爱的内容：</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">!-----------------------------------------------------------------------</span><span class="w">
+</span><span class="c1">!</span><span class="w">
+</span><span class="c1">!  read full 3-d t,s from input file</span><span class="w">
+</span><span class="c1">!</span><span class="w">
+</span><span class="c1">!-----------------------------------------------------------------------</span><span class="w">
+
+   </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">'ccsm_startup'</span><span class="p">,</span><span class="w"> </span><span class="s1">'file'</span><span class="p">)</span><span class="w">
+      </span><span class="n">first_step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="w">
+
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">'(a31,a)'</span><span class="p">)</span><span class="w"> </span><span class="s1">'Initial 3-d T,S read from file:'</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                                 </span><span class="nb">trim</span><span class="p">(</span><span class="n">init_ts_file</span><span class="p">)</span><span class="w">
+         </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">POP_stdout</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+
+      </span><span class="k">allocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="n">ny_block</span><span class="p">,</span><span class="n">km</span><span class="p">,</span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+
+      </span><span class="n">in_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_file</span><span class="p">(</span><span class="n">init_ts_file_fmt</span><span class="p">,</span><span class="w">             </span><span class="p">&amp;</span><span class="w">
+                               </span><span class="n">full_name</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">init_ts_file</span><span class="p">),</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                               </span><span class="n">record_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rec_type_dbl</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                               </span><span class="n">recl_words</span><span class="o">=</span><span class="n">nx_global</span><span class="o">*</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'open_read'</span><span class="p">)</span><span class="w">
+
+      </span><span class="n">i_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span><span class="n">nx_global</span><span class="p">)</span><span class="w">
+      </span><span class="n">j_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+      </span><span class="n">k_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'k'</span><span class="p">,</span><span class="n">km</span><span class="p">)</span><span class="w">
+
+      </span><span class="n">io_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'TEMPERATURE'</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim3</span><span class="o">=</span><span class="n">k_dim</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w">    </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">d3d_array</span><span class="o">=</span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+      </span><span class="n">io_salt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'SALINITY'</span><span class="p">,</span><span class="w">    </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">dim3</span><span class="o">=</span><span class="n">k_dim</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w">    </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+                 </span><span class="n">d3d_array</span><span class="o">=</span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'define'</span><span class="p">,</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'define'</span><span class="p">,</span><span class="n">io_salt</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'read'</span><span class="w">  </span><span class="p">,</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nblocks_clinic</span><span class="w">
+         </span><span class="n">TRACER</span><span class="p">(:,:,:,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(:,:,:,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'read'</span><span class="w">  </span><span class="p">,</span><span class="n">io_salt</span><span class="p">)</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nblocks_clinic</span><span class="w">
+         </span><span class="n">TRACER</span><span class="p">(:,:,:,</span><span class="mi">2</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(:,:,:,</span><span class="n">iblock</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_salt</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">deallocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="s1">'close'</span><span class="p">)</span><span class="w">
+      </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span><span class="w">
+
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="n">blank_fmt</span><span class="p">)</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">'(a12,a)'</span><span class="p">)</span><span class="w"> </span><span class="s1">' file read: '</span><span class="p">,</span><span class="w"> </span><span class="nb">trim</span><span class="p">(</span><span class="n">init_ts_file</span><span class="p">)</span><span class="w">
+         </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">POP_stdout</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">POP_IOUnitsFlush</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+
+</span></code></pre></div></div>
+<p>嘿嘿，和HC师兄的程序对比，如出一辙。那么我们仅仅需要在某一个合适的地方给出读取forcing场的语句就可以了。注意initial读取的时候是没有时间帧的，所以我们需要读入时间帧，并且把变量传参到step_mod或者main driver程序中。
+接下来我们看如何解决这两个问题。时间问题容易解决，HC师兄的程序里给出了，直接通过dim来指定时间维即可，关键是construct_io_field这个语句，查下这个语句的定义。在io_types.F90:</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">construct_io_field</span><span class="w"> </span><span class="p">(</span><span class="w">  </span><span class="p">&amp;</span><span class="w"> 
+       </span><span class="n">short_name</span><span class="p">,</span><span class="w">       </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">dim1</span><span class="p">,</span><span class="w"> </span><span class="n">dim2</span><span class="p">,</span><span class="w">       </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">dim3</span><span class="p">,</span><span class="w">             </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">time_dim</span><span class="p">,</span><span class="w">         </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">long_name</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">units</span><span class="p">,</span><span class="w">            </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">coordinates</span><span class="p">,</span><span class="w">      </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">grid_loc</span><span class="p">,</span><span class="w">         </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">valid_range</span><span class="p">,</span><span class="w">      </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">field_loc</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">field_id</span><span class="p">,</span><span class="w">         </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">field_type</span><span class="p">,</span><span class="w">       </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i0d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i1d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i2d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">i3d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r0d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r1d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r2d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">r3d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d0d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d1d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d2d_array</span><span class="p">,</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+       </span><span class="n">d3d_array</span><span class="p">)</span><span class="w">        </span><span class="p">&amp;</span><span class="w">    
+    </span><span class="k">result</span><span class="w"> </span><span class="p">(</span><span class="n">descriptor</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>dim123时间都给考虑好了，意不意外，惊不惊喜？依葫芦画瓢往里送就行了。</p>
+
+<p>几个神奇的参数：</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="kt">character</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+    </span><span class="n">grid_loc</span><span class="w">                  </span><span class="c1">! position of field in staggered grid</span><span class="w">
+ 
+ </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">  </span><span class="c1">! for ghost cell updates</span><span class="w">
+    </span><span class="n">field_loc</span><span class="p">,</span><span class="w">               </span><span class="p">&amp;</span><span class="c1">! staggering location</span><span class="w">
+    </span><span class="n">field_type</span><span class="p">,</span><span class="w">              </span><span class="p">&amp;</span><span class="c1">! field type (scalar,vector,angle)</span><span class="w">
+    </span><span class="n">field_id</span><span class="w">                  </span><span class="c1">! previously defined id</span><span class="w">
+
+</span></code></pre></div></div>
+<p>首先的神奇之处是grid_loc，这什么鬼，虽然模板里给了3111代号，但是毕竟好奇，搜索下发现tavg.F90有如下语句：</p>
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">grid_loc</span><span class="p">))</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+         </span><span class="c1">!*** try to decode field location from grid_loc</span><span class="w">
+         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="w">
+         </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_NEcorner</span><span class="w">
+         </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_Nface</span><span class="w">
+         </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'2'</span><span class="w"> </span><span class="ow">.and.</span><span class="w"> </span><span class="n">grid_loc</span><span class="p">(</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'1'</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> 
+            </span><span class="n">tavg_field</span><span class="o">%</span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_Eface</span><span class="w">
+         </span><span class="k">endif</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+</span></code></pre></div></div>
+<p>东西南北？看起来是位于格点什么位置的指示。还有那些r2d_array, d2d_array代表的是数据精度real,double之类（居然没写注释！也是醉了）
+查pop log发现了这个东西</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                                             2                                        30   
+                                          ________                                    31   
+                      y ^                |        |                                   32   
+                        |               3|   ijk  |1                                  33   
+                        +---&gt;            |        |                                   34   
+                            x            |________|                                   35   
+                                             4                                        36   
+</code></pre></div></div>
+<p>居然有这么可爱的图示……</p>
+
+<p><strong>Updated 2018-01-29</strong></p>
+
+<p>下面我们测试在main driver函数ocn_comp_mct.F90里读入一个既存的NC文件。为了效率，当然不能在run的时候每一步都读入，仅仅在initial的subroutine读入。initial和run都在ocn_mct的大module中，因此变量彼此应当可见互用。</p>
+
+<p>写的时候发现一堆全局变量满天飞，POP的软件工程做得真是醉醉的……</p>
+
+<p>增加namelist变量需要让bld namelist程序认识，根据<a href="https://bb.cgd.ucar.edu/how-add-new-namelist-variables">这个帖子操作</a></p>
+
+<p>增加两个subroutine，一个负责在initial的时候读取forcing文件，另一个负责在pop积分步后给出reset。</p>
+
+<p>写好后发现一个大坑，由于IO module默认没有对3D var+时间的变量进行处理，如果手动增加这一功能需要改动非常多的模块，只能退而求其次，仅仅对第一层temp进行处理了。具体代码：</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">! ***LZN: MOD START***</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">nml_error</span><span class="w">
+   </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">i4</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">decoupling_days</span><span class="o">=</span><span class="mi">30</span><span class="w">
+
+   </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="n">char_len</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file_fmt</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">ptempf_file</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_field_desc</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">io_temp</span><span class="p">,</span><span class="w"> </span><span class="n">io_ce</span><span class="w">
+   </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">io_dim</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+   </span><span class="n">t_dim</span><span class="p">,</span><span class="w"> </span><span class="n">i_dim</span><span class="p">,</span><span class="w"> </span><span class="n">j_dim</span><span class="p">,</span><span class="w"> </span><span class="n">k_dim</span><span class="w">
+   </span><span class="k">namelist</span><span class="w"> </span><span class="p">/</span><span class="n">ptempf_forcing_nml</span><span class="p">/</span><span class="w"> </span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">ptempf_file_fmt</span><span class="w">
+   
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="k">allocate</span><span class="p">(</span><span class="n">WGT_DATA</span><span class="p">(</span><span class="n">nx_block</span><span class="p">,</span><span class="w"> </span><span class="n">ny_block</span><span class="p">,</span><span class="w"> </span><span class="n">decoupling_days</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocks_clinic</span><span class="p">))</span><span class="w">
+   </span><span class="n">WGT_DATA</span><span class="o">=</span><span class="mf">1.0</span><span class="w">
+
+
+   </span><span class="c1">! Read forcing file path from namelist file</span><span class="w">
+   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">my_task</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+      </span><span class="k">open</span><span class="w"> </span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="n">nml_filename</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="o">=</span><span class="s1">'old'</span><span class="p">,</span><span class="w"> </span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="p">/</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+      </span><span class="k">else</span><span class="w">
+         </span><span class="n">nml_error</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+      </span><span class="k">endif</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+         </span><span class="k">read</span><span class="p">(</span><span class="n">nml_in</span><span class="p">,</span><span class="w"> </span><span class="n">nml</span><span class="o">=</span><span class="n">ptempf_forcing_nml</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">nml_error</span><span class="p">)</span><span class="w">
+      </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w"> 
+      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nml_error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">close</span><span class="p">(</span><span class="n">nml_in</span><span class="p">)</span><span class="w">
+   </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+   </span><span class="c1">! broadcast the scalar to all MPI processors</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">broadcast_scalar</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="n">master_task</span><span class="p">)</span><span class="w">
+      
+   </span><span class="n">ptempf_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_file</span><span class="p">(</span><span class="n">ptempf_file_fmt</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">full_name</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">ptempf_file_name</span><span class="p">),&amp;</span><span class="w">
+               </span><span class="n">record_length</span><span class="o">=</span><span class="n">rec_type_real</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">recl_words</span><span class="o">=</span><span class="n">nx_global</span><span class="o">*</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'open_read'</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">i_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'i'</span><span class="p">,</span><span class="n">nx_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">j_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'j'</span><span class="p">,</span><span class="n">ny_global</span><span class="p">)</span><span class="w">
+   </span><span class="n">t_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_dim</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,</span><span class="n">decoupling_days</span><span class="p">)</span><span class="w">
+
+   </span><span class="n">io_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct_io_field</span><span class="p">(</span><span class="s1">'TEMP'</span><span class="p">,</span><span class="n">dim1</span><span class="o">=</span><span class="n">i_dim</span><span class="p">,</span><span class="n">dim2</span><span class="o">=</span><span class="n">j_dim</span><span class="p">,</span><span class="n">dim3</span><span class="o">=</span><span class="n">t_dim</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">long_name</span><span class="o">=</span><span class="s1">'Potential Temperature'</span><span class="p">,</span><span class="w"> </span><span class="n">units</span><span class="o">=</span><span class="s1">'degC'</span><span class="p">,</span><span class="w"> </span><span class="n">grid_loc</span><span class="o">=</span><span class="s1">'3111'</span><span class="p">,&amp;</span><span class="w">
+               </span><span class="n">field_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_loc_center</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+               </span><span class="n">field_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_type_scalar</span><span class="p">,</span><span class="w"> </span><span class="n">r3d_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'define'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'read'</span><span class="p">,</span><span class="w"> </span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">!   ru_data = construct_io_field('ru', dim1=i_dim, dim2=j_dim,&amp;</span><span class="w">
+</span><span class="c1">!             long_name='nudging coefficients', units='1',&amp;</span><span class="w">
+</span><span class="c1">!             grid_loc=' 3111', field_loc = field_loc_center,&amp;</span><span class="w">
+</span><span class="c1">!             field_type = field_type_scalar, r2d_array = ru)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'define', ru_data)</span><span class="w">
+</span><span class="c1">!   call data_set(sstf_file, 'read', ru_data)</span><span class="w">
+
+   </span><span class="k">call</span><span class="w"> </span><span class="n">data_set</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">,</span><span class="w"> </span><span class="s1">'close'</span><span class="p">)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_io_field</span><span class="p">(</span><span class="n">io_temp</span><span class="p">)</span><span class="w">
+</span><span class="c1">!   call destroy_io_field(ru_data)</span><span class="w">
+   </span><span class="k">call</span><span class="w"> </span><span class="n">destroy_file</span><span class="p">(</span><span class="n">ptempf_file</span><span class="p">)</span><span class="w">
+
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_read</span><span class="w">
+ 
+ </span><span class="c1">! fixing the SST!</span><span class="w">
+ </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+    </span><span class="kt">integer</span><span class="w"> </span><span class="p">(</span><span class="n">int_kind</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w">  </span><span class="n">iblock</span><span class="w">
+    </span><span class="c1">! debug info</span><span class="w">
+    </span><span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">TEMP_DATA</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">iday_of_year</span><span class="p">,:)</span><span class="w"> 
+
+
+    </span><span class="c1">! Operation: override the runtime tracer(temp)</span><span class="w">
+    </span><span class="c1">!$OMP PARALLEL DO PRIVATE(iblock)</span><span class="w">
+    </span><span class="k">do</span><span class="w"> </span><span class="n">iblock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nblocks_clinic</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TEMP_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
+       </span><span class="n">TRACER</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">curtime</span><span class="p">,</span><span class="n">iblock</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">WGT_DATA</span><span class="p">(:,:,</span><span class="n">iday_of_year</span><span class="p">,</span><span class="w"> </span><span class="n">iblock</span><span class="p">))</span><span class="w">
+    </span><span class="k">end</span><span class="w"> </span><span class="k">do</span><span class="w">
+    </span><span class="c1">!$OMP END PARALLEL DO</span><span class="w">
+ </span><span class="k">end</span><span class="w"> </span><span class="k">subroutine</span><span class="w"> </span><span class="n">ptempforcing_fix</span><span class="w">
+ </span><span class="c1">! ***LZN: MOD END***</span><span class="w">
+</span></code></pre></div></div>
+<p>经测试一个月积分没有问题。</p>
+
+<p><strong>Updated 2018-01-29</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/28/decoupling-cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/25/pandas-csv/">利用pandas处理csv文件注意</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>写交易系统时为了让credentials在代码里不可见，用pandas读取csv获取，使用中发现一坑，把index_col设置后，竟然无法用<code class="highlighter-rouge">pd['$IND_NAME']</code>去引用对应idx的行，估计又是各种坑爹对象类型不匹配。
+解决方法也很简单，用pandas的loc方法：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">pd_cre</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'quandl'</span><span class="p">,</span><span class="s">'cred'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-01-25</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/25/pandas-csv/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/25/mercurius-system/">Mercurius交易策略系统搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>&nbsp;
+    
+        <a href="/tag/#quandl" title="Tag: quandl" rel="tag">quandl</a>&nbsp;
     
         <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
@@ -290,502 +826,51 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>SAVIO is Berkeley’s high performance clusters.</p>
-
-<p>http://research-it.berkeley.edu/services/high-performance-computing/user-guide</p>
-
-<ol>
-  <li>set up vim/project</li>
-</ol>
-
-<p>2.set up existing module</p>
-
-<p>#——— Load specific modules ————–
-module load intel/2013_sp1.4.211
-module load openmpi/1.6.5-intel</p>
-
-<p>#module load netcdf/4.3.2-intel-p System admin only provide C++ lib</p>
-
-<p>module load nco/4.4.6-intel-p
-module load ncview/2.1.2</p>
-
-<ol>
-  <li>set up NetCDF</li>
-</ol>
-
-<p>$nf-config –all</p>
-
-<p>$nc-config –all</p>
-
-<p>can be used to check the installation status.</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/24/setup-savioberkeley/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/">GFDL Spectral Idealized port on SAVIO</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
-    
-        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
-    
-        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>copy and paste to create</p>
-
-<p><strong>mkmf.template.savio.without_mpi</strong> in ./bin/</p>
-
-<p>change:</p>
-
-<p>FC CC MPI and NetCDF pathes.</p>
-
-<p>in ./full_dynamics, change:</p>
-
-<p><strong>compile_full_dynamics_on_savio.csh </strong> to fit savio (usually, just change platform name is okay).</p>
-
-<p>when compile, error:</p>
-<h5><span style="color: #ff0000;">ifort: error #10031 error: could not write to argument file</span></h5>
-<p>google it:</p>
-
-<p>https://software.intel.com/en-us/forums/intel-math-kernel-library/topic/281453</p>
-<blockquote>The MKL libraries are in different directories than the compiler runtime and other libraries. By default, the compiler will not search for libraries in the MKL <b>lib</b> directory. Use the <b>-mkl</b> compiler option for simple jobs, and use the MKL Link Line Advisor for more intricate jobs.</blockquote>
-<p>When I tried <strong>-mkl</strong> it doesn’t work and appeared another error.</p>
-
-<p>Fortunately, when I tried to module load ant TAB it, a module called</p>
-
-<p><strong>mkl/2013_sp1.4.211</strong></p>
-
-<p>just came into my eye.</p>
-
-<p>of course, use it! The problem really solved.</p>
-
-<p> </p>
-
-<p>So what is mkl?</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/17/externalities-and-the-coase-theorem/">Externalities and the Coase Theorem</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Economics" title="Category: Economics" rel="category">Economics</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Economics" title="Tag: Economics" rel="tag">Economics</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Coursera</p>
-
-<p>The price changes, the quantity of the demand changes, not the demand change!</p>
-
-<p>compliment of xxx / complementary good互补品</p>
-
-<p>Change in demand: demand curve change!</p>
-
-<p>inferior good 低档商品</p>
-<h2><span class="keyword">ceteris paribus其他条件不变<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></span></h2>
-<ul>
-	<li></li>
-	<li>Externalities
-<ul>
-	<li>Positive
-<ul>
-	<li>Example: Education</li>
-</ul>
-</li>
-	<li>Negative
-<ul>
-	<li>Example: Pollution</li>
-	<li>Measure Example: Pigouivain tax--&gt;Pareto Optimality</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p> </p>
-<ul>
-	<li>Coase theorem
-<ul>
-	<li>
-<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的两个前提条件：明确<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>和<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>　钢铁厂生产钢，自己付出的代价是铁矿石、煤炭、劳动等，但这些只是“<a href="http://baike.baidu.com/view/354998.htm" target="_blank">私人成本</a>”；在<a href="http://baike.baidu.com/view/610395.htm" target="_blank">生产过程</a>中排放的污水、废气、废渣，则是社会付出的代价。如果仅计算私人成本，生产钢铁也许是合算的，但如果从社会的角度看，可能就不合算了。于是，经济学家提出要通过征税解决这个问题，即政府出面干预，赋税使得成本高了，生产量自然会小些。但是，恰当地规定税率和有效地征税，也要花费许多成本。于是，科斯提出：政府只要明确产权就可以了。如果把产权“判给”河边居民，钢铁厂不给居民们赔偿费就别想在此设厂开工；若付出了赔偿费，成本高了，产量就会减少。如果把<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>到钢铁厂，如果居民认为付给钢铁厂一些“赎金”可以使其减少污染，由此换来健康上的好处大于那些赎金的价值，他们就会用“收买”的办法“利诱”厂方减少生产从而减少污染。当厂家多生产钢铁的<a href="http://baike.baidu.com/view/297033.htm" target="_blank">赢利</a>与少生产钢铁但接受“赎买”的收益相等时，它就会减少生产。从理论上说，无论是厂方赔偿，还是居民赎买，最后达成交易时的钢产量和污染排放量会是相同的。但是，<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>归属不同，在<a href="http://baike.baidu.com/view/9601472.htm" target="_blank">收入分配</a>上当然是不同的：谁得到了产权，谁可以从中获益，而另一方则必须支付费用来“收买”对方。<strong>总之，无论财富分配如何不同，公平与否，只要划分得清楚，资源的利用和配置是相同的——都会生产那么多钢铁、排放那么多污染，而用不着政府从中“插一杠子”。那么政府做什么呢?明确产权，并且有效地保护产权。</strong></div>
-<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理表明，<strong>市场的真谛不是价格，而是产权。只要有了产权，人们自然会“议出”合理的价格来。</strong></div>
-<div class="para"></div>
-<div class="para">但是，明确产权只是通过市场交易实现资源最优配置的一个必要条件，却不是充分条件。另一个必要条件就是“不存在<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>”。交易成本，简单地说是为达成一项交易、做成一笔买卖所要付出的时间、精力和产品之外的金钱，如市场调查、情报搜集、质量检验、条件谈判、讨价还价、起草合同、聘请律师、请客吃饭，直到最后执行合同、完成一笔交易，都是费时费力的。就河水污染这个问题而论，居民有权索偿，但可能会漫天要价，把污染造成的“肠炎”说成“胃癌”；在钢铁厂有权索要“赎买金”的情况下，它可能把减少生产的<a href="http://baike.baidu.com/view/654238.htm" target="_blank">损失</a>一元说成十元。无论哪种情况，对方都要调查研究一番。如果只是一家工厂和一户居民，事情还好办。当事人的数目一大，麻烦就更多，因为有了“合理分担”的问题。如果是多个厂家，谁排了污水、排了多少，他们如何分摊赔偿金或如何分享“赎买金”就要先扯皮一番；如果是多户居民，谁受害重谁受害轻，怎么分担费用或分享赔偿，也可打得不可开交。正是这些<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>，可能使得前面所说的那种由私人交易达到的资源配置无法实现——或是大家一看有这么多麻烦，望而却步。所以说，<a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的“逆反”形式是：如果存在交易成本，即使<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>明确，私人间的交易也不能实现资源的最优配置。</div>
-<div class="para">科斯定理的两个前提条件各有所指，但并不是完全独立、没有联系。最根本的是明确产权对减少交易成本的决定性作用。产权不明确，后果就是扯皮永远扯不清楚，意味着交易成本无穷大，任何交易都做不成；而<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>得清楚，即使存在交易成本，人们在一方面可以通过交易来解决各种问题，另一方面还可以有效地选择最有利的<a href="http://baike.baidu.com/view/3823397.htm" target="_blank">交易方式</a>，使交易成本最小化。</div></li>
-</ul>
-</li>
-</ul>
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/17/externalities-and-the-coase-theorem/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/15/fortran-direct-recl-problem/">Fortran direct recl problem</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-15
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>recl = n or recl = 4*n?</p>
-
-<p>this is a problem from a non-standard extensions of fortran: VMS fortran.<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>http://www-mipl.jpl.nasa.gov/portguide/subsection3.9.7.html</p>
-
-<p>https://docs.oracle.com/cd/E19957-01/805-4939/6j4m0vnct/index.html#c40004b91a0e</p>
-
-<p> </p>
-
-<p>typically, using ifort, dont do that.</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/15/fortran-direct-recl-problem/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/13/mac-os-e7-bb-88-e7-ab-af-e4-b8-8elinux-e7-bb-88-e7/">Mac OS终端与Linux终端的使用区别</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-13
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>John给了组里Mac Mini的账号，后面确实要开始用Mac工作了，先把NCL配置好，使用过程中发现了一些和Linux终端不同的地方，配置过程记录在这里：</p>
-
-<p>1.登录终端后默认载入环境变量的位置不同：Mac为.bash_profile，Linux为.bashrc</p>
-
-<p>2.配置终端显示颜色：</p>
-
-<p>alias ls=’ls -G’</p>
-
-<p>http://www.2cto.com/os/201205/133944.html</p>
-
-<p>3.配置vim</p>
-
-<p>git clone https://github.com/Novarizark/config_files</p>
-
-<ol>
-  <li>
-    <p>git clone project</p>
+                    <ul id="markdown-toc">
+  <li><a href="#楔子" id="markdown-toc-楔子">楔子</a></li>
+  <li><a href="#前期准备" id="markdown-toc-前期准备">前期准备</a>    <ul>
+      <li><a href="#数据搜集系统" id="markdown-toc-数据搜集系统">数据搜集系统</a></li>
+    </ul>
   </li>
-  <li>
-    <p>按NCL官网 http://ncl.ucar.edu/Download/macosx.shtml 步骤安装NCL</p>
-  </li>
-</ol>
+</ul>
 
-<p>5.1  注意登录时看到remote server禁止x11访问，</p>
+<h2 id="楔子">楔子</h2>
 
-<p>WARNING! The remote SSH server rejected X11 forwarding request</p>
+<p>昨晚和老板以及另一位教授吃了顿饭，本来很不想去，结果却有意外收获。教授直言不讳地说明了就业形势（趋势）的严峻程度，无论中美，无论天气气候。如果美国作为小政府大市场的存在能够快速试错转向，那么中国政策性红利的影响可能会造成更严重的错配。</p>
 
-<p>调整xhost发现似乎有错误，应该是有东西没装，先不管。</p>
+<p>基本印证了我基于搜集到的资料作出的推断。昨天这一事件进一步说明了搜集机会的重要性，还是应该多接触，吃顿饭的时间，机会成本也很低。</p>
 
-<p>5.2 安装XQuartz，</p>
+<p>事不宜迟，我想时间精力分配上可以从五五开转到七三开了。言归正传，开始试着搭建自己的交易系统。</p>
 
-<p>Mac下用curl命令下载，格式</p>
+<h2 id="前期准备">前期准备</h2>
 
-<p><strong>curl -o 文件名 ‘url’</strong></p>
+<p>交易系统命名是个技术活，找个西方财神的名字吧，最早发现希腊神话里是赫尔墨斯，这个英文拼写后来被爱马仕用了，略坑。对应罗马神话是墨丘利，水星，不错，就用Mercurius好了。维基百科的介绍</p>
 
-<p><strong>curl -O ‘url’</strong></p>
+<blockquote>
+  <p>墨丘利（拉丁语：Mercurius）是罗马神话中为众神传递信息的使者，相对应于希腊神话的赫耳墨斯（Hermes）。他的形象一般是头戴一顶插有双翅的帽子，脚穿飞行鞋，手握魔杖，行走如飞。墨丘利是丘比特和迈亚的儿子，是医药、旅行者、商人和小偷的保护神，西方药店经常用他的缠绕两条蛇的手杖作为标志。</p>
+</blockquote>
 
-<p>https://cnbin.github.io/blog/2015/06/14/mac-os-zhong-duan-xia-shi-yong-curl-ming-ling-xia-zai-wen-jian/<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+<blockquote>
+  <p>此外，由于水星在天上运行的速度很快，所以亦用了他的名字而命名。</p>
+</blockquote>
 
-<p>gcc与gfortran出现错误用brew doctor解决。</p>
+<p>以及对赫尔墨斯的描述：</p>
 
-<p> </p>
+<blockquote>
+  <p>变化多端、圆滑机灵的盗贼，他带给人梦境，是夜里守望者，门外的小偷，在长生不老的众神里最先展示善意的人。</p>
+</blockquote>
 
-<p> </p>
+<h3 id="数据搜集系统">数据搜集系统</h3>
 
-<p> </p>
+<p>没数据就是无米之炊，首先搭建爬虫系统搜集数据。目前的想法是先写specific脚本把存量拉下来，再用crontab每日update，分辨率到日即可，简单起见先拿大宗下手。</p>
 
-<p> </p>
+<p>数据源选择quandl和yahoo-finance，国内数据之前在某量化课件上看到个源，后续再说。</p>
 
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/13/mac-os-e7-bb-88-e7-ab-af-e4-b8-8elinux-e7-bb-88-e7/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/04/smoke-learn/">SMOKE-learn</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>HKUST使用空间查看：</p>
-
-<p>quota -uvs huangyeq<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p> </p>
-
-<p>Assign files是一堆设置环境变量的文件。</p>
-
-<p>SMKROOT</p>
-
-<p> </p>
-
-<p> </p>
+<p><strong>Updated 2018-01-25</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/04/smoke-learn/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/25/mercurius-system/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -800,10 +885,10 @@ module load ncview/2.1.2</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page15" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">16/43</span>
+          <span class="page_number ">16/87</span>
           
             <a href="/page17" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1089,7 +1174,32 @@ module load ncview/2.1.2</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2160,7 +2270,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2188,7 +2298,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2356,7 +2466,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2440,7 +2550,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2468,7 +2578,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2587,7 +2697,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2799,6 +2909,27 @@ module load ncview/2.1.2</p>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2812,6 +2943,16 @@ module load ncview/2.1.2</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2821,16 +2962,6 @@ module load ncview/2.1.2</p>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2884,7 +3015,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2920,7 +3051,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3064,7 +3195,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3172,7 +3303,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3217,7 +3348,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3253,7 +3384,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3271,7 +3402,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3280,7 +3411,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3414,7 +3545,7 @@ module load ncview/2.1.2</p>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

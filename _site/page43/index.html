@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/27/wordpress-e8-ae-bf-e9-97-ae-e6-85-a2-e7-9a-84-e9-9/">【已解决】Wordpress访问慢的问题解决</a>
+                  <a class="post-link" href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/">【CESM】slab ocean coupling</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-27
+                        <i class="fa fa-calendar"></i>2015-12-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
     
   
 
@@ -281,9 +371,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
     
-        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>
+        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
     
   
 
@@ -293,52 +383,53 @@
                 </div>
                 <div class="excerpt">
                     
-<p>2014年六月以来，由于大陆对google的封锁，导致wordpress访问变慢。主要原因是wordpress调用了google的一些公共库。经查资料，采用360做的镜像库可以解决该问题。</p>
+<p>Here is a <a href="https://www.quora.com/What-are-slab-ocean-models-in-climate-science">quora answer </a>about the slab ocean</p>
+<blockquote><span class="rendered_qtext">Slab ocean models consider this whole upper layer as one single body of water, or a 'slab' with one single velocity vector (u,v), and density. The Navier-Stokes equation is modified accordingly to compute the resultant velocity of that slab based on wind forcing and coriolis force. The mixed-layer depth in such models is usually kept fixed. </span></blockquote>
+<p>Here is a <a href="https://bb.cgd.ucar.edu/faq-data-ocean-slab-mode-docn-som">FAQ </a>about the slab ocean model. Two things to note:</p>
 
-<p>需要修改的文件</p>
-<blockquote>wp-includes/script-loader.php
+<ol>
+  <li>
+    <p>SOM is a kind of data model, can be switched in a namelist variable F compset, env_run.xml.</p>
+  </li>
+  <li>
+    <p>Some standard SOM forcing is available in the inputdata repository.</p>
+  </li>
+</ol>
 
-wp-includes/js/tinymce/plugins/compat3x/css/dialog.css
+<p>Now we may start to test the slab ocean. compset choose: E_1850_CAM5</p>
 
-wp-content/themes/twentytwelve/functions.php
+<p>ERROR comes:</p>
+<blockquote>svn: URL 'https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/UNSET' non-existent in that revision</blockquote>
+<p>There should be something wrong with the set of the ocean forcing files. So come to <a href="https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/">this dir</a>, no problem.</p>
 
-wp-content/themes/twentythirteen/functions.php
+<p>We need to set the specific foring files in the env_run.xml file. (check FAQ)</p>
 
-wp-content/themes/twentyfourteen/functions.php</blockquote>
-<p>搜索<strong>googleapis</strong>全部替换为<strong>useso</strong>即可。</p>
+<p>We choose <strong>pop_frc.b.c40.B1850CN.f19_g16.100105.nc for </strong>test.</p>
 
-<p>其实目前默认采用twentyfourth了，只修改最后面三个文件中的最后一个应该可以。</p>
+<p>In env_run.xml, only give the name of the file is okay to continue.</p>
 
-<p>参考资料：</p>
+<p>After downloading the file, you can build and submit the case. Yet there is no problem even after altering the physics into cam5 -chem none.</p>
 
-<p>http://jingyan.baidu.com/article/4f7d5712aaca631a20192720.html</p>
-
-<p>http://www.wind88.net/news/news-125.html</p>
+<p>Perfect!</p>
 
 <p> </p>
 
-<p><strong><span style="color: #008000;">#Up to 20140729#</span></strong></p>
-
-<p>这两天出现了不登录的情况下速度很快，但是登录之后却非常缓慢。经查，发现依然是由于后台调用google字体等造成。安装Disable Google Fonts插件后问题解决。</p>
-
-<p>参考资料：http://www.whyqi.com/318.html</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140824#</span></strong></p>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/27/wordpress-e8-ae-bf-e9-97-ae-e6-85-a2-e7-9a-84-e9-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/27/wordpress-e4-b8-8a-e4-bc-a0-e6-97-b6-e6-98-af-e5-9/">【已解决】Wordpress上传时“是否上级目录没有写权限”解决办法</a>
+                  <a class="post-link" href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/">【ongoing】php返回图片方法获知邮件是否被查阅</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-27
+                        <i class="fa fa-calendar"></i>2015-12-21
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -357,158 +448,7 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>想放一个顶部图像，谁知道上传的时候出现上述错误，按照路径创建了uploads目录，755权限依然不行，改为777后成功。</p>
-
-<p>这其实不是一个好方法，说明wordpress在操作的时候是作为“others”的，777代表谁都能上，不安全。</p>
-
-<p>正确方法可能要从mysql的数据库改，mysql几乎没有接触，时间宝贵起见，不管了，姑且这样解决吧。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/27/wordpress-e4-b8-8a-e4-bc-a0-e6-97-b6-e6-98-af-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/27/dokuwiki-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/">【已解决】Dokuwiki搭建过程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-27
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#wiki" title="Tag: wiki" rel="tag">wiki</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>dokuwiki的搭建还是比较简单的，反正比wordpress轻松多了。</p>
-
-<ol>
-  <li>doku官方页面下载最新版本的压缩包并解压。</li>
-</ol>
-
-<p>https://www.dokuwiki.org/dokuwiki</p>
-
-<ol>
-  <li>按照install guide里面的要求，主要是secuity配置比较麻烦。修改位置在/etc/httpd/httpd.conf，也就是apache的配置文件，加入要求的标签，位置按照要求就可以，不过具体应该没大关系。需要读一读官网Deny Directory Access in Apache模块。这样才可以使用data目录下的权限文件，防止data目录被匿名访问遍历。</li>
-</ol>
-
-<p>security：https://www.dokuwiki.org/security</p>
-
-<ol>
-  <li>修改./data等权限到755，允许dokuwiki读写。</li>
-</ol>
-<blockquote>
-data/ and data/tmp/ directory: All files in and below these directories must be writable by the web process for DokuWiki to work.
-lib/plugins/ directory: This directory must be writable by the web process for the plugin-Manager to work
-lib/ directory: This directory must be readable by the public for style sheets to display. 755 works fine.</blockquote>
-<p>https://www.dokuwiki.org/install:permissions</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/27/dokuwiki-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/">【已解决】WordPress搭建过程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
         <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
@@ -527,7 +467,7 @@ lib/ directory: This directory must be readable by the public for style sheets t
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
         <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
@@ -539,64 +479,104 @@ lib/ directory: This directory must be readable by the public for style sheets t
                 </div>
                 <div class="excerpt">
                     
-<p>安装过程的确不太轻松，可能最初php和mysql设置有问题吧。痛苦的安装过程记录一下，下学期有了新电脑正式建站的时候作参考。</p>
+<p>突然想到能否有什么方法知道发出去的某封邮件是否被别人查阅，查了下，有人提到图片挂参的方法可以办到，回想之前IP验证和php自动发邮件，突然想到可以做这么一套东西，每天固定时间统计一下今天发出去的邮件多少被查阅了，然后做个报告发到邮箱。将来撒海网套磁的时候，绝对是利器啊。LOL</p>
 
-<p>官方安装说明：http://codex.wordpress.org/zh-cn:%E5%AE%89%E8%A3%85WordPress</p>
+<p>说搞就搞：</p>
 
-<p>1.下载解压后，查看 /etc/rc.d/init.d/mysqld status 是否启动，否则启动mysql
-#service mysqld start</p>
+<p>首先，测试一下php返回图片</p>
 
-<p>按照说明运行mysql -u命令出现ERROR 1045 (28000)错误，其实可能是root没有密码，我没有多尝试，直接查到了mysql强行重新修改密码的方法，如下：</p>
-<blockquote>
-<p style="padding-left: 30px;">/etc/init.d/mysql stop (service mysqld stop )
-/usr/bin/mysqld_safe --skip-grant-tables
-另外开个SSH连接
-[root@localhost ~]# mysql
-mysql&gt;use mysql
-mysql&gt;update user set password=password("123456") where user="root";
-mysql&gt;flush privileges;
-mysql&gt;exit</p>
-<p style="padding-left: 30px;">pkill -KILL -t pts/0 可将pts为0的**用户(之前运行mysqld_safe的用户窗口)强制踢出
-正常启动 MySQL：/etc/init.d/mysql start (service mysqld start)</p>
-</blockquote>
-<p>打开install.php，出现提示</p>
-<blockquote>您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。</blockquote>
-<p>查到问题是php没有加载mysql模块所致，查看/etc/php.d/目录，如果只有dbase.ini,idpa.ini，而没有 mysql.ini,mysqli.ini,pdo.ini,pdo_mysql.ini,pdo_mysqli.ini,同时查看/usr/lib /php/modulse目录，如果没有 mysql.so,mysqli.so,pdo.so,pdo_mysql.so,pdo_sqlite.so,phpcpus.so,那么可判断为 php没有加载mysql模块。
-#yum install php-mysql</p>
+<p>参照<a href="http://www.oschina.net/code/snippet_572802_11655">这个帖子</a>，bingo，原来是改一下http的header就可以。</p>
 
-<p>php-pdo貌似centos已经默认安装。安装后/usr/lib/php/modulse目录下会有上述所需文件</p>
+<p>然后引入访问IP的检测，直接抄13年检测服务器访问沿海自动站IP的程序，调用IP138结果记录。</p>
 
-<p>配置/etc/php.ini，在任意地方加入下列语句</p>
+<p>居然就可以了～给php文件挂个参数标志是哪一个邮件，嗯嗯</p>
 
-<p>extension=mysql.so
-extension=mysqli.so</p>
+<p>最后设置下crontab，每天固定时间把log发到邮箱，bingo～再写一个可以随时访问的查看页面，done～</p>
 
-<p>extension=pdo_mysql.so</p>
-
-<p>保存，重启apache，如果还是出现问题，重启了一下mysql，刷新网页，问题基本能够解决。</p>
-
-<p>Done！</p>
-
-<p>#20140729#</p>
-
-<p>mysql默认为空密码，重置密码方式：</p>
-<div><em>    3. 然后用空密码方式使用root用户登录 MySQL；</em></div>
-<div><em>    mysql -u root</em></div>
-<div><em>    4. 修改root用户的密码；</em></div>
-<div><em>    mysql&gt; update mysql.user set password=PASSWORD（'新密码'） where User='root'；</em></div>
-<div><em>    mysql&gt; flush privileges；</em></div>
-<div><em>    mysql&gt; quit</em></div>
-<div><em>    5. 重新启动MySQL，就可以使用新密码登录了</em></div>
-<div></div>
-<div>使用密码登陆的正确姿势</div>
-<div>mysql -u root -p 回车！！！</div>
-<div>输入新密码</div>
-<div>回车……</div>
-<div>奇葩吧</div>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/11/14/use-grads-to-read-cesm-output/">【ongoing】use grads to read cesm output</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-11-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Some points to be aware:</p>
+
+<p>2D fields, not same by binary output and netcdf (high efficiency) output, one point value missing, might be the polar point. Therefore, *.bin control and *.nc sensitive is not under the same structure.</p>
+
+<p>2D fields work fine under <strong>v1.9</strong> of grads. However, 3D fields might meet some trouble. Try to use the “standard” attribution, dimention to tackle this problem. An example from NCEP-DOE dataset:</p>
+
+<p>float level(level) ;
+level:units = “millibar” ;
+level:long_name = “Level” ;
+level:positive = “down” ;
+level:GRIB_id = 100s ;
+level:GRIB_name = “hPa” ;
+level:actual_range = 1000.f, 10.f ;
+level:axis = “Z” ;
+ </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/11/14/use-grads-to-read-cesm-output/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -611,10 +591,10 @@ extension=mysqli.so</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page42" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">43/43</span>
+          <span class="page_number ">43/87</span>
           
-            <span class="next disable"><i class="fa fa-angle-right"></i></span>
-            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
+            <a href="/page44" class="next"><i class="fa fa-angle-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -900,7 +880,32 @@ extension=mysqli.so</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -1971,7 +1976,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -1999,7 +2004,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2167,7 +2172,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2251,7 +2256,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2279,7 +2284,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2398,7 +2403,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2610,6 +2615,27 @@ extension=mysqli.so</p>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2623,6 +2649,16 @@ extension=mysqli.so</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2632,16 +2668,6 @@ extension=mysqli.so</p>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2695,7 +2721,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2731,7 +2757,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2875,7 +2901,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -2983,7 +3009,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3028,7 +3054,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3064,7 +3090,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3082,7 +3108,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3091,7 +3117,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3225,7 +3251,7 @@ extension=mysqli.so</p>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

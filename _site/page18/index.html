@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/">【Supermarket】执行情况计划及进度</a>
+                  <a class="post-link" href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-10
+                        <i class="fa fa-calendar"></i>2018-01-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,9 +352,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
     
   
 
@@ -283,9 +369,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>&nbsp;
     
-        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
+        <a href="/tag/#excel" title="Tag: excel" rel="tag">excel</a>
     
   
 
@@ -294,49 +380,37 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>2016.5.14执行计划应完成</p>
-<ul>
-	<li>逐日客流时间序列（四门店同图）</li>
-	<li>小波分析其中一两店，给出图</li>
-	<li>平均周变化
-<ul>
-	<li>排除节假日调休的周变化，如果来得及</li>
-	<li>排除超过1个标准差的周变化，如果来得及</li>
-</ul>
-</li>
-	<li>平均日变化
-<ul>
-	<li>工作日和周末各自的日变化<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
-</ul>
-</li>
-	<li>尝试套用ARIMA模型进行预测</li>
-</ul>
-<p>下一步计划：</p>
-<ul>
-	<li>特殊事件因子
-<ul>
-	<li>法定节假日及调休</li>
-	<li>高温热浪、强降水、寒潮</li>
-	<li>促销活动</li>
-</ul>
-</li>
-</ul>
+                    <p>需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。
+pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。</p>
+
+<p>以应用情景为例，写入不同的sheets，具体如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open a new xlsx writer</span>
+<span class="n">writer1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">out_dir</span><span class="o">+</span><span class="n">get_outfile_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spe</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
+    <span class="c"># parser data</span>
+    <span class="n">pt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">in_dir</span><span class="o">+</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="n">corr_algthm</span><span class="p">,</span> <span class="n">spe</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'10H'</span><span class="p">,</span> <span class="s">'12H'</span><span class="p">,</span> <span class="s">'14H'</span><span class="p">,</span> <span class="s">'16H'</span><span class="p">,</span> <span class="s">'max'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'time'</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer1</span><span class="p">,</span> <span class="n">spe</span><span class="p">)</span>
+<span class="c"># save xlsx</span>
+<span class="n">writer1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-01-16</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/16/pandas-excel/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/">查看进程及对应IP</a>
+                  <a class="post-link" href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-02
+                        <i class="fa fa-calendar"></i>2018-01-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -355,9 +429,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -374,9 +446,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
+        <a href="/tag/#imagemagic" title="Tag: imagemagic" rel="tag">imagemagic</a>
     
   
 
@@ -385,32 +455,30 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#lsof--pnl-m--i4" id="markdown-toc-lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a></li>
-</ul>
+                    
+<p>给生成的wrf预报图去除白边，搜索发现imagemagick大神级命令直接搞定，当然算法本身不复杂，毕竟plot出的图边框都是255，但是有这个命令实在太方便了。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add border</span>
+convert aaa.png <span class="nt">-bordercolor</span> white <span class="nt">-border</span> 10%x10% bbb.png 
+<span class="c"># Delete border</span>
+convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-trim</span> ccc.png
+</code></pre></div></div>
 
-<h1 id="lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></h1>
-
-<p>php       10684      500    3u  IPv4 1890733      0t0  TCP 202.116.70.21:48785-&gt;140.90.101.63:80 (SYN_SENT)
-sshd      10692        0    3r  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
-sshd      10702      500    3u  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
-sshd      10702      500    9u  IPv4 1890569      0t0  TCP 127.0.0.1:6010 (LISTEN)
-sshd      10754        0    3r  IPv4 1890641      0t0  TCP 202.116.70.21:22-&gt;202.116.70.153:60307 (ESTABLISHED)</p>
+<p><strong>Updated 2018-01-16</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/16/linux-imagemagick/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/">【python】Ipython安装</a>
+                  <a class="post-link" href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-02
+                        <i class="fa fa-calendar"></i>2018-01-10
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -429,7 +497,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
     
   
 
@@ -446,7 +514,9 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -455,259 +525,16 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>想安装ipython，直接用pip貌似出错</p>
+                    <p>查了下福布斯实时榜单，居然发现1 Billion以上2000多富豪列表完全就是个硕大的table，果断down下来做点分析啥的。比如富豪里的基尼系数，嘿嘿，两千多样本可以啦。
+子样本也可以计算大陆的情况。不过呢，更关心的是个人的排位以及按高考成绩排位对应的财富目标。虽然相关计算早完成了，可惜的是实验室服务器硬盘问题，诶。这次做个更好的。</p>
 
-<p>pip install ipython，出错</p>
+<p>留坑，回填。</p>
 
-<p>OSError: [Errno 2] No such file or directory: ‘/usr/local/lib/python2.7/site-packages/setuptools-1.4.2-py2.7.egg’<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>根据<a href="http://ipython.org/ipython-doc/stable/install/install.html">官方安装说明</a>，加入</p>
-
-<p>pip install “ipython[all]”</p>
-
-<p>即可。</p>
+<p><strong>Updated 2018-01-10</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/">yh数据处理</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-04-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>iconv转码函数非常好用，可以直接在命令行下进行数据转码，例子：</p>
-
-<p>iconv weawher_coop1 -f gbk -t UTF-8 -o weather_coop1.utf-8</p>
-
-<p>split函数可以按行分隔文件：</p>
-
-<p>split -l 10000 -d -a 4 weather_coop1.utf-8 ./splited-noreject/weather<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>10000行一个文件，后缀为4位数字。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/">【未解决】python安装pandas等数据处理类库</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-04-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>首先按照<a href="http://youerning.blog.51cto.com/10513771/1711008">这个网站</a>yum这些东西，然后pip安装，</p>
-
-<p>出现错误：Command “python setup.py egg_info” failed with error code 1 in /tmp/pip-build-Cblre2/pandas/</p>
-
-<p>之后的剧情就是个坑了，查了个资料，说把python用yum给remove了，然后编译安装新版本的就行，我居然TMD信以为真，remove过程中突然出现一个提示说cannot remove yum，纳尼……啥时候要remove yum。</p>
-
-<p>不管了，编译安装python2.7，发现yum还是不能安装pandas，这个时候我做了个最错误的决定，将系统原有的/usr/下所有python的lib include全删了，用2.7去替换……天真如我啊啊啊 = =</p>
-
-<p>之后yum就不正常了，出现：</p>
-
-<p>No module named yum这种错误</p>
-
-<p>查了下，正确安装新版本python的姿势：</p>
-
-<p>http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7</p>
-
-<p>原来系统安装的python 与许多组件有依赖关系，随意搞掉是不可以的，吐血。于是找办法去解决，下载了python，yum等几个关联包，重新rpm安装，再运行yum出现新错误：No module named rpm，纳尼……</p>
-
-<p>想到之前自己删除了所有原本的python相关库，估计是这个问题。</p>
-
-<p>折腾半天，去workstation上yum update了，然后scp所有/usr下与python相关的文件夹过来……</p>
-
-<p>yum可以用了，update过程中出现许多不匹配的错误，这应该是workstation上rpm管理的软件信息与team server不同造成……</p>
-
-<p>yum update后，似乎没什么问题了。</p>
-
-<p>附带官方所有软件包地址：http://mirror.centos.org/centos/6/os/x86_64/Packages/</p>
-
-<p>重新编译安装python2.7，按照<a href="http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7">这个帖子</a>，需要安装setuptools和PIP，之后用PIP安装pandas等库，成功！</p>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td class="gutter"></td>
-<td class="code">
-<div class="container">
-<div class="line number1 index0 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">matplotlib -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
-<div class="line number2 index1 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">numpy -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
-<div class="line number3 index2 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">pandas -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
-<div class="line number4 index3 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">seaborn scipy</code></div>
-</div></td>
-</tr>
-</tbody>
-</table>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/">VBA学习笔记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-03-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#EXCEL/VBA" title="Category: EXCEL/VBA" rel="category">EXCEL/VBA</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#EXCEL/VBA" title="Tag: EXCEL/VBA" rel="tag">EXCEL/VBA</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>打开开发工具功能选项卡</p>
-
-<p>文件–&gt;选项–&gt;自定义功能区</p>
-
-<p>选定区域，F5，定位，可以定位选中到想要的区域</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/10/forbes-rank/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -722,10 +549,10 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page17" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">18/43</span>
+          <span class="page_number ">18/87</span>
           
             <a href="/page19" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1011,7 +838,32 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2082,7 +1934,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2110,7 +1962,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2278,7 +2130,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2362,7 +2214,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2390,7 +2242,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2509,7 +2361,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2721,6 +2573,27 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2734,6 +2607,16 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2743,16 +2626,6 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2806,7 +2679,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2842,7 +2715,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2986,7 +2859,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3094,7 +2967,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3139,7 +3012,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3175,7 +3048,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3193,7 +3066,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3202,7 +3075,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3336,7 +3209,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

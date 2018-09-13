@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/03/21/sp-cam-amip-run/">SP-CAM AMIP run</a>
+                  <a class="post-link" href="/2018/01/07/pkill-ssh/">干掉僵死ssh进程</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-03-21
+                        <i class="fa fa-calendar"></i>2018-01-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -281,7 +371,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a>&nbsp;
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
     
   
 
@@ -291,32 +383,24 @@
                 </div>
                 <div class="excerpt">
                     
-<ol>
-  <li>
-    <p>注意下载完整restart文件以及rpointer</p>
-  </li>
-  <li>
-    <p>AMIP run默认输出中fincl1文件变量cb_sulf_c在SP下不存在，因此运行前删掉atm_in中fincl1这一行即可。</p>
-  </li>
-  <li>
-    <p>不要用xxx.run提交，用yhbatch直接提交包含yhrun的脚本</p>
-  </li>
-</ol>
+<p>有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-kill</span> <span class="nt">-t</span> pts/2
+</code></pre></div></div>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/03/21/sp-cam-amip-run/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/07/pkill-ssh/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/03/15/linux-e6-9f-a5-e7-9c-8b-e7-a3-81-e7-9b-98-e8-af-b/">Linux 查看磁盘读写状态</a>
+                  <a class="post-link" href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-03-15
+                        <i class="fa fa-calendar"></i>2018-01-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -335,7 +419,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
+    
+        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
     
   
 
@@ -352,7 +438,15 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#json" title="Tag: json" rel="tag">json</a>&nbsp;
+    
+        <a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+    
+        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -362,22 +456,52 @@
                 </div>
                 <div class="excerpt">
                     
-<p>$iostat -x 1</p>
+<p>给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：</p>
+
+<p>首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。这样很正常嘛，本身就是静态网页啦。</p>
+
+<p>所以还是回到刚刚的思路，查了下解决方案，发现是自己定义了函数但是木有执行。在定义后加入执行代码后，生效。注意对应的json包不能放在jekyll生成的下划线前缀目录下，否则无法获取到。javascript代码：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showJson</span><span class="p">(){</span>  
+    <span class="kd">var</span> <span class="nx">test</span><span class="p">;</span>  
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">){</span>  
+        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>  
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">){</span>  
+        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">();</span>  
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Browser not supported!"</span><span class="p">);</span>  
+    <span class="p">}</span>  
+    
+    <span class="k">if</span><span class="p">(</span><span class="nx">test</span> <span class="o">!=</span><span class="kc">null</span><span class="p">){</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s2">"/database/principles.json"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>  
+            <span class="k">if</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span><span class="o">&amp;&amp;</span><span class="nx">test</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">){</span>  
+                <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>  
+                <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">rnd_pos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"content-principle"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">rnd_pos</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
+            <span class="p">}</span>  
+        <span class="p">};</span>  
+    <span class="p">}</span>  
+<span class="p">}</span>  
+<span class="nx">showJson</span><span class="p">();</span> 
+</code></pre></div></div>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/03/15/linux-e6-9f-a5-e7-9c-8b-e7-a3-81-e7-9b-98-e8-af-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/03/random-post-ajax/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/03/05/sp-cam-e7-a7-bb-e6-a4-8d/">sp-cam移植</a>
+                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-03-05
+                        <i class="fa fa-calendar"></i>2018-01-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -396,7 +520,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
     
   
 
@@ -413,7 +537,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -423,294 +551,34 @@
                 </div>
                 <div class="excerpt">
                     
-<p><span style="color: #ff0000;">/<em>注意采用较早版本（2013）的编译器和MPI</em>/</span></p>
+<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
 
-<p>按照cesm1.2.2的配置build，最后一步出错</p>
+<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
+总负债 L=a*(1+r)^n
+</code></pre></div></div>
+<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
+当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
 
-<p>mpif90  -o /users/yangsong3/L_Zealot/F/SP-test-sam1mom/exe/cesm.exe ccsm_com
-<strong> 26 ld: cannot find -lblas</strong>
-27 gmake: *** [/users/yangsong3/L_Zealot/F/SP-test-sam1mom/exe/cesm.exe] Error</p>
+<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
+总负债 L=a*(1-k)*(1+r)^n
+</code></pre></div></div>
+<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
+若不破灭，要求总资产大于等于0，则要求k</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
+</code></pre></div></div>
+<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
 
-<p>查了下</p>
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
 
-<p>http://stackoverflow.com/questions/27033243/usr-bin-ld-cannot-find-llapack</p>
+<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
+而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
 
-<p>看起来缺少lapack的包</p>
-
-<p>查log发现已经安装了lapack包，只是缺少libblas.a文件，liblapack.a是有的，目录下有libpreblas.a，感觉比较像，直接ln出来一个libblas.a，编译通过！</p>
-
-<p>提交任务运行，立刻出现segfault，显示似乎有netcdf库的问题。</p>
-
-<p>测试去掉pnetcdf，不行</p>
-
-<p>改lapack，不行</p>
-
-<p>都是同样的错位。怀疑是编译器或者MPI的问题，于是将model传输到天河二号，采用天河二号13版本的编译器进行编译，居然可以顺利运行！</p>
-
-<p>坑爹的是，m2005的case在运行到nstep=4的时候会卡死……</p>
-
-<p>mom1mam的case没有问题！</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/03/05/sp-cam-e7-a7-bb-e6-a4-8d/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/">【Linux】Windows上传文件名乱码解决</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-26
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>由于windows和linux对文件系统的编码方式不同，从windows上传或者从linux下载的文件名总存在乱码，解决方法很简单。实际上linux程序包里存在一个convmv的转换程序。</p>
-
-<p>首先，检测下是否有这个程序，如果没有，yum安装一下。</p>
-
-<p>转换命令</p>
-
-<p>convmv -f GBK -t UTF-8 -r yourdir/ –notest</p>
-
-<p>-f是源编码格式</p>
-
-<p>-t为目标编码格式</p>
-
-<p>–notest代表直接进行mv操作</p>
-
-<p>-r代表递归</p>
-
-<p>yourdir/为操作目录</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/">【mysql】测试wordpress与mysql数据库的关系</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>第一次建立wordpress站点的时候搞得不明不白，这次建站，决定测试一下进入mysql的具体流程</p>
-
-<p>经典步骤：</p>
-<pre>$ mysql -u adminusername -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 5340 to server version: 3.23.54
- 
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
- 
-mysql&gt; CREATE DATABASE databasename;
-Query OK, 1 row affected (0.00 sec)
- 
-mysql&gt; GRANT ALL PRIVILEGES ON databasename.* TO "wordpressusername"@"hostname"
-    -&gt; IDENTIFIED BY "password";
-Query OK, 0 rows affected (0.00 sec)
-  
-mysql&gt; FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
-
-mysql&gt; EXIT
-Bye
-$</pre>
-<p>第一次测试，所有都用root用户名和密码，成功！</p>
-
-<p>第二次，一般用户下，一般用户名登录mysql，无法创建数据库。</p>
-
-<p>第三次，一般用户下，root登录，创建数据库，grant时用 ”yangsong3”@”localhost”，wordpress设置下用yangsong3，失败！</p>
-
-<p>用root，成功～说明wordpress实际是用的root用户名访问mysql的。</p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/">【shell】文本处理-金价</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>awk工具可以很好的用来剔除html标签</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>awk ‘BEGIN {FS=”&gt;”} NR==19 {print $2}’ gold-1602041300</td>
-      <td>awk ‘BEGIN {FS=”&lt;”} {print $1}’</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>分别把左侧关标签和右侧开标签作为分隔符，最后print $1即可。</p>
-
-<p>字符串变量截取${var:7}，从第八个字符开始向后。</p>
-
-<p>参考：http://blog.csdn.net/misskissc/article/details/8217877</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -725,10 +593,10 @@ $</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page18" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">19/43</span>
+          <span class="page_number ">19/87</span>
           
             <a href="/page20" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1014,7 +882,32 @@ $</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2085,7 +1978,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2113,7 +2006,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2281,7 +2174,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2365,7 +2258,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2393,7 +2286,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2512,7 +2405,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2724,6 +2617,27 @@ $</pre>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2737,6 +2651,16 @@ $</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2746,16 +2670,6 @@ $</pre>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2809,7 +2723,7 @@ $</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2845,7 +2759,7 @@ $</pre>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2989,7 +2903,7 @@ $</pre>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3097,7 +3011,7 @@ $</pre>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3142,7 +3056,7 @@ $</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3178,7 +3092,7 @@ $</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3196,7 +3110,7 @@ $</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3205,7 +3119,7 @@ $</pre>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3339,7 +3253,7 @@ $</pre>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

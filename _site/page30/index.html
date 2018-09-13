@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/03/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/">【已解决】全互联同步备份系统的搭建</a>
+                  <a class="post-link" href="/2016/11/28/cmaq-output-files/">CMAQ output files</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-03-21
+                        <i class="fa fa-calendar"></i>2016-11-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,9 +352,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
     
   
 
@@ -283,9 +369,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
     
   
 
@@ -295,168 +379,32 @@
                 </div>
                 <div class="excerpt">
                     
-<p>信息的组织管理的的确确是个大学问，就像桌面整理都能作为一门课程来教授一样，能把数据和规则进行安全、规整地组织存储是非常不容易的。</p>
+<p>CMAQ以ACONC为中缀的输出文件中每天有25个时次，非常诡异，经查UG，</p>
 
-<p>数据安全的意义毋庸置疑，早就希望做一套全互联同步备份的系统，这两天终于开始着手做了，架构设计上还有诸多不完善，有待将来优化解决。基本原则：</p>
-<ul>
-	<li>数据与规则分离</li>
-	<li>冗余备份</li>
-</ul>
-<p>整个备份系统（rsync+NFS）的基本架构图如下：
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/03/bck_sys.png"><img class="alignnone size-full wp-image-685" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/03/bck_sys.png" alt="bck_sys" width="756" height="1134" /></a></p>
-<h4>NFS实现手段概要：</h4>
-<ol>
-	<li>Team_Server组建NFS服务端，设置开机启动</li>
-	<li>Blackleach配置Windows客户端，设置开机启动mount脚本</li>
-</ol>
-<p>相关资料网上有很多。实现过程中遇到的问题：</p>
+<p>CONC为瞬时文件，最常用；</p>
 
-<p>Windows客户端挂载后没有写权限的问题。</p>
+<p>ACONC通常为小时平均文件；</p>
 
-<p>首先修改服务端/etc/exports：</p>
-<pre>/home/yangsong3/L_Zealot 202.116.*.*(rw,sync,<strong>all_squash,anonuid=500,anongid=500</strong>)</pre>
-<p>再修改客户端，注册表加入新键：</p>
+<p>CGRID为restart文件。</p>
 
-<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default，DWORD项：AnonymousUid，AnonymousGid，值为10进制500</p>
-
-<p>mount语句写入bat脚本，加入计划任务，即可开机启动。</p>
-
-<p>有一点是，Blackleach上X盘符一直是断开状态，但是可以访问，可以完全读写……不知道为什么，囧。（见20150420更新）</p>
-<h4>rsync实现手段概要：</h4>
-<p>rsync参数很有考究，文件覆盖的时候要进行判断，若对方文件版本修改时间比拿去覆盖的文件要晚，则不能覆盖旧有文件，目前不加入delete以防万一。考虑到文件创建顺序，所有终端应做到时间同步，可惜HPC4无法办到，超算方面没有做对时处理。所以同步都在凌晨进行，防止误覆盖。</p>
-
-<p>同步语句范例:</p>
-<pre>rsync -vzrtulopg -progress -e 'ssh -p *' /home/yangsong3/L_Zealot/project/ workstation@*.*.*.*:/home/workstation/L_Zealot/project/</pre>
-<p>配置crontab，使得同步能在凌晨按如下顺序进行：</p>
-
-<p>3:01 A.M.</p>
-
-<p>Team_Server发起同步请求，请求顺序Team_Server–&gt;Workstation–&gt;Team_Server</p>
-
-<p>4:01 A.M.</p>
-
-<p>HPC4发起同步请求，请求顺序</p>
-
-<p>HPC4–&gt;Workstation–&gt;HPC4</p>
-
-<p>5:01 A.M.</p>
-
-<p>Workstation发起同步请求，请求顺序</p>
-
-<p>Workstation–&gt;Team_Server</p>
-
-<p>三方同步完成！</p>
-
-<p>参考资料：</p>
-
-<p><a href="http://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html">http://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html</a></p>
-
-<p><a href="http://www.cnblogs.com/itech/archive/2009/08/10/1542945.html">http://www.cnblogs.com/itech/archive/2009/08/10/1542945.html</a></p>
-
-<p><a href="http://www.jb51.net/LINUXjishu/66859.html">http://www.jb51.net/LINUXjishu/66859.html</a></p>
-
-<p><span style="color: #339966;"><strong>#Up to 20150321#</strong></span></p>
-
-<p>114那个IP果然有问题，不能下CISL上的数据，nfs挂载到blackleach上是断线状态但是能连接……</p>
-
-<p>因为不能下CISL的数据，换了21的IP，瞬间上述两个问题都解决了……</p>
-
-<p><span style="color: #339966;"><strong>#Up to 20150420#</strong></span></p>
-
-<p>加入对paperhub工程的备份</p>
-
-<p>1:01 A.M.</p>
-
-<p>EES_Web_Server发起同步pull请求，请求顺序Lab_Server–&gt;EES_Web_Server</p>
-
-<p>2:01 A.M.</p>
-
-<p>Team_Server发起同步pull请求，请求顺序Lab_Server–&gt;Team_Server</p>
-
-<p><span style="color: #339966;"><strong>#Up to 20150906#</strong></span></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/03/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/03/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL输出grads可读的dat文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-03-19
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>其实就是输出二进制文件，和<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=221">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>一文所提到的一样，需要注意大小端问题。</p>
+<p>经查ncdump，CONC文件TSTEP在第25步<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>输出了第24时次（下一个输出文件起始时刻）的数据，因此读取的时候丢掉最后一个时次即可。</p>
 
 <p> </p>
 
-<p>文件输出语句如下：</p>
-
-<p>setfileoption(“bin”,”WriteByteOrder”,”LittleEndian”)
-fbinrecwrite(g_out_fn,-1,ctrl_var)</p>
-
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/03/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/11/28/cmaq-output-files/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/03/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cento/">【已解决】团队服务器搭建记录</a>
+                  <a class="post-link" href="/2016/11/08/overseas/">Overseas</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-03-17
+                        <i class="fa fa-calendar"></i>2016-11-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -475,9 +423,7 @@ fbinrecwrite(g_out_fn,-1,ctrl_var)</p>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -494,9 +440,7 @@ fbinrecwrite(g_out_fn,-1,ctrl_var)</p>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -506,280 +450,98 @@ fbinrecwrite(g_out_fn,-1,ctrl_var)</p>
                 </div>
                 <div class="excerpt">
                     
-<p>1月底团队服务器到货，因假期没有进行搭建。这几天财务急需付款，遂与Jack_Cw一起进行搭建。操作系统：CentOS 6.5，安装过程略去不表。安装完成后配置网络着实折腾了一把，具体情况记录如下：</p>
-<h3>1.硬件及操作系统安装</h3>
+<p>通</p>
+
+<p>lizhenning7</p>
+
+<p>C6H12+as it always</p>
+
+<p>A<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>lzhenning</p>
+
+<p>sorxxxC6H12xxxx</p>
+
+<p> </p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/11/08/overseas/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/11/02/python-e5-ae-9e-e9-99-85-e4-bd-bf-e7-94-a8-e4-b8-a/">python实际使用中需要注意的问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-11-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>1.最大区别还是在字符串yinyong</p>
+<pre>&gt;&gt;&gt;str='abcde'
+&gt;&gt;&gt;print str[0:3]
+abc</pre>
+<p>注意是不包括第4个字符（码标3）的！</p>
+
 <ol>
-	<li>Linux安装步骤中配置IP及MAC地址，进入系统后完全不能上网，经检查IP地址过期。</li>
-	<li>更换IP地址及MAC，ping网关和DNS通畅，内网ssh通畅，外网（跨交换机）极其缓慢，网页打开极其困难。</li>
-	<li>BIOS设置取消网卡IP自动分配，问题没有解决。</li>
-	<li>检查交换机，更换网线，设置路由，串联路由做交换，均不能解决。</li>
-	<li>拿笔记本做诊断，发现Linux系统都存在这一问题。</li>
-	<li>到Jack_Cw房间交换机诊断，同样存在问题。</li>
-	<li>尝试增加新的网络配置后，发现原有配置正常，但无法链接到新的网络配置。</li>
-	<li>采用给服务器增加一个新的无效的网络配置，原有配置即正常。问题解决。</li>
+  <li>格式化输出不定长度格式<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
 </ol>
-<p><strong>结论：CentOS Linux系统bug，6.4/6.5/7.0均存在，不采用DHCP手动指定IP和MAC的情况下，必须再设置一个额外的网络配置（可以无效）原配置方能够正常使用。</strong>
-<span style="color: #008000;"><strong>#Up to 20150314#</strong></span></p>
-<h3>2.软件包安装</h3>
-<h4>2.1 Intel2015 C/C++/Fortran编译器</h4>
-<p>团队服务器落成，进行软件包安装，尝试安装intel2015编译器。过程与2013版本基本类似，第二步Lcense选项选择</p>
-<pre>3. I want to evaluate my product or activate later</pre>
-<p>缺少32位库，采用yum安装。</p>
-<pre># yum install libstdc++.i686 --setopt=protected_multilib=false</pre>
-<p>参数用于忽略版本兼容检查。（默认系统已经安装64位库）</p>
-
-<p>C/C++和Fortran编译器安装非常快，一共不到5分钟，不知是新版本优化了至强核心的编译还是RAID的原因。</p>
-
-<p>安装完成后，拷贝intel.lic文件到/opt/intel/licenses下。</p>
-<h4>2.2 HDF5 1.8.14</h4>
-<p>先要安装zlib</p>
-<pre>#yum install zlib-devel
-#yum install zlib-devel
-#./configure --prefix=/usr/hdf5-1814 --with-zlib=/usr/lib64
-#make
-#make check
-#make install</pre>
-<h4>2.3 NETCDF 4.3.3.1</h4>
-<p>安装C库</p>
-<pre>./configure --prefix=/usr/netcdf-4331 --enable-netcdf-4 LDFLAGS="-L/usr/hdf5-1814/lib -L/usr/lib64" CPPFLAGS="-I/usr/hdf5-1814/include -I/usr/include" CC=icc
-$./make
-$./make check
-#./make install
-</pre>
-<p>安装fortran库，注意fortran库对应的netcdf版本号为4.4.2，但是也需要安装到与C库相同的目录下。</p>
-<pre>$./configure --prefix=/usr/netcdf-4331 LDFLAGS="-L/usr/netcdf-4331/lib" CPPFLAGS="-I/usr/netcdf-4331/include" FC=ifort
-$./make
-$./make check
-#./make install</pre>
-<p>检查安装情况</p>
-<pre>$nf-config --all
-$nf-config --flibs</pre>
-<h4>2.4开启www服务</h4>
-<pre>chkconfig mysqld on
-chkconfig httpd on
-service httpd start
-service mysqld start
-</pre>
-<pre>vi /etc/httpd/conf/httpd.conf
-</pre>
-<p>修改 User和Group行
-User yangsong3
-Group yangsong3</p>
-<pre>chown -R yangsong3:yangsong3 www/
-</pre>
-<p><span style="color: #008000;"><strong>#Up to 20150317#</strong></span></p>
+<pre>&gt;&gt;&gt;x=5; y=0.34
+<strong>&gt;&gt;&gt;print 'hello%*.1f' % (x,y)</strong>
+hello  0.3</pre>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/03/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cento/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/03/09/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM绘制、修改模式地形高度</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-03-09
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>修改inputdata/cam/topo下USGS的地形数据。变量为PHIS（地表位势高度[m^2/s^2]），除以9.81[m/s^2]即可。</p>
-
-<p>参见<a href="https://www2.cesm.ucar.edu/working-groups/pwg/documentation/cesm1-paleo-ug/near-modern/atmosphere">这里</a>，这是一个古气候模拟的用户手册。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/03/09/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/02/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/">【已解决】Linux下查看目录树</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-02-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>希望查看某一项目的目录结构，有目录树的形式最好了。查了下，这个可以</p>
-<pre>find . -type d -print</pre>
-<p>但是效果并不美观
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ截图20150228195715.png"><img class="alignnone size-full wp-image-408" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ截图20150228195715.png" alt="QQ截图20150228195715" width="740" height="314" /></a></p>
-
-<p>终极解决方案是root下装个tree命令</p>
-<pre>yum install tree</pre>
-<p>然后tree就可以了</p>
-
-<p>效果：
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ图片20150228195852.png"><img class="alignnone size-full wp-image-409" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/02/QQ图片20150228195852.png" alt="QQ图片20150228195852" width="934" height="1152" /></a></p>
-
-<p>如果只显示目录：</p>
-<pre>tree -d</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/02/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/">【已解决】pbs指定作业节点</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>之前捣鼓了半天没有成功，这次终于知道指定语法怎么写了。</p>
-
-<p>惯例，申请两个节点，每个节点16进程</p>
-<pre>#PBS -l nodes=2:ppn=16</pre>
-<p>如果需要指定到c72 c73两个节点，需要这么写就可以了：</p>
-<pre>#PBS -l nodes=c72:ppn=16+c73:ppn=16</pre>
-<p>但是这样在qstat上显示会有问题，显示进程数为0，不过不影响作业正常运行。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/11/02/python-e5-ae-9e-e9-99-85-e4-bd-bf-e7-94-a8-e4-b8-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -794,10 +556,10 @@ Group yangsong3</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page29" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">30/43</span>
+          <span class="page_number ">30/87</span>
           
             <a href="/page31" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1083,7 +845,32 @@ Group yangsong3</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2154,7 +1941,7 @@ Group yangsong3</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2182,7 +1969,7 @@ Group yangsong3</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2350,7 +2137,7 @@ Group yangsong3</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2434,7 +2221,7 @@ Group yangsong3</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2462,7 +2249,7 @@ Group yangsong3</p>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2581,7 +2368,7 @@ Group yangsong3</p>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2793,6 +2580,27 @@ Group yangsong3</p>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2806,6 +2614,16 @@ Group yangsong3</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2815,16 +2633,6 @@ Group yangsong3</p>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2878,7 +2686,7 @@ Group yangsong3</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2914,7 +2722,7 @@ Group yangsong3</p>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3058,7 +2866,7 @@ Group yangsong3</p>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3166,7 +2974,7 @@ Group yangsong3</p>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3211,7 +3019,7 @@ Group yangsong3</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3247,7 +3055,7 @@ Group yangsong3</p>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3265,7 +3073,7 @@ Group yangsong3</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3274,7 +3082,7 @@ Group yangsong3</p>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3408,7 +3216,7 @@ Group yangsong3</p>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

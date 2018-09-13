@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/">【已解决】Adobe Acrobat X安装</a>
+                  <a class="post-link" href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/">GFDL Spectral Idealized port on SAVIO</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-17
+                        <i class="fa fa-calendar"></i>2016-10-24
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
+    
+        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
     
   
 
@@ -281,7 +373,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
+    
+        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
     
   
 
@@ -291,292 +387,58 @@
                 </div>
                 <div class="excerpt">
                     
-<p>Acrobat X安装后出现Adobe Application Manager损坏的问题，安装包下有个amtlib.dll的动态链接库，复制到安装路径的根目录下即可解决问题。至此，Acrobat+Illustrator已经占据paper reading &amp; producing阵地，reading再有paperhub和endnote的助阵，终于把看文献的前期工作准备好了嗯～接下来……T_T</p>
+<p>copy and paste to create</p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91adobe/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/">【已解决】CAM_F05 Resolution Out of Memory</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p><strong>mkmf.template.savio.without_mpi</strong> in ./bin/</p>
 
-                    <div class="label-card">
-                    
+<p>change:</p>
 
+<p>FC CC MPI and NetCDF pathes.</p>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
+<p>in ./full_dynamics, change:</p>
 
-  <!-- <span class="point">•</span> -->
-</span>
+<p><strong>compile_full_dynamics_on_savio.csh </strong> to fit savio (usually, just change platform name is okay).</p>
 
+<p>when compile, error:</p>
+<h5><span style="color: #ff0000;">ifort: error #10031 error: could not write to argument file</span></h5>
+<p>google it:</p>
 
-                    </div>
+<p>https://software.intel.com/en-us/forums/intel-math-kernel-library/topic/281453</p>
+<blockquote>The MKL libraries are in different directories than the compiler runtime and other libraries. By default, the compiler will not search for libraries in the MKL <b>lib</b> directory. Use the <b>-mkl</b> compiler option for simple jobs, and use the MKL Link Line Advisor for more intricate jobs.</blockquote>
+<p>When I tried <strong>-mkl</strong> it doesn’t work and appeared another error.</p>
 
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
+<p>Fortunately, when I tried to module load ant TAB it, a module called</p>
 
-</span>
+<p><strong>mkl/2013_sp1.4.211</strong></p>
 
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>之前在天河二号（包括学校超算集群）测试的F05的CAM，都没有出现什么问题，最近在天河二号上重新跑CAM5 F05，却出现了out of memory的错误，重新配置了CAM4，还是一样的错误：</p>
-<blockquote>Fatal error in PMPI_Alltoallv: Other MPI error, error stack:
-PMPI_Alltoallv(540)....................: MPI_Alltoallv(sbuf=0x806f43e0, scnts=0xe6c75e0, sdispls=0xe764390, dtype=0x4c000829, rbuf=0x805f7650, rcnts=0xe765ba0, rdispls=0xe7673b0, dtype=0x4c000829, comm=0x84000006) failed
-MPIR_Alltoallv_impl(378)...............:
-MPIR_Alltoallv(341)....................:
-MPIR_Alltoallv_intra(192)..............:
-MPIC_Waitall(720)......................:
-MPIR_Waitall_impl(163).................:
-MPIDI_CH3I_Progress(363)...............:
-MPID_nem_mpich_blocking_recv(906)......:
-MPID_nem_glex_poll(234)................:
-MPIDI_nem_glex_ER_progress_PUT(74).....:
-MPIDI_nem_glex_ER_recv_progress(378)...:
-MPID_nem_handle_pkt(635)...............:
-MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receive for message data (MPIDI_CH3_PKT_EAGER_SEND)</blockquote>
-<p>重新配置PE层，增多节点数，调整MPIBUFFER，都没用。目前搁置。forum上有贴子：</p>
+<p>just came into my eye.</p>
 
-<p>https://bb.cgd.ucar.edu/node/1001941</p>
-
-<p>eaton提到检查内存leak can be a very challenging exercise.</p>
-
-<p><strong>#Up to 20141108#</strong></p>
-
-<p>俊文寒假前将model统一升级到1.2.2后似乎没有这个问题了。不过我也退出折腾高分辨率啦，还是看paper学英语重要～嘿嘿</p>
-
-<p><strong>#Up to 20150519#</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/08/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam_f/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl高效输出netCDF格式文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>从模式原始输出中抽变量出来，采用默认输出方式输出50年全球（144x96）的ZMDT，程序会卡半天，而且最后时不时还会弹出write failed的错误。查了下，发现这种默认的输出方式非常低效（虽然不知道为什么），高效的方式是完全自行定义维数名称、属性等等。测试下速度确实快很多，而且不存在上面的问题，但是代码量增加了三四十行左右。兹举例如下：</p>
-<blockquote>48 ;************************************************
-49 ; Write the file
-50 ;************************************************
-51
-52 ;Get dimsize
-53 dims=dimsizes(ctrl_var1p(0,:,:,:))
-54 nlvl=dims(0)
-55 nlat=dims(1)
-56 nlon=dims(2)
-57
-58 ;Set fileoption
-59 system("rm "+pdata_fn)
-60 fout = addfile(pdata_fn ,"c") ; open output netCDF file
-61 setfileoption(fout,"DefineMode",True)
-62
-63 ;Set All field attribution
-64 fileAtt = True
-65 fileAtt@creation_date=systemfunc("date")
-66 fileattdef(fout,fileAtt)
-67
-68 ;Define Coordinate
-69 dimNames =(/"time","lev_p","lat","lon"/)
-70 dimSizes =(/-1,nlvl,nlat,nlon/)
-71 dimUnlim =(/True,False,False,False/)
-72 filedimdef(fout,dimNames,dimSizes,dimUnlim)
-73
-74 ;Define var, type and dim
-75 filevardef(fout,"time",typeof(ctrl_var1p&amp;time),getvardims(ctrl_var1p&amp;time))
-76 filevardef(fout,"lev_p",typeof(ctrl_var1p&amp;lev_p),getvardims(ctrl_var1p&amp;lev_p))
-77 filevardef(fout,"lat",typeof(ctrl_var1p&amp;lat),getvardims(ctrl_var1p&amp;lat))
-78 filevardef(fout,"lon",typeof(ctrl_var1p&amp;lon),getvardims(ctrl_var1p&amp;lon))
-79 filevardef(fout,"ZMDT",typeof(ctrl_var1p),getvardims(ctrl_var1p))
-80
-81 ;Define Attribute
-82 filevarattdef(fout,"ZMDT",ctrl_var1p)
-83
-84 fout-&gt;time=(/ctrl_var1p&amp;time/)
-85 fout-&gt;lev_p=(/ctrl_var1p&amp;lev_p/)
-86 fout-&gt;lat=(/ctrl_var1p&amp;lat/)
-87 fout-&gt;lon=(/ctrl_var1p&amp;lon/)
-88 fout-&gt;ZMDT=(/ctrl_var1p/)</blockquote>
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
-
-<p>这种输出模式下，注意应到将时间维和坐标维度单列变量输出到nc文件，坐标维度应当设置degree定义方向，否则绘图时需要重设。</p>
-
-<p>另外这种方法大部分时间还是比较高效的，但是有时会出现奇怪的远远超出一般用时的卡顿，在数据量较大时容易出现。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141109#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/11/07/a-walk-in-the-rain/">A Walk in the Rain</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>邮件收到了继续返工的消息，旁边又开始endless whisper，烦躁而且压抑，受不了只能戴上耳机听Yanni。a walk in the rain，之前没有注意到的一首，还是很不错的。HP同学推荐，说是感觉像是走在雨后的草地上，嗯，热情而阳光。</p>
+<p>of course, use it! The problem really solved.</p>
 
 <p> </p>
 
-<p>光腚总菊一声令下，MP3都下不了咯，贴个链接：</p>
+<p>So what is mkl?</p>
 
-<p>http://www.baidu.com/s?wd=a%20walk%20in%20the%20rain&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_5_dg&amp;rsv_pq=f40a682a0000744f&amp;rsv_t=782cZVhHu0LhKuwkr029%2Bsc1%2B%2BBZDvR19ANVw8dNJrzqLk7nxSrt&amp;bs=a%20walk%20in%20%E5%A4%A9%E6%B2%B3</p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p> </p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/07/a-walk-in-the-rain/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/">【已解决】vi获取系统命令标准流输出</a>
+                  <a class="post-link" href="/2016/10/17/externalities-and-the-coase-theorem/">Externalities and the Coase Theorem</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-07
+                        <i class="fa fa-calendar"></i>2016-10-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -595,7 +457,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#Economics" title="Category: Economics" rel="category">Economics</a>
     
   
 
@@ -612,7 +474,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#Economics" title="Tag: Economics" rel="tag">Economics</a>
     
   
 
@@ -622,24 +484,63 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                 </div>
                 <div class="excerpt">
                     
-<p>写一些脚本文件时，可能时常需要用到脚本文件所在目录的路径，而相对路径有的时候不一定可以（比如提交作业的脚本），而需要直接回显绝对路径，另开一个终端或者退出再复制当然可以，但是麻烦，查了下，vi原来有如此神奇的功能，可以直接捕获系统命令（甚至可能是自己写的程序脚本等？没有尝试过）的标准流输出，然后倒入编辑器。比如需要获得当前绝对路径的话，依次键入</p>
-<blockquote><strong>:.!pwd</strong></blockquote>
-<p>即可将当前绝对路径插入编辑点。</p>
+<p>Coursera</p>
+
+<p>The price changes, the quantity of the demand changes, not the demand change!</p>
+
+<p>compliment of xxx / complementary good互补品</p>
+
+<p>Change in demand: demand curve change!</p>
+
+<p>inferior good 低档商品</p>
+<h2><span class="keyword">ceteris paribus其他条件不变<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></span></h2>
+<ul>
+	<li></li>
+	<li>Externalities
+<ul>
+	<li>Positive
+<ul>
+	<li>Example: Education</li>
+</ul>
+</li>
+	<li>Negative
+<ul>
+	<li>Example: Pollution</li>
+	<li>Measure Example: Pigouivain tax--&gt;Pareto Optimality</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<ul>
+	<li>Coase theorem
+<ul>
+	<li>
+<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的两个前提条件：明确<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>和<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>　钢铁厂生产钢，自己付出的代价是铁矿石、煤炭、劳动等，但这些只是“<a href="http://baike.baidu.com/view/354998.htm" target="_blank">私人成本</a>”；在<a href="http://baike.baidu.com/view/610395.htm" target="_blank">生产过程</a>中排放的污水、废气、废渣，则是社会付出的代价。如果仅计算私人成本，生产钢铁也许是合算的，但如果从社会的角度看，可能就不合算了。于是，经济学家提出要通过征税解决这个问题，即政府出面干预，赋税使得成本高了，生产量自然会小些。但是，恰当地规定税率和有效地征税，也要花费许多成本。于是，科斯提出：政府只要明确产权就可以了。如果把产权“判给”河边居民，钢铁厂不给居民们赔偿费就别想在此设厂开工；若付出了赔偿费，成本高了，产量就会减少。如果把<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>到钢铁厂，如果居民认为付给钢铁厂一些“赎金”可以使其减少污染，由此换来健康上的好处大于那些赎金的价值，他们就会用“收买”的办法“利诱”厂方减少生产从而减少污染。当厂家多生产钢铁的<a href="http://baike.baidu.com/view/297033.htm" target="_blank">赢利</a>与少生产钢铁但接受“赎买”的收益相等时，它就会减少生产。从理论上说，无论是厂方赔偿，还是居民赎买，最后达成交易时的钢产量和污染排放量会是相同的。但是，<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>归属不同，在<a href="http://baike.baidu.com/view/9601472.htm" target="_blank">收入分配</a>上当然是不同的：谁得到了产权，谁可以从中获益，而另一方则必须支付费用来“收买”对方。<strong>总之，无论财富分配如何不同，公平与否，只要划分得清楚，资源的利用和配置是相同的——都会生产那么多钢铁、排放那么多污染，而用不着政府从中“插一杠子”。那么政府做什么呢?明确产权，并且有效地保护产权。</strong></div>
+<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理表明，<strong>市场的真谛不是价格，而是产权。只要有了产权，人们自然会“议出”合理的价格来。</strong></div>
+<div class="para"></div>
+<div class="para">但是，明确产权只是通过市场交易实现资源最优配置的一个必要条件，却不是充分条件。另一个必要条件就是“不存在<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>”。交易成本，简单地说是为达成一项交易、做成一笔买卖所要付出的时间、精力和产品之外的金钱，如市场调查、情报搜集、质量检验、条件谈判、讨价还价、起草合同、聘请律师、请客吃饭，直到最后执行合同、完成一笔交易，都是费时费力的。就河水污染这个问题而论，居民有权索偿，但可能会漫天要价，把污染造成的“肠炎”说成“胃癌”；在钢铁厂有权索要“赎买金”的情况下，它可能把减少生产的<a href="http://baike.baidu.com/view/654238.htm" target="_blank">损失</a>一元说成十元。无论哪种情况，对方都要调查研究一番。如果只是一家工厂和一户居民，事情还好办。当事人的数目一大，麻烦就更多，因为有了“合理分担”的问题。如果是多个厂家，谁排了污水、排了多少，他们如何分摊赔偿金或如何分享“赎买金”就要先扯皮一番；如果是多户居民，谁受害重谁受害轻，怎么分担费用或分享赔偿，也可打得不可开交。正是这些<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>，可能使得前面所说的那种由私人交易达到的资源配置无法实现——或是大家一看有这么多麻烦，望而却步。所以说，<a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的“逆反”形式是：如果存在交易成本，即使<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>明确，私人间的交易也不能实现资源的最优配置。</div>
+<div class="para">科斯定理的两个前提条件各有所指，但并不是完全独立、没有联系。最根本的是明确产权对减少交易成本的决定性作用。产权不明确，后果就是扯皮永远扯不清楚，意味着交易成本无穷大，任何交易都做不成；而<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>得清楚，即使存在交易成本，人们在一方面可以通过交易来解决各种问题，另一方面还可以有效地选择最有利的<a href="http://baike.baidu.com/view/3823397.htm" target="_blank">交易方式</a>，使交易成本最小化。</div></li>
+</ul>
+</li>
+</ul>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/17/externalities-and-the-coase-theorem/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/03/e5-9c-a8wordpress-e6-96-87-e7-ab-a0-e5-8f-8a-e9-a/">【已解决】在Wordpress文章及页面中插入可被执行的php</a>
+                  <a class="post-link" href="/2016/10/15/fortran-direct-recl-problem/">Fortran direct recl problem</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-03
+                        <i class="fa fa-calendar"></i>2016-10-15
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -658,9 +559,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
     
   
 
@@ -677,9 +576,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
     
   
 
@@ -689,15 +586,21 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                 </div>
                 <div class="excerpt">
                     
-<p>Wordpress应该是考虑到安全的原因，文章及页面中的各种脚本，无论是服务器端的还是客户端的，都会把标签转义或者抽掉。虽然安全，但是很不方便管理员，查找了一下发现了这个插件：<strong>Allow PHP in Posts and Pages</strong></p>
+<p>recl = n or recl = 4*n?</p>
 
-<p>用的人很多而且对代码执行还有权限检查，看起来应该没有什么问题，安装后接着就可使用了，不过php的标签做一下改变为方括号[]开闭，并把问号改为/即可。</p>
+<p>this is a problem from a non-standard extensions of fortran: VMS fortran.<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
 
-<p>加了个<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?page_id=2">编辑者的资源</a>页面，其中的时间戳是php生成，实时更新的。</p>
+<p>http://www-mipl.jpl.nasa.gov/portguide/subsection3.9.7.html</p>
+
+<p>https://docs.oracle.com/cd/E19957-01/805-4939/6j4m0vnct/index.html#c40004b91a0e</p>
+
+<p> </p>
+
+<p>typically, using ifort, dont do that.</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/03/e5-9c-a8wordpress-e6-96-87-e7-ab-a0-e5-8f-8a-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/15/fortran-direct-recl-problem/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -712,10 +615,10 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page32" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">33/43</span>
+          <span class="page_number ">33/87</span>
           
             <a href="/page34" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1001,7 +904,32 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2072,7 +2000,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2100,7 +2028,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2268,7 +2196,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2352,7 +2280,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2380,7 +2308,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2499,7 +2427,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2711,6 +2639,27 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2724,6 +2673,16 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2733,16 +2692,6 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2796,7 +2745,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2832,7 +2781,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2976,7 +2925,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3084,7 +3033,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3129,7 +3078,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3165,7 +3114,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3183,7 +3132,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3192,7 +3141,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3326,7 +3275,7 @@ MPIDI_CH3_PktHandler_EagerSend(640)....: failure occurred while posting a receiv
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

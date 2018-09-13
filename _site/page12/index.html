@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/31/e4-bc-81-e4-b8-9a-e9-9b-86-e5-90-88-ef-bc-9a-e6-8/">企业集合：招聘大气科学毕业生的工业界职位</a>
+                  <a class="post-link" href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-31
+                        <i class="fa fa-calendar"></i>2018-03-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -281,7 +373,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
+    
+        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>
     
   
 
@@ -291,59 +387,45 @@
                 </div>
                 <div class="excerpt">
                     
-<p>远景能源</p>
+<p>今天打算创建Mercurius的数据库，神奇的是，输入create database后报错</p>
 
-<p>坐标：上海</p>
+<blockquote>
+  <p>ERROR 1006 (HY000): Can’t create database ‘mercurius’ (errno: 28)</p>
+</blockquote>
 
-<p>核心业务：智能风机</p>
+<p>换了root账户也不行，查到的信息都是说mysql的数据库权限问题，检查后的确木有问题呀。
+注意到google出的关键词errno号不同，很多13号，而我是28号，深度搜索了一番，找到了答案：</p>
+<blockquote>
+  <p>This error means that your mysql server does not have enough free space. You need to check the file system size and please remove unwanted software(s) or installers or files.</p>
+</blockquote>
 
-<p>印象：行业内一线企业，技术优势明显，员工待遇高（2015）</p>
+<p>我去，坑我？磁盘满额？df查看一下，果然/根目录满额。奇怪～</p>
 
-<p>招聘实例</p>
+<p>利用find找大文件：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-size</span> +800M
+</code></pre></div></div>
 
-<p><strong>工作内容：</strong>
-1、 负责提升数值气象模式对于风速模拟、预报的准确性；
-2、 负责推动中尺度数据在风场设计中的应用。</p>
+<p>发现除了最早丢过来的安装包，就是gdm的log最大，cd过去一看，可了不得，13G的log，应该是图形界面出错后一直在写error，写到了3月5日，果断删掉～并且把安装包移走。目前解决，后面看是否还继续写log。</p>
 
-<p><strong>职位要求：</strong>
-1、大气科学类硕士及以上学历；
-2、专业知识扎实，对大气动力学有深入理解以及很强的应用能力；
-3、熟练掌握Linux系统操作命令和Shell编程，熟练运用WRF模式，有模式动力或资料同化科研经历者优先；
-4、至少熟练掌握MATLAB、NCL等数据处理工具中的一种 ，掌握常见机器学习算法(如Neural Network, SVM等)者优先。</p>
+<p>慎重起见，将mysql的数据库路径进行迁移，然后发现进了个大坑。无论怎样按照<a href="http://blog.csdn.net/liuchunming033/article/details/51851667">网上的步骤</a>调整，都会遇到mysqld服务无法打开的结果。甚至rsync数据库然后做链接都不行。
+折腾了一下午，突然想到，不就是把mercurius数据库拿出来么，不动mysql本身的账户库还不行。好吧，最后给mercurius做了链接搞定，要注意所在的上层目录必须有root用户和用户组的读写权限。</p>
 
-<p>http://recruit.envisioncn.com/join_us/position</p>
-
-<p>http://www.envisioncn.com/</p>
-
-<p>明阳风电</p>
-<table class="job_info" border="0" width="100%" cellspacing="0">
-<tbody>
-<tr>
-<td class="job_info1" width="15%">计算流体力学工程师</td>
-<td width="24%">计算流体力学/动力学/大气科学</td>
-</tr>
-</tbody>
-</table>
-<p>http://www.mywind.com.cn/</p>
-
-<p>国睿集团</p>
-
-<p>http://www.glarun.com/company.asp</p>
+<p><strong>Updated 2018-03-11</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/31/e4-bc-81-e4-b8-9a-e9-9b-86-e5-90-88-ef-bc-9a-e6-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/11/mysql-error-full-disk/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/23/earth-nullschool-package-test/">Earth.NullSchool Package test</a>
+                  <a class="post-link" href="/2018/03/06/mysql-basics/">mysql基本操作</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-23
+                        <i class="fa fa-calendar"></i>2018-03-06
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -362,7 +444,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#fullstackdevelopment" title="Category: fullstackdevelopment" rel="category">fullstackdevelopment</a>
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -379,7 +463,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#fullstackdevelopment" title="Tag: fullstackdevelopment" rel="tag">fullstackdevelopment</a>
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
     
   
 
@@ -389,47 +475,148 @@
                 </div>
                 <div class="excerpt">
                     
-<p>After setup node.js, follow the instruction to install earth.nullschool</p>
+<p>常用命令</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">select</span> <span class="k">database</span><span class="p">();</span> <span class="o">#</span> <span class="k">show</span> <span class="n">what</span> <span class="k">is</span> <span class="n">the</span> <span class="n">selected</span> <span class="k">database</span>
+<span class="k">drop</span> <span class="k">database</span> <span class="n">if</span> <span class="k">exists</span> <span class="n">test</span><span class="p">;</span>
+</code></pre></div></div>
+<p>建立好数据库之后，则可以开始建立tables啦，这个过程中需要有一些数据库的设计思路，大概是列出各种table，如下图：
+<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2ugsl2uej20nd0gbwka.jpg" alt="" /></p>
 
-<p>https://github.com/cambecc/earth</p>
+<p>然后我们仿照视频教程建立一个存储学生数据的table</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span>
+    <span class="o">-&gt;</span> <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">email</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">street</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="k">state</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="nv">"PA"</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">zip</span> <span class="n">mediumint</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">phone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">birth_date</span> <span class="n">date</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">date_entered</span> <span class="k">timestamp</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">lunch_cost</span> <span class="n">float</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">student_id</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
+</code></pre></div></div>
+<p>解释一下各关键词：</p>
 
-<p>install grib2json</p>
+<p>varchar代表可变长度的string，not null表示不能是空值；</p>
 
-<p>https://github.com/cambecc/grib2json</p>
+<p>state因为只有两个字母，所以，强制要求char(2)，并且给了default值为PA。mediumint有意思，查了一下，发现mysql提供非常多种类的数据类型，估计是考虑到数据库的空间利用效率的原因。
+<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2v4f3uo0j20wc07c42m.jpg" alt="" />
+我们总结一下数据类型：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAR		fixed length character string
+VARCHAR		a character string with a length that is variable
+BLOB		contain 2^16 bytes of data
+BIGINT		2^63 to -2^63-1
+FLOAT		decimal spaces 1.1e38 to -1.1e38
+DOUBLE		decimal spaces, 1.7e308 to -1.7e308
+ENUM		A character stirng that has a limited number of total values, which you must define
+SET			(Seldom used) A set of legal possible character strings. Unlike ENUM, a SET can contain a multiple values in comparason to the one legal value with ENUM.
+DATE		YYYY-MM-DD
+TIME		HH:MM:SS
+DATETIME	YYYY-MM-DD HH:MM:SS
+TIMESTAMP	YYYYMMDDHHMMSS
+YEAR		YYYY
+</code></pre></div></div>
+<p>unsigned 表示非负值。</p>
 
-<p>Steps:</p>
+<p>sex的enum非常清楚了，只有两个选项。</p>
 
-<ol>
-  <li>set JAVA_HOME</li>
-</ol>
+<p>注意入学时间，用的timestamp类型，可以看到数据库软件本身提供了非常体贴的类型，不需要自己parser date string啦。</p>
 
-<p>http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/</p>
-<pre class=" language-bash"><code class=" language-bash"><span class="token function">export</span> JAVA_HOME<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>/usr/libexec/java_home<span class="token variable">)</span></span></code></pre>
-<p class="p1">brew install maven</p>
-<p>https://github.com/cambecc/grib2json/issues/19</p>
+<p>最后一个student id，被定义为主键。</p>
 
-<p> </p>
+<p>然后我们看一下student中的情况</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">describe</span> <span class="n">student</span><span class="p">;</span>
 
-<p>convert:</p>
-<pre><code>grib2json<strong> -d -n -o</strong> current-wind-surface-level-gfs-1.0.json gfs.t00z.pgrb2.1p00.f000</code></pre>
-<p class="p1"><span class="s1">Error: Unable to access jarfile /Users/zhenningli/workspace/grib2json/src/bin/../lib/grib2json-*.jar</span></p>
-<p>You should use the executable in another folder</p>
-<p class="p1"><strong><span class="s1">/Users/zhenningli/workspace/grib2json/target/grib2json-0.8.0-SNAPSHOT/bin</span></strong></p>
+<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
+<span class="o">|</span> <span class="n">Field</span>        <span class="o">|</span> <span class="k">Type</span>                  <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span>           <span class="o">|</span> <span class="n">Extra</span>                       <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
+<span class="o">|</span> <span class="n">first_name</span>   <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">last_name</span>    <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">email</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>           <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">street</span>       <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">city</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="k">state</span>        <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>               <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="n">PA</span>                <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">zip</span>          <span class="o">|</span> <span class="n">mediumint</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">phone</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">birth_date</span>   <span class="o">|</span> <span class="n">date</span>                  <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>          <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">)</span>         <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">date_entered</span> <span class="o">|</span> <span class="k">timestamp</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span> <span class="k">on</span> <span class="k">update</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">lunch_cost</span>   <span class="o">|</span> <span class="n">float</span>                 <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">student_id</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span>      <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span> <span class="n">auto_increment</span>              <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
+
+</code></pre></div></div>
+
+<p>查看table中field值的方法：</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="n">first_name</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div></div>
+<p>可以用逗号隔开多个fields。
+清空数据表</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">truncate</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div></div>
+<p>注意truncate和drop的区别，drop直接将table从database拿掉，truncate仅仅是清空field的content。
+我们总结一下层级关系</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>databases
+	tabels
+		fields
+			field rows (contents)
+</code></pre></div></div>
+
+<p>向student table中插入一条数据记录</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="n">value</span>
+    <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">'Dennis'</span><span class="p">,</span> <span class="s1">'Lee'</span><span class="p">,</span> <span class="s1">'dcooper@aol.com'</span><span class="p">,</span> <span class="s1">'123 Main St'</span><span class="p">,</span> <span class="s1">'Yakima'</span><span class="p">,</span> <span class="s1">'WA'</span><span class="p">,</span> <span class="mi">95294</span><span class="p">,</span> <span class="s1">'510-365-0383'</span><span class="p">,</span> <span class="s1">'1995-2-22'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="mi">3</span><span class="p">.</span><span class="mi">50</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>查看加入的数据记录</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slect</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div></div>
+<p>Foreign Key的概念</p>
+
+<p>表A中的Primary Key，出现在表B中，则为Foreign Key，可为空值，可重复出现。</p>
+
+<p>如果要对已有的表增加一条数据属性，使用alter table语句</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">test</span>
+    <span class="o">-&gt;</span> <span class="k">add</span> <span class="n">maxscore</span> <span class="n">int</span> <span class="k">not</span> <span class="k">null</span> <span class="k">after</span> <span class="k">type</span><span class="p">;</span>
+
+<span class="k">describe</span> <span class="n">test</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span>    <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">date</span>     <span class="o">|</span> <span class="n">date</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="k">type</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'Q'</span><span class="p">)</span>    <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">maxscore</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">class_id</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">test_id</span>  <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+
+</code></pre></div></div>
+<p>改变已有的数据表中的Field名，</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">score</span> <span class="n">change</span> <span class="n">event_id</span> <span class="n">test_id</span>
+    <span class="o">-&gt;</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-03-08</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/23/earth-nullschool-package-test/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/06/mysql-basics/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/18/installing-node-js-on-mac-os/">Installing node.js on Mac OS</a>
+                  <a class="post-link" href="/2018/03/05/install-mysql/">CentOS mysql安装</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-18
+                        <i class="fa fa-calendar"></i>2018-03-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -448,78 +635,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#MacOS" title="Category: MacOS" rel="category">MacOS</a>&nbsp;
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
     
-        <a href="/category/#fullstackdevelopment" title="Category: fullstackdevelopment" rel="category">fullstackdevelopment</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#MacOS" title="Tag: MacOS" rel="tag">MacOS</a>&nbsp;
-    
-        <a href="/tag/#fullstackdevelopment" title="Tag: fullstackdevelopment" rel="tag">fullstackdevelopment</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p class="p1"></p>
-<p class="p1"></p>
-<p class="p1">Node.js was installed at</p>
-<p class="p1"><span class="Apple-converted-space">   </span>/usr/local/bin/node</p>
-<p class="p1">npm was installed at</p>
-<p class="p1"><span class="Apple-converted-space">   </span>/usr/local/bin/npm</p>
-<p class="p1">Make sure that /usr/local/bin is in your $PATH.</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/03/18/installing-node-js-on-mac-os/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/03/15/gfdl-moist-core-on-savio/">GFDL MOIST CORE on SAVIO</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-15
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
     
   
 
@@ -536,7 +654,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
     
   
 
@@ -546,148 +668,83 @@
                 </div>
                 <div class="excerpt">
                     
-<p>follow the dry core procedure, the first problem we meet is</p>
+<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
+首先切换到root下安装：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
+</code></pre></div></div>
+<p>检查服务状态</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
+mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
+</code></pre></div></div>
+<p>启动服务</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
+</code></pre></div></div>
 
-<p><strong>#error: unknown fpp directive.</strong></p>
-<p class="p1"><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/shared/include/fms_platform.h</span></p>
-<p class="p1">and give two space before the first _, done.</p>
-<p class="p1">Next, the model was compiled smoothly, when it hit the link process, throw a problem</p>
-<p class="p1"><strong><span class="s1">atmos_model.o: In function `atmos_model_init':</span></strong></p>
-<p class="p1"><strong><span class="s1">/global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90:290: undefined reference to `omp_set_num_threads_'</span></strong></p>
-<p class="p1">compared  with dry core, comment corresponding lines</p>
-<p class="p1"><strong><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90</span></strong></p>
-<p class="p1">IT WORKS!</p>
-<p class="p1"></p>
-<p class="p1"></p>
+<p>启动开机服务</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
+</code></pre></div></div>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/03/15/gfdl-moist-core-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/">捕捉shell执行的状态码</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-15
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p>之后给出提示信息：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
 
-                    <div class="label-card">
-                    
+/usr/bin/mysqladmin -u root password 'new-password'
+/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
 
+Alternatively you can run:
+/usr/bin/mysql_secure_installation
+</code></pre></div></div>
+<p>采用第二种方法更加安全。</p>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
+<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
 
-  <!-- <span class="point">•</span> -->
-</span>
+<p>然后的选项一路Y。</p>
 
+<p>登录mysql，在root用户下，直接</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
+</code></pre></div></div>
+<p>登陆后，我们查看一下用户列表。</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
+| Host      | User |
++-----------+------+
+| 127.0.0.1 | root |
+| localhost | root |
++-----------+------+
+2 rows in set (0.00 sec)
+</code></pre></div></div>
+<p>添加一个非root用户,密码为password</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+</code></pre></div></div>
+<p>给予新用户相应权限</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
 
-                    </div>
+<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div></div>
+<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
+<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
+</code></pre></div></div>
 
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>如果采用shell嵌套调用的方式执行一个复杂的自动化脚步，比如编译运行model，编译的过程很容易出错，那么外层脚本应考虑到这个问题并且在编译出错的情况下退出程序。这时上一条命令的状态码就派上用场了。</p>
-<pre>if [ $? -eq 0 ]        [$? 就是上一条命令执行的状态码]
-        then  
-            echo $i
-        fi</pre>
+<p><strong>Updated 2018-03-05</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/03/14/full-stack-development-notebook/">full-stack development [notebook]</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/03/14/full-stack-development-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/05/install-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -702,10 +759,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page11" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">12/43</span>
+          <span class="page_number ">12/87</span>
           
             <a href="/page13" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -991,7 +1048,32 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2062,7 +2144,7 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2090,7 +2172,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2258,7 +2340,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2342,7 +2424,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2370,7 +2452,7 @@
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2489,7 +2571,7 @@
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2701,6 +2783,27 @@
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2714,6 +2817,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2723,16 +2836,6 @@
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2786,7 +2889,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2822,7 +2925,7 @@
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2966,7 +3069,7 @@
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3074,7 +3177,7 @@
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3119,7 +3222,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3155,7 +3258,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3173,7 +3276,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3182,7 +3285,7 @@
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3316,7 +3419,7 @@
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

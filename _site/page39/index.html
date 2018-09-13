@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,91 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/">【已解决】rsync命令的使用</a>
+                  <a class="post-link" href="/2016/03/15/linux-e6-9f-a5-e7-9c-8b-e7-a3-81-e7-9b-98-e8-af-b/">Linux 查看磁盘读写状态</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>同步CESM的input数据到hpc4，但是已有的文件不希望被覆盖掉，scp不能用，只能采用rsync命令。以从东校区工作站传回数据为例</p>
-<blockquote><strong>rsync -vzrtopg --progress -e 'ssh -p 80' workstation@222.200.180.66:/home/workstation/L_Zealot ./</strong></blockquote>
-<p>参数解释：</p>
-<blockquote>-v, --verbose 详细模式输出
--z, --compress 对备份的文件在传输时进行压缩处理
--r, --recursive 对子目录以递归模式处理
--t, --times 保持文件时间信息
--p, --perms 保持文件权限
--o, --owner 保持文件属主信息
--g, --group 保持文件属组信息
---progress 在传输时现实传输过程
--e 'ssh -p 80' ssh方式传输，端口80</blockquote>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所拷贝回CESM Input Data硬盘挂载问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-31
+                        <i class="fa fa-calendar"></i>2016-03-15
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -371,30 +379,22 @@
                 </div>
                 <div class="excerpt">
                     
-<p>从大气所带回来的硬盘用Orico的硬盘座接e-SATA口，windows下直接提示要格式化，这还得了，记得当初这个分区是我做的，ext4格式，重启到Linux下，fdisk -l傻眼了，居然成了NTFS格式，测试mount -t ntfs-3g或ext4都不行，百般无奈以为出现坏道了。结果双击文件系统下的2TB文件系统却可以挂载了，显示为ext格式。无语……</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
-
-<p>到超算中心拷贝出现同样问题，钟英师姐帮忙发现其实问题很好解决，直接不使用-t参数指定的话，系统会自动检测类型挂载。反正不知道系统怎么检测出的，能挂上就是了……以在/dev/sdc5为例</p>
-<blockquote>mount /dev/sdc5 ./</blockquote>
-<p>DONE！</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140903#</span></strong></p>
+<p>$iostat -x 1</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/03/15/linux-e6-9f-a5-e7-9c-8b-e7-a3-81-e7-9b-98-e8-af-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/">【已解决】CESM-CAM积分步长调节</a>
+                  <a class="post-link" href="/2016/03/05/sp-cam-e7-a7-bb-e6-a4-8d/">sp-cam移植</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-28
+                        <i class="fa fa-calendar"></i>2016-03-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -440,59 +440,48 @@
                 </div>
                 <div class="excerpt">
                     
-<h3>CAM Standalone</h3>
-<p>namelist修改加入</p>
+<p><span style="color: #ff0000;">/<em>注意采用较早版本（2013）的编译器和MPI</em>/</span></p>
 
-<p>dtime=1200, nsplit=6, nspltrac=2, nspltvrm=2</p>
+<p>按照cesm1.2.2的配置build，最后一步出错</p>
 
-<p>第一句是把积分时长调整到1200s每步</p>
+<p>mpif90  -o /users/yangsong3/L_Zealot/F/SP-test-sam1mom/exe/cesm.exe ccsm_com
+<strong> 26 ld: cannot find -lblas</strong>
+27 gmake: *** [/users/yangsong3/L_Zealot/F/SP-test-sam1mom/exe/cesm.exe] Error</p>
 
-<p>后面三个如果不加入会报错，出错信息中会有建议更改的数值，看起来估计是与物理步长中与动力步长的匹配有关，但是依然搞不清楚这几个变量的意义……</p>
+<p>查了下</p>
 
-<p>以上几个namelist的解释：</p>
-<pre><strong>nsplit----</strong>Number of dynamics timesteps per physics timestep. If zero, a best-estimate
-will be automatically calculated.</pre>
-<pre><strong>nspltrac</strong>----Number of tracer advection timesteps per physics timestep.
-Nsplit is partitioned into nspltrac and nsplit/nspltrac,
-with the latter being the number of dynamics timesteps per
-tracer timestep, possibly rounded upward; after initialization,
-the code quantity nsplit is redefined to be the number of
-dynamics timesteps per tracer timestep.</pre>
-<pre><strong>nspltvrm----</strong>Number of vertical re-mapping timesteps per physics timestep.
-Nspltrac is partitioned into nspltvrm and nspltrac/nspltvrm,
-with the latter being the number of tracer timesteps per
-re-mapping timestep, possibly rounded upward; after initialization,
-the code quantity nspltrac is redefined to be the number of
-tracer timesteps per re-mapping timestep.</pre>
-<h3>CESM Script</h3>
-<p>这个除了需要处理standalone中的变量外，还需要更改run_env.xml中存在相应的字段：</p>
-<blockquote>&lt;entry id="NCPL_BASE_PERIOD"   value="day"  /&gt;
+<p>http://stackoverflow.com/questions/27033243/usr-bin-ld-cannot-find-llapack</p>
 
-&lt;entry id="ATM_NCPL"   value="48"  /&gt;</blockquote>
-<p>上面那行的设置代表coupler耦合频率的单位，value对应为日，下面那行是在coupler耦合单位内，ATM通过coupler和其他模块耦合的次数，值为48，即每天耦合48次，可以理解为积分步长为1800s（半小时），如果要更改积分步长为900s，将48改为96即可。同时我们可以注意到这个值在后面的语句中分别被赋给了LND OCN等其他模块，保证各个模块的耦合频率一致。如果没有正确修改dtime, nsplit, nspltrac, nspltvrm这些变量，则会出现<strong>Bad namelist settings for FV subcycling报错。</strong></p>
+<p>看起来缺少lapack的包</p>
 
-<p>当然，这里还有疑问就算，我们即便把standalone里修改的几个变量拿过来，也仅仅是修改了CAM的积分步而已，其他分量并没有修改，是会自动更改么？还是怎样？目前测试积分了三年，没有出现问题。</p>
+<p>查log发现已经安装了lapack包，只是缺少libblas.a文件，liblapack.a是有的，目录下有libpreblas.a，感觉比较像，直接ln出来一个libblas.a，编译通过！</p>
 
-<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
+<p>提交任务运行，立刻出现segfault，显示似乎有netcdf库的问题。</p>
 
-<p>前段时间忘了更新了。对于F05的配置，似乎直接在user_nl_cam中修改dtime=900就可以，什么都不用动……似乎split与dtime呈一定的倍数关系，dtime减半并不影响这个倍数关系的调整。当然，依然没有搞懂……</p>
+<p>测试去掉pnetcdf，不行</p>
 
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
+<p>改lapack，不行</p>
+
+<p>都是同样的错位。怀疑是编译器或者MPI的问题，于是将model传输到天河二号，采用天河二号13版本的编译器进行编译，居然可以顺利运行！</p>
+
+<p>坑爹的是，m2005的case在运行到nstep=4的时候会卡死……</p>
+
+<p>mom1mam的case没有问题！</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/03/05/sp-cam-e7-a7-bb-e6-a4-8d/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/">【已解决】SSH多机无密码访问</a>
+                  <a class="post-link" href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/">【Linux】Windows上传文件名乱码解决</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-26
+                        <i class="fa fa-calendar"></i>2016-02-26
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -513,9 +502,7 @@ tracer timesteps per re-mapping timestep.</pre>
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
     
   
 
@@ -534,9 +521,7 @@ tracer timesteps per re-mapping timestep.</pre>
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
     
   
 
@@ -546,249 +531,27 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <div class="excerpt">
                     
-<p>ssh无密码访问是实现MPI、以及自动化批处理如scp ssh远程命令等操作的必要设置。单机A对B单向或者B对A双向的操作类似，网上一查一大堆。一对多方向容易搞混，注意复制公钥方向。如A要无密码访问B，将A的公钥(id_rsa.pub)复制到B机的authorized_keys下。</p>
+<p>由于windows和linux对文件系统的编码方式不同，从windows上传或者从linux下载的文件名总存在乱码，解决方法很简单。实际上linux程序包里存在一个convmv的转换程序。</p>
 
-<p><strong>注意authorized_keys权限为600，.ssh目录权限700</strong></p>
+<p>首先，检测下是否有这个程序，如果没有，yum安装一下。</p>
 
-<p>参考资料：</p>
+<p>转换命令</p>
 
-<p>http://blog.sina.com.cn/s/blog_75b0e2ad010185id.html</p>
+<p>convmv -f GBK -t UTF-8 -r yourdir/ –notest</p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/">关于办户口迁移囧事的一点思考</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p>-f是源编码格式</p>
 
-                    <div class="label-card">
-                    
+<p>-t为目标编码格式</p>
 
+<p>–notest代表直接进行mv操作</p>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
+<p>-r代表递归</p>
 
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>记得本科把户口从烟台迁到东校的时候，就非常不顺利，跑了初家派出所两三次费尽口舌。没想到，这次从东校迁到南校，也被坑了一把。</p>
-
-<p>按照新生手册说法，只需要把身份证复印件和录取通知复印件准备好，交到学校（学院）处，学校自会处理这种校内升学的户口迁移。看到这些安排一时偷乐，想到俊文说他们那一级还要自己去东校办理，看来我们这一次赶上改革了，群众路线，办事人性化了嘛。没想到结果依然不是一般的折腾。</p>
-
-<p>21日报到，准备好材料交付报到处户籍科，被告知哪里说只需要身份证和录取通知复印件呀，必须要有户口迁移证才行，我说新生手册写的啊。不行不行不行，要自己去办。好吧，看起来还是老样子，不知是群众路线群不到我们这些本科毕业的干部身份呢还是根本就没改革，但丫的新生手册怎么不说清楚。</p>
-
-<p>22日随亚娜珊珊回东校办户口迁移，先学校保卫办后小谷围派出所，没想到派出所没人，办得很迅速，一上午就搞定，以为后面就简单了，下午也懒得回南校，去新开的行政楼餐厅吃了一顿，名副其实郡城的价格四饭的味道，下午在东校实验室折腾杨老师的网站DEMO，不表。</p>
-
-<p>23，24日周末，考虑到南校保卫办不上班，懒得白跑一趟。25下午开学典礼，顺道去保卫办交表。没想到进去就傻眼了——录取通知复印件、迁移证复印件、一寸照片、身份证复印件，一件不能少。我吐槽说之前没通知啊，新生手册就写说录取通知+身份证复印件啊，哪里知道这么折腾。周围不少同学也是相同遭遇，一肚子不满。</p>
-
-<p>不满也没用，白跑就是白跑，还是得回去要通知书上联复印。这种囧事，学校或者说相关部门吧，做的不到位是必然难辞其咎，但毕竟大环境如此，这种小事碰上再正常不过，客观因素改变不了。不妨从个人的角度来想想，如何能够避免麻烦，其实也很简单，找亚娜细细询问一下需要准备的材料，或者打个电话到保卫办问清楚，也就是了。归根结底，自己在已知被提供的资料不足的情况下依然消极被动地对待，想当然地认为XXX，也是造成最终麻烦的重要主观因素。前事不忘后事之师，这次吸取教训了，希望自己下次遇到类似情况能够足够重视，以免更大的麻烦。</p>
+<p>yourdir/为操作目录</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/24/cesm1_2_0-e6-ba-90-e7-a0-81-e8-a1-8c-e6-95-b0-e7-b/">CESM1_2_0源码行数统计</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>跑起来了Heating的试验，outfld也没出来到能画图的地步，忙里偷闲，用上次提到的统计行数的办法（http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=92），统计了一下cesm1.2.0总代码行数，结果如下</p>
-<blockquote><strong>1,199,145</strong></blockquote>
-<p>居然一共才不到120万行，与我想象的有差距啊。一个active的CAM就占到了接近一半，地球系统这个东西还是大气比较复杂 ……</p>
-
-<p>其中，各个分量模块（包括接口等）及Active分量的行数如下</p>
-<table style="height: 47px;" width="354">
-<tbody>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">atm</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">511,843</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CAM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>499,741</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;"><strong>csm_share</strong></h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>34,142</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">dead_share</h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>341</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">drv</h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>25,439</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">glc</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">93,206</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CISM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>22,370</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">ice</h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>75,558</strong></span></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CICE</span></strong></td>
-<td><span style="color: #ff6600;"><strong>72,950</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">lnd</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">216,309</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CLM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>175,937</strong></span>
-<span style="color: #ff6600;"><strong><span style="color: #3366ff;"> CLM4.0</span> 71,250</strong></span>
-<span style="color: #ff6600;"><strong><span style="color: #3366ff;"> CLM4.5</span> 93,857</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">ocn</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">144,761</span></strong></td>
-</tr>
-<tr>
-<td><span style="color: #3366ff;"><strong>POP2</strong></span></td>
-<td><span style="color: #ff6600;"><strong>142,292</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">rof</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">10,126</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">RTM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>7,778</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">utils</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">86,072</span></strong></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">wav</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">1,348</span></strong></td>
-</tr>
-</tbody>
-</table>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/24/cesm1_2_0-e6-ba-90-e7-a0-81-e8-a1-8c-e6-95-b0-e7-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -803,10 +566,10 @@ tracer timesteps per re-mapping timestep.</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page38" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">39/43</span>
+          <span class="page_number ">39/87</span>
           
             <a href="/page40" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1092,7 +855,32 @@ tracer timesteps per re-mapping timestep.</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2163,7 +1951,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2191,7 +1979,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2359,7 +2147,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2443,7 +2231,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2471,7 +2259,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2590,7 +2378,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2802,6 +2590,27 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2815,6 +2624,16 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2824,16 +2643,6 @@ tracer timesteps per re-mapping timestep.</pre>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2887,7 +2696,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2923,7 +2732,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3067,7 +2876,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3175,7 +2984,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3220,7 +3029,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3256,7 +3065,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3274,7 +3083,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3283,7 +3092,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3417,7 +3226,7 @@ tracer timesteps per re-mapping timestep.</pre>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

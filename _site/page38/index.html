@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM continue run的使用方法</a>
+                  <a class="post-link" href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/">【未解决】python安装pandas等数据处理类库</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-22
+                        <i class="fa fa-calendar"></i>2016-04-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,9 +352,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -283,9 +369,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -295,30 +379,64 @@
                 </div>
                 <div class="excerpt">
                     
-<p>重复何老师试验，跑CAM5的物理，学校集群太慢，于是到天河二号上跑。CTRL试验跑的顺风顺水，一路到30年。SEN试验第一次在第八年断了，第二次第四年，第三次恼了，开continue run，发现错误提示是找不到rpointer文件，原来需要在开始跑的时候就在env_run.xml里设置好REST_N变量才行，默认给的是=$STOP_N。也就是仅仅在程序运行完成后的最后一年生成rpointer文件。只得改成1后继续从头运行，果然每年都生成了每个模块对应的rpointer（rpointer.xxx）。不出所料，程序到第六年又断掉了，把continue run设置为TRUE后可以正常运行。嗯嗯还不错~查看cam的输出发现输出文件莫名其妙大了一些，莫非会输出一些与重启运行有关的变量？</p>
+<p>首先按照<a href="http://youerning.blog.51cto.com/10513771/1711008">这个网站</a>yum这些东西，然后pip安装，</p>
 
-<p>后话是，continue run跑了10个月又挂了，开始怀疑编译存在问题……重新编译继续continue中，囧……</p>
+<p>出现错误：Command “python setup.py egg_info” failed with error code 1 in /tmp/pip-build-Cblre2/pandas/</p>
 
-<p><strong><span style="color: #008000;">#Up to 20140922#</span></strong></p>
+<p>之后的剧情就是个坑了，查了个资料，说把python用yum给remove了，然后编译安装新版本的就行，我居然TMD信以为真，remove过程中突然出现一个提示说cannot remove yum，纳尼……啥时候要remove yum。</p>
 
-<p>经后来检查发现，确实是NetCDF 4.0.1的问题，CESM UG上建议采用4.1.2以上的版本，就是因为之前的版本存在corrept write的问题，尤其是在IO拥堵的情况下。Shift到4.3.2后，没有出现这类问题，但是4.3.2在天河二号上似乎还不能够使用ncdump，近期天河二号IO有很大改善，改回4.0.1后出问题的频率大大降低了。</p>
+<p>不管了，编译安装python2.7，发现yum还是不能安装pandas，这个时候我做了个最错误的决定，将系统原有的/usr/下所有python的lib include全删了，用2.7去替换……天真如我啊啊啊 = =</p>
 
-<p><strong><span style="color: #008000;">#Up to 20141019#</span></strong></p>
+<p>之后yum就不正常了，出现：</p>
+
+<p>No module named yum这种错误</p>
+
+<p>查了下，正确安装新版本python的姿势：</p>
+
+<p>http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7</p>
+
+<p>原来系统安装的python 与许多组件有依赖关系，随意搞掉是不可以的，吐血。于是找办法去解决，下载了python，yum等几个关联包，重新rpm安装，再运行yum出现新错误：No module named rpm，纳尼……</p>
+
+<p>想到之前自己删除了所有原本的python相关库，估计是这个问题。</p>
+
+<p>折腾半天，去workstation上yum update了，然后scp所有/usr下与python相关的文件夹过来……</p>
+
+<p>yum可以用了，update过程中出现许多不匹配的错误，这应该是workstation上rpm管理的软件信息与team server不同造成……</p>
+
+<p>yum update后，似乎没什么问题了。</p>
+
+<p>附带官方所有软件包地址：http://mirror.centos.org/centos/6/os/x86_64/Packages/</p>
+
+<p>重新编译安装python2.7，按照<a href="http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7">这个帖子</a>，需要安装setuptools和PIP，之后用PIP安装pandas等库，成功！</p>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter"></td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">matplotlib -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number2 index1 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">numpy -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number3 index2 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">pandas -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number4 index3 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">seaborn scipy</code></div>
+</div></td>
+</tr>
+</tbody>
+</table>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/">【已解决】Grub2默认启动Windows的设置</a>
+                  <a class="post-link" href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/">VBA学习笔记</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-20
+                        <i class="fa fa-calendar"></i>2016-03-21
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -337,7 +455,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#EXCEL/VBA" title="Category: EXCEL/VBA" rel="category">EXCEL/VBA</a>
     
   
 
@@ -354,7 +472,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#EXCEL/VBA" title="Tag: EXCEL/VBA" rel="tag">EXCEL/VBA</a>
     
   
 
@@ -364,33 +482,26 @@
                 </div>
                 <div class="excerpt">
                     
-<p>前两天给X240s换了固态硬盘，重装系统后一直没再折腾。今天终于有空处理下CentOS7默认启动项的问题了。解决方法应该比较暴力：</p>
+<p>打开开发工具功能选项卡</p>
 
-<p>grub2/grub.cfg下</p>
-<blockquote>if [ "${next_entry}" ] ; then
-set default="${next_entry}"
-set next_entry=
-save_env next_entry
-set boot_once=true
-else
-<strong>set <span style="color: #ff0000;">default=0</span></strong>
-fi</blockquote>
-<p>直接把${saved_entry}展开变量改成Windows所在列表号就可以。反正谁也不会动辄改动grub</p>
+<p>文件–&gt;选项–&gt;自定义功能区</p>
+
+<p>选定区域，F5，定位，可以定位选中到想要的区域</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/">【已解决】四期平台ys队列排队机制问题</a>
+                  <a class="post-link" href="/2016/03/21/sp-cam-amip-run/">SP-CAM AMIP run</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-19
+                        <i class="fa fa-calendar"></i>2016-03-21
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -409,9 +520,7 @@ fi</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -428,9 +537,7 @@ fi</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -440,285 +547,21 @@ fi</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>前几天发现ys队列的排队机制存在问题，即若某节点已经被前一个任务独占，排队机制似乎没有摒除该节点，后一个任务依然可能被提交到该节点，造成负载过大。发邮件给学校超算中心后如石沉大海，没有回复。想到之前给杨老师集群做测试的时候，直接手动指定hostfiles，于是自己动手，丰衣足食。</p>
-
-<p>先写hostfile文件，比如使用c74到c77四个节点，每个节点16个核心，hostfile可以这样写</p>
-
-<p>c74:16</p>
-
-<p>c75:16</p>
-
-<p>c76:16</p>
-
-<p>c77:16</p>
-
-<p>然后mpirun -hosts后面指定到这个文件。</p>
-
-<p>需要注意的是，提交pbs的话会被忽视这个设定，所以只能采用screen的方式运行脚本。pestat qstat下都不能查到任务号。</p>
+<ol>
+  <li>
+    <p>注意下载完整restart文件以及rpointer</p>
+  </li>
+  <li>
+    <p>AMIP run默认输出中fincl1文件变量cb_sulf_c在SP下不存在，因此运行前删掉atm_in中fincl1这一行即可。</p>
+  </li>
+  <li>
+    <p>不要用xxx.run提交，用yhbatch直接提交包含yhrun的脚本</p>
+  </li>
+</ol>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91think/">【已解决】Thinkpad U盘安装win7出现“安装程序无法创建新的系统分区……”</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>这个问题很奇葩，有点意思。老板发的Thinkpad，换SSD后装系统，格式化硬盘无法下一步进入复制和展开安装文件阶段，报错“安装程序无法创建新的系统分区 也无法定位……”</p>
-
-<p>百度之，发现解决方法非常奇葩：</p>
-<blockquote>先格式化一下你要装的那个盘，然后，拔出U盘，啥也别动，只拔出U盘究行，再装上U盘，然后刷新一下【选硬盘那里的高级选项中有格式化和刷新】，再选择要安装的硬盘点下一步，OK了，可以正常安装了</blockquote>
-<p>我勒个去，这是因为个鸟毛？在好奇心驱使下，继续搜索，发现这个回答比较靠谱：</p>
-<blockquote>这个问题只出现在使用U盘安装win7的时候。具体原因很难讲，我猜测是当在这个界面选择安装到C盘时，安装程序会搜索（hd0，0），但实际的（hd0，0）不是C盘而是U盘（因为U盘是启动盘，如果你有用过grub4dos就知道了），所以就出现了这个错误提示。
-
-我的解决方法很简单:
-解决方法1：
-拔掉U盘，安装就可以继续了。
-解决方法2：
-用ultraiso写到U盘。原因很简单，ultraiso是模拟cd-rom方式写入，启动后U盘占用的是光盘盘符，因此C盘还是（hd0，0）</blockquote>
-<p>看起来WT这个镜像不是拿UltraISO刻录的呀，还是软碟通好使……</p>
-
-<p>参考资料：</p>
-
-<p>http://zhidao.baidu.com/link?url=PcRCaz9PrfsPv4rHRDdZhWXIWxxP-XFLwUXeGpuUPFpR3L1xK3lSLwgVwWHqP9DmMr-mQinII46M5HalpWllKK</p>
-
-<p>http://zhidao.baidu.com/link?url=bT8DZQs3jr6WSRf7J_ruYf7Divgqlrc3z8Kpi1LJRu79wHf1rjLXJn13Qt3FrjJSK76j74BbE9w17H7YvYOujXI9KUOpcpSo-mIOHj9Pc4a</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91think/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cento/">【已解决】CentOS7初体验与grub启动项windows丢失的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>暑假的时候就发现CentOS推出了7版本，download下来iso镜像后，不知道是UltraISO出了问题还是镜像本身的问题，无法进行刻录。今天下午在王腾同学测试后，便在老板发的X240s上测试安装。相比于6代，改变真的很大。首先，安装环境完全变了，基本思路从之前的串行单线安装变成了并发多线式的，即需要设置的部分都在一个统一的导航架构下，以任意顺序完成。更为人性化的同时，也发现并不能够很好地进行6时代较为全面的安装设置，有些设置需要进入系统后才可以进行。</p>
-
-<p>GNOME界面更加漂亮，可能是向Ubuntu或者Mac OS的方向接近吧，看上去确实是非常舒服的。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152019-的截屏.png"><img class="alignnone size-full wp-image-159" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152019-的截屏.png" alt="2014-09-03 15:20:19 的截屏" width="1366" height="768" /></a> <a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152045-的截屏.png"><img class="alignnone size-full wp-image-160" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152045-的截屏.png" alt="2014-09-03 15:20:45 的截屏" width="1366" height="768" /></a></p>
-
-<p>第一次启动时发现grub下Windos选项丢失，这个问题在首先安装windows的条件下还是很好解决的（六七年了，鸟哥的建议依然是攧扑不破的真谛），修改grub即可。不过centos7升级到grub2了。有点意思。具体不搬过来了，参见作者原贴。</p>
-
-<p>http://tieba.baidu.com/p/3154031191</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cento/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91wordp/">【更新中】Wordpress主题模板修改</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>杨老师网站要求wordpress主题模板采用浮动框的形式显示内容。类似学校网站http://www.sysu.edu.cn/2012/cn/index.htm这种组织形式，搜索半天，似乎没有类似主题，没办法，这个只能自己动手丰衣足食了，无奈对wordpress主题php及css组织结构毫无概念，请教俊文大概了解实现方向后只得从基础开始学起。这里算是个笔记吧。</p>
-<h4>模板文件及工作流程</h4>
-<p>一套完整的WordPress模版应至少包括如下文件：</p>
-<blockquote>
-<p style="padding-left: 30px;">style.css : 样式表文件
-index.php : 首页模板
-archive.php : 文章归档/分类目录模板
-404.php : 404 模板
-comments.php : 留言/回复模板
-footer.php : 底部模板
-header.php : 顶部模板
-sidebar.php : 侧栏模板
-page.php : 页面模板
-single.php : 文章页面模板
-functions.php : 模板函数
-search.php : 搜索结果模板</p>
-</blockquote>
-<p>模板文件的工作机制如下图所示，可以看到每当有WordPress页面（你愿意额话可以称之为WordPress引擎）被调用时，它会判断（通过排除法）页面的类型。 这类似于询问“我在哪儿？”。 WordPress回答“我在…类型的页面上”，然后以特定顺序调用页面。 WordPress找不到需要的PHP文件时，会使用“index.php”文件来代替所需文件。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/B7WuAagY.gif"><img class="alignnone size-full wp-image-156" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/B7WuAagY.gif" alt="B7WuAagY" width="720" height="430" /></a></p>
-
-<p>对应的基本加载流程如下：</p>
-<h6>1. 调用页眉
-2. 开启the loop（主循环）
-3. 调用永久链接与一些网页上的meta
-4. 调用以通知WordPress该获取的信息
-5. 调用以获取获取文章内容或摘要
-6. （或许）更多的meta
-7. 关闭the loop（主循环）
-8. 调用侧边栏
-9. 调用页脚</h6>
-<p>这里主要介绍一下循环调用数据库the loop（主循环）
-“WordPress Loop”会在数据库中持续调用文件，直到WordPress终止调用。 “the loop”的结构随显示页面类型而变，WordPress尝试加载的每个基本类型页面都有一个“loop”。 下面是开启the loop的代码：
-<strong>&lt;?php if ( have_posts() ) : &lt;?php if ( have_posts() ) : the_post(); ?&gt; </strong></p>
-
-<p>我们可以看到，代码被拆分开来，have_posts用以定义条件标签，while和the_post则各成一部分，但这仍然是the loop，在所有页面中基本都是这样。 多行loop时的一个用法是：用query_posts在“if have_posts”和代码的剩余部分之间放置一个参数，用来显示单篇文章、某一时段的文章、最近一篇文章或者某一类别中的文章，也可以改变the loop中迭代文章的顺序</p>
-
-<p>在修改模板的过程中，firefox的开发者工具非常好用，下图可以看到，配合双屏，开发者工具能够快速定位元素在代码流中的位置，并且锁定css选择器等，而且拥有实时修改测试的沙盒功能。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/test.jpg"><img class="alignnone size-full wp-image-153" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/test.jpg" alt="test" width="3286" height="1080" /></a></p>
-
-<p>参考资料：</p>
-
-<p>http://blog.sina.com.cn/s/blog_a02d97db0101d2b0.html</p>
-
-<p>http://www.2cto.com/kf/201209/154009.html</p>
-
-<p>http://webbeta.org/2009/05/21/how-to-hack-wordpress-theme-template-pages/（讲解加载流程）</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91wordp/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/03/21/sp-cam-amip-run/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -733,10 +576,10 @@ search.php : 搜索结果模板</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page37" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">38/43</span>
+          <span class="page_number ">38/87</span>
           
             <a href="/page39" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1022,7 +865,32 @@ search.php : 搜索结果模板</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2093,7 +1961,7 @@ search.php : 搜索结果模板</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2121,7 +1989,7 @@ search.php : 搜索结果模板</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2289,7 +2157,7 @@ search.php : 搜索结果模板</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2373,7 +2241,7 @@ search.php : 搜索结果模板</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2401,7 +2269,7 @@ search.php : 搜索结果模板</p>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2520,7 +2388,7 @@ search.php : 搜索结果模板</p>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2732,6 +2600,27 @@ search.php : 搜索结果模板</p>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2745,6 +2634,16 @@ search.php : 搜索结果模板</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2754,16 +2653,6 @@ search.php : 搜索结果模板</p>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2817,7 +2706,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2853,7 +2742,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2997,7 +2886,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3105,7 +2994,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3150,7 +3039,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3186,7 +3075,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3204,7 +3093,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3213,7 +3102,7 @@ search.php : 搜索结果模板</p>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3347,7 +3236,7 @@ search.php : 搜索结果模板</p>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

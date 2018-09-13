@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,125 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>
+                  <a class="post-link" href="/2016/09/03/linux-e4-b8-8b-e5-88-87-e6-8d-a2shell-e7-8e-af-e5/">Linux下切换shell环境</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-19
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>&nbsp;
-    
-        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>&nbsp;
-    
-        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>ncl写二进制文件非常方便，setfileoption+fbinrecwrite语句即可。处理模式输出的加热数据测试了一下，非常迅速搞定。随后需要用到fortran代码来读写二进制文件，没想到却遇到大问题。</p>
-
-<p>ncl下采用fbinrecwrite写入的文件为fortran下的sequential读取方式（貌似这个才是符合ieee标准的），按照<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/fbinrecwrite.shtml">官网指示</a>，代码很容易编译通过，但是执行出错。ifort编译执行错误结果：</p>
-<blockquote>forrtl: severe (98): cannot allocate memory for the file buffer - out of memory, unit 100, file /users/yangsong3/L_Zealot/F/f90/CAM4_PTENDT_DIFF_mon.dat</blockquote>
-<p>采用gfortran编译，同样执行出错：</p>
-<blockquote>At line 12 of file read_heat_diff.f90 (unit = 100, file = '../data/model_post/CAM4_PTENDT_DIFF_mon.dat')
-Fortran runtime error: End of file</blockquote>
-<p>第一次在linux平台下编译自己写的fortran代码，多少还是有些心虚。ifort表示内存不足，gfortran表示读到文件末尾，有些莫名其妙，检查路径文件名，文件大小，读取方式，貌似都没问题，折腾许久没有结果。</p>
-
-<p>问题只能回溯到ncl那么简单的二进制写入上，fbinrecwrite看上去没什么问题，setfileoption中的几个选项值得怀疑，查了下BigEndian的问题，是这样描述的：</p>
-<blockquote>其实big endian是指低地址存放最高有效字节（MSB），而little endian则是低地址存放最低有效字节（LSB）。
-
-用文字说明可能比较抽象，下面用图像加以说明。比如数字0x12345678在两种不同字节序CPU中的存储顺序如下所示：
-
-<strong>Big Endian</strong>
-
-低地址                                   高地址
------------------------------------------&gt;
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|   12  |   34  |   56  |   78   |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-<strong>Little Endian</strong>
-
-低地址                                   高地址
------------------------------------------&gt;
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|   78|   56  |   34  |   12   |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</blockquote>
-<p>虽然看上去出错信息并不是这么指向的，但还是要试一试，查了下fortran在字节序处理的问题，果然，一行open语句赫然入眼：</p>
-
-<p>open(…,<strong><em>convert=”big_endian”</em></strong>)</p>
-
-<p>加入测试，我擦嘞……居然可以了，果然是字节序的问题。原来fortran默认的是非人的little endian，好吧……关键是运行出错给出的那些错误信息，完全无厘头，真是对编译器失望了。另外SGI编译器默认为BigEndian。</p>
-
-<p>另外fortran读ncl写出的多维二进制数据的时候，注意维数方向是相反的哦！如ncl数组（33，44），fortran（44，33）</p>
-
-<p>【参考资料】</p>
-
-<p>http://blog.csdn.net/sunshine1314/article/details/2309655 BigEndian和LittleEndian</p>
-
-<p>http://bbs.lasg.ac.cn/?action-viewthread-tid-13303</p>
-
-<p>http://www.360doc.com/content/11/0216/10/2609140_93438395.shtml</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-18
+                        <i class="fa fa-calendar"></i>2016-09-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -405,42 +379,28 @@ Fortran runtime error: End of file</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
-<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
-set shiftwidth=4
+<p>默认为bash，支持的环境存储在</p>
 
-set expandtab</blockquote>
-<p> </p>
+<p>/etc/shells,vi可以查看。</p>
 
-<p>对于已经存在的文件：</p>
-<blockquote><strong>TAB替换为空格：</strong>
-:set ts=4
-:set expandtab
-:%retab!</blockquote>
-<p>多行缩进在命令行模式下</p>
-<blockquote>n&gt;</blockquote>
-<p>向右缩进n行，左用&lt;代替</p>
+<p>若切换，用chsh命令，有问题，ypchsh命令。</p>
 
-<p>【参考资料】</p>
-
-<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
-
-<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
+<p>重新登录tty后生效。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/09/03/linux-e4-b8-8b-e5-88-87-e6-8d-a2shell-e7-8e-af-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/">【已解决】putty在vim下使用小键盘</a>
+                  <a class="post-link" href="/2016/05/14/e3-80-90python-e3-80-91matplotlib-e9-85-8d-e7-bd/">【python】matplotlib配置文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-18
+                        <i class="fa fa-calendar"></i>2016-05-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -459,7 +419,7 @@ set expandtab</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -476,7 +436,7 @@ set expandtab</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -486,23 +446,28 @@ set expandtab</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>putty默认在vim下小键盘是不启动的，启动方式：
-选项Terminal-&gt;Features里，找到Disable application keypad mode，选上</p>
+<p>开始用python画图啦，发现matplotlib功能强大到令人发指，ug整整两千多页！我了个去！除了地图数据可能不及NCL强大，一般性的line bar等等图画起来简直是炫爆了。</p>
+
+<p>有相应的配置文件可以设置默认样式，寻找配置文件可以先import matplotlib，然后</p>
+
+<p>[1] matplotlib.matplotlib_fname()</p>
+
+<p>可以找到相应的配置文件路径。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/14/e3-80-90python-e3-80-91matplotlib-e9-85-8d-e7-bd/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim针对ncl的语法高亮及自动补全</a>
+                  <a class="post-link" href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/">【Supermarket】执行情况计划及进度</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
+                        <i class="fa fa-calendar"></i>2016-05-10
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -521,84 +486,9 @@ set expandtab</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>官网上查到了几个编辑器增强插件，浏览了一下，发现针对vim的属git上那个最好(Courtesy of Xin Xie [School of Marine and Atmospheric Sciencs, Stony Brook University].)</p>
-
-<p>方法比较简单，相关文件已经打包放在文章最后，拷贝到~/.vim相应位置即可。需要注意.vimrc是放在主目录下的，且一定不要直接mv过去，否则会覆盖掉原有的设置，需要拷贝内容复制。</p>
-
-<p>命令补全快捷键是CTRL+n</p>
-
-<p>【参考资料】</p>
-
-<p>http://www.ncl.ucar.edu/Applications/editor.shtml#vim</p>
-
-<p>【附件】</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/ncl_vim_highlight.zip">ncl_vim_highlight</a></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM continue run出现Internal pop2 clock not in sync with Sync Clock的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
     
   
 
@@ -615,7 +505,9 @@ set expandtab</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
     
   
 
@@ -625,93 +517,37 @@ set expandtab</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>晚上查天河二号的spin-up任务，发现下午的时候居然断掉了，已经积分了99年，队列状态一直是CG状态卡死，貌似是某个节点的一个进程被kill掉了，其他节点陆续因为超时退出。</p>
-
-<p>好吧，不管那个CG。重新提交任务，continue run，没想到initial的时候给我弹出了，纳尼……</p>
-
-<p>查看log文件发现如下错误</p>
-
-<p><strong>Internal pop2 clock not in sync with Sync Clock</strong></p>
-
-<p>POP2的时钟不同步? 这么有意思，貌似之前碰到过，因为转的时间不久，索性直接重新start-up了，这次可是转了10天啊我擦嘞，要是重新返工岂不是要命了。果断google，然后发现了这个：</p>
-<blockquote>https://bb.cgd.ucar.edu/internal-pop2-clock-not-sync-sync-clock</blockquote>
-<p>这个意思是直接重走一遍cesm_setup就可以，clean再setup，改build状态，提交任务——依然出错。其他google出来的信息几乎没用，诶，又入无人之境……</p>
-
-<p>既然是初始化的时候时钟同步出问题，想到模式运行生成restart文件的时候会同步配置一个rpointer文件，应该是记录重启点的文件，果断查看，发现问题：只有ocn的相关rpointer文件中指向100年的1月1日，其他都是99年1月1日，明白了，应该是ocn模块指定rpointer的方式与其他module不同，先于其他模块指定了新的重启点，可是其他模块的重启文件还没生成呢。长舒一口气，改rpointer.ocn.restart里面的文件为99年咯，Okay，提交任务！</p>
-
-<p>这次依然提交不久就断掉了，万念俱灰有木有，查看log文件，发现错误不一样了，有点欣喜，说明改rpointer有效。新错误是：</p>
-
-<p><strong>nlfilename_rof does NOT exist:rof_in</strong></p>
-
-<p>这么奇葩，径流模式出问题，老子又不关心你丫的径流，小兔崽子还找事……看起来是找不到rof_in的什么东西，google直接没结果，想到刚刚cesm重新setup过，是不是改了build后的一些namelist？重新build尝试，目前可以运行了，长舒一口气……但愿今晚能顺利跑过断点～</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM标准流输出</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>实现CESM额外的标准流输出其实并不困难，只要use cam_logfile就可以了，其实看一下cam_logfile.F90文件，就可以发现，里面主语句只有一个</p>
-<blockquote>iulog=6</blockquote>
-<p>因此write语句这样写就可以将额外的信息流输出到log文件：</p>
-<blockquote>write(iulog,*) "Hello World!"</blockquote>
+<p>2016.5.14执行计划应完成</p>
+<ul>
+	<li>逐日客流时间序列（四门店同图）</li>
+	<li>小波分析其中一两店，给出图</li>
+	<li>平均周变化
+<ul>
+	<li>排除节假日调休的周变化，如果来得及</li>
+	<li>排除超过1个标准差的周变化，如果来得及</li>
+</ul>
+</li>
+	<li>平均日变化
+<ul>
+	<li>工作日和周末各自的日变化<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
+</ul>
+</li>
+	<li>尝试套用ARIMA模型进行预测</li>
+</ul>
+<p>下一步计划：</p>
+<ul>
+	<li>特殊事件因子
+<ul>
+	<li>法定节假日及调休</li>
+	<li>高温热浪、强降水、寒潮</li>
+	<li>促销活动</li>
+</ul>
+</li>
+</ul>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -726,10 +562,10 @@ set expandtab</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page35" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">36/43</span>
+          <span class="page_number ">36/87</span>
           
             <a href="/page37" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1015,7 +851,32 @@ set expandtab</blockquote>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2086,7 +1947,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2114,7 +1975,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2282,7 +2143,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2366,7 +2227,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2394,7 +2255,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2513,7 +2374,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2725,6 +2586,27 @@ set expandtab</blockquote>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2738,6 +2620,16 @@ set expandtab</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2747,16 +2639,6 @@ set expandtab</blockquote>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2810,7 +2692,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2846,7 +2728,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2990,7 +2872,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3098,7 +2980,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3143,7 +3025,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3179,7 +3061,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3197,7 +3079,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3206,7 +3088,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3340,7 +3222,7 @@ set expandtab</blockquote>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

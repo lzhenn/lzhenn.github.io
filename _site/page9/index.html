@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a>
+                  <a class="post-link" href="/2018/04/04/raid-rebuild/">东校实验室服务器阵列rebuild</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-10
+                        <i class="fa fa-calendar"></i>2018-04-04
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,7 +352,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>
     
   
 
@@ -281,76 +369,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>查了下福布斯实时榜单，居然发现1 Billion以上2000多富豪列表完全就是个硕大的table，果断down下来做点分析啥的。比如富豪里的基尼系数，嘿嘿，两千多样本可以啦。
-子样本也可以计算大陆的情况。不过呢，更关心的是个人的排位以及按高考成绩排位对应的财富目标。虽然相关计算早完成了，可惜的是实验室服务器硬盘问题，诶。这次做个更好的。</p>
-
-<p>留坑，回填。</p>
-
-<p><strong>Updated 2018-01-10</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/10/forbes-rank/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/07/pkill-ssh/">干掉僵死ssh进程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-07
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a>&nbsp;
+        <a href="/tag/#raid" title="Tag: raid" rel="tag">raid</a>&nbsp;
     
         <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
     
@@ -362,24 +381,66 @@
                 </div>
                 <div class="excerpt">
                     
-<p>有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-kill</span> <span class="nt">-t</span> pts/2
-</code></pre></div></div>
+<p>东校实验室服务器坏掉了一块RAID 1的磁盘，购置新硬盘后测试rebuild发现几个配置页面都没有相关选项。</p>
+
+<p>原RAID没出问题的磁盘被降级为foreign状态，</p>
+
+<p>后查到<a href="https://www.dell.com/support/article/cn/zh/cndhs1/sln129828/%E8%A7%A3%E5%86%B3poweredge-raid%E6%8E%A7%E5%88%B6%E5%99%A8%E9%94%99%E8%AF%AF-perc%E6%95%85%E9%9A%9C-?lang=zh">官方文档</a></p>
+
+<blockquote>
+  <p>Foreign configuration(s) found on adapter. Press any key to continue, or ’C’ to load the configuration utility or ’F’ to import foreign configuration(s) and continue.</p>
+</blockquote>
+
+<p>按F按键后导入foreign配置，开始进入系统。</p>
+
+<p>进入系统后发现0号盘位闪橙色灯，也处于降级出错状态，妈蛋，这下有的玩了。于是联系L老师再次采购硬盘。
+<strong>Updated 2017-12-30</strong></p>
+
+<p>3月硬盘到货，测试直接将0盘位换成新硬盘，发现无法自动rebuild，无法识别1盘位的系统盘。</p>
+
+<p>重新装回旧有硬盘后能够进入系统，但是只放置1盘位新硬盘，启动后出现无法找到superblock的错误。</p>
+
+<p>怀疑能进入系统的好机会不多，迅速备份了技术博客后，关掉所有的crontab减少读写，希冀RAID卡能够将所有的数据rebuild到1盘位。等下周来看。</p>
+
+<p><strong>Updated 2018-03-28</strong></p>
+
+<p>所以希冀是自欺欺人的。满心以为自动rebuild后，可以更换下0盘位，发现还是老样子。</p>
+
+<p>想到新招数偷天换日，将2号盘位的non-RAID disk取下，更换上新硬盘后，把新硬盘做全局热备。<a href="https://wenku.baidu.com/view/993960dfbb4cf7ec4afed023.html">参考资料</a></p>
+
+<p>没想到改全局热备后并没有rebuild，而且再次出现找不到superblock无法进入系统的情况。没招了，只有试图解决这个问题。测试<a href="https://linuxexpresso.wordpress.com/2010/03/31/repair-a-broken-ext4-superblock-in-ubuntu/">这个解决方案</a></p>
+
+<p>发现牛逼的是所有的备份superblock都挂了。这是没救了？</p>
+
+<p>尝试检查了一下fstab，发现奇怪的地方，fstab中将sda1挂载到/用户/data下，由于data存储较大，<strong>怀疑是2号位硬盘找不到，然后把系统盘sdb误认为是sda才出现superblock不匹配的地方。（上次更换0盘位也出现相同错误，可能更换或取下硬盘后影响了系统自检虚拟磁盘的顺序）</strong></p>
+
+<p>尝试给回2盘位，可以进入系统；随后尝试删除fstab中对应语句，拔出2盘位，也可以进入系统，有戏，果然是这个原因！</p>
+
+<p>接下来把2盘位更换为新硬盘，由于之前做了热备，现在显示为foreign状态，import foreign configure后，可以进入系统。进入系统后没有看到2盘位在闪烁，说明没有自动rebuild。</p>
+
+<p>关机，将处于2盘位的新硬盘拿下并替换0盘位就硬盘，开机发现提示进入配置页面，进入后发现0盘位开始rebuild，Yeah！成功！</p>
+
+<p>下午助教，去课室发现竟然没人，问了一下才知道换课了，磨叽了一会儿回去差不多两小时，发现rebuild居然卡在37%，奇怪。不管了，今天没时间耗着了，必须搞完。于是重启，突然想到为何不尝试一下之前的1号盘是否能读出。如果1号盘可用的话，那么直接rebuild到更新的时间点岂不是更好。</p>
+
+<p>于是将0盘位换成之前的1号盘，果然可以！慎重起见，迅速备份技术博客，17年2月之后一直到8月底最后一篇博客，一点都不少，太好了！之后设置rebuild到这个盘就去吃饭了，当晚SH说0盘位掉线了，好吧，好在技术博客救回来了。下次去恢复到2月份的系统。</p>
+
+<p><strong>Updated 2018-04-04</strong></p>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/07/pkill-ssh/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/04/raid-rebuild/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a>
+                  <a class="post-link" href="/2018/04/03/trading-diary/">20180403交易笔记-市场转向信号？</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-03
+                        <i class="fa fa-calendar"></i>2018-04-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -398,9 +459,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
     
-        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -417,15 +480,13 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#json" title="Tag: json" rel="tag">json</a>&nbsp;
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
     
-        <a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a>&nbsp;
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
     
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+        <a href="/tag/#ETF" title="Tag: ETF" rel="tag">ETF</a>&nbsp;
     
-        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
     
   
 
@@ -435,52 +496,42 @@
                 </div>
                 <div class="excerpt">
                     
-<p>给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：</p>
+<blockquote>
+  <p>逻辑对的情况下，该如何把握节奏？</p>
+</blockquote>
 
-<p>首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。这样很正常嘛，本身就是静态网页啦。</p>
+<p>这段时间最大的感受就逻辑假设在不断验真，可节奏把握的确是一件颇具奇技淫巧，难以搞定的风骚操作。其实本质还是资金仓位管理以及择时判据，逻辑对的情况下（big picture）有定量分析加持才行。</p>
 
-<p>所以还是回到刚刚的思路，查了下解决方案，发现是自己定义了函数但是木有执行。在定义后加入执行代码后，生效。注意对应的json包不能放在jekyll生成的下划线前缀目录下，否则无法获取到。javascript代码：</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showJson</span><span class="p">(){</span>  
-    <span class="kd">var</span> <span class="nx">test</span><span class="p">;</span>  
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">){</span>  
-        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>  
-    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">){</span>  
-        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">();</span>  
-    <span class="p">}</span><span class="k">else</span><span class="p">{</span>  
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Browser not supported!"</span><span class="p">);</span>  
-    <span class="p">}</span>  
-    
-    <span class="k">if</span><span class="p">(</span><span class="nx">test</span> <span class="o">!=</span><span class="kc">null</span><span class="p">){</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s2">"/database/principles.json"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>  
-            <span class="k">if</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span><span class="o">&amp;&amp;</span><span class="nx">test</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">){</span>  
-                <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>  
-                <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
-                <span class="kd">var</span> <span class="nx">rnd_pos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"content-principle"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">rnd_pos</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
-            <span class="p">}</span>  
-        <span class="p">};</span>  
-    <span class="p">}</span>  
-<span class="p">}</span>  
-<span class="nx">showJson</span><span class="p">();</span> 
-</code></pre></div></div>
+<p>从16年下半年就看空科技股，当然这节奏是严重不对的，不断学习过程中看到smart beta痴痴买入ETF的策略加上投机性买入对价格的不断推升可以持续如此之久。终于憋到今年2月份第一次利率冲击，波动性回归，市场进入震荡格局。</p>
 
+<p>这几天F的信息泄露+川普对A的税收大棒挥起，科技股终于出现像样的下跌了，大概瞄了下QQQ应该是回到去年十一月的水平，会买么？我还不会。FAANG只有PE到20以下我才会心动，G目前EPS 18股价1k，55的PE；被干的F目前PE 29，至少跌倒20以内，才会下手。只有apple目前17+。</p>
+
+<p>看了下最近的资金曲线，基本维持窄幅震荡，大概只有3%左右最大回撤，相比指数的跌宕起伏平缓很多。重新审视了下仓位、标的的分散性和风险敞口，依然不觉得有什么问题。风险投资占总资产比重已经下降到24%左右。</p>
+
+<p>逻辑上接下来应该去验真第二轮的利率上升冲击、国际经贸形势变换冲击以及地缘政治关系紧张冲击等，适当加一些吃backwardation rolling的标的后继续走佛系路线：观察，等待。</p>
+
+<p>我想也可以抛出结论了：</p>
+
+<blockquote>
+  <p>客观交易系统还不成熟的前提下，不要在乎节奏，减少操作，注意风险敞口和布局即可。</p>
+</blockquote>
+
+<p><strong>Updated 2018-04-03</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/03/random-post-ajax/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/03/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
+                  <a class="post-link" href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-03
+                        <i class="fa fa-calendar"></i>2018-04-01
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -499,7 +550,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -516,11 +571,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
     
   
 
@@ -530,188 +583,103 @@
                 </div>
                 <div class="excerpt">
                     
-<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
+<p>帮JL移植wrf3.8.1到天河2号。首先调整环境变量。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">.</span> /etc/bashrc
+<span class="k">fi</span>
+<span class="c"># edited on Apr 1, 2018 for WRF</span>
+<span class="c"># User specific aliases and functions</span>
+<span class="c">#bug fix</span>
+<span class="nb">source</span> /WORK/app/osenv/ln1/set2.sh
+<span class="nb">export </span><span class="nv">MODULEPATH</span><span class="o">=</span>/WORK/app/modulefiles
 
-<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
-总负债 L=a*(1+r)^n
+<span class="c">#set COMMON input data path for CESM</span>
+<span class="c">#export COMMON_CESM_INPUT=/WORK/app/CESM_inputdata</span>
+
+<span class="c">#set Intel compiler and MPI</span>
+module load intel-compilers/13.0.0
+module load MPI/Intel/MPICH/3.1-icc13
+module load cmake/3.0.2
+
+<span class="c">#set hdf5 and netcdf4 for WRF</span>
+module load hdf5/1.8.13/03-CF-13
+module load netcdf/4.3.2/02-CF-13
+
+<span class="c">#set jasper</span>
+<span class="nb">export </span><span class="nv">JASPER</span><span class="o">=</span>/HOME/sio_goc017/WORKSPACE/jjl/soft/jasper-1.900.1
+<span class="nb">export </span><span class="nv">JASPERLIB</span><span class="o">=</span><span class="nv">$JASPER</span>/lib
+<span class="nb">export </span><span class="nv">JASPERINC</span><span class="o">=</span><span class="nv">$JASPER</span>/include
+
+<span class="c">#set WRF</span>
+<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
+<span class="nb">export </span><span class="nv">BUFR</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">CRTM</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">J</span><span class="o">=</span><span class="s2">"-j 12"</span>
+<span class="nb">export </span><span class="nv">MP_STACK_SIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">OMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">export </span><span class="nv">KMP_STACKSIZE</span><span class="o">=</span>4000000000
+<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
+<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+
+<span class="nv">MPI_BUFFER_SIZE</span><span class="o">=</span>128
 </code></pre></div></div>
-<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
-当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
+<p>注意在编译cumulus模块的地方大概要等待20分钟之久。采用上述环境变量出错：</p>
 
-<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
-总负债 L=a*(1-k)*(1+r)^n
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wrf.o: In <span class="k">function</span> <span class="sb">`</span>MAIN__<span class="s1">':
+wrf.f90:(.text+0x1f): undefined reference to `__intel_new_feature_proc_init'</span>
+libwrflib.a<span class="o">(</span>module_check_a_mundo.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>module_check_a_mundo_mp_check_nml_consistency_<span class="s1">':
+module_check_a_mundo.f90:(.text+0x31fa): undefined reference to `__intel_ssse3_rep_memmove'</span>
+module_check_a_mundo.f90:<span class="o">(</span>.text+0x35ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_etanew.o): In function `module_mp_etanew_mp_etanewinit_'</span>:
+module_mp_etanew.f90:<span class="o">(</span>.text+0xacb0<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_mp_thompson.o): In function `module_mp_thompson_mp_table_ccnact_'</span>:
+module_mp_thompson.f90:<span class="o">(</span>.text+0x2ed74<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtm.o): In function `module_ra_rrtm_mp_rrtm_lookuptable_'</span>:
+module_ra_rrtm.f90:<span class="o">(</span>.text+0x256ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
+libwrflib.a(module_ra_rrtmg_lw.o):module_ra_rrtmg_lw.f90:(.text+0x769bf): more undefined references to `__intel_ssse3_rep_memmove'</span> follow
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x1ee4): undefined reference to `_intel_fast_memmove'</span>
+/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose1d_grib_<span class="s1">':
+io_grib_share.f90:(.text+0x26f5): undefined reference to `_intel_fast_memmove'</span>
+io_grib_share.f90:<span class="o">(</span>.text+0x29e3<span class="o">)</span>: undefined reference to <span class="sb">`</span>_intel_fast_memmove<span class="s1">'
+0.57user 4.84system 0:08.12elapsed 66%CPU (0avgtext+0avgdata 487696maxresident)k
+12392inputs+102200outputs (47major+183178minor)pagefaults 0swaps
+make[1]: [em_wrf] Error 1 (ignored)
+</span></code></pre></div></div>
+<p>Google以下，发现intel官网的<a href="https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/494782">trouble shooting page</a>
+以下内容：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I believe the message may be caused by mixing objects built with different compiler versions. The __intel_new_feature_proc_init entry point is only in recent compiler libraries; if you have code built with a recent compiler, but are linking to older run-time libraries, you might encounter such a problem.
 </code></pre></div></div>
-<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
-若不破灭，要求总资产大于等于0，则要求k</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
+
+<p>有道理，可能是之前编译的模块没有删掉。执行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$./clean -a
 </code></pre></div></div>
-<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
+<p>再次测试一下.出现难以理解的错误：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nup_em.f90(68): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
+   USE module_initialize_real, only : wrfu_initialize
+   -------^
+   real_em.f90(12): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
 
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
+</code></pre></div></div>
+<p>表示找不到include文件。到相关目录下检查发现文件确实存在，奇葩……重新执行compile语句后编译成功。怀疑是天河的文件系统不稳定造成。</p>
 
-<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
-而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
+<p>测试WPS编译出错。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make[1]: pathf90: Command not found
+</code></pre></div></div>
+<p>检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.</p>
+
+<p><strong>Updated 2018-04-01</strong></p>
+
+<p>据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。</p>
+
+<p><strong>Updated 2018-04-03</strong></p>
 
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-02
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>想要让本地的个人博客服务开机后即启动，测试了下，路径敏感。
-修改rc.local</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> vi rc.local
-</code></pre></div></div>
-<p>其中加入</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$YOUR_REPO</span>
-<span class="nb">sudo </span>jekyll s
-</code></pre></div></div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/02/ubuntu-boot/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/01/housing-account/">买房的财务安全边际计算</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。
-假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为</p>
-
-<p>R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5</p>
-
-<p>整理可得，净资产
-B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
-
-<p>假设首付率为0.3</p>
-
-<p>B&gt;0.5<em>C+0.2</em>A</p>
-
-<p>假设家庭本身无负债，B=C</p>
-
-<p>B&gt;(2/5)*A</p>
-
-<p>因此，在30%首付、家庭无负债的条件下，对于一套500万的房子，总资产大于200万达到购入的安全边际。对于小户型，假设180万，家庭总资产大于72万为安全边际。</p>
-
-<p>再考虑50%首付的情况，这是个很有意思的阈值，在50%首付的前提下，只要初始家庭负债率小于50%即可满足条件，与房产价格无关。是否矛盾，并不，因为还有一个隐含条件是，家庭能够承担买房首付，若不讨论资产是否具有高流动性，至少有C&gt;0.5A。</p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/01/housing-account/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/01/jinlin-wrf-tianhe2/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -726,10 +694,10 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page8" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">9/43</span>
+          <span class="page_number ">9/87</span>
           
             <a href="/page10" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1015,7 +983,32 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2086,7 +2079,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2114,7 +2107,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2282,7 +2275,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2366,7 +2359,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2394,7 +2387,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2513,7 +2506,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2725,6 +2718,27 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2738,6 +2752,16 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2747,16 +2771,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2810,7 +2824,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2846,7 +2860,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -2990,7 +3004,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3098,7 +3112,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3143,7 +3157,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3179,7 +3193,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3197,7 +3211,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3206,7 +3220,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3340,7 +3354,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>

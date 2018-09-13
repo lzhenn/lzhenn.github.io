@@ -41,7 +41,7 @@
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">LZN's Blog</a>
-        <small>Model Player</small>
+        <small>CodePlayer</small>
         <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
         <nav id="headerNav">
             <ul>
@@ -226,6 +226,94 @@
                 
                     
                 
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -241,11 +329,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/05/install-mysql/">CentOS mysql安装</a>
+                  <a class="post-link" href="/2018/05/17/thinking-young-world/">十年绚烂</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-05
+                        <i class="fa fa-calendar"></i>2018-05-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -264,148 +352,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
     
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
-首先切换到root下安装：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
-</code></pre></div></div>
-<p>检查服务状态</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
-mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
-</code></pre></div></div>
-<p>启动服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
-</code></pre></div></div>
-
-<p>启动开机服务</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
-</code></pre></div></div>
-
-<p>之后给出提示信息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
-To do so, start the server, then issue the following commands:
-
-/usr/bin/mysqladmin -u root password 'new-password'
-/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
-
-Alternatively you can run:
-/usr/bin/mysql_secure_installation
-</code></pre></div></div>
-<p>采用第二种方法更加安全。</p>
-
-<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
-
-<p>然后的选项一路Y。</p>
-
-<p>登录mysql，在root用户下，直接</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
-</code></pre></div></div>
-<p>登陆后，我们查看一下用户列表。</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-</code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
-| Host      | User |
-+-----------+------+
-| 127.0.0.1 | root |
-| localhost | root |
-+-----------+------+
-2 rows in set (0.00 sec)
-</code></pre></div></div>
-<p>添加一个非root用户,密码为password</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
-</code></pre></div></div>
-<p>给予新用户相应权限</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
-<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----------+--------+</span>
-<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
-</code></pre></div></div>
-<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
-<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-03-05</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/05/install-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/04/jupyter-notebook/">Jupyter notebook学习记录</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
     
   
 
@@ -422,7 +371,11 @@ Alternatively you can run:
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#jupyter&nbspnotebook" title="Tag: jupyter&nbspnotebook" rel="tag">jupyter&nbspnotebook</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
     
   
 
@@ -432,49 +385,39 @@ Alternatively you can run:
                 </div>
                 <div class="excerpt">
                     
-<p>Jupyter Notebook极端强大，可以直接执行Markdown，执行之后即成为document html。</p>
+<p>不知道什么时候开始，觉得一天天，一周周，一月月过得越来越快，小学的时候，一周五天，一学期四个月多么漫长啊，而如今，不知不觉间几个月就没了。</p>
 
-<p>感叹号(exclamation point)可以用于嵌入bash command:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">xxx</span>
-</code></pre></div></div>
+<p>老了。熬夜撑不住了，早晨也时常六点多就醒。25岁真的是人生的顶峰，随后就是下坡路。20-30岁，这短暂的十年真的是人生最美好的十年。</p>
 
-<p>Notebook built-in command叫做Magics，单百分号：Line Magics，双百分号：Cell Magics。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">lsmagic</span>
-</code></pre></div></div>
-<p>常用的magic func</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">HTML</span>  <span class="c">#其后的text会被render为html，可以放入iframe等拖视频过来。</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inlin</span> <span class="c">#将matplotlib绘图放到notebook的输出中。</span>
+<p>朱老板听了位列福布斯30-30一哥们的报告，激动得语无伦次，对其口才风度能力气质佩服的五体投地。默默查了下30-30，指的是福布斯评选出的30位30岁以下的精英青年。一眼望去，创业者居多，翻了翻后面，体育健儿，知名艺人也位列其上。猛然意识到，他们与我，是同龄人。</p>
 
-<span class="o">%%</span><span class="n">javascript</span>
-<span class="o">%%</span><span class="n">bash</span>
+<p>同龄人！时至2018，第一批90后只剩下两年就30岁了。连第一批00后今年都要大学入学了！盯着那一串名单，愈发感到恐惧和沮丧。且不说零星可见的00后艺人，对艺人和运动员这两个群体来说，如果在20-30岁阶段不能够成为业界明珠，那么这一辈子，也极少可能再向上走了吧。
+曾经觉得年轻，觉得未来充满了选择，充满了机遇，充满了可能性，而事实却远非如此。我们可以设想，即便人感受时间的流逝是线性的，即便机遇和可能性随着年龄增长也是线性减少的，这种希望也应该线性地减少才对。
+可吊诡的呢，是人感受到的时间流逝，随着年龄增长是越来越快的；而很多机遇和选择，随着时间流逝甚至可能是指数递减的，比如对艺人来说，18岁和27岁可能遇到的机会，决然是不同的。
+但是希望这种事情，却可以被称为执念，随着时间流逝，并不会以某种圆润的曲线下降。直到有一天，现实狠狠地甩了一巴掌，按王小波的话，就像挨了锤的牛一样。这个时候才会发现，自己只有希望的泡泡，却没有希望的内容。这也是为什么在各种语言的描述中，希望总是破灭的，而不是消失，减弱之类的修饰。</p>
 
-<span class="o">%</span> <span class="o">%</span><span class="n">timeit</span>   <span class="c">#可以测试function的速度</span>
-</code></pre></div></div>
+<p>我该庆幸自己意识到这一点了么？回望过去六年，我在做什么，获得了什么，争取到了什么？</p>
 
-<p>甚至可以酷炫地render pandas dataframe，看图，效果真是酷炫到爆炸
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp0wdaobj5j20s50zzgx8.jpg" alt="" /></p>
+<p>时间那么公平，所有人，无论是谁，过了一年就是长了一岁。中午看到李迅雷文章，年轻人越来越少的中国。是噢，我还把自己当年轻人。我的同龄人，都是85-95这批回声婴儿潮里的孩子，如今，真的是在二十几岁最好的年华，如今都在各自工作岗位上，奉献自己的青春汗水。这批人里，早有能够凭一张打码自拍一夜赚数百万收入，也有无数屌丝无产者，甚至，将来可能还有一批负资产人士。五年之后，我们30多岁了，十年之后，更是集体奔四。五年十年，过起来只会越来越快，年轻人，真的越来越少。</p>
 
-<p>更牛逼的是，居然可以通过file-&gt;download as存储为html pdf markdown等各种形式，简直牛逼到爆炸。
-我们测试一下，发现html直接把图片存成了一串散列值，markdown的话会把图片和md文件放在一个zip包里。</p>
+<p>下午见闻小编发来运单截图，中奖书籍发货了。看着手写运单清秀的字迹，《你的名字》剧照做头像，突然很感慨，我们这批人里，多少还把自己当作孩子，然而历史的行程从不曾暂停，工作岗位上的我们，已经是中流砥柱。如此形势，是危，也是机。</p>
 
-<p>notebook的存储本质是个json file。</p>
-
-<p><strong>Updated 2018-03-04</strong></p>
+<p><strong>Updated 2018-05-17</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/04/jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/05/17/thinking-young-world/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/02/28/trading-diary/">20180228交易笔记</a>
+                  <a class="post-link" href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-28
+                        <i class="fa fa-calendar"></i>2018-05-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -518,7 +461,7 @@ Alternatively you can run:
     
         <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
     
-        <a href="/tag/#ETF" title="Tag: ETF" rel="tag">ETF</a>&nbsp;
+        <a href="/tag/#option" title="Tag: option" rel="tag">option</a>&nbsp;
     
         <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
     
@@ -530,38 +473,44 @@ Alternatively you can run:
                 </div>
                 <div class="excerpt">
                     
-<p>前几天与ZP和SC一起讨论了一下ETF和波动性的关系，逻辑上应该比较讲得通，记录一下。首先是在知乎上看到如下讨论：</p>
+<p>原油这次真的起飞了。昨晚油价一路窜高，布油一路突突到76刀+，创下三年半来新高。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fr3q64rs8mj20rx0lx424.jpg" alt="" /></p>
+
+<p>之前的逻辑在不断地验真，去年到现在，最主要的资本利得基本都是油给的。对于高信噪比的趋势交易，真的没必要天天盯盘，更重要的是信心和布局。70+其实基本已经在平衡价位了，现在投机性交易者正在助推价格继续上涨，后续布油一旦触碰到80，打算减半仓。</p>
+
+<p>昨天看投研帮文章表示商品/权益类资产价格比值达到历史新低，该指标均指回归无非两种途径：A权益类资产大跌，B商品价格大涨。直觉应该买个大盘的put对冲下，不过仔细想了想自己的商品标的和权益类资产的对冲手段似乎没什么问题，瞄了下九月到期的QQQ的put，尼玛100股要600多刀，宰人呢这是。决定财报季过后适当减仓，继续观望。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fr3qdqtsdaj20ec09yq5d.jpg" alt="" /></p>
+
+<p>消息面上中美贸易战继续来来去去过招，川普要撕毁伊核协议，基本面上还是美利坚继续复苏扩张，上月非农虽然不及预期，但是失业率跌倒4%以下(当然每次危机前也近似这么漂亮的数字)，欧洲有整体熄火的迹象，国内各指标基本保持稳定，去杠杆总基调下资金面依然紧张。</p>
+
+<p>总之16-18全球应该是经历了一次信贷脉冲下的小复苏，根本问题当然没有解决，而且更严重了，没错，债务问题。短暂的波动并不能代替长期的趋势，时先生那句“债务是一条带血的主线”依然萦绕耳畔。短期来看，油飞了，通胀预期也跟着起来了，但17年后长债收益率和黄金出现背离，反映着黄金隐含的通胀预期与TIPS反应的通胀预期的背离，金银波动率逐渐走低。Fed措辞似乎开始接受低通胀，并且对未来的经济增长和通胀预期表示隐忧。虽然大趋势上依然固执于通胀走强，但短期考虑以期权策略做多波动性。</p>
+
+<p>另外最近开始看东野圭吾的《解忧杂货铺》。坦白说，看他第一本《拉普拉斯的魔女》，对其行文的印象就是灰暗的白描和冷淡的叙事，实则压抑。作品吸引我的地方往往在于其对人物心理和动机的揭示以及对现实社会背景的折射。比如魔女中弑夫者的价值观（大致印象）:</p>
 
 <blockquote>
-  <p>ETF turnover rate 多少？ 正常在 5%左右， mutual fund 一年 turnover 多少？ 大概在 30%-40% 左右。 一旦市场出现大批量的卖家和买家，市场上 没有足够的liquidity 去吸收吧， 所以股价才会变动的很大。等到有一天，90%的钱都去了ETF， 应该来说 active 更容易找到 alpha, 但是在钱持续往etf 流的今天，难道不是ETF 的 holding 在完全没有 基本面的情况下不停的涨吗？ 一旦出现大批卖家， it is going to be a bloodbath.</p>
+  <p>找年龄差不多的男人结婚，老了之后，两个老人相互照顾多累呀。如果找个有钱的老男人嫁了，老男人寿命不久，死了之后自己依然年轻，还能继承一大笔遗产……</p>
 </blockquote>
 
-<p>有意思，但是逻辑线还是不清楚。想了想应该是这样:</p>
-<blockquote>
-  <p><strong>ETF通过低换手率抑制了成分股的波动性，从某种意义上来说，使得市场的投机性降低，这是好的方面；但ETF本身对其标的流通股的吸收使得市场上可以自由交易的标的股数量减少。由于可供交易的流通股数量减少，潜在的大宗买卖对股价的影响增大（潜在波动性增大，盘前盘后若交易成功更容易出问题），而这种缺少流动性市场的大幅度调整可能会进一步影响ETF持仓者的预期，一旦预期一致转向将会造成大量抛盘从而引发系统性风险。</strong></p>
-</blockquote>
+<p>《解忧杂货铺》就更有意思了，现时背景下在失去的二十年里成长的一代年轻人，利用跨时空书信教育70年代石油危机时的父辈要去珍惜工作机会，继承家业的机会，告诉他们再过30年连大学生出来都可能找不到工作（误入杂货铺的三人就是找不到工作四处偷窃的社会青年）。依托时代背景塑造人物再折射时代背景，叙事行文的淡漠情感，其书近几年在国内的流行和畅销程度，其实可以反映出很多有意思的事情。愿意或者不愿，我们都将见证即将到来的这个时代。</p>
 
-<p>比较好的应对策略：</p>
-<blockquote>
-  <p>正alpha小盘股+高beta指标股去养大盘etf看跌期权？</p>
-</blockquote>
-
-<p><strong>Updated 2018-02-27</strong></p>
+<p><strong>Updated 2018-05-08</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/02/28/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/05/08/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a>
+                  <a class="post-link" href="/2018/05/07/ill-health-blog/">病了快一个月</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-24
+                        <i class="fa fa-calendar"></i>2018-05-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -580,11 +529,9 @@ Alternatively you can run:
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>&nbsp;
     
-        <a href="/category/#reading" title="Category: reading" rel="category">reading</a>&nbsp;
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -600,92 +547,10 @@ Alternatively you can run:
 <span class="pageTag">
   <i class="fa fa-tags"></i>
   
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
     
         <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
     
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>寒假回家看完了两本书，一本是Kindle中文版的《非理性繁荣》，另一本也是中文版加尔布雷斯的《1929年大崩盘》。在家看完想趁热打铁写下笔记，奈何懒惰，现在补来。</p>
-
-<p>《非理性繁荣》作者罗伯特·席勒（Robert Shiller）是耶鲁大学的行为金融学教授，2013年诺奖得主。除了这本第一版预言了00年科网泡沫和第二版语言了08年金融危机畅销书之外(据<a href="https://www.amazon.com/Irrational-Exuberance-Revised-Expanded-Third/dp/0691173125/ref=sr_1_1?ie=UTF8&amp;qid=1519524992&amp;sr=8-1&amp;keywords=irrational+exuberance+by+robert+shiller">亚马逊</a>，这本书第三版发于2016年8月16日)，在Coursera和网易上还有他Financial Markets课程也非常有名。</p>
-
-<p>初读这本书，总会脑海里浮现出在Berkeley Mccone Hall五楼看到的那位地理系老教授：白发苍苍的老人坐在窗边，佝偻着腰背，盯着眼前的屏幕，缓缓敲击着键盘，时不时低头去找键盘上遥远的数字与标点符号。
-从本书内容上的理性中立客观，旁征博引细致入微的数据支持与证据链构建；直观感受上来讲，席勒教授就是这么一副兢兢业业老学者的形象。
-当然<a href="https://book.douban.com/subject/26803982/">豆瓣上</a>第三版封面图的时候发现老人家居然这么帅的时候还是很惊讶，典型的Stereotype了。</p>
-
-<p>整本书大致先从历史角度去分析投机性泡沫形成，包括引发事件，预期自我实现的正反馈，市场信心转向等；之后分析了文化因素（欧美移民的重商文化）和行为心理因素（人性因素：贪婪和恐惧）的影响。再后则是分析人类对明显泡沫化的资产进行合理化解释归因的动机。最终给出了切实的投资建议。
-记忆比较深的还是老人家对股息的阐述，判断泡沫与否的一个简单方法就是看股息回报率（毫无疑问目前是泡沫期了）。最后关于疾病扩散模型的应用也非常有趣，描述了观点的传播和关注机制对泡沫的影响。
-老人家同时也强调市场见顶之后可能多年低迷的可能性，这无论对华尔街还是投机客来说都是致命的。所以老人家建议多元化投资、关注低市盈率、高股息的入场时机，以及增加储蓄率等。
-整部作品的基调非常像一部关于投机泡沫的大综述，理性中立客观，数据翔实，论据充分，尤其是用真实数据去评估人们一直以来的认知偏差，长期持股未必会有良好收益，如果在漫漫熊市中长期持股而不摊低成本，整个股指会经过十几年才能回到高位，非常之凄惨（不要忘了仅仅是股指，其中还有乐观主义偏差）。</p>
-
-<p>总之，重要的一点教训就是足够理性，谨慎乐观，注意风险敞口的控制，在最近几年的环境下应该是非常重要的素质。</p>
-
-<p>《1929年大崩盘》则是一部以叙事+数据+资料尽调的方式描述了1929年大崩溃的过程，整部作品读起来并不像《非理性繁荣》那般理中客，但是翔实复现了整个崩溃的过程，并做了简单的后果分析，没有进一步外延到与法西斯上台、以及随之而来的二战的关系。
-作品很短，着眼很多关于股市崩盘的特征，比如高位放量，波动性上升，反复磨顶等等，这给了大周期近顶部时的逃脱机会。最后还反驳了一下崩溃后自杀率上升的谣言，总之看下来感觉就是，只要前期不作死加杠杆资不抵债，勒紧裤腰带还是照样能过的。</p>
-
-<p><strong>Updated 2018-02-27</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/24/reading-record/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/17/shell-parallel-task/">Shell采用wait和后台执行实现多进程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -695,99 +560,120 @@ Alternatively you can run:
                 </div>
                 <div class="excerpt">
                     
-<p><a href="https://novarizark.github.io/2017/12/31/WRF-shandong-setup/">山东半岛预报系统</a>中后处理部分的NCL串行效率很低，大概要二十分钟到半个小时才能完成绘图。既然任务之间都是独立的，很自然的想法就是能否在shell的环境下实现进程级别的并行化。
-差了下其实很简单，只需要在语句后面加入 &amp; 符号放到后台执行即可实现异步，但是后台执行无法捕捉结束位置，wait语句可以解决这个问题，其作用就是等待该语句之前的所有后台任务结束之后，再执行此语句后的任务。例子如下：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ncl <span class="nt">-nQ</span>  180205-plot-precip.ncl &amp;
-ncl <span class="nt">-nQ</span>  180207-plot-T2m.ncl &amp;
-ncl <span class="nt">-nQ</span>  180207-plot-RH2m.ncl &amp;
-ncl <span class="nt">-nQ</span>  180207-plot-UV10m.ncl &amp;
-<span class="nb">wait
-echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span class="o">)</span>
-</code></pre></div></div>
-<p>前面四个NCL语句会并行执行（&amp;符号将该命令放入后台执行后立刻执行下一个语句），之后碰到wait，会等待前面四个后台任务中最慢的那个结束，再输出Hello world!</p>
+<p>史铁生在回答记者问题的时候说，他职业是生病，业余写一点东西。对我上个月来说，已经差不多如此了。</p>
 
-<p>原始脚本处理后，大概只需要三四分钟（不算坑爹慢的git push过程）即可完成所有的绘图操作。惊不惊喜？</p>
+<p>4月从HK回来就感觉不太对，特别容易疲乏。大概病程记录如下：</p>
 
-<p><strong>Updated 2018-02-17</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>date</th>
+      <th>record</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>4.14</td>
+      <td>下雨初感微冷</td>
+    </tr>
+    <tr>
+      <td>4.15</td>
+      <td>广州图书馆，感觉冷，走回来后非常乏力；</td>
+    </tr>
+    <tr>
+      <td>4.16</td>
+      <td>去暨南大学，烨琪回来开会，晚上吃饭开始流鼻涕，等到南校区，劳累感非常明显；</td>
+    </tr>
+    <tr>
+      <td>4.17</td>
+      <td>开始出现显著感冒症状，嗓子痛，鼻塞，流清涕；</td>
+    </tr>
+    <tr>
+      <td>4.18</td>
+      <td>同前一天，无大变化，东校助教，返程感觉特别劳累；</td>
+    </tr>
+    <tr>
+      <td>4.19</td>
+      <td>明显感到不适，下午傍晚有发热感，睡觉有发热；</td>
+    </tr>
+    <tr>
+      <td>4.20</td>
+      <td>早起依然有轻微发热，右侧扁桃体溃疡，午饭后疲劳，下午发热明显，晚饭洗澡后明显发热</td>
+    </tr>
+    <tr>
+      <td>4.21</td>
+      <td>症状明显缓解，但是出现咽鼓管水肿，听声沉闷。</td>
+    </tr>
+    <tr>
+      <td>4.22</td>
+      <td>珠海组会，整日并无明显不适，晚餐吃海鲜，量略大。</td>
+    </tr>
+    <tr>
+      <td>4.23</td>
+      <td>晚上跑步4.05km，感觉疲劳</td>
+    </tr>
+    <tr>
+      <td>4.24</td>
+      <td>早晨起来发现零星似被臭虫叮咬痕迹依然有疲劳感，晚上仅仅做了少量哑铃运动</td>
+    </tr>
+    <tr>
+      <td>4.25</td>
+      <td>全身被叮！包括左手手心！整个人都要崩溃了，这尼玛在米帝就是噩梦，完全让人对睡觉恐惧的虫子！去顺克隆买了杀虫剂消杀。</td>
+    </tr>
+    <tr>
+      <td>4.27</td>
+      <td>去校医检查，拿了若干外用药、地氯雷他定及泼尼松，回来后感觉没必要吃激素吧，就先放着泼尼松没吃，开始轻微咳嗽，晚上没有在意，去跑了5km，明显劳累，速度不及。</td>
+    </tr>
+    <tr>
+      <td>4.28</td>
+      <td>咳嗽有些加重，没有在意。</td>
+    </tr>
+    <tr>
+      <td>4.29</td>
+      <td>晚上依然有被叮咬痕迹，咳嗽继续加重，不敢再运动，大量喝水吃VC。</td>
+    </tr>
+    <tr>
+      <td>4.30</td>
+      <td>嗓音开始嘶哑，咳嗽加重再次出痰，有些乏力，入夜低烧，平躺咳嗽非常严重，只睡了4-5小时。</td>
+    </tr>
+    <tr>
+      <td>5.1</td>
+      <td>低烧，嗓音嘶哑，不停咳嗽，是夜再次发烧，38度左右，黄绿色痰和鼻涕，平躺后止不住咳嗽喘息，加上对虫子的恐惧，把床头灯移到腿部开着防止虫咬，垫高枕头后凌晨四点才昏昏睡去，痛苦至极。</td>
+    </tr>
+    <tr>
+      <td>5.2</td>
+      <td>早晨退烧，校医检查，体温36.2，血常规中性粒细胞比例偏高，白细胞计数略偏高，确诊为支气管炎。再次拿了氯雷他定和感咳双清。入夜再次低烧，37.6，躺下后再次止不住咳，五点半入睡，痛苦至极。</td>
+    </tr>
+    <tr>
+      <td>5.3</td>
+      <td>早晨退烧，咳嗽依然没有好转，去校医描述情况，开了头孢和阿斯美。发现吃阿斯美并没效果，甚至连中枢神经抑制的效果都没有，晚上再次没法入睡，这次更猛，六点钟。</td>
+    </tr>
+    <tr>
+      <td>5.4</td>
+      <td>白天咳嗽有所减轻，但入夜平躺依旧，夜里无法入睡，直到天亮，六点多昏昏睡去，给导师发消息请假会议，凌晨发现叮咬的虫子居然是跳蚤！</td>
+    </tr>
+    <tr>
+      <td>5.5</td>
+      <td>白天咳嗽明显减轻，入夜依然咳，但是整体有减轻，垫高枕头有明显好转，大概2点入睡。</td>
+    </tr>
+    <tr>
+      <td>5.6</td>
+      <td>咳嗽明显减轻，夜间也明显减轻，下午晚上到办公室看了《辩护人》，重温了《黑客帝国》。已经能够基本正常入睡。</td>
+    </tr>
+    <tr>
+      <td>5.7</td>
+      <td>只有零星咳嗽，终于好转。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>前后真的差不多一个月了，感冒 过敏 再加上虫子叮，从来没有这么惨过。今天发现非农竞猜居然中了二等奖，也算是时来运转人品守恒吧。希望接下来一切回到正轨！</p>
+
+<p><strong>Updated 2018-05-07</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/02/17/shell-parallel-task/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>拖了几次Yahoo的美股daily数据，发现有很多Symbol对应的标的没有数据，对应的文件大小为3Byte。打算做一下清理，查了下删除语句：</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-size</span> <span class="nt">-4</span> <span class="nt">-exec</span> rm <span class="o">{}</span> <span class="se">\;</span>
-</code></pre></div></div>
-<p>减号代表小于，不带单位默认为byte。exec是find的参数，具体描述</p>
-
-<blockquote>
-  <p>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ { } \;，注意{   }和\；之间的空格。</p>
-</blockquote>
-
-<p>至于为啥后面要有个大括号 空格 反斜线 然后再分号？如此冗余设计实在让人不爽。查了一下<a href="https://www.crifan.com/linux_shell_empty_curly_bracket_meaning/">这个帖子</a>刨根问底了一番。具体来说，大括号代表占位符，表示对find出的列表元素，每次展开遍历其中一个，反斜线代表参数范围结束符，分号后面是其他参数了。</p>
-
-<p><strong>Updated 2018-02-14</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/14/shell-delete-size/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/05/07/ill-health-blog/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -802,10 +688,10 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page5" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">6/43</span>
+          <span class="page_number ">6/87</span>
           
             <a href="/page7" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page43" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1091,7 +977,32 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (54)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
                             
                           
                         
@@ -2162,7 +2073,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 15.5pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
                     
                       
                       
@@ -2190,7 +2101,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #555;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2358,7 +2269,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
                     
                       
                       
@@ -2442,7 +2353,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
                     
                       
                       
@@ -2470,7 +2381,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 9.5pt; color: #888;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 10pt; color: #888;">jekyll</a>
                     
                       
                       
@@ -2589,7 +2500,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       
                       
-                      <a href="/tag/#investment" style="font-size: 10.5pt; color: #777;">investment</a>
+                      <a href="/tag/#investment" style="font-size: 11pt; color: #777;">investment</a>
                     
                       
                       
@@ -2801,6 +2712,27 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                       
                       <a href="/tag/#parted" style="font-size: 9pt; color: #999;">parted</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#html5" style="font-size: 9pt; color: #999;">html5</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#css" style="font-size: 9pt; color: #999;">css</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
+                    
                 </div>
             </div>
 
@@ -2814,6 +2746,16 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
+                    
+                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
+                    
+                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
+                    
+                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
+                    
+                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
+                    
                         <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
                     
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
@@ -2823,16 +2765,6 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                         <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
                     
                         <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
-                    
-                        <li><a href="/2018/06/06/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></li>
-                    
-                        <li><a href="/2018/06/05/clm-landuse/">Change CESM/CLM Surface to Pure Bare Ground</a></li>
-                    
-                        <li><a href="/2018/06/02/ill-again/">我TM又病了</a></li>
-                    
-                        <li><a href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
                     
                 </ul>
             </div>
@@ -2886,7 +2818,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">57</span>
+                            <span class="badge">58</span>
                         </a>
                     </li>
                     
@@ -2922,7 +2854,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 Hardware
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3066,7 +2998,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 Notebook
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3174,7 +3106,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 internet
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3219,7 +3151,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">14</span>
+                            <span class="badge">17</span>
                         </a>
                     </li>
                     
@@ -3255,7 +3187,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">10</span>
+                            <span class="badge">11</span>
                         </a>
                     </li>
                     
@@ -3273,7 +3205,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">22</span>
                         </a>
                     </li>
                     
@@ -3282,7 +3214,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
                             <span class="name">
                                 reading
                             </span>
-                            <span class="badge">2</span>
+                            <span class="badge">3</span>
                         </a>
                     </li>
                     
@@ -3416,7 +3348,7 @@ echo</span><span class="o">(</span><span class="s2">"Hello world!"</span><span c
             
         </p>
         <p class="contact">
-            Contact me at: 
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
             <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
         </p>
