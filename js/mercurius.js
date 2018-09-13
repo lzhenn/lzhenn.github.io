@@ -51,26 +51,51 @@ function showMercurius(){
 
 					r1y=setPercent(obj['target'+ii].r1y)
 					if (r1y>0){
-						data.push('<td style="color:Green">'+r1y+ '%</td>');
+						data.push('<td style="color:Green">'+r1y+ '% ');
 					}else{
 					
-						data.push('<td style="color:Red">'+r1y+ '%</td>');
+						data.push('<td style="color:Red">'+r1y+ '% ');
+					}
+                    
+                    r1y_ref=setPercent(obj['target'+ii].r1y_ref)
+					if (r1y_ref>0){
+						data.push('<em style="color:Green">('+r1y_ref+'%)</em>');
+					}else{
+					
+						data.push('<em style="color:Red">('+r1y_ref+'%)</em>');
 					}
 
 					ttr=setPercent(obj['target'+ii].ttr)
 					if (ttr>0){
-						data.push('<td style="color:Green">'+ttr+ '%</td>');
+						data.push('<td style="color:Green">'+ttr+ '% ');
 					}else{
 					
-						data.push('<td style="color:Red">'+ttr+ '%</td>');
+						data.push('<td style="color:Red">'+ttr+ '% ');
 					}
+                
+                    bttr=setPercent(obj['target'+ii].bttr)
+					if (bttr>0){
+						data.push('<em style="color:Green">('+bttr+'%)</em>');
+					}else{
+					
+						data.push('<em style="color:Red">('+bttr+'%)</em>');
+					}
+
 
 					arr=setPercent(obj['target'+ii].arr)
 					if (arr>0){
-						data.push('<td style="color:Green">'+arr+ '%</td>');
+						data.push('<td style="color:Green">'+arr+ '% ');
 					}else{
 					
-						data.push('<td style="color:Red">'+arr+ '%</td>');
+						data.push('<td style="color:Red">'+arr+ '% ');
+					}
+
+					barr=setPercent(obj['target'+ii].barr)
+					if (barr>0){
+						data.push('<em style="color:Green">('+barr+'%)</em>');
+					}else{
+					
+						data.push('<em style="color:Red">('+barr+'%)</em>');
 					}
 
 
