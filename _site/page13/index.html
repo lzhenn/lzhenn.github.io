@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,336 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/06/mysql-basics/">mysql基本操作</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-06
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>常用命令</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">select</span> <span class="k">database</span><span class="p">();</span> <span class="o">#</span> <span class="k">show</span> <span class="n">what</span> <span class="k">is</span> <span class="n">the</span> <span class="n">selected</span> <span class="k">database</span>
+<span class="k">drop</span> <span class="k">database</span> <span class="n">if</span> <span class="k">exists</span> <span class="n">test</span><span class="p">;</span>
+</code></pre></div></div>
+<p>建立好数据库之后，则可以开始建立tables啦，这个过程中需要有一些数据库的设计思路，大概是列出各种table，如下图：
+<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2ugsl2uej20nd0gbwka.jpg" alt="" /></p>
+
+<p>然后我们仿照视频教程建立一个存储学生数据的table</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span>
+    <span class="o">-&gt;</span> <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">email</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">street</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="k">state</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="nv">"PA"</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">zip</span> <span class="n">mediumint</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">phone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">birth_date</span> <span class="n">date</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">date_entered</span> <span class="k">timestamp</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">lunch_cost</span> <span class="n">float</span> <span class="k">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">student_id</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
+</code></pre></div></div>
+<p>解释一下各关键词：</p>
+
+<p>varchar代表可变长度的string，not null表示不能是空值；</p>
+
+<p>state因为只有两个字母，所以，强制要求char(2)，并且给了default值为PA。mediumint有意思，查了一下，发现mysql提供非常多种类的数据类型，估计是考虑到数据库的空间利用效率的原因。
+<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2v4f3uo0j20wc07c42m.jpg" alt="" />
+我们总结一下数据类型：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAR		fixed length character string
+VARCHAR		a character string with a length that is variable
+BLOB		contain 2^16 bytes of data
+BIGINT		2^63 to -2^63-1
+FLOAT		decimal spaces 1.1e38 to -1.1e38
+DOUBLE		decimal spaces, 1.7e308 to -1.7e308
+ENUM		A character stirng that has a limited number of total values, which you must define
+SET			(Seldom used) A set of legal possible character strings. Unlike ENUM, a SET can contain a multiple values in comparason to the one legal value with ENUM.
+DATE		YYYY-MM-DD
+TIME		HH:MM:SS
+DATETIME	YYYY-MM-DD HH:MM:SS
+TIMESTAMP	YYYYMMDDHHMMSS
+YEAR		YYYY
+</code></pre></div></div>
+<p>unsigned 表示非负值。</p>
+
+<p>sex的enum非常清楚了，只有两个选项。</p>
+
+<p>注意入学时间，用的timestamp类型，可以看到数据库软件本身提供了非常体贴的类型，不需要自己parser date string啦。</p>
+
+<p>最后一个student id，被定义为主键。</p>
+
+<p>然后我们看一下student中的情况</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">describe</span> <span class="n">student</span><span class="p">;</span>
+
+<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
+<span class="o">|</span> <span class="n">Field</span>        <span class="o">|</span> <span class="k">Type</span>                  <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span>           <span class="o">|</span> <span class="n">Extra</span>                       <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
+<span class="o">|</span> <span class="n">first_name</span>   <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">last_name</span>    <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">email</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>           <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">street</span>       <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">city</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="k">state</span>        <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>               <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="n">PA</span>                <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">zip</span>          <span class="o">|</span> <span class="n">mediumint</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">phone</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">birth_date</span>   <span class="o">|</span> <span class="n">date</span>                  <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>          <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">)</span>         <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">date_entered</span> <span class="o">|</span> <span class="k">timestamp</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span> <span class="k">on</span> <span class="k">update</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">lunch_cost</span>   <span class="o">|</span> <span class="n">float</span>                 <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">student_id</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span>      <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span> <span class="n">auto_increment</span>              <span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
+
+</code></pre></div></div>
+
+<p>查看table中field值的方法：</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="n">first_name</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div></div>
+<p>可以用逗号隔开多个fields。
+清空数据表</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">truncate</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div></div>
+<p>注意truncate和drop的区别，drop直接将table从database拿掉，truncate仅仅是清空field的content。
+我们总结一下层级关系</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>databases
+	tabels
+		fields
+			field rows (contents)
+</code></pre></div></div>
+
+<p>向student table中插入一条数据记录</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="n">value</span>
+    <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">'Dennis'</span><span class="p">,</span> <span class="s1">'Lee'</span><span class="p">,</span> <span class="s1">'dcooper@aol.com'</span><span class="p">,</span> <span class="s1">'123 Main St'</span><span class="p">,</span> <span class="s1">'Yakima'</span><span class="p">,</span> <span class="s1">'WA'</span><span class="p">,</span> <span class="mi">95294</span><span class="p">,</span> <span class="s1">'510-365-0383'</span><span class="p">,</span> <span class="s1">'1995-2-22'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="mi">3</span><span class="p">.</span><span class="mi">50</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>查看加入的数据记录</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slect</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div></div>
+<p>Foreign Key的概念</p>
+
+<p>表A中的Primary Key，出现在表B中，则为Foreign Key，可为空值，可重复出现。</p>
+
+<p>如果要对已有的表增加一条数据属性，使用alter table语句</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">test</span>
+    <span class="o">-&gt;</span> <span class="k">add</span> <span class="n">maxscore</span> <span class="n">int</span> <span class="k">not</span> <span class="k">null</span> <span class="k">after</span> <span class="k">type</span><span class="p">;</span>
+
+<span class="k">describe</span> <span class="n">test</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span>    <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">date</span>     <span class="o">|</span> <span class="n">date</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="k">type</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'Q'</span><span class="p">)</span>    <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">maxscore</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">class_id</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">test_id</span>  <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
+
+</code></pre></div></div>
+<p>改变已有的数据表中的Field名，</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">score</span> <span class="n">change</span> <span class="n">event_id</span> <span class="n">test_id</span>
+    <span class="o">-&gt;</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-03-08</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/06/mysql-basics/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/05/install-mysql/">CentOS mysql安装</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>&nbsp;
+    
+        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Mercurius系统后续的数据组织必须要用数据库啦，而且SQL作为基本的程序员技能当然要熟悉啦，跟着youtube教学视频在CentOS下安装mysql server，记录如下：
+首先切换到root下安装：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install mysql mysql-server
+</code></pre></div></div>
+<p>检查服务状态</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld <span class="nt">--list</span>
+mysqld          0:off   1:off   2:off   3:off   4:off   5:off   6:off
+</code></pre></div></div>
+<p>启动服务</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig mysqld on 
+</code></pre></div></div>
+
+<p>启动开机服务</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysqld start
+</code></pre></div></div>
+
+<p>之后给出提示信息：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+/usr/bin/mysqladmin -u root password 'new-password'
+/usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
+
+Alternatively you can run:
+/usr/bin/mysql_secure_installation
+</code></pre></div></div>
+<p>采用第二种方法更加安全。</p>
+
+<p>之后需要输入root密码，注意这个root指代是mysql的root用户的密码，不是系统root用户。</p>
+
+<p>然后的选项一路Y。</p>
+
+<p>登录mysql，在root用户下，直接</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-p</span>
+</code></pre></div></div>
+<p>登陆后，我们查看一下用户列表。</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------+------+
+| Host      | User |
++-----------+------+
+| 127.0.0.1 | root |
+| localhost | root |
++-----------+------+
+2 rows in set (0.00 sec)
+</code></pre></div></div>
+<p>添加一个非root用户,密码为password</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'password'</span><span class="p">;</span>
+</code></pre></div></div>
+<p>给予新用户相应权限</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'lzhenn'</span><span class="o">@</span><span class="s1">'127.0.0.1'</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="n">HOSTS</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="k">Host</span><span class="p">,</span><span class="k">User</span> <span class="k">from</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="o">|</span> <span class="k">Host</span>      <span class="o">|</span> <span class="k">User</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">lzhenn</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="n">root</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+--------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div></div>
+<p>这里遇到一点与视频教程不太一致的地方（补充：其实密码是password，见前面identified by），新建用户的密码与root密码并不相同，查了下解决方法</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">update</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">set</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="s1">'$NEW_PWD'</span><span class="p">)</span> <span class="k">where</span> <span class="k">User</span><span class="o">=</span><span class="nv">"$YOUR_USER_NAME"</span> <span class="k">and</span> <span class="k">Host</span><span class="o">=</span><span class="nv">"localhost"</span><span class="p">;</span>
+<span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>Updated 2018-03-05</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/05/install-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -417,179 +749,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/28/trading-diary/">20180228交易笔记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
-    
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
-    
-        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
-    
-        <a href="/tag/#ETF" title="Tag: ETF" rel="tag">ETF</a>&nbsp;
-    
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>前几天与ZP和SC一起讨论了一下ETF和波动性的关系，逻辑上应该比较讲得通，记录一下。首先是在知乎上看到如下讨论：</p>
-
-<blockquote>
-  <p>ETF turnover rate 多少？ 正常在 5%左右， mutual fund 一年 turnover 多少？ 大概在 30%-40% 左右。 一旦市场出现大批量的卖家和买家，市场上 没有足够的liquidity 去吸收吧， 所以股价才会变动的很大。等到有一天，90%的钱都去了ETF， 应该来说 active 更容易找到 alpha, 但是在钱持续往etf 流的今天，难道不是ETF 的 holding 在完全没有 基本面的情况下不停的涨吗？ 一旦出现大批卖家， it is going to be a bloodbath.</p>
-</blockquote>
-
-<p>有意思，但是逻辑线还是不清楚。想了想应该是这样:</p>
-<blockquote>
-  <p><strong>ETF通过低换手率抑制了成分股的波动性，从某种意义上来说，使得市场的投机性降低，这是好的方面；但ETF本身对其标的流通股的吸收使得市场上可以自由交易的标的股数量减少。由于可供交易的流通股数量减少，潜在的大宗买卖对股价的影响增大（潜在波动性增大，盘前盘后若交易成功更容易出问题），而这种缺少流动性市场的大幅度调整可能会进一步影响ETF持仓者的预期，一旦预期一致转向将会造成大量抛盘从而引发系统性风险。</strong></p>
-</blockquote>
-
-<p>比较好的应对策略：</p>
-<blockquote>
-  <p>正alpha小盘股+高beta指标股去养大盘etf看跌期权？</p>
-</blockquote>
-
-<p><strong>Updated 2018-02-27</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/28/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/24/reading-record/">《非理性繁荣》和《1929年大崩盘》阅读笔记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#reading" title="Category: reading" rel="category">reading</a>&nbsp;
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <p>寒假回家看完了两本书，一本是Kindle中文版的《非理性繁荣》，另一本也是中文版加尔布雷斯的《1929年大崩盘》。在家看完想趁热打铁写下笔记，奈何懒惰，现在补来。</p>
-
-<p>《非理性繁荣》作者罗伯特·席勒（Robert Shiller）是耶鲁大学的行为金融学教授，2013年诺奖得主。除了这本第一版预言了00年科网泡沫和第二版语言了08年金融危机畅销书之外(据<a href="https://www.amazon.com/Irrational-Exuberance-Revised-Expanded-Third/dp/0691173125/ref=sr_1_1?ie=UTF8&amp;qid=1519524992&amp;sr=8-1&amp;keywords=irrational+exuberance+by+robert+shiller">亚马逊</a>，这本书第三版发于2016年8月16日)，在Coursera和网易上还有他Financial Markets课程也非常有名。</p>
-
-<p>初读这本书，总会脑海里浮现出在Berkeley Mccone Hall五楼看到的那位地理系老教授：白发苍苍的老人坐在窗边，佝偻着腰背，盯着眼前的屏幕，缓缓敲击着键盘，时不时低头去找键盘上遥远的数字与标点符号。
-从本书内容上的理性中立客观，旁征博引细致入微的数据支持与证据链构建；直观感受上来讲，席勒教授就是这么一副兢兢业业老学者的形象。
-当然<a href="https://book.douban.com/subject/26803982/">豆瓣上</a>第三版封面图的时候发现老人家居然这么帅的时候还是很惊讶，典型的Stereotype了。</p>
-
-<p>整本书大致先从历史角度去分析投机性泡沫形成，包括引发事件，预期自我实现的正反馈，市场信心转向等；之后分析了文化因素（欧美移民的重商文化）和行为心理因素（人性因素：贪婪和恐惧）的影响。再后则是分析人类对明显泡沫化的资产进行合理化解释归因的动机。最终给出了切实的投资建议。
-记忆比较深的还是老人家对股息的阐述，判断泡沫与否的一个简单方法就是看股息回报率（毫无疑问目前是泡沫期了）。最后关于疾病扩散模型的应用也非常有趣，描述了观点的传播和关注机制对泡沫的影响。
-老人家同时也强调市场见顶之后可能多年低迷的可能性，这无论对华尔街还是投机客来说都是致命的。所以老人家建议多元化投资、关注低市盈率、高股息的入场时机，以及增加储蓄率等。
-整部作品的基调非常像一部关于投机泡沫的大综述，理性中立客观，数据翔实，论据充分，尤其是用真实数据去评估人们一直以来的认知偏差，长期持股未必会有良好收益，如果在漫漫熊市中长期持股而不摊低成本，整个股指会经过十几年才能回到高位，非常之凄惨（不要忘了仅仅是股指，其中还有乐观主义偏差）。</p>
-
-<p>总之，重要的一点教训就是足够理性，谨慎乐观，注意风险敞口的控制，在最近几年的环境下应该是非常重要的素质。</p>
-
-<p>《1929年大崩盘》则是一部以叙事+数据+资料尽调的方式描述了1929年大崩溃的过程，整部作品读起来并不像《非理性繁荣》那般理中客，但是翔实复现了整个崩溃的过程，并做了简单的后果分析，没有进一步外延到与法西斯上台、以及随之而来的二战的关系。
-作品很短，着眼很多关于股市崩盘的特征，比如高位放量，波动性上升，反复磨顶等等，这给了大周期近顶部时的逃脱机会。最后还反驳了一下崩溃后自杀率上升的谣言，总之看下来感觉就是，只要前期不作死加杠杆资不抵债，勒紧裤腰带还是照样能过的。</p>
-
-<p><strong>Updated 2018-02-27</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/24/reading-record/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -600,10 +759,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page12" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">13/87</span>
+          <span class="page_number ">13/88</span>
           
             <a href="/page14" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -914,7 +1073,17 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -1985,7 +2154,7 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -2013,7 +2182,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2419,7 +2588,7 @@
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -2645,6 +2814,27 @@
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -2657,6 +2847,10 @@
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -2673,10 +2867,6 @@
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3045,7 +3235,7 @@
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3063,7 +3253,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3090,7 +3280,7 @@
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3099,7 +3289,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3117,7 +3307,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

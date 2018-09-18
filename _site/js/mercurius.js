@@ -43,10 +43,10 @@ function showMercurius(){
 					
 					bias365=setPercent(obj['target'+ii].bias365);
 					if (bias365>0){
-						data.push('<td style="color:Green">'+bias365+ '%</td>');
+						data.push('<td style="color:Green">'+bias365+ '%'+obj['target'+ii].move1+'</td>');
 					}else{
 					
-						data.push('<td style="color:Red">'+bias365+ '%</td>');
+						data.push('<td style="color:Red">'+bias365+ '%'+obj['target'+ii].move1+'</td>');
 					}
 
 					r1y=setPercent(obj['target'+ii].r1y)

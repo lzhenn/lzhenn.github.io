@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>EC2迁移：从Razortail到Diggler</title>
-    <meta name="description" content="  预安装Razortail的免费期马上要过了，用菇菇的信息注册了新的AWS账户，开了新的节点，叫做Diggler吧.主机位置也从韩国首尔搬到了新加坡，希望坡县的丢包率能低一点，可悲。记录下配置过程。参考之前Razortail的记录。预安装git安装$sudo yum install git配置ssh$ssh-k...">
+    <meta name="description" content="Diggler用了一段时间后发现丢包率严重，终于有一天彻底挂掉了。ssh通。查了下应该是被ban掉了端口，发现aws设置了非常方便的动态ip绑定，胆战心惊换了ip后正常。所以W的策略应该是行为检测，pattern connector确认后开始数据包投毒，随后ban端口ban ip。惹不起惹不起。无非是看些技术文档...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -383,64 +385,90 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#预安装" id="markdown-toc-预安装">预安装</a></li>
-</ul>
+        
+<p>Diggler用了一段时间后发现丢包率严重，终于有一天彻底挂掉了。ssh通。查了下应该是被ban掉了端口，发现aws设置了非常方便的动态ip绑定，胆战心惊换了ip后正常。所以W的策略应该是行为检测，pattern connector确认后开始数据包投毒，随后ban端口ban ip。</p>
 
-<p>Razortail的免费期马上要过了，用菇菇的信息注册了新的AWS账户，开了新的节点，叫做Diggler吧.主机位置也从韩国首尔搬到了新加坡，希望坡县的丢包率能低一点，可悲。</p>
+<p>惹不起惹不起。无非是看些技术文档教学视频paper什么的，诶。换了ip/crypto算法。</p>
 
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fsyws2e8q9j20mb05bt94.jpg" alt="" /></p>
-
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fsywu80c5tj20g5054mxe.jpg" alt="" /></p>
-
-<p>记录下配置过程。参考之前<a href="https://novarizark.github.io/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/">Razortail的记录</a>。</p>
-
-<h4 id="预安装">预安装</h4>
-
-<p>git安装</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> yum install git
-</code></pre></div></div>
-
-<p>配置ssh</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ssh</span><span class="nt">-keygen</span>
-</code></pre></div></div>
-
-<p>安装SS依赖(参考最<a href="https://github.com/shadowsocks/shadowsocks-libev">新版本依赖</a>)</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum install <span class="nt">-y</span> gcc gettext-devel unzip autoconf automake make zlib-devel libtool xmlto asciidoc udns-devel libev-devel
-<span class="nb">sudo </span>yum install <span class="nt">-y</span> pcre pcre-devel perl perl-devel cpio expat-devel openssl-devel mbedtls-devel
-<span class="nb">sudo </span>yum install gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel <span class="nt">-y</span>
-</code></pre></div></div>
-
-<p>安装libsodium到系统默认搜索路径</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
-./configure
-make <span class="o">&amp;&amp;</span> make check
-<span class="nb">sudo </span>make install
-</code></pre></div></div>
-<p>Follow the instructions in <a href="https://github.com/shadowsocks/shadowsocks-libev">SS Severlibv Version</a>.</p>
-
-<p>注意用sudo ldconfig来更新lib配置。</p>
-
-<p>安装ss后的配置：</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-</span><span class="s2">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0.0"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"server_port"</span><span class="p">:</span><span class="w"> </span><span class="err">xxxxx</span><span class="p">,</span><span class="w">
-</span><span class="s2">"local_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
-</span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yourpwd"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w">
-</span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aes-256-cfb"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"fast_open"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-<p>注意去掉旧版本中的local_address字段。</p>
-
-<p><strong>Updated 2018-07-05</strong></p>
+<p><strong>Updated 2018-09-07</strong></p>
 
 
         </article>
         <hr>
 
         
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
         
             
             
@@ -595,36 +623,6 @@ make <span class="o">&amp;&amp;</span> make check
                         </li>
                         
                         
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
                     
                 
                     

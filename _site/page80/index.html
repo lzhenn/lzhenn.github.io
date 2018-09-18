@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,179 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/">【已解决】CESM-CAM积分步长调节</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<h3>CAM Standalone</h3>
+<p>namelist修改加入</p>
+
+<p>dtime=1200, nsplit=6, nspltrac=2, nspltvrm=2</p>
+
+<p>第一句是把积分时长调整到1200s每步</p>
+
+<p>后面三个如果不加入会报错，出错信息中会有建议更改的数值，看起来估计是与物理步长中与动力步长的匹配有关，但是依然搞不清楚这几个变量的意义……</p>
+
+<p>以上几个namelist的解释：</p>
+<pre><strong>nsplit----</strong>Number of dynamics timesteps per physics timestep. If zero, a best-estimate
+will be automatically calculated.</pre>
+<pre><strong>nspltrac</strong>----Number of tracer advection timesteps per physics timestep.
+Nsplit is partitioned into nspltrac and nsplit/nspltrac,
+with the latter being the number of dynamics timesteps per
+tracer timestep, possibly rounded upward; after initialization,
+the code quantity nsplit is redefined to be the number of
+dynamics timesteps per tracer timestep.</pre>
+<pre><strong>nspltvrm----</strong>Number of vertical re-mapping timesteps per physics timestep.
+Nspltrac is partitioned into nspltvrm and nspltrac/nspltvrm,
+with the latter being the number of tracer timesteps per
+re-mapping timestep, possibly rounded upward; after initialization,
+the code quantity nspltrac is redefined to be the number of
+tracer timesteps per re-mapping timestep.</pre>
+<h3>CESM Script</h3>
+<p>这个除了需要处理standalone中的变量外，还需要更改run_env.xml中存在相应的字段：</p>
+<blockquote>&lt;entry id="NCPL_BASE_PERIOD"   value="day"  /&gt;
+
+&lt;entry id="ATM_NCPL"   value="48"  /&gt;</blockquote>
+<p>上面那行的设置代表coupler耦合频率的单位，value对应为日，下面那行是在coupler耦合单位内，ATM通过coupler和其他模块耦合的次数，值为48，即每天耦合48次，可以理解为积分步长为1800s（半小时），如果要更改积分步长为900s，将48改为96即可。同时我们可以注意到这个值在后面的语句中分别被赋给了LND OCN等其他模块，保证各个模块的耦合频率一致。如果没有正确修改dtime, nsplit, nspltrac, nspltvrm这些变量，则会出现<strong>Bad namelist settings for FV subcycling报错。</strong></p>
+
+<p>当然，这里还有疑问就算，我们即便把standalone里修改的几个变量拿过来，也仅仅是修改了CAM的积分步而已，其他分量并没有修改，是会自动更改么？还是怎样？目前测试积分了三年，没有出现问题。</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
+
+<p>前段时间忘了更新了。对于F05的配置，似乎直接在user_nl_cam中修改dtime=900就可以，什么都不用动……似乎split与dtime呈一定的倍数关系，dtime减半并不影响这个倍数关系的调整。当然，依然没有搞懂……</p>
+
+<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/">【已解决】SSH多机无密码访问</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>ssh无密码访问是实现MPI、以及自动化批处理如scp ssh远程命令等操作的必要设置。单机A对B单向或者B对A双向的操作类似，网上一查一大堆。一对多方向容易搞混，注意复制公钥方向。如A要无密码访问B，将A的公钥(id_rsa.pub)复制到B机的authorized_keys下。</p>
+
+<p><strong>注意authorized_keys权限为600，.ssh目录权限700</strong></p>
+
+<p>参考资料：</p>
+
+<p>http://blog.sina.com.cn/s/blog_75b0e2ad010185id.html</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -398,618 +573,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/24/cesm1_2_0-e6-ba-90-e7-a0-81-e8-a1-8c-e6-95-b0-e7-b/">CESM1_2_0源码行数统计</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>跑起来了Heating的试验，outfld也没出来到能画图的地步，忙里偷闲，用上次提到的统计行数的办法（http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=92），统计了一下cesm1.2.0总代码行数，结果如下</p>
-<blockquote><strong>1,199,145</strong></blockquote>
-<p>居然一共才不到120万行，与我想象的有差距啊。一个active的CAM就占到了接近一半，地球系统这个东西还是大气比较复杂 ……</p>
-
-<p>其中，各个分量模块（包括接口等）及Active分量的行数如下</p>
-<table style="height: 47px;" width="354">
-<tbody>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">atm</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">511,843</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CAM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>499,741</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;"><strong>csm_share</strong></h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>34,142</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">dead_share</h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>341</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">drv</h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>25,439</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">glc</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">93,206</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CISM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>22,370</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">ice</h3>
-</td>
-<td colspan="2"><span style="color: #ff6600;"><strong>75,558</strong></span></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CICE</span></strong></td>
-<td><span style="color: #ff6600;"><strong>72,950</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">lnd</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">216,309</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">CLM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>175,937</strong></span>
-<span style="color: #ff6600;"><strong><span style="color: #3366ff;"> CLM4.0</span> 71,250</strong></span>
-<span style="color: #ff6600;"><strong><span style="color: #3366ff;"> CLM4.5</span> 93,857</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">ocn</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">144,761</span></strong></td>
-</tr>
-<tr>
-<td><span style="color: #3366ff;"><strong>POP2</strong></span></td>
-<td><span style="color: #ff6600;"><strong>142,292</strong></span></td>
-</tr>
-<tr>
-<td rowspan="2">
-<h3 style="text-align: center;">rof</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">10,126</span></strong></td>
-</tr>
-<tr>
-<td><strong><span style="color: #3366ff;">RTM</span></strong></td>
-<td><span style="color: #ff6600;"><strong>7,778</strong></span></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">utils</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">86,072</span></strong></td>
-</tr>
-<tr>
-<td>
-<h3 style="text-align: center;">wav</h3>
-</td>
-<td colspan="2"><strong><span style="color: #ff6600;">1,348</span></strong></td>
-</tr>
-</tbody>
-</table>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/24/cesm1_2_0-e6-ba-90-e7-a0-81-e8-a1-8c-e6-95-b0-e7-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-e/">【已解决】CAM垂直坐标转换</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>做Heating试验的时候，何老师提示将Profile中的最大值放在500-600hPa附近。但是CAM中采用的是σ-P混合坐标系统，需要进行坐标转换。之所以采用这种坐标系统，是因为底层为了描述好地形的作用采用σ坐标系统，而高层则采用P坐标系统。而我们通常关心的是P坐标系统下某一层面的情况，比如500hPa位势高度场等。CAM3.0的users’ guide 上提供了CAM坐标系统向P坐标系统转化的方法</p>
-<blockquote>
-<p style="padding-left: 30px;"><strong>p(i,j,k)= Ak P0+ Bk Ps(i,j)</strong></p>
-</blockquote>
-<p>其中p(i,j,k)为指定点处的气压，A，B，P0均为常数。Ps是模式当前地表气压；P0在模式源码中已被给定。AB在模式输出数据中已经存在，界面处系数分别为hyai和hybi，层面中间点为hyam和hybm。其中主要关注的U V T等变量应该使用hyam和hybm（<strong>对应下图Level Index</strong>），而通量场变量则多位于交界面（<strong>对应下图Interface Index</strong>）。引用CAM 3.0 ug中的图如下</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/08/vc.jpg"><img class="alignnone size-full wp-image-108" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/08/vc.jpg" alt="vc" width="814" height="873" /></a></p>
-
-<p>在CAM4和CAM5下，中间点对应的气压如下表所示（假设PS=1000hPa，Hard Coded P0=1000hPa）</p>
-<table width="470">
-<tbody>
-<tr>
-<td colspan="4" width="470">CAM4 Vertical Transform</td>
-</tr>
-<tr>
-<td>Num</td>
-<td>byam</td>
-<td>hybm</td>
-<td>presure</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0.003544638</td>
-<td>0.000000000</td>
-<td>3.544638</td>
-</tr>
-<tr>
-<td>2</td>
-<td>0.007388814</td>
-<td>0.000000000</td>
-<td>7.3888135</td>
-</tr>
-<tr>
-<td>3</td>
-<td>0.013967214</td>
-<td>0.000000000</td>
-<td>13.967214</td>
-</tr>
-<tr>
-<td>4</td>
-<td>0.023944625</td>
-<td>0.000000000</td>
-<td>23.944625</td>
-</tr>
-<tr>
-<td>5</td>
-<td>0.037230290</td>
-<td>0.000000000</td>
-<td>37.23029</td>
-</tr>
-<tr>
-<td>6</td>
-<td>0.053114605</td>
-<td>0.000000000</td>
-<td>53.114605</td>
-</tr>
-<tr>
-<td>7</td>
-<td>0.070059150</td>
-<td>0.000000000</td>
-<td>70.05915</td>
-</tr>
-<tr>
-<td>8</td>
-<td>0.077912570</td>
-<td>0.007526545</td>
-<td>85.439115</td>
-</tr>
-<tr>
-<td>9</td>
-<td>0.076607010</td>
-<td>0.023907685</td>
-<td>100.514695</td>
-</tr>
-<tr>
-<td>10</td>
-<td>0.075071085</td>
-<td>0.043179250</td>
-<td>118.250335</td>
-</tr>
-<tr>
-<td>11</td>
-<td>0.073264150</td>
-<td>0.065851245</td>
-<td>139.115395</td>
-</tr>
-<tr>
-<td>12</td>
-<td>0.071138385</td>
-<td>0.092523685</td>
-<td>163.66207</td>
-</tr>
-<tr>
-<td>13</td>
-<td>0.068637535</td>
-<td>0.123902400</td>
-<td>192.539935</td>
-</tr>
-<tr>
-<td>14</td>
-<td>0.065695415</td>
-<td>0.160817850</td>
-<td>226.513265</td>
-</tr>
-<tr>
-<td>15</td>
-<td>0.062234155</td>
-<td>0.204247000</td>
-<td>266.481155</td>
-</tr>
-<tr>
-<td>16</td>
-<td>0.058162165</td>
-<td>0.255339100</td>
-<td>313.501265</td>
-</tr>
-<tr>
-<td>17</td>
-<td>0.053371680</td>
-<td>0.315446300</td>
-<td>368.81798</td>
-</tr>
-<tr>
-<td>18</td>
-<td>0.047735925</td>
-<td>0.386159300</td>
-<td>433.895225</td>
-</tr>
-<tr>
-<td>19</td>
-<td>0.041105755</td>
-<td>0.469349500</td>
-<td>510.455255</td>
-</tr>
-<tr>
-<td>20</td>
-<td>0.033305700</td>
-<td>0.567218500</td>
-<td>600.5242</td>
-</tr>
-<tr>
-<td>21</td>
-<td>0.024968440</td>
-<td>0.671827850</td>
-<td>696.79629</td>
-</tr>
-<tr>
-<td>22</td>
-<td>0.017095910</td>
-<td>0.770606150</td>
-<td>787.70206</td>
-</tr>
-<tr>
-<td>23</td>
-<td>0.010214710</td>
-<td>0.856946050</td>
-<td>867.16076</td>
-</tr>
-<tr>
-<td>24</td>
-<td>0.004803175</td>
-<td>0.924845700</td>
-<td>929.648875</td>
-</tr>
-<tr>
-<td>25</td>
-<td>0.001260680</td>
-<td>0.969294150</td>
-<td>970.55483</td>
-</tr>
-<tr>
-<td>26</td>
-<td>0.000000000</td>
-<td>0.992556100</td>
-<td>992.5561</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td colspan="4">CAM5 Vertical Transform</td>
-</tr>
-<tr>
-<td>Num</td>
-<td>byam</td>
-<td>hybm</td>
-<td>presure</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0.003643466</td>
-<td>0.000000000</td>
-<td>3.643465694</td>
-</tr>
-<tr>
-<td>2</td>
-<td>0.007594820</td>
-<td>0.000000000</td>
-<td>7.594819646</td>
-</tr>
-<tr>
-<td>3</td>
-<td>0.014356632</td>
-<td>0.000000000</td>
-<td>14.35663225</td>
-</tr>
-<tr>
-<td>4</td>
-<td>0.024612220</td>
-<td>0.000000000</td>
-<td>24.61222</td>
-</tr>
-<tr>
-<td>5</td>
-<td>0.038268300</td>
-<td>0.000000000</td>
-<td>38.26829977</td>
-</tr>
-<tr>
-<td>6</td>
-<td>0.054595480</td>
-<td>0.000000000</td>
-<td>54.59547974</td>
-</tr>
-<tr>
-<td>7</td>
-<td>0.072012451</td>
-<td>0.000000000</td>
-<td>72.01245055</td>
-</tr>
-<tr>
-<td>8</td>
-<td>0.087821230</td>
-<td>0.000000000</td>
-<td>87.82123029</td>
-</tr>
-<tr>
-<td>9</td>
-<td>0.103317127</td>
-<td>0.000000000</td>
-<td>103.3171266</td>
-</tr>
-<tr>
-<td>10</td>
-<td>0.121547241</td>
-<td>0.000000000</td>
-<td>121.5472408</td>
-</tr>
-<tr>
-<td>11</td>
-<td>0.142994039</td>
-<td>0.000000000</td>
-<td>142.9940388</td>
-</tr>
-<tr>
-<td>12</td>
-<td>0.168225080</td>
-<td>0.000000000</td>
-<td>168.2250798</td>
-</tr>
-<tr>
-<td>13</td>
-<td>0.178230673</td>
-<td>0.019677414</td>
-<td>197.9080867</td>
-</tr>
-<tr>
-<td>14</td>
-<td>0.170324326</td>
-<td>0.062504293</td>
-<td>232.828619</td>
-</tr>
-<tr>
-<td>15</td>
-<td>0.161022909</td>
-<td>0.112887908</td>
-<td>273.9108168</td>
-</tr>
-<tr>
-<td>16</td>
-<td>0.150080286</td>
-<td>0.172161616</td>
-<td>322.2419024</td>
-</tr>
-<tr>
-<td>17</td>
-<td>0.137206860</td>
-<td>0.241894044</td>
-<td>379.1009039</td>
-</tr>
-<tr>
-<td>18</td>
-<td>0.122061938</td>
-<td>0.323930636</td>
-<td>445.9925741</td>
-</tr>
-<tr>
-<td>19</td>
-<td>0.104244713</td>
-<td>0.420442462</td>
-<td>524.6871747</td>
-</tr>
-<tr>
-<td>20</td>
-<td>0.084979154</td>
-<td>0.524799541</td>
-<td>609.7786948</td>
-</tr>
-<tr>
-<td>21</td>
-<td>0.066501696</td>
-<td>0.624887735</td>
-<td>691.3894303</td>
-</tr>
-<tr>
-<td>22</td>
-<td>0.050196789</td>
-<td>0.713207692</td>
-<td>763.4044811</td>
-</tr>
-<tr>
-<td>23</td>
-<td>0.037188658</td>
-<td>0.783669710</td>
-<td>820.8583687</td>
-</tr>
-<tr>
-<td>24</td>
-<td>0.028431948</td>
-<td>0.831102818</td>
-<td>859.5347665</td>
-</tr>
-<tr>
-<td>25</td>
-<td>0.022208977</td>
-<td>0.864811271</td>
-<td>887.0202489</td>
-</tr>
-<tr>
-<td>26</td>
-<td>0.016407382</td>
-<td>0.896237165</td>
-<td>912.6445469</td>
-</tr>
-<tr>
-<td>27</td>
-<td>0.011074558</td>
-<td>0.925123841</td>
-<td>936.1983985</td>
-</tr>
-<tr>
-<td>28</td>
-<td>0.006254954</td>
-<td>0.951230526</td>
-<td>957.4854795</td>
-</tr>
-<tr>
-<td>29</td>
-<td>0.001989409</td>
-<td>0.974335998</td>
-<td>976.3254074</td>
-</tr>
-<tr>
-<td>30</td>
-<td>0.000000000</td>
-<td>0.992556095</td>
-<td>992.5560951</td>
-</tr>
-</tbody>
-</table>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -1020,10 +583,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page79" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">80/87</span>
+          <span class="page_number ">80/88</span>
           
             <a href="/page81" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1334,7 +897,17 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -2405,7 +1978,7 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -2433,7 +2006,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2839,7 +2412,7 @@
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -3065,6 +2638,27 @@
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -3077,6 +2671,10 @@
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -3093,10 +2691,6 @@
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3465,7 +3059,7 @@
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3483,7 +3077,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3510,7 +3104,7 @@
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3519,7 +3113,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3537,7 +3131,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

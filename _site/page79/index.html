@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,194 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/09/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91wordp/">【更新中】Wordpress主题模板修改</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-09-01
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>杨老师网站要求wordpress主题模板采用浮动框的形式显示内容。类似学校网站http://www.sysu.edu.cn/2012/cn/index.htm这种组织形式，搜索半天，似乎没有类似主题，没办法，这个只能自己动手丰衣足食了，无奈对wordpress主题php及css组织结构毫无概念，请教俊文大概了解实现方向后只得从基础开始学起。这里算是个笔记吧。</p>
+<h4>模板文件及工作流程</h4>
+<p>一套完整的WordPress模版应至少包括如下文件：</p>
+<blockquote>
+<p style="padding-left: 30px;">style.css : 样式表文件
+index.php : 首页模板
+archive.php : 文章归档/分类目录模板
+404.php : 404 模板
+comments.php : 留言/回复模板
+footer.php : 底部模板
+header.php : 顶部模板
+sidebar.php : 侧栏模板
+page.php : 页面模板
+single.php : 文章页面模板
+functions.php : 模板函数
+search.php : 搜索结果模板</p>
+</blockquote>
+<p>模板文件的工作机制如下图所示，可以看到每当有WordPress页面（你愿意额话可以称之为WordPress引擎）被调用时，它会判断（通过排除法）页面的类型。 这类似于询问“我在哪儿？”。 WordPress回答“我在…类型的页面上”，然后以特定顺序调用页面。 WordPress找不到需要的PHP文件时，会使用“index.php”文件来代替所需文件。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/B7WuAagY.gif"><img class="alignnone size-full wp-image-156" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/B7WuAagY.gif" alt="B7WuAagY" width="720" height="430" /></a></p>
+
+<p>对应的基本加载流程如下：</p>
+<h6>1. 调用页眉
+2. 开启the loop（主循环）
+3. 调用永久链接与一些网页上的meta
+4. 调用以通知WordPress该获取的信息
+5. 调用以获取获取文章内容或摘要
+6. （或许）更多的meta
+7. 关闭the loop（主循环）
+8. 调用侧边栏
+9. 调用页脚</h6>
+<p>这里主要介绍一下循环调用数据库the loop（主循环）
+“WordPress Loop”会在数据库中持续调用文件，直到WordPress终止调用。 “the loop”的结构随显示页面类型而变，WordPress尝试加载的每个基本类型页面都有一个“loop”。 下面是开启the loop的代码：
+<strong>&lt;?php if ( have_posts() ) : &lt;?php if ( have_posts() ) : the_post(); ?&gt; </strong></p>
+
+<p>我们可以看到，代码被拆分开来，have_posts用以定义条件标签，while和the_post则各成一部分，但这仍然是the loop，在所有页面中基本都是这样。 多行loop时的一个用法是：用query_posts在“if have_posts”和代码的剩余部分之间放置一个参数，用来显示单篇文章、某一时段的文章、最近一篇文章或者某一类别中的文章，也可以改变the loop中迭代文章的顺序</p>
+
+<p>在修改模板的过程中，firefox的开发者工具非常好用，下图可以看到，配合双屏，开发者工具能够快速定位元素在代码流中的位置，并且锁定css选择器等，而且拥有实时修改测试的沙盒功能。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/test.jpg"><img class="alignnone size-full wp-image-153" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/test.jpg" alt="test" width="3286" height="1080" /></a></p>
+
+<p>参考资料：</p>
+
+<p>http://blog.sina.com.cn/s/blog_a02d97db0101d2b0.html</p>
+
+<p>http://www.2cto.com/kf/201209/154009.html</p>
+
+<p>http://webbeta.org/2009/05/21/how-to-hack-wordpress-theme-template-pages/（讲解加载流程）</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/09/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91wordp/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/">【已解决】rsync命令的使用</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-31
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>同步CESM的input数据到hpc4，但是已有的文件不希望被覆盖掉，scp不能用，只能采用rsync命令。以从东校区工作站传回数据为例</p>
+<blockquote><strong>rsync -vzrtopg --progress -e 'ssh -p 80' workstation@222.200.180.66:/home/workstation/L_Zealot ./</strong></blockquote>
+<p>参数解释：</p>
+<blockquote>-v, --verbose 详细模式输出
+-z, --compress 对备份的文件在传输时进行压缩处理
+-r, --recursive 对子目录以递归模式处理
+-t, --times 保持文件时间信息
+-p, --perms 保持文件权限
+-o, --owner 保持文件属主信息
+-g, --group 保持文件属组信息
+--progress 在传输时现实传输过程
+-e 'ssh -p 80' ssh方式传输，端口80</blockquote>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -396,179 +586,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/">【已解决】CESM-CAM积分步长调节</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h3>CAM Standalone</h3>
-<p>namelist修改加入</p>
-
-<p>dtime=1200, nsplit=6, nspltrac=2, nspltvrm=2</p>
-
-<p>第一句是把积分时长调整到1200s每步</p>
-
-<p>后面三个如果不加入会报错，出错信息中会有建议更改的数值，看起来估计是与物理步长中与动力步长的匹配有关，但是依然搞不清楚这几个变量的意义……</p>
-
-<p>以上几个namelist的解释：</p>
-<pre><strong>nsplit----</strong>Number of dynamics timesteps per physics timestep. If zero, a best-estimate
-will be automatically calculated.</pre>
-<pre><strong>nspltrac</strong>----Number of tracer advection timesteps per physics timestep.
-Nsplit is partitioned into nspltrac and nsplit/nspltrac,
-with the latter being the number of dynamics timesteps per
-tracer timestep, possibly rounded upward; after initialization,
-the code quantity nsplit is redefined to be the number of
-dynamics timesteps per tracer timestep.</pre>
-<pre><strong>nspltvrm----</strong>Number of vertical re-mapping timesteps per physics timestep.
-Nspltrac is partitioned into nspltvrm and nspltrac/nspltvrm,
-with the latter being the number of tracer timesteps per
-re-mapping timestep, possibly rounded upward; after initialization,
-the code quantity nspltrac is redefined to be the number of
-tracer timesteps per re-mapping timestep.</pre>
-<h3>CESM Script</h3>
-<p>这个除了需要处理standalone中的变量外，还需要更改run_env.xml中存在相应的字段：</p>
-<blockquote>&lt;entry id="NCPL_BASE_PERIOD"   value="day"  /&gt;
-
-&lt;entry id="ATM_NCPL"   value="48"  /&gt;</blockquote>
-<p>上面那行的设置代表coupler耦合频率的单位，value对应为日，下面那行是在coupler耦合单位内，ATM通过coupler和其他模块耦合的次数，值为48，即每天耦合48次，可以理解为积分步长为1800s（半小时），如果要更改积分步长为900s，将48改为96即可。同时我们可以注意到这个值在后面的语句中分别被赋给了LND OCN等其他模块，保证各个模块的耦合频率一致。如果没有正确修改dtime, nsplit, nspltrac, nspltvrm这些变量，则会出现<strong>Bad namelist settings for FV subcycling报错。</strong></p>
-
-<p>当然，这里还有疑问就算，我们即便把standalone里修改的几个变量拿过来，也仅仅是修改了CAM的积分步而已，其他分量并没有修改，是会自动更改么？还是怎样？目前测试积分了三年，没有出现问题。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
-
-<p>前段时间忘了更新了。对于F05的配置，似乎直接在user_nl_cam中修改dtime=900就可以，什么都不用动……似乎split与dtime呈一定的倍数关系，dtime减半并不影响这个倍数关系的调整。当然，依然没有搞懂……</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/">【已解决】SSH多机无密码访问</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-26
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>ssh无密码访问是实现MPI、以及自动化批处理如scp ssh远程命令等操作的必要设置。单机A对B单向或者B对A双向的操作类似，网上一查一大堆。一对多方向容易搞混，注意复制公钥方向。如A要无密码访问B，将A的公钥(id_rsa.pub)复制到B机的authorized_keys下。</p>
-
-<p><strong>注意authorized_keys权限为600，.ssh目录权限700</strong></p>
-
-<p>参考资料：</p>
-
-<p>http://blog.sina.com.cn/s/blog_75b0e2ad010185id.html</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -579,10 +596,10 @@ tracer timesteps per re-mapping timestep.</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page78" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">79/87</span>
+          <span class="page_number ">79/88</span>
           
             <a href="/page80" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -893,7 +910,17 @@ tracer timesteps per re-mapping timestep.</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -1964,7 +1991,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -1992,7 +2019,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2398,7 +2425,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -2624,6 +2651,27 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -2636,6 +2684,10 @@ tracer timesteps per re-mapping timestep.</pre>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -2652,10 +2704,6 @@ tracer timesteps per re-mapping timestep.</pre>
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3024,7 +3072,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3042,7 +3090,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3069,7 +3117,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3078,7 +3126,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3096,7 +3144,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

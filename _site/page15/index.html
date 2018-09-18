@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,172 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/02/14/shell-delete-size/">Shell删除一定大小文件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-02-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#shell" title="Tag: shell" rel="tag">shell</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>拖了几次Yahoo的美股daily数据，发现有很多Symbol对应的标的没有数据，对应的文件大小为3Byte。打算做一下清理，查了下删除语句：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-size</span> <span class="nt">-4</span> <span class="nt">-exec</span> rm <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div></div>
+<p>减号代表小于，不带单位默认为byte。exec是find的参数，具体描述</p>
+
+<blockquote>
+  <p>-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为’command’ { } \;，注意{   }和\；之间的空格。</p>
+</blockquote>
+
+<p>至于为啥后面要有个大括号 空格 反斜线 然后再分号？如此冗余设计实在让人不爽。查了一下<a href="https://www.crifan.com/linux_shell_empty_curly_bracket_meaning/">这个帖子</a>刨根问底了一番。具体来说，大括号代表占位符，表示对find出的列表元素，每次展开遍历其中一个，反斜线代表参数范围结束符，分号后面是其他参数了。</p>
+
+<p><strong>Updated 2018-02-14</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/02/14/shell-delete-size/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/02/07/trading-diary/">20180207交易笔记</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-02-07
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
+    
+        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>因为不是day trader，也懒得做短线投机，所以一直觉得没必要写交易日记。不过参与market就是一个假设验证的过程，正巧这几天全球股市暴跌，波动性复活，也不妨投资过程中把整理到的资料和自己的一些想法时不时记录下来，以后也是很好的参考。</p>
+
+<p>之前在<a href="https://novarizark.github.io/2018/01/18/2018-investment/">2018年的交易逻辑</a>一文中已经对今年的大概逻辑体系总结为 油价 通胀预期 以及波动性回归。具体而言就是油价中枢抬升推动通胀（或预期），随后对应着全球央行的货币政策收紧（或预期），之后是普遍的利率中枢抬升，流动性收缩，权益类资产价格受到打压，久违的波动性上升。逻辑都没错，但没想到这么快。</p>
+
+<p>周二一早醒来就看到ZP的消息“妈的这是股灾了”。我还在想不知道之前网格一路拉到怀疑人生的VIX解套没，打开交易软件一看连续五六格网格止盈单全部挂出去了，直愣愣涨了一倍。
+portfolio daily return大概-2%，本来觉得没什么，毕竟其他标的都在跌。可是瞄了一眼总亏损居然全都是xiv这一个标的贡献的，如果没有这个标的的话，做多波动性的仓位直接在股灾时给予正盈利。
+若不是long xiv也踩了黑天鹅，这波实实在在践行Taleb的杠铃策略gain from disoder。对冲踩上了，醉了醉了。</p>
+
+<p>瞄了下新闻，发现long xiv的厮们全在盘后狠抛，直接砸下90%，我勒个去。搜了下发现这货如果跌80%+会直接清盘，看起来是躲不开了。此处应总结的原则还是，下手前对对标的无论如何了解都不为过。
+上周四居然还有5.2亿跑步long xiv，这下估计埋惨了。</p>
+
+<p>交易xiv的逻辑是，满市场都是被动指数型ETF和机器人的时候，波动性自然下降。所谓的smart beta造成了大量的etf标的集中在为数不多的stock上，反倒集中了风险。预期一致转向波动率增大就是这个结果。具体瞄瞄知乎<a href="https://www.zhihu.com/question/266741454/answer/313475488">这个帖子</a>。
+瞄了下几乎没什么交易量的边缘化个股，果然跌幅远远小于大盘。interesting，或许后面会有一波风格转换。</p>
+
+<p>接下来怎么做？做一下假设验证：</p>
+
+<ol>
+  <li>历史回溯的话市场转向一般是双顶，后顶低于前顶，在下一次高位时减仓高债务中小个股。</li>
+  <li>网格挂VIX</li>
+  <li>低位买入一定金银对冲</li>
+  <li>保持持现率75%以上</li>
+</ol>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/02/07/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -416,252 +584,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/02/04/yahoo-finance-python/">爬取Yahoo Finance美股数据</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-02-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
-    
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
-    
-        <a href="/category/#python" title="Category: python" rel="category">python</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#yahoo-finance" title="Tag: yahoo-finance" rel="tag">yahoo-finance</a>&nbsp;
-    
-        <a href="/tag/#spider" title="Tag: spider" rel="tag">spider</a>&nbsp;
-    
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
-    
-        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
-    
-        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>去年5月就试着用python现成包爬取Yahoo Finance的数据，但是发现坑爹的是在我打算搞这个事情前两天，雅虎改了API爬不到。这次想起来查了下发现已经有相应的fix包了，当然只是临时的。不过无所谓，数据先拉到，后面业务化运行时能用多久用多久咯。</p>
-
-<p>先装包：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas_datareader
-pip install yahoo-finance
-pip install fix-yahoo-finance
-</code></pre></div></div>
-<p>然后就可以快乐地爬数据了。Stock ETF代码可以在<a href="https://www.nasdaq.com/screening/companies-by-name.aspx?letter=A">Nasdaq官网</a>拿到，这玩意儿一共26个英文字母，我居然手动下完了所有才发现有集中到一起的表格可以下载，shit！
-对代码先做了个A-Z排序，加上个随机延时，然后就可以开搞啦。源码如下：</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mainfunc</span><span class="p">():</span>
-
-    <span class="n">yf</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span> <span class="c"># fix yahoo finance api</span>
-
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">eq_market</span><span class="p">:</span>
-        <span class="n">pd_symbol</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">eq_path</span><span class="o">+</span><span class="n">item</span><span class="o">+</span><span class="s">'.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'Symbol'</span><span class="p">)</span>
-        <span class="n">pos</span><span class="o">=</span><span class="mi">0</span>
-        <span class="k">for</span> <span class="n">symb</span> <span class="ow">in</span> <span class="n">pd_symbol</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-            <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">'Now download </span><span class="si">%</span><span class="s">s@</span><span class="si">%</span><span class="s">s (</span><span class="si">%</span><span class="s">d/</span><span class="si">%</span><span class="s">d)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd_symbol</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">ini_time</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_time</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s">'i</span><span class="se">\n</span><span class="s">Error while downloading </span><span class="si">%</span><span class="s">s@</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">symb</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
-
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">eq_path</span><span class="o">+</span><span class="n">item</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span><span class="n">symb</span><span class="o">+</span><span class="s">'.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="n">sptime</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">sleep </span><span class="si">%4.2</span><span class="s">fs'</span> <span class="o">%</span> <span class="n">sptime</span><span class="p">)</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sptime</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-02-04</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/02/04/yahoo-finance-python/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/30/evaluate-simple-strategy/">追涨杀跌还是买跌卖涨？几个简单策略的实现与横评</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
-    
-        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
-    
-        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>（文末有福利）</p>
-
-<p>追涨杀跌还是买跌卖涨？无论是投资者还是投机客，这可能是个永恒的问题。
-之前刷华尔街见闻的时候发现一个简单的<a href="https://wallstreetcn.com/articles/3059211">右侧交易策略</a></p>
-
-<blockquote>
-  <p>当目前的价格 ＞ 过去12个月的平均价格，那么保持投资（如果没有投资，那么就买入）；
-当目前的价格 ＜ 过去12个月的平均价格，那么就全部卖出，持有现金（或债券）。</p>
-</blockquote>
-
-<p>很有意思，回测也很不错。感觉原则就是，趋势来了我贪心，趋势走了我就离场，而且坚决不回来。不过对于我这种左侧交易者来说，在上升时期宁可hold也不愿意加仓。这个策略很简单，应可以作为一个出发点，后面按自己的理解来进行一些修正。尤其对于我这种喜欢左侧交易和网格策略的～</p>
-
-<p><strong>Updated 2018-01-23</strong></p>
-
-<p>正巧需要构建自己的Mercurius交易系统，不妨先实现几个策略做回测试试，标的的话，就选黄金好了，当然一般来说，黄金并不是什么好的投资标的。不过俺们就是这么俗，土豪金谁人不爱～</p>
-
-<p>一共写了三套策略：</p>
-
-<ul>
-  <li>佛系策略一把梭：Buy and Hold</li>
-  <li>极端贪心与恐惧：Up in and Down out</li>
-  <li>传说中的网格提款机：Grid Trading</li>
-</ul>
-
-<p>回测采用日均值，还没来得及写年化收益，最大回撤、夏普ratio等统计指标，先简单看图吧。首先我们以满仓10000美元的buy and hold策略，来看黄金自2000年以来的表现情况：</p>
-
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fnyyomaw8dj21720lwn15.jpg" alt="" /></p>
-
-<p>很明显，黄金从00年开始，随着全球的货币大宽松走出了一个长期牛市，主升浪在2008金融危机之后。到2011年上半年，净值翻了六倍多，随后由于美国逐渐退出QE，走熊直到2016年初（怎知16-now这波不是反弹？嘿嘿）。</p>
-
-<p>作为对策略的压力测试，当然先看熊市表现啦。</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyyxcwibmj216u0l4q8g.jpg" alt="" /></p>
-
-<p>结果还是很有趣的，从投资（机）总效果来看，up in and down out相比于佛系的buyNhold最终表现仅仅略微好一点点，大概也就少损失个一两百刀。过程中我们可以看到金价多次出现假突破，从而使得策略不断进出，在不计交易费用的情况下相比佛系投资还有一点优势，如果存在交易成本，那怕是必然亏更多的。
-当然改进的方法也很简单，比如每隔一个period进行一次检测，这样能够避免频繁假突破时的频繁交易。</p>
-
-<p>值得注意的是，这一贪心策略可以确保在市场急剧下跌期间保持极高的（100%）持现比例，你不爱我绝不回头～一手现金dry powder。充沛的流动性在手给了标的走熊期间去发掘其他资产的机会。</p>
-
-<p>如果我们cover牛市，从2008年到现在呢？看这十年间会发生什么。</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzav3p53j216u0l4tey.jpg" alt="" /></p>
-
-<p>Oops！居然无法跑赢佛系buy and hold。这还算在木有交易费用的情况下。矬了吧～主要问题在于前期高频箱体振荡期间出现频繁买卖，而买点恰巧错过一批疾速上涨期，随后基本一直落后buy and hold。</p>
-
-<p>我们再看所谓的网格提款机的效果。我喜欢的左侧交易策略表现又如何呢？</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzm26xq6j216u0l4agu.jpg" alt="" /></p>
-
-<p>嘿嘿！大网格熊市各种睥睨佛系一把梭，我们看到几个酷炫的买点基本都出现在市场底部，然后前期两次出网很酷炫得锁定了收益，随后剧烈走熊阶段不断加仓压低成本，可惜13年中即已满仓，一直到16的市场底部只能不断观望。但是最终到18年初，我们可以看到网格策略仅仅承担了不到10%的账面亏损，而佛系一把梭却有接近20%的账面亏损。</p>
-
-<p>那么牛市呢？</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzri1hp8j216u0l4tf5.jpg" alt="" /></p>
-
-<p>哎哟不错诶。虽然赶不上一把梭的痴长，但是基本保持了数量级相当的收益。不过值得注意的是，在牛市启动阶段，网格卖出所有的quota之后即因成本持续低于市值而按兵不动，所以后续基本相当于大半仓位下buy and hold。注意到09年的turmoil阶段网格抓到了几次低位买点，那么我们将时间尺度继续拉长，是否还能获得如此不错的表现呢？</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fnyzvibso0j216v0l4dlm.jpg" alt="" /></p>
-
-<p>显然，从00年到现在，网格策略远远落后于buy and hold，主要原因也很简单，人家满仓，我们却基本半仓走了快二十年，最终大概只能获得佛系一把梭一半多点的收益。</p>
-
-<p>简单总结一下：</p>
-
-<ul>
-  <li>贪心的up in down out策略在黄金标的上，无论牛熊的表现都差强人意，但是剧烈走熊期间能够确保足够安全，手中握有大量dry powder。</li>
-  <li>网格策略在熊市期间表现出较好的风控能力，低位吸筹，高位抛出，简单机械的操作能够在保持流动性安全以及抓住收益中取得较好平衡。但是单边牛市（或持久熊市）估计会错过机会（输掉裤衩）。</li>
-  <li>如果在市场低位（如何判断，这可是一个大问题）入场，buy and hold可能是非常优秀的交易策略。（事实上李嘉诚先生基本就是这个策略，关键得有他老人家的眼光呀）</li>
-</ul>
-
-<p>总而言之，眼光决定一切。基本面得抓得准呀。不说了，默默啃书。</p>
-
-<p>Left or right, This is a problem.</p>
-
-<p><strong>要Code？没问题！瞎捣鼓的<a href="https://github.com/Novarizark/mercurius">交易系统都是完全开源</a>的啦！几个简单的策略在strategy目录下。欢迎star/fork/diss</strong></p>
-
-<p><strong>Updated 2018-01-30</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/30/evaluate-simple-strategy/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -672,10 +594,10 @@ pip install fix-yahoo-finance
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page14" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">15/87</span>
+          <span class="page_number ">15/88</span>
           
             <a href="/page16" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -986,7 +908,17 @@ pip install fix-yahoo-finance
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -2057,7 +1989,7 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -2085,7 +2017,7 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2491,7 +2423,7 @@ pip install fix-yahoo-finance
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -2717,6 +2649,27 @@ pip install fix-yahoo-finance
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -2729,6 +2682,10 @@ pip install fix-yahoo-finance
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -2745,10 +2702,6 @@ pip install fix-yahoo-finance
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3117,7 +3070,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3135,7 +3088,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3162,7 +3115,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3171,7 +3124,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3189,7 +3142,7 @@ pip install fix-yahoo-finance
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

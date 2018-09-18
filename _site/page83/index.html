@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,150 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/06/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam-e/">【已解决】CAM增加自定义输出变量</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-06
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>做何老师在FGOALS上的试验，需要把加热率的输出，但是不在Master list里，要hard-coded进去。官方文档（CAM3 ug）和tutorial上都有介绍方法，不过写的都很简单，甚至连在哪一个文件里改都没有介绍。几经周折，发现大部分输出都在cam的physics包下的cam_diagnostics.F90下。预计是就把三条语句直接加在了这里，结果运行后长时间没有输出，看起来不对。</p>
+
+<p>之后的思路是仿照已经在master list里的变量加入history output的方法，去查找这些非默认加入的变量，在cam_diagnostics.F90这些变量的响应位置加入对加热率的输出，结果出现了编译不通过的情况。具体错误为大致数组没有声明。</p>
+
+<p>查看physpkg.F90，发现加热率在每一个物理包运行后都会被physics_update归零，所以变量应该只能在调用deep_convect后而update前进行输出，于是吧addfld和add_defalult加载cam_diagnostics文件下，而outfld加在刚刚所说的位置。目前可以输出，还没有检查输出是否有问题。</p>
+
+<p><strong><span style="color: #008000;">#Up to 201408071349#</span></strong></p>
+
+<p>回到住宿处用ncl查看，将26层全部输出，确实中高空都是有数值的，看起来问题不大。但是量级上达到0.1K/kg/s，1分钟加热6摄氏度？考虑到对流的时间尺度，或许是这样吧……等回来真正开始做试验的时候具体看看。</p>
+
+<p><strong><span style="color: #008000;">#Up to 201408072319#</span></strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/06/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cam-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】天河二号CESM自动编译环境搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>今晚想在天河二号上把bw和aw的几个case跑起来，顺道把所有的脚本都规整一遍，以便将来自动化。</p>
+
+<p>没想到困难多多。第一次编译倒是顺利，适当修改run脚本后，yhbatch却提交不了任务。回去查看mkbatch，把与PBS相关的都给干掉后，结果生成的run文件直接没有yhrun语句。无语了。好在第一次编译的程序可以通过yhrun提交任务，哪知道提交半小时一个输出也没有。情况和最初用14编译器编译时一样，节点直接down掉。查看了一下ifort -v，果然又是14编译器作怪！为什么会这样呢，环境变量里分明设置好了。</p>
+
+<p>后来发现，原来之前从ln20 ssh到了ln22，返回后就出现了这个问题。而直接登陆ln20不进行ssh则不存在问题。实在是诡异……</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -400,192 +546,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/">看CESM Tutorial CAM Physics (Video)的一点想法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天看完了Tutorial里关于Physics in CAM的视频。下载发现从2010年到2013年每一年的Tutorial释放出的pdf都差不多，但是13、12年却都没有这一场lecture的视频，这部还是从11年的resource里下到的。报告者是Neale，很年轻小伙，思维灵活，语速很快，基本跟不上，长相看起来很干练。有那么一两分像Prof. Yi Ming，当然啦，一个华人一个老外。</p>
-
-<p>快讲到最后几张ppt的时候Neale吐了个槽很好玩，大概意思是我们搞Atm Model真是悲了个剧啊，我们要处理云啊你造么，各种姿态各种高度各种分布各种奇葩的云啊你造么，云里面水也有冰也有雪也有霰也有水汽还有，固液气一家三口都在里面啊你造么，都是二话不说直接扔给我们搞Atm Model的来处理啊……哪像人家Ocean Model，天天转的都是液态水，海表蒸发出水汽了，人家不要了，直接扔给大气模块；海表冻出冰了，人家也不要了，这是冰雪模块干的事……</p>
-
-<p>一哂过后，想到前段时间在PNAS上看到的一篇文章，大概是说给CESM来了个Super-parameterization，看高CO2情景下的响应。所谓Super-Parameterization，实际就是在CESM的每一个大网格里都套了一个更小尺度的专门对付积云对流的模式，结果好像是发现在全球这个尺度的响应上，和CESM默认的Zhang方案有差不多的效果，说明CESM的对流参数化还是做得不错的。话说回来，Neale吐得槽以后能不能用这种类似方法来解决呢？即专门开发积云模式，然后做好接口工作套在全球模式里就可以了。广而言之，能否把参数化过程都独立成一个个的模块，由该领域的专业人员进行开发，使得这些模块独自能够运行（比如专门的边界层模式、辐射传输模式），也可以嵌入到CESM这种全球模式中。</p>
-
-<p>想来想去，其实现在已经有了呀。专门的边界层模式、辐射传输模式（RRTM不就是商业公司的产品么，由于太优秀了所以被引入气象模拟……）、积云模式等等，模块化必然也是全球模式的趋势吧：CESM等已经做了大圈层的模块化，如大气模块海洋模块冰雪模块等等，下一步圈层级模块内部物理过程的模块化应该也是必须的。当然，对全球模式来说，挑战还是很多的：首先必须要出台统一的接口标准，貌似ESMF、MCT这些就是干这个的，不过不了解，也不知道委员会成员的野心大不大，能搞出一套类似通信网络OSI 7层模型这种高大上的接口标准那就牛逼了；其次还是计算的问题，如果每一个大网格点都要在次网格的尺度上去转很多小模式，那计算时间肯定会暴涨，对计算机的计算能力也是个不小挑战。</p>
-
-<p>嗯~就YY这么多啦，还是要继续深入了解才行。全球模式开发越来越成为一个系统工程了，越来越向物理学中的LHC等大项目看齐了，这无疑是很好的嘛，这也应该是逐渐地把地学建立在牢靠的数学物理基础上的最佳方式了吧。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM F Compset指定SST和CO2外强迫的方法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>打算开始在CESM的框架下做何编老师的试验，试着从CESM的scripts出发编译F Compset，结果神奇地发现居然还需要下载数据。问题是之前已经可以通过standalone的方式运行CAM5了呀，神奇的地球。决定用standalone的方式转转，对比下到底有什么不一样。</p>
-
-<p>CESM的编译方式还是遇到些阻碍，问题及解决方法记录在这里。</p>
-
-<p>1.F_2000_CAM5下载数据后编译失败，编译输出目录为out-of-box设置时config_machines.xml指定的位置。解决方案：xmlchange改env_build.xml重新指定编译输出目录。通过！</p>
-
-<p>2.查看env_run.xml发现rundir也是默认的，果断要改。xmlchange同时改运行时间。</p>
-
-<p>3.修改user_nl_cam，加入针对CAM的namelist更改项目。最初直接把SST和CO2强迫都加这里，结果create_namelist都通过不了。还是一点点来吧。关于海温强迫的方法，standalnoe和F的方式是不一样的。参考帖子：</p>
-
-<p>https://bb.cgd.ucar.edu/node/1001744</p>
-
-<p>UG上有一篇讲B SST OUT, F SST IN的，里面提出要修改env_run.xml。</p>
-
-<p>CO2最初只修改了cam中的co2vmr这个变量，结果CLM崩了，应该是两边CO2不匹配，standalone实在不知道怎么对CLM进行修改，F下找到响应变量修改后，运行到第四天出现sigfault。后来发现居然有一个统一变量叫CCSM_CO2_PPMV啊！坑爹，修改后没问题。</p>
-
-<p>4.qsub提交任务的时候出问题，需要注意 run脚本中第一行 csh后面的-f参数需要去掉，这是最初移植的时候遗漏的问题。</p>
-
-<p> </p>
-
-<p> </p>
-
-<p>以上问题最终的解决办法写在下面：</p>
-
-<ol>
-  <li>在 $CCSMROOT/scripts/ccsm_ut</li>
-</ol>
-
-<p>能够通过的步骤写在下面，以1999-2008变暖后的clim SST及CO2强迫为例：</p>
-<blockquote>$ create_newcase -case awcam5 -compset F_2000_CAM5 -res <strong>f19_f19 </strong>-mach sigon #注意$CCSMROOT/scripts已经加入PATH环境变量
-
-$ ./xmlchange EXEROOT=`pwd`/exe #反点号括起来的pwd会被执行，其输出并同/exe输入给exeroot变量
-
-$ ./xmlchange RUNDIR=`pwd`/exe
-
-$./cesm_setup
-
-$./awcam5.build</blockquote>
-<p>build后修改外强迫。</p>
-
-<p>首先是CO2：</p>
-<blockquote>$.xmlchange CCSM_CO2_PPMV=385.59 # 2009年数据，这个变量在env_run.xml当中</blockquote>
-<p>再是海温，首先将总input数据链接过来，防止路径被新提供的inputdata污染，再修改响应变量。</p>
-
-<p>$link_dirtree $CSMDATA ./input</p>
-
-<p>$./xmlchange DIN_LOC_ROOT=<code class="highlighter-rouge">pwd</code>/input</p>
-
-<p>cp处理后的SST数据到相应位置，修改响应namelist变量，包括起止年份及文件名称。这个名字太长，建议直接vi。</p>
-
-<p>$./qsub awcam5.run</p>
-
-<p>此外有一点发现是，F_2000采用的不是AMIP形式的观测资料强迫，而是气候态海温循环强迫。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -596,10 +556,10 @@ $./awcam5.build</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page82" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">83/87</span>
+          <span class="page_number ">83/88</span>
           
             <a href="/page84" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -910,7 +870,17 @@ $./awcam5.build</blockquote>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -1981,7 +1951,7 @@ $./awcam5.build</blockquote>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -2009,7 +1979,7 @@ $./awcam5.build</blockquote>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2415,7 +2385,7 @@ $./awcam5.build</blockquote>
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -2641,6 +2611,27 @@ $./awcam5.build</blockquote>
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -2653,6 +2644,10 @@ $./awcam5.build</blockquote>
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -2669,10 +2664,6 @@ $./awcam5.build</blockquote>
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3041,7 +3032,7 @@ $./awcam5.build</blockquote>
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3059,7 +3050,7 @@ $./awcam5.build</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3086,7 +3077,7 @@ $./awcam5.build</blockquote>
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3095,7 +3086,7 @@ $./awcam5.build</blockquote>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3113,7 +3104,7 @@ $./awcam5.build</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

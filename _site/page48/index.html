@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,149 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/">【solved】Teamserver huge .xsession-error problem</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>A few days ago I have found that the available disk space on Teamserver was shrunk to 60%. This is very weird because most datasets on the machine were uploaded by me and I know they only occupy about 30% in 22TB. Once I thought they might come from one of my teammate, uploading CMIP5 data or something. However, when I checked individual directory in home, I found nothing. Then I checked “ll -ah” in home. Holly shit! One file named “.xsession-error” takes up about 6TB, and still enlarging! So I google it and found it might be a bug of Linux, regardless of the distribution. Many people delete it or use file permission to restrict its expansion, without any source seeking. I followed them, while nothing happened to the available size from df command. I used DirStat and the original software to check this, nothing.
+What the fuck! I just let it alone and do my staff until I found there is only 2TB available today. Another similar file named as “.xsession-error.XXXXX” did the evil things. In fact this file was a text file, thus I “tail” it and found the flowing statement:</p>
+<pre>sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!</pre>
+<p>VPN! So it must be the vpn soft which aimed at connecting TH-2 that wrongly redirect the std out flow to this poor file and made the shit. Without any hesitate, I uninstall the VPN soft. Everything’s back to normal.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/">【Shanbei News Notes】20150826</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-08-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
+    
+        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
+    
+        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p><span id="A36247P260670S229194" class="sentence"> and certainly I’m asking is how, just how this gets <strong>stemmed</strong></span></p>
+
+<p>stem是茎的意思，也有“起源于”的意思</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -398,172 +543,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150822/">【Shanbei News Notes】20150822</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-23
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/36112/">China Worries Push Down Global Stocks 中国担忧推低全球股市</a></h2>
-<p>brokerage 证券公司</p>
-
-<p>faltering growth经济增长下行</p>
-
-<p>on edge 急切不安的</p>
-
-<p>stock market 股票市场</p>
-
-<p>devaluation 货币贬值</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/23/e3-80-90shanbei-news-notes-e3-80-9120150822/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/23/e3-80-90gitgithub-e3-80-91the-first-move-on-git-p/">【git&github】the first move on git push</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-23
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Finally we come to the deadline of data science course project on coursera. In fact, most of the questions are very easy to answer or cope with, except one aiming at try the git push. I got some problems when test this:</p>
-
-<p>As the question requests, I created a file named “HelloWorld.md” and write something in it. When I type the command</p>
-<pre>&gt;git push</pre>
-<p>Waiting for about 1 min, an error occors:</p>
-
-<p><strong>error:src refspec master does not match any</strong></p>
-
-<p>Then I found this was because no file in the dir yet. The solution is as follow:</p>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td class="gutter"></td>
-<td class="code">
-<div class="container">
-<div class="line number1 index0 alt2"><code class="shell functions">touch</code> <code class="shell plain">README</code></div>
-<div class="line number2 index1 alt1"><code class="shell plain">git add README </code></div>
-<div class="line number3 index2 alt2"><code class="shell plain">git commit -m </code><code class="shell string">'first commit'</code></div>
-<div class="line number4 index3 alt1"><code class="shell plain">git push origin master</code></div>
-</div></td>
-</tr>
-</tbody>
-</table>
-<p>Of course, we don’t need README, then I trid git add, commit and push commands, it works!</p>
-
-<p>Through, I am not really understand the exact reason.</p>
-
-<p>Referrence:</p>
-
-<p>http://www.open-open.com/lib/view/open1366080269265.html#_label0</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/23/e3-80-90gitgithub-e3-80-91the-first-move-on-git-p/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -574,10 +553,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page47" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">48/87</span>
+          <span class="page_number ">48/88</span>
           
             <a href="/page49" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -888,7 +867,17 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -1959,7 +1948,7 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -1987,7 +1976,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2393,7 +2382,7 @@
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -2619,6 +2608,27 @@
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -2631,6 +2641,10 @@
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -2647,10 +2661,6 @@
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3019,7 +3029,7 @@
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3037,7 +3047,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3064,7 +3074,7 @@
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3073,7 +3083,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3091,7 +3101,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

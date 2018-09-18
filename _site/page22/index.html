@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,363 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/12/30/ubuntu-cuda-setup/">Ubuntu/K4200机器学习系统搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+    
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
+    
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
+    
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#记得装desktop版本的ubuntu否则没有xserver比较蛋疼" id="markdown-toc-记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</a></li>
+  <li><a href="#安装英伟达显卡驱动要关掉x-server" id="markdown-toc-安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</a></li>
+  <li><a href="#安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本" id="markdown-toc-安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</a></li>
+</ul>
+
+<h3 id="记得装desktop版本的ubuntu否则没有xserver比较蛋疼">记得装desktop版本的ubuntu，否则没有xserver，比较蛋疼</h3>
+<h3 id="安装英伟达显卡驱动要关掉x-server">安装英伟达显卡驱动，要关掉x server……</h3>
+<p>默认进入命令行启动</p>
+
+<p>http://blog.topspeedsnail.com/archives/4922</p>
+
+<p>注意16.04用这句：</p>
+
+<p>$sudo systemctl set-default multi-user.target</p>
+
+<p>这是每次开机默认进入命令行模式的方法。单词关闭用</p>
+
+<p>sudo /etc/init.d/lightdm stop</p>
+
+<p>然后遇到了坑爹的linux预装驱动……需要关掉。（谁说ubuntu少折腾来着……）</p>
+
+<p>驱动安装过程这个链接内容比较详细（卸载系统驱动后机器无法完全启动，但是ssh没问题）</p>
+
+<p>http://blog.csdn.net/u012759136/article/details/53355781</p>
+
+<p>照着来没问题了吧，错了……build driver的时候直接说unable……我去</p>
+
+<p>差了下说我下的版本不对，赶紧去重新找（为啥查到的帖子都是那个340.32版本）</p>
+
+<p>http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run&amp;lang=us&amp;type=GeForce</p>
+
+<p>这里下载17.11的版本</p>
+
+<h3 id="安装cuda-toolkit这次吸取教训直接英伟达官网下载最新cuda91版本">安装cuda toolkit，这次吸取教训，直接英伟达官网下载最新cuda9.1版本。</h3>
+<p>直接运行安装，居然自带了驱动……去死吧……</p>
+
+<p>后面说我有几个库没装好，记录如下</p>
+
+<p>Missing recommended library: libGLU.so</p>
+
+<p>Missing recommended library: libX11.so</p>
+
+<p>Missing recommended library: libXi.so</p>
+
+<p>Missing recommended library: libXmu.so</p>
+
+<p>搜索下直接apt-get搞定</p>
+
+<p>$ sudo apt-getinstall freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
+
+<p>官方参考</p>
+
+<p>https://devtalk.nvidia.com/default/topic/827410/cuda-setup-and-installation/new-installation-of-cuda-7-toolkit-in-ubuntu-12-04-question-about-missing-recommended-libraries-/</p>
+
+<p>重装一遍cuda测试，一并安装了连同cuda的显卡驱动。没有问题。</p>
+
+<p>http://blog.csdn.net/shiorioxy/article/details/52652831</p>
+
+<p>http://blog.csdn.net/jhszh418762259/article/details/52958287</p>
+
+<p>之后写几个配置</p>
+
+<p>环境变量设置</p>
+
+<p>sudo vim ~/.bashrc</p>
+
+<p>在末尾添加</p>
+
+<p>export CUDA_HOME=/usr/local/cuda-8.0</p>
+
+<p>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</p>
+
+<p>export PATH=/usr/local/cuda-8.0/bin:$PATH</p>
+
+<p>保存退出。</p>
+
+<p>然后刷新。</p>
+
+<p>source ~/.bashrc</p>
+
+<p>动态链接库设置</p>
+
+<p>创建文件：</p>
+
+<p>sudo vim /etc/ld.so.conf.d/cuda.conf</p>
+
+<p>写入：/usr/local/cuda/lib64</p>
+
+<p>保存之后使其立即生效：</p>
+
+<p>sudo ldconfig -v</p>
+
+<p>之后是测试sample，网上教程都是进utility编译，表示直接在根目录下编译了，很长时间……但是似乎没有报错退出。</p>
+
+<p>许久之后，安全完成。</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/ubuntu-cuda-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>还是要搬家啦～</p>
+
+<p>经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。</p>
+
+<p>需求端：</p>
+<ol>
+  <li>
+    <p>类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整</p>
+  </li>
+  <li>
+    <p>足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制</p>
+  </li>
+  <li>
+    <p>安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶</p>
+  </li>
+</ol>
+
+<p>考虑供给端：</p>
+<ol>
+  <li>
+    <p>EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃</p>
+  </li>
+  <li>
+    <p>简书，不灵活，放弃</p>
+  </li>
+  <li>
+    <p>csdn，已经被边缘化了，放弃</p>
+  </li>
+  <li>
+    <p>github，嘿嘿，就是你了</p>
+  </li>
+</ol>
+
+<p>思想准备结束，开始搭建
+follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm">这个</a>来</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--orphan</span> gh-pages
+</code></pre></div></div>
+<p>语句出错，果然又是git版本问题……坑爹centos</p>
+
+<p>突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。</p>
+
+<p>https://pages.github.com/</p>
+
+<p>相当有效。</p>
+
+<p>然后costumize</p>
+
+<p>https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/</p>
+
+<p>模板找到了几个，Jekll安装似乎有点麻烦。</p>
+
+<ol>
+  <li>安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示</li>
+</ol>
+
+<blockquote>
+  <p>YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&gt;= 2.0).</p>
+</blockquote>
+
+<blockquote>
+  <p>There are no versions of psych (&gt;= 0) compatible with your Ruby &amp; RubyGems. psych requires Ruby version &gt;= 2.2.2. The current ruby version is 1.8.</p>
+</blockquote>
+
+<p>真是操蛋的centos，不折腾了还是装在ubuntu下好了。</p>
+
+<p>ubuntu下一条apt-get install ruby直接搞定。</p>
+
+<p>安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。</p>
+
+<p>can’t find header files for ruby at /usr/lib/ruby/include/ruby.h</p>
+
+<p>之后</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$jekyll</span> new myblog
+</code></pre></div></div>
+<p>发现第一次执行非常慢，不过问题不大</p>
+
+<p>然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1</p>
+
+<p>_config.yml文件下修改host为内网（公网）IP即可。</p>
+
+<p>找到一些不错的介绍防火墙的内容</p>
+
+<p>https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/</p>
+
+<p>搞定内网调试，开始看官方文档调戏github</p>
+
+<p>https://help.github.com/articles/about-jekyll-themes-on-github/</p>
+
+<p>花了一下午时间找了个好模板</p>
+
+<p>https://github.com/Gaohaoyang/gaohaoyang.github.io</p>
+
+<p>直接开服务，出错</p>
+
+<blockquote>
+  <p>Could not locate Gemfile or .bundle/ directory</p>
+</blockquote>
+
+<p>不管三七二十一，把示例里面的文件丢过来</p>
+
+<p>之后新的错误</p>
+
+<blockquote>
+  <p>Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.</p>
+</blockquote>
+
+<blockquote>
+  <p>Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`</p>
+</blockquote>
+
+<p>按要求安装之后也不成功。google发现如下stackoverflow帖子</p>
+
+<p>https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed</p>
+
+<p>居然有github-pages这种东西……</p>
+
+<p>装完之后，拿掉gemfile即可。</p>
+
+<p>摸索修改之后，发现这个评论解决方案</p>
+
+<p>https://imsun.net/posts/gitment-introduction/</p>
+
+<p>问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。</p>
+
+<p>参考</p>
+
+<p>http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/</p>
+
+<p>http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/tech-blog-github-page/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -392,965 +751,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/08/21/e5-ae-a2-e8-a7-82-e5-ae-9a-e9-87-8f-e7-9a-84-e4-b/">客观定量的人生目标</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-08-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>可能这一两年一直是一个低谷，最近更是觉得得过且过有何不好？果然迷茫的时候就要看书，李笑来《把时间当作朋友》给了我一些启示。人可以反思。</p>
-
-<p>不应该浑浑噩噩下去，要给自己个理由，或许是应该给自己人生找个意义，因为浑浑噩噩过，尽管舒适懒散，但精神确实是空虚的，而且，比较，peer pressure，并不让人舒适。</p>
-
-<p>所以反思到这点，我想这一低谷或许应该结束了。但我需要给自己一个定量的目标来说服自己，我的欲望，实现到那种程度算是合格呢？今天拿最赤裸裸的来说，财富，金钱。我应该达到怎样的目标算合适呢？</p>
-
-<p>洗澡的时候突然想到，用我的高考成绩排序啊！对哦！有定量的结果，正态分布的成绩结果，自评也是正常（应该说尽力）发挥拿到的理想中的成绩。我自己估分的时候还低估了自己呢！那我理应在所有的正态分布当中，处于与高考成绩相似的地位，作为我的奋斗目标才是合理的！</p>
-
-<p>那么当年的高考情况是怎样呢？</p>
-
-<p>当年652的成绩，按分段表线性插值估算，我的排位应该在2600名左右，全年山东省共有65.6万人，那么我应该处于top 0.40%的位置<strong><span style="color: #ff0000;">（估算有误，见修改）</span></strong>，差不多是250-300人里选一的位置。</p>
-
-<p>假定社会财富分配的总量及任意子集都满足2-8定律幂律分布，根据</p>
-
-<p> </p>
-<blockquote><strong>高淨值人士是可投資資產超過1000萬人民幣的個人。</strong>招商银行与贝恩公司（BAIN）的数据，2016年中国高净值人士有158万人，预计2017年底有 187万 人。按照国家统计局最新公布的中国大陆总人口数测算（138271万，不包括港澳台），到今年底，平均100万人有135个高净值人士，比万里挑一的比例略高一些。
-
-什么是可投资资产？它是指金融资产加上非自住的投资性房产。金融资产包括：现金、存款、股票、债券、基金（含专户）、保险、银行理财、黄金、互联网金融、信托、券商资管、私募股权，等等。</blockquote>
-<p>我们认为可投资资产应该是处于总资产与净资产之间的一物，因为富人总会融资。2017年拥有1000万以上可投资人民币的个人比例是：<strong>0.135%</strong></p>
-<blockquote>按照招商银行与贝恩公司的报告，2016年他们一共拥有49万亿人民币的可投资资产，相当于人均拥有3100万元可投资资产。预计到2017年底，他们持有的可投资资产规模将达58万亿人民币，人均拥有3670万元可投资资产。
-
-由于2016年全国个人持有的可投资资产总规模为165万亿元，不难算出，高净值人士资产占全国个人资产总量的29.7%。</blockquote>
-<p>设财富分布幂律为</p>
-
-<p>W(x)=k*e^(cx)</p>
-
-<p>其中x是分位点，W为总财富</p>
-
-<p>最终需要<a href="https://www.wolframalpha.com">求解超越方程</a></p>
-
-<p>k=9.826e-7</p>
-
-<p>c=20.7688</p>
-
-<p>最终财富需要<strong>946.450万元 </strong></p>
-
-<p>好吧，计入3%通胀，按我目前可投资资产为20万人民币。希望能在60岁前实现的话，列表如下.</p>
-<table width="744">
-<tbody>
-<tr>
-<td width="72">年份</td>
-<td width="72">年龄</td>
-<td width="99">目标财富</td>
-<td width="237">达到目标年复合增长率（20万起）</td>
-<td width="264">60岁实现目标累积财富（20万起）</td>
-</tr>
-<tr>
-<td>2017</td>
-<td>26</td>
-<td>946.45</td>
-<td>N/A</td>
-<td>20</td>
-</tr>
-<tr>
-<td>2018</td>
-<td>27</td>
-<td>974.8435</td>
-<td>4774.22%</td>
-<td>23.074</td>
-</tr>
-<tr>
-<td>2019</td>
-<td>28</td>
-<td>1004.088805</td>
-<td>608.55%</td>
-<td>26.6204738</td>
-</tr>
-<tr>
-<td>2020</td>
-<td>29</td>
-<td>1034.211469</td>
-<td>272.56%</td>
-<td>30.71204062</td>
-</tr>
-<tr>
-<td><strong>2021</strong></td>
-<td><strong>30</strong></td>
-<td><strong>1065.237813</strong></td>
-<td><strong>170.15%</strong></td>
-<td><strong>35.43248127</strong></td>
-</tr>
-<tr>
-<td>2022</td>
-<td>31</td>
-<td>1097.194948</td>
-<td>122.77%</td>
-<td>40.87845364</td>
-</tr>
-<tr>
-<td>2023</td>
-<td>32</td>
-<td>1130.110796</td>
-<td>95.89%</td>
-<td>47.16147196</td>
-</tr>
-<tr>
-<td>2024</td>
-<td>33</td>
-<td>1164.01412</td>
-<td>78.70%</td>
-<td>54.4101902</td>
-</tr>
-<tr>
-<td>2025</td>
-<td>34</td>
-<td>1198.934544</td>
-<td>66.81%</td>
-<td>62.77303644</td>
-</tr>
-<tr>
-<td><strong>2026</strong></td>
-<td><strong>35</strong></td>
-<td><strong>1234.90258</strong></td>
-<td><strong>58.11%</strong></td>
-<td><strong>72.42125214</strong></td>
-</tr>
-<tr>
-<td>2027</td>
-<td>36</td>
-<td>1271.949657</td>
-<td>51.48%</td>
-<td>83.55239859</td>
-</tr>
-<tr>
-<td>2028</td>
-<td>37</td>
-<td>1310.108147</td>
-<td>46.26%</td>
-<td>96.39440225</td>
-</tr>
-<tr>
-<td>2029</td>
-<td>38</td>
-<td>1349.411391</td>
-<td>42.05%</td>
-<td>111.2102219</td>
-</tr>
-<tr>
-<td>2030</td>
-<td>39</td>
-<td>1389.893733</td>
-<td>38.58%</td>
-<td>128.303233</td>
-</tr>
-<tr>
-<td><strong>2031</strong></td>
-<td><strong>40</strong></td>
-<td><strong>1431.590545</strong></td>
-<td><strong>35.67%</strong></td>
-<td><strong>148.0234399</strong></td>
-</tr>
-<tr>
-<td>2032</td>
-<td>41</td>
-<td>1474.538261</td>
-<td>33.20%</td>
-<td>170.7746426</td>
-</tr>
-<tr>
-<td>2033</td>
-<td>42</td>
-<td>1518.774409</td>
-<td>31.08%</td>
-<td>197.0227052</td>
-</tr>
-<tr>
-<td>2034</td>
-<td>43</td>
-<td>1564.337642</td>
-<td>29.23%</td>
-<td>227.305095</td>
-</tr>
-<tr>
-<td>2035</td>
-<td>44</td>
-<td>1611.267771</td>
-<td>27.61%</td>
-<td>262.2418881</td>
-</tr>
-<tr>
-<td><strong>2036</strong></td>
-<td><strong>45</strong></td>
-<td><strong>1659.6058</strong></td>
-<td><strong>26.18%</strong></td>
-<td><strong>302.5484662</strong></td>
-</tr>
-<tr>
-<td>2037</td>
-<td>46</td>
-<td>1709.39398</td>
-<td>24.91%</td>
-<td>349.0501655</td>
-</tr>
-<tr>
-<td>2038</td>
-<td>47</td>
-<td>1760.6758</td>
-<td>23.77%</td>
-<td>402.6991759</td>
-</tr>
-<tr>
-<td>2039</td>
-<td>48</td>
-<td>1813.49607</td>
-<td>22.74%</td>
-<td>464.5940393</td>
-</tr>
-<tr>
-<td>2040</td>
-<td>49</td>
-<td>1867.90095</td>
-<td>21.81%</td>
-<td>536.0021431</td>
-</tr>
-<tr>
-<td><strong>2041</strong></td>
-<td><strong>50</strong></td>
-<td><strong>1923.93798</strong></td>
-<td><strong>20.96%</strong></td>
-<td><strong>618.3856725</strong></td>
-</tr>
-<tr>
-<td>2042</td>
-<td>51</td>
-<td>1981.65612</td>
-<td>20.18%</td>
-<td>713.4315504</td>
-</tr>
-<tr>
-<td>2043</td>
-<td>52</td>
-<td>2041.10581</td>
-<td>19.47%</td>
-<td>823.0859797</td>
-</tr>
-<tr>
-<td>2044</td>
-<td>53</td>
-<td>2102.33898</td>
-<td>18.82%</td>
-<td>949.5942948</td>
-</tr>
-<tr>
-<td>2045</td>
-<td>54</td>
-<td>2165.40915</td>
-<td>18.21%</td>
-<td>1095.546938</td>
-</tr>
-<tr>
-<td><strong>2046</strong></td>
-<td><strong>55</strong></td>
-<td><strong>2230.37142</strong></td>
-<td><strong>17.65%</strong></td>
-<td><strong>1263.932502</strong></td>
-</tr>
-<tr>
-<td>2047</td>
-<td>56</td>
-<td>2297.28257</td>
-<td>17.13%</td>
-<td>1458.198928</td>
-</tr>
-<tr>
-<td>2048</td>
-<td>57</td>
-<td>2366.20104</td>
-<td>16.65%</td>
-<td>1682.324103</td>
-</tr>
-<tr>
-<td>2049</td>
-<td>58</td>
-<td>2437.18707</td>
-<td>16.19%</td>
-<td>1940.897318</td>
-</tr>
-<tr>
-<td>2050</td>
-<td>59</td>
-<td>2510.30269</td>
-<td>15.77%</td>
-<td>2239.213235</td>
-</tr>
-<tr>
-<td><strong>2051</strong></td>
-<td><strong>60</strong></td>
-<td><strong>2585.61177</strong></td>
-<td><strong>15.37%</strong></td>
-<td><strong>2583.38031</strong></td>
-</tr>
-</tbody>
-</table>
-<p>—————-分割线———————</p>
-
-<p>补，若根据之前通过支付宝估算的基尼系数，所获得分位点财富幂律指数，同样的幂律分布下：</p>
-
-<p>k*e^(8.8992(1-0.135%))=1000</p>
-
-<p>解得k=0.138148万</p>
-
-<p>带入个人的分位点，得2017年底目标财富要到达<span style="color: #ff0000;"><strong>976.7万（居然差不多啊！这flag立得不好啊……）才能与我高考分位点匹配！</strong></span></p>
-
-<p>好吧，计入3%通胀，按我目前可投资资产为20万人民币。希望能在60岁前实现的话，列表如下.</p>
-<table width="744">
-<tbody>
-<tr>
-<td width="72">年份</td>
-<td width="72">年龄</td>
-<td width="99">目标财富</td>
-<td width="237">达到目标年复合增长率（20万起）</td>
-<td width="264">60岁实现目标累积财富（20万起）</td>
-</tr>
-<tr>
-<td>2017</td>
-<td>26</td>
-<td>976.7</td>
-<td>N/A</td>
-<td>20</td>
-</tr>
-<tr>
-<td>2018</td>
-<td>27</td>
-<td>1006.001</td>
-<td>4930.01%</td>
-<td>23.096</td>
-</tr>
-<tr>
-<td>2019</td>
-<td>28</td>
-<td>1036.18103</td>
-<td>619.79%</td>
-<td>26.6712608</td>
-</tr>
-<tr>
-<td>2020</td>
-<td>29</td>
-<td>1067.266461</td>
-<td>276.48%</td>
-<td>30.79997197</td>
-</tr>
-<tr>
-<td>2021</td>
-<td>30</td>
-<td>1099.284455</td>
-<td>172.28%</td>
-<td>35.56780763</td>
-</tr>
-<tr>
-<td>2022</td>
-<td>31</td>
-<td>1132.262988</td>
-<td>124.17%</td>
-<td>41.07370425</td>
-</tr>
-<tr>
-<td>2023</td>
-<td>32</td>
-<td>1166.230878</td>
-<td>96.92%</td>
-<td>47.43191367</td>
-</tr>
-<tr>
-<td>2024</td>
-<td>33</td>
-<td>1201.217804</td>
-<td>79.51%</td>
-<td>54.77437391</td>
-</tr>
-<tr>
-<td>2025</td>
-<td>34</td>
-<td>1237.254338</td>
-<td>67.47%</td>
-<td>63.25344699</td>
-</tr>
-<tr>
-<td>2026</td>
-<td>35</td>
-<td>1274.371969</td>
-<td>58.66%</td>
-<td>73.04508059</td>
-</tr>
-<tr>
-<td>2027</td>
-<td>36</td>
-<td>1312.603128</td>
-<td>51.95%</td>
-<td>84.35245906</td>
-</tr>
-<tr>
-<td>2028</td>
-<td>37</td>
-<td>1351.981222</td>
-<td>46.68%</td>
-<td>97.41021972</td>
-</tr>
-<tr>
-<td>2029</td>
-<td>38</td>
-<td>1392.540658</td>
-<td>42.42%</td>
-<td>112.4893217</td>
-</tr>
-<tr>
-<td>2030</td>
-<td>39</td>
-<td>1434.316878</td>
-<td>38.91%</td>
-<td>129.9026687</td>
-</tr>
-<tr>
-<td>2031</td>
-<td>40</td>
-<td>1477.346384</td>
-<td>35.98%</td>
-<td>150.0116019</td>
-</tr>
-<tr>
-<td>2032</td>
-<td>41</td>
-<td>1521.666776</td>
-<td>33.48%</td>
-<td>173.2333978</td>
-</tr>
-<tr>
-<td>2033</td>
-<td>42</td>
-<td>1567.316779</td>
-<td>31.34%</td>
-<td>200.0499278</td>
-</tr>
-<tr>
-<td>2034</td>
-<td>43</td>
-<td>1614.336282</td>
-<td>29.47%</td>
-<td>231.0176566</td>
-</tr>
-<tr>
-<td>2035</td>
-<td>44</td>
-<td>1662.766371</td>
-<td>27.84%</td>
-<td>266.7791899</td>
-</tr>
-<tr>
-<td>2036</td>
-<td>45</td>
-<td>1712.64936</td>
-<td>26.39%</td>
-<td>308.0766085</td>
-</tr>
-<tr>
-<td>2037</td>
-<td>46</td>
-<td>1764.02884</td>
-<td>25.10%</td>
-<td>355.7668675</td>
-</tr>
-<tr>
-<td>2038</td>
-<td>47</td>
-<td>1816.94971</td>
-<td>23.95%</td>
-<td>410.8395786</td>
-</tr>
-<tr>
-<td>2039</td>
-<td>48</td>
-<td>1871.4582</td>
-<td>22.91%</td>
-<td>474.4375453</td>
-</tr>
-<tr>
-<td>2040</td>
-<td>49</td>
-<td>1927.60195</td>
-<td>21.97%</td>
-<td>547.8804773</td>
-</tr>
-<tr>
-<td>2041</td>
-<td>50</td>
-<td>1985.43</td>
-<td>21.12%</td>
-<td>632.6923752</td>
-</tr>
-<tr>
-<td>2042</td>
-<td>51</td>
-<td>2044.9929</td>
-<td>20.33%</td>
-<td>730.6331549</td>
-</tr>
-<tr>
-<td>2043</td>
-<td>52</td>
-<td>2106.34269</td>
-<td>19.62%</td>
-<td>843.7351673</td>
-</tr>
-<tr>
-<td>2044</td>
-<td>53</td>
-<td>2169.53297</td>
-<td>18.96%</td>
-<td>974.3453712</td>
-</tr>
-<tr>
-<td>2045</td>
-<td>54</td>
-<td>2234.61896</td>
-<td>18.34%</td>
-<td>1125.174035</td>
-</tr>
-<tr>
-<td>2046</td>
-<td>55</td>
-<td>2301.65753</td>
-<td>17.78%</td>
-<td>1299.350975</td>
-</tr>
-<tr>
-<td>2047</td>
-<td>56</td>
-<td>2370.70726</td>
-<td>17.25%</td>
-<td>1500.490506</td>
-</tr>
-<tr>
-<td>2048</td>
-<td>57</td>
-<td>2441.82847</td>
-<td>16.76%</td>
-<td>1732.766437</td>
-</tr>
-<tr>
-<td>2049</td>
-<td>58</td>
-<td>2515.08333</td>
-<td>16.31%</td>
-<td>2000.998681</td>
-</tr>
-<tr>
-<td>2050</td>
-<td>59</td>
-<td>2590.53583</td>
-<td>15.88%</td>
-<td>2310.753277</td>
-</tr>
-<tr>
-<td>2051</td>
-<td>60</td>
-<td>2668.2519</td>
-<td>15.48%</td>
-<td>2668.457884</td>
-</tr>
-</tbody>
-</table>
-<p>线性估计，若资产本身能够产生5%的增速，那么薪资、奖金、外快每年平均必须有12%增速才能在55岁达到目标……</p>
-<p style="text-align: center;"><span style="color: #ff0000;">=========知耻而后勇的分割线===========</span></p>
-<p>和catpiano讨论的时候发现了一个较大的问题，我在统计rank的时候应该把自己放到理科生排名，而不是报考总人数。这里对结果进行修改：</p>
-
-<p>根据2010年分段表，将总分300分以上的人数作为总量统计，共有<strong>533169</strong>人。其中理科累计人数<strong>317588</strong>人.（把自己从坑里救出来啦）</p>
-
-<p>2600/(656000*(317588/533169))=0.665%</p>
-
-<p>差不多150人取1的位置，带入财富分布公式，可得到可投资净资产约为<strong>895.704万元</strong></p>
-<table width="744">
-<tbody>
-<tr>
-<td width="72">年份</td>
-<td width="72">年龄</td>
-<td width="99">目标财富</td>
-<td width="237">达到目标年复合增长率（20万起）</td>
-<td width="264">60岁实现目标累积财富（20万起）</td>
-</tr>
-<tr>
-<td>2017</td>
-<td>26</td>
-<td>895.704</td>
-<td>N/A</td>
-<td>20</td>
-</tr>
-<tr>
-<td>2018</td>
-<td>27</td>
-<td>922.57512</td>
-<td>4512.88%</td>
-<td>23.038</td>
-</tr>
-<tr>
-<td>2019</td>
-<td>28</td>
-<td>950.2523736</td>
-<td>589.29%</td>
-<td>26.5374722</td>
-</tr>
-<tr>
-<td>2020</td>
-<td>29</td>
-<td>978.7599448</td>
-<td>265.78%</td>
-<td>30.56851423</td>
-</tr>
-<tr>
-<td><strong>2021</strong></td>
-<td><strong>30</strong></td>
-<td><strong>1008.122743</strong></td>
-<td><strong>166.45%</strong></td>
-<td><strong>35.21187154</strong></td>
-</tr>
-<tr>
-<td>2022</td>
-<td>31</td>
-<td>1038.366425</td>
-<td>120.33%</td>
-<td>40.56055482</td>
-</tr>
-<tr>
-<td>2023</td>
-<td>32</td>
-<td>1069.517418</td>
-<td>94.10%</td>
-<td>46.7217031</td>
-</tr>
-<tr>
-<td>2024</td>
-<td>33</td>
-<td>1101.602941</td>
-<td>77.30%</td>
-<td>53.8187298</td>
-</tr>
-<tr>
-<td>2025</td>
-<td>34</td>
-<td>1134.651029</td>
-<td>65.66%</td>
-<td>61.99379486</td>
-</tr>
-<tr>
-<td><strong>2026</strong></td>
-<td><strong>35</strong></td>
-<td><strong>1168.69056</strong></td>
-<td><strong>57.14%</strong></td>
-<td><strong>71.4106523</strong></td>
-</tr>
-<tr>
-<td>2027</td>
-<td>36</td>
-<td>1203.751277</td>
-<td>50.64%</td>
-<td>82.25793039</td>
-</tr>
-<tr>
-<td>2028</td>
-<td>37</td>
-<td>1239.863815</td>
-<td>45.53%</td>
-<td>94.75291001</td>
-</tr>
-<tr>
-<td>2029</td>
-<td>38</td>
-<td>1277.059729</td>
-<td>41.39%</td>
-<td>109.145877</td>
-</tr>
-<tr>
-<td>2030</td>
-<td>39</td>
-<td>1315.371521</td>
-<td>37.99%</td>
-<td>125.7251358</td>
-</tr>
-<tr>
-<td><strong>2031</strong></td>
-<td><strong>40</strong></td>
-<td><strong>1354.832667</strong></td>
-<td><strong>35.14%</strong></td>
-<td><strong>144.8227839</strong></td>
-</tr>
-<tr>
-<td>2032</td>
-<td>41</td>
-<td>1395.477647</td>
-<td>32.71%</td>
-<td>166.8213648</td>
-</tr>
-<tr>
-<td>2033</td>
-<td>42</td>
-<td>1437.341976</td>
-<td>30.63%</td>
-<td>192.1615301</td>
-</tr>
-<tr>
-<td>2034</td>
-<td>43</td>
-<td>1480.462236</td>
-<td>28.81%</td>
-<td>221.3508665</td>
-</tr>
-<tr>
-<td>2035</td>
-<td>44</td>
-<td>1524.876103</td>
-<td>27.22%</td>
-<td>254.9740631</td>
-</tr>
-<tr>
-<td><strong>2036</strong></td>
-<td><strong>45</strong></td>
-<td><strong>1570.62239</strong></td>
-<td><strong>25.82%</strong></td>
-<td><strong>293.7046233</strong></td>
-</tr>
-<tr>
-<td>2037</td>
-<td>46</td>
-<td>1617.74106</td>
-<td>24.56%</td>
-<td>338.3183556</td>
-</tr>
-<tr>
-<td>2038</td>
-<td>47</td>
-<td>1666.27329</td>
-<td>23.44%</td>
-<td>389.7089138</td>
-</tr>
-<tr>
-<td>2039</td>
-<td>48</td>
-<td>1716.26149</td>
-<td>22.43%</td>
-<td>448.9056978</td>
-</tr>
-<tr>
-<td>2040</td>
-<td>49</td>
-<td>1767.74933</td>
-<td>21.51%</td>
-<td>517.0944733</td>
-</tr>
-<tr>
-<td><strong>2041</strong></td>
-<td><strong>50</strong></td>
-<td><strong>1820.78181</strong></td>
-<td><strong>20.68%</strong></td>
-<td><strong>595.6411238</strong></td>
-</tr>
-<tr>
-<td>2042</td>
-<td>51</td>
-<td>1875.40527</td>
-<td>19.92%</td>
-<td>686.1190105</td>
-</tr>
-<tr>
-<td>2043</td>
-<td>52</td>
-<td>1931.66742</td>
-<td>19.22%</td>
-<td>790.3404881</td>
-</tr>
-<tr>
-<td>2044</td>
-<td>53</td>
-<td>1989.61745</td>
-<td>18.57%</td>
-<td>910.3932083</td>
-</tr>
-<tr>
-<td>2045</td>
-<td>54</td>
-<td>2049.30597</td>
-<td>17.98%</td>
-<td>1048.681937</td>
-</tr>
-<tr>
-<td><strong>2046</strong></td>
-<td><strong>55</strong></td>
-<td><strong>2110.78515</strong></td>
-<td><strong>17.43%</strong></td>
-<td><strong>1207.976723</strong></td>
-</tr>
-<tr>
-<td>2047</td>
-<td>56</td>
-<td>2174.1087</td>
-<td>16.92%</td>
-<td>1391.468387</td>
-</tr>
-<tr>
-<td>2048</td>
-<td>57</td>
-<td>2239.33197</td>
-<td>16.44%</td>
-<td>1602.832435</td>
-</tr>
-<tr>
-<td>2049</td>
-<td>58</td>
-<td>2306.51192</td>
-<td>15.99%</td>
-<td>1846.302682</td>
-</tr>
-<tr>
-<td>2050</td>
-<td>59</td>
-<td>2375.70728</td>
-<td>15.58%</td>
-<td>2126.756059</td>
-</tr>
-<tr>
-<td><strong>2051</strong></td>
-<td><strong>60</strong></td>
-<td><strong>2446.9785</strong></td>
-<td><strong>15.19%</strong></td>
-<td><strong>2449.810305</strong></td>
-</tr>
-</tbody>
-</table>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/08/21/e5-ae-a2-e8-a7-82-e5-ae-9a-e9-87-8f-e7-9a-84-e4-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/07/11/porting-dart-on-cori/">porting DART on CORI</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-07-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>When porting DART on CORI, the compiling process of CESM got error:</p>
-
-<p>cannot find -lmemkind</p>
-<pre>I checked my error log and found that the compiler cannot find some libraries. After loading memkind, the CESM component can be compiled successfully. It's strange because I cannot find command line like "<strong>module load memkind</strong>" in your related config files. I am working forward and will inform you later.</pre>
-<div>After building, when trying to run the model, got segment fault.</div>
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/07/11/porting-dart-on-cori/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -1361,10 +761,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page21" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">22/87</span>
+          <span class="page_number ">22/88</span>
           
             <a href="/page23" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1675,7 +1075,17 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -2746,7 +2156,7 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -2774,7 +2184,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -3180,7 +2590,7 @@
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -3406,6 +2816,27 @@
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -3418,6 +2849,10 @@
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -3434,10 +2869,6 @@
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3806,7 +3237,7 @@
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3824,7 +3255,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3851,7 +3282,7 @@
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3860,7 +3291,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3878,7 +3309,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     

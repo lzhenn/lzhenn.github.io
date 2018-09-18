@@ -314,6 +314,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -326,6 +328,195 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
+    
+        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#json" title="Tag: json" rel="tag">json</a>&nbsp;
+    
+        <a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+    
+        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：</p>
+
+<p>首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。这样很正常嘛，本身就是静态网页啦。</p>
+
+<p>所以还是回到刚刚的思路，查了下解决方案，发现是自己定义了函数但是木有执行。在定义后加入执行代码后，生效。注意对应的json包不能放在jekyll生成的下划线前缀目录下，否则无法获取到。javascript代码：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showJson</span><span class="p">(){</span>  
+    <span class="kd">var</span> <span class="nx">test</span><span class="p">;</span>  
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">){</span>  
+        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>  
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">){</span>  
+        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">();</span>  
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Browser not supported!"</span><span class="p">);</span>  
+    <span class="p">}</span>  
+    
+    <span class="k">if</span><span class="p">(</span><span class="nx">test</span> <span class="o">!=</span><span class="kc">null</span><span class="p">){</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s2">"/database/principles.json"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>  
+        <span class="nx">test</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>  
+            <span class="k">if</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span><span class="o">&amp;&amp;</span><span class="nx">test</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">){</span>  
+                <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>  
+                <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">rnd_pos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"content-principle"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">rnd_pos</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
+            <span class="p">}</span>  
+        <span class="p">};</span>  
+    <span class="p">}</span>  
+<span class="p">}</span>  
+<span class="nx">showJson</span><span class="p">();</span> 
+</code></pre></div></div>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/03/random-post-ajax/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
+
+<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
+总负债 L=a*(1+r)^n
+</code></pre></div></div>
+<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
+当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
+
+<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
+总负债 L=a*(1-k)*(1+r)^n
+</code></pre></div></div>
+<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
+若不破灭，要求总资产大于等于0，则要求k</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
+</code></pre></div></div>
+<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
+
+<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
+而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -397,184 +588,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/01/housing-account/">买房的财务安全边际计算</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-01
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。
-假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为</p>
-
-<p>R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5</p>
-
-<p>整理可得，净资产
-B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
-
-<p>假设首付率为0.3</p>
-
-<p>B&gt;0.5<em>C+0.2</em>A</p>
-
-<p>假设家庭本身无负债，B=C</p>
-
-<p>B&gt;(2/5)*A</p>
-
-<p>因此，在30%首付、家庭无负债的条件下，对于一套500万的房子，总资产大于200万达到购入的安全边际。对于小户型，假设180万，家庭总资产大于72万为安全边际。</p>
-
-<p>再考虑50%首付的情况，这是个很有意思的阈值，在50%首付的前提下，只要初始家庭负债率小于50%即可满足条件，与房产价格无关。是否矛盾，并不，因为还有一个隐含条件是，家庭能够承担买房首付，若不讨论资产是否具有高流动性，至少有C&gt;0.5A。</p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/01/housing-account/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/12/31/new-year-blog/">岁末年初</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-12-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#emotion" title="Category: emotion" rel="category">emotion</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#jan-1-2018-update" id="markdown-toc-jan-1-2018-update">Jan 1 2018 Update</a></li>
-</ul>
-
-<p>犹豫了一下午要不要写点什么，晚上回来还是决定写点吧。
-又到了跨年的时候了，2017在印象中过的无比的快。真的是无比的快。记得之前有人解释说，为什么人越长大越觉得时间快，想想小学中学，一个学期四个月都觉得无比漫长，如今一年毫无感觉就结束了。解释说是基数效应，十岁的时候，多过一年，那是生命的十分之一；而25岁的时候，再过一年，也不过是4%的增幅，跟余额宝年化差不多，自然没感觉。
-想到了七年前的这个时候，也是坐在床上，当时用着床上书桌，接着网线，也是用着现在的小Y，当时和烨琪一起倒数跨年，两栋宿舍楼，QQ联系，那时还没确定关系。
-如今我也是这种状态，不过在南校；烨琪也和我聊着，不过隔着伶仃洋，用着手机。
-后来几年，有几次在学校倒数，东校新天地，南校亲新广场，都有。
-去年，我在大洋彼岸，16小时时差，一起跨了两次。</p>
-
-<p>去年对我来说，是一个拐点。
-从2016年，慢慢关注经济和金融，过去的2017当然投入了更多。
-两本对我影响深刻的书：塔勒布《黑天鹅》，Van Tharp《Trade Your Way to Financial Freedom》，思想上对我影响深刻的，反倒是还没有看的塔勒布那本《反脆弱》。
-没错，杠铃策略。
-2016年还在迷茫挣扎，2017则是明确了自己不想要的，而杠铃策略，给了我最大的启发。
-稳定工作应该是保守的一端，而另一端则是激进的机会搜集和备战。
-想清楚这些，很多迷茫都迎刃而解；目标明确，接下来就是按部就班操作，焦虑也少了。
-想想10年初的目标，现在实现早没什么问题了；如今，可能更多想到的是如何去平衡责任。</p>
-
-<p>说说目标吧。
-Van Tharp的规则意识让我明白交易系统是可以机械化操作的，因此也有了写自己交易系统的想法。人性太难克服，随意性，操作瘾性太强。赌多，输多。年末一段时间算是慢慢改掉了坏毛病，看得少了，动的少了，心情起伏也少了。投资以来，总体没亏，年底借了几个标的涨势，今年算勉强跑赢余额宝。大牛市没赚大钱，不过起码没亏。
-所以第一个目标就是动手做一个交易系统，ML要上，我只需要概率而已，剩下的交给时间。
-第二个目标是完成确保保守端成立，问题不大，但是塔勒布告诉我，不能掉以轻心。plan B还是要有的。
-第三个目标算为第二个目标，同时也是Plan B服务，做一套山东半岛预报系统。
-第四个目标，也是为第二个服务，完成最低毕业标准。
-ML没法立flag了，边学边用吧。很多书要看，看很多书。看书的确能让人思路大开。</p>
-
-<p>听说新年立flag都完成不了，不过我还是信心满满。
-知道自己想要什么，也就平和多了，加油！</p>
-
-<h4 id="jan-1-2018-update">Jan 1 2018 Update</h4>
-<p>中午和rds师兄吃饭，再次得出稀缺大于一切的结论，无论怎样，潮水退去时，有所栖倚才会留出反应时间，这当然是极其珍贵的。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/12/31/new-year-blog/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -585,10 +598,10 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page19" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">20/87</span>
+          <span class="page_number ">20/88</span>
           
             <a href="/page21" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page87" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -899,7 +912,17 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (59)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
                             
                           
                         
@@ -1970,7 +1993,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16pt; color: #222;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
                     
                       
                       
@@ -1998,7 +2021,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 13.5pt; color: #444;">thinking</a>
+                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
                     
                       
                       
@@ -2404,7 +2427,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                       
                       
                       
-                      <a href="/tag/#career" style="font-size: 9.5pt; color: #888;">career</a>
+                      <a href="/tag/#career" style="font-size: 10pt; color: #888;">career</a>
                     
                       
                       
@@ -2630,6 +2653,27 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                       
                       <a href="/tag/#dalio" style="font-size: 9pt; color: #999;">dalio</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#event-listening" style="font-size: 9pt; color: #999;">event-listening</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#debt" style="font-size: 9pt; color: #999;">debt</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
+                    
                 </div>
             </div>
 
@@ -2642,6 +2686,10 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                     Recent Posts
                 </div>
                 <ul class="content-ul" recent>
+                    
+                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
+                    
+                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
@@ -2658,10 +2706,6 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                         <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
                     
                         <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></li>
                     
                 </ul>
             </div>
@@ -3030,7 +3074,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                             <span class="name">
                                 modeling
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -3048,7 +3092,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">17</span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -3075,7 +3119,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                             <span class="name">
                                 python
                             </span>
-                            <span class="badge">9</span>
+                            <span class="badge">10</span>
                         </a>
                     </li>
                     
@@ -3084,7 +3128,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">11</span>
+                            <span class="badge">12</span>
                         </a>
                     </li>
                     
@@ -3102,7 +3146,7 @@ ML没法立flag了，边学边用吧。很多书要看，看很多书。看书�
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">22</span>
+                            <span class="badge">23</span>
                         </a>
                     </li>
                     
