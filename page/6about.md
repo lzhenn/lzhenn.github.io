@@ -9,6 +9,10 @@ type: page
 * content
 {:toc}
 
+
+* [CV for Academic Circle]()  ([学术界简历](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/2018/cv/CV-Academic-Chinese.pdf))
+* [CV for Industrial Circle]() ([工业界简历](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/2018/cv/CV-Industrial-Chinese.pdf))
+
 ## 关于我
 
 
