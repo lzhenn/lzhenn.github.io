@@ -9,7 +9,7 @@ function showMercurius(){
 
 	var data = new Array();
     data.push('<table><tbody>');
-    data.push('<tr style="font-weight:bold"><td>Target</td><td>Update Date</td><td>Action</td><td>1Y Bias</td><td>1Y Return</td><td>10Y Return</td><td>APR</td></tr>');
+    data.push('<tr style="font-weight:bold; font-size:12px"><td>Target</td><td>Update Date</td><td>Action</td><td>1Y Bias</td><td>1Y Return</td><td>10Y Return</td><td>APR</td></tr>');
 	
 
 
@@ -30,7 +30,7 @@ function showMercurius(){
                 var count = Object.keys(obj).length;
                 
 				for (var ii = 1; ii <= count; ii++) {
-        			data.push('<tr>');
+        			data.push('<tr style="font-size:12px">');
         			
 					data.push('<td><a href="https://raw.githubusercontent.com/Novarizark/mercurius/master/routine_output/'+obj['target'+ii].tgt_name.trim()+'.png">'+obj['target'+ii].tgt_name+ '</td>');
 					data.push('<td>'+obj['target'+ii].update_date+ '</td>');
