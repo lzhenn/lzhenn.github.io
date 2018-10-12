@@ -22,7 +22,7 @@ function showMercurius(){
     }  
     
     if(test !=null){  
-        test.open("GET","https://raw.githubusercontent.com/Novarizark/mercurius/master/routine_output/routine_info.json",true);  
+        test.open("GET","https://raw.githubusercontent.com/Novarizark/routine-output/master/mercurius/routine_info.json",true);  
         test.send(null);  
         test.onreadystatechange=function(){  
             if(test.readyState==4&&test.status==200){  
@@ -32,7 +32,7 @@ function showMercurius(){
 				for (var ii = 1; ii <= count; ii++) {
         			data.push('<tr style="font-size:12px">');
         			
-					data.push('<td><a href="https://raw.githubusercontent.com/Novarizark/mercurius/master/routine_output/'+obj['target'+ii].tgt_name.trim()+'.png">'+obj['target'+ii].tgt_name+ '</td>');
+					data.push('<td><a href="https://raw.githubusercontent.com/Novarizark/routine-output/master/mercurius/'+obj['target'+ii].tgt_name.trim()+'.png">'+obj['target'+ii].tgt_name+ '</td>');
 					data.push('<td>'+obj['target'+ii].update_date+ '</td>');
 					action=obj['target'+ii].action;
 					if ((action.search('Buy')>=0)||(action.search('Full')>=0)){
