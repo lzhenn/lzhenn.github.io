@@ -130,7 +130,21 @@ Here we note that SW and LW are from coupler, and LH and SH are from coupler. Th
 |cam_in%lhf|LHFLX|
 |cam_in%shf|SHFLX|
 
+Next, in `physpkg.F90` (still this guy!), we found that lhf is calculated by cam_in%cflx (moisture flux from the surface). As the moisture flux is a constituent flux, I decide to remain the latent heat at first.
 
+Therefore, the question is to add a constant forcing to netsw, flwds, and shflx.
+
+Luckily, we have tried to change the shflx in [previous trial](https://github.com/Novarizark/project/tree/master/SRC_MOD_LIB-2017/SourceMods-shf/src.cam).
+
+For netsw and flwds, `physpkg.F90` call the radiation, and in radiation_tend module, the netsw is set. Note that in `radiation.F90`: 
+
+``` fortran
+real(r8), parameter :: cgs2mks = 1.e-3_r8
+flds(i)  = cam_out%flwds(i)*cgs2mks
+cam_out%flwds(i) = cam_out%flwds(i)*cgs2mks
+```
+
+I don't know why they organize the data structure like this. But netsw and flwds both can be handled similarly after physpkg call the radiation module.
 
 
 
