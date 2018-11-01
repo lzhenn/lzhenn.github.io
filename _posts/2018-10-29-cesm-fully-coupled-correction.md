@@ -146,7 +146,8 @@ cam_out%flwds(i) = cam_out%flwds(i)*cgs2mks
 
 I don't know why they organize the data structure like this. But netsw and flwds both can be handled similarly after physpkg call the radiation module.
 
+The modified code files have been uploaded to [github](https://github.com/Novarizark/project/tree/master/SRC_MOD_LIB-2017/SourceMods-heatflux-correction/src.cam).
 
 
-**Updated 2018-10-29**
+**Updated 2018-11-01**
 
