@@ -51,8 +51,11 @@ Results from the file:
 (0) min=0   max=60
 ```
 
-60 means the deepest ocean bottom lies on the 60th model layer.
-Here we set all to Layer 25 in `PURE_AQUA` (2.6848km depth), and all land (0) to 1 (10m) in `SURF_AQUA` model.
+60 means the deepest ocean bottom lies on the 60th model layer. A list of the ocean depth is attached below:
+
+>1: 10m; 2: 20m; 3: 30m; 4: 40m; 5: 50m; 6: 60m; 7: 70m; 8: 80m; 9: 90m; 10: 100m; 11: 110m; 12: 120m; 13: 130m; 14: 140m; 15: 150m; 16: 160m; 17: 170.1968m; 18: 180.7613m; 19: 191.8212m; 20: 203.4993m; 21: 215.9234m; 22: 229.2331m; 23: 243.5845m; 24: 259.1558m; 25: 276.1526m; 26: 294.8147m; 27: 315.4237m; 28: 338.3123m; 29: 363.8747m; 30: 392.5805m; 31: 424.9889m; 32: 461.7666m; 33: 503.7069m; 34: 551.7491m; 35: 606.9967m; 36: 670.7286m; 37: 744.398m; 38: 829.607m; 39: 928.0435m; 40: 1041.368m; 41: 1171.04m; 42: 1318.094m; 43: 1482.901m; 44: 1664.992m; 45: 1863.014m; 46: 2074.874m; 47: 2298.039m; 48: 2529.904m; 49: 2768.098m; 50: 3010.671m; 51: 3256.138m; 52: 3503.449m; 53: 3751.892m; 54: 4001.012m; 55: 4250.525m; 56: 4500.261m; 57: 4750.12m; 58: 5000.047m; 59: 5250.009m; 60: 5499.991m; 
+
+Here we set all to Layer ~~25~~ **49** in `PURE_AQUA` (2.768km depth), and all land (0) to 1 (10m) in `SURF_AQUA` model.
 
 However, the NCL had problem when writing the new file (See **[Appendix01](./#61-ncl-binary-file)** for details and solution). We change to F90 to realize our goal. For example, below is the code to generate `SURF_AQUA` bathymetry data:
 
