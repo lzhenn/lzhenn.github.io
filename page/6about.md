@@ -15,18 +15,21 @@ type: page
 
 ## About Me
 
-My name is Zhenning Li, I was born in Shandong Province in 1991. 
+My name is Zhenning Li, I was born in Shandong Province, China, in 1991. 
 
-I am now a Ph.D student majoring in meteorology, using models and high performance computing clusters to simulate weather and climate. Meanwhile, I like coding, reading, and watching movies.
+I am now a Ph.D student majoring in meteorology, using models and high performance computing clusters to simulate weather and climate. Meanwhile, I like coding, reading, hiking, swimming, watching movies, and playing video games.
 
 Recently, I am taking more interests in the global economic system and fintech, and trying to build my own algorithm trading system.
 
-Life is cool, but at first we need to find the cool things.
+Life is cool, but we need to find the cool things first.
 
 ![](http://ww1.sinaimg.cn/large/73ebdc71gy1fmzzdtzucxj20wu0kugmh.jpg)
 
 ## Contact Me
 
-* GitHub：[Novarizark](https://github.com/Novarizark)
-* email：lzhenn@mail2.sysu.edu.cn
-
+* [<i style="font-size: 20px" class="fa fa-envelope-o"></i>](lzhenn@mail2.sysu.edu.cn) [lzhenn@mail2.sysu.edu.cn](lzhenn@mail2.sysu.edu.cn)
+* [<i style="font-size: 20px" class="fa fa-envelope"></i>](novarizark@gmail.com) [novarizark@gmail.com](novarizark@gmail.com)
+* [<i style="font-size: 20px" class="fa fa-weixin"></i>](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/WeChatID.jpg) [Novarizark](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/WeChatID.jpg)
+* [<i style="font-size: 20px" class="fa fa-github"></i>](https://github.com/Novarizark) [Novarizark](https://github.com/Novarizark)
+* [<i style="font-size: 20px" class="fa fa-comments"></i>](https://novarizark.github.io/comments/) [Comments](https://novarizark.github.io/comments/)
+  

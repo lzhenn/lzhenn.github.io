@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,75 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM标准流输出</a>
+                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-ef-bc-8c-e8-b/">【已解决，转】vi多文件编辑</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>实现CESM额外的标准流输出其实并不困难，只要use cam_logfile就可以了，其实看一下cam_logfile.F90文件，就可以发现，里面主语句只有一个</p>
-<blockquote>iulog=6</blockquote>
-<p>因此write语句这样写就可以将额外的信息流输出到log文件：</p>
-<blockquote>write(iulog,*) "Hello World!"</blockquote>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/16/linux-e6-9f-a5-e6-89-be-e6-96-87-e4-bb-b6-e6-89-80/">Linux查找文件所在位置</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-16
+                        <i class="fa fa-calendar"></i>2014-10-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -445,23 +385,78 @@
                 </div>
                 <div class="excerpt">
                     
-<p>Linux下查找命令find， locate，find选项太多，每次查文件都记不住怎么搞，最常用的当前目录递归深入查找写在这里了，以后记住</p>
-<blockquote>find ./ -name "*keyword*"</blockquote>
+<p>转自：http://www.cnblogs.com/end/archive/2012/06/12/2546757.html</p>
+
+<p>1、在同一窗口中打开多个文件：</p>
+
+<p>vi file1 file2 file3
+:n 切换到下一个文件 (n=next)
+:N 切换到上一个文件
+2、在不同窗口中打开多个文件：</p>
+
+<p>如果已经打开一个了一个文件，
+则在vi的命令输入状态下输入 :sp 另外一个文件的路径及文件名，
+如此就可以在一个窗口打开多个文件了。</p>
+
+<p>或者用 vi -o file1 file2 file3….用分割屏幕窗口方式同时打开多个文件。
+可以使用 ctrl + 两次按 w 或者ctrl + w 然后按上下键在上下窗口间切换。
+2.窗口分割实现编辑多文件
+*先使用vi打开一个文件，例如vi actinia_proenrule.sh
+*分割窗口打开另外的文件
+命令行模式下输入 sp 另外一个文件 就可以水平分割继续打开第二个文件，如果想纵向分割，可以使用vsp 文件名
+注：sp=split，vsp=vsplit. 上面的写法是vi支持的简略写法，v实际就是vertical，从中我们可以看出改命令的含义，另外vi不仅仅支持两个文件，还支持更多个文件同时在一个 大的窗口中显示编辑，同时还支持同时打开的两个文件是同一个文件。
+*窗口切换
+可以使用 ctrl +两次按 w，这样就可以在各个文件中切换</p>
+
+<p>之前觉得vi的多文档编辑用着很不方便，现在接触了几个，用过了MiniBufExplorer，发现看着不是很舒服。还是使用ｌｓ比较好看一些。</p>
+
+<p>:ls 展示全部的打开文档</p>
+
+<p>:xn 切换到向下的第x个文档</p>
+
+<p>n ctrl+6 ： 切换到第n个buffer</p>
+
+<p>ctrl+6 或 :e# 回到前一个编辑文件</p>
+
+<p>分屏</p>
+
+<p>:new xxx</p>
+
+<p>ctrl+w s 对当前文档内容分屏显示</p>
+
+<p>ctrl+w q 关闭所处分屏</p>
+
+<p>ctrl+w o 仅显示当前分屏内容</p>
+
+<p>ctrl+w j k 上下选择分屏</p>
+
+<p>个人觉得最值得用的命令就是ctrl+w w 快速在分屏的两个屏幕中切换</p>
+
+<p> </p>
+
+<p>下面写的还没用过~看了大家的分享觉得这几个还不错</p>
+
+<p>:n1,n2 co n3: 将n1行到n2行之间的内容拷贝到第n3行下
+:n1,n2 m n3:将n1行到n2行之间的内容移至到第n3行下
+:n1,n2 d: 将 n1行到n2行之间的内容删除
+:n1,n2 w!command: 将文件中n1行至n2行的内容作为command的输入并执行之，
+若不指定n1，n2，则表示将整个文件内容作为command的输入
+方式2的优点在可以直接使用nyy和pp命令在各个窗口的文件之间进行拷贝和粘贴，操作比较方便。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/16/linux-e6-9f-a5-e6-89-be-e6-96-87-e4-bb-b6-e6-89-80/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-ef-bc-8c-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/">【更新中】高分辨率CAM更改PE Layers的测试</a>
+                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-14
+                        <i class="fa fa-calendar"></i>2014-10-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -480,11 +475,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>&nbsp;
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
     
   
 
@@ -501,11 +496,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>&nbsp;
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
     
   
 
@@ -515,25 +510,137 @@
                 </div>
                 <div class="excerpt">
                     
-<p>应老板项目要求，CAM的分辨率早晚要shift到F05的水平，前两天在学校四期平台上测试了下，默认配置，CAM4物理，96个核，900s积分时间，运行情况实在惨不忍睹：</p>
+<p>ncl写二进制文件非常方便，setfileoption+fbinrecwrite语句即可。处理模式输出的加热数据测试了一下，非常迅速搞定。随后需要用到fortran代码来读写二进制文件，没想到却遇到大问题。</p>
 
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png"><img class="alignnone size-full wp-image-199" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png" alt="QQ截图20141014222809" width="1054" height="763" /></a></p>
+<p>ncl下采用fbinrecwrite写入的文件为fortran下的sequential读取方式（貌似这个才是符合ieee标准的），按照<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/fbinrecwrite.shtml">官网指示</a>，代码很容易编译通过，但是执行出错。ifort编译执行错误结果：</p>
+<blockquote>forrtl: severe (98): cannot allocate memory for the file buffer - out of memory, unit 100, file /users/yangsong3/L_Zealot/F/f90/CAM4_PTENDT_DIFF_mon.dat</blockquote>
+<p>采用gfortran编译，同样执行出错：</p>
+<blockquote>At line 12 of file read_heat_diff.f90 (unit = 100, file = '../data/model_post/CAM4_PTENDT_DIFF_mon.dat')
+Fortran runtime error: End of file</blockquote>
+<p>第一次在linux平台下编译自己写的fortran代码，多少还是有些心虚。ifort表示内存不足，gfortran表示读到文件末尾，有些莫名其妙，检查路径文件名，文件大小，读取方式，貌似都没问题，折腾许久没有结果。</p>
 
-<p>运行一个月用了整整一晚上，十几分钟才能输出一天，一个文件1.2G，我擦嘞。</p>
+<p>问题只能回溯到ncl那么简单的二进制写入上，fbinrecwrite看上去没什么问题，setfileoption中的几个选项值得怀疑，查了下BigEndian的问题，是这样描述的：</p>
+<blockquote>其实big endian是指低地址存放最高有效字节（MSB），而little endian则是低地址存放最低有效字节（LSB）。
 
-<p>转到天河二号，直接调用了1200个核心，物理包用的CAM5，大概三四分钟出来一天的样子，发现IO是个大瓶颈。测试改PE层，只有atm用1200个核心，其他用120个核心，依然是sequential执行，效果差不多。</p>
+用文字说明可能比较抽象，下面用图像加以说明。比如数字0x12345678在两种不同字节序CPU中的存储顺序如下所示：
 
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png"><img class="alignnone size-full wp-image-198" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png" alt="QQ截图20141014220543" width="1066" height="757" /></a></p>
+<strong>Big Endian</strong>
 
-<p>决定尝试采用concurrent的方式进行，UG上给的1800+个核心，而且用了多线程的方式，还是先不冒险多线程了吧，atm缩减到768，其他大概凑天河二号节点情况24核心的倍数，具体配置如下，几个concurrent的层次模块与UG上一致。<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png"><img class="alignnone size-full wp-image-202" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png" alt="QQ截图20141014223453" width="958" height="1575" /></a></p>
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   12  |   34  |   56  |   78   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+<strong>Little Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   78|   56  |   34  |   12   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</blockquote>
+<p>虽然看上去出错信息并不是这么指向的，但还是要试一试，查了下fortran在字节序处理的问题，果然，一行open语句赫然入眼：</p>
+
+<p>open(…,<strong><em>convert=”big_endian”</em></strong>)</p>
+
+<p>加入测试，我擦嘞……居然可以了，果然是字节序的问题。原来fortran默认的是非人的little endian，好吧……关键是运行出错给出的那些错误信息，完全无厘头，真是对编译器失望了。另外SGI编译器默认为BigEndian。</p>
+
+<p>另外fortran读ncl写出的多维二进制数据的时候，注意维数方向是相反的哦！如ncl数组（33，44），fortran（44，33）</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/sunshine1314/article/details/2309655 BigEndian和LittleEndian</p>
+
+<p>http://bbs.lasg.ac.cn/?action-viewthread-tid-13303</p>
+
+<p>http://www.360doc.com/content/11/0216/10/2609140_93438395.shtml</p>
 
 <p> </p>
 
-<p>运行速度貌似差别不大，可以省核时了。但是IO实在是太慢了，1秒钟才能写入10-20M+？我擦嘞，这是网速来着……1分钟+才能写出一个日平均，真是丧心病狂啊……回来得问问超算中心，PIO究竟能不能实现。</p>
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-18
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
+<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
+set shiftwidth=4
+
+set expandtab</blockquote>
+<p> </p>
+
+<p>对于已经存在的文件：</p>
+<blockquote><strong>TAB替换为空格：</strong>
+:set ts=4
+:set expandtab
+:%retab!</blockquote>
+<p>多行缩进在命令行模式下</p>
+<blockquote>n&gt;</blockquote>
+<p>向右缩进n行，左用&lt;代替</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
+
+<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -548,10 +655,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page74" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">75/88</span>
+          <span class="page_number ">75/90</span>
           
             <a href="/page76" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -872,7 +979,37 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2237,7 +2374,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2545,7 +2682,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2559,7 +2696,7 @@
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2624,6 +2761,27 @@
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2637,25 +2795,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2673,7 +2831,7 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2691,7 +2849,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3006,7 +3164,7 @@
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3042,7 +3200,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3078,7 +3236,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3096,7 +3254,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3132,7 +3290,7 @@
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3177,7 +3335,7 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3185,6 +3343,15 @@
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3241,10 +3408,12 @@
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3256,7 +3425,7 @@
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

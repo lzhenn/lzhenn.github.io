@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,78 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/">【已解决】pbs指定作业节点</a>
+                  <a class="post-link" href="/2015/04/05/php-e9-81-8d-e5-8e-86-e7-9b-ae-e5-bd-95/">php遍历目录</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-24
+                        <i class="fa fa-calendar"></i>2015-04-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>整理所有报告用于下载，希望用php自动遍历目录读入，采用scandir函数实现。直接返回目录到字符串数组，第0与第1个元素是”.”和”..”，空过即可。</p>
+
+<p> </p>
+
+<p>参考资料：</p>
+
+<p>http://www.jb51.net/article/43186.htm</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/04/05/php-e9-81-8d-e5-8e-86-e7-9b-ae-e5-bd-95/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/03/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/">【已解决】全互联同步备份系统的搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-03-21
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -356,7 +427,7 @@
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
     
   
 
@@ -375,7 +446,7 @@
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
     
   
 
@@ -385,28 +456,100 @@
                 </div>
                 <div class="excerpt">
                     
-<p>之前捣鼓了半天没有成功，这次终于知道指定语法怎么写了。</p>
+<p>信息的组织管理的的确确是个大学问，就像桌面整理都能作为一门课程来教授一样，能把数据和规则进行安全、规整地组织存储是非常不容易的。</p>
 
-<p>惯例，申请两个节点，每个节点16进程</p>
-<pre>#PBS -l nodes=2:ppn=16</pre>
-<p>如果需要指定到c72 c73两个节点，需要这么写就可以了：</p>
-<pre>#PBS -l nodes=c72:ppn=16+c73:ppn=16</pre>
-<p>但是这样在qstat上显示会有问题，显示进程数为0，不过不影响作业正常运行。</p>
+<p>数据安全的意义毋庸置疑，早就希望做一套全互联同步备份的系统，这两天终于开始着手做了，架构设计上还有诸多不完善，有待将来优化解决。基本原则：</p>
+<ul>
+	<li>数据与规则分离</li>
+	<li>冗余备份</li>
+</ul>
+<p>整个备份系统（rsync+NFS）的基本架构图如下：
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/03/bck_sys.png"><img class="alignnone size-full wp-image-685" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/03/bck_sys.png" alt="bck_sys" width="756" height="1134" /></a></p>
+<h4>NFS实现手段概要：</h4>
+<ol>
+	<li>Team_Server组建NFS服务端，设置开机启动</li>
+	<li>Blackleach配置Windows客户端，设置开机启动mount脚本</li>
+</ol>
+<p>相关资料网上有很多。实现过程中遇到的问题：</p>
+
+<p>Windows客户端挂载后没有写权限的问题。</p>
+
+<p>首先修改服务端/etc/exports：</p>
+<pre>/home/yangsong3/L_Zealot 202.116.*.*(rw,sync,<strong>all_squash,anonuid=500,anongid=500</strong>)</pre>
+<p>再修改客户端，注册表加入新键：</p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default，DWORD项：AnonymousUid，AnonymousGid，值为10进制500</p>
+
+<p>mount语句写入bat脚本，加入计划任务，即可开机启动。</p>
+
+<p>有一点是，Blackleach上X盘符一直是断开状态，但是可以访问，可以完全读写……不知道为什么，囧。（见20150420更新）</p>
+<h4>rsync实现手段概要：</h4>
+<p>rsync参数很有考究，文件覆盖的时候要进行判断，若对方文件版本修改时间比拿去覆盖的文件要晚，则不能覆盖旧有文件，目前不加入delete以防万一。考虑到文件创建顺序，所有终端应做到时间同步，可惜HPC4无法办到，超算方面没有做对时处理。所以同步都在凌晨进行，防止误覆盖。</p>
+
+<p>同步语句范例:</p>
+<pre>rsync -vzrtulopg -progress -e 'ssh -p *' /home/yangsong3/L_Zealot/project/ workstation@*.*.*.*:/home/workstation/L_Zealot/project/</pre>
+<p>配置crontab，使得同步能在凌晨按如下顺序进行：</p>
+
+<p>3:01 A.M.</p>
+
+<p>Team_Server发起同步请求，请求顺序Team_Server–&gt;Workstation–&gt;Team_Server</p>
+
+<p>4:01 A.M.</p>
+
+<p>HPC4发起同步请求，请求顺序</p>
+
+<p>HPC4–&gt;Workstation–&gt;HPC4</p>
+
+<p>5:01 A.M.</p>
+
+<p>Workstation发起同步请求，请求顺序</p>
+
+<p>Workstation–&gt;Team_Server</p>
+
+<p>三方同步完成！</p>
+
+<p>参考资料：</p>
+
+<p><a href="http://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html">http://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html</a></p>
+
+<p><a href="http://www.cnblogs.com/itech/archive/2009/08/10/1542945.html">http://www.cnblogs.com/itech/archive/2009/08/10/1542945.html</a></p>
+
+<p><a href="http://www.jb51.net/LINUXjishu/66859.html">http://www.jb51.net/LINUXjishu/66859.html</a></p>
+
+<p><span style="color: #339966;"><strong>#Up to 20150321#</strong></span></p>
+
+<p>114那个IP果然有问题，不能下CISL上的数据，nfs挂载到blackleach上是断线状态但是能连接……</p>
+
+<p>因为不能下CISL的数据，换了21的IP，瞬间上述两个问题都解决了……</p>
+
+<p><span style="color: #339966;"><strong>#Up to 20150420#</strong></span></p>
+
+<p>加入对paperhub工程的备份</p>
+
+<p>1:01 A.M.</p>
+
+<p>EES_Web_Server发起同步pull请求，请求顺序Lab_Server–&gt;EES_Web_Server</p>
+
+<p>2:01 A.M.</p>
+
+<p>Team_Server发起同步pull请求，请求顺序Lab_Server–&gt;Team_Server</p>
+
+<p><span style="color: #339966;"><strong>#Up to 20150906#</strong></span></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/01/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91pbs-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/03/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/">【已解决】Linux对时命令</a>
+                  <a class="post-link" href="/2015/03/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL输出grads可读的dat文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-21
+                        <i class="fa fa-calendar"></i>2015-03-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -425,7 +568,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
     
   
 
@@ -442,7 +585,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
     
   
 
@@ -452,105 +595,18 @@
                 </div>
                 <div class="excerpt">
                     
-<pre>#ntpdate us.pool.ntp.org</pre>
+<p>其实就是输出二进制文件，和<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=221">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>一文所提到的一样，需要注意大小端问题。</p>
+
+<p> </p>
+
+<p>文件输出语句如下：</p>
+
+<p>setfileoption(“bin”,”WriteByteOrder”,”LittleEndian”)
+fbinrecwrite(g_out_fn,-1,ctrl_var)</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/01/21/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91linux/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/">【已解决】自动生成pbs的create_newcase.sh</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-01-08
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>在上一篇<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=387">【已解决】shell大法好——用here document生成脚本</a>中介绍了如何使用here document自动生成脚本文件，折腾了一番，搞定了新的create_newcase.sh，可以自动生成pbs文件啦，不用每次调核心数调节点调路径啦。话说shell的if语法真是折腾，调试了快半个小时才通过三行if语句。注意各种空格！</p>
-
-<p>核心代码：</p>
-<pre>97 #Deal with que and nodes
-98 NNODES=$[NTASKS/16]
-99
-100 if [ $QUENAME = "ys" ]; then
-101 WALLTIME=999
-102 elif [ $QUENAME = "few" ]; then
-103 WALLTIME=720
-104 elif [ $QUENAME = "medium" ]; then
-105 WALLTIME=168
-106 else
-107 WALLTIME=48
-108 fi
-109
-110 #--------------------------------------
-111 #------Now generate the pbs file-------
-112 #--------------------------------------
-113 cat &lt;&lt; EOF &gt; run.pbs
-114 #!/bin/sh
-115 #PBS -N $CASENAME
-116 #PBS -q $QUENAME
-117 #PBS -l walltime=$WALLTIME:00:00
-118 #PBS -l nodes=$NNODES:ppn=16
-119 #PBS -r n
-120 #PBS -o cesmrun.log
-121 #PBS -e cesmrun.err
-122 echo "This jobs is "\$PBS_JOBID@\$PBS_QUEUE
-123 MPIBIN=/public/mpi/mvapich2-18-intel/bin
-124 EXEROOT=/users/yangsong3/L_Zealot/F/$CASENAME/exe
-125 cd \$EXEROOT
-126 \$MPIBIN/mpirun -np $NTASKS -hostfile \$PBS_NODEFILE ./cesm.exe &gt;&amp; ../run.log
-127 EOF</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/03/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -565,10 +621,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page62" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">63/88</span>
+          <span class="page_number ">63/90</span>
           
             <a href="/page64" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -889,7 +945,37 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2254,7 +2340,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2562,7 +2648,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2576,7 +2662,7 @@
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2641,6 +2727,27 @@
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2654,25 +2761,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2690,7 +2797,7 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2708,7 +2815,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3023,7 +3130,7 @@
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3059,7 +3166,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3095,7 +3202,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3113,7 +3220,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3149,7 +3256,7 @@
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3194,7 +3301,7 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3202,6 +3309,15 @@
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3258,10 +3374,12 @@
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3273,7 +3391,7 @@
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

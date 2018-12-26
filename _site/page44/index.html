@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/">【ongoing】php返回图片方法获知邮件是否被查阅</a>
+                  <a class="post-link" href="/2016/02/06/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·函数篇</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-12-21
+                        <i class="fa fa-calendar"></i>2016-02-06
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,9 +358,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -373,9 +375,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -385,115 +385,106 @@
                 </div>
                 <div class="excerpt">
                     
-<p>突然想到能否有什么方法知道发出去的某封邮件是否被别人查阅，查了下，有人提到图片挂参的方法可以办到，回想之前IP验证和php自动发邮件，突然想到可以做这么一套东西，每天固定时间统计一下今天发出去的邮件多少被查阅了，然后做个报告发到邮箱。将来撒海网套磁的时候，绝对是利器啊。LOL</p>
+<p>built-in函数</p>
 
-<p>说搞就搞：</p>
+<p>int() str() float() bool()</p>
 
-<p>首先，测试一下php返回图片</p>
+<p>函数名可以赋值给变量，相当于alias</p>
 
-<p>参照<a href="http://www.oschina.net/code/snippet_572802_11655">这个帖子</a>，bingo，原来是改一下http的header就可以。</p>
+<p>自定义函数</p>
+<pre>def function(x):
+    if x&lt;10:
+        print('too low')
+    else:
+        print('good')
+        return x+1</pre>
+<p>return用于返回函数，若无操作对象，则返回None，也可以返回多个值，tuple类型，也可以给多个变量</p>
 
-<p>然后引入访问IP的检测，直接抄13年检测服务器访问沿海自动站IP的程序，调用IP138结果记录。</p>
+<p>若在当前目录test.py中定义了function()函数，可以通过模块方式引用</p>
 
-<p>居然就可以了～给php文件挂个参数标志是哪一个邮件，嗯嗯</p>
+<p>&gt;&gt;&gt;from test import function</p>
 
-<p>最后设置下crontab，每天固定时间把log发到邮箱，bingo～再写一个可以随时访问的查看页面，done～</p>
+<p>无语句的缩进中可以用 pass过</p>
+
+<p>if x&gt;10:</p>
+
+<p>pass</p>
+
+<p>参数可以给予默认值</p>
+
+<p>power(x,n=2)</p>
+
+<p>n在调用时若不传递，则为2；不按顺序提供可选参数时，需要在调用时提供参数名。若默认参数指向可变对象，如list，则每次调用函数，均会使得可变对象发生改变。（传址）</p>
+<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">add_end</span><span class="params">(L=None)</span>:</span>
+    <span class="keyword">if</span> L <span class="keyword">is</span> <span class="built_in">None</span>:
+        L = []
+    L.append(<span class="string">'END'</span>)
+    <span class="keyword">return</span> L</code></pre>
+<p>L每次默认参数均为None，这样可以避免该问题。</p>
+
+<p>可变参数标识，前缀*，可传入0-任意多参数</p>
+<pre>def sum_all(*numbers):
+    sum=0
+    for num in numbers:
+        sum=sum+num
+    return sum</pre>
+<p>可以传入任意多个数字</p>
+
+<p>如</p>
+
+<p>sum_all(2,3,5,4)</p>
+
+<p>若为list</p>
+
+<p>l=[3,4,5,6,8]</p>
+
+<p>sum_all(*l)</p>
+
+<p>挂前缀传入</p>
 
 <p> </p>
 
+<p>关键字参数，按字典进行组装</p>
+<pre>def test_student(name,gender,**kw)
+    print('name:',name,'gender:',gender,'other:',kw)</pre>
+<p>调用时若传入其他参数</p>
+
+<p>&gt;&gt;&gt;test_student(‘Mike’,’Male’,city=’Beijing’)</p>
+
+<p>name: Mike gender: Male other: {‘city’: ‘Beijing’}</p>
+
+<p>直接传入dict则获得dict的拷贝（传值）</p>
+
+<p>&gt;&gt;&gt;test_student(‘Mike’,’Male’,**extra)</p>
+
+<p>若通过*分隔，则定义了命名关键字参数</p>
+<pre>def test_student(name,gender,*,city)</pre>
+<p>命名关键字参数与位置参数不同，必须传入参数名</p>
+
+<p>参数定义的顺序必须是：<strong>必选参数、默认参数、可变参数/命名关键字参数和关键字参数。</strong></p>
+
+<p>复习</p>
+
+<p>*arg 可变参数，接受tuple</p>
+
+<p>**kw 关键字参数，接受dict</p>
+
+<p>递归超过一定栈帧长度会溢出，1000的阶乘是无法计算的。</p>
+
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/12/21/e3-80-90ongoing-e3-80-91php-e8-bf-94-e5-9b-9e-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/06/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/11/14/use-grads-to-read-cesm-output/">【ongoing】use grads to read cesm output</a>
+                  <a class="post-link" href="/2016/02/05/e3-80-90python-e3-80-91-e4-b8-ad-e6-96-87-e7-bc-9/">【python】中文编码问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-11-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Some points to be aware:</p>
-
-<p>2D fields, not same by binary output and netcdf (high efficiency) output, one point value missing, might be the polar point. Therefore, *.bin control and *.nc sensitive is not under the same structure.</p>
-
-<p>2D fields work fine under <strong>v1.9</strong> of grads. However, 3D fields might meet some trouble. Try to use the “standard” attribution, dimention to tackle this problem. An example from NCEP-DOE dataset:</p>
-
-<p>float level(level) ;
-level:units = “millibar” ;
-level:long_name = “Level” ;
-level:positive = “down” ;
-level:GRIB_id = 100s ;
-level:GRIB_name = “hPa” ;
-level:actual_range = 1000.f, 10.f ;
-level:axis = “Z” ;
- </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/11/14/use-grads-to-read-cesm-output/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/">【NOT solved】GFDL atmosphere dycore porting</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-28
+                        <i class="fa fa-calendar"></i>2016-02-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -514,7 +505,9 @@ level:axis = “Z” ;
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -533,7 +526,9 @@ level:axis = “Z” ;
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -543,41 +538,296 @@ level:axis = “Z” ;
                 </div>
                 <div class="excerpt">
                     
-<p>Now we try to setup GFDL dycore model on our Neptune platform. Following steps has been used:</p>
+<p>文件头加入如下内容</p>
+<pre><code class="ruby"><span class="comment">#!/usr/bin/env python3</span>
+<span class="comment"># -*- coding: utf-8 -*-</span>
+</code></pre>
+<p>第二行注释是为了告诉Python解释器，按照UTF-8编码读取源代码，否则，你在源代码中写的中文输出可能会有乱码。</p>
 
+<p>申明了UTF-8编码并不意味着你的<code>.py</code>文件就是UTF-8编码的，必须并且要确保文本编辑器正在使用UTF-8 without BOM编码</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/02/05/e3-80-90python-e3-80-91-e4-b8-ad-e6-96-87-e7-bc-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/02/02/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·基础篇</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-02-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>&nbsp;
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
+    
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>#20160202#</p>
+
+<p>print() 双引号单引号均可，字符串之间用逗号分隔会自动加入空格</p>
+
+<p>直接写变量名回车可以打印出变量值（类似matlab）</p>
+
+<p>name=input(‘please input your name…’)</p>
+
+<p>if结构</p>
+<pre>if a&gt;1:
+    print a
+else:
+    print -a
+</pre>
+<p>python强制缩进，大小写敏感</p>
+
+<p>#20160204#</p>
+
+<p><img src="http://www.liaoxuefeng.com/files/attachments/001387245992536e2ba28125cf04f5c8985dbc94a02245e000/0" alt="rw-file-utf-8" /></p>
+
+<p><img src="http://www.liaoxuefeng.com/files/attachments/001387245979827634fd6204f9346a1ae6358d9ed051666000/0" alt="web-utf-8" /></p>
+
+<p>Python 3版本中，字符串是以Unicode编码的，也就是说，Python的字符串支持多语言</p>
+
+<p>ord()函数 字符–》编码</p>
+
+<p>chr()函数 编码–》字符</p>
+<pre><code class="python"><span class="prompt">&gt;&gt;&gt; </span><span class="string">'\u4e2d\u6587'</span>
+<span class="string">'中文'</span>
+</code></pre>
+<p>python默认字符串类型为str，一个字符对应若干字节；传输或者保存为byte类型，以字节为单位。</p>
+
+<p>x=b’xxx’</p>
+
+<p>字节码转回ASCII或utf-8 (decode方法)</p>
+
+<p>&gt;&gt;&gt;b’abc’.decode(‘ascii’)</p>
+
+<p>‘abc’</p>
+
+<p>取字符串长度函数 len()</p>
+
+<p>中文经过utf-8编码后占3个字节，英文仅占1个字节</p>
+
+<p>&gt;&gt;&gt;len(‘我们’.encode(‘utf-8’))</p>
+
+<p>6</p>
+
+<p>格式化输出</p>
+
+<p>&gt;&gt;&gt;‘hi, %s, you have %d’ % (‘xxx’, 100)</p>
+
+<p>‘hi, xxx, you have 100’</p>
+
+<p>%%用于转义</p>
+
+<p>【lists】</p>
+
+<p>&gt;&gt;&gt;classmates=[‘Alice’,’Bob’]</p>
+
+<p>&gt;&gt;&gt;classmates</p>
+
+<p>[‘Alice’,’Bob’]</p>
+
+<p>&gt;&gt;&gt;len(classmates)</p>
+
+<p>2</p>
+
+<p>若取用最后一个元素，用-1做索引；-2，-3类推</p>
+
+<p>追加元素，append方法</p>
+
+<p>&gt;&gt;&gt;classmates.append(‘Adam’)</p>
+
+<p>删除最后一个元素，pop方法</p>
+
+<p>&gt;&gt;&gt;classmates.pop</p>
+
+<p>指定位置</p>
+
+<p>&gt;&gt;&gt;classmates.pop(i)</p>
+
+<p>加入到指定位置，比如，index=1的位置</p>
+
+<p>&gt;&gt;&gt;classmates.insert(1,’Alex’)</p>
+
+<p>替换指定位置元素，直接赋值即可</p>
+
+<p>&gt;&gt;&gt;classmates[1]=’Frank’</p>
+
+<p>list可以放入不同的数据类型，甚至可以list套list，例如</p>
+
+<p>&gt;&gt;&gt;language=[‘VB’,’C++’,[‘php’,’asp’]]</p>
+
+<p>引用’asp’</p>
+
+<p>&gt;&gt;&gt;language[2][1]</p>
+
+<p>有序列别tuple，不可更改，小括号</p>
+
+<p>&gt;&gt;&gt;classmates=(‘Bob’,’Jane’,’Dennis’)</p>
+
+<p>引用依然用中括号。</p>
+
+<p>若定义只有一个元素的tuple，不能用 test=(1)的形式，小括号被解释为数学运算符，加入逗号消除歧义test=(1,)</p>
+
+<p><img src="http://www.liaoxuefeng.com/files/attachments/001387269768140c7d5ca167342402989dfc75343fe900b000/0" alt="tuple-1" /></p>
+
+<p>tuple指的是指向不变</p>
+
+<p>IF</p>
+
+<p>强制缩进代表块语句</p>
+<pre>if xxx:
+    xxxx
+elif xxx:
+    xxxx
+else:
+    xxxx</pre>
+<p>input输入的是str()类型，必须通过int()函数转换才能与数值类型进行比较。</p>
+
+<p>FOR</p>
+
+<p>遍历list</p>
+<pre>names=['Bob','Steve','John']
+for name in names:
+    print name</pre>
+<p>range(n)函数用于生成小于整数n的序列</p>
+
+<p>如0-100的序列求和</p>
+<pre>num=range(101)
+sum=0
+for x in num:
+    sum=sum+x
+print(sum)</pre>
+<p>WHILE</p>
+<pre>s=100
+sum=0
+while s&gt;0:
+    sum=sum+s
+    s=s-1</pre>
+<p>DICT和SET</p>
+
+<p>dictionary，key-value对</p>
+
+<p>dic={‘Mike’:100,’Alice’:90}</p>
+
+<p>dic[‘Mike’]</p>
+
+<p>dic[‘Mike’]=10</p>
+
+<p>判断key是否存在，用in</p>
+
+<p>&gt;&gt;&gt;‘Tom’ in dic</p>
+
+<p>False</p>
+
+<p>get方法</p>
+
+<p>&gt;&gt;&gt;dic.get(‘Tom’,-999)</p>
+
+<p>-999</p>
+
+<p>pop方法删除字典元素</p>
+
+<p>dic.pop(‘Mike’)</p>
+
+<p>和list比较，dict有以下几个特点：</p>
 <ol>
-  <li>We exec the ./exp/fv/fms_runscript, then got the netcdf and mpi error. It seems that the model does not recognize the environmental variables associated with these lib. We add the flags directly to the compile sentence.</li>
+	<li>查找和插入的速度极快，不会随着key的增加而增加；</li>
+	<li>需要占用大量的内存，内存浪费多。</li>
 </ol>
-<pre>L35: $mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DUSE_LIMA -DSPMD -DLAND_BND_TRACERS" -a $sourcedir $pathnames /usr/local/include $sourcedir/shared/mpp/include $sourcedir/shared/include /home/yangsong3/soft/mpich314-intel/include /usr/netcdf-4331/include</pre>
-<p>And mkmf.template.ia64 file</p>
-<pre>LDFLAGS = -L/usr/local/lib -L/usr/netcdf-4331/lib -L/home/yangsong3/soft/mpich314-intel/lib #-lsma</pre>
-<p>We comment the “-lsma” flag because it is a flag specific to Cray machine.</p>
+<p>而list相反：</p>
+<ol>
+	<li>查找和插入的时间随着元素的增加而增加；</li>
+	<li>占用空间小，浪费内存很少。</li>
+</ol>
+<p>key是不可变对象，做Hash运算后确定value地址</p>
 
-<p>Next, we compile again, frequently got this</p>
-<pre>ifort:  '-i_dynamic' not supported</pre>
-<p>google it, got this</p>
+<p>SET</p>
 
-<p>https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/486830</p>
-<blockquote>Regarding 1:<strong> -i_dynamic</strong> (the underscore form) was a option spelling used many many releases ago that was later mapped to <strong>-i-dynamic</strong> (the hyphen form) and then that form was depreciated in more current releases and it now maps to<strong> -shared-intel</strong></blockquote>
-<p>So, we change it to <strong>-shared-intel</strong>, no more warning.</p>
+<p>只保存key，用list初始化</p>
 
-<p>However, when it compiles for a long time (5min), we got error again, lots of:</p>
-<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_transmit_mpi.h:79: undefined reference to `mpi_recv_'</pre>
-<p>Then we change the ifort compile flag into mpif90, we got this</p>
-<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_io_misc.inc:116: undefined reference to `nf_inq_libvers_'</pre>
-<p>It really sucks<strong><span style="color: #339966;">.</span></strong></p>
+<p>&gt;&gt;&gt;s=set([1,2,3])</p>
 
-<p>#Last Edited on 20151004#</p>
+<p>&gt;&gt;&gt;s</p>
 
-<p><strong><span style="color: #339966;">We finally stop trying and turn to CAM dynamical core simulation and it works really smooth over the CESM construction.</span></strong></p>
+<p>{1,2,3}</p>
 
-<p>#Last Edited on 20151114#</p>
+<p>无重复，无序，集合，可以交集并集等</p>
+
+<p>&gt;&gt;&gt;s1=set([1,2,3])</p>
+
+<p>&gt;&gt;&gt;s2=set([2,3,4])</p>
+
+<p>&gt;&gt;&gt;s1 &amp; s2</p>
+
+<p>{2,3}</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>&gt;&gt;&gt;s1</td>
+      <td>s2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>{1,2,3,4}</p>
+
+<p>注意了解不可变对象的概念，<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000">最后一部分</a></p>
+
+<p>对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。</p>
 
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/02/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -592,10 +842,10 @@ level:axis = “Z” ;
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page43" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">44/88</span>
+          <span class="page_number ">44/90</span>
           
             <a href="/page45" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -916,7 +1166,37 @@ level:axis = “Z” ;
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2281,7 +2561,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2589,7 +2869,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2603,7 +2883,7 @@ level:axis = “Z” ;
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2668,6 +2948,27 @@ level:axis = “Z” ;
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2681,25 +2982,25 @@ level:axis = “Z” ;
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2717,7 +3018,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2735,7 +3036,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3050,7 +3351,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3086,7 +3387,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3122,7 +3423,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3140,7 +3441,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3176,7 +3477,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3221,7 +3522,7 @@ level:axis = “Z” ;
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3229,6 +3530,15 @@ level:axis = “Z” ;
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3285,10 +3595,12 @@ level:axis = “Z” ;
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3300,7 +3612,7 @@ level:axis = “Z” ;
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

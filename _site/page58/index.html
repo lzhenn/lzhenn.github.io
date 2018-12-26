@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/05/19/e5-85-b0-e8-8b-a5-e9-ab-98-e5-b1-b1-e5-a4-84/">兰若高山处</a>
+                  <a class="post-link" href="/2015/06/24/e3-80-90coap-e3-80-91python-e5-ad-a6-e4-b9-a0-e6/">【COAP】python学习抓取页面之cookie处理</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-05-19
+                        <i class="fa fa-calendar"></i>2015-06-24
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,7 +358,13 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>&nbsp;
+    
+        <a href="/category/#COAP" title="Category: COAP" rel="category">COAP</a>&nbsp;
+    
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -371,7 +381,13 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>&nbsp;
+    
+        <a href="/tag/#COAP" title="Tag: COAP" rel="tag">COAP</a>&nbsp;
+    
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -381,180 +397,308 @@
                 </div>
                 <div class="excerpt">
                     
-<pre style="text-align: center;">谒真谛寺禅师
-杜甫
-兰若山高处，烟霞嶂几重。冻泉依细石，晴雪落长松。
-问法看诗忘，观身向酒慵。未能割妻子，卜宅近前峰。</pre>
-<p>最早是在06年暗黑吧一吧友签名里看到“兰若高山处，烟霞嶂几重”两句，只觉意境深远，心向往之，便铭记在心。</p>
+<p>正式开始进行COAP计划，尝试使用虫师文章中的方法，第一步尝试抓页面，没想到抓<a href="http://journals.ametsoc.org/toc/clim/27/1">AMS页面</a>直接出错，获取到如下信息：</p>
+<pre><strong>An Error Occurred Setting Your User Cookie</strong>
+This site uses cookies to improve performance. If your browser does not accept cookies, you cannot view this site.</pre>
+<p>看起来需要python模拟cookie，查到了这篇资料：
+http://www.jb51.net/article/57161.htm</p>
 
-<p>如今已快十年，前段时间大半夜听写完TPO，劳顿困倦，关机准备上床的时候脑海里突然闪过这两句话，一下子清醒了许多，躺在床上细细品味，或许诗人只是用来描写拜谒真谛寺时所见山上景色吧，我却多想了几分意思。汉语功底不深，只得依托查找搜索。“兰若”指兰草与杜若，都是香草，很明显是美好事物的意象；兰若高山处，香草生长在高山上。“烟霞”大家都懂，就是山上的云雾，去过黄山，印象深刻，风吹云移，一倾万变，相隔十几米的景物，也是时隐时现，所谓仙境。</p>
+<p>用firefox开发者工具查看到如下cookie于消息头：
+__utma=16122406.1750209584.1411475670.1431938642.1432023770.7; __utmz=16122406.1432023770.7.6.utmcsr=gfsoso.net|utmccn=(referral)|utmcmd=referral|utmcct=/; is_returning=1; MAID=dzAjIuUXaPeh6b+Yq+nUfw==; MAID=dzAjIuUXaPeh6b+Yq+nUfw==; __utma=204447755.516480521.1411475728.1433503003.1435135708.81; __utmz=204447755.1431959196.71.52.utmcsr=gfsoso.net|utmccn=(referral)|utmcmd=referral|utmcct=/scholar; __atuvc=2%7C18%2C0%7C19%2C10%7C20%2C14%7C21%2C1%7C22; __atssc=google%3B11; _ga=GA1.2.1750209584.1411475670; SERVER=WZ6myaEXBLEBggwSoVsKlQ==; SERVER=WZ6myaEXBLEBggwSoVsKlQ==; JSESSIONID=aaabcsH1XJkK18aZ3n83u; JSESSIONID=aaabcsH1XJkK18aZ3n83u; __utmb=204447755.6.10.1435135708; __utmc=204447755; __utmt=1</p>
 
-<p>美好的香草是长在高高的山岭上的，又有数重布满烟霞的山峰相隔，很难到达见识。或许作者只是描绘一下真谛寺在高山上，周围有兰若，也能看到几重烟霞嶂，抑或作者也在暗示追求美好的事物，总要克服许多困难，才能最终得到。无论是居上而观，还是居下而瞻，似乎都把王国维提到的大学者三重境界都包含了：高楼望尽天涯路，衣带渐宽终不悔，回首灯火阑珊处。求不得，舍不得，终自然而得。这是马拉松，是厚积薄发，是跬步千里。这是一万小时定律，我信奉这个。</p>
+<p>完全没头绪……</p>
 
-<p>近两年的迷惘和思索，观念价值受冲击也改变了很多，未来不确定，现实不满意，却在思索和内省中渐渐明晰了自己究竟想要什么：再看高中时的想法，当时向往的完全出世是不可以的，“未能割妻子，卜宅近前峰。”杜甫这么说，妻儿舍不下，把家安在山前呗，去山上拜谒并不远，又能在家陪老婆孩子。出世不离世，入尘不染尘。其实作者是在前两句“问法看诗妄，观身向酒慵”中走出来的：问道佛法，却发现自己写的诗是虚妄；反省自身，只觉酒为乱性污物，不喜自己酒后懒散颓靡之姿。</p>
+<p>关于cookie的操作</p>
 
-<p>“冻泉依细石，晴雪落长松。”这两句意象绝妙。清泉在冰冻的细石上汩汩涌出，晴天里却落雪在长松枝上，读得这两句，只觉脑海中一片高山清冷凛冽，却又处处透露着生机的矛盾之感。不知何故，却联系到了“昔我往矣，杨柳依依；今我来思，雨雪霏霏”，一时语塞。这意境已然玄妙，阅历不足，不可妄论。</p>
+<p>http://www.jb51.net/article/57144.htm</p>
 
-<p>细细品来，其实全诗始末，也是作者的一番心路历程吧。</p>
+<p>换用urllib2，去请求该页面的cookie，然后输出html，done！这样就将页面获得了，还是很简单的。不过那些方法属性，确实不懂……</p>
 
-<p>开头两句做了微信签名，跬步千里，祝福自己吧！</p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/06/QQ截图20150624220531.png"><img class="alignnone size-full wp-image-567" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/06/QQ截图20150624220531.png" alt="QQ截图20150624220531" width="1688" height="450" /></a></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/06/24/e3-80-90coap-e3-80-91python-e5-ad-a6-e4-b9-a0-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/06/21/e3-80-90shanbei-news-notes-e3-80-9120150621/">【Shanbei News Notes】20150621</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-06-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>US Calls on Greece for Tough Fiscal Decisions to Avert Default 美国呼吁希腊采取强硬财政措施以避免债务违约</p>
+
+<p>Default 债务违约</p>
+
+<p>Default on 拖欠债务</p>
+
+<p>FILE在新闻中作“资料”理解</p>
+
+<p>set to air 播出，例如</p>
+
+<p>The full interview is set to air Sunday on CNN’s “Fareed Zakaria GPS”. 完整的采访将于周日在CNN的《法里德·扎卡里亚全球扫描》中播出。</p>
+
+<p>International Monetary Fund 国际货币基金组织</p>
+
+<p>Athens has so far balked at austerity demands from creditors in exchange fr further cash. 希腊一直不愿意实行债权人要求的紧缩政策，导致无法相应地获得更多的现金。</p>
+
+<p>balk at 回避</p>
+
+<p>austerity 紧缩，苦行</p>
+
+<p>Negotiations remain at a standstill 谈判一直停滞不前</p>
+
+<p>The summit was called after multinational talks about terms of the ongoing $17.5 billion bailout ended in acrimony Thursday. 周四时，欧盟多国就现行的175亿美元紧急援助的条款进行了商谈，但最终不欢而散，随后决定召开紧急峰会。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/06/21/e3-80-90shanbei-news-notes-e3-80-9120150621/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/06/20/e3-80-90friends-e3-80-91s01e01/">【Friends】S01E01</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-06-20
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
+    
+        <a href="/category/#FriendsNotebook" title="Category: FriendsNotebook" rel="category">FriendsNotebook</a>&nbsp;
+    
+        <a href="/category/#Season1" title="Category: Season1" rel="category">Season1</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
+    
+        <a href="/tag/#FriendsNotebook" title="Tag: FriendsNotebook" rel="tag">FriendsNotebook</a>&nbsp;
+    
+        <a href="/tag/#Season1" title="Tag: Season1" rel="tag">Season1</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>sb have a hump 某人驼背 hump 隆起的东西，驼峰</p>
+
+<p>hairpiece 假发</p>
+
+<p>chalk 粉笔</p>
+
+<p>All of a sudden</p>
+
+<p>turn out 结果发现 v.</p>
+
+<p>sweetie 甜心（昵称）</p>
+
+<p>intestine 肠子</p>
+
+<p>cookie=biscuit</p>
+
+<p>aura 灵气，光环</p>
+
+<p>murky 阴暗的，模糊的</p>
+
+<p>lesbian 蕾丝边，女同性恋</p>
+
+<p>fixate 注视 v.</p>
+
+<p>hysterical 歇斯底里的</p>
+
+<p>strip joint 脱衣舞酒店</p>
+
+<p>hormones 激素 荷尔蒙</p>
+
+<p>decaffeinated 去咖啡因咖啡</p>
+
+<p>bridesmaid 伴娘</p>
+
+<p>gravy 卤的</p>
+
+<p>freak out （I got really freaked out）惊慌</p>
+
+<p>kinda = kind of</p>
+
+<p>drift apart 渐行渐远</p>
+
+<p>pipe organ 管风琴</p>
+
+<p>Tuna 吞拿鱼 金枪鱼</p>
+
+<p>purse 女式钱包</p>
+
+<p>metaphor 隐喻</p>
+
+<p>bluebell 风信子</p>
+
+<p>mitten 手套</p>
+
+<p>diary 日记</p>
+
+<p>I didn’t catch your name</p>
+
+<p>eyelash 眼睫毛</p>
+
+<p>just gonna hang out here tonight 呆在这里一晚上</p>
+
+<p>wondrous 奇妙的</p>
+
+<p>pigeon 鸽子</p>
+
+<p>crap 废话，排泄</p>
+
+<p>the new ones are <b>crap</b></p>
+
+<p>换新都是<b>扯淡</b></p>
+
+<p>bracket 托架</p>
+
+<p>I am supposed to attach a brackety thing to the side things, using a bunch of these little worm guys. 我认为应该把这个托架用蜗杆装到侧面。</p>
+
+<p>stereo 立体声</p>
+
+<p>get screwed 收到不公正的待遇，受骗</p>
+
+<p>catch on 理解明白，变得流行</p>
+
+<p>shred 切碎 撕碎</p>
+
+<p>steer clear of 避开，绕开</p>
+
+<p>rip your heart out 撕开你的心</p>
+
+<p>whipped cream 生奶油</p>
+
+<p>revelation 启示 揭露 出乎意料的事</p>
+
+<p>smash 粉碎 v.</p>
+
+<p>screamer 尖叫的人</p>
+
+<p>get it together 【俚】圆满处理 Even if I could get it together enough to ask a woman out</p>
+
+<p>be on a roll 运气好，超常发挥，很顺利</p>
+
+<p>omelet 煎蛋卷</p>
+
+<p>raise 筹集 v.</p>
+
+<p>abuse 辱骂 v.</p>
+
+<p>hanger 衣架</p>
+
+<p>take credit for 归功于</p>
+
+<p>I take credit for selling the socks. 袜子卖出去了归功于我</p>
+
+<p>I take credit for Paul. Paul欠我人情。</p>
+
+<p>beacon 灯塔 烽火</p>
+
+<p>upbeat 乐观的 上升的</p>
+
+<p>step-dad 继父</p>
+
+<p>albino 白化病</p>
+
+<p>aromatherapy 香料按摩</p>
+
+<p>crush on 暗恋</p>
+
+<p>butt 屁股</p>
 
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/05/19/e5-85-b0-e8-8b-a5-e9-ab-98-e5-b1-b1-e5-a4-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/05/11/wang-pnas-2013/">Wang-PNAS-2013</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-05-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
-    
-        <a href="/category/#2015" title="Category: 2015" rel="category">2015</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
-    
-        <a href="/tag/#2015" title="Tag: 2015" rel="tag">2015</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h4><span style="color: #339966;"><strong>2015/05/01</strong></span></h4>
-<pre><strong>题目：Northern Hemisphere summer monsoon intensified by mega-El Niño/southern oscillation and Atlantic multidecadal oscillation</strong>
-<strong>原文：<a href="http://222.200.180.66:1234/L_Zealot/paperhub/warehouse/Wang-PNAS-2013-110_14_5347-5352.pdf">Wang-PNAS-2013-110_14_5347-5352.pdf</a></strong></pre>
-<p><strong>笔记：</strong>不同于以往将全球各个季风系统分开独立研究的方法，作者从全球的角度考察了整个北半球夏季风的变化，认为从这一角度来看，北半球整体夏季风都是增强的，沃克环流增强；作者认为整个北半球夏季风的增强是归因于mega-ENSO（作者自己定义的一种跨尺度自然变率，跨越年际-年代际尺度）以及AMO的共同作用，以及半球间增暖的不同步。</p>
-
-<p><strong>问题：</strong>文章整体读来感觉平铺直叙，索然寡味，很容易就会走神。而且作者后来提出mega-ENSO后很是自卖自夸了一番：</p>
-<pre>1.3年滑动平均定义，使用方便，不用搞什么EOF第二模态或者滤波
-2.适用范围比ENSO、PDO、IPO更广泛
-<strong>3.多时间尺度的特性，联系年际-年代际变率</strong>
-4.与NHSM有很好的相关性</pre>
-<p>作者认为mega-ENSO具有定义简单等诸多优点，但是在讨论Hadley环流变化时，采用的是复杂的质量流函数的跨半球运输效果来评价的，当然，作者本身也强调了由于季风辐合区的巨大变动，评估Hadley环流变化是不容易的。可能是由于篇幅限制，作者并没有对mega-ENSO、AMO、半球增暖不均一对北半球季风作用的具体机制进行诠释，关于Hadley和Walker环流增强的机制也没有进行具体阐述。</p>
-
-<p>不过，这篇文章发出后，引用非常高。之前某次开会，似乎也听到两位老师评价所说的“很会写文章，现象提出了，指数也定义好了，只要你做，绕不开它”指的似乎也是这篇文章。不能否认的是，这篇文章有多值得思考借鉴的地方，当然也包括技巧。</p>
-
-<p><strong>亮点和借鉴：</strong></p>
-<ol>
-	<li>尽管平铺直叙索然寡味，洞察力和技巧是这篇文章的最大特点：（1）曾经研究季风，都是在区域尺度上捣鼓，少有全球尺度捣鼓的（作者也提到，在他之前有人玩了，但只是玩玩降水），作者现在玩大了，环流也搞进来，于是来一个指数（怎么样，以后搞全球季风，绕得开这个指数么？）（2）我们早就知道ENSO和PDO的pattern非常类似，可是没有人想着去定义一个指数，将这两者联系起来，作者现在这么做了，于是又有了一个指数（怎么样，想说ENSO和PDO关系，想说最近几十年太平洋自然辨率，来吧来吧用我吧）。</li>
-	<li>AMO对NHSM影响的model试验很神奇，耦合模式然后做SST的nudging，技术细节还值得深思，也值得将来参考应用，考虑发邮件询问。</li>
-	<li>Fig. S2判断两套资料趋势信噪比的方法值得借鉴。</li>
-</ol>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/05/11/wang-pnas-2013/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/05/11/li-nature-2014/">Li-Nature-2014</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-05-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
-    
-        <a href="/category/#2014" title="Category: 2014" rel="category">2014</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
-    
-        <a href="/tag/#2014" title="Tag: 2014" rel="tag">2014</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<pre><strong>题目：Impacts of the north and tropical Atlantic Ocean on the Antarctic Peninsula and sea ice</strong>
-<strong>原文：<a href="http://222.200.180.66:1234/L_Zealot/paperhub/warehouse/Li-Nature-2014-505_7484_538-542.pdf">Li-Nature-2014-505_7484_538-542.pdf</a></strong></pre>
-<p><strong>笔记：占坑，回填(2015.5.11)</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/05/11/li-nature-2014/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/06/20/e3-80-90friends-e3-80-91s01e01/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -569,10 +713,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page57" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">58/88</span>
+          <span class="page_number ">58/90</span>
           
             <a href="/page59" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -893,7 +1037,37 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2258,7 +2432,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2566,7 +2740,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2580,7 +2754,7 @@
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2645,6 +2819,27 @@
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2658,25 +2853,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2694,7 +2889,7 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2712,7 +2907,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3027,7 +3222,7 @@
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3063,7 +3258,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3099,7 +3294,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3117,7 +3312,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3153,7 +3348,7 @@
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3198,7 +3393,7 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3206,6 +3401,15 @@
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3262,10 +3466,12 @@
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3277,7 +3483,7 @@
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a>
+                  <a class="post-link" href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-08-05
+                        <i class="fa fa-calendar"></i>2018-10-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,171 +358,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
     
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
-    
-        <a href="/tag/#html5" title="Tag: html5" rel="tag">html5</a>&nbsp;
-    
-        <a href="/tag/#css" title="Tag: css" rel="tag">css</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>之前就想要给博客加个黑客帝国字幕雨做背景，奈何没搞定元素定位的问题，这次花一个多小时折腾了一下算是基本搞定了。</p>
-
-<p>google一下发现大部分实现都是基于html5的canvas绘图，<a href="https://codepen.io/P3R0/pen/MwgoKv">一个例子</a>.</p>
-
-<p>关键就是调整定位的问题，canvas用relative，header和content部分的div元素要用absolute方式定位，top按像素，content的left按5%窗口，效果还不错，如果有不希望发生的覆盖，可以通过z-index调整。</p>
-
-<p><strong>Updated 2018-08-05</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/08/05/blog-background/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-08-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#EC2" title="Tag: EC2" rel="tag">EC2</a>&nbsp;
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>这段时间忙忙乱乱，一直没有将财务系统迁移过来，已经一个多月没有更新资产负债表了，趁着得闲，尽快处理下，记录下迁移过程。话说突然觉得有钱还是好啊，如果不在乎每月十几二十刀，也用不着每年迁移一次AWS吧，重新调配环境确实还是很蛋疼的事情。</p>
-
-<p>首先尝试直接运行<code class="highlighter-rouge">routine_balance_sheet.py</code>，按提示安装所需库</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>pip install httplib2
-<span class="nb">sudo </span>pip install quandl
-</code></pre></div></div>
-
-<p>安装quandl出错，提示requests不能够卸载：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cannot uninstall 'requests'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
-</code></pre></div></div>
-
-<p>解决办法，保留原有安全装包的情况下安装：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-H</span> pip install <span class="nt">--ignore-installed</span> <span class="nt">-U</span> ipython
-</code></pre></div></div>
-<p>随后<a href="https://developers.google.com/sheets/api/quickstart/python">安装google sheets python api</a></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install <span class="nt">--upgrade</span> google-api-python-client oauth2client
-</code></pre></div></div>
-
-<p>可以执行，但是执行中存在numpy警告。随后发现quandl将所有的exchange rate的数据做了premium权限设定，这下没法用免费的了，查了下发现<a href="http://free.currencyconverterapi.com/api/v5/convert?q=USD_CNY&amp;compact=y">免费的echange rate API</a>.更换后可用。</p>
-
-<p><strong>Updated 2018-08-03</strong></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/08/03/EC2-diggler-quandl-goole-sheet/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-07-10
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#WRF" title="Category: WRF" rel="category">WRF</a>&nbsp;
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
     
         <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
@@ -537,9 +379,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
     
-        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>
     
   
 
@@ -549,33 +391,253 @@
                 </div>
                 <div class="excerpt">
                     
-<p>When I tried to use the realtime SST update in WRF runtime, I met the problem:</p>
+<p>我们看下八月份的策略总结：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> None of the following are allowed to be TRUE :
-  ( internal_time_loop .EQ. 1 )                F   
-  ( config_flags%grid_fdda .NE. 0 )            F   
-  ( config_flags%sst_update .EQ. 1 )           T   
-  ( config_flags%all_ic_times )                F   
-  ( config_flags%smooth_cg_topo )              F   
-  ( config_flags%polar )                       F   
--------------- FATAL CALLED ---------------
-FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431 
- Problems, we cannot have excluded middle data from WPS 
+<ol>
+  <li>油价回调到65以下开始加仓。</li>
+  <li>低买offshore高卖onshore硬通货。</li>
+  <li>佛系加仓贵金属。</li>
+  <li>再次强调几条底线：50%家庭负债率红线；6个月流动性；30%风投红线。</li>
+  <li>少看盘多看书，多写代码搭系统。</li>
+</ol>
 
-</code></pre></div></div>
+<p>过去两个月，1没机会，一路突突突。2没流动性，3佛了几把，4风投红线边缘试探。5已经尽力做到。</p>
 
-<p>delete namelist variable in <code class="highlighter-rouge">namelist.wps</code></p>
-<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">process_only_bdy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">
-</span></code></pre></div></div>
+<p>老规矩，重要的还是记录错误。过去两个月最大问题就如同题目所说，跟得上旋律，踩不中鼓点。</p>
 
-<p>and rebuild the <code class="highlighter-rouge">met_em*</code> files.</p>
+<p>EWH put最高浮盈130%，但是持有到Expire被一波反弹干到-20%；随后单周VIX call上场，out of money后没有rolling，然后呢，我们看下这周：</p>
 
-<p><strong>Updated 2018-07-18</strong></p>
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fw4dfkhn9dj21et0mvgoh.jpg" alt="" /></p>
 
+<p>日了狗。踩节奏难，不算清楚option price in了多少预期，out of money还没发达到套保目的。想想portfolio本身还是没什么问题，短期回撤也能接受，还是谨慎点，别上来就干，多读书了解。</p>
+
+<p>宏观形势上tarrif在9月底进一步加码，纵深发展无法避免。就像Dalio所说，单纯的tarrif不是什么问题，问题是CN US两大国之间的关系在未来走向何方。时老师14年的书里讲清楚了，波动和趋势，趋势的力量怕根本不是什么川总的花边新闻，驴象扯皮能改变的。</p>
+
+<p>US端不确定性是中期，以及关系上进一步财长宣布汇操。</p>
+
+<p>市场情绪面上整体非常悲观。</p>
+
+<p>我呢？依然乐观。最近看吴晓波《十年二十人》采访红杉沈南鹏，开始反思自己关注社会经济的时候忽略了什么。每一代人里都有佼佼者，踏踏实实做事的人，创造价值的人，慧眼寻找潜在价值并给予机会的人，减熵，为世界增加有序对而不是尸位素餐的人。他们的存在确保了社会全要素生产率水位不断提高。
+前提是渠道的畅通。环境改变，渠道会彻底在正反馈下封死么？我想不会的，人性不变，但全要素生产率的水位一直向上走，每一代人的平均受教育程度也是向上的，大道之行，只是波动磕碰难免。</p>
+
+<p>天佑中华，做好自己的事情，言尽于此。</p>
+
+<p><strong>Updated 2018-10-12</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/07/10/wrf-workflow/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/10/11/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-09-15
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#dalio" title="Tag: dalio" rel="tag">dalio</a>&nbsp;
+    
+        <a href="/tag/#debt" title="Tag: debt" rel="tag">debt</a>&nbsp;
+    
+        <a href="/tag/#crisis" title="Tag: crisis" rel="tag">crisis</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#bloomberg" id="markdown-toc-bloomberg">Bloomberg</a></li>
+  <li><a href="#cnbc" id="markdown-toc-cnbc">CNBC</a></li>
+</ul>
+<!--<iframe width="907" height="510" src="https://www.youtube.com/embed/7WXidoI9ppw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<p>Recently, Ray Dalio was interviewed by several medias after he had published his new book named as “A template for understanding big debt crises” (hereafter “Crises”, <a href="https://www.principles.com/">free PDF available here</a>). Dalio became more public after he had published his new book “Principles” in 2016. This year, 2018, the newly published book “Crises” makes the situation subtle. I have downloaded the new book and prepared to read it. However, now, I hope to summarize the key points that Mr. Dalio raised in the interviewed video.</p>
+
+<h3 id="bloomberg">Bloomberg</h3>
+
+<iframe width="680" height="382" src="https://www.youtube.com/embed/Nm0m62reFuY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p><strong>Everything happens over and over again.</strong></p>
+
+<p>Template: Inflationary depression</p>
+
+<p><strong>Key point: The debt is nominated in the nation’s own currency or foreign currency.</strong></p>
+
+<p>If the debt is nominated by foreign currency, e.g. dollar. When the dollar goes up, the country does not have enough cash to pay the debt, so print more money to pay the debt, and the inflation and devaluation come.</p>
+
+<p>However, if the debt is nominated in the country’s own currency, the depreciation will wipe out the debt, naturally.</p>
+
+<p>Then, when the currency becomes cheaper, the country will export more and import less. If the country remains an healthy environment to invest, foreign capitals will come back.</p>
+
+<p>The central bank, by monetary policy, should make the interest rate compensate the depreciation of the currency.<strong>(Interest = Infaltion + Devaluation)</strong> This is the way to track the bottom of the devaluation of the country’s currency.</p>
+
+<p>(Turkey, Argentina is around 1/3 distance to the bottom)</p>
+
+<p>After 2008:</p>
+
+<ol>
+  <li>Central banks: print money and buy financial assets.</li>
+  <li>Price of financial assets goes up, and cause greater wealth gap.</li>
+  <li>Most people do not benefit from the process. <strong>Populism</strong> comes.</li>
+  <li>The central bank starts to raise the interest rate (we are in tightening cycle), with populism, it is hard. (political and social problem/extreme monetary policy) ~ 2 years since 2018.9.17 (30% down of dollar prices) Gradual down.</li>
+</ol>
+
+<h3 id="cnbc">CNBC</h3>
+
+<iframe width="680" height="382" src="https://www.youtube.com/embed/7WXidoI9ppw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>About China, tariff.</p>
+
+<p>China can handle this. Big deal: relationship with China (antagonism is bad!).</p>
+
+<p>China’s debt is denominated in CNY, and dealing with it before the crisis, and from a top-down method, Dalio thinks China can deal with it well enough.</p>
+
+<p><strong>Updated 2018-09-17</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/09/15/dalio-debt-crisis/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-09-13
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>&nbsp;
+    
+        <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
+    
+        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>&nbsp;
+    
+        <a href="/tag/#quandl" title="Tag: quandl" rel="tag">quandl</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#event-listening" title="Tag: event-listening" rel="tag">event-listening</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>最近几天集中编码了一番，终于把差不多九个月前立下的flag雏形写好了，Mercurius的Demo version完成，从spider拉取数据，入库，调库回测，标准化输出json数据包，上传github，github page前端调用显示，虽然策略只有简单的up in down out，但框架还是完整啦。后面打算做个Risk Parity的portfolio回测下放上来。</p>
+
+<p>项目并不麻烦，也还没上酷炫的ML算法，但串了一下从python spider/mysql到frontend这一条的工程实现，也算是不错的锻炼吧，希望未来能给我带来一些机遇。God Bless~</p>
+
+<p>上图：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fv7ztpkl0sj210k0u0b29.jpg" alt="" height="50%" width="50%" align="center" /></p>
+
+<p>未来完整版本的工程实现流程图：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fv80eil7suj213j0td7ct.jpg" alt="" /></p>
+
+<p>Sandbox页面策略的实时回测，偷懒还没有把event summary写好：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fv80g5yuzxj20sq0gp77d.jpg" alt="" /></p>
+
+<p>以后每天又多了个客观参考啦～距离程序化决策又近了一步。</p>
+
+<p><strong>Updated 2018-09-13</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/09/13/mercurius-system/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -590,10 +652,10 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page2" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">3/88</span>
+          <span class="page_number ">3/90</span>
           
             <a href="/page4" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -914,7 +976,37 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2279,7 +2371,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2587,7 +2679,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2601,7 +2693,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2666,6 +2758,27 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2679,25 +2792,25 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2715,7 +2828,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2733,7 +2846,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3048,7 +3161,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3084,7 +3197,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3120,7 +3233,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3138,7 +3251,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3174,7 +3287,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3219,7 +3332,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3227,6 +3340,15 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3283,10 +3405,12 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3298,7 +3422,7 @@ FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

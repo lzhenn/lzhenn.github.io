@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,109 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/">【已解决】CESM-CAM积分步长调节</a>
+                  <a class="post-link" href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/">【已解决】四期平台ys队列排队机制问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-28
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h3>CAM Standalone</h3>
-<p>namelist修改加入</p>
-
-<p>dtime=1200, nsplit=6, nspltrac=2, nspltvrm=2</p>
-
-<p>第一句是把积分时长调整到1200s每步</p>
-
-<p>后面三个如果不加入会报错，出错信息中会有建议更改的数值，看起来估计是与物理步长中与动力步长的匹配有关，但是依然搞不清楚这几个变量的意义……</p>
-
-<p>以上几个namelist的解释：</p>
-<pre><strong>nsplit----</strong>Number of dynamics timesteps per physics timestep. If zero, a best-estimate
-will be automatically calculated.</pre>
-<pre><strong>nspltrac</strong>----Number of tracer advection timesteps per physics timestep.
-Nsplit is partitioned into nspltrac and nsplit/nspltrac,
-with the latter being the number of dynamics timesteps per
-tracer timestep, possibly rounded upward; after initialization,
-the code quantity nsplit is redefined to be the number of
-dynamics timesteps per tracer timestep.</pre>
-<pre><strong>nspltvrm----</strong>Number of vertical re-mapping timesteps per physics timestep.
-Nspltrac is partitioned into nspltvrm and nspltrac/nspltvrm,
-with the latter being the number of tracer timesteps per
-re-mapping timestep, possibly rounded upward; after initialization,
-the code quantity nspltrac is redefined to be the number of
-tracer timesteps per re-mapping timestep.</pre>
-<h3>CESM Script</h3>
-<p>这个除了需要处理standalone中的变量外，还需要更改run_env.xml中存在相应的字段：</p>
-<blockquote>&lt;entry id="NCPL_BASE_PERIOD"   value="day"  /&gt;
-
-&lt;entry id="ATM_NCPL"   value="48"  /&gt;</blockquote>
-<p>上面那行的设置代表coupler耦合频率的单位，value对应为日，下面那行是在coupler耦合单位内，ATM通过coupler和其他模块耦合的次数，值为48，即每天耦合48次，可以理解为积分步长为1800s（半小时），如果要更改积分步长为900s，将48改为96即可。同时我们可以注意到这个值在后面的语句中分别被赋给了LND OCN等其他模块，保证各个模块的耦合频率一致。如果没有正确修改dtime, nsplit, nspltrac, nspltvrm这些变量，则会出现<strong>Bad namelist settings for FV subcycling报错。</strong></p>
-
-<p>当然，这里还有疑问就算，我们即便把standalone里修改的几个变量拿过来，也仅仅是修改了CAM的积分步而已，其他分量并没有修改，是会自动更改么？还是怎样？目前测试积分了三年，没有出现问题。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
-
-<p>前段时间忘了更新了。对于F05的配置，似乎直接在user_nl_cam中修改dtime=900就可以，什么都不用动……似乎split与dtime呈一定的倍数关系，dtime减半并不影响这个倍数关系的调整。当然，依然没有搞懂……</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/">【已解决】SSH多机无密码访问</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-26
+                        <i class="fa fa-calendar"></i>2014-09-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -454,8 +360,6 @@ tracer timesteps per re-mapping timestep.</pre>
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
         <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
     
   
@@ -475,8 +379,6 @@ tracer timesteps per re-mapping timestep.</pre>
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
         <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
     
   
@@ -487,28 +389,36 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <div class="excerpt">
                     
-<p>ssh无密码访问是实现MPI、以及自动化批处理如scp ssh远程命令等操作的必要设置。单机A对B单向或者B对A双向的操作类似，网上一查一大堆。一对多方向容易搞混，注意复制公钥方向。如A要无密码访问B，将A的公钥(id_rsa.pub)复制到B机的authorized_keys下。</p>
+<p>前几天发现ys队列的排队机制存在问题，即若某节点已经被前一个任务独占，排队机制似乎没有摒除该节点，后一个任务依然可能被提交到该节点，造成负载过大。发邮件给学校超算中心后如石沉大海，没有回复。想到之前给杨老师集群做测试的时候，直接手动指定hostfiles，于是自己动手，丰衣足食。</p>
 
-<p><strong>注意authorized_keys权限为600，.ssh目录权限700</strong></p>
+<p>先写hostfile文件，比如使用c74到c77四个节点，每个节点16个核心，hostfile可以这样写</p>
 
-<p>参考资料：</p>
+<p>c74:16</p>
 
-<p>http://blog.sina.com.cn/s/blog_75b0e2ad010185id.html</p>
+<p>c75:16</p>
+
+<p>c76:16</p>
+
+<p>c77:16</p>
+
+<p>然后mpirun -hosts后面指定到这个文件。</p>
+
+<p>需要注意的是，提交pbs的话会被忽视这个设定，所以只能采用screen的方式运行脚本。pestat qstat下都不能查到任务号。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/">关于办户口迁移囧事的一点思考</a>
+                  <a class="post-link" href="/2014/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91think/">【已解决】Thinkpad U盘安装win7出现“安装程序无法创建新的系统分区……”</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-25
+                        <i class="fa fa-calendar"></i>2014-09-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -527,7 +437,9 @@ tracer timesteps per re-mapping timestep.</pre>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
     
   
 
@@ -544,7 +456,9 @@ tracer timesteps per re-mapping timestep.</pre>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
     
   
 
@@ -554,21 +468,98 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <div class="excerpt">
                     
-<p>记得本科把户口从烟台迁到东校的时候，就非常不顺利，跑了初家派出所两三次费尽口舌。没想到，这次从东校迁到南校，也被坑了一把。</p>
+<p>这个问题很奇葩，有点意思。老板发的Thinkpad，换SSD后装系统，格式化硬盘无法下一步进入复制和展开安装文件阶段，报错“安装程序无法创建新的系统分区 也无法定位……”</p>
 
-<p>按照新生手册说法，只需要把身份证复印件和录取通知复印件准备好，交到学校（学院）处，学校自会处理这种校内升学的户口迁移。看到这些安排一时偷乐，想到俊文说他们那一级还要自己去东校办理，看来我们这一次赶上改革了，群众路线，办事人性化了嘛。没想到结果依然不是一般的折腾。</p>
+<p>百度之，发现解决方法非常奇葩：</p>
+<blockquote>先格式化一下你要装的那个盘，然后，拔出U盘，啥也别动，只拔出U盘究行，再装上U盘，然后刷新一下【选硬盘那里的高级选项中有格式化和刷新】，再选择要安装的硬盘点下一步，OK了，可以正常安装了</blockquote>
+<p>我勒个去，这是因为个鸟毛？在好奇心驱使下，继续搜索，发现这个回答比较靠谱：</p>
+<blockquote>这个问题只出现在使用U盘安装win7的时候。具体原因很难讲，我猜测是当在这个界面选择安装到C盘时，安装程序会搜索（hd0，0），但实际的（hd0，0）不是C盘而是U盘（因为U盘是启动盘，如果你有用过grub4dos就知道了），所以就出现了这个错误提示。
 
-<p>21日报到，准备好材料交付报到处户籍科，被告知哪里说只需要身份证和录取通知复印件呀，必须要有户口迁移证才行，我说新生手册写的啊。不行不行不行，要自己去办。好吧，看起来还是老样子，不知是群众路线群不到我们这些本科毕业的干部身份呢还是根本就没改革，但丫的新生手册怎么不说清楚。</p>
+我的解决方法很简单:
+解决方法1：
+拔掉U盘，安装就可以继续了。
+解决方法2：
+用ultraiso写到U盘。原因很简单，ultraiso是模拟cd-rom方式写入，启动后U盘占用的是光盘盘符，因此C盘还是（hd0，0）</blockquote>
+<p>看起来WT这个镜像不是拿UltraISO刻录的呀，还是软碟通好使……</p>
 
-<p>22日随亚娜珊珊回东校办户口迁移，先学校保卫办后小谷围派出所，没想到派出所没人，办得很迅速，一上午就搞定，以为后面就简单了，下午也懒得回南校，去新开的行政楼餐厅吃了一顿，名副其实郡城的价格四饭的味道，下午在东校实验室折腾杨老师的网站DEMO，不表。</p>
+<p>参考资料：</p>
 
-<p>23，24日周末，考虑到南校保卫办不上班，懒得白跑一趟。25下午开学典礼，顺道去保卫办交表。没想到进去就傻眼了——录取通知复印件、迁移证复印件、一寸照片、身份证复印件，一件不能少。我吐槽说之前没通知啊，新生手册就写说录取通知+身份证复印件啊，哪里知道这么折腾。周围不少同学也是相同遭遇，一肚子不满。</p>
+<p>http://zhidao.baidu.com/link?url=PcRCaz9PrfsPv4rHRDdZhWXIWxxP-XFLwUXeGpuUPFpR3L1xK3lSLwgVwWHqP9DmMr-mQinII46M5HalpWllKK</p>
 
-<p>不满也没用，白跑就是白跑，还是得回去要通知书上联复印。这种囧事，学校或者说相关部门吧，做的不到位是必然难辞其咎，但毕竟大环境如此，这种小事碰上再正常不过，客观因素改变不了。不妨从个人的角度来想想，如何能够避免麻烦，其实也很简单，找亚娜细细询问一下需要准备的材料，或者打个电话到保卫办问清楚，也就是了。归根结底，自己在已知被提供的资料不足的情况下依然消极被动地对待，想当然地认为XXX，也是造成最终麻烦的重要主观因素。前事不忘后事之师，这次吸取教训了，希望自己下次遇到类似情况能够足够重视，以免更大的麻烦。</p>
+<p>http://zhidao.baidu.com/link?url=bT8DZQs3jr6WSRf7J_ruYf7Divgqlrc3z8Kpi1LJRu79wHf1rjLXJn13Qt3FrjJSK76j74BbE9w17H7YvYOujXI9KUOpcpSo-mIOHj9Pc4a</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91think/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/09/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cento/">【已解决】CentOS7初体验与grub启动项windows丢失的问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-09-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>暑假的时候就发现CentOS推出了7版本，download下来iso镜像后，不知道是UltraISO出了问题还是镜像本身的问题，无法进行刻录。今天下午在王腾同学测试后，便在老板发的X240s上测试安装。相比于6代，改变真的很大。首先，安装环境完全变了，基本思路从之前的串行单线安装变成了并发多线式的，即需要设置的部分都在一个统一的导航架构下，以任意顺序完成。更为人性化的同时，也发现并不能够很好地进行6时代较为全面的安装设置，有些设置需要进入系统后才可以进行。</p>
+
+<p>GNOME界面更加漂亮，可能是向Ubuntu或者Mac OS的方向接近吧，看上去确实是非常舒服的。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152019-的截屏.png"><img class="alignnone size-full wp-image-159" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152019-的截屏.png" alt="2014-09-03 15:20:19 的截屏" width="1366" height="768" /></a> <a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152045-的截屏.png"><img class="alignnone size-full wp-image-160" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/2014-09-03-152045-的截屏.png" alt="2014-09-03 15:20:45 的截屏" width="1366" height="768" /></a></p>
+
+<p>第一次启动时发现grub下Windos选项丢失，这个问题在首先安装windows的条件下还是很好解决的（六七年了，鸟哥的建议依然是攧扑不破的真谛），修改grub即可。不过centos7升级到grub2了。有点意思。具体不搬过来了，参见作者原贴。</p>
+
+<p>http://tieba.baidu.com/p/3154031191</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/09/03/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cento/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -583,10 +574,10 @@ tracer timesteps per re-mapping timestep.</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page79" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">80/88</span>
+          <span class="page_number ">80/90</span>
           
             <a href="/page81" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -907,7 +898,37 @@ tracer timesteps per re-mapping timestep.</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2272,7 +2293,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2580,7 +2601,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2594,7 +2615,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2659,6 +2680,27 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2672,25 +2714,25 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2708,7 +2750,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2726,7 +2768,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3041,7 +3083,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3077,7 +3119,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3113,7 +3155,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3131,7 +3173,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3167,7 +3209,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3212,7 +3254,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3220,6 +3262,15 @@ tracer timesteps per re-mapping timestep.</pre>
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3276,10 +3327,12 @@ tracer timesteps per re-mapping timestep.</pre>
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3291,7 +3344,7 @@ tracer timesteps per re-mapping timestep.</pre>
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

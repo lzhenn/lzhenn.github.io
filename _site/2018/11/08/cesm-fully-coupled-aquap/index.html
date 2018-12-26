@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://202.116.70.212:80/2018/06/06/cesm-fully-coupled-aquap/">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/11/08/cesm-fully-coupled-aquap/">
     <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
 
 
@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -328,7 +332,7 @@
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-06-06
+                <i class="fa fa-calendar"></i>2018-11-08
             </div>
 
             <div class="label-card">
@@ -450,8 +454,13 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span>   <span class="nb">max</span><span class="o">=</span><span class="mi">60</span>
 </code></pre></div></div>
 
-<p>60 means the deepest ocean bottom lies on the 60th model layer.
-Here we set all to Layer 25 in <code class="highlighter-rouge">PURE_AQUA</code> (2.6848km depth), and all land (0) to 1 (10m) in <code class="highlighter-rouge">SURF_AQUA</code> model.</p>
+<p>60 means the deepest ocean bottom lies on the 60th model layer. A list of the ocean depth is attached below:</p>
+
+<blockquote>
+  <p>1: 10m; 2: 20m; 3: 30m; 4: 40m; 5: 50m; 6: 60m; 7: 70m; 8: 80m; 9: 90m; 10: 100m; 11: 110m; 12: 120m; 13: 130m; 14: 140m; 15: 150m; 16: 160m; 17: 170.1968m; 18: 180.7613m; 19: 191.8212m; 20: 203.4993m; 21: 215.9234m; 22: 229.2331m; 23: 243.5845m; 24: 259.1558m; 25: 276.1526m; 26: 294.8147m; 27: 315.4237m; 28: 338.3123m; 29: 363.8747m; 30: 392.5805m; 31: 424.9889m; 32: 461.7666m; 33: 503.7069m; 34: 551.7491m; 35: 606.9967m; 36: 670.7286m; 37: 744.398m; 38: 829.607m; 39: 928.0435m; 40: 1041.368m; 41: 1171.04m; 42: 1318.094m; 43: 1482.901m; 44: 1664.992m; 45: 1863.014m; 46: 2074.874m; 47: 2298.039m; 48: 2529.904m; 49: 2768.098m; 50: 3010.671m; 51: 3256.138m; 52: 3503.449m; 53: 3751.892m; 54: 4001.012m; 55: 4250.525m; 56: 4500.261m; 57: 4750.12m; 58: 5000.047m; 59: 5250.009m; 60: 5499.991m;</p>
+</blockquote>
+
+<p>Here we set all to Layer <del>25</del> <strong>49</strong> in <code class="highlighter-rouge">PURE_AQUA</code> (2.768km depth), and all land (0) to 1 (10m) in <code class="highlighter-rouge">SURF_AQUA</code> model.</p>
 
 <p>However, the NCL had problem when writing the new file (See <strong><a href="./#61-ncl-binary-file">Appendix01</a></strong> for details and solution). We change to F90 to realize our goal. For example, below is the code to generate <code class="highlighter-rouge">SURF_AQUA</code> bathymetry data:</p>
 
@@ -868,23 +877,17 @@ MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strate
             
                 
                     
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -892,51 +895,6 @@ MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strate
             
         
             
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
             
                 
                     
@@ -969,6 +927,39 @@ MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strate
             
             
                 
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -1043,8 +1034,17 @@ MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strate
                     
                 
             
-        
+                
+                    
+                
+                    
+                
             
+                
+                    
+                
+                    
+                
             
                 
                     
@@ -1073,19 +1073,42 @@ MCT::m_MatAttrVectMul::sMatAvMult_SMPlus_:: FATAL ERROR–parallelization strate
                     
                 
             
+                
+                    
+                
+                    
+                
+            
         
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a></p>
+        <p><strong>下一篇</strong> <a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></p>
         
     </div>
 </div>
@@ -1129,6 +1152,8 @@ gitment.render('container')
                 </div>
                 <ul id="content-side" class="content-ul">
                     
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
                     <li><a href="#comments">Comments</a></li>
                 </ul>
             </div>
@@ -1162,10 +1187,12 @@ gitment.render('container')
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -1177,7 +1204,7 @@ gitment.render('container')
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

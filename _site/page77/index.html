@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/22/novarizarks-pc/">Novarizark's PC</a>
+                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM标准流输出</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-22
+                        <i class="fa fa-calendar"></i>2014-10-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,11 +358,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -375,11 +375,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -389,107 +385,25 @@
                 </div>
                 <div class="excerpt">
                     
-<p>上学期自己买了E2414H，这学期的笔记本和台式机也都下来了，差不多装好了系统，起名，合照。White Cube和Crystal Shadow，伴我度过了九年岁月，我对这个世界很大一部分的了解和探索，都是通过她们实现的。新台式机和笔记本的名字想了好久，还是决定去纪念伴我度过了十多年的Blizzard的游戏——Diablo II，从二年级不懂事的小屁孩看老爸公司里的叔叔刷血鸟，到初中三年级和hunger的纯招NEC pass dy，再是中考结束整个暑假研究pass各种char各种build，一直甚至到大二实习还和烨琪一起开荒pass，太多记忆与怀念了。</p>
-
-<p>台式机决定取名为Blackleach，黑是主色调，坚韧而厚重，本因台式机性能优越希望取为Stormspire，但Black的属性久久萦绕脑海，不得已，故名。其实溯源的话，Blackleach是苏格兰一个地名，这套暗金装备全名为Blackleach Blade Bill (黑水之刃-比尔长刀)，因Blackleach这个地方生产Bill这种钩镰枪，故名。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/blackleach.jpg"><img class="alignnone size-full wp-image-182" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/blackleach.jpg" alt="blackleach" width="674" height="222" /></a></p>
-
-<p>笔记本取名为Wizardspike吧，level mana + 75% mana + 50% FCR + 75% 4R，换上浦科特的SSD后还是非常神似的嘛，哈哈！Wizardspike Bone Knife （巫师之刺-骸骨匕首），居家旅行，杀人越货，必备之选。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/wizardspike.jpg"><img class="alignnone size-full wp-image-184" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/wizardspike.jpg" alt="wizardspike" width="833" height="212" /></a></p>
-
-<p>来张大合照啦，除了White Cube在烟台，其他都在这里啦。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/IMG_20140922_202625.jpg"><img class="alignnone size-full wp-image-185" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/09/IMG_20140922_202625.jpg" alt="IMG_20140922_202625" width="3200" height="2368" /></a></p>
+<p>实现CESM额外的标准流输出其实并不困难，只要use cam_logfile就可以了，其实看一下cam_logfile.F90文件，就可以发现，里面主语句只有一个</p>
+<blockquote>iulog=6</blockquote>
+<p>因此write语句这样写就可以将额外的信息流输出到log文件：</p>
+<blockquote>write(iulog,*) "Hello World!"</blockquote>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/22/novarizarks-pc/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM continue run的使用方法</a>
+                  <a class="post-link" href="/2014/10/16/linux-e6-9f-a5-e6-89-be-e6-96-87-e4-bb-b6-e6-89-80/">Linux查找文件所在位置</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-22
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>重复何老师试验，跑CAM5的物理，学校集群太慢，于是到天河二号上跑。CTRL试验跑的顺风顺水，一路到30年。SEN试验第一次在第八年断了，第二次第四年，第三次恼了，开continue run，发现错误提示是找不到rpointer文件，原来需要在开始跑的时候就在env_run.xml里设置好REST_N变量才行，默认给的是=$STOP_N。也就是仅仅在程序运行完成后的最后一年生成rpointer文件。只得改成1后继续从头运行，果然每年都生成了每个模块对应的rpointer（rpointer.xxx）。不出所料，程序到第六年又断掉了，把continue run设置为TRUE后可以正常运行。嗯嗯还不错~查看cam的输出发现输出文件莫名其妙大了一些，莫非会输出一些与重启运行有关的变量？</p>
-
-<p>后话是，continue run跑了10个月又挂了，开始怀疑编译存在问题……重新编译继续continue中，囧……</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140922#</span></strong></p>
-
-<p>经后来检查发现，确实是NetCDF 4.0.1的问题，CESM UG上建议采用4.1.2以上的版本，就是因为之前的版本存在corrept write的问题，尤其是在IO拥堵的情况下。Shift到4.3.2后，没有出现这类问题，但是4.3.2在天河二号上似乎还不能够使用ncdump，近期天河二号IO有很大改善，改回4.0.1后出问题的频率大大降低了。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141019#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/">【已解决】Grub2默认启动Windows的设置</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-20
+                        <i class="fa fa-calendar"></i>2014-10-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -535,22 +449,95 @@
                 </div>
                 <div class="excerpt">
                     
-<p>前两天给X240s换了固态硬盘，重装系统后一直没再折腾。今天终于有空处理下CentOS7默认启动项的问题了。解决方法应该比较暴力：</p>
-
-<p>grub2/grub.cfg下</p>
-<blockquote>if [ "${next_entry}" ] ; then
-set default="${next_entry}"
-set next_entry=
-save_env next_entry
-set boot_once=true
-else
-<strong>set <span style="color: #ff0000;">default=0</span></strong>
-fi</blockquote>
-<p>直接把${saved_entry}展开变量改成Windows所在列表号就可以。反正谁也不会动辄改动grub</p>
+<p>Linux下查找命令find， locate，find选项太多，每次查文件都记不住怎么搞，最常用的当前目录递归深入查找写在这里了，以后记住</p>
+<blockquote>find ./ -name "*keyword*"</blockquote>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/16/linux-e6-9f-a5-e6-89-be-e6-96-87-e4-bb-b6-e6-89-80/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/">【更新中】高分辨率CAM更改PE Layers的测试</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>应老板项目要求，CAM的分辨率早晚要shift到F05的水平，前两天在学校四期平台上测试了下，默认配置，CAM4物理，96个核，900s积分时间，运行情况实在惨不忍睹：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png"><img class="alignnone size-full wp-image-199" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png" alt="QQ截图20141014222809" width="1054" height="763" /></a></p>
+
+<p>运行一个月用了整整一晚上，十几分钟才能输出一天，一个文件1.2G，我擦嘞。</p>
+
+<p>转到天河二号，直接调用了1200个核心，物理包用的CAM5，大概三四分钟出来一天的样子，发现IO是个大瓶颈。测试改PE层，只有atm用1200个核心，其他用120个核心，依然是sequential执行，效果差不多。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png"><img class="alignnone size-full wp-image-198" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png" alt="QQ截图20141014220543" width="1066" height="757" /></a></p>
+
+<p>决定尝试采用concurrent的方式进行，UG上给的1800+个核心，而且用了多线程的方式，还是先不冒险多线程了吧，atm缩减到768，其他大概凑天河二号节点情况24核心的倍数，具体配置如下，几个concurrent的层次模块与UG上一致。<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png"><img class="alignnone size-full wp-image-202" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png" alt="QQ截图20141014223453" width="958" height="1575" /></a></p>
+
+<p> </p>
+
+<p>运行速度貌似差别不大，可以省核时了。但是IO实在是太慢了，1秒钟才能写入10-20M+？我擦嘞，这是网速来着……1分钟+才能写出一个日平均，真是丧心病狂啊……回来得问问超算中心，PIO究竟能不能实现。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -565,10 +552,10 @@ fi</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page76" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">77/88</span>
+          <span class="page_number ">77/90</span>
           
             <a href="/page78" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -889,7 +876,37 @@ fi</blockquote>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2254,7 +2271,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2562,7 +2579,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2576,7 +2593,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2641,6 +2658,27 @@ fi</blockquote>
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2654,25 +2692,25 @@ fi</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2690,7 +2728,7 @@ fi</blockquote>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2708,7 +2746,7 @@ fi</blockquote>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3023,7 +3061,7 @@ fi</blockquote>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3059,7 +3097,7 @@ fi</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3095,7 +3133,7 @@ fi</blockquote>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3113,7 +3151,7 @@ fi</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3149,7 +3187,7 @@ fi</blockquote>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3194,7 +3232,7 @@ fi</blockquote>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3202,6 +3240,15 @@ fi</blockquote>
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3258,10 +3305,12 @@ fi</blockquote>
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3273,7 +3322,7 @@ fi</blockquote>
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

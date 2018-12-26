@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/02/e3-80-90dos-e3-80-91-e6-96-87-e4-bb-b6-e7-b3-bb-e/">【DOS】文件系统操作</a>
+                  <a class="post-link" href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/">【shell】文本处理-金价</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-02
+                        <i class="fa fa-calendar"></i>2016-02-24
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,7 +358,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -371,7 +375,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -381,24 +385,39 @@
                 </div>
                 <div class="excerpt">
                     
-<p>DOS下文件系统操作与Linux下有区别也有相同，比如切换目录都是cd命令，但在dos下切换驱动器，需要加上 /d选项，这个略坑。或者直接输入盘符F：</p>
+<p>awk工具可以很好的用来剔除html标签</p>
 
-<p>ls在dos下用dir替代。</p>
+<table>
+  <tbody>
+    <tr>
+      <td>awk ‘BEGIN {FS=”&gt;”} NR==19 {print $2}’ gold-1602041300</td>
+      <td>awk ‘BEGIN {FS=”&lt;”} {print $1}’</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>分别把左侧关标签和右侧开标签作为分隔符，最后print $1即可。</p>
+
+<p>字符串变量截取${var:7}，从第八个字符开始向后。</p>
+
+<p>参考：http://blog.csdn.net/misskissc/article/details/8217877</p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/02/e3-80-90dos-e3-80-91-e6-96-87-e4-bb-b6-e7-b3-bb-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/01/e3-80-90matlab-e3-80-91-e6-95-b0-e5-ad-97ocr/">【MATLAB】数字OCR</a>
+                  <a class="post-link" href="/2016/02/20/wordpress-e7-a6-81-e7-94-a8-e6-89-be-e5-9b-9e-e5-a/">wordpress禁用找回密码</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-01
+                        <i class="fa fa-calendar"></i>2016-02-20
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -417,7 +436,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#MATLAB" title="Category: MATLAB" rel="category">MATLAB</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -434,7 +455,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#MATLAB" title="Tag: MATLAB" rel="tag">MATLAB</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -444,80 +467,41 @@
                 </div>
                 <div class="excerpt">
                     
-<p>之前截取了一些羽绒服的销量数据，以为能凑着这次<a href="http://met.sysu.edu.cn/?p=6153">广州飞雪的超强寒潮</a>写一点东西，最后发现数据并不是很有说服力。由于淘宝反爬虫的策略，因此过程中用浏览器配合按键精灵每小时截图，最后也是搜集到了不少位图数据，因此有一个问题就怎样在这些位图中将数字抽取出来，因为数字几乎没有干扰，这是个很基本的OCR（Optical Character Recognition，光学字符识别）问题。</p>
+<p>转自http://www.wpmee.com/disable_reset_lost_password/</p>
 
-<p>考虑还是用MATLAB做图像处理熟悉，简单查了下资料，思路很简单：</p>
+<p> </p>
 
-<ol>
-  <li>预处理，剪裁出需要识别的区域，灰度化，二值化。</li>
+<p>今天给大家分享一个<a title="查看更多关于wordpress优化的教程" href="http://www.wpmee.com/tag/wordpress%E4%BC%98%E5%8C%96/" target="_blank">wordpress优化</a>中的一个防黑小妙招，禁用密码找回功能，为什么要禁用如此优秀的功能呢？因为可能被有心之人滥用，如果你也像wordpress迷一样装了<a title="postfix发信程序的安装教程" href="http://www.wpmee.com/lnmp1-0-centos-postfix/" target="_blank">postfix发信</a>程序，那么很有可能被无数个发信线程卡死。所以如果你只是单用户的站点，直接禁用了吧。</p>
+
+<p>将下面的代码添加到你主题的functions.php中即可：</p>
+<div class="dp-highlighter nogutter">
+<ol class="dp-c" start="0">
+	<li class="alt"><span class="comment">/* </span></li>
+	<li><span class="comment">*禁用密码找回功能 </span></li>
+	<li class="alt"><span class="comment">*http://www.wpmee.com/disable_reset_lost_password/</span></li>
+	<li><span class="comment">*/</span></li>
+	<li class="alt"><span class="keyword">function</span> disable_reset_lost_password()</li>
+	<li> {</li>
+	<li class="alt">   <span class="keyword">return</span> false;</li>
+	<li> }</li>
+	<li class="alt">add_filter( 'allow_password_reset', 'disable_reset_lost_password');</li>
 </ol>
-
-<p>2.（关键）字符分隔，这个其实很简单，向x轴y轴分别投影，找出0和正整数之间的过渡位置，即字符和间隙的分隔位置</p>
-
-<ol>
-  <li>将图像字符串分隔为单个字符，分别向x轴y轴投影，记录投影特征，遍历10个阿拉伯数字</li>
-</ol>
-
-<p>4.待识别的新样本重复1和2的操作，计算与记录特征的标准偏差，设定一合理阈值偏差，小于该偏差即可认为识别成功。</p>
-
-<p>对于标准的屏幕显示的数字（或者字母），可以想象上述过程基本能做到极高的识别率了。手写体识别估计就更复杂了，需要用到机器学习等方法，木有涉猎，暂且不表。</p>
-
-<p>识别部分程序代码如下</p>
-
-<pre><code>
-function img_number()
-    clear all;
-    close all;
-    echo off;
-	
-	
-	%---------------Read features---------------
-	x_mat=load('../feature/x_project.txt');
-	y_mat=load('../feature/y_project.txt');
-	
-    I = imread('../img/2016011920.bmp');
-    I=I(612:625,900:946,:);
-    I_int = rgb2gray(I);
-    
-    I_int=~im2bw(I_int,0.5);   %binary and reverse
-    I_x_pro = sum(I_int,1);    % project to the x axis
-    imshow(I_int)
-	num_x_start=strfind(I_x_pro~=0,[0 1])+1; %find the start point of a specific figure
-	num_x_end=strfind(I_x_pro==0,[0 1]); %find the end point of a specific figure
-	
-	I_y_pro = sum(I_int,2);   % project to the y axis
-    num_y_start=strfind(I_y_pro'~=0,[0 1])+1; %find the start point of a specific figure
-	num_y_end=strfind(I_y_pro'==0,[0 1]); %find the end point of a specific figure
-	
-	fig_num = size(num_x_start);   % how many figures in the image
-	fig_stdwidth = 6;
-	fig_stdheight = num_y_end-num_y_start+1;
-	for ii=1:fig_num(2)
-        I_std_ele_fig = imresize(I_int(num_y_start:num_y_end,num_x_start(ii):num_x_end(ii)), [fig_stdheight fig_stdwidth]);
-		std_x_pro = sum(I_std_ele_fig,1);
-		std_y_pro = sum(I_std_ele_fig,2)';
-		for jj=1:10
-			if(sum((std_x_pro-x_mat(jj,2:end)).^2)&lt;10 &amp; sum((std_y_pro-y_mat(jj,2:end)).^2)&lt;10)
-				jj-1
-			end
-		end 
-    end 
-</code></pre>
+</div>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/01/e3-80-90matlab-e3-80-91-e6-95-b0-e5-ad-97ocr/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/20/wordpress-e7-a6-81-e7-94-a8-e6-89-be-e5-9b-9e-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/">【CESM】slab ocean coupling</a>
+                  <a class="post-link" href="/2016/02/08/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/">【python】学习笔记·高级篇</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-12-28
+                        <i class="fa fa-calendar"></i>2016-02-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -536,9 +520,9 @@ function img_number()
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>&nbsp;
     
-        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
     
   
 
@@ -555,9 +539,9 @@ function img_number()
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>&nbsp;
     
-        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
     
   
 
@@ -567,42 +551,75 @@ function img_number()
                 </div>
                 <div class="excerpt">
                     
-<p>Here is a <a href="https://www.quora.com/What-are-slab-ocean-models-in-climate-science">quora answer </a>about the slab ocean</p>
-<blockquote><span class="rendered_qtext">Slab ocean models consider this whole upper layer as one single body of water, or a 'slab' with one single velocity vector (u,v), and density. The Navier-Stokes equation is modified accordingly to compute the resultant velocity of that slab based on wind forcing and coriolis force. The mixed-layer depth in such models is usually kept fixed. </span></blockquote>
-<p>Here is a <a href="https://bb.cgd.ucar.edu/faq-data-ocean-slab-mode-docn-som">FAQ </a>about the slab ocean model. Two things to note:</p>
+<p>L=[‘Mary’,’Steve’,’Mike’,’Dennis’]</p>
 
-<ol>
-  <li>
-    <p>SOM is a kind of data model, can be switched in a namelist variable F compset, env_run.xml.</p>
-  </li>
-  <li>
-    <p>Some standard SOM forcing is available in the inputdata repository.</p>
-  </li>
-</ol>
+<p>L[0:3]切片操作，从0开始，到3（不包括3脚标）</p>
 
-<p>Now we may start to test the slab ocean. compset choose: E_1850_CAM5</p>
+<p>&gt;&gt;&gt;L[0:3]</p>
 
-<p>ERROR comes:</p>
-<blockquote>svn: URL 'https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/UNSET' non-existent in that revision</blockquote>
-<p>There should be something wrong with the set of the ocean forcing files. So come to <a href="https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/ocn/docn7/SOM/">this dir</a>, no problem.</p>
+<p>‘Mary’,’Steve’,’Mike’</p>
 
-<p>We need to set the specific foring files in the env_run.xml file. (check FAQ)</p>
+<p>支持负数切片，如[-2:-1]，为倒数第一个。</p>
 
-<p>We choose <strong>pop_frc.b.c40.B1850CN.f19_g16.100105.nc for </strong>test.</p>
+<p>L[:10]，前十个元素</p>
 
-<p>In env_run.xml, only give the name of the file is okay to continue.</p>
+<p>L[:10:2]，前十个元素，每隔一个取一个</p>
 
-<p>After downloading the file, you can build and submit the case. Yet there is no problem even after altering the physics into cam5 -chem none.</p>
+<p>[0,2,4,6,8]</p>
 
-<p>Perfect!</p>
+<p>L[::5]所有数，每五个取一个</p>
 
-<p> </p>
+<p>字符串，tuple都可以进行切片</p>
 
-<p> </p>
+<p>&gt;&gt;&gt;‘ABCD’[:2]</p>
+
+<p>‘AB’</p>
+
+<p>迭代</p>
+
+<p>用循环遍历的操作称为迭代，可迭代对象范围很广，包括dict</p>
+
+<p>如</p>
+
+<p>for key in dict:</p>
+
+<p>for value in dict.value():</p>
+
+<p>都可以</p>
+
+<p>同时迭代key和value</p>
+
+<p>for  k,v in dict.items():</p>
+
+<p>带索引迭代</p>
+
+<p>&gt;&gt;&gt;for i,value in enumerate(L):</p>
+
+<p>多引用</p>
+
+<p>&gt;&gt;&gt;for i,j in [(1,2), (3,4), (5,6)]</p>
+
+<p>列表生成器</p>
+
+<p>如[1 4 9 16]</p>
+
+<p>[x*x for x in range(1,5)]</p>
+
+<p>[x*x for x in range(1,11) if x%2==0]</p>
+
+<p>[4, 16, 36, 64, 100]</p>
+
+<p>[m+n for m in ‘ABC’ for n in ‘CDE’]</p>
+
+<p>遍历目录</p>
+
+<p>import os</p>
+
+<p>[d for d in os.listdir(‘.’)]</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/12/28/e3-80-90cesm-e3-80-91slab-ocean-coupling/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/02/08/e3-80-90python-e3-80-91-e5-ad-a6-e4-b9-a0-e7-ac-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -617,10 +634,10 @@ function img_number()
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page42" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">43/88</span>
+          <span class="page_number ">43/90</span>
           
             <a href="/page44" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -941,7 +958,37 @@ function img_number()
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2306,7 +2353,7 @@ function img_number()
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2614,7 +2661,7 @@ function img_number()
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2628,7 +2675,7 @@ function img_number()
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2693,6 +2740,27 @@ function img_number()
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2706,25 +2774,25 @@ function img_number()
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2742,7 +2810,7 @@ function img_number()
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2760,7 +2828,7 @@ function img_number()
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3075,7 +3143,7 @@ function img_number()
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3111,7 +3179,7 @@ function img_number()
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3147,7 +3215,7 @@ function img_number()
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3165,7 +3233,7 @@ function img_number()
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3201,7 +3269,7 @@ function img_number()
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3246,7 +3314,7 @@ function img_number()
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3254,6 +3322,15 @@ function img_number()
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3310,10 +3387,12 @@ function img_number()
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3325,7 +3404,7 @@ function img_number()
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

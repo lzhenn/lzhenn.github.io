@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl高效输出netCDF格式文件</a>
+                  <a class="post-link" href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl求线性回归系数的问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-08
+                        <i class="fa fa-calendar"></i>2014-12-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -381,70 +385,26 @@
                 </div>
                 <div class="excerpt">
                     
-<p>从模式原始输出中抽变量出来，采用默认输出方式输出50年全球（144x96）的ZMDT，程序会卡半天，而且最后时不时还会弹出write failed的错误。查了下，发现这种默认的输出方式非常低效（虽然不知道为什么），高效的方式是完全自行定义维数名称、属性等等。测试下速度确实快很多，而且不存在上面的问题，但是代码量增加了三四十行左右。兹举例如下：</p>
-<blockquote>48 ;************************************************
-49 ; Write the file
-50 ;************************************************
-51
-52 ;Get dimsize
-53 dims=dimsizes(ctrl_var1p(0,:,:,:))
-54 nlvl=dims(0)
-55 nlat=dims(1)
-56 nlon=dims(2)
-57
-58 ;Set fileoption
-59 system("rm "+pdata_fn)
-60 fout = addfile(pdata_fn ,"c") ; open output netCDF file
-61 setfileoption(fout,"DefineMode",True)
-62
-63 ;Set All field attribution
-64 fileAtt = True
-65 fileAtt@creation_date=systemfunc("date")
-66 fileattdef(fout,fileAtt)
-67
-68 ;Define Coordinate
-69 dimNames =(/"time","lev_p","lat","lon"/)
-70 dimSizes =(/-1,nlvl,nlat,nlon/)
-71 dimUnlim =(/True,False,False,False/)
-72 filedimdef(fout,dimNames,dimSizes,dimUnlim)
-73
-74 ;Define var, type and dim
-75 filevardef(fout,"time",typeof(ctrl_var1p&amp;time),getvardims(ctrl_var1p&amp;time))
-76 filevardef(fout,"lev_p",typeof(ctrl_var1p&amp;lev_p),getvardims(ctrl_var1p&amp;lev_p))
-77 filevardef(fout,"lat",typeof(ctrl_var1p&amp;lat),getvardims(ctrl_var1p&amp;lat))
-78 filevardef(fout,"lon",typeof(ctrl_var1p&amp;lon),getvardims(ctrl_var1p&amp;lon))
-79 filevardef(fout,"ZMDT",typeof(ctrl_var1p),getvardims(ctrl_var1p))
-80
-81 ;Define Attribute
-82 filevarattdef(fout,"ZMDT",ctrl_var1p)
-83
-84 fout-&gt;time=(/ctrl_var1p&amp;time/)
-85 fout-&gt;lev_p=(/ctrl_var1p&amp;lev_p/)
-86 fout-&gt;lat=(/ctrl_var1p&amp;lat/)
-87 fout-&gt;lon=(/ctrl_var1p&amp;lon/)
-88 fout-&gt;ZMDT=(/ctrl_var1p/)</blockquote>
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
+<p>求线性回归系数画图，直接用regCoef函数出现维度问题，出不来图。看了下varSummary，奇奇怪怪一大堆，估计是误差估计之类的东西。于是对返回变量做取值操作，没有问题。</p>
 
-<p>这种输出模式下，注意应到将时间维和坐标维度单列变量输出到nc文件，坐标维度应当设置degree定义方向，否则绘图时需要重设。</p>
-
-<p>另外这种方法大部分时间还是比较高效的，但是有时会出现奇怪的远远超出一般用时的卡顿，在数据量较大时容易出现。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141109#</span></strong></p>
+<p>例子：</p>
+<pre>391 reg_var4 = season_var4(0,:,:)
+392 reg_var4 = (/regCoef(sst_ts(i,:),season_var4_anoLLT)/)</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/07/a-walk-in-the-rain/">A Walk in the Rain</a>
+                  <a class="post-link" href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/">【已解决】NCL input in flex scanner failed错误</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-07
+                        <i class="fa fa-calendar"></i>2014-12-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -463,7 +423,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
     
   
 
@@ -480,7 +440,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
     
   
 
@@ -490,28 +450,24 @@
                 </div>
                 <div class="excerpt">
                     
-<p>邮件收到了继续返工的消息，旁边又开始endless whisper，烦躁而且压抑，受不了只能戴上耳机听Yanni。a walk in the rain，之前没有注意到的一首，还是很不错的。HP同学推荐，说是感觉像是走在雨后的草地上，嗯，热情而阳光。</p>
+<p>最近使用ncl总是在最后成图的时候出现input in flex scanner failed这种错误。可以肯定是GUI的问题，<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21254823">查了下资料感觉也无从下手</a>，错误触发原因看起来比高级图形接口更加底层，动弹不得。</p>
 
-<p> </p>
-
-<p>光腚总菊一声令下，MP3都下不了咯，贴个链接：</p>
-
-<p>http://www.baidu.com/s?wd=a%20walk%20in%20the%20rain&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_5_dg&amp;rsv_pq=f40a682a0000744f&amp;rsv_t=782cZVhHu0LhKuwkr029%2Bsc1%2B%2BBZDvR19ANVw8dNJrzqLk7nxSrt&amp;bs=a%20walk%20in%20%E5%A4%A9%E6%B2%B3</p>
+<p>这个错误最初是由于把字号改大而出现的，于是我将字号改小，果然没问题……不太懂什么原因</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/07/a-walk-in-the-rain/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/">【已解决】vi获取系统命令标准流输出</a>
+                  <a class="post-link" href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/">【已解决】ncl中的cd_calendar</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-07
+                        <i class="fa fa-calendar"></i>2014-12-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -530,7 +486,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
     
   
 
@@ -547,7 +503,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
     
   
 
@@ -557,13 +513,34 @@
                 </div>
                 <div class="excerpt">
                     
-<p>写一些脚本文件时，可能时常需要用到脚本文件所在目录的路径，而相对路径有的时候不一定可以（比如提交作业的脚本），而需要直接回显绝对路径，另开一个终端或者退出再复制当然可以，但是麻烦，查了下，vi原来有如此神奇的功能，可以直接捕获系统命令（甚至可能是自己写的程序脚本等？没有尝试过）的标准流输出，然后倒入编辑器。比如需要获得当前绝对路径的话，依次键入</p>
-<blockquote><strong>:.!pwd</strong></blockquote>
-<p>即可将当前绝对路径插入编辑点。</p>
+<p>处理CFSR的数据，已经是团队其他成员处理过的了，由于她用的是GrADS，清一色的二进制bin+描述文件ctl，不是自描述的nc文件，ncl处理起来没有任何的metadata，所以都要自己指定。数据文件名是YYYYMM的，循环不是很好写，查了一下，<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/cd_calendar.shtml#Examples">cd_calendar</a>这个函数很好用，官网上给的例子是hours since和days since的，实际上用months也是可以的。</p>
+<pre> <strong>16    </strong> time = ispan(0,383,1)
+ <strong>17    </strong> time@units  =   "months since 1979-01-01"
+ <strong>18</strong>
+ <strong>19    </strong> date = cd_calendar(time,-1)</pre>
+<p>得到的date变量返回integer形式的YYYYMM，从79年1月到10年12月，perfect！
+而且使用cd_calendar函数，发现之前做起来很麻烦（要算位置）的合成和截取，都可以很方便实现了。还是教程看得不够细致呀 = =</p>
+
+<p><span style="color: #808080;"><strong>#Up to 20151216#</strong></span></p>
+
+<p>用cd_calendar可以很好地转换days since之类的时间格式，用于长序列数据的切片读取非常有效。例如下面的例子就可以截取197901-201312的SST片。</p>
+<pre> 29 ymstrt = 197901
+ 30 ymlast = 201312 ; 
+ 31
+ 32 data_path = "../../data/sst/monthly"
+ 33 ctrl_file1 = data_path+"sst_HadOIBl_bc_1.9x2.5_1850_2011_c130301.nc"
+ 34 ctrl_in1 = addfile (ctrl_file1, "r") 
+ 35
+ 36 time = ctrl_in1-&gt;time
+ 37 yyyymm = cd_calendar(time,-1)
+ 38 istrt = ind(yyyymm .eq. ymstrt)
+ 39 ilast = ind(yyyymm .eq. ymlast)
+ 40 var1 = ctrl_in2-&gt;SST_cpl(istrt:ilast,:,:)</pre>
+<p><span style="color: #808080;"><strong>#Up to 20150107#</strong></span></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -578,10 +555,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page67" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">68/88</span>
+          <span class="page_number ">68/90</span>
           
             <a href="/page69" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -902,7 +879,37 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2267,7 +2274,7 @@
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2575,7 +2582,7 @@
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2589,7 +2596,7 @@
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2654,6 +2661,27 @@
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2667,25 +2695,25 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2703,7 +2731,7 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2721,7 +2749,7 @@
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3036,7 +3064,7 @@
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3072,7 +3100,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3108,7 +3136,7 @@
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3126,7 +3154,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3162,7 +3190,7 @@
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3207,7 +3235,7 @@
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3215,6 +3243,15 @@
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3271,10 +3308,12 @@
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3286,7 +3325,7 @@
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

@@ -25,6 +25,10 @@ Resources and bookmarks for work, hobby, and others.
 
 #### Tools
 
+* [MSDN Packages](http://msdn.itellyou.cn/)
+
+    MSDN original packages.
+
 * [tiny png](https://tinypng.com/)
 
     Online png or jpg zipper.

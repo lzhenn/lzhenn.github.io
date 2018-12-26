@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CESM Fully-coupled Model State Correction</title>
+    <meta name="description" content="  Introduction  Heat Flux CorrectionIntroductionA new NCC paper provided a technology to rectify the fully-coupled model systematic bias.The procedures are f...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://202.116.70.212:80/2018/10/29/cesm-fully-coupled-correction/">
+    <link rel="alternate" type="application/rss+xml" title="LZN's Blog" href="http://202.116.70.212:80/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f8f21649f9d39b36012bc6dac8898310";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+
+
+</head>
+
+
+  <body>
+
+    <canvas id="c"  style="postion:relative;left:0px;top:60px;width:100%;height:800px;"></canvas>
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">LZN's Blog</a>
+        <small>CodePlayer</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-clock-o"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-server"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/Side Projects/">
+                        
+                            <i class="fa fa-bar-chart"></i>Side Projects
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/sandbox/">
+                        
+                            <i class="fa fa-flask"></i>Sandbox
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/favorites/">
+                        
+                            <i class="fa fa-heart"></i>Favorites
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-id-card-o"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/comments/">
+                        
+                            <i class="fa fa-comments"></i>Comments
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>CESM Fully-coupled Model State Correction</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2018-10-29
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>LZN
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a-->
+        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
+    
+        <!--a href="/tag/#fully-coupled" title="Tag: fully-coupled" rel="tag">fully-coupled</a-->
+        <a href="/tag/#fully-coupled" title="Tag: fully-coupled" rel="tag">fully-coupled</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#heat-flux-correction" id="markdown-toc-heat-flux-correction">Heat Flux Correction</a></li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><a href="https://www.nature.com/articles/s41558-018-0248-0">A new NCC paper</a> provided a technology to rectify the fully-coupled model systematic bias.</p>
+
+<p>The procedures are following:</p>
+
+<ol>
+  <li>A free run (<code class="highlighter-rouge">FREE</code>) after spin-up, of course, full of systematic biases.</li>
+  <li>A SST restoring run (<code class="highlighter-rouge">SSTR</code>) toward observational SST.
+    <ul>
+      <li>The tech support to restore SST may refer to <a href="https://novarizark.github.io/2018/01/28/decoupling-cesm/">my previous notes (in Chinese)</a></li>
+      <li><a href="https://github.com/Novarizark/project/blob/master/1810-ENSO-BIAS/ncl/popregrid2.ncl">Relevant scripts</a> for preprocessing.</li>
+    </ul>
+  </li>
+  <li>Get downward heat flux differences (SW+LW+LH+SH) from <code class="highlighter-rouge">SSTR-FREE</code>, make it as a constant forcing and add the forcing to free run, namely <code class="highlighter-rouge">HEATR_CTRL</code>.</li>
+  <li>Following 3, Do what you need (<code class="highlighter-rouge">HEATR_SEN</code>).</li>
+</ol>
+
+<h3 id="heat-flux-correction">Heat Flux Correction</h3>
+
+<p>I will then show the procedures to conduct the <code class="highlighter-rouge">HEATR_CTRL</code> run.</p>
+
+<p>First we lock the definition part for the cam variables to hold data input to &amp; output from the coupler. In <code class="highlighter-rouge">$CESMROOT/models/atm/cam/src/control</code>:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">!</span><span class="w">
+</span><span class="c1">! Public data types</span><span class="w">
+</span><span class="c1">!</span><span class="w">
+  </span><span class="k">public</span><span class="w"> </span><span class="n">cam_out_t</span><span class="w">                  </span><span class="c1">! Data from atmosphere</span><span class="w">
+  </span><span class="k">public</span><span class="w"> </span><span class="n">cam_in_t</span><span class="w">                   </span><span class="c1">! Merged surface data</span><span class="w">
+
+</span><span class="c1">!---------------------------------------------------------------------------</span><span class="w">
+</span><span class="c1">! This is the data that is sent from the atmosphere to the surface models</span><span class="w">
+</span><span class="c1">!---------------------------------------------------------------------------</span><span class="w">
+
+  </span><span class="k">type</span><span class="w"> </span><span class="n">cam_out_t</span><span class="w">
+     </span><span class="kt">integer</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="n">lchnk</span><span class="w">               </span><span class="c1">! chunk index</span><span class="w">
+     </span><span class="kt">integer</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="n">ncol</span><span class="w">                </span><span class="c1">! number of columns in chunk</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">tbot</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! bot level temperature</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">zbot</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! bot level height above surface</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ubot</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! bot level u wind</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">vbot</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! bot level v wind</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">qbot</span><span class="p">(</span><span class="n">pcols</span><span class="p">,</span><span class="n">pcnst</span><span class="p">)</span><span class="w">   </span><span class="c1">! bot level specific humidity</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">pbot</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! bot level pressure</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">rho</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">          </span><span class="c1">! bot level density    </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">netsw</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">!  </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">flwds</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">! </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">precsc</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">       </span><span class="c1">!</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">precsl</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">       </span><span class="c1">!</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">precc</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">! </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">precl</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">! </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">soll</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">sols</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">solld</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">!</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">solsd</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">!</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">thbot</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">! </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">co2prog</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! prognostic co2</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">co2diag</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! diagnostic co2</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">psl</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">bcphiwet</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">     </span><span class="c1">! wet deposition of hydrophilic black carbon</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">bcphidry</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">     </span><span class="c1">! dry deposition of hydrophilic black carbon</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">bcphodry</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">     </span><span class="c1">! dry deposition of hydrophobic black carbon</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ocphiwet</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">     </span><span class="c1">! wet deposition of hydrophilic organic carbon</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ocphidry</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">     </span><span class="c1">! dry deposition of hydrophilic organic carbon</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ocphodry</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">     </span><span class="c1">! dry deposition of hydrophobic organic carbon</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstwet1</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! wet deposition of dust (bin1)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstdry1</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! dry deposition of dust (bin1)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstwet2</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! wet deposition of dust (bin2)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstdry2</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! dry deposition of dust (bin2)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstwet3</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! wet deposition of dust (bin3)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstdry3</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! dry deposition of dust (bin3)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstwet4</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! wet deposition of dust (bin4)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">dstdry4</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">      </span><span class="c1">! dry deposition of dust (bin4)</span><span class="w">
+  </span><span class="k">end</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="n">cam_out_t</span><span class="w">
+
+</span><span class="c1">!---------------------------------------------------------------------------</span><span class="w">
+</span><span class="c1">! This is the merged state of sea-ice, land and ocean surface parameterizations</span><span class="w">
+</span><span class="c1">!---------------------------------------------------------------------------</span><span class="w">
+
+  </span><span class="k">type</span><span class="w"> </span><span class="n">cam_in_t</span><span class="w">
+     </span><span class="kt">integer</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="n">lchnk</span><span class="w">                   </span><span class="c1">! chunk index</span><span class="w">
+     </span><span class="kt">integer</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="n">ncol</span><span class="w">                    </span><span class="c1">! number of active columns</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">asdir</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">            </span><span class="c1">! albedo: shortwave, direct</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">asdif</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">            </span><span class="c1">! albedo: shortwave, diffuse</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">aldir</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">            </span><span class="c1">! albedo: longwave, direct</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">aldif</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">            </span><span class="c1">! albedo: longwave, diffuse</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">lwup</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">             </span><span class="c1">! longwave up radiative flux</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">lhf</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! latent heat flux</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">shf</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! sensible heat flux</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">wsx</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! surface u-stress (N)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">wsy</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! surface v-stress (N)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">tref</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">             </span><span class="c1">! ref height surface air temp</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">qref</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">             </span><span class="c1">! ref height specific humidity </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">u10</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! 10m wind speed</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ts</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">               </span><span class="c1">! merged surface temp </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">sst</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! sea surface temp</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">snowhland</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">        </span><span class="c1">! snow depth (liquid water equivalent) over land </span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">snowhice</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! snow depth over ice</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">fco2_lnd</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! co2 flux from lnd</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">fco2_ocn</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! co2 flux from ocn</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">fdms</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">             </span><span class="c1">! dms flux</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">landfrac</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">         </span><span class="c1">! land area fraction</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">icefrac</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">          </span><span class="c1">! sea-ice areal fraction</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ocnfrac</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">          </span><span class="c1">! ocean areal fraction</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ram1</span><span class="w">  </span><span class="c1">!aerodynamical resistance (s/m) (pcols)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">fv</span><span class="w">    </span><span class="c1">!friction velocity (m/s) (pcols)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">soilw</span><span class="w"> </span><span class="c1">!volumetric soil water (m3/m3)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">cflx</span><span class="p">(</span><span class="n">pcols</span><span class="p">,</span><span class="n">pcnst</span><span class="p">)</span><span class="w">      </span><span class="c1">! constituent flux (evap)</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ustar</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">            </span><span class="c1">! atm/ocn saved version of ustar</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">re</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">               </span><span class="c1">! atm/ocn saved version of re</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">ssq</span><span class="p">(</span><span class="n">pcols</span><span class="p">)</span><span class="w">              </span><span class="c1">! atm/ocn saved version of ssq</span><span class="w">
+     </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:,:)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">depvel</span><span class="w"> </span><span class="c1">! deposition velocities</span><span class="w">
+  </span><span class="k">end</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="n">cam_in_t</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Here we note that SW and LW are from coupler, and LH and SH are from coupler. Then we will grep the relationship between these things and the variables in the output file of CAM model.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name in code</th>
+      <th>Name in output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cam_out%netsw</td>
+      <td>FSNS</td>
+    </tr>
+    <tr>
+      <td>cam_out%flwds</td>
+      <td>FLDS</td>
+    </tr>
+    <tr>
+      <td>cam_in%lhf</td>
+      <td>LHFLX</td>
+    </tr>
+    <tr>
+      <td>cam_in%shf</td>
+      <td>SHFLX</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Next, in <code class="highlighter-rouge">physpkg.F90</code> (still this guy!), we found that lhf is calculated by cam_in%cflx (moisture flux from the surface). As the moisture flux is a constituent flux, I decide to remain the latent heat at first.</p>
+
+<p>Therefore, the question is to add a constant forcing to netsw, flwds, and shflx.</p>
+
+<p>Luckily, we have tried to change the shflx in <a href="https://github.com/Novarizark/project/tree/master/SRC_MOD_LIB-2017/SourceMods-shf/src.cam">previous trial</a>.</p>
+
+<p>For netsw and flwds, <code class="highlighter-rouge">physpkg.F90</code> call the radiation, and in radiation_tend module, the netsw is set. Note that in <code class="highlighter-rouge">radiation.F90</code>:</p>
+
+<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">cgs2mks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.e-3_r8</span><span class="w">
+</span><span class="n">flds</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">cam_out</span><span class="o">%</span><span class="n">flwds</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">cgs2mks</span><span class="w">
+</span><span class="n">cam_out</span><span class="o">%</span><span class="n">flwds</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cam_out</span><span class="o">%</span><span class="n">flwds</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">cgs2mks</span><span class="w">
+</span></code></pre></div></div>
+
+<p>I don’t know why they organize the data structure like this. But netsw and flwds both can be handled similarly after physpkg call the radiation module.</p>
+
+<p>The modified code files have been uploaded to <a href="https://github.com/Novarizark/project/tree/master/SRC_MOD_LIB-2017/SourceMods-heatflux-correction/src.cam">github</a>.</p>
+
+<p><strong>Updated 2018-11-01</strong></p>
+
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></p>
+        
+    </div>
+</div>
+
+
+<!--        <h2 id="comments">Comments</h2>
+    
+
+
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', // 可选。默认为 location.href
+  owner: 'Novarizark',
+  repo: 'Novarizark.github.io',
+  oauth: {
+    client_id: '08594414abfaba1aa8bd',
+    client_secret: '56bd0f234257f69ca94cafa5086af0ff2e43ac70',
+  },
+})
+gitment.render('container')
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://imsun.github.io/gitment/" rel="nofollow">comments powered by Gitment.</a></noscript>
+
+ -->
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
+            <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
+        </p>
+        <p>
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <script src="/js/cmatrix.js" charset="utf-8"></script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

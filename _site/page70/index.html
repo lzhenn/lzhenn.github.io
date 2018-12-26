@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/">【已解决】利用php函数强制下载链接（即不允许浏览器打开文本文件）</a>
+                  <a class="post-link" href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl高效输出netCDF格式文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-02
+                        <i class="fa fa-calendar"></i>2014-11-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,13 +358,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
-    
-        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
     
   
 
@@ -377,13 +375,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
-    
-        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
     
   
 
@@ -393,31 +385,70 @@
                 </div>
                 <div class="excerpt">
                     
-<p>今天做paperhub v0.01的时候，生成的enw文件会自动在浏览器中打开，而我们希望能够采用下载的形式在endnote中打开。百度了下，解决方法原来可以直接用php去修改html请求头:</p>
-<blockquote>$filename = '/path/'.$_GET['file'].'.txt'; //文件路径
-header("Content-Type: application/force-download");
-header("Content-Disposition: attachment; filename=".basename($filename));
-readfile($filename);</blockquote>
-<p>最初写在了solve_enw.php中，结果是整个页面的html流都返回了，原来是这样。于是又建立了一个down_enw.php文件，不输出html流，可以正常下载enw文件。</p>
+<p>从模式原始输出中抽变量出来，采用默认输出方式输出50年全球（144x96）的ZMDT，程序会卡半天，而且最后时不时还会弹出write failed的错误。查了下，发现这种默认的输出方式非常低效（虽然不知道为什么），高效的方式是完全自行定义维数名称、属性等等。测试下速度确实快很多，而且不存在上面的问题，但是代码量增加了三四十行左右。兹举例如下：</p>
+<blockquote>48 ;************************************************
+49 ; Write the file
+50 ;************************************************
+51
+52 ;Get dimsize
+53 dims=dimsizes(ctrl_var1p(0,:,:,:))
+54 nlvl=dims(0)
+55 nlat=dims(1)
+56 nlon=dims(2)
+57
+58 ;Set fileoption
+59 system("rm "+pdata_fn)
+60 fout = addfile(pdata_fn ,"c") ; open output netCDF file
+61 setfileoption(fout,"DefineMode",True)
+62
+63 ;Set All field attribution
+64 fileAtt = True
+65 fileAtt@creation_date=systemfunc("date")
+66 fileattdef(fout,fileAtt)
+67
+68 ;Define Coordinate
+69 dimNames =(/"time","lev_p","lat","lon"/)
+70 dimSizes =(/-1,nlvl,nlat,nlon/)
+71 dimUnlim =(/True,False,False,False/)
+72 filedimdef(fout,dimNames,dimSizes,dimUnlim)
+73
+74 ;Define var, type and dim
+75 filevardef(fout,"time",typeof(ctrl_var1p&amp;time),getvardims(ctrl_var1p&amp;time))
+76 filevardef(fout,"lev_p",typeof(ctrl_var1p&amp;lev_p),getvardims(ctrl_var1p&amp;lev_p))
+77 filevardef(fout,"lat",typeof(ctrl_var1p&amp;lat),getvardims(ctrl_var1p&amp;lat))
+78 filevardef(fout,"lon",typeof(ctrl_var1p&amp;lon),getvardims(ctrl_var1p&amp;lon))
+79 filevardef(fout,"ZMDT",typeof(ctrl_var1p),getvardims(ctrl_var1p))
+80
+81 ;Define Attribute
+82 filevarattdef(fout,"ZMDT",ctrl_var1p)
+83
+84 fout-&gt;time=(/ctrl_var1p&amp;time/)
+85 fout-&gt;lev_p=(/ctrl_var1p&amp;lev_p/)
+86 fout-&gt;lat=(/ctrl_var1p&amp;lat/)
+87 fout-&gt;lon=(/ctrl_var1p&amp;lon/)
+88 fout-&gt;ZMDT=(/ctrl_var1p/)</blockquote>
+<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
 
-<p>参考资料：</p>
+<p>这种输出模式下，注意应到将时间维和坐标维度单列变量输出到nc文件，坐标维度应当设置degree定义方向，否则绘图时需要重设。</p>
 
-<p>http://www.jb51.net/article/26907.htm</p>
+<p>另外这种方法大部分时间还是比较高效的，但是有时会出现奇怪的远远超出一般用时的卡顿，在数据量较大时容易出现。</p>
+
+<p><strong><span style="color: #008000;">#Up to 20141109#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/">【已解决】restart改变CAM输出变量场</a>
+                  <a class="post-link" href="/2014/11/07/a-walk-in-the-rain/">A Walk in the Rain</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-31
+                        <i class="fa fa-calendar"></i>2014-11-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -436,7 +467,7 @@ readfile($filename);</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
     
   
 
@@ -453,7 +484,7 @@ readfile($filename);</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
     
   
 
@@ -463,30 +494,28 @@ readfile($filename);</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>CESM模式运行过程中如果想要更改CAM的输出频率或者输出的变量场，单纯的restart是不行的，因为ug上说了，restart的话，pop和ice model会再次读取namelist，但是atm模块不理的，ug上给了一个巨坑爹的解决办法，先给case换个名字，再建个case做branch run。这不是扯淡么。</p>
+<p>邮件收到了继续返工的消息，旁边又开始endless whisper，烦躁而且压抑，受不了只能戴上耳机听Yanni。a walk in the rain，之前没有注意到的一首，还是很不错的。HP同学推荐，说是感觉像是走在雨后的草地上，嗯，热情而阳光。</p>
 
-<p>不信邪，试了下这个办法是可以的，前提是之前run的时候一定要把restart文件记录下来。</p>
+<p> </p>
 
-<p>该env_run.xml几个变量，把run的类型改成branch，时间点指定到restart file上，改rpointer，改rtm的bug，其实跟branch run的方式一样，只不过不用重新建立case而已。</p>
+<p>光腚总菊一声令下，MP3都下不了咯，贴个链接：</p>
 
-<p>当然不要忘了改user_nl_xxx</p>
-
-<p>done！</p>
+<p>http://www.baidu.com/s?wd=a%20walk%20in%20the%20rain&amp;ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_5_dg&amp;rsv_pq=f40a682a0000744f&amp;rsv_t=782cZVhHu0LhKuwkr029%2Bsc1%2B%2BBZDvR19ANVw8dNJrzqLk7nxSrt&amp;bs=a%20walk%20in%20%E5%A4%A9%E6%B2%B3</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/07/a-walk-in-the-rain/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM rebuild restart后不认SourceMods及namelist内容</a>
+                  <a class="post-link" href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/">【已解决】vi获取系统命令标准流输出</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-28
+                        <i class="fa fa-calendar"></i>2014-11-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -505,7 +534,7 @@ readfile($filename);</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -522,7 +551,7 @@ readfile($filename);</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -532,31 +561,13 @@ readfile($filename);</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>今天下午画CAM5 Heat试验的图，发现不能通过显著性检验，非常令人费解。毕竟已经重复跑过多遍了，再次重来，而且还是时空代价这么高的CAM5，终归让人沮丧。检查强迫输入文件没问题，fortran源代码中inject的读写函数也没问题，想到最初检查03-09年的数据通过显著性是没有问题的，于是检查10年之后的输出……完全不能通过。</p>
-
-<p>返回查找log文件，发现25日那天我为了增快运行速度，更改pe_layers之后rebuild重启了一次，貌似rebuild过程中完全无视了我SourceMods中的内容！restart之后的结果转的其实是control，完全没有inject heating！简直无语了，为什么会这样。现在只能重新编译，在10年处restart试试看了。非常郁闷。</p>
-
-<p>突然想到couple的试验还没有检查，暗暗祈祷画了个响应场，傻眼了，发现all value=0，以为脚本出错，查错时发现最不愿看到的事情还是发生了，所有的branch run的结果和原始的control结果一模一样……OMG！又不认SourceMods！实在是非常不能够理解。测试在修改的代码里加入错误，运行build程序时确乎是能够读到错误的，说明是可以读到SourceMods的，非常的奇怪，莫非与cesm_setup被clean后或者第一次build的时候是不去读SourceMods的？为了做测试，更改了pe layers，clean了setup，在代码里故意注入iulog文件句柄输出，重新build。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141029#</span></strong></p>
-
-<p>今天来查看结果，还是不行。不知道为什么，即便编译的时候会去检查Sourcemods的错误以及后来测试加入iulog也是可以输出的，但就是不会去执行。</p>
-
-<p>今天中午回来索性直接查个遍。calday过1直接log输出heatf的所有数据。编译成功运行，查看输出——全部都是0！这种情况最大的可能当然是没有读取heatf的强迫文件。分明记得heatf的强迫在physics initial这个subroutine里呀，难道restart的时候就不会去做initial么？向上翻了翻代码，查了下restart的关键词，发现惊天地泣鬼神的三行语句：</p>
-<blockquote>750 if (nsrest .eq. 0) then
-751 call phys_inidat(cam_out, pbuf2d)
-752 end if</blockquote>
-<p>反查了下nsrest是什么，在control目录下，cam_control_mod这个module写的那叫一个清楚啊</p>
-<blockquote>11 integer :: nsrest ! run type flag (0=initial, 1=restart-continuation, 3=restart-branch.)</blockquote>
-<p>而我那可怜的读取外强迫文件的语句，被我扔在了phys_inidat这个subroutine下读取，OMG！原来你丫的inidat只在startup的case下采去读，我restart不出问题才怪，<span style="color: #ff0000;"><strong>物理包真正的initial在phys_init这个soubroutine里！</strong></span>找到这个问题，重新编译测试，没想到提交任务的时候c73节点down掉了，真是那个叫什么来着，屋漏偏逢连阴雨，哪壶不开提哪壶么……</p>
-
-<p>好在找到问题了，couple的问题也是一样的，当然也能迎刃而解。经测试，确实是这个问题造成的。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
+<p>写一些脚本文件时，可能时常需要用到脚本文件所在目录的路径，而相对路径有的时候不一定可以（比如提交作业的脚本），而需要直接回显绝对路径，另开一个终端或者退出再复制当然可以，但是麻烦，查了下，vi原来有如此神奇的功能，可以直接捕获系统命令（甚至可能是自己写的程序脚本等？没有尝试过）的标准流输出，然后倒入编辑器。比如需要获得当前绝对路径的话，依次键入</p>
+<blockquote><strong>:.!pwd</strong></blockquote>
+<p>即可将当前绝对路径插入编辑点。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vi-e8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -571,10 +582,10 @@ readfile($filename);</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page69" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">70/88</span>
+          <span class="page_number ">70/90</span>
           
             <a href="/page71" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -895,7 +906,37 @@ readfile($filename);</blockquote>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2260,7 +2301,7 @@ readfile($filename);</blockquote>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2568,7 +2609,7 @@ readfile($filename);</blockquote>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2582,7 +2623,7 @@ readfile($filename);</blockquote>
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2647,6 +2688,27 @@ readfile($filename);</blockquote>
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2660,25 +2722,25 @@ readfile($filename);</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2696,7 +2758,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2714,7 +2776,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3029,7 +3091,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3065,7 +3127,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3101,7 +3163,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3119,7 +3181,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3155,7 +3217,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3200,7 +3262,7 @@ readfile($filename);</blockquote>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3208,6 +3270,15 @@ readfile($filename);</blockquote>
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3264,10 +3335,12 @@ readfile($filename);</blockquote>
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3279,7 +3352,7 @@ readfile($filename);</blockquote>
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

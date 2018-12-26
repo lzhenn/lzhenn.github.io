@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/03/05/sp-cam-e7-a7-bb-e6-a4-8d/">sp-cam移植</a>
+                  <a class="post-link" href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/">【python】Ipython安装</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-03-05
+                        <i class="fa fa-calendar"></i>2016-05-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,7 +358,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -371,7 +375,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -381,48 +385,32 @@
                 </div>
                 <div class="excerpt">
                     
-<p><span style="color: #ff0000;">/<em>注意采用较早版本（2013）的编译器和MPI</em>/</span></p>
+<p>想安装ipython，直接用pip貌似出错</p>
 
-<p>按照cesm1.2.2的配置build，最后一步出错</p>
+<p>pip install ipython，出错</p>
 
-<p>mpif90  -o /users/yangsong3/L_Zealot/F/SP-test-sam1mom/exe/cesm.exe ccsm_com
-<strong> 26 ld: cannot find -lblas</strong>
-27 gmake: *** [/users/yangsong3/L_Zealot/F/SP-test-sam1mom/exe/cesm.exe] Error</p>
+<p>OSError: [Errno 2] No such file or directory: ‘/usr/local/lib/python2.7/site-packages/setuptools-1.4.2-py2.7.egg’<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
 
-<p>查了下</p>
+<p>根据<a href="http://ipython.org/ipython-doc/stable/install/install.html">官方安装说明</a>，加入</p>
 
-<p>http://stackoverflow.com/questions/27033243/usr-bin-ld-cannot-find-llapack</p>
+<p>pip install “ipython[all]”</p>
 
-<p>看起来缺少lapack的包</p>
-
-<p>查log发现已经安装了lapack包，只是缺少libblas.a文件，liblapack.a是有的，目录下有libpreblas.a，感觉比较像，直接ln出来一个libblas.a，编译通过！</p>
-
-<p>提交任务运行，立刻出现segfault，显示似乎有netcdf库的问题。</p>
-
-<p>测试去掉pnetcdf，不行</p>
-
-<p>改lapack，不行</p>
-
-<p>都是同样的错位。怀疑是编译器或者MPI的问题，于是将model传输到天河二号，采用天河二号13版本的编译器进行编译，居然可以顺利运行！</p>
-
-<p>坑爹的是，m2005的case在运行到nstep=4的时候会卡死……</p>
-
-<p>mom1mam的case没有问题！</p>
+<p>即可。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/03/05/sp-cam-e7-a7-bb-e6-a4-8d/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/">【Linux】Windows上传文件名乱码解决</a>
+                  <a class="post-link" href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/">yh数据处理</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-26
+                        <i class="fa fa-calendar"></i>2016-04-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -441,9 +429,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -460,9 +446,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -472,38 +456,30 @@
                 </div>
                 <div class="excerpt">
                     
-<p>由于windows和linux对文件系统的编码方式不同，从windows上传或者从linux下载的文件名总存在乱码，解决方法很简单。实际上linux程序包里存在一个convmv的转换程序。</p>
+<p>iconv转码函数非常好用，可以直接在命令行下进行数据转码，例子：</p>
 
-<p>首先，检测下是否有这个程序，如果没有，yum安装一下。</p>
+<p>iconv weawher_coop1 -f gbk -t UTF-8 -o weather_coop1.utf-8</p>
 
-<p>转换命令</p>
+<p>split函数可以按行分隔文件：</p>
 
-<p>convmv -f GBK -t UTF-8 -r yourdir/ –notest</p>
+<p>split -l 10000 -d -a 4 weather_coop1.utf-8 ./splited-noreject/weather<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
 
-<p>-f是源编码格式</p>
-
-<p>-t为目标编码格式</p>
-
-<p>–notest代表直接进行mv操作</p>
-
-<p>-r代表递归</p>
-
-<p>yourdir/为操作目录</p>
+<p>10000行一个文件，后缀为4位数字。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/">【mysql】测试wordpress与mysql数据库的关系</a>
+                  <a class="post-link" href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/">【未解决】python安装pandas等数据处理类库</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-25
+                        <i class="fa fa-calendar"></i>2016-04-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -522,9 +498,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -541,9 +515,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -553,44 +525,53 @@
                 </div>
                 <div class="excerpt">
                     
-<p>第一次建立wordpress站点的时候搞得不明不白，这次建站，决定测试一下进入mysql的具体流程</p>
+<p>首先按照<a href="http://youerning.blog.51cto.com/10513771/1711008">这个网站</a>yum这些东西，然后pip安装，</p>
 
-<p>经典步骤：</p>
-<pre>$ mysql -u adminusername -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 5340 to server version: 3.23.54
- 
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
- 
-mysql&gt; CREATE DATABASE databasename;
-Query OK, 1 row affected (0.00 sec)
- 
-mysql&gt; GRANT ALL PRIVILEGES ON databasename.* TO "wordpressusername"@"hostname"
-    -&gt; IDENTIFIED BY "password";
-Query OK, 0 rows affected (0.00 sec)
-  
-mysql&gt; FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
+<p>出现错误：Command “python setup.py egg_info” failed with error code 1 in /tmp/pip-build-Cblre2/pandas/</p>
 
-mysql&gt; EXIT
-Bye
-$</pre>
-<p>第一次测试，所有都用root用户名和密码，成功！</p>
+<p>之后的剧情就是个坑了，查了个资料，说把python用yum给remove了，然后编译安装新版本的就行，我居然TMD信以为真，remove过程中突然出现一个提示说cannot remove yum，纳尼……啥时候要remove yum。</p>
 
-<p>第二次，一般用户下，一般用户名登录mysql，无法创建数据库。</p>
+<p>不管了，编译安装python2.7，发现yum还是不能安装pandas，这个时候我做了个最错误的决定，将系统原有的/usr/下所有python的lib include全删了，用2.7去替换……天真如我啊啊啊 = =</p>
 
-<p>第三次，一般用户下，root登录，创建数据库，grant时用 ”yangsong3”@”localhost”，wordpress设置下用yangsong3，失败！</p>
+<p>之后yum就不正常了，出现：</p>
 
-<p>用root，成功～说明wordpress实际是用的root用户名访问mysql的。</p>
+<p>No module named yum这种错误</p>
 
-<p> </p>
+<p>查了下，正确安装新版本python的姿势：</p>
 
-<p> </p>
+<p>http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7</p>
+
+<p>原来系统安装的python 与许多组件有依赖关系，随意搞掉是不可以的，吐血。于是找办法去解决，下载了python，yum等几个关联包，重新rpm安装，再运行yum出现新错误：No module named rpm，纳尼……</p>
+
+<p>想到之前自己删除了所有原本的python相关库，估计是这个问题。</p>
+
+<p>折腾半天，去workstation上yum update了，然后scp所有/usr下与python相关的文件夹过来……</p>
+
+<p>yum可以用了，update过程中出现许多不匹配的错误，这应该是workstation上rpm管理的软件信息与team server不同造成……</p>
+
+<p>yum update后，似乎没什么问题了。</p>
+
+<p>附带官方所有软件包地址：http://mirror.centos.org/centos/6/os/x86_64/Packages/</p>
+
+<p>重新编译安装python2.7，按照<a href="http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7">这个帖子</a>，需要安装setuptools和PIP，之后用PIP安装pandas等库，成功！</p>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter"></td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">matplotlib -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number2 index1 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">numpy -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number3 index2 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">pandas -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number4 index3 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">seaborn scipy</code></div>
+</div></td>
+</tr>
+</tbody>
+</table>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -605,10 +586,10 @@ $</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page39" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">40/88</span>
+          <span class="page_number ">40/90</span>
           
             <a href="/page41" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -929,7 +910,37 @@ $</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2294,7 +2305,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2602,7 +2613,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2616,7 +2627,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2681,6 +2692,27 @@ $</pre>
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2694,25 +2726,25 @@ $</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2730,7 +2762,7 @@ $</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2748,7 +2780,7 @@ $</pre>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3063,7 +3095,7 @@ $</pre>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3099,7 +3131,7 @@ $</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3135,7 +3167,7 @@ $</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3153,7 +3185,7 @@ $</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3189,7 +3221,7 @@ $</pre>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3234,7 +3266,7 @@ $</pre>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3242,6 +3274,15 @@ $</pre>
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3298,10 +3339,12 @@ $</pre>
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3313,7 +3356,7 @@ $</pre>
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>

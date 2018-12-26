@@ -316,6 +316,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -331,11 +335,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/11/08/overseas/">Overseas</a>
+                  <a class="post-link" href="/2017/01/04/e7-a7-bb-e6-a4-8ddart-e5-88-b0nersc/">移植DART到NERSC</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-08
+                        <i class="fa fa-calendar"></i>2017-01-04
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -354,7 +358,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -371,7 +377,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -381,36 +389,82 @@
                 </div>
                 <div class="excerpt">
                     
-<p>通</p>
+<p>拖了好多天，Inez开始催了……</p>
 
-<p>lizhenning7</p>
+<p>好吧，先登录，发现集群居然叫Edison，也是醉了。不用说，先把环境配置好。</p>
 
-<p>C6H12+as it always</p>
+<p>vim配置好后发现目录没有高亮显示。</p>
 
-<p>A<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+<p>DART官网</p>
 
-<p>lzhenning</p>
+<p>http://www.image.ucar.edu/DAReS/DART/DART_Starting.php#requirements_simple</p>
 
-<p>sorxxxC6H12xxxx</p>
+<p>download link</p>
 
-<p> </p>
+<p>https://www2.cisl.ucar.edu/software/dart/download</p>
 
-<p> </p>
+<p>官网手册，写的还是挺详细的：</p>
+
+<p>http://www.image.ucar.edu/DAReS/DART/DART_Starting.php#fortran90</p>
+
+<p>照着来，改mkmf，和gfdl的那些鬼东西差不多，nersc上fortran编译器连接器对应都是ftn，改好后继续按要求，去work目录下修改mkmf指定脚本，make编译，貌似没问题。</p>
+
+<p>Okay，下一步采用quickbuild编译所有可执行程序，出现错误提示f77找不到。</p>
+
+<p>尝试1：修改template，加入</p>
+
+<p>F77=ftn行，失败，错误没有变化。</p>
+
+<p>尝试2：链接</p>
+
+<p>链接ftn到f77，并加入环境变量，失败：</p>
+
+<p>lzhenn@edison11:~/soft/dart/lanai/models/lorenz_63/work&gt; make
+f77 -c ../../../common/types_mod.f90
+<strong>Use either: ‘cc’, ‘CC’, or ‘ftn’.</strong></p>
+
+<p>ftn这个傻逼wrapper不认f77</p>
+
+<p>ifort也不行，找不到netcdf库</p>
+
+<p>gfortran也是。</p>
+
+<p>坑了，不过就是一个f77链接的问题，一定有办法解决！</p>
+
+<p>回到mkmf目录，蓦然发现一个mkmf.template.nersc文件，什么鬼，应该有个intel中缀才对，突然意识到是不是修改template指向的时候出了问题，检查了一下，果然是……修改后居然编译通过了……</p>
+
+<p>卧槽那为什么出这种奇奇怪怪告诉我找不到f77的问题啊……</p>
+
+<p>都是泪 = =</p>
+
+<p>下一步，验证：</p>
+
+<p>tutorial：</p>
+
+<p>http://www.image.ucar.edu/DAReS/DART/trunk/tutorial/</p>
+
+<p>Lanai版本的instructions</p>
+
+<p>http://www.image.ucar.edu/DAReS/DART/Lanai_release.html</p>
+
+<p>Jan 6, 2017:</p>
+
+<p>上午与Inez和Stephanie讨论了trunk版本的dart，估计回来得搞个移植上，web上有couple CESM的guide，后面还有的搞。停不下来。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/11/08/overseas/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/01/04/e7-a7-bb-e6-a4-8ddart-e5-88-b0nersc/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/11/02/python-e5-ae-9e-e9-99-85-e4-bd-bf-e7-94-a8-e4-b8-a/">python实际使用中需要注意的问题</a>
+                  <a class="post-link" href="/2017/01/03/start-with-jupyter-notebook/">Start with Jupyter notebook</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-11-02
+                        <i class="fa fa-calendar"></i>2017-01-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -456,34 +510,40 @@
                 </div>
                 <div class="excerpt">
                     
-<p>1.最大区别还是在字符串yinyong</p>
-<pre>&gt;&gt;&gt;str='abcde'
-&gt;&gt;&gt;print str[0:3]
-abc</pre>
-<p>注意是不包括第4个字符（码标3）的！</p>
+<p>开始照着youtube和coursera的视频教程正式学习python啦。</p>
 
-<ol>
-  <li>格式化输出不定长度格式<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
-</ol>
-<pre>&gt;&gt;&gt;x=5; y=0.34
-<strong>&gt;&gt;&gt;print 'hello%*.1f' % (x,y)</strong>
-hello  0.3</pre>
+<p>command mode: Adding deleting command cells</p>
+
+<p>edit mode</p>
+
+<p>shortcuts:</p>
+<p style="padding-left: 30px;"><strong>ctrl+enter:</strong> execute the command and stay there</p>
+<p style="padding-left: 30px;"><strong>alt+enter:</strong> execute the command and create one next</p>
+<p style="padding-left: 30px;"><strong>shift+enter:</strong> execute and move to the next cell (or create one in the last)</p>
+<p>markdown:</p>
+
+<p>change the cell type to markdown type</p>
+
+<p>! prefix means the following command is bash command.</p>
+
+<p>% magic command</p>
+
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/11/02/python-e5-ae-9e-e9-99-85-e4-bd-bf-e7-94-a8-e4-b8-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/01/03/start-with-jupyter-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/28/port-smoke-on-savio/">port smoke on SAVIO</a>
+                  <a class="post-link" href="/2016/12/20/linux-e6-8f-90-e5-8f-96-e8-b7-af-e5-be-84-e5-86-85/">Linux提取路径内容</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-28
+                        <i class="fa fa-calendar"></i>2016-12-20
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -502,9 +562,7 @@ hello  0.3</pre>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -521,9 +579,7 @@ hello  0.3</pre>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -533,56 +589,21 @@ hello  0.3</pre>
                 </div>
                 <div class="excerpt">
                     
-<p>https://www.cmascenter.org/smoke/documentation/4.0/html/ch12s02.html</p>
+<p>提取路径中的文件名 basename $PATH，路径名 dirname $PATH</p>
 
-<ol>
-  <li>download</li>
-</ol>
+<p>${}也可以较好实现：<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
 
-<p>先找到release timeline</p>
+<p>${var##*/} 文件名</p>
 
-<p>https://www.cmascenter.org/download/release_calendar.cfm</p>
+<p>${var%/*} 路径名</p>
 
-<p>找到最新版本，比如我们看到4.0，进入后可以发现下载链接</p>
+<p>具体参见：</p>
 
-<p>https://www.cmascenter.org/download/forms/step_1.cfm</p>
-
-<p>https://www.cmascenter.org/help/model_docs/porting_guide.cfm</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap2.jpg"><img class="alignnone size-full wp-image-906" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap2.jpg" alt="snap2" width="856" height="257" /></a></p>
-
-<p>选择好后，进入下载页，下载安装脚本（Installation script）、源码包以及测试例子数据三个内容。（其实他们用github托管哦）</p>
-
-<p>之后follow <strong>12.3（非常重要一章）</strong>进行安装</p>
-
-<p>https://www.cmascenter.org/smoke/documentation/4.0/html/ch12s03.html</p>
-
-<p>设置<code class="filename"><code class="envar">SMK_HOME</code></code>环境变量指向安装路径，可以将安装脚本和压缩包放入同一路径下，将这个路径设置为安装路径。</p>
-
-<p>在smoke_install.csh最前面加入</p>
-<pre>setenv SMK_HOME `pwd`</pre>
-<p>不需要source，直接csh运行即可。如果顺利编译，会显示</p>
-<pre>NOTE: AUTO_DELETE script setting is not set.
-      Default is N to not delete I/O API intermediate and output files
-Creating inventory list files...
-Installation completed successfully.
- 
-Please follow the instructions in Section 4.3 of the SMOKE User's Manual
-to run the nctox test case.
-https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
-<p>再后follow 4.3去run测试用例</p>
-
-<p>https://www.cmascenter.org/smoke/documentation/4.0/html/ch04s03.html</p>
-
-<p>出现错误</p>
-<pre>mrggrid.abmp.nctox.20050710.us12-nc.log:     *** ERROR ABORT in subroutine MRGGRID</pre>
-<p>后来发现执行语句4.0ug里居然少一个！<strong class="userinput"><code><code class="filename">smk_rateperhour_nctox.csh</code></code></strong></p>
-
-<p><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>更改后正常。</p>
+<p>http://blog.csdn.net/ljianhui/article/details/43128465</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/28/port-smoke-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/12/20/linux-e6-8f-90-e5-8f-96-e8-b7-af-e5-be-84-e5-86-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -597,10 +618,10 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page30" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">31/88</span>
+          <span class="page_number ">31/90</span>
           
             <a href="/page32" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page88" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -921,7 +942,37 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (61)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
                             
                           
                         
@@ -2286,7 +2337,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                       
                       
                       
-                      <a href="/tag/#server" style="font-size: 11.5pt; color: #777;">server</a>
+                      <a href="/tag/#server" style="font-size: 11.5pt; color: #666;">server</a>
                     
                       
                       
@@ -2594,7 +2645,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                       
                       
                       
-                      <a href="/tag/#cesm" style="font-size: 9.5pt; color: #888;">cesm</a>
+                      <a href="/tag/#cesm" style="font-size: 10pt; color: #888;">cesm</a>
                     
                       
                       
@@ -2608,7 +2659,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                       
                       
                       
-                      <a href="/tag/#aqua-planet" style="font-size: 9pt; color: #999;">aqua-planet</a>
+                      <a href="/tag/#aqua-planet" style="font-size: 9.5pt; color: #999;">aqua-planet</a>
                     
                       
                       
@@ -2673,6 +2724,27 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                       
                       <a href="/tag/#crisis" style="font-size: 9pt; color: #999;">crisis</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#fully-coupled" style="font-size: 9pt; color: #999;">fully-coupled</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#wrf" style="font-size: 9pt; color: #999;">wrf</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
+                    
                 </div>
             </div>
 
@@ -2686,25 +2758,25 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
+                    
+                        <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
+                    
+                        <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
+                    
+                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
+                    
+                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
+                    
+                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
+                    
+                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
+                    
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                         <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
                     
                         <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
-                    
-                        <li><a href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a></li>
-                    
-                        <li><a href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a></li>
-                    
-                        <li><a href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a></li>
-                    
-                        <li><a href="/2018/08/05/blog-background/">给博客加了个Matrix字幕雨的动态背景</a></li>
-                    
-                        <li><a href="/2018/08/03/EC2-diggler-quandl-goole-sheet/">EC2迁移II：财务系统</a></li>
-                    
-                        <li><a href="/2018/07/10/wrf-workflow/">WRF SST Update problem solved</a></li>
-                    
-                        <li><a href="/2018/07/08/reading-record/">《枪炮、病菌与钢铁》阅读笔记</a></li>
                     
                 </ul>
             </div>
@@ -2722,7 +2794,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">29</span>
+                            <span class="badge">30</span>
                         </a>
                     </li>
                     
@@ -2740,7 +2812,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 thinking
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3055,7 +3127,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 linux
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -3091,7 +3163,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">19</span>
+                            <span class="badge">20</span>
                         </a>
                     </li>
                     
@@ -3127,7 +3199,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 investment
                             </span>
-                            <span class="badge">12</span>
+                            <span class="badge">13</span>
                         </a>
                     </li>
                     
@@ -3145,7 +3217,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">23</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3181,7 +3253,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 hardware
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">5</span>
                         </a>
                     </li>
                     
@@ -3226,7 +3298,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                             <span class="name">
                                 cesm
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">7</span>
                         </a>
                     </li>
                     
@@ -3234,6 +3306,15 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
                         <a href="/category/#WRF" class="categories-list-item" cate="WRF">
                             <span class="name">
                                 WRF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#wrf" class="categories-list-item" cate="wrf">
+                            <span class="name">
+                                wrf
                             </span>
                             <span class="badge">1</span>
                         </a>
@@ -3290,10 +3371,12 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
         <p class="contact">
             Contact  <a href="https://github.com/Novarizark">Novarizark</a> at: 
             <a href="https://github.com/Novarizark" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+            <a href="mailto:lzhenn@mail2.sysu.edu.cn" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="mailto:novarizark@gmail.com" title="gmail"><i class="fa fa-envelope" aria-hidden="true"></i></a>  
+            <a href="http://202.116.70.41/GloCli/Team/wp-content/uploads/2014/08/mmqrcode1437904436522.jpg" title="WeChat"><i class="fa fa-weixin" aria-hidden="true"></i></a>       
         </p>
         <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+           本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
         </p>
         <p class="power">
             <span>
@@ -3305,7 +3388,7 @@ https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
         </p>
     </div>
 </footer>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <div class="back-to-top">
     <a href="#top" data-scroll>
