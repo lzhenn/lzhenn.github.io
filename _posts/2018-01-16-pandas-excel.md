@@ -24,5 +24,6 @@ for pos, spe in enumerate(species):
 writer1.save()
 ```
 
+其中第一个参数是xls的文件句柄，第二个是对应的sheet名，参见[pandas的document](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_excel.html)
 
 **Updated 2018-01-16**

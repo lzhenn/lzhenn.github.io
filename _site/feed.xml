@@ -5,34 +5,36 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Dec 2018 16:16:21 +0800</pubDate>
-    <lastBuildDate>Wed, 26 Dec 2018 16:16:21 +0800</lastBuildDate>
+    <pubDate>Wed, 26 Dec 2018 16:24:39 +0800</pubDate>
+    <lastBuildDate>Wed, 26 Dec 2018 16:24:39 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
         <title>CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</title>
         <description>
-A student in OUC
+FS in OUC is trying to setup CESM fully coupled Pre-industrial (B1850 compset) cases while faced with some problem.
 
-&lt;strong&gt;Updated 2018-12-24&lt;/strong&gt;
+In the run log, we found:
+
+&lt;blockquote&gt;
+  ERROR: restformat: number of records on restart file not supported
+&lt;/blockquote&gt;
+
+By searching, &lt;a href=&quot;https://bb.cgd.ucar.edu/port-validation-runtime-failure-error-restformat-number-records-restart-file-not-supported&quot;&gt;the error seems to come from the ice restart file&lt;/a&gt;.
+
+We then checked the default restart file, which can be located in &lt;code class=&quot;highlighter-rouge&quot;&gt;ice_in&lt;/code&gt;, in &lt;code class=&quot;highlighter-rouge&quot;&gt;${CESM_INPUT}/ice/cice/iced.0001-01-01.gx1v6_20080212&lt;/code&gt;. The file is zero in size. Thus, it must be created by the model, and the model cannot read anything from it. We re-download the corresponding file and the problem solved.
+
+&lt;strong&gt;Updated 2018-12-26&lt;/strong&gt;
 
 </description>
         <pubDate>Mon, 24 Dec 2018 00:00:00 +0800</pubDate>
         <link>http://202.116.70.212:80/2018/12/24/cesm-error-log/</link>
         <guid isPermaLink="true">http://202.116.70.212:80/2018/12/24/cesm-error-log/</guid>
         
-        <category>server</category>
-        
-        <category>cesm</category>
+        <category>CESM</category>
         
         
-        <category>hardware</category>
-        
-        <category>linux</category>
-        
-        <category>notebook</category>
-        
-        <category>cesm</category>
+        <category>CESM</category>
         
       </item>
     
