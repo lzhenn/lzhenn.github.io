@@ -55,7 +55,9 @@ Resources and bookmarks for work, hobby, and others.
 
     Online library.
 
-#### Financial
+### Financial
+
+#### Strategy
 
 * [Zhihu: Bubbles and Anti-fragile](https://zhuanlan.zhihu.com/p/29399851?utm_source=wechat_timeline&utm_medium=social&from=timeline)
 
@@ -68,6 +70,12 @@ Resources and bookmarks for work, hobby, and others.
 * [Zhihu: Short Position Control Strategy](https://www.zhihu.com/question/264725421)
     
     A position control strategy to lead limited short loss.
+
+#### Reading/Information
+
+* [Farnam Street](https://fs.blog/)
+    
+    Mental models, decision making, learning, reading, and the art of living.
 
 * [Forbes Realtime Billionaires List](https://www.forbes.com/billionaires/list/)
     
