@@ -17,7 +17,7 @@ type: page
 
 My name is Zhenning Li, I was born in Shandong Province, China, in 1991. 
 
-I am now a Ph.D student majoring in meteorology, using models and high performance computing clusters to simulate weather and climate. Meanwhile, I like coding, reading, hiking, swimming, watching movies, and playing video games.
+I am now a Ph.D student majoring in meteorology, using models and high performance computing clusters to simulate weather and climate. Meanwhile, I like coding, reading, hiking, swimming, watching movies, playing video games, and emmmmm, eating 72-86% dark chocolate!
 
 Recently, I am taking more interests in the global economic system and fintech, and trying to build my own algorithm trading system.
 
