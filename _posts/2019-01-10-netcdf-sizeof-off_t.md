@@ -29,5 +29,7 @@ export LD_LIBRARY_PATH=$LIB_NETCDF:$LD_LIBRARY_PATH
 
 The configure utility passed after source the bashrc. It seems to be a bug of the configure utility in NetCDF-fortran lib to locate the C lib.
 
+The model was successfully ported after we re-built every lib with the identical compiler.
+
 **Updated 2019-01-10**
 
