@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,155 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/">【已解决】rsync命令的使用</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-31
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>同步CESM的input数据到hpc4，但是已有的文件不希望被覆盖掉，scp不能用，只能采用rsync命令。以从东校区工作站传回数据为例</p>
+<blockquote><strong>rsync -vzrtopg --progress -e 'ssh -p 80' workstation@222.200.180.66:/home/workstation/L_Zealot ./</strong></blockquote>
+<p>参数解释：</p>
+<blockquote>-v, --verbose 详细模式输出
+-z, --compress 对备份的文件在传输时进行压缩处理
+-r, --recursive 对子目录以递归模式处理
+-t, --times 保持文件时间信息
+-p, --perms 保持文件权限
+-o, --owner 保持文件属主信息
+-g, --group 保持文件属组信息
+--progress 在传输时现实传输过程
+-e 'ssh -p 80' ssh方式传输，端口80</blockquote>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所拷贝回CESM Input Data硬盘挂载问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-31
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>从大气所带回来的硬盘用Orico的硬盘座接e-SATA口，windows下直接提示要格式化，这还得了，记得当初这个分区是我做的，ext4格式，重启到Linux下，fdisk -l傻眼了，居然成了NTFS格式，测试mount -t ntfs-3g或ext4都不行，百般无奈以为出现坏道了。结果双击文件系统下的2TB文件系统却可以挂载了，显示为ext格式。无语……</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
+
+<p>到超算中心拷贝出现同样问题，钟英师姐帮忙发现其实问题很好解决，直接不使用-t参数指定的话，系统会自动检测类型挂载。反正不知道系统怎么检测出的，能挂上就是了……以在/dev/sdc5为例</p>
+<blockquote>mount /dev/sdc5 ./</blockquote>
+<p>DONE！</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140903#</span></strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -431,152 +594,6 @@ tracer timesteps per re-mapping timestep.</pre>
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/">【已解决】SSH多机无密码访问</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-26
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>ssh无密码访问是实现MPI、以及自动化批处理如scp ssh远程命令等操作的必要设置。单机A对B单向或者B对A双向的操作类似，网上一查一大堆。一对多方向容易搞混，注意复制公钥方向。如A要无密码访问B，将A的公钥(id_rsa.pub)复制到B机的authorized_keys下。</p>
-
-<p><strong>注意authorized_keys权限为600，.ssh目录权限700</strong></p>
-
-<p>参考资料：</p>
-
-<p>http://blog.sina.com.cn/s/blog_75b0e2ad010185id.html</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ssh-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/">关于办户口迁移囧事的一点思考</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>记得本科把户口从烟台迁到东校的时候，就非常不顺利，跑了初家派出所两三次费尽口舌。没想到，这次从东校迁到南校，也被坑了一把。</p>
-
-<p>按照新生手册说法，只需要把身份证复印件和录取通知复印件准备好，交到学校（学院）处，学校自会处理这种校内升学的户口迁移。看到这些安排一时偷乐，想到俊文说他们那一级还要自己去东校办理，看来我们这一次赶上改革了，群众路线，办事人性化了嘛。没想到结果依然不是一般的折腾。</p>
-
-<p>21日报到，准备好材料交付报到处户籍科，被告知哪里说只需要身份证和录取通知复印件呀，必须要有户口迁移证才行，我说新生手册写的啊。不行不行不行，要自己去办。好吧，看起来还是老样子，不知是群众路线群不到我们这些本科毕业的干部身份呢还是根本就没改革，但丫的新生手册怎么不说清楚。</p>
-
-<p>22日随亚娜珊珊回东校办户口迁移，先学校保卫办后小谷围派出所，没想到派出所没人，办得很迅速，一上午就搞定，以为后面就简单了，下午也懒得回南校，去新开的行政楼餐厅吃了一顿，名副其实郡城的价格四饭的味道，下午在东校实验室折腾杨老师的网站DEMO，不表。</p>
-
-<p>23，24日周末，考虑到南校保卫办不上班，懒得白跑一趟。25下午开学典礼，顺道去保卫办交表。没想到进去就傻眼了——录取通知复印件、迁移证复印件、一寸照片、身份证复印件，一件不能少。我吐槽说之前没通知啊，新生手册就写说录取通知+身份证复印件啊，哪里知道这么折腾。周围不少同学也是相同遭遇，一肚子不满。</p>
-
-<p>不满也没用，白跑就是白跑，还是得回去要通知书上联复印。这种囧事，学校或者说相关部门吧，做的不到位是必然难辞其咎，但毕竟大环境如此，这种小事碰上再正常不过，客观因素改变不了。不妨从个人的角度来想想，如何能够避免麻烦，其实也很简单，找亚娜细细询问一下需要准备的材料，或者打个电话到保卫办问清楚，也就是了。归根结底，自己在已知被提供的资料不足的情况下依然消极被动地对待，想当然地认为XXX，也是造成最终麻烦的重要主观因素。前事不忘后事之师，这次吸取教训了，希望自己下次遇到类似情况能够足够重视，以免更大的麻烦。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/25/e5-85-b3-e4-ba-8e-e5-8a-9e-e6-88-b7-e5-8f-a3-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -587,10 +604,10 @@ tracer timesteps per re-mapping timestep.</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page81" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">82/90</span>
+          <span class="page_number ">82/91</span>
           
             <a href="/page83" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -941,7 +958,17 @@ tracer timesteps per re-mapping timestep.</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2047,7 +2074,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -2727,6 +2754,10 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -2742,10 +2773,6 @@ tracer timesteps per re-mapping timestep.</pre>
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -2790,7 +2817,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -2844,7 +2871,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3352,7 +3379,7 @@ tracer timesteps per re-mapping timestep.</pre>
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

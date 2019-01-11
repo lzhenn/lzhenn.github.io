@@ -79,4 +79,9 @@ Resources and bookmarks for work, hobby, and others.
 
 * [Forbes Realtime Billionaires List](https://www.forbes.com/billionaires/list/)
     
-    Forbes realtime billionaires list. 
+    Forbes realtime billionaires list.
+
+## Comments
+
+{% include comments.html %}
+

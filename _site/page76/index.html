@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,201 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-19
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>&nbsp;
+    
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>&nbsp;
+    
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>ncl写二进制文件非常方便，setfileoption+fbinrecwrite语句即可。处理模式输出的加热数据测试了一下，非常迅速搞定。随后需要用到fortran代码来读写二进制文件，没想到却遇到大问题。</p>
+
+<p>ncl下采用fbinrecwrite写入的文件为fortran下的sequential读取方式（貌似这个才是符合ieee标准的），按照<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/fbinrecwrite.shtml">官网指示</a>，代码很容易编译通过，但是执行出错。ifort编译执行错误结果：</p>
+<blockquote>forrtl: severe (98): cannot allocate memory for the file buffer - out of memory, unit 100, file /users/yangsong3/L_Zealot/F/f90/CAM4_PTENDT_DIFF_mon.dat</blockquote>
+<p>采用gfortran编译，同样执行出错：</p>
+<blockquote>At line 12 of file read_heat_diff.f90 (unit = 100, file = '../data/model_post/CAM4_PTENDT_DIFF_mon.dat')
+Fortran runtime error: End of file</blockquote>
+<p>第一次在linux平台下编译自己写的fortran代码，多少还是有些心虚。ifort表示内存不足，gfortran表示读到文件末尾，有些莫名其妙，检查路径文件名，文件大小，读取方式，貌似都没问题，折腾许久没有结果。</p>
+
+<p>问题只能回溯到ncl那么简单的二进制写入上，fbinrecwrite看上去没什么问题，setfileoption中的几个选项值得怀疑，查了下BigEndian的问题，是这样描述的：</p>
+<blockquote>其实big endian是指低地址存放最高有效字节（MSB），而little endian则是低地址存放最低有效字节（LSB）。
+
+用文字说明可能比较抽象，下面用图像加以说明。比如数字0x12345678在两种不同字节序CPU中的存储顺序如下所示：
+
+<strong>Big Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   12  |   34  |   56  |   78   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+<strong>Little Endian</strong>
+
+低地址                                   高地址
+-----------------------------------------&gt;
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   78|   56  |   34  |   12   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</blockquote>
+<p>虽然看上去出错信息并不是这么指向的，但还是要试一试，查了下fortran在字节序处理的问题，果然，一行open语句赫然入眼：</p>
+
+<p>open(…,<strong><em>convert=”big_endian”</em></strong>)</p>
+
+<p>加入测试，我擦嘞……居然可以了，果然是字节序的问题。原来fortran默认的是非人的little endian，好吧……关键是运行出错给出的那些错误信息，完全无厘头，真是对编译器失望了。另外SGI编译器默认为BigEndian。</p>
+
+<p>另外fortran读ncl写出的多维二进制数据的时候，注意维数方向是相反的哦！如ncl数组（33，44），fortran（44，33）</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/sunshine1314/article/details/2309655 BigEndian和LittleEndian</p>
+
+<p>http://bbs.lasg.ac.cn/?action-viewthread-tid-13303</p>
+
+<p>http://www.360doc.com/content/11/0216/10/2609140_93438395.shtml</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-18
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
+<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
+set shiftwidth=4
+
+set expandtab</blockquote>
+<p> </p>
+
+<p>对于已经存在的文件：</p>
+<blockquote><strong>TAB替换为空格：</strong>
+:set ts=4
+:set expandtab
+:%retab!</blockquote>
+<p>多行缩进在命令行模式下</p>
+<blockquote>n&gt;</blockquote>
+<p>向右缩进n行，左用&lt;代替</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
+
+<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -395,162 +604,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim针对ncl的语法高亮及自动补全</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>官网上查到了几个编辑器增强插件，浏览了一下，发现针对vim的属git上那个最好(Courtesy of Xin Xie [School of Marine and Atmospheric Sciencs, Stony Brook University].)</p>
-
-<p>方法比较简单，相关文件已经打包放在文章最后，拷贝到~/.vim相应位置即可。需要注意.vimrc是放在主目录下的，且一定不要直接mv过去，否则会覆盖掉原有的设置，需要拷贝内容复制。</p>
-
-<p>命令补全快捷键是CTRL+n</p>
-
-<p>【参考资料】</p>
-
-<p>http://www.ncl.ucar.edu/Applications/editor.shtml#vim</p>
-
-<p>【附件】</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/ncl_vim_highlight.zip">ncl_vim_highlight</a></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM continue run出现Internal pop2 clock not in sync with Sync Clock的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>晚上查天河二号的spin-up任务，发现下午的时候居然断掉了，已经积分了99年，队列状态一直是CG状态卡死，貌似是某个节点的一个进程被kill掉了，其他节点陆续因为超时退出。</p>
-
-<p>好吧，不管那个CG。重新提交任务，continue run，没想到initial的时候给我弹出了，纳尼……</p>
-
-<p>查看log文件发现如下错误</p>
-
-<p><strong>Internal pop2 clock not in sync with Sync Clock</strong></p>
-
-<p>POP2的时钟不同步? 这么有意思，貌似之前碰到过，因为转的时间不久，索性直接重新start-up了，这次可是转了10天啊我擦嘞，要是重新返工岂不是要命了。果断google，然后发现了这个：</p>
-<blockquote>https://bb.cgd.ucar.edu/internal-pop2-clock-not-sync-sync-clock</blockquote>
-<p>这个意思是直接重走一遍cesm_setup就可以，clean再setup，改build状态，提交任务——依然出错。其他google出来的信息几乎没用，诶，又入无人之境……</p>
-
-<p>既然是初始化的时候时钟同步出问题，想到模式运行生成restart文件的时候会同步配置一个rpointer文件，应该是记录重启点的文件，果断查看，发现问题：只有ocn的相关rpointer文件中指向100年的1月1日，其他都是99年1月1日，明白了，应该是ocn模块指定rpointer的方式与其他module不同，先于其他模块指定了新的重启点，可是其他模块的重启文件还没生成呢。长舒一口气，改rpointer.ocn.restart里面的文件为99年咯，Okay，提交任务！</p>
-
-<p>这次依然提交不久就断掉了，万念俱灰有木有，查看log文件，发现错误不一样了，有点欣喜，说明改rpointer有效。新错误是：</p>
-
-<p><strong>nlfilename_rof does NOT exist:rof_in</strong></p>
-
-<p>这么奇葩，径流模式出问题，老子又不关心你丫的径流，小兔崽子还找事……看起来是找不到rof_in的什么东西，google直接没结果，想到刚刚cesm重新setup过，是不是改了build后的一些namelist？重新build尝试，目前可以运行了，长舒一口气……但愿今晚能顺利跑过断点～</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -561,10 +614,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page75" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">76/90</span>
+          <span class="page_number ">76/91</span>
           
             <a href="/page77" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -915,7 +968,17 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2021,7 +2084,7 @@
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -2701,6 +2764,10 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -2716,10 +2783,6 @@
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -2764,7 +2827,7 @@
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -2818,7 +2881,7 @@
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3326,7 +3389,7 @@
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

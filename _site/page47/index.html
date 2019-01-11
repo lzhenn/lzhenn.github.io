@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,180 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/11/14/use-grads-to-read-cesm-output/">【ongoing】use grads to read cesm output</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-11-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Some points to be aware:</p>
+
+<p>2D fields, not same by binary output and netcdf (high efficiency) output, one point value missing, might be the polar point. Therefore, *.bin control and *.nc sensitive is not under the same structure.</p>
+
+<p>2D fields work fine under <strong>v1.9</strong> of grads. However, 3D fields might meet some trouble. Try to use the “standard” attribution, dimention to tackle this problem. An example from NCEP-DOE dataset:</p>
+
+<p>float level(level) ;
+level:units = “millibar” ;
+level:long_name = “Level” ;
+level:positive = “down” ;
+level:GRIB_id = 100s ;
+level:GRIB_name = “hPa” ;
+level:actual_range = 1000.f, 10.f ;
+level:axis = “Z” ;
+ </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/11/14/use-grads-to-read-cesm-output/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/">【NOT solved】GFDL atmosphere dycore porting</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Now we try to setup GFDL dycore model on our Neptune platform. Following steps has been used:</p>
+
+<ol>
+  <li>We exec the ./exp/fv/fms_runscript, then got the netcdf and mpi error. It seems that the model does not recognize the environmental variables associated with these lib. We add the flags directly to the compile sentence.</li>
+</ol>
+<pre>L35: $mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DUSE_LIMA -DSPMD -DLAND_BND_TRACERS" -a $sourcedir $pathnames /usr/local/include $sourcedir/shared/mpp/include $sourcedir/shared/include /home/yangsong3/soft/mpich314-intel/include /usr/netcdf-4331/include</pre>
+<p>And mkmf.template.ia64 file</p>
+<pre>LDFLAGS = -L/usr/local/lib -L/usr/netcdf-4331/lib -L/home/yangsong3/soft/mpich314-intel/lib #-lsma</pre>
+<p>We comment the “-lsma” flag because it is a flag specific to Cray machine.</p>
+
+<p>Next, we compile again, frequently got this</p>
+<pre>ifort:  '-i_dynamic' not supported</pre>
+<p>google it, got this</p>
+
+<p>https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/486830</p>
+<blockquote>Regarding 1:<strong> -i_dynamic</strong> (the underscore form) was a option spelling used many many releases ago that was later mapped to <strong>-i-dynamic</strong> (the hyphen form) and then that form was depreciated in more current releases and it now maps to<strong> -shared-intel</strong></blockquote>
+<p>So, we change it to <strong>-shared-intel</strong>, no more warning.</p>
+
+<p>However, when it compiles for a long time (5min), we got error again, lots of:</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_transmit_mpi.h:79: undefined reference to `mpi_recv_'</pre>
+<p>Then we change the ifort compile flag into mpif90, we got this</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_io_misc.inc:116: undefined reference to `nf_inq_libvers_'</pre>
+<p>It really sucks<strong><span style="color: #339966;">.</span></strong></p>
+
+<p>#Last Edited on 20151004#</p>
+
+<p><strong><span style="color: #339966;">We finally stop trying and turn to CAM dynamical core simulation and it works really smooth over the CESM construction.</span></strong></p>
+
+<p>#Last Edited on 20151114#</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -568,226 +756,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91prefe/">【已解决】Preferable PE layers for BC5 compset on tianhe2</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/09/QQ图片20150924162913.jpg"><img class="alignnone size-full wp-image-728" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/09/QQ图片20150924162913.jpg" alt="QQ图片20150924162913" width="582" height="234" /></a></p>
-
-<p>72 #Change PE layers
-73 ./xmlchange NTASKS_ATM=480
-74 ./xmlchange NTHRDS_ATM=1
-75 ./xmlchange ROOTPE_ATM=0
-76
-77 ./xmlchange NTASKS_LND=240
-78 ./xmlchange NTHRDS_LND=1
-79 ./xmlchange ROOTPE_LND=120
-80
-81 ./xmlchange NTASKS_ICE=120
-82 ./xmlchange NTHRDS_ICE=1
-83 ./xmlchange ROOTPE_ICE=0
-84
-85 ./xmlchange NTASKS_OCN=96
-86 ./xmlchange NTHRDS_OCN=1
-87 ./xmlchange ROOTPE_OCN=480
-88
-89 ./xmlchange NTASKS_CPL=120
-90 ./xmlchange NTHRDS_CPL=1
-91 ./xmlchange ROOTPE_CPL=360
-92
-93 ./xmlchange NTASKS_GLC=240
-94 ./xmlchange NTHRDS_GLC=1
-95 ./xmlchange ROOTPE_GLC=0
-96
-97 ./xmlchange NTASKS_ROF=120
-98 ./xmlchange NTHRDS_ROF=1
-99 ./xmlchange ROOTPE_ROF=240
-100
-101 ./xmlchange NTASKS_WAV=120
-102 ./xmlchange NTHRDS_WAV=1
-103 ./xmlchange ROOTPE_WAV=360</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91prefe/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL脚本的参数传递</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>When used in conjunction with an NCL script, command line arguments can set a variable’s value, help determine initial conditions, and so forth:</p>
-<pre>% cat modelRun.ncl
-begin
-  [...]
-
-  if (.not. isvar("nyrStrt")) then      ; is nyrStrt on command line?
-      nyrSrt = 1960
-  end if
-
-  if (.not. isvar("nyrLast")) then      ; is nyrLast on command line?
-      nyrLast = 2002;
-  end if
-
-  print(nyrStrt)                        ; for illustrative purposes
-  print(nyrLast)
-
-  [...]
-end
-</pre>
-<p>(Variables nyrStrt and nyrLast are set on the command line)</p>
-<pre>% ncl nyrStrt=1900 nyrLast=1968 modelRun.ncl
-
-Variable: nyrStrt
-Type: integer
-Total Size: 4 bytes
-            1 values
-Number of Dimensions: 1
-Dimensions and sizes:   [1]
-Coordinates: 
-(0)     1900
-
-
-Variable: nyrStrt
-Type: integer
-Total Size: 4 bytes
-            1 values
-Number of Dimensions: 1
-Dimensions and sizes:   [1]
-Coordinates: 
-(0)     1968
-
-</pre>
-<p>Consider the following</p>
-<pre>ncl nyrStrt=1930 'fName="Model*"' gravity=9.8 opt=True cyclic=False latS=-30 latN=30 lonL=130 lonR=290 modelRun.ncl
-</pre>
-<p>When the number of CLOs is large, it might be clearer to enter only one or two per line. The Unix line continuation character, <b>&lt;/b&gt;, can be used to accomplish this:</b></p>
-<pre> ncl nyrStrt=1930      <b>\</b> 
-     'fName="Model*"'  <b>\</b>
-     gravity=9.8       <b>\</b>
-     latS=-30 latN=30  <b>\</b>
-     lonL=130 lonR=290 <b>\</b>
-     modelRun.ncl
-
-</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -798,10 +766,10 @@ Coordinates:
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page46" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">47/90</span>
+          <span class="page_number ">47/91</span>
           
             <a href="/page48" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1152,7 +1120,17 @@ Coordinates:
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2258,7 +2236,7 @@ Coordinates:
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -2938,6 +2916,10 @@ Coordinates:
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -2953,10 +2935,6 @@ Coordinates:
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -3001,7 +2979,7 @@ Coordinates:
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -3055,7 +3033,7 @@ Coordinates:
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3563,7 +3541,7 @@ Coordinates:
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

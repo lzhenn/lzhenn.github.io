@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,180 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/29/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim左列显示行号</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-29
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#vim" title="Tag: vim" rel="tag">vim</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#vi-vimrc" id="markdown-toc-vi-vimrc">vi ~/.vimrc</a></li>
+</ul>
+
+<p>打开</p>
+
+<p>:set nu</p>
+
+<p>关闭</p>
+
+<p>:set nonu</p>
+
+<p>但是想将这个设置写进VI的配置文件，就</p>
+
+<h1 id="vi-vimrc">vi ~/.vimrc</h1>
+
+<p>在这个文件中，添加</p>
+
+<p>set nu</p>
+
+<p>就行了</p>
+<p style="text-indent: 2em;">:set number
+:set nu 这个是简写</p>
+<p style="text-indent: 2em;"></p>
+<p style="text-indent: 2em;">参考：http://happyolucky.blog.163.com/blog/static/12235640020096235012610/</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/29/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/">【未解决】CESM1.2.2移植到中大hpc4平台出问题</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>有1.2.0的基础，想必1.2.2应该是好搞定的，很多配置文件可以从1.2.0里拷贝过来。如法炮制，在天河二号上应该也可以这么搞定。</p>
+
+<p>首先cd到新版的Machines目录下，然后拷贝旧版中的<em>config_machines.xml config_compilers.xml</em> 以及 <em>mkbatch.${MACH}</em>这三个配置文件过来（${MACH}代表自定义的机器名）</p>
+<blockquote>#cd ~/CESM/cesm1_2_2//scripts/ccsm_utils/Machines
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_machines.xml ./
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_compilers.xml ./
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/mkbatch.sigon ./</blockquote>
+<p>回到scripts目录，再采用create_newcase的方法进行X Compset的测试，</p>
+<blockquote>#./create_newcase -case testnew -res f45_g37 -compset X -mach sigon</blockquote>
+<p>结果出现了意想不到的错误：</p>
+
+<p><em>WARNING:</em>
+<em>    The perl module XML::LibXML is needed for XML parsing in the CESM script system.</em>
+<em>        Please contact your local systems administrators or IT staff and have them install it for</em>
+<em>        you, or install the module locally.</em></p>
+
+<p>回到1.2.0的目录测试，发现1.2.0是没有问题的。感觉像是新版加了perl的神马库去解析xml文件，google之，发现应该是这样。</p>
+
+<p>https://bb.cgd.ucar.edu/cesm-12-stempede-problem</p>
+
+<p>https://bb.cgd.ucar.edu/warning-cesm122</p>
+
+<p>按照贴子里的说法下载 XML::LibXML  安装，发现安装说明一头雾水完全看不懂，cpan命令无效，退出到workstation居然有cpan命令，呃……看起来是hpc4又没装神马东西，回来再慢慢捣鼓吧……</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -408,166 +596,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/27/wordpress-e8-ae-bf-e9-97-ae-e6-85-a2-e7-9a-84-e9-9/">【已解决】Wordpress访问慢的问题解决</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-27
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>2014年六月以来，由于大陆对google的封锁，导致wordpress访问变慢。主要原因是wordpress调用了google的一些公共库。经查资料，采用360做的镜像库可以解决该问题。</p>
-
-<p>需要修改的文件</p>
-<blockquote>wp-includes/script-loader.php
-
-wp-includes/js/tinymce/plugins/compat3x/css/dialog.css
-
-wp-content/themes/twentytwelve/functions.php
-
-wp-content/themes/twentythirteen/functions.php
-
-wp-content/themes/twentyfourteen/functions.php</blockquote>
-<p>搜索<strong>googleapis</strong>全部替换为<strong>useso</strong>即可。</p>
-
-<p>其实目前默认采用twentyfourth了，只修改最后面三个文件中的最后一个应该可以。</p>
-
-<p>参考资料：</p>
-
-<p>http://jingyan.baidu.com/article/4f7d5712aaca631a20192720.html</p>
-
-<p>http://www.wind88.net/news/news-125.html</p>
-
-<p> </p>
-
-<p><strong><span style="color: #008000;">#Up to 20140729#</span></strong></p>
-
-<p>这两天出现了不登录的情况下速度很快，但是登录之后却非常缓慢。经查，发现依然是由于后台调用google字体等造成。安装Disable Google Fonts插件后问题解决。</p>
-
-<p>参考资料：http://www.whyqi.com/318.html</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140824#</span></strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/27/wordpress-e8-ae-bf-e9-97-ae-e6-85-a2-e7-9a-84-e9-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/27/wordpress-e4-b8-8a-e4-bc-a0-e6-97-b6-e6-98-af-e5-9/">【已解决】Wordpress上传时“是否上级目录没有写权限”解决办法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-27
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>想放一个顶部图像，谁知道上传的时候出现上述错误，按照路径创建了uploads目录，755权限依然不行，改为777后成功。</p>
-
-<p>这其实不是一个好方法，说明wordpress在操作的时候是作为“others”的，777代表谁都能上，不安全。</p>
-
-<p>正确方法可能要从mysql的数据库改，mysql几乎没有接触，时间宝贵起见，不管了，姑且这样解决吧。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/27/wordpress-e4-b8-8a-e4-bc-a0-e6-97-b6-e6-98-af-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -578,10 +606,10 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page88" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">89/90</span>
+          <span class="page_number ">89/91</span>
           
             <a href="/page90" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -932,7 +960,17 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2038,7 +2076,7 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -2718,6 +2756,10 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -2733,10 +2775,6 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -2781,7 +2819,7 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -2835,7 +2873,7 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3343,7 +3381,7 @@ wp-content/themes/twentyfourteen/functions.php</blockquote>
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

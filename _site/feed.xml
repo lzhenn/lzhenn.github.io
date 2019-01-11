@@ -5,9 +5,92 @@
     <description></description>
     <link>http://202.116.70.212:80/</link>
     <atom:link href="http://202.116.70.212:80/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Dec 2018 16:24:39 +0800</pubDate>
-    <lastBuildDate>Wed, 26 Dec 2018 16:24:39 +0800</lastBuildDate>
+    <pubDate>Mon, 31 Dec 2018 22:49:23 +0800</pubDate>
+    <lastBuildDate>Mon, 31 Dec 2018 22:49:23 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</title>
+        <description>
+Wenxiu Zhong met PopLatLon error:
+
+&lt;blockquote&gt;
+  ls: cannot access map_*: No such file or directory
+(0) create_rmpPopFileName: file not recognized/found: map_gx1v6_to_1x1d_bilin_da_100716.nc
+(0) create_rmpPopFileName: dir searched: ./
+&lt;/blockquote&gt;
+
+This is actually the system cannot find the pop remap weight file. The file info can be found from the &lt;a href=&quot;https://www.ncl.ucar.edu/Applications/popwgtfiles.shtml&quot;&gt;NCL official site&lt;/a&gt;, which is actually downloaded from the CESM official svn site.
+
+After downloaded the files, export related environmental variable in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt;:
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NCL_POP_REMAP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DIR_TO_POP_REMAP_FILE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;code class=&quot;highlighter-rouge&quot;&gt;source ~/.bashrc&lt;/code&gt; and re-run the script.
+
+&lt;strong&gt;Updated 2018-12-31&lt;/strong&gt;
+
+</description>
+        <pubDate>Mon, 31 Dec 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/12/31/ncl-pop-regrid/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/12/31/ncl-pop-regrid/</guid>
+        
+        <category>NCL</category>
+        
+        
+        <category>NCL</category>
+        
+      </item>
+    
+      <item>
+        <title>CESM Reading User-defined File got Segmentation Fault</title>
+        <description>
+YT met segmentation fault error when using similar tech as in the &lt;a href=&quot;https://github.com/Novarizark/project/tree/master/SRC_MOD_LIB-2017/SourceMods-Nudging/src.cam&quot;&gt;UV Nudging experiment&lt;/a&gt; to conduct TP heatforcing experiments.
+
+The segfault comes from the user-added call in &lt;code class=&quot;highlighter-rouge&quot;&gt;phypkg.F90&lt;/code&gt;:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fh_tpmask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lon'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lat'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pcols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begchunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endchunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;found&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grid_map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'PHYS'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+According to &lt;a href=&quot;https://en.wikipedia.org/wiki/Segmentation_fault&quot;&gt;wikipedia&lt;/a&gt;:
+&lt;blockquote&gt;
+  In computing, a segmentation fault (often shortened to segfault) or access violation is a fault, or failure condition, raised by hardware with memory protection, notifying an operating system (OS) &lt;strong&gt;the software has attempted to access a restricted area of memory (a memory access violation)&lt;/strong&gt;.
+&lt;/blockquote&gt;
+
+We believe the error comes from the &lt;code class=&quot;highlighter-rouge&quot;&gt;infld&lt;/code&gt; reading process. Somehow the program violates the memory access limit, such as using double to read byte, or reading after End-of-File.
+
+However, the original code is copied from a previous F compset run, which was smoothly conducted. So we re-check the ad-hoc part:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;!*** MOD START: infld TP mask and heating file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fh_tpmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask_file_get_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fh_tpmask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lon'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lat'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pcols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begchunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endchunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+              &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;found&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grid_map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'PHYS'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+The thing is that we read the file info (get the file handle) in a function from another module (&lt;code class=&quot;highlighter-rouge&quot;&gt;cam_initfiles.F90&lt;/code&gt;), and use the pointer to get the function handle in &lt;code class=&quot;highlighter-rouge&quot;&gt;phypkg.F90&lt;/code&gt;. In ` cam_initfiles.F90` we define:
+
+&lt;div class=&quot;language-fortran highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask_file_get_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file_desc_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;pointer&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask_file_get_id&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask_file_get_id&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fh_tpmask&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpmask_file_get_id&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;strong&gt;Updated 2018-12-27&lt;/strong&gt;
+
+</description>
+        <pubDate>Thu, 27 Dec 2018 00:00:00 +0800</pubDate>
+        <link>http://202.116.70.212:80/2018/12/27/cesm-segfault-log/</link>
+        <guid isPermaLink="true">http://202.116.70.212:80/2018/12/27/cesm-segfault-log/</guid>
+        
+        <category>CESM</category>
+        
+        
+        <category>CESM</category>
+        
+      </item>
     
       <item>
         <title>CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</title>
@@ -931,100 +1014,6 @@ China’s debt is denominated in CNY, and dealing with it before the crisis, and
         <category>debt</category>
         
         <category>crisis</category>
-        
-        
-        <category>notebook</category>
-        
-        <category>economy</category>
-        
-      </item>
-    
-      <item>
-        <title>Mercurius事件监听系统终于Online啦</title>
-        <description>
-最近几天集中编码了一番，终于把差不多九个月前立下的flag雏形写好了，Mercurius的Demo version完成，从spider拉取数据，入库，调库回测，标准化输出json数据包，上传github，github page前端调用显示，虽然策略只有简单的up in down out，但框架还是完整啦。后面打算做个Risk Parity的portfolio回测下放上来。
-
-项目并不麻烦，也还没上酷炫的ML算法，但串了一下从python spider/mysql到frontend这一条的工程实现，也算是不错的锻炼吧，希望未来能给我带来一些机遇。God Bless~
-
-上图：
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv7ztpkl0sj210k0u0b29.jpg&quot; alt=&quot;&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;center&quot; /&gt;
-
-未来完整版本的工程实现流程图：
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv80eil7suj213j0td7ct.jpg&quot; alt=&quot;&quot; /&gt;
-
-Sandbox页面策略的实时回测，偷懒还没有把event summary写好：
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv80g5yuzxj20sq0gp77d.jpg&quot; alt=&quot;&quot; /&gt;
-
-以后每天又多了个客观参考啦～距离程序化决策又近了一步。
-
-&lt;strong&gt;Updated 2018-09-13&lt;/strong&gt;
-</description>
-        <pubDate>Thu, 13 Sep 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/09/13/mercurius-system/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/09/13/mercurius-system/</guid>
-        
-        <category>thinking</category>
-        
-        <category>investment</category>
-        
-        <category>career</category>
-        
-        <category>quandl</category>
-        
-        <category>blog</category>
-        
-        <category>event-listening</category>
-        
-        
-        <category>economy</category>
-        
-        <category>investment</category>
-        
-        <category>python</category>
-        
-        <category>modeling</category>
-        
-      </item>
-    
-      <item>
-        <title>Thinking: TED talk from Ray Dalio</title>
-        <description>
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv5farq2csj20q10d1nca.jpg&quot; alt=&quot;&quot; /&gt;
-
-今天刷华见发现Dalio又出了&lt;a href=&quot;https://wallstreetcn.com/articles/3404712&quot;&gt;一本新书&lt;/a&gt;，详细阐述历史上的债务危机。毫无疑问，桥水出品，Dalio出品必属精品，兴冲冲去桥水网站subcribe了免费的pdf版本。往下拖发现Dalio居然在2017年还有个TED演讲。
-
-内容基本是对《Principle》一书精华的阐述，算法决策，计算机决策，集体智慧，克服个人的非理性与集体盲从的办法就是算法的weight。不过视频演讲中能够给出一个足够震撼人心的例子：Dalio中途戴上眼镜，盯着辅助演讲的iPad，展示了一下Bridgewater的会议流程：
-
-所有人都可以对其他人提出赞成或反对意见并打分，Dot Collector（桥水的计算机决策系统的一个module）会进行记录，因此，可以想象N人的会议就能够组成一个NxN的矩阵（有向）
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv5g1lpwvrj20qd0okdwc.jpg&quot; alt=&quot;&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;center&quot; /&gt;
-
-随后计算机系统会根据每个人在所有会议的表现等等进行用户画像（有没有感到可怕！），当最后会议集体决策时，并不是单单的democracy！而是根据不同人不同的merits进行加权；同时，用户画像也让企业能够对不同特质的人进行组合匹配，从而有利于合作事务的最优展开。
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv5g6r11byj20zi0jn7wh.jpg&quot; alt=&quot;&quot; height=&quot;50%&quot; width=&quot;50%&quot; align=&quot;center&quot; /&gt;
-
-最后一个关于民主决策的例子也非常震撼人心，即使在一场会议上65%赞同35%反对一项决策，当桥水的机器决策系统根据不同人的merits进行加权后，会发现这个比例竟然会反过来，而更可怕的是，整个公司会遵循这样加权后的决策树行动。正如Dalio在经济运行的视频中描述的，像机器一样运行。
-
-绝对的透明和绝对的客观，这是通往成功的第一步。
-
-&lt;img src=&quot;https://ws1.sinaimg.cn/large/73ebdc71ly1fv5fmorbfjj214k07uq9i.jpg&quot; alt=&quot;&quot; /&gt;
-
-另附Dalio的新动画视频 &lt;a href=&quot;https://www.youtube.com/watch?v=B9XGUpQZY38&quot;&gt;《Principles for Success》&lt;/a&gt;
-
-&lt;strong&gt;Updated 2018-09-11&lt;/strong&gt;
-</description>
-        <pubDate>Tue, 11 Sep 2018 00:00:00 +0800</pubDate>
-        <link>http://202.116.70.212:80/2018/09/11/ray-dalio-ted/</link>
-        <guid isPermaLink="true">http://202.116.70.212:80/2018/09/11/ray-dalio-ted/</guid>
-        
-        <category>blog</category>
-        
-        <category>thinking</category>
-        
-        <category>dalio</category>
         
         
         <category>notebook</category>

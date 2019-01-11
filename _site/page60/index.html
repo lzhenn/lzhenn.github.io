@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,226 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/05/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91excel/">【已解决】EXCEL+Shell抓取扇贝COCA TOP 20000</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-05-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#English" title="Category: English" rel="category">English</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<pre>COCA 20000高频词汇。 COCA=Corpus of Contemporary American English (COCA) 这是英语国家使用频率最高的词汇集合。 从众多语料库（corpus）中提取。用大数据的方法从各种文体中自动生成一个词频表。这是当今最准确的词频表：美国当代语料库 coca 中的前20000个单词。 简单的说，coca就是把1990-2012年美国最有代表性的报纸，杂志，小说，学术，口语（口语可能是用的电视剧或者脱口秀之类的节目转录的）汇集起来，每部分各占1/5，生成4.5亿单词量语料库。 背完这个，应当就可以愉快的阅读纽约时报了。 希望你能成功。</pre>
+<p>上面是扇贝单词中<a href="http://www.shanbay.com/wordbook/103867/">COCA20000单词书</a>的介绍。</p>
+
+<p>不知道大家看完是不是之前就有这个想法：为什么我们背单词，不能集中下能搜集到的语言材料，然后将词汇出现的频次排个序呢？按照出现频次背上top一两万，日常能碰到的词汇不就都涵盖了么。确实是这样。</p>
+
+<p>上个月在知乎一英语学习贴子上接触到了corpus（语料库）的概念，的确有人在用大数据自然语言分析的方法做这个事情。网上能搜到的有BNC和COCA，BNC公布了前15000，但是语料内容过于老旧，据说是80年代的，而COCA则是美国的，统计数据从90年代初到2012年，绝对的精华，非常优秀非常珍贵，但是只公开了前5000的高频词，20K的要接近40刀价格出售，没办法……</p>
+
+<p>这几天托福4K已经差不多背完了，正在想着怎么把BNC15000导入，又查了一下扇贝单词书，大吃一惊，原来几天前（5月20日）已经有人把COCA top20000做成了单词书，而且售价199贝壳，相比于40USD，这可真是普度众生功德无量啊，果断收藏之！BNC15000也不用搞了，真爽。</p>
+
+<p>正洋洋得意之时，突觉哪里不对，毕竟有个版权问题，万一哪天COCA找到扇贝，说你丫侵权，删掉删掉，一则词库没了要搁置一段时间，二则购买的话，又是接近三百块钱，这不完蛋了。虽然只是个概率问题，但毕竟还是存在风险的，计算下成本收益，与其承担这个不确定性，不妨写个脚本把单词全抓下来，万一删了还是有留底的，对冲风险，万无一失。下面来展示EXCEL+Linux的完美解决方案，当然，重点是分析问题的思路：</p>
+
+<p><strong>1. 地址分析</strong></p>
+
+<p>对于如此批量数据的处理，最基础的，我们要先搞清楚两个问题：</p>
+<p style="padding-left: 30px;">（1）查看数据是否有权限要求？</p>
+<p style="padding-left: 30px;">（2）数据组织结构是怎样的，源地址是否有规律？</p>
+<p>对于第一个问题，如果不需要登录权限就可以查看单词书以及单词书下所有词汇，对我们来说无疑是非常有利的，因为不需要认证，很可能使用shell下的wget命令或者php get_file_contents就可以实现下载；</p>
+
+<p>第二个问题，如果地址有规律，前面两个命令或函数配合循环直接搞定，问题将被大大简化，如果没有规律的话，就需要想办法进行遍历了。</p>
+
+<p>首先在团队服务器用wget测试一下<a href="http://www.shanbay.com/wordlist/103867/194194/">wordlist0-100</a>这个页面能不能抓到，bingo！没问题，第一个问题直接解决。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525221100.jpg"><img class="alignnone size-full wp-image-521" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525221100.jpg" alt="QQ图片20150525221100" width="878" height="734" /></a></p>
+
+<p>对于第二个问题，我们分析一下地址：</p>
+<pre>http://www.shanbay.com/wordlist/103867/194194/</pre>
+<p>这是list0-100第一页的地址，可以末尾目录地址分为两个部分，10387是单词书编号，这个退回到单词书首页就可以发现，194194应该是单元编号，我们再跳到第二页，地址变成了这个：</p>
+<pre>http://www.shanbay.com/wordlist/103867/194194/?page=2</pre>
+<p>没错，只需要挂一个get参数就可以决定页数。而且扫了下每个单元，都是5页。Bingo，接下来的问题是，单元号是否有规律呢？</p>
+
+<p>我们依次往下切几个单元看看：</p>
+<pre>http://www.shanbay.com/wordlist/103867/194194/ 0-100
+http://www.shanbay.com/wordlist/103867/194197/ 100-200
+http://www.shanbay.com/wordlist/103867/194200/ 200-300
+http://www.shanbay.com/wordlist/103867/194203/ 300-400 
+http://www.shanbay.com/wordlist/103867/194230/ 1100-1200
+http://www.shanbay.com/wordlist/103867/194863/ 20100-20200</pre>
+<p>从前几个单元来看，似乎单元号依次+3，这样很容易找到规律，按照这一规律推算，最后一个单元应该是194194+3*(20100/100)=194797，纳尼！实际却是194863，中间那几十个单元号哪里去了！！</p>
+
+<p>估计这可能与单词书创建时单元提交错误，作者又重新提交有关，数据库没有删除错误的单元号。这么说，单元号可能是间断无规律的，换个思路，我们只能枚举了。</p>
+
+<p><strong>2. 枚举地址
+</strong></p>
+
+<p>首先查看源代码，发现词汇书首页单元链接部分共享统一的代码结构：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525222015.jpg"><img class="alignnone size-full wp-image-522" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525222015.jpg" alt="QQ图片20150525222015" width="851" height="262" /></a></p>
+
+<p>二话不说，全选复制，放到EXCEL中，A列：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525222245.jpg"><img class="alignnone size-full wp-image-523" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525222245.jpg" alt="QQ图片20150525222245" width="611" height="590" /></a></p>
+
+<p>重点来了：由于每个单元结构都是固定格式，所以这些单元所占行数是固定的，因此我们所关注的链接地址出现的位置也是固定的：6行、36行、66行依次类推，所以，我们采用函数把这些行抽出来放到一个列中，随意百度，<a href="http://zhidao.baidu.com/link?url=r1C-aSjR_OY-HgGC1BWRXNTiQ8tESvlN4b-gdaZL2y5QV5lhdAm4uMwqPO-jQXJl-gIC07qW7DAQa3FVwdQQS_">你就知道</a>：</p>
+<pre>=INDEX(A:A,(ROW()-1)*30+6)
+结果：
+ &lt;a href="/wordlist/103867/194194/"&gt;wordlist 0-100&lt;/a&gt;</pre>
+<p>接下来则是喜闻乐见的拖啊托，然后分列，抽出链接部分，索性直接把命令补全：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525222734.jpg"><img class="alignnone size-full wp-image-524" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525222734.jpg" alt="QQ图片20150525222734" width="730" height="281" /></a></p>
+
+<p><strong>3. 脚本下载
+</strong></p>
+
+<p>接下来就水到渠成啦！复制粘贴，查找更换下多余tab空格，套个循环，sh执行！全部list down下来大概只用了5分钟左右，ls之：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525223013.jpg"><img class="alignnone size-full wp-image-525" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525223013.jpg" alt="QQ图片20150525223013" width="995" height="616" /></a></p>
+
+<p>满满的成就感，且慢～grep一下html的关键label，再数个个数，看下是否都下载到了：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525223245.jpg"><img class="alignnone size-full wp-image-526" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/05/QQ图片20150525223245.jpg" alt="QQ图片20150525223245" width="961" height="289" /></a></p>
+
+<p>BINGO！不过单词书里16000+单词，为什么grep出18000+关键标签……查了个文件貌似除了汉语意思部分木有这个class了呀，不懂……回来满满找吧</p>
+
+<p> </p>
+
+<p>ps: 5分钟能把这些单词upload到我脑子中不？LOL</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/05/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91excel/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/05/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-9/">【已解决】用winRAR+计划任务定期备份文件夹</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-05-25
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>三月份做好了linux下的<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=426">全备份互联系统</a>，Blackleach上工作用文件夹本想备份到Linux下，奈何没有做要数据和规则的分离，体积过大（40+G），winscp/NSF等可能也很费时不方便，用WinDirStat做了大文件分离后，还剩10+G，所以参考了这个帖子：</p>
+
+<p>http://jingyan.baidu.com/article/3052f5a1ddb11097f31f8688.html</p>
+
+<p>直接用winRAR+计划任务备份到另一块database硬盘上，我们文件过大，不需要存留旧版本，所以生成文件不挂时间戳，文中有几点需要设置的地方没有说清楚：</p>
+<ol>
+	<li>需要选定【备份】选项卡下“压缩前清除目标磁盘内容”的选项，否则第二次压缩时，由于同名文件存在，C盘无论多大都会被压缩过程中的临时文件占满。（估计可能是一个bug）</li>
+	<li>需要选定立刻执行，否则计划任务到时会弹出对话框，而不是立刻执行备份压缩。</li>
+	<li>压缩程度直接选存储级别，否则查看就会特别慢。</li>
+</ol>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/05/25/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e7-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -412,157 +646,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/05/11/wang-pnas-2013/">Wang-PNAS-2013</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-05-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
-    
-        <a href="/category/#2015" title="Category: 2015" rel="category">2015</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
-    
-        <a href="/tag/#2015" title="Tag: 2015" rel="tag">2015</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h4><span style="color: #339966;"><strong>2015/05/01</strong></span></h4>
-<pre><strong>题目：Northern Hemisphere summer monsoon intensified by mega-El Niño/southern oscillation and Atlantic multidecadal oscillation</strong>
-<strong>原文：<a href="http://222.200.180.66:1234/L_Zealot/paperhub/warehouse/Wang-PNAS-2013-110_14_5347-5352.pdf">Wang-PNAS-2013-110_14_5347-5352.pdf</a></strong></pre>
-<p><strong>笔记：</strong>不同于以往将全球各个季风系统分开独立研究的方法，作者从全球的角度考察了整个北半球夏季风的变化，认为从这一角度来看，北半球整体夏季风都是增强的，沃克环流增强；作者认为整个北半球夏季风的增强是归因于mega-ENSO（作者自己定义的一种跨尺度自然变率，跨越年际-年代际尺度）以及AMO的共同作用，以及半球间增暖的不同步。</p>
-
-<p><strong>问题：</strong>文章整体读来感觉平铺直叙，索然寡味，很容易就会走神。而且作者后来提出mega-ENSO后很是自卖自夸了一番：</p>
-<pre>1.3年滑动平均定义，使用方便，不用搞什么EOF第二模态或者滤波
-2.适用范围比ENSO、PDO、IPO更广泛
-<strong>3.多时间尺度的特性，联系年际-年代际变率</strong>
-4.与NHSM有很好的相关性</pre>
-<p>作者认为mega-ENSO具有定义简单等诸多优点，但是在讨论Hadley环流变化时，采用的是复杂的质量流函数的跨半球运输效果来评价的，当然，作者本身也强调了由于季风辐合区的巨大变动，评估Hadley环流变化是不容易的。可能是由于篇幅限制，作者并没有对mega-ENSO、AMO、半球增暖不均一对北半球季风作用的具体机制进行诠释，关于Hadley和Walker环流增强的机制也没有进行具体阐述。</p>
-
-<p>不过，这篇文章发出后，引用非常高。之前某次开会，似乎也听到两位老师评价所说的“很会写文章，现象提出了，指数也定义好了，只要你做，绕不开它”指的似乎也是这篇文章。不能否认的是，这篇文章有多值得思考借鉴的地方，当然也包括技巧。</p>
-
-<p><strong>亮点和借鉴：</strong></p>
-<ol>
-	<li>尽管平铺直叙索然寡味，洞察力和技巧是这篇文章的最大特点：（1）曾经研究季风，都是在区域尺度上捣鼓，少有全球尺度捣鼓的（作者也提到，在他之前有人玩了，但只是玩玩降水），作者现在玩大了，环流也搞进来，于是来一个指数（怎么样，以后搞全球季风，绕得开这个指数么？）（2）我们早就知道ENSO和PDO的pattern非常类似，可是没有人想着去定义一个指数，将这两者联系起来，作者现在这么做了，于是又有了一个指数（怎么样，想说ENSO和PDO关系，想说最近几十年太平洋自然辨率，来吧来吧用我吧）。</li>
-	<li>AMO对NHSM影响的model试验很神奇，耦合模式然后做SST的nudging，技术细节还值得深思，也值得将来参考应用，考虑发邮件询问。</li>
-	<li>Fig. S2判断两套资料趋势信噪比的方法值得借鉴。</li>
-</ol>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/05/11/wang-pnas-2013/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/05/11/li-nature-2014/">Li-Nature-2014</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-05-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
-    
-        <a href="/category/#2014" title="Category: 2014" rel="category">2014</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
-    
-        <a href="/tag/#2014" title="Tag: 2014" rel="tag">2014</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<pre><strong>题目：Impacts of the north and tropical Atlantic Ocean on the Antarctic Peninsula and sea ice</strong>
-<strong>原文：<a href="http://222.200.180.66:1234/L_Zealot/paperhub/warehouse/Li-Nature-2014-505_7484_538-542.pdf">Li-Nature-2014-505_7484_538-542.pdf</a></strong></pre>
-<p><strong>笔记：占坑，回填(2015.5.11)</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/05/11/li-nature-2014/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -573,10 +656,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page59" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">60/90</span>
+          <span class="page_number ">60/91</span>
           
             <a href="/page61" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -927,7 +1010,17 @@
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2033,7 +2126,7 @@
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -2713,6 +2806,10 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -2728,10 +2825,6 @@
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -2776,7 +2869,7 @@
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -2830,7 +2923,7 @@
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3338,7 +3431,7 @@
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

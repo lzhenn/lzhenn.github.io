@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,164 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-03
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
+
+<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
+总负债 L=a*(1+r)^n
+</code></pre></div></div>
+<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
+当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
+
+<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
+总负债 L=a*(1-k)*(1+r)^n
+</code></pre></div></div>
+<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
+若不破灭，要求总资产大于等于0，则要求k</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
+</code></pre></div></div>
+<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
+
+<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
+而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-02
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>想要让本地的个人博客服务开机后即启动，测试了下，路径敏感。
+修改rc.local</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> vi rc.local
+</code></pre></div></div>
+<p>其中加入</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$YOUR_REPO</span>
+<span class="nb">sudo </span>jekyll s
+</code></pre></div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/02/ubuntu-boot/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -417,484 +589,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/12/31/new-year-blog/">岁末年初</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-12-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#emotion" title="Category: emotion" rel="category">emotion</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#jan-1-2018-update" id="markdown-toc-jan-1-2018-update">Jan 1 2018 Update</a></li>
-</ul>
-
-<p>犹豫了一下午要不要写点什么，晚上回来还是决定写点吧。
-又到了跨年的时候了，2017在印象中过的无比的快。真的是无比的快。记得之前有人解释说，为什么人越长大越觉得时间快，想想小学中学，一个学期四个月都觉得无比漫长，如今一年毫无感觉就结束了。解释说是基数效应，十岁的时候，多过一年，那是生命的十分之一；而25岁的时候，再过一年，也不过是4%的增幅，跟余额宝年化差不多，自然没感觉。
-想到了七年前的这个时候，也是坐在床上，当时用着床上书桌，接着网线，也是用着现在的小Y，当时和烨琪一起倒数跨年，两栋宿舍楼，QQ联系，那时还没确定关系。
-如今我也是这种状态，不过在南校；烨琪也和我聊着，不过隔着伶仃洋，用着手机。
-后来几年，有几次在学校倒数，东校新天地，南校亲新广场，都有。
-去年，我在大洋彼岸，16小时时差，一起跨了两次。</p>
-
-<p>去年对我来说，是一个拐点。
-从2016年，慢慢关注经济和金融，过去的2017当然投入了更多。
-两本对我影响深刻的书：塔勒布《黑天鹅》，Van Tharp《Trade Your Way to Financial Freedom》，思想上对我影响深刻的，反倒是还没有看的塔勒布那本《反脆弱》。
-没错，杠铃策略。
-2016年还在迷茫挣扎，2017则是明确了自己不想要的，而杠铃策略，给了我最大的启发。
-稳定工作应该是保守的一端，而另一端则是激进的机会搜集和备战。
-想清楚这些，很多迷茫都迎刃而解；目标明确，接下来就是按部就班操作，焦虑也少了。
-想想10年初的目标，现在实现早没什么问题了；如今，可能更多想到的是如何去平衡责任。</p>
-
-<p>说说目标吧。
-Van Tharp的规则意识让我明白交易系统是可以机械化操作的，因此也有了写自己交易系统的想法。人性太难克服，随意性，操作瘾性太强。赌多，输多。年末一段时间算是慢慢改掉了坏毛病，看得少了，动的少了，心情起伏也少了。投资以来，总体没亏，年底借了几个标的涨势，今年算勉强跑赢余额宝。大牛市没赚大钱，不过起码没亏。
-所以第一个目标就是动手做一个交易系统，ML要上，我只需要概率而已，剩下的交给时间。
-第二个目标是完成确保保守端成立，问题不大，但是塔勒布告诉我，不能掉以轻心。plan B还是要有的。
-第三个目标算为第二个目标，同时也是Plan B服务，做一套山东半岛预报系统。
-第四个目标，也是为第二个服务，完成最低毕业标准。
-ML没法立flag了，边学边用吧。很多书要看，看很多书。看书的确能让人思路大开。</p>
-
-<p>听说新年立flag都完成不了，不过我还是信心满满。
-知道自己想要什么，也就平和多了，加油！</p>
-
-<h4 id="jan-1-2018-update">Jan 1 2018 Update</h4>
-<p>中午和rds师兄吃饭，再次得出稀缺大于一切的结论，无论怎样，潮水退去时，有所栖倚才会留出反应时间，这当然是极其珍贵的。</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/12/31/new-year-blog/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/12/31/WRF-shandong-setup/">山东半岛预报系统搭建</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-12-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#modeling" title="Category: modeling" rel="category">modeling</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>&nbsp;
-    
-        <a href="/tag/#forecast&nbsp;system" title="Tag: forecast&nbsp;system" rel="tag">forecast&nbsp;system</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#编译wrf" id="markdown-toc-编译wrf">编译WRF</a></li>
-  <li><a href="#编译wps" id="markdown-toc-编译wps">编译WPS</a></li>
-  <li><a href="#下载geog包并解压" id="markdown-toc-下载geog包并解压">下载geog包并解压。</a></li>
-  <li><a href="#调整wps设置" id="markdown-toc-调整wps设置">调整wps设置</a></li>
-  <li><a href="#执行wps" id="markdown-toc-执行wps">执行wps</a></li>
-  <li><a href="#调整wrf设置" id="markdown-toc-调整wrf设置">调整WRF设置</a></li>
-  <li><a href="#执行real" id="markdown-toc-执行real">执行real</a></li>
-  <li><a href="#执行wrf" id="markdown-toc-执行wrf">执行wrf</a></li>
-  <li><a href="#计划任务" id="markdown-toc-计划任务">计划任务</a></li>
-</ul>
-
-<p>打算做一个山东半岛的预报系统，以后也算投名状。</p>
-
-<h3 id="编译wrf">编译WRF</h3>
-
-<p>configure尝试选择20. INTEL (ifort/icc): Xeon (SNB with AVX mods)</p>
-
-<p>之后直接执行编译</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./compile <span class="nt">-j</span> 8 em_real
-</code></pre></div></div>
-<p>执行编译过程卡住。更换15. 不包括avx指令集后成功。</p>
-
-<h3 id="编译wps">编译WPS</h3>
-
-<p>编译wps发现无法编译出ungrib，经过多次测试，分别</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install libpng-devel
-yum install jasper-devel
-</code></pre></div></div>
-<p>将devel包安装完整后成功。</p>
-
-<h3 id="下载geog包并解压">下载geog包并解压。</h3>
-
-<p><strong>Updated 2017-12-31</strong></p>
-
-<h3 id="调整wps设置">调整wps设置</h3>
-
-<p>完整namelist.wps</p>
-
-<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&amp;</span><span class="n">share</span><span class="w">
- </span><span class="n">wrf_core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ARW'</span><span class="p">,</span><span class="w">
- </span><span class="n">max_dom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
- </span><span class="n">start_date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-05_12:00:00'</span><span class="p">,</span><span class="w">
- </span><span class="n">end_date</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="s1">'2018-01-10_12:00:00'</span><span class="p">,</span><span class="w">
- </span><span class="n">interval_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">21600</span><span class="w">
- </span><span class="n">active_grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="w">
- </span><span class="n">subgrid_ratio_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
- </span><span class="n">subgrid_ratio_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
- </span><span class="n">io_form_geogrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
- </span><span class="n">opt_output_from_geogrid_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'./'</span><span class="p">,</span><span class="w">
- </span><span class="n">debug_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="p">/</span><span class="w">
-
-</span><span class="p">&amp;</span><span class="n">geogrid</span><span class="w">
- </span><span class="n">parent_id</span><span class="w">         </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">2</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">
- </span><span class="n">parent_grid_ratio</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span><span class="mi">3</span><span class="p">,</span><span class="w">
- </span><span class="n">i_parent_start</span><span class="w">    </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">140</span><span class="p">,</span><span class="w">  </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">140</span><span class="p">,</span><span class="w">
- </span><span class="n">j_parent_start</span><span class="w">    </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">80</span><span class="p">,</span><span class="w">  </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w">
- </span><span class="n">s_we</span><span class="w">              </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="n">e_we</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">241</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
- </span><span class="n">s_sn</span><span class="w">              </span><span class="o">=</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="n">e_sn</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
- </span><span class="c1">!</span><span class="w">
- </span><span class="c1">!!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><span class="w">
- </span><span class="c1">! The default datasets used to produce the HGT_M, GREENFRAC,</span><span class="w">
- </span><span class="c1">! and LU_INDEX/LANDUSEF fields have changed in WPS v3.8. The HGT_M field</span><span class="w">
- </span><span class="c1">! is now interpolated from 30-arc-second USGS GMTED2010, the GREENFRAC</span><span class="w">
- </span><span class="c1">! field is interpolated from MODIS FPAR, and the LU_INDEX/LANDUSEF fields</span><span class="w">
- </span><span class="c1">! are interpolated from 21-class MODIS.</span><span class="w">
- </span><span class="c1">!</span><span class="w">
- </span><span class="c1">! To match the output given by the default namelist.wps.all_options </span><span class="w">
- </span><span class="c1">! in WPS v3.7.1, the following setting for geog_data_res may be used:</span><span class="w">
- </span><span class="c1">!</span><span class="w">
- </span><span class="c1">! geog_data_res = 'gtopo_10m+usgs_10m+nesdis_greenfrac+10m','gtopo_2m+usgs_2m+nesdis_greenfrac+2m',</span><span class="w">
- </span><span class="c1">!</span><span class="w">
- </span><span class="c1">!!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><span class="w">
- </span><span class="c1">!</span><span class="w">
- </span><span class="n">geog_data_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'default'</span><span class="p">,</span><span class="w">
- </span><span class="n">dx</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">
- </span><span class="n">dy</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">
- </span><span class="n">map_proj</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'lambert'</span><span class="p">,</span><span class="w">
- </span><span class="n">ref_lat</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mf">37.00</span><span class="p">,</span><span class="w">
- </span><span class="n">ref_lon</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mf">110.00</span><span class="p">,</span><span class="w">
- </span><span class="n">ref_x</span><span class="w">     </span><span class="o">=</span><span class="w">  </span><span class="mf">55.0</span><span class="p">,</span><span class="w">
- </span><span class="n">ref_y</span><span class="w">     </span><span class="o">=</span><span class="w">  </span><span class="mf">35.0</span><span class="p">,</span><span class="w">
- </span><span class="n">truelat1</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mf">30.0</span><span class="p">,</span><span class="w">
- </span><span class="n">truelat2</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mf">60.0</span><span class="p">,</span><span class="w">
- </span><span class="n">stand_lon</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mf">110.0</span><span class="p">,</span><span class="w">
- </span><span class="n">geog_data_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/home/lzhenn/wrf-surface-data/geog'</span><span class="w">
- </span><span class="n">opt_geogrid_tbl_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'geogrid/'</span><span class="w">
-</span><span class="p">/</span><span class="w">
- </span><span class="n">geog_data_res</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'modis_lakes+10m'</span><span class="p">,</span><span class="s1">'modis_lakes+2m'</span><span class="p">,</span><span class="w">
- </span><span class="n">geog_data_res</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'usgs_lakes+10m'</span><span class="p">,</span><span class="s1">'usgs_lakes+2m'</span><span class="p">,</span><span class="w">
-
-</span><span class="p">&amp;</span><span class="n">ungrib</span><span class="w">
- </span><span class="n">out_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'WPS'</span><span class="p">,</span><span class="w">
- </span><span class="n">prefix</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'GFS'</span><span class="p">,</span><span class="w">
-</span><span class="p">/</span><span class="w">
-
-</span><span class="p">&amp;</span><span class="n">metgrid</span><span class="w">
- </span><span class="n">fg_name</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">'GFS'</span><span class="p">,</span><span class="w"> </span><span class="s1">'SST'</span><span class="w">
- </span><span class="n">constants_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">'./TAVGSFC'</span><span class="w">
- </span><span class="n">io_form_metgrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> 
- </span><span class="n">opt_output_from_metgrid_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'./'</span><span class="p">,</span><span class="w">
- </span><span class="n">opt_metgrid_tbl_path</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">'metgrid/'</span><span class="p">,</span><span class="w">
- </span><span class="n">process_only_bdy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-</span><span class="p">/</span><span class="w">
-
-</span><span class="p">&amp;</span><span class="n">mod_levs</span><span class="w">
- </span><span class="n">press_pa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">201300</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">200100</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">100000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">95000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">90000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">85000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">80000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">75000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">70000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">65000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">60000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">55000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">50000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">45000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">40000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">35000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">30000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">25000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">20000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-             </span><span class="mi">15000</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mi">10000</span><span class="w"> </span><span class="p">,</span><span class="w"> 
-              </span><span class="mi">5000</span><span class="w"> </span><span class="p">,</span><span class="w">   </span><span class="mi">1000</span><span class="w">
-</span><span class="p">/</span><span class="w">
-
-</span><span class="p">&amp;</span><span class="n">plotfmt</span><span class="w">
- </span><span class="n">ix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
- </span><span class="n">jx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
- </span><span class="n">ioff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
- </span><span class="n">joff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
-</span><span class="p">/</span><span class="w">
-
-</span></code></pre></div></div>
-
-<p>domain设置如下：
-<img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn6ptmsx25j20ug0o9dk8.jpg" alt="" /></p>
-
-<h3 id="执行wps">执行wps</h3>
-<p>设置从HKUST ENVR下载GFS输入文件<a href="http://envf.ust.hk/dataop/data/model_input/gfs_1.00deg_realtime/">GFS data archive</a></p>
-
-<p>测试加入gfs的SST数据，参考</p>
-
-<p><a href="http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html">http://www2.mmm.ucar.edu/wrf/OnLineTutorial/DATA/SST/index.html</a></p>
-
-<p>后发现并不能用，出现segfault，之后更改namelist和，对应GFS数据为SST变量Vtable，以及SST前缀，sst问题解决。</p>
-
-<p>met data生成过程一切顺利。</p>
-
-<p><strong>Updated 2018-01-06</strong></p>
-
-<h3 id="调整wrf设置">调整WRF设置</h3>
-
-<p>根据俊文和海洋局的配置调整namelist.input设置，过程中发现V3.9提供了经过测试的参数化suite，果断采用。CONUS代表北美大陆配置。</p>
-<h3 id="执行real">执行real</h3>
-<p>调整后real过程出错</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 5   --- ERROR: If sst_update /= 0, one of the auxinput4_interval settings must be /= 0
- 6   --- Set auxinput4_interval_s to the same value as interval_seconds (usually a pretty good guess).
-</code></pre></div></div>
-<p>修改后，执行过程出现段错误。</p>
-
-<p>测试修改环境变量。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># set WRF</span>
-<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
-
-<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
-<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
-</code></pre></div></div>
-<p>通过第一断点。新错误：</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--------------</span> FATAL CALLED <span class="nt">---------------</span>
-FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:     431 
- Problems, we cannot have excluded middle data from WPS 
- <span class="nt">-------------------------------------------</span>
- application called MPI_Abort<span class="o">(</span>MPI_COMM_WORLD, 1<span class="o">)</span> - process 0
- <span class="o">[</span><span class="nb">unset</span><span class="o">]</span>: write_line error<span class="p">;</span> <span class="nv">fd</span><span class="o">=</span><span class="nt">-1</span> <span class="nv">buf</span><span class="o">=</span>:cmd<span class="o">=</span>abort <span class="nv">exitcode</span><span class="o">=</span>1
- :
- system msg <span class="k">for </span>write_line failure : Bad file descriptor
-
-</code></pre></div></div>
-<p>将SST Update设置为0后可以顺利执行完real。</p>
-
-<h3 id="执行wrf">执行wrf</h3>
-<p>执行过程直接出错,有一个gwd_opt设置为1后可行。</p>
-
-<p>顺利执行，但是积分速度奇慢无比，决定采用180s步长，三层嵌套，速度快了很多。
-最终采用的wrf namelist.input</p>
-<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">&amp;</span><span class="n">time_control</span><span class="w">
- </span><span class="n">run_days</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
- </span><span class="n">run_hours</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">run_minutes</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">run_seconds</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">start_year</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
- </span><span class="n">start_month</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">
- </span><span class="n">start_day</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">   </span><span class="mi">05</span><span class="p">,</span><span class="w">
- </span><span class="n">start_hour</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">
- </span><span class="n">start_minute</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
- </span><span class="n">start_second</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
- </span><span class="n">end_year</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w">
- </span><span class="n">end_month</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">   </span><span class="mi">01</span><span class="p">,</span><span class="w">
- </span><span class="n">end_day</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">   </span><span class="mi">10</span><span class="p">,</span><span class="w">
- </span><span class="n">end_hour</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">   </span><span class="mi">12</span><span class="p">,</span><span class="w">
- </span><span class="n">end_minute</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
- </span><span class="n">end_second</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">   </span><span class="mi">00</span><span class="p">,</span><span class="w">
- </span><span class="n">interval_seconds</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">21600</span><span class="w">
- </span><span class="n">input_from_file</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="kc">.true.</span><span class="p">,</span><span class="w">
- </span><span class="n">history_interval</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">  </span><span class="mi">60</span><span class="p">,</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w">
- </span><span class="n">frames_per_outfile</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
- </span><span class="n">restart</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="w">
- </span><span class="n">restart_interval</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
- </span><span class="n">io_form_history</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
- </span><span class="n">io_form_restart</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
- </span><span class="n">io_form_input</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
- </span><span class="n">io_form_auxinput4</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
- </span><span class="n">io_form_boundary</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
- </span><span class="n">auxinput4_interval</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
- </span><span class="n">debug_level</span><span class="w">                         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">domains</span><span class="w">
- </span><span class="n">time_step</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w">
- </span><span class="n">time_step_fract_num</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">time_step_fract_den</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="n">max_dom</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
- </span><span class="n">e_we</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">241</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
- </span><span class="n">e_sn</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w"> </span><span class="mi">301</span><span class="p">,</span><span class="w">
- </span><span class="n">e_vert</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">   </span><span class="mi">39</span><span class="p">,</span><span class="w">  </span><span class="mi">39</span><span class="p">,</span><span class="w">  </span><span class="mi">39</span><span class="p">,</span><span class="w"> 
- </span><span class="n">p_top_requested</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
- </span><span class="n">num_metgrid_levels</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
- </span><span class="n">num_metgrid_soil_levels</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
- </span><span class="n">eta_levels</span><span class="w">			     </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0000</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9979</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9956</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9931</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.9904</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9875</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9844</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9807</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.9763</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9711</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9649</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9575</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.9488</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9385</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9263</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9120</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.8951</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8753</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8521</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8251</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.7937</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7597</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7229</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6833</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.6410</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5960</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5484</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4985</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.4467</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3934</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3393</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2850</span><span class="p">,</span><span class="w">
-				       </span><span class="mf">0.2316</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1801</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1324</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0903</span><span class="p">,</span><span class="w">
-                                       </span><span class="mf">0.0542</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0241</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0000</span><span class="w">
- </span><span class="n">dx</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">   </span><span class="mi">9000</span><span class="p">,</span><span class="w">   </span><span class="mi">3000</span><span class="p">,</span><span class="w">	</span><span class="mi">1000</span><span class="p">,</span><span class="w">
- </span><span class="n">dy</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w"> 	</span><span class="mi">9000</span><span class="p">,</span><span class="w">   </span><span class="mi">3000</span><span class="p">,</span><span class="w">	</span><span class="mi">1000</span><span class="p">,</span><span class="w">
- 
- </span><span class="n">grid_id</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">	   </span><span class="mi">4</span><span class="p">,</span><span class="w">
- </span><span class="n">parent_id</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w">	   </span><span class="mi">3</span><span class="p">,</span><span class="w">
- </span><span class="n">i_parent_start</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">140</span><span class="p">,</span><span class="w">    </span><span class="mi">80</span><span class="p">,</span><span class="w">  </span><span class="mi">140</span><span class="p">,</span><span class="w">
- </span><span class="n">j_parent_start</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">80</span><span class="p">,</span><span class="w">    </span><span class="mi">50</span><span class="p">,</span><span class="w">  </span><span class="mi">110</span><span class="p">,</span><span class="w">
- </span><span class="n">parent_grid_ratio</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">    </span><span class="mi">3</span><span class="p">,</span><span class="w">
- </span><span class="n">parent_time_step_ratio</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w">    </span><span class="mi">3</span><span class="p">,</span><span class="w">
- </span><span class="n">feedback</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">smooth_option</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">physics</span><span class="w">
- </span><span class="n">physics_suite</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="s1">'CONUS'</span><span class="w">
- 
- </span><span class="n">cu_physics</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">     </span><span class="mi">6</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
-
- </span><span class="n">radt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">    </span><span class="mi">30</span><span class="p">,</span><span class="w">    </span><span class="mi">30</span><span class="p">,</span><span class="w">  </span><span class="mi">30</span><span class="p">,</span><span class="w">
- </span><span class="n">bldt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">cudt</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w">    </span><span class="mi">5</span><span class="p">,</span><span class="w">
- </span><span class="n">icloud</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="n">num_soil_layers</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
- </span><span class="n">num_land_cat</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
- </span><span class="n">sf_urban_physics</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">sst_update</span><span class="w">	            		     </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">fdda</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">dynamics</span><span class="w">
- </span><span class="n">w_damping</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">diff_opt</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="n">km_opt</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">      </span><span class="mi">4</span><span class="p">,</span><span class="w">      </span><span class="mi">4</span><span class="p">,</span><span class="w">    </span><span class="mi">4</span><span class="p">,</span><span class="w">
- </span><span class="n">diff_6th_opt</span><span class="w">                        </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">diff_6th_factor</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">   </span><span class="mf">0.12</span><span class="p">,</span><span class="w">   </span><span class="mf">0.12</span><span class="p">,</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">
- </span><span class="n">base_temp</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mf">290.</span><span class="w">                          
- </span><span class="n">damp_opt</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                            
- </span><span class="n">zdamp</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mf">5000.</span><span class="p">,</span><span class="w">  </span><span class="mf">5000.</span><span class="p">,</span><span class="w">  </span><span class="mf">5000.</span><span class="p">,</span><span class="mf">5000.</span><span class="p">,</span><span class="w">
- </span><span class="n">dampcoef</span><span class="w">                            </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w">    </span><span class="mf">0.2</span><span class="p">,</span><span class="w">    </span><span class="mf">0.2</span><span class="w">   </span><span class="mf">0.2</span><span class="w">
- </span><span class="n">khdif</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">kvdif</span><span class="w">                               </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">non_hydrostatic</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true..true.</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w">
- </span><span class="n">moist_adv_opt</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">       
- </span><span class="n">scalar_adv_opt</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">       
- </span><span class="n">gwd_opt</span><span class="w">                             </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">bdy_control</span><span class="w">
- </span><span class="n">spec_bdy_width</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
- </span><span class="n">spec_zone</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="n">relax_zone</span><span class="w">                          </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
- </span><span class="n">specified</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="kc">.false.</span><span class="p">,</span><span class="kc">.false.</span><span class="p">,</span><span class="w">
- </span><span class="n">nested</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="kc">.false.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w"> </span><span class="kc">.true.</span><span class="p">,</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">grib2</span><span class="w">
- </span><span class="p">/</span><span class="w">
-
- </span><span class="p">&amp;</span><span class="n">namelist_quilt</span><span class="w">
- </span><span class="n">nio_tasks_per_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
- </span><span class="n">nio_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="p">/</span><span class="w">
-</span></code></pre></div></div>
-<h3 id="计划任务">计划任务</h3>
-<p>之后crontab配合自动运行脚本，每晚0:45开始执行，利用12Z数据，积分步长120s，尝试做未来5天预报。
-自动运行脚本：
-``` bash
-#!/bin/sh</p>
-
-<p>LID=<code class="highlighter-rouge">date -d '1 days ago' +%Y%m%d</code>
-LID_NLS=<code class="highlighter-rouge">date -d '1 days ago' +%Y-%m-%d</code>
-LID_NLE=<code class="highlighter-rouge">date -d '-4 days ago' +%Y-%m-%d</code> # 5 days later, for forecast</p>
-
-<p>WPSDIR=/home/lzhenn/package/WPS
-WRFDIR=/home/lzhenn/array/lzhenn/WRFV3/run
-LOGFILE=/home/lzhenn/workspace/wrf-sdpwfe/sys-log/${LID}.log
-GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/12/31/WRF-shandong-setup/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -905,10 +599,10 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page22" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">23/90</span>
+          <span class="page_number ">23/91</span>
           
             <a href="/page24" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1259,7 +953,17 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2365,7 +2069,7 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -3045,6 +2749,10 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -3060,10 +2768,6 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -3108,7 +2812,7 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -3162,7 +2866,7 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3670,7 +3374,7 @@ GFSDIR=/home/lzhenn/array/lzhenn/gfs_fcst/$LID</p>
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

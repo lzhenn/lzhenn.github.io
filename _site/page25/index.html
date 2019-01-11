@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,264 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/12/30/tech-blog-github-page/">github技术博客搭建</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>还是要搬家啦～</p>
+
+<p>经历了东校实验室RAID1阵列双盘全坏，我的wordpress站点从2014到前几个月数百篇文章香消玉殒，遑论全校关端口更是让在外访问变得不可能。几个重要的系统搭建流程，目前看来只能靠并不靠谱的直觉和印象了。痛定思痛，为下一处站点做好相对周全的考虑，避免再次出现这类问题。</p>
+
+<p>需求端：</p>
+<ol>
+  <li>
+    <p>类wordpress，框架成熟，索引方便、样式美观，不需要个人太多调整</p>
+  </li>
+  <li>
+    <p>足够灵活，有单独页面，比如需要有scp/ftp push实时更新、daily refresh的预报图，以及支持脚本控制</p>
+  </li>
+  <li>
+    <p>安全，两个方面的，一是数据安全……我就没见过RAID一次坏俩的情况！！！二是防范政策风险，这也是为啥放弃在EC2上开443搭wordpress的原因，目前……22口都已经不稳定了，诶</p>
+  </li>
+</ol>
+
+<p>考虑供给端：</p>
+<ol>
+  <li>
+    <p>EC2+wordpress，足够灵活，10G也够用，但是政策风险太大，目前22访问都不稳定了，放弃</p>
+  </li>
+  <li>
+    <p>简书，不灵活，放弃</p>
+  </li>
+  <li>
+    <p>csdn，已经被边缘化了，放弃</p>
+  </li>
+  <li>
+    <p>github，嘿嘿，就是你了</p>
+  </li>
+</ol>
+
+<p>思想准备结束，开始搭建
+follow<a href="http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.htm">这个</a>来</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--orphan</span> gh-pages
+</code></pre></div></div>
+<p>语句出错，果然又是git版本问题……坑爹centos</p>
+
+<p>突然发现很多资料都是13-14年的，这段时间应该官方更新了不少，索性还是查官方库吧。</p>
+
+<p>https://pages.github.com/</p>
+
+<p>相当有效。</p>
+
+<p>然后costumize</p>
+
+<p>https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/</p>
+
+<p>模板找到了几个，Jekll安装似乎有点麻烦。</p>
+
+<ol>
+  <li>安装ruby，rubygems，安装gems过程中出错，运行中有这么一个提示</li>
+</ol>
+
+<blockquote>
+  <p>YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (&gt;= 2.0).</p>
+</blockquote>
+
+<blockquote>
+  <p>There are no versions of psych (&gt;= 0) compatible with your Ruby &amp; RubyGems. psych requires Ruby version &gt;= 2.2.2. The current ruby version is 1.8.</p>
+</blockquote>
+
+<p>真是操蛋的centos，不折腾了还是装在ubuntu下好了。</p>
+
+<p>ubuntu下一条apt-get install ruby直接搞定。</p>
+
+<p>安装jekyll的问题是找不到头文件，apt-get install ruby-dev，注意ubuntu下是dev后缀对应头文件。</p>
+
+<p>can’t find header files for ruby at /usr/lib/ruby/include/ruby.h</p>
+
+<p>之后</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$jekyll</span> new myblog
+</code></pre></div></div>
+<p>发现第一次执行非常慢，不过问题不大</p>
+
+<p>然后就是漫长的端口问题。最初以为4000口没有向外开放，折腾了一晚上ufw iptables这些防火墙设置都无效。最后看应用doc，发现应该是在jekyll里设置相应的内容，默认是localhost 127.0.0.1</p>
+
+<p>_config.yml文件下修改host为内网（公网）IP即可。</p>
+
+<p>找到一些不错的介绍防火墙的内容</p>
+
+<p>https://www.rosehosting.com/blog/how-to-set-up-a-firewall-with-iptables-on-ubuntu-and-centos/</p>
+
+<p>搞定内网调试，开始看官方文档调戏github</p>
+
+<p>https://help.github.com/articles/about-jekyll-themes-on-github/</p>
+
+<p>花了一下午时间找了个好模板</p>
+
+<p>https://github.com/Gaohaoyang/gaohaoyang.github.io</p>
+
+<p>直接开服务，出错</p>
+
+<blockquote>
+  <p>Could not locate Gemfile or .bundle/ directory</p>
+</blockquote>
+
+<p>不管三七二十一，把示例里面的文件丢过来</p>
+
+<p>之后新的错误</p>
+
+<blockquote>
+  <p>Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.</p>
+</blockquote>
+
+<blockquote>
+  <p>Dependency Error: Yikes! It looks like you don’t have jekyll-paginate or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-paginate’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!`</p>
+</blockquote>
+
+<p>按要求安装之后也不成功。google发现如下stackoverflow帖子</p>
+
+<p>https://stackoverflow.com/questions/35401566/dont-have-jekyll-paginate-or-one-of-its-dependencies-installed</p>
+
+<p>居然有github-pages这种东西……</p>
+
+<p>装完之后，拿掉gemfile即可。</p>
+
+<p>摸索修改之后，发现这个评论解决方案</p>
+
+<p>https://imsun.net/posts/gitment-introduction/</p>
+
+<p>问题是评论页面在我这里会混淆，所以单独设计了一个page给评论，就当留言板吧。</p>
+
+<p>参考</p>
+
+<p>http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/</p>
+
+<p>http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html（重要）</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/tech-blog-github-page/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2017/12/30/aws-port/">AWS网络问题解决</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2017-12-30
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#aws" title="Tag: aws" rel="tag">aws</a>&nbsp;
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>很郁闷今天去东校修复服务器阵列，发现另一块RAID盘也坏了，wordpress数据库几乎全部丢失，文章只有题目没有内容。没办法，只能随他去了。</p>
+
+<p>终归还是要迁移到AWS的，之前一直没有折腾好的手机端SS问题，今天yum update的时候发现无法连接yum源，怀疑是安全组策略问题，设置出站流量为所有流量后，成功解决这一问题，看起来限制入站流量就可以了嘛～</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2017/12/30/aws-port/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -1218,183 +1490,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/07/11/porting-dart-on-cori/">porting DART on CORI</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-07-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>When porting DART on CORI, the compiling process of CESM got error:</p>
-
-<p>cannot find -lmemkind</p>
-<pre>I checked my error log and found that the compiler cannot find some libraries. After loading memkind, the CESM component can be compiled successfully. It's strange because I cannot find command line like "<strong>module load memkind</strong>" in your related config files. I am working forward and will inform you later.</pre>
-<div>After building, when trying to run the model, got segment fault.</div>
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/07/11/porting-dart-on-cori/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/">AWS EC2搭建VPS</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-07-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#EC2" title="Tag: EC2" rel="tag">EC2</a>&nbsp;
-    
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>起名为Razortail，剃刀之尾，继续纪念我的D2青春。</p>
-
-<p>私钥需要好好保存。</p>
-
-<p>按这里的来：http://celerysoft.github.io/2016-01-15.html</p>
-
-<p>configure ss出问题，asciidoc找不到，挂–disable-documentation参数。</p>
-
-<p>之后又出现</p>
-
-<p>configure: error: Couldn’t find libudns. Try installing libudns-dev or udns-devel</p>
-
-<p>错误，看起来还是缺库，尝试yum安装，发现找不到这个lib。尝试添加remi的yum源：</p>
-
-<p>https://rpms.remirepo.net/wizard/</p>
-
-<p>重新尝试了centos7情景下先安装的yum库</p>
-
-<p>https://www.ifshow.com/centos-7-installation-and-configuration-shadowsocks/</p>
-
-<p>成功configure！</p>
-
-<p>安装后，运行ss-server出现libsodium.so.18 库找不到，从lib下ln到lib64解决，运行出现问题</p>
-
-<p>2017-07-03 14:34:01 ERROR: bind: Cannot assign requested address</p>
-
-<p>经查，居然要把config文件的ip设置为0.0.0.0，无语。</p>
-
-<p>之后可用，启动服务即可。</p>
-<pre>systemctl start ss.service
-systemctl enable ss.service</pre>
-<p>停止服务：</p>
-<pre>systemctl stop ss.service</pre>
-<p>取消shadowsocks开机自启</p>
-<pre>systemctl disable ss.service</pre>
-<p>查看日志文件</p>
-<pre>less /var/log/shadowsocks.log</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -1405,10 +1500,10 @@ systemctl enable ss.service</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page24" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">25/90</span>
+          <span class="page_number ">25/91</span>
           
             <a href="/page26" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -1759,7 +1854,17 @@ systemctl enable ss.service</pre>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2865,7 +2970,7 @@ systemctl enable ss.service</pre>
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -3545,6 +3650,10 @@ systemctl enable ss.service</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -3560,10 +3669,6 @@ systemctl enable ss.service</pre>
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -3608,7 +3713,7 @@ systemctl enable ss.service</pre>
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -3662,7 +3767,7 @@ systemctl enable ss.service</pre>
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -4170,7 +4275,7 @@ systemctl enable ss.service</pre>
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>

@@ -30,6 +30,18 @@
     </script>
 
 
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-131403040-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
 
 
 </head>
@@ -320,6 +332,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -332,6 +346,162 @@
         <small>Wind distinguishes a candle but energizes fire.</small>
         <hr>
         <ul>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/10/26/vim-e5-b0-86-e5-8c-85-e5-90-ab-e5-85-b3-e9-94-ae-e/">vim将包含关键词的多行进行复制替换</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-10-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>vim用了三年了，现在还是在基础命令的水平上。</p>
+
+<p>今天用到了个复杂的，记录下：</p>
+
+<p><strong>复制包含关键字的所有行</strong></p>
+
+<p><strong>%g/KeyWord/normal yyGp</strong></p>
+
+<p>对于包含 KeyWord 的任何行，执行 normal mode 命令：复制此行yy、跳到文件末尾G、粘贴p</p>
+
+<p><strong>%g/KeyWord/normal yyp</strong></p>
+
+<p>对于包含 KeyWord 的任何行，执行 normal mode 命令：复制此行yy、粘贴p<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>复制完后替换下一行的关键字（比如通过var1增加var2经常用到）</p>
+
+<p><strong>:g/\%(^\1$\n)\@&lt;=(.*)$/s/var1/var2/g</strong></p>
+
+<p>这个命令太复杂了，前面那堆符号啥意思回来再慢慢研究……</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/10/26/vim-e5-b0-86-e5-8c-85-e5-90-ab-e5-85-b3-e9-94-ae-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/10/26/mac-os-e7-bb-88-e7-ab-af-e4-b8-8b-e4-b8-8d-e8-83-b/">Mac OS终端下不能用home和end的解决</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-10-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>查了下，可以用bash的快捷键解决这个问题，并且bash快捷键适用范围是跨平台的哦</p>
+
+<p><strong>行首ctrl+A</strong></p>
+
+<p><strong>行尾ctrl+E</strong></p>
+
+<p>记录下其他有用的<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p> </p>
+<ul>
+	<li><strong><code>ctrl+u</code>: 删除光标左边所有</strong></li>
+	<li><strong><code>ctrl+k</code>: 删除光标右边所有</strong></li>
+	<li><strong><code>ctrl+xx</code>: 行首到当前光标替换</strong></li>
+</ul>
+<p> </p>
+
+<p>https://github.com/hokein/Wiki/wiki/Bash-Shell%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/10/26/mac-os-e7-bb-88-e7-ab-af-e4-b8-8b-e4-b8-8d-e8-83-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
             
               <li>
                 <h2>
@@ -404,201 +574,6 @@
                 <hr>
               </li>
             
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/24/setup-savioberkeley/">Setup SAVIO@Berkeley</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>SAVIO is Berkeley’s high performance clusters.</p>
-
-<p>http://research-it.berkeley.edu/services/high-performance-computing/user-guide</p>
-
-<ol>
-  <li>set up vim/project</li>
-</ol>
-
-<p>2.set up existing module</p>
-
-<p>#——— Load specific modules ————–
-module load intel/2013_sp1.4.211
-module load openmpi/1.6.5-intel</p>
-
-<p>#module load netcdf/4.3.2-intel-p System admin only provide C++ lib</p>
-
-<p>module load nco/4.4.6-intel-p
-module load ncview/2.1.2</p>
-
-<ol>
-  <li>set up NetCDF</li>
-</ol>
-
-<p>$nf-config –all</p>
-
-<p>$nc-config –all</p>
-
-<p>can be used to check the installation status.</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/24/setup-savioberkeley/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/">GFDL Spectral Idealized port on SAVIO</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
-    
-        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
-    
-        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>copy and paste to create</p>
-
-<p><strong>mkmf.template.savio.without_mpi</strong> in ./bin/</p>
-
-<p>change:</p>
-
-<p>FC CC MPI and NetCDF pathes.</p>
-
-<p>in ./full_dynamics, change:</p>
-
-<p><strong>compile_full_dynamics_on_savio.csh </strong> to fit savio (usually, just change platform name is okay).</p>
-
-<p>when compile, error:</p>
-<h5><span style="color: #ff0000;">ifort: error #10031 error: could not write to argument file</span></h5>
-<p>google it:</p>
-
-<p>https://software.intel.com/en-us/forums/intel-math-kernel-library/topic/281453</p>
-<blockquote>The MKL libraries are in different directories than the compiler runtime and other libraries. By default, the compiler will not search for libraries in the MKL <b>lib</b> directory. Use the <b>-mkl</b> compiler option for simple jobs, and use the MKL Link Line Advisor for more intricate jobs.</blockquote>
-<p>When I tried <strong>-mkl</strong> it doesn’t work and appeared another error.</p>
-
-<p>Fortunately, when I tried to module load ant TAB it, a module called</p>
-
-<p><strong>mkl/2013_sp1.4.211</strong></p>
-
-<p>just came into my eye.</p>
-
-<p>of course, use it! The problem really solved.</p>
-
-<p> </p>
-
-<p>So what is mkl?</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
         </ul>
 
 
@@ -609,10 +584,10 @@ module load ncview/2.1.2</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page34" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">35/90</span>
+          <span class="page_number ">35/91</span>
           
             <a href="/page36" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page90" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -963,7 +938,17 @@ module load ncview/2.1.2</p>
                           
                           
                           
-                            <li><a data-scroll href="archive/#y2018">2018 (67)</a></li>
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2018">2018 (69)</a></li>
                             
                           
                         
@@ -2069,7 +2054,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
                     
                       
                       
@@ -2749,6 +2734,10 @@ module load ncview/2.1.2</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
+                    
+                        <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
+                    
                         <li><a href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a></li>
                     
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
@@ -2764,10 +2753,6 @@ module load ncview/2.1.2</p>
                         <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
                     
                         <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
-                    
-                        <li><a href="/2018/09/13/mercurius-system/">Mercurius事件监听系统终于Online啦</a></li>
-                    
-                        <li><a href="/2018/09/11/ray-dalio-ted/">Thinking: TED talk from Ray Dalio</a></li>
                     
                 </ul>
             </div>
@@ -2812,7 +2797,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 CESM
                             </span>
-                            <span class="badge">38</span>
+                            <span class="badge">39</span>
                         </a>
                     </li>
                     
@@ -2866,7 +2851,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 NCL
                             </span>
-                            <span class="badge">13</span>
+                            <span class="badge">14</span>
                         </a>
                     </li>
                     
@@ -3374,7 +3359,7 @@ module load ncview/2.1.2</p>
                 Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>, and modified by <a href="https://github.com/Novarizark">Novarizark</a>.
             </span>
         </p>
     </div>
