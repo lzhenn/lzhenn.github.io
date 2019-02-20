@@ -85,10 +85,11 @@ type: page
 * content
 {:toc}
 ## SDPWFE  
-Shandong Peninsula Weather Forecasting Experiment **(For Research Use ONLY)**. 
+Shandong Peninsula Weather Forecasting Experiment **(For Research Use ONLY)**.
 
-Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.
+~~Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.~~
 
+<font color="red"><b>Due to computation resourses run out, we suspended the realtime forecast on Feb 20, 2019. The system will restart once the computional resourses are available.</b></font>
 ### Station Timeseries
 Please select the station for its timeseries.
 <select style="margin-bottom: 15px" id="select_ts" onchange="change_png(this)">
