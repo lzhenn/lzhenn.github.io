@@ -48,6 +48,9 @@ Resources and bookmarks for work, hobby, and others.
 
     Dr. Ruan's personal webpage, very nice CS-related resources in Chinese!
 
+* [Liaoxuefeng's Blog](https://www.liaoxuefeng.com/)
+
+    Mr. Liao's personal blog, very nice CS-related tech-blog in Chinese!
 
 #### Tools
 
