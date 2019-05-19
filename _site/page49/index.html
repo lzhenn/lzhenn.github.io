@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/">【vim, 已解决】使用vim批量插入/删除 行首行尾</a>
+                  <a class="post-link" href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/">【NOT solved】GFDL atmosphere dycore porting</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-13
+                        <i class="fa fa-calendar"></i>2015-09-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
     
   
 
@@ -389,7 +395,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
     
   
 
@@ -399,105 +407,52 @@
                 </div>
                 <div class="excerpt">
                     
-<p>设想这样一个应用情景，需要下载一批文件，不想写循环或者文件名分散或随机的情况，拿到了枚举list，可以下了吧。当然，我们还需要wget 以及重命名等任务。也就是说，我们需要在每一行前面或者后面加上关键词，比如wget空格，或者其他什么的</p>
+<p>Now we try to setup GFDL dycore model on our Neptune platform. Following steps has been used:</p>
 
-<p>vim可以很好解决这个问题，两个语句：</p>
+<ol>
+  <li>We exec the ./exp/fv/fms_runscript, then got the netcdf and mpi error. It seems that the model does not recognize the environmental variables associated with these lib. We add the flags directly to the compile sentence.</li>
+</ol>
+<pre>L35: $mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DUSE_LIMA -DSPMD -DLAND_BND_TRACERS" -a $sourcedir $pathnames /usr/local/include $sourcedir/shared/mpp/include $sourcedir/shared/include /home/yangsong3/soft/mpich314-intel/include /usr/netcdf-4331/include</pre>
+<p>And mkmf.template.ia64 file</p>
+<pre>LDFLAGS = -L/usr/local/lib -L/usr/netcdf-4331/lib -L/home/yangsong3/soft/mpich314-intel/lib #-lsma</pre>
+<p>We comment the “-lsma” flag because it is a flag specific to Cray machine.</p>
 
-<p><strong>行首加入 :%s/^/Hello, this is your word/</strong></p>
+<p>Next, we compile again, frequently got this</p>
+<pre>ifort:  '-i_dynamic' not supported</pre>
+<p>google it, got this</p>
 
-<p><strong>行尾加入 :%s/$/Bye, this is your word/</strong></p>
+<p>https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/486830</p>
+<blockquote>Regarding 1:<strong> -i_dynamic</strong> (the underscore form) was a option spelling used many many releases ago that was later mapped to <strong>-i-dynamic</strong> (the hyphen form) and then that form was depreciated in more current releases and it now maps to<strong> -shared-intel</strong></blockquote>
+<p>So, we change it to <strong>-shared-intel</strong>, no more warning.</p>
 
-<p>CTRL+V 可以很好解决局部问题</p>
+<p>However, when it compiles for a long time (5min), we got error again, lots of:</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_transmit_mpi.h:79: undefined reference to `mpi_recv_'</pre>
+<p>Then we change the ifort compile flag into mpif90, we got this</p>
+<pre>/home/yangsong3/soft/GFDL_atm_dycores/exp/fv/../../src/shared/mpp/include/mpp_io_misc.inc:116: undefined reference to `nf_inq_libvers_'</pre>
+<p>It really sucks<strong><span style="color: #339966;">.</span></strong></p>
 
-<p>或者</p>
+<p>#Last Edited on 20151004#</p>
 
-<p><strong>2-50行加入 :2,50 s/^/#/g</strong></p>
+<p><strong><span style="color: #339966;">We finally stop trying and turn to CAM dynamical core simulation and it works really smooth over the CESM construction.</span></strong></p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/09/13/e3-80-90vim-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/">【Shanbei News Notes】20150915</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-13
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/37042/">Trillenium takes virtual reality into online shopping Trillenium为网购带来虚拟现实体验</a></h2>
-<p><span id="A37042P86103S71040" class="sentence">“The current dot.com experience is pretty <span class="learning-all"><strong>sterile</strong>. 此处有“枯燥无味的”意思
-</span></span></p>
-
-<p>venture capical 风险投资（VC）</p>
+<p>#Last Edited on 20151114#</p>
 
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/13/e3-80-90shanbei-news-notes-e3-80-9120150621-2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/09/28/e3-80-90ongoing-e3-80-91gfdl-atmosphere-dycore-po/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/">【solved, git&github】URL problem</a>
+                  <a class="post-link" href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/">【CESM】B compset CAM5_PM设置</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-09-07
+                        <i class="fa fa-calendar"></i>2015-09-24
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -516,7 +471,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#ClimateChange" title="Category: ClimateChange" rel="category">ClimateChange</a>
     
   
 
@@ -533,7 +490,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#ClimateChange" title="Tag: ClimateChange" rel="tag">ClimateChange</a>
     
   
 
@@ -543,32 +502,283 @@
                 </div>
                 <div class="excerpt">
                     
-<p>When I pushed all ncl file in project to github, I got this error:</p>
-<pre>[yangsong3@localhost project]$ git push -u origin master
-Password:
-To https://Novarizark@github.com/Novarizark/project.git<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
- ! [rejected] master -&gt; master (non-fast-forward)
-error: failed to push some refs to 'https://Novarizark@github.com/Novarizark/pro ject.git'
-To prevent you from losing history, non-fast-forward updates were rejected
-Merge the remote changes before pushing again. See the 'Note about
-fast-forwards' section of 'git push --help' for details.</pre>
-<p>Google it, found the solution on Stackoverflow</p>
-<pre>You need to add the origin remote:
+<p>Since we don’t care about the chemical process when investigate the physical climate system, we hope to close the prognostic chemistry model in CAM5. For F compset, it is easy because a specific PM compset without active chemistry model has been provided by CESM. For B compset, there is no option like this.</p>
 
-    Delete the current one
+<p>Therefore, we try to capture the differences in FC5PM and FC5. We first see the differences in output flow after create_newcase command.</p>
+<pre>6c6
+&lt;   2000_CAM5_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5) (FC5)
+---
+&gt;   2000_CAM5%PM_CLM40%SP_CICE%PRES_DOCN%DOM_RTM_SGLC_SWAV (F_2000_CAM5_PM) (FC5PM)
+8c8
+&lt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
+---
+&gt;   CAM: CLM: RTM: CICE: DOCN: SGLC: SWAV: present day: cam5 physics: CAM prescribed modal aerosols: clm4.0 physics: clm4.0 Satellite phenology: prescribed cice: docn data mode:
+23c23
+&lt;   CAM_CONFIG_OPTS: -phys cam5
+---
+&gt;   CAM_CONFIG_OPTS: -phys cam5 -chem none
+58,63c58,63
+&lt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_mach_pes.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_build.xml
+&lt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_run.xml
+&lt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_CHEM/env_case.xml
+---
+&gt; Creating /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_mach_pes.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_build.xml
+&gt; Created /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_run.xml
+&gt; Locking file /WORK/sysu_hjkx_ys/L_Zealot/cesm/F/CAM5_NO_CHEM/env_case.xml</pre>
+<p>Clearly, a PM option has been added to the CAM5 component. We try put this full name to B compset.</p>
 
-    git remote rm origin
+<p>Things never get so smooth~</p>
+<pre>set_compset: no match for compset 2000_CAM5%PM_CLM40%SP_CICE_POP2_RTM_SGLC_SWAV
+            to see supported compsets issue</pre>
+<p>It seems that we have to change it in the specific configuration file.</p>
 
-    Add the git remote link ex: (https://user@bitbucket.org/test.git or https://github.com/user/test.git)
+<p>We then try to seek the differences in xml files. In <strong>env_build.xml,  </strong>we found an interesting differences:</p>
+<pre>40c40
+&lt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5_CTRL/bld" /&gt;
+---
+&gt; &lt;entry id="EXEROOT" value="/HOME/sysu_hjkx_ys/WORKSPACE/L_Zealot/cesm/F/F2000_F09_CAM5PM_CTRL/bld" /&gt;
+72c72
+&lt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5" /&gt;
+---
+&gt; &lt;entry id="CAM_CONFIG_OPTS" value="-phys cam5 -chem none" /&gt;</pre>
+<p>That is fine. We then add argument “<strong><span style="color: #ff0000;"><em>-chem none</em></span></strong>” to the env_build.xml in B2000CAM5 case, setup and build, smoothly!</p>
 
-    git remote add origin link
+<p>Now we come to the atm_in differences between FC5 and FC5PM</p>
+<pre>1,3c1,8
+&lt; &amp;aerosol_nl
+&lt; dust_emis_fact = 0.35D0
+&lt; soil_erod = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/dst/dst_0.9x1.25_c100121.nc'
+---
+&gt; &amp;aerodep_flx_nl
+&gt; aerodep_flx_cycle_yr = 2000
+&gt; aerodep_flx_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
+&gt; aerodep_flx_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
+&gt; aerodep_flx_specifier = 'bc_a1DDF', 'bc_c1DDF', 'pom_a1DDF', 'pom_c1DDF', 'soa_a1DDF', 'soa_c1DDF', 'soa_a2DDF', 'soa_c2DDF',
+&gt; 'dst_a1DDF', 'dst_c1DDF', 'dst_a3DDF', 'dst_c3DDF', 'bc_a1SFWET', 'bc_c1SFWET', 'pom_a1SFWET', 'pom_c1SFWET',
+&gt; 'soa_a1SFWET', 'soa_c1SFWET', 'dst_a1SFWET', 'dst_c1SFWET', 'dst_a3SFWET', 'dst_c3SFWET'
+&gt; aerodep_flx_type = 'CYCLICAL'
+10d14
+&lt; print_energy_errors = .false.
+16,34d19
+&lt; aer_drydep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
+&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
+&lt; aer_wetdep_list = 'bc_a1', 'dst_a1', 'dst_a3', 'ncl_a1', 'ncl_a2', 'ncl_a3', 'num_a1', 'num_a2', 'num_a3', 'pom_a1', 'so4_a1',
+&lt; 'so4_a2', 'so4_a3', 'soa_a1', 'soa_a2'
+&lt; clim_soilw_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/clim_soilw.nc'
+&lt; depvel_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/depvel_monthly.nc'
+&lt; depvel_lnd_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/regrid_vegetation.nc'
+&lt; exo_coldens_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/phot/exo_coldens.nc'
+&lt; ext_frc_specifier = 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_elev_2000_c090726.nc',
+&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_elev_2000_c090726.nc',
+&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_elev_2000_c090726.nc',
+&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_elev_2000_c090726.nc',
+&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_elev_2000_c090726.nc',
+&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_elev_2000_c090726.nc',
+&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_elev_2000_c090726.nc'
+&lt; ext_frc_type = 'CYCLICAL'
+&lt; fstrat_list = ' '
+&lt; rsf_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/RSF_GT200nm_v3.0_c080416.nc'
+&lt; season_wes_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart/dvel/season_wes.nc'
+36,54d20
+&lt; srf_emis_specifier = 'DMS -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/aerocom_mam3_dms_surf_2000_c090129.nc',
+&lt; 'SO2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_surf_2000_c090726.nc',
+&lt; 'SOAG -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_soag_1.5_surf_2000_c100217.nc',
+&lt; 'bc_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_surf_2000_c090726.nc',
+&lt; 'num_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_surf_2000_c090726.nc',
+&lt; 'num_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_surf_2000_c090726.nc',
+&lt; 'pom_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_surf_2000_c090726.nc',
+&lt; 'so4_a1 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_surf_2000_c090726.nc',
+&lt; 'so4_a2 -&gt; /HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_surf_2000_c090726.nc'
+&lt; srf_emis_type = 'CYCLICAL'
+&lt; tracer_cnst_cycle_yr = 2000
+&lt; tracer_cnst_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mozart_aero/oxid'
+&lt; tracer_cnst_file = 'oxid_1.9x2.5_L26_1850-2005_c091123.nc'
+&lt; tracer_cnst_filelist = 'oxid_1.9x2.5_L26_clim_list.c090805.txt'
+&lt; tracer_cnst_specifier = 'O3','OH','NO3','HO2'
+&lt; tracer_cnst_type = 'CYCLICAL'
+&lt; use_cam_sulfchem = .false.
+&lt; xactive_prates = .false.
+&lt; xs_long_file = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/waccm/phot/temp_prs_GT200nm_jpl06_c080930.nc'
+61d26
+&lt; flbc_list = ' '
+114c79
+&lt; cam_chempkg = 'trop_mam3'
+---
+&gt; cam_chempkg = 'none'
+137a103,114
+&gt; &amp;prescribed_aero_nl
+&gt; prescribed_aero_cycle_yr = 2000
+&gt; prescribed_aero_datapath = '/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/chem/trop_mam/aero'
+&gt; prescribed_aero_file = 'mam3_1.9x2.5_L30_2000clim_c130319.nc'
+&gt; prescribed_aero_specifier = 'num_c1', 'bc_c1', 'dst_c1', 'ncl_c1', 'pom_c1', 'so4_c1', 'soa_c1', 'num_c2',
+&gt; 'ncl_c2', 'so4_c2', 'soa_c2', 'num_c3', 'dst_c3', 'ncl_c3', 'so4_c3', 'num_a1_logm',
+&gt; 'bc_a1_logm', 'dst_a1_logm', 'ncl_a1_logm', 'pom_a1_logm', 'so4_a1_logm', 'soa_a1_logm', 'num_a2_logm', 'ncl_a2_logm',
+&gt; 'so4_a2_logm', 'soa_a2_logm', 'num_a3_logm', 'dst_a3_logm', 'ncl_a3_logm', 'so4_a3_logm', 'num_a1_logv', 'bc_a1_logv',
+&gt; 'dst_a1_logv', 'ncl_a1_logv', 'pom_a1_logv', 'so4_a1_logv', 'soa_a1_logv', 'num_a2_logv', 'ncl_a2_logv', 'so4_a2_logv',
+&gt; 'soa_a2_logv', 'num_a3_logv', 'dst_a3_logv', 'ncl_a3_logv', 'so4_a3_logv'
+&gt; prescribed_aero_type = 'CYCLICAL'
+&gt; /
+150,158c127,135
+&lt; mode_defs = 'mam3_mode1:accum:=', 'A:num_a1:N:num_c1:num_mr:+',
+&lt; 'A:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
+&lt; 'A:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'A:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
+&lt; 'A:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'A:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
+&lt; 'mam3_mode2:aitken:=', 'A:num_a2:N:num_c2:num_mr:+',
+&lt; 'A:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'A:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
+&lt; 'A:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
+&lt; 'A:num_a3:N:num_c3:num_mr:+', 'A:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
+&lt; 'A:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'A:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
+---
+&gt; mode_defs = 'mam3_mode1:accum:=', 'N:num_a1:N:num_c1:num_mr:+',
+&gt; 'N:so4_a1:N:so4_c1:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:pom_a1:N:pom_c1:p-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocpho_rrtmg_c101112.nc:+',
+&gt; 'N:soa_a1:N:soa_c1:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+', 'N:bc_a1:N:bc_c1:black-c:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/bcpho_rrtmg_c100508.nc:+',
+&gt; 'N:dst_a1:N:dst_c1:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+', 'N:ncl_a1:N:ncl_c1:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc',
+&gt; 'mam3_mode2:aitken:=', 'N:num_a2:N:num_c2:num_mr:+',
+&gt; 'N:so4_a2:N:so4_c2:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc:+', 'N:soa_a2:N:soa_c2:s-organic:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ocphi_rrtmg_c100508.nc:+',
+&gt; 'N:ncl_a2:N:ncl_c2:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc', 'mam3_mode3:coarse:=',
+&gt; 'N:num_a3:N:num_c3:num_mr:+', 'N:dst_a3:N:dst_c3:dust:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/dust4_rrtmg_c090521.nc:+',
+&gt; 'N:ncl_a3:N:ncl_c3:seasalt:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/ssam_rrtmg_c100508.nc:+', 'N:so4_a3:N:so4_c3:sulfate:/HOME/sysu_hjkx_ys/WORKSPACE/cesm/input/atm/cam/physprops/sulfate_rrtmg_c080918.nc'
+191,193d167
+&lt; &amp;wetdep_inparm
+&lt; gas_wetdep_list = 'H2O2','SO2'
+&lt; /</pre>
+<p>Such a lot differences in input files as we expected.</p>
 
-    git pull origin master (or other branch)</pre>
-<p>It is the Username@github made the bad result. So there should be other ways to solve the 403 or ssh error.</p>
+<p>We test the <strong>atm_in</strong> differences between B with / without “-chem none” argument, everything goes fine!</p>
+
+<p>Now we run the model for several months to test the final results.</p>
+
+<p>Configuration:</p>
+
+<p>B2000_CAM5</p>
+
+<p>0.9x1.25</p>
+
+<p>Tianhe-2: 192PEs</p>
+
+<p> </p>
+
+<p>output with” phys cam5 -chem none”:</p>
+<pre> -rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:10</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-01.nc
+-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 299965072 <strong>Sep 24 15:30</strong> B_NO_CHEM_CAM5_TEST.cam.h0.0001-02.nc
+
+</pre>
+<p>output without “phys cam5”:</p>
+<pre>-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:23</strong> B_CHEM_CAM5_TEST.cam.h0.0001-01.nc
+-rw-r--r-- 1 sysu_hjkx_ys sysu_hjkx 305056100 <strong>Sep 24 15:49</strong> B_CHEM_CAM5_TEST.cam.h0.0001-02.nc</pre>
+<p>So without the aerosol active, it saves (49-23)-(30-10) = 6 min in each month. About 6/26*100% = 23% time saved.</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/09/07/e3-80-90solved-gitgithub-e3-80-91/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/09/24/e3-80-90cesm-e3-80-91b-compset-cam5_pm-e8-ae-be-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/09/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91prefe/">【已解决】Preferable PE layers for BC5 compset on tianhe2</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-09-24
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/09/QQ图片20150924162913.jpg"><img class="alignnone size-full wp-image-728" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/09/QQ图片20150924162913.jpg" alt="QQ图片20150924162913" width="582" height="234" /></a></p>
+
+<p>72 #Change PE layers
+73 ./xmlchange NTASKS_ATM=480
+74 ./xmlchange NTHRDS_ATM=1
+75 ./xmlchange ROOTPE_ATM=0
+76
+77 ./xmlchange NTASKS_LND=240
+78 ./xmlchange NTHRDS_LND=1
+79 ./xmlchange ROOTPE_LND=120
+80
+81 ./xmlchange NTASKS_ICE=120
+82 ./xmlchange NTHRDS_ICE=1
+83 ./xmlchange ROOTPE_ICE=0
+84
+85 ./xmlchange NTASKS_OCN=96
+86 ./xmlchange NTHRDS_OCN=1
+87 ./xmlchange ROOTPE_OCN=480
+88
+89 ./xmlchange NTASKS_CPL=120
+90 ./xmlchange NTHRDS_CPL=1
+91 ./xmlchange ROOTPE_CPL=360
+92
+93 ./xmlchange NTASKS_GLC=240
+94 ./xmlchange NTHRDS_GLC=1
+95 ./xmlchange ROOTPE_GLC=0
+96
+97 ./xmlchange NTASKS_ROF=120
+98 ./xmlchange NTHRDS_ROF=1
+99 ./xmlchange ROOTPE_ROF=240
+100
+101 ./xmlchange NTASKS_WAV=120
+102 ./xmlchange NTHRDS_WAV=1
+103 ./xmlchange ROOTPE_WAV=360</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/24/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91prefe/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -583,10 +793,10 @@ fast-forwards' section of 'git push --help' for details.</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page48" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">49/91</span>
+          <span class="page_number ">49/93</span>
           
             <a href="/page50" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -602,6 +812,34 @@ fast-forwards' section of 'git push --help' for details.</pre>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1973,6 +2211,14 @@ fast-forwards' section of 'git push --help' for details.</pre>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2018,14 +2264,21 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2046,14 +2299,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2172,7 +2418,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2214,7 +2460,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2235,7 +2481,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2298,7 +2544,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2466,7 +2712,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2720,6 +2966,20 @@ fast-forwards' section of 'git push --help' for details.</pre>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2733,6 +2993,16 @@ fast-forwards' section of 'git push --help' for details.</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2742,16 +3012,6 @@ fast-forwards' section of 'git push --help' for details.</pre>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2769,7 +3029,16 @@ fast-forwards' section of 'git push --help' for details.</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2779,15 +3048,6 @@ fast-forwards' section of 'git push --help' for details.</pre>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2805,7 +3065,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3138,7 +3398,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3192,7 +3452,7 @@ fast-forwards' section of 'git push --help' for details.</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3290,6 +3550,33 @@ fast-forwards' section of 'git push --help' for details.</pre>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/08/23/e3-80-90gitgithub-e3-80-91the-first-move-on-git-p/">【git&github】the first move on git push</a>
+                  <a class="post-link" href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/">【solved, git&github】first move to push my project</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-23
+                        <i class="fa fa-calendar"></i>2015-09-06
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,6 +376,8 @@
   <i class="fa fa-th-list"></i>
   
     
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
         <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
     
   
@@ -389,6 +395,8 @@
   <i class="fa fa-tags"></i>
   
     
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
         <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
     
   
@@ -399,51 +407,132 @@
                 </div>
                 <div class="excerpt">
                     
-<p>Finally we come to the deadline of data science course project on coursera. In fact, most of the questions are very easy to answer or cope with, except one aiming at try the git push. I got some problems when test this:</p>
+<p>Try to push paperhub project on Lab server to github. The following are steps and barriers when I did this.</p>
 
-<p>As the question requests, I created a file named “HelloWorld.md” and write something in it. When I type the command</p>
-<pre>&gt;git push</pre>
-<p>Waiting for about 1 min, an error occors:</p>
+<ol>
+  <li>
+    <p>create a new repo on github, same name as “paperhub”</p>
+  </li>
+  <li>
+    <p>Try one file down_enw.php</p>
+  </li>
+</ol>
+<pre><strong>$git init</strong> # to regard paperhub dir as a git repo
+<strong>$git add down_enw.php
+$git commit -m "first commit"
+$git push origin master</strong></pre>
+<p>Get error:</p>
+<pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git push origin master
+error: The requested URL returned error: <span class="m">403</span> Forbidden <span class="k">while</span> accessing https://github.com/Novarizark/paperhub.git
 
-<p><strong>error:src refspec master does not match any</strong></p>
+fatal: HTTP request failed</code></pre>
+<p>Follow this:</p>
 
-<p>Then I found this was because no file in the dir yet. The solution is as follow:</p>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td class="gutter"></td>
-<td class="code">
-<div class="container">
-<div class="line number1 index0 alt2"><code class="shell functions">touch</code> <code class="shell plain">README</code></div>
-<div class="line number2 index1 alt1"><code class="shell plain">git add README </code></div>
-<div class="line number3 index2 alt2"><code class="shell plain">git commit -m </code><code class="shell string">'first commit'</code></div>
-<div class="line number4 index3 alt1"><code class="shell plain">git push origin master</code></div>
-</div></td>
-</tr>
-</tbody>
-</table>
-<p>Of course, we don’t need README, then I trid git add, commit and push commands, it works!</p>
+<p><a href="http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/">http://jim-y.me/linux/2015/04/01/setting-up-git-for-error-403-forbidden/</a>
+<a href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed"> http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed</a></p>
 
-<p>Through, I am not really understand the exact reason.</p>
+<p>Change:</p>
+<pre>$vi .git/config
+url = https://<strong>Novarizark@</strong>github.com/Novarizark/paperhub.git
+:wq</pre>
+<p>Another error:</p>
+<pre><code>(gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display:</code></pre>
+<p>Follow this:
+<a href="http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#">http://stackoverflow.com/questions/16077971/git-push-produces-gtk-warning#</a></p>
+<pre><code>unset SSH_ASKPASS</code></pre>
 
-<p>Referrence:</p>
-
-<p>http://www.open-open.com/lib/view/open1366080269265.html#_label0</p>
+<p>Done!</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/08/23/e3-80-90gitgithub-e3-80-91the-first-move-on-git-p/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/09/06/e3-80-90solved-gitgithub-e3-80-91first-move-to-pu/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/08/19/e3-80-90shanbei-news-notes-e3-80-9120150819/">【Shanbei News Notes】20150819</a>
+                  <a class="post-link" href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/">【solved】Teamserver huge .xsession-error problem</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-19
+                        <i class="fa fa-calendar"></i>2015-09-04
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>A few days ago I have found that the available disk space on Teamserver was shrunk to 60%. This is very weird because most datasets on the machine were uploaded by me and I know they only occupy about 30% in 22TB. Once I thought they might come from one of my teammate, uploading CMIP5 data or something. However, when I checked individual directory in home, I found nothing. Then I checked “ll -ah” in home. Holly shit! One file named “.xsession-error” takes up about 6TB, and still enlarging! So I google it and found it might be a bug of Linux, regardless of the distribution. Many people delete it or use file permission to restrict its expansion, without any source seeking. I followed them, while nothing happened to the available size from df command. I used DirStat and the original software to check this, nothing.
+What the fuck! I just let it alone and do my staff until I found there is only 2TB available today. Another similar file named as “.xsession-error.XXXXX” did the evil things. In fact this file was a text file, thus I “tail” it and found the flowing statement:</p>
+<pre>sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!
+Error while reading SSL packet
+keep alive recv failed!
+TCP_KEEP_ALIVE_SOCK_ENVENT
+sslvpn_read_packet: SSL_read failed!</pre>
+<p>VPN! So it must be the vpn soft which aimed at connecting TH-2 that wrongly redirect the std out flow to this poor file and made the shit. Without any hesitate, I uninstall the VPN soft. Everything’s back to normal.</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/09/04/e3-80-90solved-e3-80-91teamserver-huge-xsession-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/">【Shanbei News Notes】20150826</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-08-26
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -493,99 +582,13 @@
                 </div>
                 <div class="excerpt">
                     
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/35983/">New US Rules Promise Deep Cuts in Methane Emissions 最新的美国法规承诺大幅减少甲烷排放</a></h2>
-<p>fracking wells 水力压裂井</p>
+<p><span id="A36247P260670S229194" class="sentence"> and certainly I’m asking is how, just how this gets <strong>stemmed</strong></span></p>
 
-<p>volatile organic compounds VOC</p>
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/35971/">Hackers dump data from cheating website Ashley Madison online: reports 黑客从偷腥网站AsheleyMadison导出数据</a></h2>
-<p>cheating spouses webstie 已婚人士偷情网站</p>
-
-<p>follow through on 完成</p>
-
-<p>sprout up 涌现</p>
-
-<p> </p>
+<p>stem是茎的意思，也有“起源于”的意思</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/08/19/e3-80-90shanbei-news-notes-e3-80-9120150819/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2015/08/14/e3-80-90solved-r-e3-80-91problems-during-installi/">【solved, R】problems during installing devtools</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-08-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
-    
-        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>&nbsp;
-    
-        <a href="/category/#R" title="Category: R" rel="category">R</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
-    
-        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>&nbsp;
-    
-        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Finished installing R and Rstudio, we come to the installation of Rtools. (Please check the <a href="https://class.coursera.org/datascitoolbox-031/lecture/55">tutorial vedio</a> in coursera) It seems all went fine before installing devtools. However, typing</p>
-<pre>&gt;install.packages("devtools")</pre>
-<p>really took a long time to download a series of packages. When finished, a pop-up info indicated an error: <strong>“https://class.coursera.org/datascitoolbox-031/lecture/55”</strong></p>
-
-<p>google it, and we found this would work:</p>
-<pre>Sys.setlocale('LC_ALL','C')</pre>
-
-<p>Reasons are complex, here post the reference:
-http://cos.name/cn/topic/157794/</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2015/08/14/e3-80-90solved-r-e3-80-91problems-during-installi/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/08/26/e3-80-90shanbei-news-notes-e3-80-9120150826/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -600,10 +603,10 @@ http://cos.name/cn/topic/157794/</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page51" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">52/91</span>
+          <span class="page_number ">52/93</span>
           
             <a href="/page53" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -619,6 +622,34 @@ http://cos.name/cn/topic/157794/</p>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1990,6 +2021,14 @@ http://cos.name/cn/topic/157794/</p>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2035,14 +2074,21 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2063,14 +2109,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2189,7 +2228,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2231,7 +2270,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2252,7 +2291,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2315,7 +2354,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2483,7 +2522,7 @@ http://cos.name/cn/topic/157794/</p>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2737,6 +2776,20 @@ http://cos.name/cn/topic/157794/</p>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2750,6 +2803,16 @@ http://cos.name/cn/topic/157794/</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2759,16 +2822,6 @@ http://cos.name/cn/topic/157794/</p>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2786,7 +2839,16 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2796,15 +2858,6 @@ http://cos.name/cn/topic/157794/</p>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2822,7 +2875,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3155,7 +3208,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3209,7 +3262,7 @@ http://cos.name/cn/topic/157794/</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3307,6 +3360,33 @@ http://cos.name/cn/topic/157794/</p>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

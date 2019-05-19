@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/15/gfdl-moist-core-on-savio/">GFDL MOIST CORE on SAVIO</a>
+                  <a class="post-link" href="/2017/05/08/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/">团队服务器升级ssh</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-15
+                        <i class="fa fa-calendar"></i>2017-05-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
     
   
 
@@ -389,7 +395,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
     
   
 
@@ -399,34 +407,38 @@
                 </div>
                 <div class="excerpt">
                     
-<p>follow the dry core procedure, the first problem we meet is</p>
+<p>注意先解决依赖关系，编译参数如下：</p>
 
-<p><strong>#error: unknown fpp directive.</strong></p>
-<p class="p1"><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/shared/include/fms_platform.h</span></p>
-<p class="p1">and give two space before the first _, done.</p>
-<p class="p1">Next, the model was compiled smoothly, when it hit the link process, throw a problem</p>
-<p class="p1"><strong><span class="s1">atmos_model.o: In function `atmos_model_init':</span></strong></p>
-<p class="p1"><strong><span class="s1">/global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90:290: undefined reference to `omp_set_num_threads_'</span></strong></p>
-<p class="p1">compared  with dry core, comment corresponding lines</p>
-<p class="p1"><strong><span class="s1">vi /global/home/groups/co_aiolos/models/spec_moist_idl_gfdl_model/src/atmos_solo/atmos_model.F90</span></strong></p>
-<p class="p1">IT WORKS!</p>
-<p class="p1"></p>
-<p class="p1"></p>
+<p>./configure –sysconfdir=/etc/ssh  –with-zlib –with-md5-passwords</p>
+
+<p>make</p>
+
+<p>make install</p>
+
+<p>然后重启sshd服务，基本没什么大问题。</p>
+
+<p>后发现X11 forwarding不可用，调整/etc/sshd_config X11Forwarding为yes还是不行。</p>
+
+<p>最后发现之前删掉了hosts文件，加入</p>
+
+<p>127.0.0.1 localhost.locoldoman localhost</p>
+
+<p>后成功</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/15/gfdl-moist-core-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/05/08/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/">捕捉shell执行的状态码</a>
+                  <a class="post-link" href="/2017/05/08/e5-8e-9f-e6-b2-b9-e6-8a-95-e6-9c-ba/">原油投机</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-15
+                        <i class="fa fa-calendar"></i>2017-05-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -472,26 +484,32 @@
                 </div>
                 <div class="excerpt">
                     
-<p>如果采用shell嵌套调用的方式执行一个复杂的自动化脚步，比如编译运行model，编译的过程很容易出错，那么外层脚本应考虑到这个问题并且在编译出错的情况下退出程序。这时上一条命令的状态码就派上用场了。</p>
-<pre>if [ $? -eq 0 ]        [$? 就是上一条命令执行的状态码]
-        then  
-            echo $i
-        fi</pre>
+<p>NASDAQ OIL</p>
+
+<p>仓位：1200*0.7=840</p>
+
+<p>开仓：300 @ 5.00</p>
+
+<p>止损：4.80</p>
+
+<p>第一加仓位：5.20 止损提升至5.05</p>
+
+<p>止盈：6.0</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/15/e6-8d-95-e6-8d-89shell-e6-89-a7-e8-a1-8c-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/05/08/e5-8e-9f-e6-b2-b9-e6-8a-95-e6-9c-ba/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/14/full-stack-development-notebook/">full-stack development [notebook]</a>
+                  <a class="post-link" href="/2017/03/31/e4-bc-81-e4-b8-9a-e9-9b-86-e5-90-88-ef-bc-9a-e6-8/">企业集合：招聘大气科学毕业生的工业界职位</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-14
+                        <i class="fa fa-calendar"></i>2017-03-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -510,7 +528,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
     
   
 
@@ -527,7 +545,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
     
   
 
@@ -537,10 +555,48 @@
                 </div>
                 <div class="excerpt">
                     
+<p>远景能源</p>
+
+<p>坐标：上海</p>
+
+<p>核心业务：智能风机</p>
+
+<p>印象：行业内一线企业，技术优势明显，员工待遇高（2015）</p>
+
+<p>招聘实例</p>
+
+<p><strong>工作内容：</strong>
+1、 负责提升数值气象模式对于风速模拟、预报的准确性；
+2、 负责推动中尺度数据在风场设计中的应用。</p>
+
+<p><strong>职位要求：</strong>
+1、大气科学类硕士及以上学历；
+2、专业知识扎实，对大气动力学有深入理解以及很强的应用能力；
+3、熟练掌握Linux系统操作命令和Shell编程，熟练运用WRF模式，有模式动力或资料同化科研经历者优先；
+4、至少熟练掌握MATLAB、NCL等数据处理工具中的一种 ，掌握常见机器学习算法(如Neural Network, SVM等)者优先。</p>
+
+<p>http://recruit.envisioncn.com/join_us/position</p>
+
+<p>http://www.envisioncn.com/</p>
+
+<p>明阳风电</p>
+<table class="job_info" border="0" width="100%" cellspacing="0">
+<tbody>
+<tr>
+<td class="job_info1" width="15%">计算流体力学工程师</td>
+<td width="24%">计算流体力学/动力学/大气科学</td>
+</tr>
+</tbody>
+</table>
+<p>http://www.mywind.com.cn/</p>
+
+<p>国睿集团</p>
+
+<p>http://www.glarun.com/company.asp</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/14/full-stack-development-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/03/31/e4-bc-81-e4-b8-9a-e9-9b-86-e5-90-88-ef-bc-9a-e6-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -555,10 +611,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page28" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">29/91</span>
+          <span class="page_number ">29/93</span>
           
             <a href="/page30" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -574,6 +630,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1945,6 +2029,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -1990,14 +2082,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2018,14 +2117,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2144,7 +2236,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2186,7 +2278,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2207,7 +2299,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2270,7 +2362,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2438,7 +2530,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2692,6 +2784,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2705,6 +2811,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2714,16 +2830,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2741,7 +2847,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2751,15 +2866,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2777,7 +2883,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3110,7 +3216,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3164,7 +3270,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3262,6 +3368,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

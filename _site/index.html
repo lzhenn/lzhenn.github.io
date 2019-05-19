@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a>
+                  <a class="post-link" href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-12-31
+                        <i class="fa fa-calendar"></i>2019-04-15
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>&nbsp;
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -389,7 +395,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -399,40 +407,24 @@
                 </div>
                 <div class="excerpt">
                     
-<p>Wenxiu Zhong met PopLatLon error:</p>
+<p>这部片子在大陆是17年4月7日上映的，到我昨天看过刚好两年。在九十年代后港片落寞的时代，这种写实题材的剧本却依然铿锵有力。</p>
 
-<blockquote>
-  <p>ls: cannot access map_*: No such file or directory
-(0) create_rmpPopFileName: file not recognized/found: map_gx1v6_to_1x1d_bilin_da_100716.nc
-(0) create_rmpPopFileName: dir searched: ./</p>
-</blockquote>
-
-<p>This is actually the system cannot find the pop remap weight file. The file info can be found from the <a href="https://www.ncl.ucar.edu/Applications/popwgtfiles.shtml">NCL official site</a>, which is actually downloaded from the CESM official svn site.</p>
-
-<p>After downloaded the files, export related environmental variable in <code class="highlighter-rouge">~/.bashrc</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">export </span><span class="nv">NCL_POP_REMAP</span><span class="o">=</span><span class="nv">$DIR_TO_POP_REMAP_FILE</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">source ~/.bashrc</code> and re-run the script.</p>
-
-<p><strong>Updated 2018-12-31</strong></p>
-
+<p><strong>Updated 2019-04-15</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/12/31/ncl-pop-regrid/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2019/04/15/mad-world-thinking/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a>
+                  <a class="post-link" href="/2019/02/04/card-play-life/">人生是一场牌局</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-12-27
+                        <i class="fa fa-calendar"></i>2019-02-04
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -451,7 +443,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>&nbsp;
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -468,7 +462,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -478,55 +474,48 @@
                 </div>
                 <div class="excerpt">
                     
-<p>YT met segmentation fault error when using similar tech as in the <a href="https://github.com/Novarizark/project/tree/master/SRC_MOD_LIB-2017/SourceMods-Nudging/src.cam">UV Nudging experiment</a> to conduct TP heatforcing experiments.</p>
+<p>人生其实就像打牌。</p>
 
-<p>The segfault comes from the user-added call in <code class="highlighter-rouge">phypkg.F90</code>:</p>
+<p>每个人生来，都有自己的初始手牌，和初始筹码。幸亦不幸，个体的一生，对初始条件，以及早期发展路径是高度敏感的。</p>
 
-<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="k">call</span><span class="w"> </span><span class="n">infld</span><span class="p">(</span><span class="s1">'tp'</span><span class="p">,</span><span class="w"> </span><span class="n">fh_tpmask</span><span class="p">,</span><span class="w"> </span><span class="s1">'lon'</span><span class="p">,</span><span class="w"> </span><span class="s1">'lat'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">pcols</span><span class="p">,</span><span class="w"> </span><span class="n">begchunk</span><span class="p">,</span><span class="w"> </span><span class="n">endchunk</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
-                </span><span class="n">tpmask</span><span class="p">,</span><span class="w"> </span><span class="n">found</span><span class="p">,</span><span class="w"> </span><span class="n">grid_map</span><span class="o">=</span><span class="s1">'PHYS'</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>从胎儿、婴儿、幼儿、一直到少儿，在这长达十几年的时间里，无论个体的基因组、营养发育、家庭财富等硬手牌，还是父母关系、家庭教育、社交环境等软实力，这一切，完全由父母、家庭、和大的时代与社会背景决定。在个体心智萌蘖之前，无法对自己的牌局做任何掌控。</p>
 
-<p>According to <a href="https://en.wikipedia.org/wiki/Segmentation_fault">wikipedia</a>:</p>
-<blockquote>
-  <p>In computing, a segmentation fault (often shortened to segfault) or access violation is a fault, or failure condition, raised by hardware with memory protection, notifying an operating system (OS) <strong>the software has attempted to access a restricted area of memory (a memory access violation)</strong>.</p>
-</blockquote>
+<p>巴菲特说，这是每一个人的“卵巢彩票”。</p>
 
-<p>We believe the error comes from the <code class="highlighter-rouge">infld</code> reading process. Somehow the program violates the memory access limit, such as using double to read byte, or reading after End-of-File.</p>
+<p>当个体心智开始成长，会慢慢意识到，时间在不断向我们发牌，而到手的牌时好时坏，这是运气，这是概率中无法控制的部分。</p>
 
-<p>However, the original code is copied from a previous F compset run, which was smoothly conducted. So we re-check the ad-hoc part:</p>
+<p>而同时，只要我们运气不至于差到，在接受书本教育前就爆仓，教育的出现，会使得初始条件和前期路径的依赖权重，开始降低。</p>
 
-<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">      </span><span class="c1">!*** MOD START: infld TP mask and heating file</span><span class="w">
-      </span><span class="n">fh_tpmask</span><span class="o">=&gt;</span><span class="n">tpmask_file_get_id</span><span class="p">()</span><span class="w">
-      </span><span class="k">call</span><span class="w"> </span><span class="n">infld</span><span class="p">(</span><span class="s1">'tp'</span><span class="p">,</span><span class="w"> </span><span class="n">fh_tpmask</span><span class="p">,</span><span class="w"> </span><span class="s1">'lon'</span><span class="p">,</span><span class="w"> </span><span class="s1">'lat'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">pcols</span><span class="p">,</span><span class="w"> </span><span class="n">begchunk</span><span class="p">,</span><span class="w"> </span><span class="n">endchunk</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w">
-              </span><span class="n">tpmask</span><span class="p">,</span><span class="w"> </span><span class="n">found</span><span class="p">,</span><span class="w"> </span><span class="n">grid_map</span><span class="o">=</span><span class="s1">'PHYS'</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>接受教育就如同个体开挂，如同个体人生漫漫的牌局中，能够并行运作一台线下人生模拟器。教育会告诉个体，这个世界有哪些牌存在；手上拿到哪组牌，对应怎样的策略，可以规避爆仓的风险，或者拥有最大的胜率。</p>
 
-<p>The thing is that we read the file info (get the file handle) in a function from another module (<code class="highlighter-rouge">cam_initfiles.F90</code>), and use the pointer to get the function handle in <code class="highlighter-rouge">phypkg.F90</code>. In ` cam_initfiles.F90` we define:</p>
+<p>教育更大的意义在于能够让个体启动元思考，或者说，对思考的思考。这是由思维和文字的递归性所决定的：既有的思维印痕通过文字而得到记录和传播，而个体对文字的吸纳理解又可以启动新的思维。</p>
 
-<div class="language-fortran highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="w"> </span><span class="n">tpmask_file_get_id</span><span class="p">()</span><span class="w">
-  </span><span class="k">type</span><span class="p">(</span><span class="n">file_desc_t</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">tpmask_file_get_id</span><span class="w">
-  </span><span class="n">tpmask_file_get_id</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fh_tpmask</span><span class="w">
-</span><span class="k">end</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">tpmask_file_get_id</span><span class="w">
+<p>聪明的你肯定从小就知道，不能把燃着的鞭炮丢到充满沼气的化粪池。因为你学过CH4，了解它的性质，并且，你懂得从第一性原理(first principle)出发进行结果推理。瞧，这就是风控。</p>
 
-</span></code></pre></div></div>
+<p>所以接受教育，对个体，相当于获得了这场牌局的外挂：人生模拟器。更牛逼的地方在于，这个模拟器既是数据驱动的，也是动力驱动的。不过，动力驱动的模块，更难被训练和加强。黑格尔说：“人类从历史上学到的唯一教训，就是人类无法从历史上学到教训。”不仅从种群尺度，到个体尺度，往往也适用。</p>
 
-<p><strong>Updated 2018-12-27</strong></p>
+<p>接受教育，利用主观能动性和思维去驱动自己的人生模拟器，试图把手上的牌打好，把每次下注应押的筹码计算好，这叫牌技，也是概率中可以控制的部分。自我驱动的主观努力，是牌技，在关键时刻下注或弃牌的选择决策，也是牌技。哪个更重要？都重要，长时间尺度而言，努力重要；某些关键时点，选择更重要。他曾经说过“个人的努力固然重要，但也要考虑历史的行程啊。“而选择的能力，依赖于对信息的搜集和处理，依赖于非对称信息下的决策思维，而这些，依赖于长期坚持的努力和思考。</p>
 
+<p>我们身边，有人能够把一手烂牌打出花，也有人能把一手好牌打成翔，有些一手臭牌梭哈最终一败涂地，有人蛰伏保守一辈子等待好的赔率和胜率。</p>
+
+<p>新一年，祝大家多拿好牌，把牌打顺！</p>
+
+<p><strong>Updated 2019-02-03</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/12/27/cesm-segfault-log/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2019/02/04/card-play-life/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/12/24/cesm-error-log/">CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED</a>
+                  <a class="post-link" href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-12-24
+                        <i class="fa fa-calendar"></i>2019-01-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -545,7 +534,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#finance" title="Category: finance" rel="category">finance</a>&nbsp;
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
 
@@ -562,8 +555,6 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
-    
   
 
 </span>
@@ -571,25 +562,162 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>FS in OUC is trying to setup CESM fully coupled Pre-industrial (B1850 compset) cases while faced with some problem.</p>
+                    <ul id="markdown-toc">
+  <li><a href="#要点" id="markdown-toc-要点">要点</a></li>
+  <li><a href="#楔子" id="markdown-toc-楔子">楔子</a></li>
+  <li><a href="#理论" id="markdown-toc-理论">理论</a></li>
+  <li><a href="#实践" id="markdown-toc-实践">实践</a></li>
+  <li><a href="#讨论" id="markdown-toc-讨论">讨论</a></li>
+  <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
+  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
+</ul>
 
-<p>In the run log, we found:</p>
+<h3 id="要点">要点</h3>
+
+<ol>
+  <li>
+    <p>新税收体系相比于旧税收体系，预扣税款会减少研究生助研津贴的累积当期<strong>账面</strong>收入，且毕业前累积<strong>账面</strong>减值达到最大；毕业前的账上减值，对于一般3年期硕士生，约在<strong>1000元</strong>，四年期博士生约在<strong>2000-3000元</strong>，约占累积收入3-4%；五年期直博生约在<strong>3000-5000元</strong>，约占累积收入5%；部分劳务收入特别高（比如有较多非校内收入）的博士生能达到<strong>10000元</strong>以上，约占累积收入8%.</p>
+  </li>
+  <li>
+    <p>次年退税后，账面减值均会有显著回调，且该回调随读研年数增加（收入增多）而增多。对硕士生来说，该回调约在500元以下，高年级博士生能接近1000元；收入特别高的博士生能达到几千元。毕业后次年，随着最后一次退税完成，最终实际减值为<strong>预扣税款的时间价值</strong>.三年期博士生仅为几十块，收入特别高的博士生也不到总累积收入的1%。若退税过程一切顺利，完全可以忽略对总收入的影响。</p>
+  </li>
+  <li>
+    <p>研究生所交预扣税款的本质相当于逐月滚动购买15-27月期零息国债,全国研究生每年平均为财税体系贡献20亿零利息，一年之上，两年未满的流动性便利，但该金额其实只相当于年总税收万分之一。</p>
+  </li>
+</ol>
+
+<h3 id="楔子">楔子</h3>
+
+<p>北宋词人晏几道一曲《浣溪沙》有云：</p>
 
 <blockquote>
-  <p>ERROR: restformat: number of records on restart file not supported</p>
+  <p>一向年光有限身，等闲离别易销魂，酒筵歌席莫辞频。</p>
 </blockquote>
 
-<p>By searching, <a href="https://bb.cgd.ucar.edu/port-validation-runtime-failure-error-restformat-number-records-restart-file-not-supported">the error seems to come from the ice restart file</a>.</p>
+<blockquote>
+  <p>满目山河空念远，落花风雨更伤春，不如怜取眼前人。</p>
+</blockquote>
 
-<p>We then checked the default restart file, which can be located in <code class="highlighter-rouge">ice_in</code>, in <code class="highlighter-rouge">${CESM_INPUT}/ice/cice/iced.0001-01-01.gx1v6_20080212</code>. The file is zero in size. Thus, it must be created by the model, and the model cannot read anything from it. We re-download the corresponding file and the problem solved.</p>
+<p>这首词感叹人生苦短，聚少离多，不如及时行乐，“酒筵歌席莫辞频”。晏殊词温婉清丽，格调优雅，亦不乏深刻，人这一生，究竟应该“艰难困苦，玉汝于成”，还是应当“歌席莫辞频，怜取眼前人”？只怕也是亘古之人生难题。</p>
 
-<p><strong>Updated 2018-12-26</strong></p>
+<p>在晏殊这牌词写就近千年之后，这个世界上大部分人依然会面临同样的问题，只不过创造了一个时髦的心理学词汇，试图定量描述：“延迟满足“。</p>
 
+<p>商人无道，比如张一鸣造了个抖音，靠及时行乐的用户赚得体满钵满，还要回过头diss一番自己客户：<a href="https://tech.sina.com.cn/i/2018-08-02/doc-ihhehtqf3594606.shtml">延迟满足能力差，还没拼天赋就跪倒我裙下</a>。</p>
+
+<p>相较之下，国家2019年针对研究生津贴的新税改，那可真如母亲一般关怀备至，悉心培养祖国花朵们的延迟满足能力：研究生助研津贴全部按照劳务报酬税的标准先行预扣，次年再行退税。这个劳务报酬税嘛，其实在八十年代就制定了，免征额是800块，多体贴，八百吃饭，超过八百，收点税帮您保管着，择日再还。如此这般，自是结结实实地帮助大手大脚的研究生们学会了自律，延迟了满足，感受了温暖，实现了价值。不要忘了，年劳务收入不超过7.5万可是会全额退税的哦，这可比老标准赚得不知道高哪里去了。且看下图：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fzk2wfwmkmj20dm0digq9.jpg" alt="" /></p>
+
+<p>什么？超过两万每月还要扣30%做梦呢，不用看表，表没用，以大家收入水平，记住个800，4000，20%就行了诶。</p>
+
+<p>不妨我们对新旧税收体系做个比较，看看延迟满足的我们究竟多赚了多少呢？</p>
+
+<h3 id="理论">理论</h3>
+
+<p>如何比较？原来的标准是，每月收入超过3500按个人所得税扣取，现在是超800按劳务报酬预扣，满足一定条件一年后退税。不过话说回来，1年后返还的100元和今天拿到的100元是一样的100元么？聪明的你肯定知道，不一样不一样，小时候雪糕五毛一块，十几年后的今天，最便宜也得三四块啦。</p>
+
+<p>现在，为了解决这个不一样的问题，我们祭出纸醉金迷行业中让人清醒法宝之一：用于企业、债券等等估值常用的方法：<a href="https://wallstreetcn.com/articles/3060993">现金流折现法</a>.</p>
+
+<p>顾名思义，现金流折现，就是将资产未来所能产生的现金流量还原为当前现值，对于两种不同的扣税方式，我们可以采用完全相同的办法来贴现，只要比较现值高低，就知道究竟哪种计税方式我们赚得更多！说人话，就是把研究生期间补助，考虑通胀之类的因素，全部折算到今天，看看哪个多哪个少就行啦。具体现金流折现公式如下：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fzk2ggckowj213c0ec3zq.jpg" alt="" /></p>
+
+<p>这一公式中的<a href="https://wiki.mbalib.com/wiki/%E6%8A%98%E7%8E%B0%E7%8E%87">折现率</a>是非常重要的参数，揭示了未来的100块和今天100块的差异。那么该如何确定折现率呢？折现率取决于预扣税款的时间价值，也就是我们所承担的机会成本。当然，如果我们现在拿到这笔钱，可以用于投资，也可以用于消费，投资可以增值，早消费可以避免长期的货币贬值。考虑到这些就差不多啦，折现率通常由如下几个部分构成：</p>
+<blockquote>
+  <p>折现率=无风险报酬率+风险报酬率+通货膨胀率</p>
+</blockquote>
+
+<p>风险？不存在的，税务爸爸到期一定会还给你的啦（准备好你的退税资料！）。当然，报酬是有的，75000块每年的免征额，可比3500块一月的免征额高不知道哪里去了。所以我们关注的就是无风险报酬率和通货膨胀率。无风险收益大概可以等价于我们买银行定期存款、货币基金或者国债的收益，目前的利率环境下，3%是一个比较好的估计；通胀率嘛，<a href="http://www.chinanews.com/cj/2019/01-10/8725173.shtml">统计局告诉我们去年终于踩上2%啦</a>。好的，谢谢！我们姑且把2%再乘以2就等于4%吧。什么？为什么乘以2？我也不知道，去问问饭堂大妈吧，或许她们还嫌2小。</p>
+
+<p>因此我们采用折现率r0=0.03+0.04=0.07/年</p>
+
+<p>注意这是年折现率，我们采用复利公式把它改写为月折现率以与现金流入频率对应：r=56.54/10000，亦即月底的10000块比月初的10000块价值下降了56块5毛4分钱.</p>
+
+<p>这样，我们只需要将两套体系未来全部收入折现到今天的现值比较就可以啦。旧个税（2011）表如下：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fzk3mn0dq8j20jg0dj0wb.jpg" alt="" /></p>
+
+<p>简便起见，我们对未来研究生劳务现金流做如下预设：</p>
+
+<ol>
+  <li>每月助研津贴等额且小于5000元人民币（旧有个税第一档且新体系下全额退税）</li>
+  <li>没有其他劳务收入（设计、安装、制图、医疗、会计、法律、咨询、讲学、新闻、广播、投稿、翻译、书画、雕刻、电影、戏剧、音乐、舞蹈、杂技、曲艺、体育、技术服务等项劳务的所得）</li>
+  <li>对完整一年期收入进行现金流折现，且退税发生在次年年末。</li>
+</ol>
+
+<p>下面两张图展现的是两套体系的现值对比。横轴是月收入，纵轴是1年期现金流折现。注意，新体系下包含了次年末的退税。怎么？第一张图看不出区别？其实仔细看还是可以发现旧体系（灰色实线）在收入大于800后是在新体系（蓝色实线上面的）。</p>
+
+<p>为了方便各位客官观瞻评点，小的特地又画了图2。红线代表新体系减去旧体系的现值差。可以看到，月助研津贴大于800元的时候，新体系未来一年期的现金流折现总是小于旧体系的。比如说吧，客官您每月津贴1500大洋，如果按新体系折现一年期现金流，您大概是亏了一百多块的样子。一年一百多也没什么嘛，也就是腾讯云一年期学生价而已啦。但如果您的月劳务有5k的话，那可就是八百多啦，是不是当两年电话费啦？可不是嘛，我纳税我自豪，我为国家省余粮！</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fzlauone83j20ga0c9jt7.jpg" alt="" /></p>
+
+<h3 id="实践">实践</h3>
+
+<p>我们再考虑三个现实的情况：小A是三年期硕士研究生，这三年每月导师给的助研津贴分别为800元，1000元和1200元。小B是直博生，对应五年津贴为800元，1000元，1200元，1500元，和2000元。小C是中科院高才直博生，五年津贴分别为 2000元，2500元，3000元， 4000元和5000元 我们对三人三年和到五年的累积现金流折现情况进行分析。这里我们把逐月收入累计并贴现到现值，一直记录到最后一年次年最终退税为止。简化起见，我们从年初考虑，不考虑实际学年划分在9月。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fznq00t1tpj20hs0dcwfb.jpg" alt="" /></p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fznq0fda49j20hs0dcdgr.jpg" alt="" /></p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fznj2ydvrxj20hs0dcab3.jpg" alt="" /></p>
+
+<p>从上面三个情景的对比可以看出，新体系下，无论硕士还是博士，累计现金流折现最大账面亏损都是发生在毕业前夕，对于五年高收入学霸直博生来说，账面亏损能达到12000+，相当于总收入8%。但是随着毕业次年末最大力度的退税，所有情形下，实际都仅仅亏损预扣税款的时间价值。对于一般硕士生来说，总亏损不过几十块，可以忽略；即便是收入最高的学霸直博生，也不过1000出头，不到累积收入的1%。</p>
+
+<h3 id="讨论">讨论</h3>
+
+<p>各位客官看到这里似乎都疲劳困倦了，没关系，接下来的内容会让您更加困倦！</p>
+
+<p>我们从个体角度考虑一下新个税体系下究竟发生了什么：每个月，我们的收入，都会预扣一部分税款，而预扣部分，会根据我们年收入情况，在次年退回给我们。也就是说，我们把国家当作一个客体，他每个月都向我们借入一笔钱，并且拍胸脯说，老乡你好，明年某时，定当逐月累积如数奉还！聪明的你如果知道国债这个东西，是不是有点像？</p>
+
+<p>没错，就是这样！如果退税真的发生在次年12月的话，且按9月开学为新的补贴周期，这个过程相当于<strong>我们逐月滚动购买15-27个月期、价格为预扣税金额的、零利率国债。</strong>没明白？没关系，下面的更不用看啦。</p>
+
+<p>我们可以进一步估计新的退税体系下，全国研究生群体为国家财税系统贡献了多少的流动性。据<a href="http://www.ecorr.org/news/industry/2018-06-11/169201.html">调查</a>：</p>
+<blockquote>
+  <p>日前，一项来自全国各地的1663名研究生参与调查的研究生问卷结果显示，223人每月补贴在0-500元区间，占比13.42%；359人每月补贴在500-1000元区间，占比21.66%；450人每月补贴在1000-2000元区间，占比27.14%；452人每月补贴在2000-3000元区间，占比27.26%；148人每月补贴在3000-4000元区间，占比8.97%；每月补贴在4000-5000元区间以上的学生人数占比较低。仅有11.13%的学生表示补贴金额能够满足日常使用，88.87%的学生表示补贴并不能满足日常开销。</p>
+</blockquote>
+
+<p>我们做一个简单的估计（仅仅是估计哦），假设月收入在2000以下的，减去500（与国家对硕士生的每月助学金对应，这部分不计税）为硕士助研津贴收入；月收入2000以上的减去1250为博士助研津贴收入，那么根据上述数据，可以每年全国在读研究生(约210万)的预扣税款总额可根据下表估算：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71ly1fznrpbqiqej20i605pmz1.jpg" alt="" /></p>
+
+<p>942×210万大约也就是20个亿，对全国税收总收入来说（2018年15.6万亿），这个数额仅仅万分之一多点，其实可以忽略。不过，铁打的营盘流水的兵，只要每年研究生都不断入学，又在这样一个不断扩招的背景下，这部分流动性就源源不断～</p>
+
+<p>不知道大家有没有在新闻上听说过“麻辣粉(MLF)”这个东西？其实MLF全名叫中期借贷便利(Medium-term Lending Facility)。具体定义我抄写下百度百科：</p>
+<blockquote>
+  <p>中期借贷便利于2014年9月由中国人民银行创设。中期借贷便利是中央银行提供中期基础货币的货币政策工具，对象为符合宏观审慎管理要求的商业银行、政策性银行，可通过招标方式开展。发放方式为质押方式，并需提供国债、央行票据、政策性金融债、高等级信用债等优质债券作为合格质押品。</p>
+</blockquote>
+
+<p>看懂没？没看懂没关系，大概意思就是说，作为央妈的孩子，商业银行们没奶吃的时候，就可以向央妈借钱。央妈说，借钱可以，一年后还我，连本付息哦；还有那啥，空手来借可不行，把你们家的国债票据啥的宝贝，都拿出来先押我这里，等一年后你还钱的时候我还你的宝贝们。不过MLF动辄都是几千亿，相比之下我们贡献的流动性真是毛毛雨啦。</p>
+
+<p>说到央妈向银行出借流动性，回到我们研究生群体，对比下财爸爸向我们借钱的态度……摔。无论怎样，我们应该感到自豪，仅仅牺牲百分之零点几的总收入，就为国家贡献了20亿流动性，不正是我辈最大荣幸吗！</p>
+
+<h3 id="总结">总结</h3>
+
+<ol>
+  <li>
+    <p>新税收体系相比于旧税收体系，预扣税款会减少研究生助研津贴的累积当期<strong>账面</strong>收入，且毕业前累积<strong>账面</strong>减值达到最大；毕业前该账上减值，对于一般3年期硕士生，约在<strong>1000元</strong>，四年期博士生约在<strong>2000-3000元</strong>，约占累积收入3-4%；五年期直博生约在<strong>3000-5000元</strong>，约占累积收入5%；部分劳务收入特别高（比如有较多非校内收入）的博士生能达到<strong>10000元</strong>以上，约占累积收入8%.</p>
+  </li>
+  <li>
+    <p>次年退税后，账面减值均会有显著回调，且该回调随读研年数增加（收入增多）而增多。对硕士生来说，该回调约在500元以下，高年级博士生能接近1000元；收入特别高的博士生能达到几千元。毕业后次年，随着最后一次退税完成，最终实际减值为<strong>预扣税款的时间价值</strong>.三年期博士生仅为几十块，收入特别高的博士生也不到总累积收入的1%。若退税一切顺利，完全可以忽略。</p>
+  </li>
+  <li>
+    <p>研究生所交预扣税款的本质相当于逐月滚动购买15-27月期零息国债,全国研究生每年平均为财税体系贡献20亿零利息，一年之上，两年未满的流动性便利，但该金额其实只相当于年总税收万分之一。</p>
+  </li>
+</ol>
+
+<h3 id="参考">参考</h3>
+
+<ul>
+  <li><a href="https://wallstreetcn.com/articles/3060993">详解自由现金流折现法</a></li>
+  <li><a href="https://www.zhihu.com/question/23005134">如何简明地解释自由现金流折现</a></li>
+  <li><a href="https://www.douban.com/note/643343513/">净现金流折现法</a></li>
+  <li><a href="http://www.ecorr.org/news/industry/2018-06-11/169201.html">中国200万在读硕博</a>
+<strong>Updated 2019-01-29</strong></li>
+</ul>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/12/24/cesm-error-log/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2019/01/25/new-tax-system-student-stipend/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -604,10 +732,10 @@
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
           
-          <span class="page_number ">1/91</span>
+          <span class="page_number ">1/93</span>
           
             <a href="/page2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -623,6 +751,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1994,6 +2150,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2039,14 +2203,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2067,14 +2238,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2193,7 +2357,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2235,7 +2399,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2256,7 +2420,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2319,7 +2483,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2487,7 +2651,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2741,6 +2905,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2754,6 +2932,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2763,16 +2951,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2790,7 +2968,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2800,15 +2987,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2826,7 +3004,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3159,7 +3337,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3213,7 +3391,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3311,6 +3489,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

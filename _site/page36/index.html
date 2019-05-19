@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,101 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/24/setup-savioberkeley/">Setup SAVIO@Berkeley</a>
+                  <a class="post-link" href="/2016/10/28/port-smoke-on-savio/">port smoke on SAVIO</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>SAVIO is Berkeley’s high performance clusters.</p>
-
-<p>http://research-it.berkeley.edu/services/high-performance-computing/user-guide</p>
-
-<ol>
-  <li>set up vim/project</li>
-</ol>
-
-<p>2.set up existing module</p>
-
-<p>#——— Load specific modules ————–
-module load intel/2013_sp1.4.211
-module load openmpi/1.6.5-intel</p>
-
-<p>#module load netcdf/4.3.2-intel-p System admin only provide C++ lib</p>
-
-<p>module load nco/4.4.6-intel-p
-module load ncview/2.1.2</p>
-
-<ol>
-  <li>set up NetCDF</li>
-</ol>
-
-<p>$nf-config –all</p>
-
-<p>$nc-config –all</p>
-
-<p>can be used to check the installation status.</p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/10/24/setup-savioberkeley/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/">GFDL Spectral Idealized port on SAVIO</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-24
+                        <i class="fa fa-calendar"></i>2016-10-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -464,9 +378,7 @@ module load ncview/2.1.2</p>
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
-    
-        <a href="/category/#GFDL_FMS" title="Category: GFDL_FMS" rel="category">GFDL_FMS</a>
+        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
     
   
 
@@ -485,9 +397,7 @@ module load ncview/2.1.2</p>
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
-    
-        <a href="/tag/#GFDL_FMS" title="Tag: GFDL_FMS" rel="tag">GFDL_FMS</a>
+        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
     
   
 
@@ -497,58 +407,67 @@ module load ncview/2.1.2</p>
                 </div>
                 <div class="excerpt">
                     
-<p>copy and paste to create</p>
+<p>https://www.cmascenter.org/smoke/documentation/4.0/html/ch12s02.html</p>
 
-<p><strong>mkmf.template.savio.without_mpi</strong> in ./bin/</p>
+<ol>
+  <li>download</li>
+</ol>
 
-<p>change:</p>
+<p>先找到release timeline</p>
 
-<p>FC CC MPI and NetCDF pathes.</p>
+<p>https://www.cmascenter.org/download/release_calendar.cfm</p>
 
-<p>in ./full_dynamics, change:</p>
+<p>找到最新版本，比如我们看到4.0，进入后可以发现下载链接</p>
 
-<p><strong>compile_full_dynamics_on_savio.csh </strong> to fit savio (usually, just change platform name is okay).</p>
+<p>https://www.cmascenter.org/download/forms/step_1.cfm</p>
 
-<p>when compile, error:</p>
-<h5><span style="color: #ff0000;">ifort: error #10031 error: could not write to argument file</span></h5>
-<p>google it:</p>
+<p>https://www.cmascenter.org/help/model_docs/porting_guide.cfm</p>
 
-<p>https://software.intel.com/en-us/forums/intel-math-kernel-library/topic/281453</p>
-<blockquote>The MKL libraries are in different directories than the compiler runtime and other libraries. By default, the compiler will not search for libraries in the MKL <b>lib</b> directory. Use the <b>-mkl</b> compiler option for simple jobs, and use the MKL Link Line Advisor for more intricate jobs.</blockquote>
-<p>When I tried <strong>-mkl</strong> it doesn’t work and appeared another error.</p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap2.jpg"><img class="alignnone size-full wp-image-906" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap2.jpg" alt="snap2" width="856" height="257" /></a></p>
 
-<p>Fortunately, when I tried to module load ant TAB it, a module called</p>
+<p>选择好后，进入下载页，下载安装脚本（Installation script）、源码包以及测试例子数据三个内容。（其实他们用github托管哦）</p>
 
-<p><strong>mkl/2013_sp1.4.211</strong></p>
+<p>之后follow <strong>12.3（非常重要一章）</strong>进行安装</p>
 
-<p>just came into my eye.</p>
+<p>https://www.cmascenter.org/smoke/documentation/4.0/html/ch12s03.html</p>
 
-<p>of course, use it! The problem really solved.</p>
+<p>设置<code class="filename"><code class="envar">SMK_HOME</code></code>环境变量指向安装路径，可以将安装脚本和压缩包放入同一路径下，将这个路径设置为安装路径。</p>
 
-<p> </p>
+<p>在smoke_install.csh最前面加入</p>
+<pre>setenv SMK_HOME `pwd`</pre>
+<p>不需要source，直接csh运行即可。如果顺利编译，会显示</p>
+<pre>NOTE: AUTO_DELETE script setting is not set.
+      Default is N to not delete I/O API intermediate and output files
+Creating inventory list files...
+Installation completed successfully.
+ 
+Please follow the instructions in Section 4.3 of the SMOKE User's Manual
+to run the nctox test case.
+https://www.cmascenter.org/smoke/documentation/4.0/html/</pre>
+<p>再后follow 4.3去run测试用例</p>
 
-<p>So what is mkl?</p>
+<p>https://www.cmascenter.org/smoke/documentation/4.0/html/ch04s03.html</p>
 
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg"><img class="alignnone size-full wp-image-889" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/Snap1.jpg" alt="snap1" width="672" height="324" /></a><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+<p>出现错误</p>
+<pre>mrggrid.abmp.nctox.20050710.us12-nc.log:     *** ERROR ABORT in subroutine MRGGRID</pre>
+<p>后来发现执行语句4.0ug里居然少一个！<strong class="userinput"><code><code class="filename">smk_rateperhour_nctox.csh</code></code></strong></p>
 
-<p> </p>
-
-<p> </p>
+<p><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>更改后正常。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/24/gfdl-spectral-idealized-port-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/28/port-smoke-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/17/externalities-and-the-coase-theorem/">Externalities and the Coase Theorem</a>
+                  <a class="post-link" href="/2016/10/27/porting-cam3-on-savio/">Porting CAM3 on SAVIO</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-17
+                        <i class="fa fa-calendar"></i>2016-10-27
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -567,7 +486,11 @@ module load ncview/2.1.2</p>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Economics" title="Category: Economics" rel="category">Economics</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>&nbsp;
+    
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>
     
   
 
@@ -584,7 +507,11 @@ module load ncview/2.1.2</p>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Economics" title="Tag: Economics" rel="tag">Economics</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>&nbsp;
+    
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>
     
   
 
@@ -594,52 +521,142 @@ module load ncview/2.1.2</p>
                 </div>
                 <div class="excerpt">
                     
-<p>Coursera</p>
+<p>When porting cam3, in configure process we meet the error like cannot find “ncdf_xxxx”</p>
 
-<p>The price changes, the quantity of the demand changes, not the demand change!</p>
+<p>In fact, this is not a very serious error because we are using brand new netcdf (after 2012 in fact) that it requires <strong>-lnetcdff </strong>to link to fortran lib instead of only <strong>-lnetcdf</strong></p>
 
-<p>compliment of xxx / complementary good互补品</p>
+<p>Change the makefile template, search -lnetcdf and append -lnetcdff to it when using FC</p>
 
-<p>Change in demand: demand curve change!</p>
+<p>http://www.unidata.ucar.edu/support/help/MailArchives/netcdf/msg11396.html</p>
 
-<p>inferior good 低档商品</p>
-<h2><span class="keyword">ceteris paribus其他条件不变<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></span></h2>
+<p>When finishing compiling, use <a href="http://research-it.berkeley.edu/services/high-performance-computing/running-your-jobs">SLURM method</a> to submit the task with openMP configure, get the error</p>
+<pre> 18  READ_NAMELIST: Namelist read returns           -1
+ 19  ENDRUN: called without a message string</pre>
+<p>It seems that the model cannot lock the namelist position.</p>
+
+<p>So I’ve found that the script moved the cam.exe out of the bld dir after compiling. So it maybe the cam exe cannot find the inside namelist file. Actually it is true!</p>
+
+<p>After moving the exe in, another problem occurs</p>
+<pre> 18  READ_NAMELIST: Namelist read returns           19
+ 19  ENDRUN: called without a message string</pre>
+<p>What the hell with 19 code??? Google and got this</p>
+
+<p>http://www.ladon.iqfr.csic.es/intel/doc/main_for/mergedProjects/bldaps_for/ug1l_rt_errors.htm</p>
+<table>
+<tbody>
+<tr>
+<td></td>
+<td><tt><span style="font-size: medium;">severe (19): Invalid reference to variable in NAMELIST input</span></tt>
+
+FOR$IOS_INVREFVAR. One of the following conditions occurred:
 <ul>
-	<li></li>
-	<li>Externalities
-<ul>
-	<li>Positive
-<ul>
-	<li>Example: Education</li>
+	<li class="kadov-p">The variable was not a member of the namelist group.</li>
+	<li class="kadov-p">An attempt was made to subscript a scalar variable.</li>
+	<li class="kadov-p">A subscript of the array variable was out-of-bounds.</li>
+	<li class="kadov-p">An array variable was specified with too many or too few subscripts for the variable.</li>
+	<li class="kadov-p">An attempt was made to specify a substring of a noncharacter variable or array name.</li>
+	<li class="kadov-p">A substring specifier of the character variable was out-of-bounds.</li>
+	<li class="kadov-p">A subscript or substring specifier of the variable was not an integer constant.</li>
+	<li class="kadov-p">An attempt was made to specify a substring by using an unsubscripted array variable.</li>
 </ul>
-</li>
-	<li>Negative
-<ul>
-	<li>Example: Pollution</li>
-	<li>Measure Example: Pigouivain tax--&gt;Pareto Optimality</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>It’s possibly that some variables cannot be recognized by the exe.</p>
+
+<p>Find it one by one, stop_option and stop_n!!!!</p>
+
+<p>OMG, CAM3 even doesn’t have these two namelist variables!</p>
+
+<p>After deleting that and configuring the running period by NELAPSE, the world back to normal.<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
 <p> </p>
-<ul>
-	<li>Coase theorem
-<ul>
-	<li>
-<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的两个前提条件：明确<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>和<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>　钢铁厂生产钢，自己付出的代价是铁矿石、煤炭、劳动等，但这些只是“<a href="http://baike.baidu.com/view/354998.htm" target="_blank">私人成本</a>”；在<a href="http://baike.baidu.com/view/610395.htm" target="_blank">生产过程</a>中排放的污水、废气、废渣，则是社会付出的代价。如果仅计算私人成本，生产钢铁也许是合算的，但如果从社会的角度看，可能就不合算了。于是，经济学家提出要通过征税解决这个问题，即政府出面干预，赋税使得成本高了，生产量自然会小些。但是，恰当地规定税率和有效地征税，也要花费许多成本。于是，科斯提出：政府只要明确产权就可以了。如果把产权“判给”河边居民，钢铁厂不给居民们赔偿费就别想在此设厂开工；若付出了赔偿费，成本高了，产量就会减少。如果把<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>到钢铁厂，如果居民认为付给钢铁厂一些“赎金”可以使其减少污染，由此换来健康上的好处大于那些赎金的价值，他们就会用“收买”的办法“利诱”厂方减少生产从而减少污染。当厂家多生产钢铁的<a href="http://baike.baidu.com/view/297033.htm" target="_blank">赢利</a>与少生产钢铁但接受“赎买”的收益相等时，它就会减少生产。从理论上说，无论是厂方赔偿，还是居民赎买，最后达成交易时的钢产量和污染排放量会是相同的。但是，<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>归属不同，在<a href="http://baike.baidu.com/view/9601472.htm" target="_blank">收入分配</a>上当然是不同的：谁得到了产权，谁可以从中获益，而另一方则必须支付费用来“收买”对方。<strong>总之，无论财富分配如何不同，公平与否，只要划分得清楚，资源的利用和配置是相同的——都会生产那么多钢铁、排放那么多污染，而用不着政府从中“插一杠子”。那么政府做什么呢?明确产权，并且有效地保护产权。</strong></div>
-<div class="para"><a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理表明，<strong>市场的真谛不是价格，而是产权。只要有了产权，人们自然会“议出”合理的价格来。</strong></div>
-<div class="para"></div>
-<div class="para">但是，明确产权只是通过市场交易实现资源最优配置的一个必要条件，却不是充分条件。另一个必要条件就是“不存在<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>”。交易成本，简单地说是为达成一项交易、做成一笔买卖所要付出的时间、精力和产品之外的金钱，如市场调查、情报搜集、质量检验、条件谈判、讨价还价、起草合同、聘请律师、请客吃饭，直到最后执行合同、完成一笔交易，都是费时费力的。就河水污染这个问题而论，居民有权索偿，但可能会漫天要价，把污染造成的“肠炎”说成“胃癌”；在钢铁厂有权索要“赎买金”的情况下，它可能把减少生产的<a href="http://baike.baidu.com/view/654238.htm" target="_blank">损失</a>一元说成十元。无论哪种情况，对方都要调查研究一番。如果只是一家工厂和一户居民，事情还好办。当事人的数目一大，麻烦就更多，因为有了“合理分担”的问题。如果是多个厂家，谁排了污水、排了多少，他们如何分摊赔偿金或如何分享“赎买金”就要先扯皮一番；如果是多户居民，谁受害重谁受害轻，怎么分担费用或分享赔偿，也可打得不可开交。正是这些<a href="http://baike.baidu.com/view/45349.htm" target="_blank">交易成本</a>，可能使得前面所说的那种由私人交易达到的资源配置无法实现——或是大家一看有这么多麻烦，望而却步。所以说，<a href="http://baike.baidu.com/view/298321.htm" target="_blank">科斯</a>定理的“逆反”形式是：如果存在交易成本，即使<a href="http://baike.baidu.com/view/73580.htm" target="_blank">产权</a>明确，私人间的交易也不能实现资源的最优配置。</div>
-<div class="para">科斯定理的两个前提条件各有所指，但并不是完全独立、没有联系。最根本的是明确产权对减少交易成本的决定性作用。产权不明确，后果就是扯皮永远扯不清楚，意味着交易成本无穷大，任何交易都做不成；而<a href="http://baike.baidu.com/view/109544.htm" target="_blank">产权界定</a>得清楚，即使存在交易成本，人们在一方面可以通过交易来解决各种问题，另一方面还可以有效地选择最有利的<a href="http://baike.baidu.com/view/3823397.htm" target="_blank">交易方式</a>，使交易成本最小化。</div></li>
-</ul>
-</li>
-</ul>
+
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/17/externalities-and-the-coase-theorem/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/27/porting-cam3-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/10/26/vim-e5-b0-86-e5-8c-85-e5-90-ab-e5-85-b3-e9-94-ae-e/">vim将包含关键词的多行进行复制替换</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-10-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>vim用了三年了，现在还是在基础命令的水平上。</p>
+
+<p>今天用到了个复杂的，记录下：</p>
+
+<p><strong>复制包含关键字的所有行</strong></p>
+
+<p><strong>%g/KeyWord/normal yyGp</strong></p>
+
+<p>对于包含 KeyWord 的任何行，执行 normal mode 命令：复制此行yy、跳到文件末尾G、粘贴p</p>
+
+<p><strong>%g/KeyWord/normal yyp</strong></p>
+
+<p>对于包含 KeyWord 的任何行，执行 normal mode 命令：复制此行yy、粘贴p<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>复制完后替换下一行的关键字（比如通过var1增加var2经常用到）</p>
+
+<p><strong>:g/\%(^\1$\n)\@&lt;=(.*)$/s/var1/var2/g</strong></p>
+
+<p>这个命令太复杂了，前面那堆符号啥意思回来再慢慢研究……</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/10/26/vim-e5-b0-86-e5-8c-85-e5-90-ab-e5-85-b3-e9-94-ae-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -654,10 +671,10 @@ module load ncview/2.1.2</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page35" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">36/91</span>
+          <span class="page_number ">36/93</span>
           
             <a href="/page37" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -673,6 +690,34 @@ module load ncview/2.1.2</p>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2044,6 +2089,14 @@ module load ncview/2.1.2</p>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2089,14 +2142,21 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2117,14 +2177,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2243,7 +2296,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2285,7 +2338,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2306,7 +2359,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2369,7 +2422,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2537,7 +2590,7 @@ module load ncview/2.1.2</p>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2791,6 +2844,20 @@ module load ncview/2.1.2</p>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2804,6 +2871,16 @@ module load ncview/2.1.2</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2813,16 +2890,6 @@ module load ncview/2.1.2</p>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2840,7 +2907,16 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2850,15 +2926,6 @@ module load ncview/2.1.2</p>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2876,7 +2943,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3209,7 +3276,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3263,7 +3330,7 @@ module load ncview/2.1.2</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3361,6 +3428,33 @@ module load ncview/2.1.2</p>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/">【已解决】NCL input in flex scanner failed错误</a>
+                  <a class="post-link" href="/2015/01/05/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91ncl-e/">【更新中】ncl读取ASCII文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-02
+                        <i class="fa fa-calendar"></i>2015-01-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -399,24 +403,80 @@
                 </div>
                 <div class="excerpt">
                     
-<p>最近使用ncl总是在最后成图的时候出现input in flex scanner failed这种错误。可以肯定是GUI的问题，<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21254823">查了下资料感觉也无从下手</a>，错误触发原因看起来比高级图形接口更加底层，动弹不得。</p>
+<p>帮CDH做sst forcing的试验，需要用ncl读入个规整的index （35x12），回归出sst anomalies pattern，测试了下asciiread函数，非常好用，有点类似MATLAB的load函数，能够直接识别分隔符。</p>
 
-<p>这个错误最初是由于把字号改大而出现的，于是我将字号改小，果然没问题……不太懂什么原因</p>
+<p>拷个example过来</p>
+
+<p><b>Example 1</b></p>
+
+<p>Assume you have an ASCII data file called “data.asc”:</p>
+<pre> 1.  2.  3.
+ 4.  5.  6.
+ 7.  8.  9.
+10. 11. 12.
+13. 14. 15.
+</pre>
+<p>You can read it various ways as shown with the following NCL script:</p>
+<pre>begin  
+  z1 = <strong>asciiread</strong>("data.asc",(/5,3/),"float")
+  z2 = <strong>asciiread</strong>("data.asc",(/4,2/),"float")
+end
+</pre>
+<p>The results of <tt>z1</tt> and <tt>z2</tt> would be:</p>
+<pre>z1(0,0) = 1.
+z1(0,1) = 2.
+z1(0,2) = 3.
+z1(1,0) = 4.
+z1(1,1) = 5.
+z1(1,2) = 6.
+z1(2,0) = 7.
+.
+.
+.
+z1(4,0) = 13.
+z1(4,1) = 14.
+
+
+z2(0,0) = 1.
+z2(0,1) = 2.
+z2(1,0) = 3.
+z2(1,1) = 4.
+z2(2,0) = 5.
+z2(2,1) = 6.
+z2(3,0) = 7.
+z2(3,1) = 8.
+</pre>
+<p>Example of using -1:</p>
+<pre>begin
+	z3 = <strong>asciiread</strong>("data.asc",-1,"float")
+end
+</pre>
+<pre>z3(0) = 1.
+z3(1) = 2.
+z3(2) = 3.
+.
+.
+.
+z3(14)= 15.
+</pre>
+<p>The above <tt>z3</tt> could be reshaped via use of <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/onedtond.shtml"><strong>onedtond</strong></a>:</p>
+<pre>     Z3 = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/onedtond.shtml"><strong>onedtond</strong></a>(z3, (/5,3/) )
+</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/02/ncl-input-in-flex-scanner-failed-e9-94-99-e8-af-af/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/01/05/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/">【已解决】ncl中的cd_calendar</a>
+                  <a class="post-link" href="/2014/12/25/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e8-b/">【更新中】跳闸故障排查:Windows事件查看器</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-02
+                        <i class="fa fa-calendar"></i>2014-12-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -435,7 +495,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
     
   
 
@@ -452,7 +514,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
     
   
 
@@ -462,45 +526,32 @@
                 </div>
                 <div class="excerpt">
                     
-<p>处理CFSR的数据，已经是团队其他成员处理过的了，由于她用的是GrADS，清一色的二进制bin+描述文件ctl，不是自描述的nc文件，ncl处理起来没有任何的metadata，所以都要自己指定。数据文件名是YYYYMM的，循环不是很好写，查了一下，<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/cd_calendar.shtml#Examples">cd_calendar</a>这个函数很好用，官网上给的例子是hours since和days since的，实际上用months也是可以的。</p>
-<pre> <strong>16    </strong> time = ispan(0,383,1)
- <strong>17    </strong> time@units  =   "months since 1979-01-01"
- <strong>18</strong>
- <strong>19    </strong> date = cd_calendar(time,-1)</pre>
-<p>得到的date变量返回integer形式的YYYYMM，从79年1月到10年12月，perfect！
-而且使用cd_calendar函数，发现之前做起来很麻烦（要算位置）的合成和截取，都可以很方便实现了。还是教程看得不够细致呀 = =</p>
+<p>最近三天办公室计算机用电（桌位底插座对应线路）总是在凌晨跳闸，而其他路（包括空调）良好，非常奇怪。由于电脑一直开着，所以从系统日志入手查看问题。</p>
 
-<p><span style="color: #808080;"><strong>#Up to 20151216#</strong></span></p>
+<p>win7有eventvwr.exe，直接通过开始运行打开。</p>
 
-<p>用cd_calendar可以很好地转换days since之类的时间格式，用于长序列数据的切片读取非常有效。例如下面的例子就可以截取197901-201312的SST片。</p>
-<pre> 29 ymstrt = 197901
- 30 ymlast = 201312 ; 
- 31
- 32 data_path = "../../data/sst/monthly"
- 33 ctrl_file1 = data_path+"sst_HadOIBl_bc_1.9x2.5_1850_2011_c130301.nc"
- 34 ctrl_in1 = addfile (ctrl_file1, "r") 
- 35
- 36 time = ctrl_in1-&gt;time
- 37 yyyymm = cd_calendar(time,-1)
- 38 istrt = ind(yyyymm .eq. ymstrt)
- 39 ilast = ind(yyyymm .eq. ymlast)
- 40 var1 = ctrl_in2-&gt;SST_cpl(istrt:ilast,:,:)</pre>
-<p><span style="color: #808080;"><strong>#Up to 20150107#</strong></span></p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/12/QQ图片20141225101006.jpg"><img class="alignnone size-full wp-image-371" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/12/QQ图片20141225101006.jpg" alt="QQ图片20141225101006" width="1160" height="558" /></a></p>
+
+<p>可以看到左侧选中【windows日志】–&gt;【系统】，查看最近日志发现service control manager每个整点过三分会发出ID为7036的事件，而24日和25日这两天都是在凌晨4:03发出最后一个事件报告后缄默，23日在3:03发出最后一个事件报告后缄默。也就是说停电都发生在凌晨三点到五点之间。这样的凌晨时间，而又并非固定时间（可以锁定某些定时开启类电器），非常吊诡。</p>
+
+<p>参考资料</p>
+
+<p>http://blog.sina.com.cn/s/blog_518b64290100fewh.html</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/02/ncl-e4-b8-ad-e7-9a-84cd_calendar/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/12/25/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/11/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl中关于Land Sea Mask的问题</a>
+                  <a class="post-link" href="/2014/12/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim块选择</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-11-22
+                        <i class="fa fa-calendar"></i>2014-12-22
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -519,7 +570,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -536,7 +587,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -546,24 +597,19 @@
                 </div>
                 <div class="excerpt">
                     
-<p>模式中为了防止海陆边界不连续造成积分不稳定，往往会将海温插值到陆地上，画图时当然不希望这些数据出现，求海温区域平均时也不希望出现，所以必须要处理下。
-根据目的是画图还是计算，处理的方式不一样。画图的话，我们希望海陆边缘不要出现<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141122160718.jpg"><img class="alignnone size-full wp-image-337" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/11/QQ图片20141122160718.jpg" alt="QQ图片20141122160718" width="749" height="508" /></a></p>
+<p>之前一直用“v”进入可视模式，今天查替换的资料，发现可以通过大写“V”进入可是模式，直接进入行选择，这样进行块复制会方便很多。其他块选择及辅助命令的说明记在这里：</p>
+<pre>v------------块选择，字符模式
+V------------块选择，行模式
+Ctrl+v-------块选择，矩形模式
 
-<p>比如这样就很好。其实不需对原数据进行操作，只要改变绘图的属性让地图底图后画就可以：</p>
-<pre>res@mpFillDrawOrder="PostDraw"</pre>
-<p>如果要进行计算，就需要mask了，如果是规整的1x1的数据可以用landsea_mask解决</p>
-<pre>load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/<a href="http://www.ncl.ucar.edu/Document/Functions/Shea_util/shea_util.shtml">shea_util.ncl</a>"</pre>
-<pre>a    = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/addfile.shtml"><strong>addfile</strong></a>("$NCARG_ROOT/lib/ncarg/data/cdf/landsea.nc","r")
-lsdata = a-&gt;LSMASK
-lsm  = <strong>landsea_mask</strong>(lsdata,data&amp;lat,data&amp;lon)
-data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml"><strong>mask</strong></a>(data,lsm.eq.1,False)
-data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml"><strong>mask</strong></a>(data,lsm.eq.3,False)</pre>
-<p>如果数据不是规整的1x1，需要先做一下插值处理，比如包含极点的场变量转换</p>
-<pre> var4    = f2fsh_Wrap(var4s1,(/180,360/))</pre>
+gg-----------移动到文件头
+G------------移动到文件尾
+0------------移动到行首
+$------------移动到行尾</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/11/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/12/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -578,10 +624,10 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page68" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">69/91</span>
+          <span class="page_number ">69/93</span>
           
             <a href="/page70" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -597,6 +643,34 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1968,6 +2042,14 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2013,14 +2095,21 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2041,14 +2130,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2167,7 +2249,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2209,7 +2291,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2230,7 +2312,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2293,7 +2375,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2461,7 +2543,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2715,6 +2797,20 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2728,6 +2824,16 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2737,16 +2843,6 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2764,7 +2860,16 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2774,15 +2879,6 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2800,7 +2896,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3133,7 +3229,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3187,7 +3283,7 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3285,6 +3381,33 @@ data = <a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/mask.shtml">
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

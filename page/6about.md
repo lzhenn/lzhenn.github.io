@@ -29,7 +29,7 @@ Life is cool, but we need to find the cool things first.
 
 * [<i style="font-size: 20px" class="fa fa-envelope-o"></i>](lzhenn@mail2.sysu.edu.cn) [lzhenn@mail2.sysu.edu.cn](lzhenn@mail2.sysu.edu.cn)
 * [<i style="font-size: 20px" class="fa fa-envelope"></i>](novarizark@gmail.com) [novarizark@gmail.com](novarizark@gmail.com)
-* [<i style="font-size: 20px" class="fa fa-weixin"></i>](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/WeChatID.jpg) [Novarizark](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/WeChatID.jpg)
+<!--* [<i style="font-size: 20px" class="fa fa-weixin"></i>](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/WeChatID.jpg) [Novarizark](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/WeChatID.jpg)-->
 * [<i style="font-size: 20px" class="fa fa-github"></i>](https://github.com/Novarizark) [Novarizark](https://github.com/Novarizark)
 * [<i style="font-size: 20px" class="fa fa-comments"></i>](https://novarizark.github.io/comments/) [Comments](https://novarizark.github.io/comments/)
   

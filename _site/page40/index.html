@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/">【Supermarket】执行情况计划及进度</a>
+                  <a class="post-link" href="/2016/10/03/mollner-science-2010/">Mollner-Science-2010</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-10
+                        <i class="fa fa-calendar"></i>2016-10-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,9 +376,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
     
-        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
+        <a href="/category/#2016" title="Category: 2016" rel="category">2016</a>
     
   
 
@@ -391,9 +395,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
     
-        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
+        <a href="/tag/#2016" title="Tag: 2016" rel="tag">2016</a>
     
   
 
@@ -403,48 +407,49 @@
                 </div>
                 <div class="excerpt">
                     
-<p>2016.5.14执行计划应完成</p>
-<ul>
-	<li>逐日客流时间序列（四门店同图）</li>
-	<li>小波分析其中一两店，给出图</li>
-	<li>平均周变化
-<ul>
-	<li>排除节假日调休的周变化，如果来得及</li>
-	<li>排除超过1个标准差的周变化，如果来得及</li>
-</ul>
-</li>
-	<li>平均日变化
-<ul>
-	<li>工作日和周末各自的日变化<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
-</ul>
-</li>
-	<li>尝试套用ARIMA模型进行预测</li>
-</ul>
-<p>下一步计划：</p>
-<ul>
-	<li>特殊事件因子
-<ul>
-	<li>法定节假日及调休</li>
-	<li>高温热浪、强降水、寒潮</li>
-	<li>促销活动</li>
-</ul>
-</li>
-</ul>
+<h4><span style="color: #339966;"><strong>2016/10/02</strong></span></h4>
+<pre><strong>题目：Rate of Gas Phase Association of Hydroxyl Radical and Nitrogen Dioxide</strong>
+<strong>原文：<a href="http://202.116.70.21/L_Zealot/workspace/paperhub/warehouse/Mollner-Science-2010-330_6004_646-649.pdf">Mollner-Science-2010-330_6004_646-649.pdf</a></strong></pre>
+<p><strong>内容概述：</strong>氢氧自由基（Hydroxyl Radical）和NO2（Nitrogen Dioxide）反应生成气态硝酸这一过程是大气化学中最具影响的反应。但是目前关于这一反应在对流层内条件下速率的测量依然研究不足，主要原因是 1. 实验室测量760torr（毫米汞柱）气压下反应速率的困难 2. 该反应存在的二次反应通道，产物：过氧亚硝酸（peroxynitrous）量。更加加剧了测量的不确定性。研究者结合了两种激光光谱学（Spectroscopy）技术来测量两个反应通道的总速率以及在25摄氏度，760毫米汞柱下的反应分配比例。结果相比于（之前的）反应常数，当然是更准确啦，所以我们将测量的东西拿到model里去试了一下对洛杉矶地区Ozone的预报模拟，结果我猜肯定是更好啦。</p>
+
+<p><strong>笔记：</strong>文章思路很简单，就是把之前没测准的东西想个办法测准了，然后用model测试了下，挺好。所以他们主要想装逼的是：用了牛逼方法搞定了之前大家搞不定的技术难题。反正就是测量反应速率里的系数k，说了一堆看似高端的原理机制，也就是这么一回事。Fig S1里他们设计的高端实验机器系统那张图可以说下，反正不懂，可以留给老师解释下那些仪器是搞什么鬼的……大概意思是用个泵抽气，然后对着气放了两道（浅蓝和深蓝）激光，之后分析这两道激光散射光谱确定物质的量，进一步确定反应速率常数。</p>
+
+<p>图1示意了这两个channel反应，图1上面的文字介绍了分支反应的特殊特点：在较低的压力下，过氧亚硝酸的生成是个小分支，但是随着气压增大，分支率增大。随后一段引出目前矛盾：实验室测定这一反应速率系数的时候，只是测定NO2存在下OH的减小，因此只是测定的分支1+分支2反应的总系数。（k1=k1a+k1b）</p>
+
+<p>之后的段落阐述了困难的两个方面。</p>
+
+<p> </p>
+
+<p>图2对比了作者的牛逼方法测量的结果和之前几个组织（有个JPL，喷气动力实验室，加州理工的实验室，曾经很牛逼，钱学森在的时候）的结果，这张图很容易看啦。反正就是他们测得k1小，误差小；阿尔法系数他们独一无二的给出来了，k1a测量情况有点像JPL 2000.</p>
+
+<p>之后他们用自己测量的系数去模拟南加州的正午ozone污染，A是JPL2006推荐的，B是他们测得，C是被吐槽的IUPAC推荐的高k1a模拟结果，（注意他们没有观测图呢）。总之他们强调k1a小10%，ozone浓度提高10%（这就说明他们准么？难道模拟O3从来就是偏低的？）。我觉得这篇文章最大不足就是没有观测对比呀，宝宝要提出来！</p>
+
+<p> </p>
+
+<p>背景知识：化学反应速率</p>
+
+<p>发现高中的东西全忘了 = =</p>
+
+<p>维基百科复习下：https://zh.wikipedia.org/wiki/%E9%80%9F%E7%8E%87%E6%96%B9%E7%A8%8B</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/139718010280082228.jpg"><img class="alignnone wp-image-866 size-full" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2016/10/139718010280082228-e1476131794502.jpg" alt="139718010280082228" width="1280" height="948" /><span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a></p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/10/03/mollner-science-2010/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/">查看进程及对应IP</a>
+                  <a class="post-link" href="/2016/09/22/ehn-nature-2014/">Ehn-Nature-2014</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-02
+                        <i class="fa fa-calendar"></i>2016-09-22
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -463,9 +468,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+        <a href="/category/#PaperReading" title="Category: PaperReading" rel="category">PaperReading</a>&nbsp;
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
+        <a href="/category/#2016" title="Category: 2016" rel="category">2016</a>
     
   
 
@@ -482,9 +487,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+        <a href="/tag/#PaperReading" title="Tag: PaperReading" rel="tag">PaperReading</a>&nbsp;
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
+        <a href="/tag/#2016" title="Tag: 2016" rel="tag">2016</a>
     
   
 
@@ -493,32 +498,45 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#lsof--pnl-m--i4" id="markdown-toc-lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></a></li>
-</ul>
+                    
+<h4><span style="color: #339966;"><strong>2016/09/22</strong></span></h4>
+<pre><strong>题目：A large source of low-volatility secondary organic aerosol</strong>
+<strong>原文：<a href="http://202.116.70.21/L_Zealot/workspace/paperhub/warehouse/Ehn-Nature-2014-506_7489_476-479.pdf">Ehn-Nature-2014-506_7489_476-479.pdf</a></strong></pre>
+<p><strong>笔记：</strong>森林会释放大量的VOC，其氧化产物可以形成SOA.SOA会通过直接辐射效应和充当云凝结核来影响气候，但是其来源依然不清楚。通过模拟大气环境的箱试验，来探究terpene的是氧化。发现一条直接的反应路径：尤其对于monoterpenes，会反应成低挥发性的vapours。这些气态的vapour不可逆地沉积到气溶胶表面形成SOA。这可以帮助解释为什么观测的SOA和模拟之间存在巨大差异。</p>
 
-<h1 id="lsof--pnl-m--i4">lsof -Pnl +M -i4<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></h1>
+<p>Possible questions:</p>
 
-<p>php       10684      500    3u  IPv4 1890733      0t0  TCP 202.116.70.21:48785-&gt;140.90.101.63:80 (SYN_SENT)
-sshd      10692        0    3r  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
-sshd      10702      500    3u  IPv4 1890422      0t0  TCP 202.116.70.21:22-&gt;58.254.4.117:2268 (ESTABLISHED)
-sshd      10702      500    9u  IPv4 1890569      0t0  TCP 127.0.0.1:6010 (LISTEN)
-sshd      10754        0    3r  IPv4 1890641      0t0  TCP 202.116.70.21:22-&gt;202.116.70.153:60307 (ESTABLISHED)</p>
+<ol>
+  <li>
+    <p>Could you explain more about the chamber experiment? How did they set up the experiment?</p>
+  </li>
+  <li>
+    <p>What is the particular process of SOA formation by vapour condensation?</p>
+  </li>
+</ol>
+
+<p> </p>
+
+<p> </p>
+
+<p>萜烯：terpene， 是一系列萜类化合物的总称，是分子式为异戊二烯的整数倍的烯烃类化合物。萜烯是一类广泛存在于植物体内的天然来源碳氢化合物，可从许多植物，特别是针叶树得到。它是树脂以及由树脂而来的松节油的主要成分。根据近年来的研究，除了在植物中大量存在萜类化合物外，在海洋生物体内也提取出了大量的萜类化合物，据统计，目前已知的萜类化合物的总数超过了22000种。</p>
+
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/02/e6-9f-a5-e7-9c-8b-e8-bf-9b-e7-a8-8b-e5-8f-8a-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/09/22/ehn-nature-2014/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/">【python】Ipython安装</a>
+                  <a class="post-link" href="/2016/09/06/e3-80-90cesm-e3-80-91couple-the-sp-cam-with-pop/">【CESM】couple the SP-CAM with POP</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-05-02
+                        <i class="fa fa-calendar"></i>2016-09-06
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -537,7 +555,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -554,7 +572,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -564,21 +582,13 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                 </div>
                 <div class="excerpt">
                     
-<p>想安装ipython，直接用pip貌似出错</p>
+<p>试图将SP-CAM和POP耦合起来，依然采用修改env_build atm physics的方式进行，build到链接一步出错，居然是CRM下有module名和POP下重名。（moudule grid）</p>
 
-<p>pip install ipython，出错</p>
-
-<p>OSError: [Errno 2] No such file or directory: ‘/usr/local/lib/python2.7/site-packages/setuptools-1.4.2-py2.7.egg’<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>根据<a href="http://ipython.org/ipython-doc/stable/install/install.html">官方安装说明</a>，加入</p>
-
-<p>pip install “ipython[all]”</p>
-
-<p>即可。</p>
+<p>找到相应module改名，sed查找所有use module的地方改名，修改module定义的源文件名，build，done！</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/05/02/e3-80-90python-e3-80-91ipython-e5-ae-89-e8-a3-85/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/09/06/e3-80-90cesm-e3-80-91couple-the-sp-cam-with-pop/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -593,10 +603,10 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page39" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">40/91</span>
+          <span class="page_number ">40/93</span>
           
             <a href="/page41" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -612,6 +622,34 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1983,6 +2021,14 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2028,14 +2074,21 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2056,14 +2109,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2182,7 +2228,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2224,7 +2270,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2245,7 +2291,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2308,7 +2354,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2476,7 +2522,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2730,6 +2776,20 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2743,6 +2803,16 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2752,16 +2822,6 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2779,7 +2839,16 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2789,15 +2858,6 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2815,7 +2875,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3148,7 +3208,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3202,7 +3262,7 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3300,6 +3360,33 @@ sshd      10754        0    3r  IPv4 1890641      0t0  TCP
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

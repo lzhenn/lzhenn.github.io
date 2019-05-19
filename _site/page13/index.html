@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/04/01/jinlin-wrf-tianhe2/">Porting WRF v3.8.1 on Tianhe2</a>
+                  <a class="post-link" href="/2018/04/17/keyword-notebook/">学习与工作日记：关键词</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-04-01
+                        <i class="fa fa-calendar"></i>2018-04-17
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,11 +376,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
     
         <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
     
   
 
@@ -393,9 +397,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
     
-        <a href="/tag/#WRF" title="Tag: WRF" rel="tag">WRF</a>
+        <a href="/tag/#keyword&nbspnotebook" title="Tag: keyword&nbspnotebook" rel="tag">keyword&nbspnotebook</a>
     
   
 
@@ -404,115 +408,90 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>帮JL移植wrf3.8.1到天河2号。首先调整环境变量。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">.</span> /etc/bashrc
-<span class="k">fi</span>
-<span class="c"># edited on Apr 1, 2018 for WRF</span>
-<span class="c"># User specific aliases and functions</span>
-<span class="c">#bug fix</span>
-<span class="nb">source</span> /WORK/app/osenv/ln1/set2.sh
-<span class="nb">export </span><span class="nv">MODULEPATH</span><span class="o">=</span>/WORK/app/modulefiles
+                    <ul id="markdown-toc">
+  <li><a href="#20180312" id="markdown-toc-20180312">20180312</a></li>
+  <li><a href="#20180313" id="markdown-toc-20180313">20180313</a></li>
+  <li><a href="#20180417" id="markdown-toc-20180417">20180417</a></li>
+</ul>
 
-<span class="c">#set COMMON input data path for CESM</span>
-<span class="c">#export COMMON_CESM_INPUT=/WORK/app/CESM_inputdata</span>
+<h3 id="20180312">20180312</h3>
 
-<span class="c">#set Intel compiler and MPI</span>
-module load intel-compilers/13.0.0
-module load MPI/Intel/MPICH/3.1-icc13
-module load cmake/3.0.2
+<ul>
+  <li>Blockchain
+    <ul>
+      <li>Block–&gt;Header–&gt;Nonce–&gt;Hash</li>
+      <li>Double Spending–&gt;6 Confirmation</li>
+    </ul>
+  </li>
+  <li>Encryption Algorithm
+    <ul>
+      <li>Symmetric-key
+        <ul>
+          <li>DES–&gt;3DES–&gt;AES</li>
+        </ul>
+      </li>
+      <li>Public-key Cryptography
+        <ul>
+          <li>RSA</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Python Class
+    <ul>
+      <li>__init(self,a,b,c)__ –&gt; cls=class(a, b, c) –&gt; cls.a</li>
+      <li>method(self) –&gt; cls.method() –&gt;class.method(cls)</li>
+    </ul>
+  </li>
+</ul>
 
-<span class="c">#set hdf5 and netcdf4 for WRF</span>
-module load hdf5/1.8.13/03-CF-13
-module load netcdf/4.3.2/02-CF-13
+<h3 id="20180313">20180313</h3>
 
-<span class="c">#set jasper</span>
-<span class="nb">export </span><span class="nv">JASPER</span><span class="o">=</span>/HOME/sio_goc017/WORKSPACE/jjl/soft/jasper-1.900.1
-<span class="nb">export </span><span class="nv">JASPERLIB</span><span class="o">=</span><span class="nv">$JASPER</span>/lib
-<span class="nb">export </span><span class="nv">JASPERINC</span><span class="o">=</span><span class="nv">$JASPER</span>/include
+<ul>
+  <li>pymysql
+    <ul>
+      <li>with connection.cursor() as cursor</li>
+      <li>connection.commit()</li>
+      <li>connection.close()</li>
+    </ul>
+  </li>
+  <li>python-for-teens
+    <ul>
+      <li>string</li>
+      <li>if structure</li>
+    </ul>
+  </li>
+</ul>
 
-<span class="c">#set WRF</span>
-<span class="nb">export </span><span class="nv">WRFIO_NCD_LARGE_FILE_SUPPORT</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">WRF_EM_CORE</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">NETCDF4</span><span class="o">=</span>0
-<span class="nb">export </span><span class="nv">BUFR</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">CRTM</span><span class="o">=</span>1
-<span class="nb">export </span><span class="nv">J</span><span class="o">=</span><span class="s2">"-j 12"</span>
-<span class="nb">export </span><span class="nv">MP_STACK_SIZE</span><span class="o">=</span>4000000000
-<span class="nb">export </span><span class="nv">OMP_STACKSIZE</span><span class="o">=</span>4000000000
-<span class="nb">export </span><span class="nv">KMP_STACKSIZE</span><span class="o">=</span>4000000000
-<span class="nb">ulimit</span> <span class="nt">-s</span> unlimited
-<span class="nb">ulimit</span> <span class="nt">-c</span> unlimited
+<h3 id="20180417">20180417</h3>
 
-<span class="nv">MPI_BUFFER_SIZE</span><span class="o">=</span>128
-</code></pre></div></div>
-<p>注意在编译cumulus模块的地方大概要等待20分钟之久。采用上述环境变量出错：</p>
+<ul>
+  <li>Bayesian Model
+    <ul>
+      <li>Bayesian Model</li>
+      <li>Markov Chain</li>
+      <li>Mento Carlo</li>
+      <li>Markov Chain Mento Carlo (MCMC)</li>
+    </ul>
+  </li>
+</ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wrf.o: In <span class="k">function</span> <span class="sb">`</span>MAIN__<span class="s1">':
-wrf.f90:(.text+0x1f): undefined reference to `__intel_new_feature_proc_init'</span>
-libwrflib.a<span class="o">(</span>module_check_a_mundo.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>module_check_a_mundo_mp_check_nml_consistency_<span class="s1">':
-module_check_a_mundo.f90:(.text+0x31fa): undefined reference to `__intel_ssse3_rep_memmove'</span>
-module_check_a_mundo.f90:<span class="o">(</span>.text+0x35ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_mp_etanew.o): In function `module_mp_etanew_mp_etanewinit_'</span>:
-module_mp_etanew.f90:<span class="o">(</span>.text+0xacb0<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_mp_thompson.o): In function `module_mp_thompson_mp_table_ccnact_'</span>:
-module_mp_thompson.f90:<span class="o">(</span>.text+0x2ed74<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_ra_rrtm.o): In function `module_ra_rrtm_mp_rrtm_lookuptable_'</span>:
-module_ra_rrtm.f90:<span class="o">(</span>.text+0x256ea<span class="o">)</span>: undefined reference to <span class="sb">`</span>__intel_ssse3_rep_memmove<span class="s1">'
-libwrflib.a(module_ra_rrtmg_lw.o):module_ra_rrtmg_lw.f90:(.text+0x769bf): more undefined references to `__intel_ssse3_rep_memmove'</span> follow
-/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose_grib_<span class="s1">':
-io_grib_share.f90:(.text+0x1ee4): undefined reference to `_intel_fast_memmove'</span>
-/WORK/sio_goc017/jjl/wrfdata/WRFV3/external/io_grib_share/libio_grib_share.a<span class="o">(</span>io_grib_share.o<span class="o">)</span>: In <span class="k">function</span> <span class="sb">`</span>transpose1d_grib_<span class="s1">':
-io_grib_share.f90:(.text+0x26f5): undefined reference to `_intel_fast_memmove'</span>
-io_grib_share.f90:<span class="o">(</span>.text+0x29e3<span class="o">)</span>: undefined reference to <span class="sb">`</span>_intel_fast_memmove<span class="s1">'
-0.57user 4.84system 0:08.12elapsed 66%CPU (0avgtext+0avgdata 487696maxresident)k
-12392inputs+102200outputs (47major+183178minor)pagefaults 0swaps
-make[1]: [em_wrf] Error 1 (ignored)
-</span></code></pre></div></div>
-<p>Google以下，发现intel官网的<a href="https://software.intel.com/en-us/forums/intel-fortran-compiler-for-linux-and-mac-os-x/topic/494782">trouble shooting page</a>
-以下内容：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I believe the message may be caused by mixing objects built with different compiler versions. The __intel_new_feature_proc_init entry point is only in recent compiler libraries; if you have code built with a recent compiler, but are linking to older run-time libraries, you might encounter such a problem.
-</code></pre></div></div>
-
-<p>有道理，可能是之前编译的模块没有删掉。执行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$./clean -a
-</code></pre></div></div>
-<p>再次测试一下.出现难以理解的错误：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nup_em.f90(68): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
-   USE module_initialize_real, only : wrfu_initialize
-   -------^
-   real_em.f90(12): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [MODULE_INITIALIZE_REAL]
-
-</code></pre></div></div>
-<p>表示找不到include文件。到相关目录下检查发现文件确实存在，奇葩……重新执行compile语句后编译成功。怀疑是天河的文件系统不稳定造成。</p>
-
-<p>测试WPS编译出错。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make[1]: pathf90: Command not found
-</code></pre></div></div>
-<p>检查了下发现自己选错了architecture，并不是与前面相同的#15，而是#19.</p>
-
-<p><strong>Updated 2018-04-01</strong></p>
-
-<p>据CM大哥表示，天河不开NC4编译是不行的。果然，JL运行出错，测试NC4打开后是否能解决。</p>
-
-<p><strong>Updated 2018-04-03</strong></p>
-
+<p><strong>Updated 2018-04-14</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/04/01/jinlin-wrf-tianhe2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/17/keyword-notebook/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a>
+                  <a class="post-link" href="/2018/04/14/python-search-path/">为python增加默认的库搜索路径</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-30
+                        <i class="fa fa-calendar"></i>2018-04-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -533,7 +512,7 @@ make[1]: [em_wrf] Error 1 (ignored)
     
         <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
     
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
     
   
 
@@ -550,7 +529,7 @@ make[1]: [em_wrf] Error 1 (ignored)
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#tensorflow" title="Tag: tensorflow" rel="tag">tensorflow</a>
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>
     
   
 
@@ -560,33 +539,29 @@ make[1]: [em_wrf] Error 1 (ignored)
                 </div>
                 <div class="excerpt">
                     
-<p>开始测试tensorflow的图片分类器！
-按<a href="https://www.youtube.com/watch?v=gIhUePPFmpY">这个视频</a>来，发现train的一步出现问题</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:tensorflow:Couldn't understand architecture name ''
-</code></pre></div></div>
-<p>发现是指定的环境变量读不到，于是将给ARCH赋值的语句和python执行语句一起放到shell脚本里，问题解决。
-train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based，tf应该自动选用cuda解决了。</p>
+<p>明文密码丢到程序里当然是很傻逼的事情（参见斯导新片《头号玩家》），所以访问数据库用了AES加密（<a href="https://novarizark.github.io/2018/03/12/cryptography-python-mysql/">参见</a>）。</p>
 
-<p>之后做测试，效果很好。</p>
+<p>数据库可是个好东西，慢慢很多程序都要开始访问数据库了，那么我们自己的加密模块能否不通过动态方式添加搜索路径，像import其他模块那样引用呢？答案当然是可以的，在bashrc中修改PYTHONPATH环境变量就可以啦。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fpwweqdx63j20fz0790t7.jpg" alt="" /></p>
+<p>当然这不是推荐方法，因为具有外部依赖性。推荐方法是在site-packages目录下增加一个扩展名为.pth的文件，在里面写入增加的搜索路径。这里有<a href="https://blog.csdn.net/liang19890820/article/details/76219560">很好的介绍</a>。</p>
 
-<p><strong>Updated 2018-03-30</strong></p>
+<p><strong>Updated 2018-04-14</strong></p>
+
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/30/tf-img-classifier/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/14/python-search-path/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a>
+                  <a class="post-link" href="/2018/04/14/bayes-mcmc/">贝叶斯模型, MC, MC, 与MCMC</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-28
+                        <i class="fa fa-calendar"></i>2018-04-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -605,11 +580,7 @@ train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based�
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+        <a href="/category/#machine&nbsp;leanring" title="Category: machine&nbsp;leanring" rel="category">machine&nbsp;leanring</a>
     
   
 
@@ -626,11 +597,15 @@ train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based�
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+        <a href="/tag/#machine&nbsp;learning" title="Tag: machine&nbsp;learning" rel="tag">machine&nbsp;learning</a>&nbsp;
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+        <a href="/tag/#CUDA" title="Tag: CUDA" rel="tag">CUDA</a>&nbsp;
     
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+        <a href="/tag/#deep&nbsp;learning" title="Tag: deep&nbsp;learning" rel="tag">deep&nbsp;learning</a>&nbsp;
+    
+        <a href="/tag/#MCMC" title="Tag: MCMC" rel="tag">MCMC</a>&nbsp;
+    
+        <a href="/tag/#Bayes" title="Tag: Bayes" rel="tag">Bayes</a>
     
   
 
@@ -639,29 +614,26 @@ train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based�
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>周三助教回到东校，决定去处理一下实验室服务器，看下我的wordpress博客内容到底还有没有救。因为<a href="https://novarizark.github.io/2017/12/30/raid-rebuild/">上次</a>做了1号盘位的rebuild，这次测试将0号盘位degraded的旧硬盘换下。
-可是将0号盘位换下后，1号盘位显示为non-raid磁盘，而0号新盘直接不认，what the fuck。怀疑是上次rebuild没有完成，所以将旧硬盘再次换到0号位置让raid卡自己玩去。
-换上旧硬盘后可以正常识别到raid信息并进入系统。测试mysql数据库居然发现wp_posts数据都存在，太幸运了，我的技术博客有救了！果断导出。</p>
+                    
+<p>帮老板审稿，这稿子用了个非常牛逼的Bayesian Model+MCMC做降水的突变检验，很明显是个ML的方法，这么好的机会，肯定要抓着搞明白。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysqldump <span class="nt">-h</span> localhost <span class="nt">-u</span> root <span class="nt">-p</span> <span class="nt">--database</span> wordpress | gzip <span class="o">&gt;</span> backupfile.sql.gz
-gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> bck.sql 
-</code></pre></div></div>
+<p>整理一些资料如下：</p>
 
-<p>之后在mysql下导入</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">source</span> <span class="o">~/</span><span class="n">bck</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
-</code></pre></div></div>
+<ol>
+  <li><strong><a href="https://blog.csdn.net/pongba/article/details/2958094">贝叶斯方法介绍</a></strong>: 这是篇非常好的科普，从贝叶斯老爷的逆概问题讨论形式化的贝叶斯概型。</li>
+  <li><strong><a href="https://site.douban.com/182577/widget/notes/10567181/note/292072927/">MC, MC, MCMC</a></strong>: 蒙特卡洛、马尔可夫链，到马尔可夫链蒙特卡洛方法。</li>
+  <li><strong><a href="https://zh.wikipedia.org/wiki/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0">似然函数</a></strong>:终于明白了似然函数是什么意思，表征观测结果对应预期分布的似然性。定性的说，一个硬币投了一百次有90次正面，那么这个硬币正常的似然性很低很低。</li>
+  <li><strong><a href="">最大似然估计</a></strong>:对同一个似然函数，如果存在一个参数值，使得它的函数值达到最大的话，那么这个值就是最为“合理”的参数值。</li>
+  <li><strong><a href="http://sunyi514.github.io/2016/03/05/mcmc%E6%96%B9%E6%B3%95%E5%B0%8F%E8%AE%B0/">MCMC方法小记</a></strong>：好例子!</li>
+  <li><strong><a href="http://xccds1977.blogspot.kr/2014/07/mcmc.html">理解MCMC</a></strong>:好例子！</li>
+</ol>
 
-<p>查看中文时注意utf8编码</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span> <span class="k">names</span> <span class="n">utf8</span><span class="p">;</span>
-</code></pre></div></div>
+<p><strong>Updated 2018-04-14</strong></p>
 
-<p>后面考虑写个python脚本将过去的日志转成markdown放到jekyll博客下。</p>
-
-<p><strong>Updated 2018-03-28</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/28/recover-techblog/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/04/14/bayes-mcmc/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -676,10 +648,10 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page12" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">13/91</span>
+          <span class="page_number ">13/93</span>
           
             <a href="/page14" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -695,6 +667,34 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2066,6 +2066,14 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2111,14 +2119,21 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2139,14 +2154,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2265,7 +2273,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2307,7 +2315,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2328,7 +2336,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2391,7 +2399,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2559,7 +2567,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2813,6 +2821,20 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2826,6 +2848,16 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2835,16 +2867,6 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2862,7 +2884,16 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2872,15 +2903,6 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2898,7 +2920,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3231,7 +3253,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3285,7 +3307,7 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3383,6 +3405,33 @@ gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> 
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,91 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/">【已解决】rsync命令的使用</a>
+                  <a class="post-link" href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/">【已解决】Grub2默认启动Windows的设置</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-31
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>同步CESM的input数据到hpc4，但是已有的文件不希望被覆盖掉，scp不能用，只能采用rsync命令。以从东校区工作站传回数据为例</p>
-<blockquote><strong>rsync -vzrtopg --progress -e 'ssh -p 80' workstation@222.200.180.66:/home/workstation/L_Zealot ./</strong></blockquote>
-<p>参数解释：</p>
-<blockquote>-v, --verbose 详细模式输出
--z, --compress 对备份的文件在传输时进行压缩处理
--r, --recursive 对子目录以递归模式处理
--t, --times 保持文件时间信息
--p, --perms 保持文件权限
--o, --owner 保持文件属主信息
--g, --group 保持文件属组信息
---progress 在传输时现实传输过程
--e 'ssh -p 80' ssh方式传输，端口80</blockquote>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91rsync/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所拷贝回CESM Input Data硬盘挂载问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-31
+                        <i class="fa fa-calendar"></i>2014-09-20
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -479,30 +403,33 @@
                 </div>
                 <div class="excerpt">
                     
-<p>从大气所带回来的硬盘用Orico的硬盘座接e-SATA口，windows下直接提示要格式化，这还得了，记得当初这个分区是我做的，ext4格式，重启到Linux下，fdisk -l傻眼了，居然成了NTFS格式，测试mount -t ntfs-3g或ext4都不行，百般无奈以为出现坏道了。结果双击文件系统下的2TB文件系统却可以挂载了，显示为ext格式。无语……</p>
+<p>前两天给X240s换了固态硬盘，重装系统后一直没再折腾。今天终于有空处理下CentOS7默认启动项的问题了。解决方法应该比较暴力：</p>
 
-<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
-
-<p>到超算中心拷贝出现同样问题，钟英师姐帮忙发现其实问题很好解决，直接不使用-t参数指定的话，系统会自动检测类型挂载。反正不知道系统怎么检测出的，能挂上就是了……以在/dev/sdc5为例</p>
-<blockquote>mount /dev/sdc5 ./</blockquote>
-<p>DONE！</p>
-
-<p><strong><span style="color: #008000;">#Up to 20140903#</span></strong></p>
+<p>grub2/grub.cfg下</p>
+<blockquote>if [ "${next_entry}" ] ; then
+set default="${next_entry}"
+set next_entry=
+save_env next_entry
+set boot_once=true
+else
+<strong>set <span style="color: #ff0000;">default=0</span></strong>
+fi</blockquote>
+<p>直接把${saved_entry}展开变量改成Windows所在列表号就可以。反正谁也不会动辄改动grub</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/">【已解决】CESM-CAM积分步长调节</a>
+                  <a class="post-link" href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/">【已解决】四期平台ys队列排队机制问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-08-28
+                        <i class="fa fa-calendar"></i>2014-09-19
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -521,7 +448,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
     
   
 
@@ -538,7 +467,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
     
   
 
@@ -548,48 +479,108 @@
                 </div>
                 <div class="excerpt">
                     
-<h3>CAM Standalone</h3>
-<p>namelist修改加入</p>
+<p>前几天发现ys队列的排队机制存在问题，即若某节点已经被前一个任务独占，排队机制似乎没有摒除该节点，后一个任务依然可能被提交到该节点，造成负载过大。发邮件给学校超算中心后如石沉大海，没有回复。想到之前给杨老师集群做测试的时候，直接手动指定hostfiles，于是自己动手，丰衣足食。</p>
 
-<p>dtime=1200, nsplit=6, nspltrac=2, nspltvrm=2</p>
+<p>先写hostfile文件，比如使用c74到c77四个节点，每个节点16个核心，hostfile可以这样写</p>
 
-<p>第一句是把积分时长调整到1200s每步</p>
+<p>c74:16</p>
 
-<p>后面三个如果不加入会报错，出错信息中会有建议更改的数值，看起来估计是与物理步长中与动力步长的匹配有关，但是依然搞不清楚这几个变量的意义……</p>
+<p>c75:16</p>
 
-<p>以上几个namelist的解释：</p>
-<pre><strong>nsplit----</strong>Number of dynamics timesteps per physics timestep. If zero, a best-estimate
-will be automatically calculated.</pre>
-<pre><strong>nspltrac</strong>----Number of tracer advection timesteps per physics timestep.
-Nsplit is partitioned into nspltrac and nsplit/nspltrac,
-with the latter being the number of dynamics timesteps per
-tracer timestep, possibly rounded upward; after initialization,
-the code quantity nsplit is redefined to be the number of
-dynamics timesteps per tracer timestep.</pre>
-<pre><strong>nspltvrm----</strong>Number of vertical re-mapping timesteps per physics timestep.
-Nspltrac is partitioned into nspltvrm and nspltrac/nspltvrm,
-with the latter being the number of tracer timesteps per
-re-mapping timestep, possibly rounded upward; after initialization,
-the code quantity nspltrac is redefined to be the number of
-tracer timesteps per re-mapping timestep.</pre>
-<h3>CESM Script</h3>
-<p>这个除了需要处理standalone中的变量外，还需要更改run_env.xml中存在相应的字段：</p>
-<blockquote>&lt;entry id="NCPL_BASE_PERIOD"   value="day"  /&gt;
+<p>c76:16</p>
 
-&lt;entry id="ATM_NCPL"   value="48"  /&gt;</blockquote>
-<p>上面那行的设置代表coupler耦合频率的单位，value对应为日，下面那行是在coupler耦合单位内，ATM通过coupler和其他模块耦合的次数，值为48，即每天耦合48次，可以理解为积分步长为1800s（半小时），如果要更改积分步长为900s，将48改为96即可。同时我们可以注意到这个值在后面的语句中分别被赋给了LND OCN等其他模块，保证各个模块的耦合频率一致。如果没有正确修改dtime, nsplit, nspltrac, nspltvrm这些变量，则会出现<strong>Bad namelist settings for FV subcycling报错。</strong></p>
+<p>c77:16</p>
 
-<p>当然，这里还有疑问就算，我们即便把standalone里修改的几个变量拿过来，也仅仅是修改了CAM的积分步而已，其他分量并没有修改，是会自动更改么？还是怎样？目前测试积分了三年，没有出现问题。</p>
+<p>然后mpirun -hosts后面指定到这个文件。</p>
 
-<p><strong><span style="color: #008000;">#Up to 20140831#</span></strong></p>
-
-<p>前段时间忘了更新了。对于F05的配置，似乎直接在user_nl_cam中修改dtime=900就可以，什么都不用动……似乎split与dtime呈一定的倍数关系，dtime减半并不影响这个倍数关系的调整。当然，依然没有搞懂……</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141108#</span></strong></p>
+<p>需要注意的是，提交pbs的话会被忽视这个设定，所以只能采用screen的方式运行脚本。pestat qstat下都不能查到任务号。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/08/28/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cam-s/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91think/">【已解决】Thinkpad U盘安装win7出现“安装程序无法创建新的系统分区……”</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-09-16
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>这个问题很奇葩，有点意思。老板发的Thinkpad，换SSD后装系统，格式化硬盘无法下一步进入复制和展开安装文件阶段，报错“安装程序无法创建新的系统分区 也无法定位……”</p>
+
+<p>百度之，发现解决方法非常奇葩：</p>
+<blockquote>先格式化一下你要装的那个盘，然后，拔出U盘，啥也别动，只拔出U盘究行，再装上U盘，然后刷新一下【选硬盘那里的高级选项中有格式化和刷新】，再选择要安装的硬盘点下一步，OK了，可以正常安装了</blockquote>
+<p>我勒个去，这是因为个鸟毛？在好奇心驱使下，继续搜索，发现这个回答比较靠谱：</p>
+<blockquote>这个问题只出现在使用U盘安装win7的时候。具体原因很难讲，我猜测是当在这个界面选择安装到C盘时，安装程序会搜索（hd0，0），但实际的（hd0，0）不是C盘而是U盘（因为U盘是启动盘，如果你有用过grub4dos就知道了），所以就出现了这个错误提示。
+
+我的解决方法很简单:
+解决方法1：
+拔掉U盘，安装就可以继续了。
+解决方法2：
+用ultraiso写到U盘。原因很简单，ultraiso是模拟cd-rom方式写入，启动后U盘占用的是光盘盘符，因此C盘还是（hd0，0）</blockquote>
+<p>看起来WT这个镜像不是拿UltraISO刻录的呀，还是软碟通好使……</p>
+
+<p>参考资料：</p>
+
+<p>http://zhidao.baidu.com/link?url=PcRCaz9PrfsPv4rHRDdZhWXIWxxP-XFLwUXeGpuUPFpR3L1xK3lSLwgVwWHqP9DmMr-mQinII46M5HalpWllKK</p>
+
+<p>http://zhidao.baidu.com/link?url=bT8DZQs3jr6WSRf7J_ruYf7Divgqlrc3z8Kpi1LJRu79wHf1rjLXJn13Qt3FrjJSK76j74BbE9w17H7YvYOujXI9KUOpcpSo-mIOHj9Pc4a</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/09/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91think/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -604,10 +595,10 @@ tracer timesteps per re-mapping timestep.</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page81" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">82/91</span>
+          <span class="page_number ">82/93</span>
           
             <a href="/page83" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -623,6 +614,34 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1994,6 +2013,14 @@ tracer timesteps per re-mapping timestep.</pre>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2039,14 +2066,21 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2067,14 +2101,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2193,7 +2220,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2235,7 +2262,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2256,7 +2283,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2319,7 +2346,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2487,7 +2514,7 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2741,6 +2768,20 @@ tracer timesteps per re-mapping timestep.</pre>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2754,6 +2795,16 @@ tracer timesteps per re-mapping timestep.</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2763,16 +2814,6 @@ tracer timesteps per re-mapping timestep.</pre>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2790,7 +2831,16 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2800,15 +2850,6 @@ tracer timesteps per re-mapping timestep.</pre>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2826,7 +2867,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3159,7 +3200,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3213,7 +3254,7 @@ tracer timesteps per re-mapping timestep.</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3311,6 +3352,33 @@ tracer timesteps per re-mapping timestep.</pre>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/07/08/e3-80-90shanbei-news-notes-e3-80-9120150708/">【Shanbei News Notes】20150708</a>
+                  <a class="post-link" href="/2015/07/21/e3-80-90-e8-bf-9b-e8-a1-8c-e4-b8-ad-e3-80-91cesm/">【已解决】CESM Tibetan Plateau无PBL加热试验</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-08
+                        <i class="fa fa-calendar"></i>2015-07-21
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,9 +376,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
     
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
     
   
 
@@ -391,9 +395,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
     
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
     
   
 
@@ -403,35 +407,99 @@
                 </div>
                 <div class="excerpt">
                     
-<h2 class="head-title"><a href="http://www.shanbay.com/read/article/34414/">Lawyers: Cosby's Drugs-Sex Admission Could Aid Women's Cases 律师称：考斯比承认使用安眠酮，或有助于性侵指控</a></h2>
-<p>civil case 民事诉讼</p>
+<p>wzq师兄希望做一个没有青藏高原PBL加热的试验，因为有之前改deep convection的经验，这个应该不复杂。</p>
 
-<p>criminal charge field 刑事指控领域</p>
+<p>wzq tends to test an experiment without sensible heating from the TP. As I’ve got the experience from deep convection heating experiments,  this shouldn’t be very complex.</p>
 
-<p>admission 承认</p>
+<p>首先希望能用model自身读入netcdf格式的TP mask文件。grep到了 control目录下的cam_initfiles.F90文件，其中是读init数据和topo数据的，果断就follow格式加入如下语句：</p>
 
-<p>bolster: to give support to sth</p>
+<p>First, we hope to get var from the netcdf file directly via the packeged method in the model. Using command ‘grep’, we located a source file called cam_initfiles.F90, which was programmed to read init data and topo data. Thus, we follow the style of this file to add the changes as follows:</p>
+<pre>20d19
+&lt; tpmask_file_get_id, &amp;! returns filehandle for tp mask file
+23c22
+&lt; type(file_desc_t), pointer :: fh_ini, fh_topo, fh_tpmask
+---
+&gt; type(file_desc_t), pointer :: fh_ini, fh_topo
+39,42d37
+&lt; function tpmask_file_get_id()
+&lt; type(file_desc_t), pointer :: tpmask_file_get_id
+&lt; tpmask_file_get_id =&gt; fh_tpmask
+&lt; end function tpmask_file_get_id
+59,61d53
+&lt; character(len=256) :: bnd_tpmask_loc ! filepath of topo file on local disk
+&lt;
+&lt; bnd_tpmask_loc = "/users/yangsong3/wzq/TP_noPBL_HEAT/data/TPmask.nc"
+72c64
+&lt; call getfil(bnd_topo, bnd_topo_loc) !getfil is check process
+---
+&gt; call getfil(bnd_topo, bnd_topo_loc)
+78,82d69
+&lt;
+&lt; ! 20150721 Add for TP mask
+&lt; allocate(fh_tpmask)
+&lt; call cam_pio_openfile(fh_tpmask, bnd_tpmask_loc, PIO_NOWRITE)
+&lt;
+106,110d92
+&lt;
+&lt;
+&lt; call pio_closefile(fh_tpmask)
+&lt; deallocate(fh_tpmask)
+&lt; nullify(fh_tpmask)</pre>
+<p>TPmask数据放到了case的新建data目录下，编译，成功！已经把文件打开了，然后去找读入topo文件的代码！<code></code></p>
 
-<p>file in 编入</p>
-<h3><a href="http://www.shanbay.com/read/article/34441/">Carnival Aims to Launch Miami-Cuba Cruises in May 2016 嘉年华集团获得美国政府批准于2016年五月开通迈阿密-古巴邮轮航线</a></h3>
-<p>a handful of 少量</p>
+<p>We then put the TPmask.nc to a new foolder “data” in the case directory, and compile the model. Successed! We now go back to the code in cam_initfiles.F90 and find that there is no read data keyword for topo. However, a “readinitial” keyword operated to the initial data found in the file.</p>
 
-<p>charter fight 包机</p>
+<p>grep the keyword with “readinitial”, we found a file called readinitial.F90. Check it! To our disappointment, it is only for the validation check. Next, we change another keyword “topo” to grep, we found <strong>startup_initialconds.F90</strong>, in this file, we then locate a sentence</p>
+<pre> call read_inidat(fh_ini, fh_topo, dyn_in)</pre>
+<p>Very interesting! we believe this could be the true method to read data from the topo file. Another grep!</p>
+
+<p>In fact, we found keyword “dycore” appeared in a number of files. Then we locate $SRC/dynamic/fv, then we grep <strong>inidat.F90. </strong>In this file, we finally found how the model deal with the topo field</p>
+<pre>    fieldname = 'PHIS'
+    readvar   = .false.
+    if (ideal_phys .or. aqua_planet) then
+       dyn_in%phis(:,:) = D0_0
+    else
+       allocate(phis_tmp(im, jm))
+       <strong>call infld(fieldname, ncid_topo, 'lon', 'lat', ifirstxy, ilastxy, jfirstxy, jlastxy, &amp;</strong>
+<strong>            dyn_in%phis, readvar, grid_map='dyn')</strong>
+       if (.not. readvar) &amp;
+            call endrun(trim(subname)//' ERROR: PHIS not found on topo dataset.')
+      <strong> call process_inidat(ncid_ini, ncid_topo, grid, dyn_in, 'PHIS')</strong>
+    end if</pre>
+<p>Apparently, infld is a method that read a field from a specific file. grep “infld” and locate the file ./control/<strong>ncdio_cam.F90 </strong>to refer the usage. Since “infld” is a common usage in many source files, we try to search it in the main interface of the physics package <strong>physpkg.F90, </strong>bingo! We got it in subroutine phys_initdat(). We are familiar with this source file because we have changed the deep convection in this file. Phys_initdata() is a subroutine that only be called during the startup run. Therefore, we add a infld in <strong>phy_init()</strong>, which would be called during every run type.</p>
+
+<p>Be careful with the “use module_name” statement, never leave a wild variable. Then we need to add another field to the surface field. Definition code is in <strong>comsrf.F90</strong></p>
+<pre>&lt;   public landm, sgh, tpmask, sgh30, fv, ram1, soilw, fsns, fsds
+---
+&gt;   public landm, sgh, sgh30, fv, ram1, soilw, fsns, fsds
+43d42
+&lt;   real(r8), allocatable:: tpmask(:,:)    ! Tibetan Platau Mask flag
+105d103
+&lt;        allocate (tpmask  (pcols,begchunk:endchunk))
+128d125
+&lt;        tpmask   (:,:) = nan</pre>
+<p>Try to build it again. Successful! Now we have read the TP mask in.</p>
+
+<p><strong>#Up to 20150722#</strong></p>
+
+<p>The final code has been uploaded to my <a href="https://github.com/Novarizark/project/tree/master/TP_HEAT_wzq-2015/SourceMods/src.cam">github</a>. So, no more update here.</p>
+
+<p><strong>#Up to 20150924#</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/07/08/e3-80-90shanbei-news-notes-e3-80-9120150708/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/07/21/e3-80-90-e8-bf-9b-e8-a1-8c-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/07/07/e3-80-90shanbei-news-notes-e3-80-9120150707/">【Shanbei News Notes】20150707</a>
+                  <a class="post-link" href="/2015/07/15/e3-80-90r-e3-80-91installing-r-on-windows/">【R】Installing R on Windows</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-07
+                        <i class="fa fa-calendar"></i>2015-07-15
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -450,9 +518,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
+        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>&nbsp;
     
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
+        <a href="/category/#Software" title="Category: Software" rel="category">Software</a>&nbsp;
+    
+        <a href="/category/#R" title="Category: R" rel="category">R</a>
     
   
 
@@ -469,9 +539,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
+        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>&nbsp;
     
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
+        <a href="/tag/#Software" title="Tag: Software" rel="tag">Software</a>&nbsp;
+    
+        <a href="/tag/#R" title="Tag: R" rel="tag">R</a>
     
   
 
@@ -481,49 +553,37 @@
                 </div>
                 <div class="excerpt">
                     
-<h3><a href="http://www.shanbay.com/read/article/reviews/34402/">Analysts: Greece Now More Likely to Leave Euro 分析师：希腊目前更可能离开欧元区</a></h3>
-<p>deeper austerity and greater cuts in spending <strong>in exchange for</strong> additional loans （通过）更深入的财政紧缩和更大的削减开支以换取额外的贷款</p>
+<h3>R</h3>
+<p>Download from http://cran.r-project.org/</p>
 
-<p>issue ious 发布借据 issue动词作“发布”意， iou=I owe you 借据，欠款</p>
+<p>Choose the “Basic”</p>
 
-<p>repay loans denominated in the euro currency 以欧元的名目还贷</p>
+<p>Wait the download 10+ min, and click, click, click… Done</p>
+<h3>RStudio</h3>
+<p>Download from https://www.rstudio.com/products/rstudio/download/</p>
 
-<p>go bust 破产</p>
+<p>choose the PC version and for OS Windows</p>
 
-<p>resume bargaining 恢复谈判</p>
+<p>Download (a few minutes) and install, easy!</p>
 
-<p>pressing 紧迫的</p>
-
-<p>Goldman Sachs 高盛集团</p>
-
-<p>egregious mismanagement 过分的管理不善</p>
-
-<p>parlous state 危险的境地</p>
-
-<p>a staunch opponent of debt relief 债务减免的坚决反对者</p>
-
-<p>or be forced to pay a “risk premium” [high interest rate] to get loans 被迫支付一个高的“风险溢价”（高息）以获得贷款</p>
-
-<p>she expects the crisis to cause volatility and sell-offs in European markets and have potentially serious long-term political implications for Europe 她预计这场危机将导致欧洲市场的波动和抛售，并有可能造成潜在的长期政治影响。</p>
-
-<p>reaction in the bond market has been “muted” so far 债券市场的反应一直是“静音状态”</p>
+<p> </p>
 
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/07/07/e3-80-90shanbei-news-notes-e3-80-9120150707/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/07/15/e3-80-90r-e3-80-91installing-r-on-windows/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2015/07/06/e3-80-90shanbei-news-notes-e3-80-9120150706/">【Shanbei News Notes】20150706</a>
+                  <a class="post-link" href="/2015/07/13/e4-bf-ae-e6-94-b9vim-e6-b3-a8-e9-87-8a-e9-a2-9c-e/">修改vim注释颜色以及ls目录颜色</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2015-07-06
+                        <i class="fa fa-calendar"></i>2015-07-13
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -542,9 +602,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#English" title="Category: English" rel="category">English</a>&nbsp;
-    
-        <a href="/category/#ShanbeiNews" title="Category: ShanbeiNews" rel="category">ShanbeiNews</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -561,9 +619,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#English" title="Tag: English" rel="tag">English</a>&nbsp;
-    
-        <a href="/tag/#ShanbeiNews" title="Tag: ShanbeiNews" rel="tag">ShanbeiNews</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -573,32 +629,23 @@
                 </div>
                 <div class="excerpt">
                     
-<h3><a href="http://www.shanbay.com/read/article/34345/">With Hours Left, Greek Vote on Austerity Measures Is Tossup 希腊关于经济紧缩的公投结果将于数小时后揭晓</a></h3>
-<p>tossup 成败各半</p>
+<p>vim下的注释和ls出来的目录字体颜色都是深蓝色的，在终端黑色背景下看起来非常累，修改这个颜色也很简单。</p>
 
-<p>tax hike 税收增加</p>
+<p>vim注释颜色修改：</p>
+<pre>$vi ~/.vimrc
+hi Comment ctermfg=6;
+:wq</pre>
+<p>这样就可以把注释改成青色的了。</p>
 
-<p>bailout 纾困， 缓解困难</p>
-
-<p>too close to call 难分伯仲</p>
-
-<p>too costly for both sides 两败俱伤</p>
-
-<p>Gross Domestic Product GDP</p>
-
-<p>lead up to 为……做准备</p>
-
-<p>enslaved by 受……奴役</p>
-
-<p>reflect on 反思</p>
-
-<p>throw stun grenade 投掷闪光雷</p>
-
-<p>clash with 与……起冲突</p>
+<p>ls出来的目录颜色修改，黄色</p>
+<pre>$vi ~/.bashrc
+LS_COLORS=$LS_COLORS:'di=0;33:'; 
+export LS_COLORS
+:wq</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2015/07/06/e3-80-90shanbei-news-notes-e3-80-9120150706/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/07/13/e4-bf-ae-e6-94-b9vim-e6-b3-a8-e9-87-8a-e9-a2-9c-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -613,10 +660,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page54" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">55/91</span>
+          <span class="page_number ">55/93</span>
           
             <a href="/page56" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -632,6 +679,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2003,6 +2078,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2048,14 +2131,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2076,14 +2166,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2202,7 +2285,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2244,7 +2327,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2265,7 +2348,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2328,7 +2411,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2496,7 +2579,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2750,6 +2833,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2763,6 +2860,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2772,16 +2879,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2799,7 +2896,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2809,15 +2915,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2835,7 +2932,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3168,7 +3265,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3222,7 +3319,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3320,6 +3417,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/30/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/">大气所学习小记20140729</a>
+                  <a class="post-link" href="/2014/08/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM输出频率和变量的调节</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-30
+                        <i class="fa fa-calendar"></i>2014-08-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -371,6 +375,81 @@
 <span class="categories">
   <i class="fa fa-th-list"></i>
   
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>在被上一篇（http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=64）文章中所出现的问题折腾很久后，决定不再直接转30年那么久，还是一点点先调整再说。默认转5天，为了检测，就需要把输出也调节为逐日输出。这一点在CESM的users’ guide上写的比较清楚。</p>
+
+<p>比如逐日输出，标准输出变量场中加入QFLX变量，cesm_setup前将以下namelist变量的修改加入user_nl_cam</p>
+<blockquote>
+<p style="padding-left: 30px;">nhtfrq= -24</p>
+<p style="padding-left: 30px;">fincl1='QFLX'</p>
+</blockquote>
+<p>之后采用cesm_setup可以验证namelist的修改是否正确。</p>
+
+<p>假设运行5days，希望每天生成一个文件的话，加入如下语句</p>
+<blockquote>
+<p style="padding-left: 30px;">mfilt=1</p>
+</blockquote>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/08/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/">看CESM Tutorial CAM Physics (Video)的一点想法</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-08-01
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
     
         <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
     
@@ -389,6 +468,8 @@
   <i class="fa fa-tags"></i>
   
     
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
         <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
     
   
@@ -399,50 +480,30 @@
                 </div>
                 <div class="excerpt">
                     
-<p>早起公交，早饭。饭后去家乐福买了香皂和纸巾，发现把杯子丢在了宿舍，于是又买了一瓶水。</p>
+<p>今天看完了Tutorial里关于Physics in CAM的视频。下载发现从2010年到2013年每一年的Tutorial释放出的pdf都差不多，但是13、12年却都没有这一场lecture的视频，这部还是从11年的resource里下到的。报告者是Neale，很年轻小伙，思维灵活，语速很快，基本跟不上，长相看起来很干练。有那么一两分像Prof. Yi Ming，当然啦，一个华人一个老外。</p>
 
-<p>到所里发现办公室没有开门，没钥匙。发短信问国魁师兄什么时间过来。没回。便先去了611孟军师兄的办公室小坐。九点多下来一次还是没人，好在十点钟有报告。</p>
+<p>快讲到最后几张ppt的时候Neale吐了个槽很好玩，大概意思是我们搞Atm Model真是悲了个剧啊，我们要处理云啊你造么，各种姿态各种高度各种分布各种奇葩的云啊你造么，云里面水也有冰也有雪也有霰也有水汽还有，固液气一家三口都在里面啊你造么，都是二话不说直接扔给我们搞Atm Model的来处理啊……哪像人家Ocean Model，天天转的都是液态水，海表蒸发出水汽了，人家不要了，直接扔给大气模块；海表冻出冰了，人家也不要了，这是冰雪模块干的事……</p>
 
-<p>报告内容：http://www.lasg.ac.cn/xsbg/2014/7/q1c61fkk14.htm。前两天杨老板发消息说中大八月份的一个报告便是这个。</p>
+<p>一哂过后，想到前段时间在PNAS上看到的一篇文章，大概是说给CESM来了个Super-parameterization，看高CO2情景下的响应。所谓Super-Parameterization，实际就是在CESM的每一个大网格里都套了一个更小尺度的专门对付积云对流的模式，结果好像是发现在全球这个尺度的响应上，和CESM默认的Zhang方案有差不多的效果，说明CESM的对流参数化还是做得不错的。话说回来，Neale吐得槽以后能不能用这种类似方法来解决呢？即专门开发积云模式，然后做好接口工作套在全球模式里就可以了。广而言之，能否把参数化过程都独立成一个个的模块，由该领域的专业人员进行开发，使得这些模块独自能够运行（比如专门的边界层模式、辐射传输模式），也可以嵌入到CESM这种全球模式中。</p>
 
-<p>Prof. Wang没有讲数学细节，依然听不懂。大概内容是通过最大熵增原理去计算地表能量收支，可以理解为一个模型或者说通用方法。信息熵的观点引入到地学研究的一个成功范例。前面讲和Bulk Transfer Model的对比，一般陆面模式的Bulk Transfer Model缺点倒是记得清楚：1.计算过程中能量缺乏守恒性，2.存在梯度计算，测量误差很大，3.风速的不确定性，粗糙度的难以测量，4.一阶闭合本身就是近似，精确度有限。</p>
+<p>想来想去，其实现在已经有了呀。专门的边界层模式、辐射传输模式（RRTM不就是商业公司的产品么，由于太优秀了所以被引入气象模拟……）、积云模式等等，模块化必然也是全球模式的趋势吧：CESM等已经做了大圈层的模块化，如大气模块海洋模块冰雪模块等等，下一步圈层级模块内部物理过程的模块化应该也是必须的。当然，对全球模式来说，挑战还是很多的：首先必须要出台统一的接口标准，貌似ESMF、MCT这些就是干这个的，不过不了解，也不知道委员会成员的野心大不大，能搞出一套类似通信网络OSI 7层模型这种高大上的接口标准那就牛逼了；其次还是计算的问题，如果每一个大网格点都要在次网格的尺度上去转很多小模式，那计算时间肯定会暴涨，对计算机的计算能力也是个不小挑战。</p>
 
-<p>Model的数学基础有四点：1.贝叶斯概率论；2.信息熵；3.最大熵原理；4.最大熵增原理</p>
-
-<p>讲了一个简单的并联电路求分流的例子，大家都知道用欧姆定律。从最大熵原理的角度进行解析的话，系统会使得总的热耗散最小（why？），方程很好列，乘上个拉格朗日算子就解出来了。虽然我不知道怎么解……</p>
-
-<p>计算地面能量收支的过程基本类似：物理上，无非就是净辐射进来，感热潜热出去；冰面雪面水面冠层适当进行一些调整。根据这个物理情景构造热耗散函数，乘拉格朗日算子，如法炮制。解出来的结果是Prof. Wang Highlight的。参数就是热惯量，潜热的惯量又正比于感热的惯量，不知怎么又把方程的自由度限制了一下，发现只和入射净辐射、Ts和比湿有关。优点很明显，没有风速了，不用粗糙度了，也不用梯度了，pia的一下把测量中最困难的几个量给扔了，帅呆！</p>
-
-<p>最后拿这个model算了些东西，和观测对比，貌似日变化之类还是能对上的，强度差的挺大。又和NCEP提供的资料对比，发现两者差的更大了，但是NCEP的潜热通量看上去是觉得不对，六七八月南半球日极值到了500W，换算成蒸发有6-7mm，而且南半球的潜热通量要比北半球高；Prof. Wang的Model是整个反过来的，从直观上想一下，貌似还是应该北半球夏季蒸发多一点，潜热通量大一些吧。</p>
-
-<p>听完报告回办公室发现有人来了，放下包吃饭。吃完饭回来打算给办公室的师兄师姐分好丽友，刚刚拿出来，包庆老师就来找我。叫到他办公室，说有没有查邮件啊，我说没。说清华有个薛老师也是移植CESM有些问题，你和他交流下等等，他是做计算机出身的，基本超级计算领域清华应该是国内的top1了，可以学习啊云云。我说好好好。包老师办公室不大，也不小。有长沙发，开放式的办公桌，桌上应该是Mac Pro。其他地方没细看，应该有一部打印机。办公椅看上去非常舒服，整个人都可以陷进去一般，虽然包老师坐着，但给人一种埋在沙发里躺着的感觉，这么工作起来还是挺惬意的。以后我也搞这么个椅子，再适当运动运动。就不用总担心颈椎腰椎了。后来三点多钟到走廊走了走，恰巧包老师端着杯子上来，说三楼有现磨咖啡豆，你喝不喝咖啡，免费的，我们所已经共产主义了哈哈哈~包老师确实是很能干，也很会干的人，前途无量啊。</p>
-
-<p>下午准备晚上找何编聊的内容，张方案的源文件接近四千行代码，搜索cape十几二十个结果，看上去完全没头绪。反正文件锁定了，晚上再问问吧。对何编的试验设计还是有疑问，做了ppt备注。晚上一并去问问。</p>
-
-<p>下午吃过饭回来，发现门又锁了。从六点半直等到八点半，本来还想再过一遍ppt，结果师兄回来开门之前何编老师就打电话让我过去了。两个多小时等待期间背了背托福单词，又跑到四十号楼转了一圈参观。四十号楼和科研楼是连体的，在楼内直接可以走过去。发现人很少，走廊又没有窗户，很封闭的感觉，晚上还有些恐怖。开门后拿了电脑就去找何编，从科研楼509到40#楼711，路挺绕。</p>
-
-<p>问明白了试验设计，方案，何老师的基本思路还是希望我能把每个积分步中的物理过程调用的顺序搞清楚，接口搞明白，之后再往Ttendency上加这个Heating的强迫项，不是直接改张方案这么简单，shallow convection和large-scale 里面也有Q啊，不是说直接在张方案里注入就行。又解释了一番A那篇文章的试验设计。其实很多地方还是和我想的比较类似的，从物理合理的角度出发，方法可以自己确定，Annual Cycle这类信号肯定是会去掉的，作者没必要说那么详细。想来想去，还是自己读的太少。很多方法和技术的运用，基本是约定俗成的，看到response差不多了，也就应该明白怎么操作的了，没必要细究（或者说不细究也就明白了）。说到做Model的苦与乐。技术活居多，门槛高，动手要勤快，Paper不好发，但真正钻进去才是窥探物理本质，才有意思。对我来说，coding本身就是很有挑战性满足支配欲的事情嘛~更何况深入的是物理而不是回归来合成去看到似是而非的现象就扯所谓的本质。“为赋新词强说愁”。说到做model的好处，也很明显，本身门槛就高，做的人少，所以一旦有人会，那便很抢手，吃香。突然想到了前段时间flash编程突然大受欢迎，因为互联网发展，网页游戏繁荣，而会flash编程的人又太少，所以瞬间此类人才价格疯涨。不知道目前怎么样了，估计应该昙花一现吧，前端不是html5+css3的天下了么，毕竟IT新陈代谢太快了。又太久没关注了啊~</p>
-
-<p>说道这里，瞬间有些不太美好的感觉。做model会不会也昙花一现呢？风险高的几点就在于，首先气象这个领域出路太狭窄，太专太封闭；其次，而仅仅做model又很难从一般科研人员堆paper的路子爬上去，因此一旦气象科研的路数变了，或者整个领域出现了因宏观政策性调整等不确定因素造成的坍缩，做model的人很难将已经深入的专业知识转移到其他领域，从而威胁到个人及家庭的底层生存需求。</p>
-
-<p>话说回来，毕竟能做model能做技术活的人肯定要有较好的计算机、网络以及Linux等基础，动手能力自然不差。所以明确的路子还是支起一行副业，而且是与专业相关的比较靠谱。开网店、投资期货、炒股等基础投入大、风险高而且经验几乎没有，没有一定资本前还是暂且不作考虑。当然首先还是要踏踏实实地积累好本专业基础知识，试着发paper；同时继续保持对IT行业的高敏感度及热情，了解整个业界动向，不断学习新技术积累建站搭站、硬件及操作系统维护、网页编程、网站管理经验，拓展渠道试着去接手一些外包项目，多结交技术型人才，拓展信息源。大致能够理清三条线吧：1.夯实基础，深入数值模式；2.广泛涉猎，提好科学问题，paper发好、发多；3.保持对本专业及IT行业的热情，终身学习，试着发展相关副业。</p>
-
-<p> </p>
+<p>嗯~就YY这么多啦，还是要继续深入了解才行。全球模式开发越来越成为一个系统工程了，越来越向物理学中的LHC等大项目看齐了，这无疑是很好的嘛，这也应该是逐渐地把地学建立在牢靠的数学物理基础上的最佳方式了吧。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/30/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/08/01/e7-9c-8bcesm-tutorial-cam-physics-video-e7-9a-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/">【已解决】shell中的数值计算</a>
+                  <a class="post-link" href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM F Compset指定SST和CO2外强迫的方法</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-30
+                        <i class="fa fa-calendar"></i>2014-08-01
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -461,7 +522,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -478,9 +539,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Shell" title="Tag: Shell" rel="tag">Shell</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -490,91 +549,63 @@
                 </div>
                 <div class="excerpt">
                     
-<p>在天河二号上，想在bash中根据申请的节点数自动计算核心数，其实就是一个n= N*24这样简单的计算，但是bash中的变量是没有数据类型的，所以还是查了下资料才解决。很简单，用中括号，中括号包含的数学式子是可以被shell识别的。主要中括号最外面还要<strong>$</strong>展开一下，否则下例echo时会返回“100+200”</p>
+<p>打算开始在CESM的框架下做何编老师的试验，试着从CESM的scripts出发编译F Compset，结果神奇地发现居然还需要下载数据。问题是之前已经可以通过standalone的方式运行CAM5了呀，神奇的地球。决定用standalone的方式转转，对比下到底有什么不一样。</p>
 
-<p>例子：</p>
-<blockquote><span style="background-color: #ffffff;"><span style="color: #333399;">[root@localhost ~]# cat  test.sh</span></span>
+<p>CESM的编译方式还是遇到些阻碍，问题及解决方法记录在这里。</p>
 
-<span style="background-color: #ffffff;"><span style="color: #333399;">#!/bin/bash
-var1=100
-var2=200
-var3=$[$var1+$var2]
-echo $var3</span></span>
+<p>1.F_2000_CAM5下载数据后编译失败，编译输出目录为out-of-box设置时config_machines.xml指定的位置。解决方案：xmlchange改env_build.xml重新指定编译输出目录。通过！</p>
 
-<span style="background-color: #ffffff;"><span style="color: #333399;">[root@localhost ~]# sh test.sh
-</span></span></blockquote>
-<p><span style="background-color: #ffffff;"><span style="color: #333399;">300</span></span></p>
+<p>2.查看env_run.xml发现rundir也是默认的，果断要改。xmlchange同时改运行时间。</p>
 
-<p>参考资料：http://www.baidu.com/link?url=GwzHXLxzHdFb549J1fGR5gcyoRlCuW48q6LH7yRqmbSfGYrFITZ6pIXMy-bJ3yImnZ6XPBBjL3wKt6xer1Fvqq</p>
+<p>3.修改user_nl_cam，加入针对CAM的namelist更改项目。最初直接把SST和CO2强迫都加这里，结果create_namelist都通过不了。还是一点点来吧。关于海温强迫的方法，standalnoe和F的方式是不一样的。参考帖子：</p>
+
+<p>https://bb.cgd.ucar.edu/node/1001744</p>
+
+<p>UG上有一篇讲B SST OUT, F SST IN的，里面提出要修改env_run.xml。</p>
+
+<p>CO2最初只修改了cam中的co2vmr这个变量，结果CLM崩了，应该是两边CO2不匹配，standalone实在不知道怎么对CLM进行修改，F下找到响应变量修改后，运行到第四天出现sigfault。后来发现居然有一个统一变量叫CCSM_CO2_PPMV啊！坑爹，修改后没问题。</p>
+
+<p>4.qsub提交任务的时候出问题，需要注意 run脚本中第一行 csh后面的-f参数需要去掉，这是最初移植的时候遗漏的问题。</p>
 
 <p> </p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】大气所链接天河二号终端流输出卡的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-30
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p> </p>
 
-                    <div class="label-card">
-                    
+<p>以上问题最终的解决办法写在下面：</p>
 
+<ol>
+  <li>在 $CCSMROOT/scripts/ccsm_ut</li>
+</ol>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
+<p>能够通过的步骤写在下面，以1999-2008变暖后的clim SST及CO2强迫为例：</p>
+<blockquote>$ create_newcase -case awcam5 -compset F_2000_CAM5 -res <strong>f19_f19 </strong>-mach sigon #注意$CCSMROOT/scripts已经加入PATH环境变量
 
-  <!-- <span class="point">•</span> -->
-</span>
+$ ./xmlchange EXEROOT=`pwd`/exe #反点号括起来的pwd会被执行，其输出并同/exe输入给exeroot变量
 
+$ ./xmlchange RUNDIR=`pwd`/exe
 
-                    </div>
+$./cesm_setup
 
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
+$./awcam5.build</blockquote>
+<p>build后修改外强迫。</p>
 
-</span>
+<p>首先是CO2：</p>
+<blockquote>$.xmlchange CCSM_CO2_PPMV=385.59 # 2009年数据，这个变量在env_run.xml当中</blockquote>
+<p>再是海温，首先将总input数据链接过来，防止路径被新提供的inputdata污染，再修改响应变量。</p>
 
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>大气所包庆老师希望测试一下cam5在天河二号上的速度表现情况。连上去编译的时候发现非常卡，表现为编译命令行在终端输出一部分后卡在某个位置3-5分钟，之后才能继续正常继续运行。编译一次会卡这么十几二十个位置，实在让人没法接受。超算方面解释为网络问题。试着将输出流重定向到文本文件后，速度正常了。其他命令如top、w、yhq等也会出现类似卡顿。基本可以确定应该是因为某种网络或者说是超算登陆节点分时算法对网络延时处理的原因，远程终端的流输出过大时会进行限制，从而产生卡顿。经验就是，出现这类问题时，尽量减少远程终端上的流输出。</p>
+<p>$link_dirtree $CSMDATA ./input</p>
+
+<p>$./xmlchange DIN_LOC_ROOT=<code class="highlighter-rouge">pwd</code>/input</p>
+
+<p>cp处理后的SST数据到相应位置，修改响应namelist变量，包括起止年份及文件名称。这个名字太长，建议直接vi。</p>
+
+<p>$./qsub awcam5.run</p>
+
+<p>此外有一点发现是，F_2000采用的不是AMIP形式的观测资料强迫，而是气候态海温循环强迫。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/30/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/08/01/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -589,10 +620,10 @@ echo $var3</span></span>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page87" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">88/91</span>
+          <span class="page_number ">88/93</span>
           
             <a href="/page89" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -608,6 +639,34 @@ echo $var3</span></span>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1979,6 +2038,14 @@ echo $var3</span></span>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2024,14 +2091,21 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2052,14 +2126,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2178,7 +2245,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2220,7 +2287,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2241,7 +2308,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2304,7 +2371,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2472,7 +2539,7 @@ echo $var3</span></span>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2726,6 +2793,20 @@ echo $var3</span></span>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2739,6 +2820,16 @@ echo $var3</span></span>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2748,16 +2839,6 @@ echo $var3</span></span>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2775,7 +2856,16 @@ echo $var3</span></span>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2785,15 +2875,6 @@ echo $var3</span></span>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2811,7 +2892,7 @@ echo $var3</span></span>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3144,7 +3225,7 @@ echo $var3</span></span>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3198,7 +3279,7 @@ echo $var3</span></span>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3296,6 +3377,33 @@ echo $var3</span></span>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

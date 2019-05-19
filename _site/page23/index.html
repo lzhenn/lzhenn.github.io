@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/03/ponzi-scheme/">庞氏骗局不破灭的条件</a>
+                  <a class="post-link" href="/2018/01/16/pandas-excel/">利用pandas生成excel文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-03
+                        <i class="fa fa-calendar"></i>2018-01-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
     
   
 
@@ -389,11 +393,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#ponzi" title="Tag: ponzi" rel="tag">ponzi</a>&nbsp;
+        <a href="/tag/#pandas" title="Tag: pandas" rel="tag">pandas</a>&nbsp;
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#excel" title="Tag: excel" rel="tag">excel</a>
     
   
 
@@ -402,46 +404,39 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>这几天经常听闻各种借新还旧的庞氏骗局玩不下去了。突发奇想，能否构建个模型了解下庞氏骗局不破灭大概要维持个什么样的条件。</p>
+                    <p>需要将几个pandas生成的csv文件合并到excel的不同sheets里，手动是一件比较蛋疼的工作，查了下python对excel的支持，发现pandas天生支持这类操作，大喜过望。测试之。
+pandas写出xls简直像csv一样简单，而且是内生支持，不需要安装任何其他库。</p>
 
-<p>假设庞氏骗局的起始资金为a，年规模增长率为i，承诺年化收益率为r，假定非法集资不产生任何收益，集资者也没有挥霍浪费。则第n年末，有：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a*(1+i)^n
-总负债 L=a*(1+r)^n
+<p>以应用情景为例，写入不同的sheets，具体如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open a new xlsx writer</span>
+<span class="n">writer1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">out_dir</span><span class="o">+</span><span class="n">get_outfile_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">spe</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">):</span>
+    <span class="c"># parser data</span>
+    <span class="n">pt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">in_dir</span><span class="o">+</span><span class="n">get_file_name</span><span class="p">(</span><span class="n">sta_num</span><span class="p">,</span> <span class="n">corr_algthm</span><span class="p">,</span> <span class="n">spe</span><span class="p">,</span> <span class="s">'Daily'</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'10H'</span><span class="p">,</span> <span class="s">'12H'</span><span class="p">,</span> <span class="s">'14H'</span><span class="p">,</span> <span class="s">'16H'</span><span class="p">,</span> <span class="s">'max'</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s">'time'</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer1</span><span class="p">,</span> <span class="n">spe</span><span class="p">)</span>
+<span class="c"># save xlsx</span>
+<span class="n">writer1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </code></pre></div></div>
-<p>很显然，若有i&gt;=r，则庞氏骗局一定不会破灭。也就是说，新韭菜带来的资产增长率大于承诺给老韭菜的收益率即可。这是骗局初期的情况，集资人或者传销者能够以种种手段快速骗取资金，不断扩大自己的资产负债表。
-当骗局发展到一定阶段，由于庞大的基数效应，无论怎样都不能保持i&gt;=r，我们将模型进一步复杂化，继续讨论i&lt;r的情况：</p>
 
-<p>一般来说，赎回额应该与骗局规模呈正相关，假定骗局要求只能在年末赎回，且赎回额与总负债（这是承诺应有）的关系为一固定比例k，那么第n年末这一骗局的资产负债状态：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>总资产 A=a(1+i)^n-k*a(1+r)^n
-总负债 L=a*(1-k)*(1+r)^n
-</code></pre></div></div>
-<p>i&lt;r，很明显从现金流角度而言这是一个收不抵支的状态，我们进一步看看上述资产负债情况的一些属性：
-若不破灭，要求总资产大于等于0，则要求k</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k&lt;=((1+i)/(1+r))^n
-</code></pre></div></div>
-<p>这就有意思了。我们假定某一骗局承诺50%回报，且韭菜资金增长率随时间指数递减，第一年韭菜增长率有4倍的话，给出一个例子如下：</p>
+<p>其中第一个参数是xls的文件句柄，第二个是对应的sheet名，参见<a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_excel.html">pandas的document</a></p>
 
-<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fn37m4q1sij207707ntae.jpg" alt="" /></p>
-
-<p>结果非常有趣，很显然对于这样一个骗局，若新韭菜增长率每年都以前一年一半的速度下降的话，那么前4年不存在任何的兑付问题。
-而第五年形势急转直下，要求兑付额不能超过承诺额的40%，这是一大坎；而第六年则不到18%，联想到某宝事件能够撑到第七年，当真是牛啊……</p>
-
+<p><strong>Updated 2018-01-16</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/03/ponzi-scheme/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/16/pandas-excel/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/02/ubuntu-boot/">Ubuntu开机启动</a>
+                  <a class="post-link" href="/2018/01/16/linux-imagemagick/">利用imagemagick去除png白边</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-02
+                        <i class="fa fa-calendar"></i>2018-01-16
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -477,9 +472,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
+        <a href="/tag/#imagemagic" title="Tag: imagemagic" rel="tag">imagemagic</a>
     
   
 
@@ -489,29 +482,29 @@
                 </div>
                 <div class="excerpt">
                     
-<p>想要让本地的个人博客服务开机后即启动，测试了下，路径敏感。
-修改rc.local</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> vi rc.local
+<p>给生成的wrf预报图去除白边，搜索发现imagemagick大神级命令直接搞定，当然算法本身不复杂，毕竟plot出的图边框都是255，但是有这个命令实在太方便了。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add border</span>
+convert aaa.png <span class="nt">-bordercolor</span> white <span class="nt">-border</span> 10%x10% bbb.png 
+<span class="c"># Delete border</span>
+convert bbb.png <span class="nt">-bordercolor</span> white <span class="nt">-trim</span> ccc.png
 </code></pre></div></div>
-<p>其中加入</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$YOUR_REPO</span>
-<span class="nb">sudo </span>jekyll s
-</code></pre></div></div>
+
+<p><strong>Updated 2018-01-16</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/02/ubuntu-boot/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/16/linux-imagemagick/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/01/housing-account/">买房的财务安全边际计算</a>
+                  <a class="post-link" href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-01
+                        <i class="fa fa-calendar"></i>2018-01-10
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -530,7 +523,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
     
   
 
@@ -547,11 +540,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#housing" title="Tag: housing" rel="tag">housing</a>&nbsp;
-    
         <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
     
-        <a href="/tag/#accounting" title="Tag: accounting" rel="tag">accounting</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -560,31 +551,16 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>我们首先假定长期贷款下总资产负债率在50%一下为财务安全边际。
-假设房产目前价值为A，家庭现有净资产为B，总资产为C，首付率为alpha，总资产负债率为</p>
+                    <p>查了下福布斯实时榜单，居然发现1 Billion以上2000多富豪列表完全就是个硕大的table，果断down下来做点分析啥的。比如富豪里的基尼系数，嘿嘿，两千多样本可以啦。
+子样本也可以计算大陆的情况。不过呢，更关心的是个人的排位以及按高考成绩排位对应的财富目标。虽然相关计算早完成了，可惜的是实验室服务器硬盘问题，诶。这次做个更好的。</p>
 
-<p>R=((C-B)+(1-alpha)*A)/(A+C)&lt;=0.5</p>
+<p>留坑，回填。</p>
 
-<p>整理可得，净资产
-B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
-
-<p>假设首付率为0.3</p>
-
-<p>B&gt;0.5<em>C+0.2</em>A</p>
-
-<p>假设家庭本身无负债，B=C</p>
-
-<p>B&gt;(2/5)*A</p>
-
-<p>因此，在30%首付、家庭无负债的条件下，对于一套500万的房子，总资产大于200万达到购入的安全边际。对于小户型，假设180万，家庭总资产大于72万为安全边际。</p>
-
-<p>再考虑50%首付的情况，这是个很有意思的阈值，在50%首付的前提下，只要初始家庭负债率小于50%即可满足条件，与房产价格无关。是否矛盾，并不，因为还有一个隐含条件是，家庭能够承担买房首付，若不讨论资产是否具有高流动性，至少有C&gt;0.5A。</p>
-
+<p><strong>Updated 2018-01-10</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/01/housing-account/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/10/forbes-rank/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -599,10 +575,10 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page22" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">23/91</span>
+          <span class="page_number ">23/93</span>
           
             <a href="/page24" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -618,6 +594,34 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1989,6 +1993,14 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2034,14 +2046,21 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2062,14 +2081,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2188,7 +2200,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2230,7 +2242,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2251,7 +2263,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2314,7 +2326,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2482,7 +2494,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2736,6 +2748,20 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2749,6 +2775,16 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2758,16 +2794,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2785,7 +2811,16 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2795,15 +2830,6 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2821,7 +2847,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3154,7 +3180,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3208,7 +3234,7 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3306,6 +3332,33 @@ B&gt;(0.5-alpha)<em>A+0.5</em>C</p>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

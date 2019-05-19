@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/">【已解决】WordPress搭建过程</a>
+                  <a class="post-link" href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/">【未解决】CESM1.2.2移植到中大hpc4平台出问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-22
+                        <i class="fa fa-calendar"></i>2014-07-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,9 +376,170 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>有1.2.0的基础，想必1.2.2应该是好搞定的，很多配置文件可以从1.2.0里拷贝过来。如法炮制，在天河二号上应该也可以这么搞定。</p>
+
+<p>首先cd到新版的Machines目录下，然后拷贝旧版中的<em>config_machines.xml config_compilers.xml</em> 以及 <em>mkbatch.${MACH}</em>这三个配置文件过来（${MACH}代表自定义的机器名）</p>
+<blockquote>#cd ~/CESM/cesm1_2_2//scripts/ccsm_utils/Machines
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_machines.xml ./
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_compilers.xml ./
+
+#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/mkbatch.sigon ./</blockquote>
+<p>回到scripts目录，再采用create_newcase的方法进行X Compset的测试，</p>
+<blockquote>#./create_newcase -case testnew -res f45_g37 -compset X -mach sigon</blockquote>
+<p>结果出现了意想不到的错误：</p>
+
+<p><em>WARNING:</em>
+<em>    The perl module XML::LibXML is needed for XML parsing in the CESM script system.</em>
+<em>        Please contact your local systems administrators or IT staff and have them install it for</em>
+<em>        you, or install the module locally.</em></p>
+
+<p>回到1.2.0的目录测试，发现1.2.0是没有问题的。感觉像是新版加了perl的神马库去解析xml文件，google之，发现应该是这样。</p>
+
+<p>https://bb.cgd.ucar.edu/cesm-12-stempede-problem</p>
+
+<p>https://bb.cgd.ucar.edu/warning-cesm122</p>
+
+<p>按照贴子里的说法下载 XML::LibXML  安装，发现安装说明一头雾水完全看不懂，cpan命令无效，退出到workstation居然有cpan命令，呃……看起来是hpc4又没装神马东西，回来再慢慢捣鼓吧……</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/28/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/">大气所学习小记20140728</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>今天应该是来大气所这三天里获得信息量最大的一天（半天）了，收益非凡！</p>
+
+<p>首先是GFDL Prof. Yi Ming 和佛罗里达大学 Prof. Zhaohua Wu的报告。Prof. Yi Ming用英文演讲，可能一方面因为内容太深，另一方面英文实在是太成问题了，根本听不懂，只能感慨自己水爆了。大概能听出来是讲了三方面内容（其实周天军老师最后提示才知道……）。一是通过某种手段估计可以减少人类活动中aerosol排放造成的气候反馈过程的不确定性，就是有方法能够缩短IPCC报告中aerosol效应error bar。确实帅呆！ 二是热带环流的一些内容，只记得wet get wetter，dry get dryer 和 stable get stabler这些，实在是听不懂……囧。 第三方面讲了GFDL model的一些发展状况。</p>
+
+<p>Prof. Zhaohua Wu的报告大概还是能够听明白的，可能主要是因为没有讲技术细节而且还是中文吧。从IPCC AR5中model historical run与观测的Ts对比那张经典的figure引出，指出了model对突变把握中存在的问题。以及采用统计方法在研究气候问题中的局限性、片面性。讲的很好，从平均值到方差，到基于平均值和方差的一系列方法，包括EOF等，实际都由于简化而掩盖了大量的信息，又产生了虚假信号。随后引入EMD方法，感觉应该就是杨老师让国军师兄重点研究和采用的那个吧，要不Zhaohua Wu这个名字怎么这么耳熟呢。这个方法的原理确实绝，时序信号最大值包络线最小值包络线做个差，就提出低频信号了，帅呆！当然具体技术细节上还是需要很多数学技巧的。列了很多的文献，大概记了下，需要的时候下载看，正好能够和杨老师的课题契合。今年Wu老师还发了Nature Climate Change的文章，佩服啊！做了好多年方法，从最初的为人不屑为人唾骂到现在逐渐被接受以及能够利用该方法发Nature……板凳坐得十年冷，坚韧不拔，自强不息！是以为戒！</p>
+
+<p>随后紧接着是LASG模式开发组的组会，见到了龚华师兄以及包庆老师，包老师主导，明显是一位活力四射开朗有趣的老师。我介绍了CESM在天河二号上移植的情况，有点小紧张。包老师表示很好，也希望作为模式组未来机器选择的一个参考，讲了很多有意思的事情 ，比如NCAR的超级计算机（估计是yellowstone）是装在3000+m的山上的，可以利用环境散热，TH-2装在广州，天天那么热，这个散热费肯定海了，最后还不是承担在用户身上，价格居高不下。对呀！很有道理。又讲中国硬件是有啦，软件却是个大瓶颈啊，和国外差的远了。所以我们必须要跟上，必须自主研发才行啊。暗暗佩服，包老师确实是懂得深明大义的牛人啊。</p>
+
+<p>中午一起去吃饭，中餐似的快餐店，名字忘了，在路对面商业区，点了份东坡肉，味道还可以，就是搭配可乐感觉有点诡异。</p>
+
+<p>下午去东航售票点取票，北土城地铁站还是挺远的，中间路过微电子所，三元桥下了地铁后还是走了好长一段路才到东航的售票点，那个片区叫静安里。大气所这边叫华严里，才发现北京好多“里”啊，可能和胡同有关？</p>
+
+<p>嗯，大概就这些啦。</p>
+
+<p> </p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/07/28/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/07/27/wordpress-e8-ae-bf-e9-97-ae-e6-85-a2-e7-9a-84-e9-9/">【已解决】Wordpress访问慢的问题解决</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-07-27
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -393,7 +558,7 @@
     
         <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
     
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
+        <a href="/tag/#wordpress" title="Tag: wordpress" rel="tag">wordpress</a>
     
   
 
@@ -403,64 +568,41 @@
                 </div>
                 <div class="excerpt">
                     
-<p>安装过程的确不太轻松，可能最初php和mysql设置有问题吧。痛苦的安装过程记录一下，下学期有了新电脑正式建站的时候作参考。</p>
+<p>2014年六月以来，由于大陆对google的封锁，导致wordpress访问变慢。主要原因是wordpress调用了google的一些公共库。经查资料，采用360做的镜像库可以解决该问题。</p>
 
-<p>官方安装说明：http://codex.wordpress.org/zh-cn:%E5%AE%89%E8%A3%85WordPress</p>
+<p>需要修改的文件</p>
+<blockquote>wp-includes/script-loader.php
 
-<p>1.下载解压后，查看 /etc/rc.d/init.d/mysqld status 是否启动，否则启动mysql
-#service mysqld start</p>
+wp-includes/js/tinymce/plugins/compat3x/css/dialog.css
 
-<p>按照说明运行mysql -u命令出现ERROR 1045 (28000)错误，其实可能是root没有密码，我没有多尝试，直接查到了mysql强行重新修改密码的方法，如下：</p>
-<blockquote>
-<p style="padding-left: 30px;">/etc/init.d/mysql stop (service mysqld stop )
-/usr/bin/mysqld_safe --skip-grant-tables
-另外开个SSH连接
-[root@localhost ~]# mysql
-mysql&gt;use mysql
-mysql&gt;update user set password=password("123456") where user="root";
-mysql&gt;flush privileges;
-mysql&gt;exit</p>
-<p style="padding-left: 30px;">pkill -KILL -t pts/0 可将pts为0的**用户(之前运行mysqld_safe的用户窗口)强制踢出
-正常启动 MySQL：/etc/init.d/mysql start (service mysqld start)</p>
-</blockquote>
-<p>打开install.php，出现提示</p>
-<blockquote>您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。</blockquote>
-<p>查到问题是php没有加载mysql模块所致，查看/etc/php.d/目录，如果只有dbase.ini,idpa.ini，而没有 mysql.ini,mysqli.ini,pdo.ini,pdo_mysql.ini,pdo_mysqli.ini,同时查看/usr/lib /php/modulse目录，如果没有 mysql.so,mysqli.so,pdo.so,pdo_mysql.so,pdo_sqlite.so,phpcpus.so,那么可判断为 php没有加载mysql模块。
-#yum install php-mysql</p>
+wp-content/themes/twentytwelve/functions.php
 
-<p>php-pdo貌似centos已经默认安装。安装后/usr/lib/php/modulse目录下会有上述所需文件</p>
+wp-content/themes/twentythirteen/functions.php
 
-<p>配置/etc/php.ini，在任意地方加入下列语句</p>
+wp-content/themes/twentyfourteen/functions.php</blockquote>
+<p>搜索<strong>googleapis</strong>全部替换为<strong>useso</strong>即可。</p>
 
-<p>extension=mysql.so
-extension=mysqli.so</p>
+<p>其实目前默认采用twentyfourth了，只修改最后面三个文件中的最后一个应该可以。</p>
 
-<p>extension=pdo_mysql.so</p>
+<p>参考资料：</p>
 
-<p>保存，重启apache，如果还是出现问题，重启了一下mysql，刷新网页，问题基本能够解决。</p>
+<p>http://jingyan.baidu.com/article/4f7d5712aaca631a20192720.html</p>
 
-<p>Done！</p>
+<p>http://www.wind88.net/news/news-125.html</p>
 
-<p>#20140729#</p>
+<p> </p>
 
-<p>mysql默认为空密码，重置密码方式：</p>
-<div><em>    3. 然后用空密码方式使用root用户登录 MySQL；</em></div>
-<div><em>    mysql -u root</em></div>
-<div><em>    4. 修改root用户的密码；</em></div>
-<div><em>    mysql&gt; update mysql.user set password=PASSWORD（'新密码'） where User='root'；</em></div>
-<div><em>    mysql&gt; flush privileges；</em></div>
-<div><em>    mysql&gt; quit</em></div>
-<div><em>    5. 重新启动MySQL，就可以使用新密码登录了</em></div>
-<div></div>
-<div>使用密码登陆的正确姿势</div>
-<div>mysql -u root -p 回车！！！</div>
-<div>输入新密码</div>
-<div>回车……</div>
-<div>奇葩吧</div>
+<p><strong><span style="color: #008000;">#Up to 20140729#</span></strong></p>
+
+<p>这两天出现了不登录的情况下速度很快，但是登录之后却非常缓慢。经查，发现依然是由于后台调用google字体等造成。安装Disable Google Fonts插件后问题解决。</p>
+
+<p>参考资料：http://www.whyqi.com/318.html</p>
+
+<p><strong><span style="color: #008000;">#Up to 20140824#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/22/wordpress-e6-90-ad-e5-bb-ba-e8-bf-87-e7-a8-8b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/07/27/wordpress-e8-ae-bf-e9-97-ae-e6-85-a2-e7-9a-84-e9-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -475,10 +617,10 @@ extension=mysqli.so</p>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page90" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">91/91</span>
+          <span class="page_number ">91/93</span>
           
-            <span class="next disable"><i class="fa fa-angle-right"></i></span>
-            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
+            <a href="/page92" class="next"><i class="fa fa-angle-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -494,6 +636,34 @@ extension=mysqli.so</p>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1865,6 +2035,14 @@ extension=mysqli.so</p>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -1910,14 +2088,21 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -1938,14 +2123,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2064,7 +2242,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2106,7 +2284,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2127,7 +2305,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2190,7 +2368,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2358,7 +2536,7 @@ extension=mysqli.so</p>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2612,6 +2790,20 @@ extension=mysqli.so</p>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2625,6 +2817,16 @@ extension=mysqli.so</p>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2634,16 +2836,6 @@ extension=mysqli.so</p>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2661,7 +2853,16 @@ extension=mysqli.so</p>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2671,15 +2872,6 @@ extension=mysqli.so</p>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2697,7 +2889,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3030,7 +3222,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3084,7 +3276,7 @@ extension=mysqli.so</p>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3182,6 +3374,33 @@ extension=mysqli.so</p>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

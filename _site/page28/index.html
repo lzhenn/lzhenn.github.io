@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/31/e4-bc-81-e4-b8-9a-e9-9b-86-e5-90-88-ef-bc-9a-e6-8/">企业集合：招聘大气科学毕业生的工业界职位</a>
+                  <a class="post-link" href="/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/">AWS EC2搭建VPS</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-31
+                        <i class="fa fa-calendar"></i>2017-07-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
     
   
 
@@ -389,7 +397,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#EC2" title="Tag: EC2" rel="tag">EC2</a>&nbsp;
+    
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
     
   
 
@@ -399,59 +409,58 @@
                 </div>
                 <div class="excerpt">
                     
-<p>远景能源</p>
+<p>起名为Razortail，剃刀之尾，继续纪念我的D2青春。</p>
 
-<p>坐标：上海</p>
+<p>私钥需要好好保存。</p>
 
-<p>核心业务：智能风机</p>
+<p>按这里的来：http://celerysoft.github.io/2016-01-15.html</p>
 
-<p>印象：行业内一线企业，技术优势明显，员工待遇高（2015）</p>
+<p>configure ss出问题，asciidoc找不到，挂–disable-documentation参数。</p>
 
-<p>招聘实例</p>
+<p>之后又出现</p>
 
-<p><strong>工作内容：</strong>
-1、 负责提升数值气象模式对于风速模拟、预报的准确性；
-2、 负责推动中尺度数据在风场设计中的应用。</p>
+<p>configure: error: Couldn’t find libudns. Try installing libudns-dev or udns-devel</p>
 
-<p><strong>职位要求：</strong>
-1、大气科学类硕士及以上学历；
-2、专业知识扎实，对大气动力学有深入理解以及很强的应用能力；
-3、熟练掌握Linux系统操作命令和Shell编程，熟练运用WRF模式，有模式动力或资料同化科研经历者优先；
-4、至少熟练掌握MATLAB、NCL等数据处理工具中的一种 ，掌握常见机器学习算法(如Neural Network, SVM等)者优先。</p>
+<p>错误，看起来还是缺库，尝试yum安装，发现找不到这个lib。尝试添加remi的yum源：</p>
 
-<p>http://recruit.envisioncn.com/join_us/position</p>
+<p>https://rpms.remirepo.net/wizard/</p>
 
-<p>http://www.envisioncn.com/</p>
+<p>重新尝试了centos7情景下先安装的yum库</p>
 
-<p>明阳风电</p>
-<table class="job_info" border="0" width="100%" cellspacing="0">
-<tbody>
-<tr>
-<td class="job_info1" width="15%">计算流体力学工程师</td>
-<td width="24%">计算流体力学/动力学/大气科学</td>
-</tr>
-</tbody>
-</table>
-<p>http://www.mywind.com.cn/</p>
+<p>https://www.ifshow.com/centos-7-installation-and-configuration-shadowsocks/</p>
 
-<p>国睿集团</p>
+<p>成功configure！</p>
 
-<p>http://www.glarun.com/company.asp</p>
+<p>安装后，运行ss-server出现libsodium.so.18 库找不到，从lib下ln到lib64解决，运行出现问题</p>
+
+<p>2017-07-03 14:34:01 ERROR: bind: Cannot assign requested address</p>
+
+<p>经查，居然要把config文件的ip设置为0.0.0.0，无语。</p>
+
+<p>之后可用，启动服务即可。</p>
+<pre>systemctl start ss.service
+systemctl enable ss.service</pre>
+<p>停止服务：</p>
+<pre>systemctl stop ss.service</pre>
+<p>取消shadowsocks开机自启</p>
+<pre>systemctl disable ss.service</pre>
+<p>查看日志文件</p>
+<pre>less /var/log/shadowsocks.log</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/31/e4-bc-81-e4-b8-9a-e9-9b-86-e5-90-88-ef-bc-9a-e6-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/23/earth-nullschool-package-test/">Earth.NullSchool Package test</a>
+                  <a class="post-link" href="/2017/05/31/porting-cesm1-2-2-on-savio/">Porting CESM1.2.2 on SAVIO</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-23
+                        <i class="fa fa-calendar"></i>2017-05-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -470,7 +479,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#fullstackdevelopment" title="Category: fullstackdevelopment" rel="category">fullstackdevelopment</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -487,7 +496,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#fullstackdevelopment" title="Tag: fullstackdevelopment" rel="tag">fullstackdevelopment</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -497,47 +506,43 @@
                 </div>
                 <div class="excerpt">
                     
-<p>After setup node.js, follow the instruction to install earth.nullschool</p>
+<p>When move all the code from HPC4 to savio, and config all machine related environmental variables, the create_newcase got the error:</p>
+<p class="p1"><strong><span class="s1">The perl module XML::LibXML is needed for XML parsing in the CESM script system</span></strong></p>
+<p class="p1">search</p>
+<p>https://bb.cgd.ucar.edu/warning-cesm122</p>
 
-<p>https://github.com/cambecc/earth</p>
+<p>cesm_setup后出现新错误</p>
 
-<p>install grib2json</p>
+<p><strong>gmake: c: Command not found</strong></p>
 
-<p>https://github.com/cambecc/grib2json</p>
+<p>https://bb.cgd.ucar.edu/porting-cesm-120-local-cluster-linux-intel-or-pgi125表示增加几个flag即可，后对比Macro文件发现少很多东西。</p>
 
-<p>Steps:</p>
+<p>原来 config_machine.xml中</p>
 
-<ol>
-  <li>set JAVA_HOME</li>
-</ol>
+<p>&lt;COMPILERS&gt;intel14&lt;/COMPILERS&gt;</p>
 
-<p>http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/</p>
-<pre class=" language-bash"><code class=" language-bash"><span class="token function">export</span> JAVA_HOME<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>/usr/libexec/java_home<span class="token variable">)</span></span></code></pre>
-<p class="p1">brew install maven</p>
-<p>https://github.com/cambecc/grib2json/issues/19</p>
+<p>我写成intel13在config_compiler的时候找不到标的。换成intel后即可。</p>
 
-<p> </p>
+<p>后到最后连接过程出现错误</p>
 
-<p>convert:</p>
-<pre><code>grib2json<strong> -d -n -o</strong> current-wind-surface-level-gfs-1.0.json gfs.t00z.pgrb2.1p00.f000</code></pre>
-<p class="p1"><span class="s1">Error: Unable to access jarfile /Users/zhenningli/workspace/grib2json/src/bin/../lib/grib2json-*.jar</span></p>
-<p>You should use the executable in another folder</p>
-<p class="p1"><strong><span class="s1">/Users/zhenningli/workspace/grib2json/target/grib2json-0.8.0-SNAPSHOT/bin</span></strong></p>
+<p>ld: cannot find -lrefblas</p>
+
+<p>找不到库文件，经查为lapack的一个lib flag。需要重命名之。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/23/earth-nullschool-package-test/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/05/31/porting-cesm1-2-2-on-savio/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2017/03/18/installing-node-js-on-mac-os/">Installing node.js on Mac OS</a>
+                  <a class="post-link" href="/2017/05/11/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/">团队服务器升级php</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2017-03-18
+                        <i class="fa fa-calendar"></i>2017-05-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -556,9 +561,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#MacOS" title="Category: MacOS" rel="category">MacOS</a>&nbsp;
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
     
-        <a href="/category/#fullstackdevelopment" title="Category: fullstackdevelopment" rel="category">fullstackdevelopment</a>
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -575,9 +580,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#MacOS" title="Tag: MacOS" rel="tag">MacOS</a>&nbsp;
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
     
-        <a href="/tag/#fullstackdevelopment" title="Tag: fullstackdevelopment" rel="tag">fullstackdevelopment</a>
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -587,17 +592,11 @@
                 </div>
                 <div class="excerpt">
                     
-<p class="p1"></p>
-<p class="p1"></p>
-<p class="p1">Node.js was installed at</p>
-<p class="p1"><span class="Apple-converted-space">   </span>/usr/local/bin/node</p>
-<p class="p1">npm was installed at</p>
-<p class="p1"><span class="Apple-converted-space">   </span>/usr/local/bin/npm</p>
-<p class="p1">Make sure that /usr/local/bin is in your $PATH.</p>
+<p>注意先卸载php与依赖关系，然后改用remi的yum源，直接yum install高版本php和所有的依赖包即可。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2017/03/18/installing-node-js-on-mac-os/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2017/05/11/e5-9b-a2-e9-98-9f-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -612,10 +611,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page27" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">28/91</span>
+          <span class="page_number ">28/93</span>
           
             <a href="/page29" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -631,6 +630,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2002,6 +2029,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2047,14 +2082,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2075,14 +2117,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2201,7 +2236,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2243,7 +2278,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2264,7 +2299,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2327,7 +2362,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2495,7 +2530,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2749,6 +2784,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2762,6 +2811,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2771,16 +2830,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2798,7 +2847,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2808,15 +2866,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2834,7 +2883,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3167,7 +3216,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3221,7 +3270,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3319,6 +3368,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

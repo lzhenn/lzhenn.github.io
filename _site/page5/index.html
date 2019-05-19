@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/09/07/EC2-diggler-ip-ban/">EC2迁移：从Razortail到Diggler</a>
+                  <a class="post-link" href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-09-07
+                        <i class="fa fa-calendar"></i>2018-10-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,11 +376,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
+        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
     
   
 
@@ -393,81 +393,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#EC2" title="Tag: EC2" rel="tag">EC2</a>&nbsp;
+        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
     
-        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>Diggler用了一段时间后发现丢包率严重，终于有一天彻底挂掉了。ssh通。查了下应该是被ban掉了端口，发现aws设置了非常方便的动态ip绑定，胆战心惊换了ip后正常。所以W的策略应该是行为检测，pattern connector确认后开始数据包投毒，随后ban端口ban ip。</p>
-
-<p>惹不起惹不起。无非是看些技术文档教学视频paper什么的，诶。换了ip/crypto算法。</p>
-
-<p><strong>Updated 2018-09-07</strong></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/09/07/EC2-diggler-ip-ban/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/09/04/reading-record/">《激荡十年：水大鱼大》阅读笔记</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-09-04
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#reading" title="Category: reading" rel="category">reading</a>&nbsp;
-    
-        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a>
     
   
 
@@ -476,34 +404,42 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fuygxfm5kuj20u0179wy5.jpg" alt="" height="33%" width="33%" align="center" /></p>
+                    
+<p>开始测试Aqua-Planet试验，直接按照aqua的设置run没有任何问题，但是发现SST没有annual cycle，询问师姐：</p>
+<blockquote>
+  <p>你是用的cesm的default的 aqua compset吗 如果是的话，那么好像是不需要额外读入sst文件的，而是直接在code里指定需要哪种sst profile就可以，具体是通过修改ocn_comp.F90 中 sst_option，这里不同的sst_option代表不同的profile；关于topo，好像你是需要在user_nl_cam里指定一个新的topo文件的(把高度啥的设为0)</p>
+</blockquote>
 
-<p>最近读完了吴晓波的《激荡十年，水大鱼大》一书，内容上讲述了从2008到2018十年间中国民营企业家的经历和故事。新书，时效性很强，同时很多事情几乎都是最近几年发生，随着年龄的增长和对经济社会关注的提升，亲切感、代入感与认同感也很强。概念清晰，行文流畅，语气平和而不失力道，逻辑抽象与语言组织的功底十分了得。唯一缺陷是编年史容易写成流水账，总让人感觉罗列堆砌人物和事件，不过也是难免之事，整体愿意给八分。</p>
+<p>这么说还需要自己写一个topo为0的文件。</p>
 
-<p>“水大鱼大”，指的是过去十年里中国急速扩张的经济规模，货币总量，以及消费能力。而鱼大则指无论是个人还是企业，弄潮儿的突飞猛进。世界五百强榜单中，中国公司从2008年的35家增加到115家就是最好的佐证。而抓住机会的个人，大到小马大马驾驭腾讯阿里纵浪大化，小到金融危机后满仓杀入股市的老太太或者16年以前大举买入比特币的幸运儿，无不在大水之中成为了大鱼或者捞到了大鱼。</p>
+<p><a href="http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html">一些资料</a></p>
 
-<p>吴在字里行间穿插着对事件的分析与反思，深沉但依然中立客观，只是具体到人物，如豆瓣评论所言，觥筹交错后难免有所凝滞疑虑，再无08年之前的挥斥方遒。没有读过吴其他书，这一评论也让我对他的前作更加期待。</p>
+<p>修改轨道参数，固定黄赤交角为0度：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">rb_mode</span><span class="o">=</span><span class="s">'fixed_parameters'</span>
+<span class="n">orb_obliq</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">orb_eccen</span><span class="o">=</span><span class="mf">0.0167239</span>
+<span class="n">orb_mvelp</span><span class="o">=</span><span class="mf">102.035</span>
 
-<p>这十年里，吴晓波时不时提到焦虑一词，的确，无论是年轻人还是已经功成名就的中年企业家，都充满了焦虑，本书的第一章2008即题为“不确定的开始”，这也是过去十年里的大背景。最后一章2018题为改革的“不惑”之年。不惑不惑，迷茫和不确定或许已经过去了，过去十年，资产价格暴涨而通胀没有明显上升，技术不断迭代革新，边际成本极低的互联网行业在马太效应加持下创造了一批批新贵，贫富分化的势能进一步拉大，如此看来，不惑的确将逝，未来或许我们将要面对势能进一步积累后释放的动能，regime shift.</p>
+</code></pre></div></div>
 
-<p>鱼的一生固然要靠自我奋斗，更重要的是顺从水流的方向。</p>
+<p><strong>Updated 2018-05-14</strong></p>
 
-<p><strong>Updated 2018-09-04</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/09/04/reading-record/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/10/14/cesm-aquap/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/08/20/trading-diary/">20180820交易笔记-倾听上帝的脚步</a>
+                  <a class="post-link" href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-08-20
+                        <i class="fa fa-calendar"></i>2018-10-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -555,46 +491,7 @@
                 </div>
                 <div class="excerpt">
                     
-<blockquote>
-  <p>“政治家的任务就是倾听上帝在历史上走过的脚步声，并且当他在身旁经过时努力抓住他的上衣的后下摆，跟他一起前进。”
-                                                                      戴蒙德 《枪炮、病菌与钢铁》</p>
-</blockquote>
-
-<p>巨轮转向。</p>
-
-<p>商品方面最近油价开始下跌，布油从六月底高点80左右跌倒71附近。虽然相关持仓在6月底已经陆续减去1/3，可还是为整体失血回调贡献不少。震荡区间下维持之前判断60左右考虑开始卖出债券加仓，60-80一定是平衡价位，5-10年的区间内没有什么好怕的。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fug0dauzgkj20rz0jg76a.jpg" alt="" /></p>
-
-<p>汇市USD全面爆发，带动部分财务状况不佳的新兴市场汇率崩盘，土耳其崩，卢布崩，阿根廷比索崩。其中以Turkey的表演尤其叹为观止，8.10晚直接暴贬20%。这种黑天鹅机会实在是措手不及，对个人来说太难抓住。看新闻似乎有德银交易员因此赚得体满钵满。由于U爆发，R也一路下挫，从七月初的6.6逼至6.9，7的心理关口应是铁底，低买高卖，支持宏观稳定和宽幅震荡的导向。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fug16731scj20rw0ipdif.jpg" alt="" /></p>
-
-<p>贵金属市场一片惨绝人寰，自从4月中旬下跌趋势开启以来，几乎每周都拉阴线。在通胀预期走高和不稳定积累的环境下，唯一能够解释贵金属下挫的就是美指高企，回望黄金在风险积累时失去避险属性的时刻，应该还是08年危机爆发全球换取流动性的那段时间。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fug8h2zz66j20rx0j9q5o.jpg" alt="" /></p>
-
-<p>付总讨论黄金价格的逻辑是：</p>
-
-<blockquote>
-  <p>TIPS=美债收益率-通胀预期</p>
-
-  <p>黄金和TIPS之间有反向关系的话，黄金价格=通胀预期-美债收益率</p>
-</blockquote>
-
-<p><strong>在美债收益率一致的情况下，黄金和TIPS实质上的差别就是两个市场隐含的通胀预期是否一致。</strong></p>
-
-<p>17年景全球共振复苏，通胀预期回升，17年后债券市场的隐含通胀并没有进一步增强，而黄金市场隐含的通胀预期却高涨。所以要么是TIPS对于长端通胀预期错误定价，要么是黄金对于长端通胀预期错误定价，而付总站在TIPS定价一侧，认为黄金会纠偏。（付鹏2018-05-03）
-果不其然，黄金从1300+一直被拖到了1200-。付总四天前再次对贵金属走势进行了分析：</p>
-
-<p>OLS隔夜利差3M-1Y为0.25，付总认为这100% price in了FED加息预期，因此金银一路下挫。目前来看，这个逻辑框架还是没有发生变化。从技术分析角度来说均已超跌，黄金平衡价位应在1240上下，所以接下来如果低于该位可以继续佛系加点仓，但恢复到1240上下应该减仓。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fug9bjb8frj21uf110hdt.jpg" alt="" /></p>
-
-<p>米帝经济依然强劲，GDP连续17个月为正，18Q1甚至推高到4.1%；住房拥有率不断上升，制造业服务业大举扩张；职位空缺甚至多于失业人数；对米帝这体量，当真是可怕。物极必反，极盛而衰，还是应当谨慎些。纳指继续推高，但是波动性上升，但小盘股不再痴涨而是回调，科技龙头波动性也开始增大。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fuhkjar3w2j20ro0jmmyu.jpg" alt="" /></p>
-
-<p>大A继续跌成狗，支付宝收益直接拉到-2%了，实在是坑。我会停止定投么？当然不会！这种时候一定要体现出对人民，对祖国的责任心，坚定持有，坚定定投，一颗为国托市的红心在，什么也不怕。最近也适当配了些之前没有接触的债类资产。</p>
-
-<p>不过，最近两个月失血有点多，今年以来盈利基本被抹平，检查了下整体资产负债和现金流状况，上个月还了一波家庭债务，花了整整一年的时间终于把负债率从60%降到了40%以下，感觉轻松了很多。任何时候家庭负债率都不能超过50%，对我这种风险偏好低的胆小鬼来说，这是铁的纪律。由于接下来两个月陆续要交学费已经购置大件，R的现金流或会有些吃紧，需要注意。风险投资比例27.14%左右，最近几个月一直在稳定上升，而且出现不少没有原则的操作，还是要注意管住自己的手，维持30%以下。有功夫少看盘，多看书，多写写代码搭建系统。</p>
-
-<p>总结策略：</p>
+<p>我们看下八月份的策略总结：</p>
 
 <ol>
   <li>油价回调到65以下开始加仓。</li>
@@ -604,13 +501,148 @@
   <li>少看盘多看书，多写代码搭系统。</li>
 </ol>
 
-<p>言尽于此。</p>
+<p>过去两个月，1没机会，一路突突突。2没流动性，3佛了几把，4风投红线边缘试探。5已经尽力做到。</p>
 
-<p><strong>Updated 2018-08-21</strong></p>
+<p>老规矩，重要的还是记录错误。过去两个月最大问题就如同题目所说，跟得上旋律，踩不中鼓点。</p>
+
+<p>EWH put最高浮盈130%，但是持有到Expire被一波反弹干到-20%；随后单周VIX call上场，out of money后没有rolling，然后呢，我们看下这周：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fw4dfkhn9dj21et0mvgoh.jpg" alt="" /></p>
+
+<p>日了狗。踩节奏难，不算清楚option price in了多少预期，out of money还没发达到套保目的。想想portfolio本身还是没什么问题，短期回撤也能接受，还是谨慎点，别上来就干，多读书了解。</p>
+
+<p>宏观形势上tarrif在9月底进一步加码，纵深发展无法避免。就像Dalio所说，单纯的tarrif不是什么问题，问题是CN US两大国之间的关系在未来走向何方。时老师14年的书里讲清楚了，波动和趋势，趋势的力量怕根本不是什么川总的花边新闻，驴象扯皮能改变的。</p>
+
+<p>US端不确定性是中期，以及关系上进一步财长宣布汇操。</p>
+
+<p>市场情绪面上整体非常悲观。</p>
+
+<p>我呢？依然乐观。最近看吴晓波《十年二十人》采访红杉沈南鹏，开始反思自己关注社会经济的时候忽略了什么。每一代人里都有佼佼者，踏踏实实做事的人，创造价值的人，慧眼寻找潜在价值并给予机会的人，减熵，为世界增加有序对而不是尸位素餐的人。他们的存在确保了社会全要素生产率水位不断提高。
+前提是渠道的畅通。环境改变，渠道会彻底在正反馈下封死么？我想不会的，人性不变，但全要素生产率的水位一直向上走，每一代人的平均受教育程度也是向上的，大道之行，只是波动磕碰难免。</p>
+
+<p>天佑中华，做好自己的事情，言尽于此。</p>
+
+<p><strong>Updated 2018-10-12</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/08/20/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/10/11/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-09-15
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#dalio" title="Tag: dalio" rel="tag">dalio</a>&nbsp;
+    
+        <a href="/tag/#debt" title="Tag: debt" rel="tag">debt</a>&nbsp;
+    
+        <a href="/tag/#crisis" title="Tag: crisis" rel="tag">crisis</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <ul id="markdown-toc">
+  <li><a href="#bloomberg" id="markdown-toc-bloomberg">Bloomberg</a></li>
+  <li><a href="#cnbc" id="markdown-toc-cnbc">CNBC</a></li>
+</ul>
+<!--<iframe width="907" height="510" src="https://www.youtube.com/embed/7WXidoI9ppw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<p>Recently, Ray Dalio was interviewed by several medias after he had published his new book named as “A template for understanding big debt crises” (hereafter “Crises”, <a href="https://www.principles.com/">free PDF available here</a>). Dalio became more public after he had published his new book “Principles” in 2016. This year, 2018, the newly published book “Crises” makes the situation subtle. I have downloaded the new book and prepared to read it. However, now, I hope to summarize the key points that Mr. Dalio raised in the interviewed video.</p>
+
+<h3 id="bloomberg">Bloomberg</h3>
+
+<iframe width="680" height="382" src="https://www.youtube.com/embed/Nm0m62reFuY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p><strong>Everything happens over and over again.</strong></p>
+
+<p>Template: Inflationary depression</p>
+
+<p><strong>Key point: The debt is nominated in the nation’s own currency or foreign currency.</strong></p>
+
+<p>If the debt is nominated by foreign currency, e.g. dollar. When the dollar goes up, the country does not have enough cash to pay the debt, so print more money to pay the debt, and the inflation and devaluation come.</p>
+
+<p>However, if the debt is nominated in the country’s own currency, the depreciation will wipe out the debt, naturally.</p>
+
+<p>Then, when the currency becomes cheaper, the country will export more and import less. If the country remains an healthy environment to invest, foreign capitals will come back.</p>
+
+<p>The central bank, by monetary policy, should make the interest rate compensate the depreciation of the currency.<strong>(Interest = Infaltion + Devaluation)</strong> This is the way to track the bottom of the devaluation of the country’s currency.</p>
+
+<p>(Turkey, Argentina is around 1/3 distance to the bottom)</p>
+
+<p>After 2008:</p>
+
+<ol>
+  <li>Central banks: print money and buy financial assets.</li>
+  <li>Price of financial assets goes up, and cause greater wealth gap.</li>
+  <li>Most people do not benefit from the process. <strong>Populism</strong> comes.</li>
+  <li>The central bank starts to raise the interest rate (we are in tightening cycle), with populism, it is hard. (political and social problem/extreme monetary policy) ~ 2 years since 2018.9.17 (30% down of dollar prices) Gradual down.</li>
+</ol>
+
+<h3 id="cnbc">CNBC</h3>
+
+<iframe width="680" height="382" src="https://www.youtube.com/embed/7WXidoI9ppw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>About China, tariff.</p>
+
+<p>China can handle this. Big deal: relationship with China (antagonism is bad!).</p>
+
+<p>China’s debt is denominated in CNY, and dealing with it before the crisis, and from a top-down method, Dalio thinks China can deal with it well enough.</p>
+
+<p><strong>Updated 2018-09-17</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/09/15/dalio-debt-crisis/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -625,10 +657,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page4" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">5/91</span>
+          <span class="page_number ">5/93</span>
           
             <a href="/page6" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -644,6 +676,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2015,6 +2075,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2060,14 +2128,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2088,14 +2163,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2214,7 +2282,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2256,7 +2324,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2277,7 +2345,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2340,7 +2408,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2508,7 +2576,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2762,6 +2830,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2775,6 +2857,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2784,16 +2876,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2811,7 +2893,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2821,15 +2912,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2847,7 +2929,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3180,7 +3262,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3234,7 +3316,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3332,6 +3414,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

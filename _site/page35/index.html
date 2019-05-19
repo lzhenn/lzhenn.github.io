@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/26/vim-e5-b0-86-e5-8c-85-e5-90-ab-e5-85-b3-e9-94-ae-e/">vim将包含关键词的多行进行复制替换</a>
+                  <a class="post-link" href="/2016/11/28/cmaq-output-files/">CMAQ output files</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-26
+                        <i class="fa fa-calendar"></i>2016-11-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#AirQualityModeling" title="Category: AirQualityModeling" rel="category">AirQualityModeling</a>
     
   
 
@@ -389,7 +393,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#AirQualityModeling" title="Tag: AirQualityModeling" rel="tag">AirQualityModeling</a>
     
   
 
@@ -399,40 +403,32 @@
                 </div>
                 <div class="excerpt">
                     
-<p>vim用了三年了，现在还是在基础命令的水平上。</p>
+<p>CMAQ以ACONC为中缀的输出文件中每天有25个时次，非常诡异，经查UG，</p>
 
-<p>今天用到了个复杂的，记录下：</p>
+<p>CONC为瞬时文件，最常用；</p>
 
-<p><strong>复制包含关键字的所有行</strong></p>
+<p>ACONC通常为小时平均文件；</p>
 
-<p><strong>%g/KeyWord/normal yyGp</strong></p>
+<p>CGRID为restart文件。</p>
 
-<p>对于包含 KeyWord 的任何行，执行 normal mode 命令：复制此行yy、跳到文件末尾G、粘贴p</p>
+<p>经查ncdump，CONC文件TSTEP在第25步<span id="transmark" style="display: none; width: 0px; height: 0px;"></span>输出了第24时次（下一个输出文件起始时刻）的数据，因此读取的时候丢掉最后一个时次即可。</p>
 
-<p><strong>%g/KeyWord/normal yyp</strong></p>
-
-<p>对于包含 KeyWord 的任何行，执行 normal mode 命令：复制此行yy、粘贴p<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>复制完后替换下一行的关键字（比如通过var1增加var2经常用到）</p>
-
-<p><strong>:g/\%(^\1$\n)\@&lt;=(.*)$/s/var1/var2/g</strong></p>
-
-<p>这个命令太复杂了，前面那堆符号啥意思回来再慢慢研究……</p>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/26/vim-e5-b0-86-e5-8c-85-e5-90-ab-e5-85-b3-e9-94-ae-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/11/28/cmaq-output-files/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/26/mac-os-e7-bb-88-e7-ab-af-e4-b8-8b-e4-b8-8d-e8-83-b/">Mac OS终端下不能用home和end的解决</a>
+                  <a class="post-link" href="/2016/11/08/overseas/">Overseas</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-26
+                        <i class="fa fa-calendar"></i>2016-11-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -451,7 +447,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -468,7 +464,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -478,38 +474,36 @@
                 </div>
                 <div class="excerpt">
                     
-<p>查了下，可以用bash的快捷键解决这个问题，并且bash快捷键适用范围是跨平台的哦</p>
+<p>通</p>
 
-<p><strong>行首ctrl+A</strong></p>
+<p>lizhenning7</p>
 
-<p><strong>行尾ctrl+E</strong></p>
+<p>C6H12+as it always</p>
 
-<p>记录下其他有用的<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+<p>A<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
+
+<p>lzhenning</p>
+
+<p>sorxxxC6H12xxxx</p>
 
 <p> </p>
-<ul>
-	<li><strong><code>ctrl+u</code>: 删除光标左边所有</strong></li>
-	<li><strong><code>ctrl+k</code>: 删除光标右边所有</strong></li>
-	<li><strong><code>ctrl+xx</code>: 行首到当前光标替换</strong></li>
-</ul>
-<p> </p>
 
-<p>https://github.com/hokein/Wiki/wiki/Bash-Shell%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE</p>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/26/mac-os-e7-bb-88-e7-ab-af-e4-b8-8b-e4-b8-8d-e8-83-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/11/08/overseas/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/10/25/neptune-met-with-403-when-push-to-repo/">Neptune met with 403 when push to repo</a>
+                  <a class="post-link" href="/2016/11/02/python-e5-ae-9e-e9-99-85-e4-bd-bf-e7-94-a8-e4-b8-a/">python实际使用中需要注意的问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-10-25
+                        <i class="fa fa-calendar"></i>2016-11-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -528,7 +522,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Git&amp;GitHub" title="Category: Git&amp;GitHub" rel="category">Git&amp;GitHub</a>
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -545,7 +539,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Git&amp;GitHub" title="Tag: Git&amp;GitHub" rel="tag">Git&amp;GitHub</a>
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -555,21 +549,23 @@
                 </div>
                 <div class="excerpt">
                     
-<p>I have found that after the attack to DNS servers in the US, gitrefresh operation seems to be blocked. Got the error:</p>
+<p>1.最大区别还是在字符串yinyong</p>
+<pre>&gt;&gt;&gt;str='abcde'
+&gt;&gt;&gt;print str[0:3]
+abc</pre>
+<p>注意是不包括第4个字符（码标3）的！</p>
 
-<p><span style="color: #ff0000;"><strong> error: The requested URL returned error: 403 Forbidden while accessing https://github.com/Novarizark/project/info/refs</strong></span></p>
-
-<p><span style="color: #ff0000;"><strong>fatal: HTTP request failed</strong></span></p>
-
-<p>Then found this in stackoverflow</p>
-
-<p>http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed</p>
-
-<p>change the https method to ssh method really solved the probleme. Although, I am still confused why this problem happens…</p>
+<ol>
+  <li>格式化输出不定长度格式<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
+</ol>
+<pre>&gt;&gt;&gt;x=5; y=0.34
+<strong>&gt;&gt;&gt;print 'hello%*.1f' % (x,y)</strong>
+hello  0.3</pre>
+<p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/10/25/neptune-met-with-403-when-push-to-repo/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/11/02/python-e5-ae-9e-e9-99-85-e4-bd-bf-e7-94-a8-e4-b8-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -584,10 +580,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page34" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">35/91</span>
+          <span class="page_number ">35/93</span>
           
             <a href="/page36" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -603,6 +599,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1974,6 +1998,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2019,14 +2051,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2047,14 +2086,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2173,7 +2205,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2215,7 +2247,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2236,7 +2268,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2299,7 +2331,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2467,7 +2499,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2721,6 +2753,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2734,6 +2780,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2743,16 +2799,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2770,7 +2816,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2780,15 +2835,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2806,7 +2852,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3139,7 +3185,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3193,7 +3239,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3291,6 +3337,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

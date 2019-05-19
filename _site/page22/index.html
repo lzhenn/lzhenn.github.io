@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/10/forbes-rank/">Forbes分析与财务目标</a>
+                  <a class="post-link" href="/2018/01/25/import-python/">python import其他文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-10
+                        <i class="fa fa-calendar"></i>2018-01-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,80 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
+        <a href="/category/#python" title="Category: python" rel="category">python</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>交易系统下希望将策略(strategy)和评估(evaluator)分离，这样就需要评估系统调用相应的策略，其实可以用简单的import解决，只是注意python仅仅把当前路径加入搜索目录，如果策略不在当前路径的话，则采用sys模块加入策略路径即可：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_strategy</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">buy_and_hold</span> <span class="kn">import</span> <span class="n">buy_and_hold</span> <span class="k">as</span> <span class="n">strategy</span>
+
+<span class="n">strategy</span><span class="p">()</span>
+</code></pre></div></div>
+<p>就是这么简单。</p>
+
+<p><strong>Updated 2018-01-25</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/01/25/import-python/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/01/20/antifragile-career/">模型化分析职业选择上反脆弱策略的收益条件</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-01-20
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
+    
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
     
   
 
@@ -391,7 +468,11 @@
     
         <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
     
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
+    
+        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>&nbsp;
+    
+        <a href="/tag/#antifragile" title="Tag: antifragile" rel="tag">antifragile</a>
     
   
 
@@ -400,27 +481,47 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <p>查了下福布斯实时榜单，居然发现1 Billion以上2000多富豪列表完全就是个硕大的table，果断down下来做点分析啥的。比如富豪里的基尼系数，嘿嘿，两千多样本可以啦。
-子样本也可以计算大陆的情况。不过呢，更关心的是个人的排位以及按高考成绩排位对应的财富目标。虽然相关计算早完成了，可惜的是实验室服务器硬盘问题，诶。这次做个更好的。</p>
+                    
+<p>今天上午聊天的时候讨论到all in情况下，在领域前端的边际收益无法覆盖去了解其他领域既成知识体系的机会成本，突然想到应该可以建立一个模型去分析，在怎样的条件下，拒绝all in而采用反脆弱策略，效用能够接近all in所可达到的高度？</p>
 
-<p>留坑，回填。</p>
+<p>简单整理下这个模型应该包括的要素：</p>
 
-<p><strong>Updated 2018-01-10</strong></p>
+<ul>
+  <li>行业的效用收益分布：幂律</li>
+  <li>行业的成本分布：幂律</li>
+  <li>all in的时间投入，承担的风险（如何定价？）</li>
+  <li>all in情况下的期望位置</li>
+  <li>antifragile的分支点位置</li>
+  <li>antifragile的情况下其他领域的收益分布和成本分布</li>
+</ul>
+
+<p>时间投入应该是个守恒量，最终效用如何评定？这个模型应该要比收入分布讨论的模型复杂很多。
+继续挖坑回填。</p>
+
+<p>应该先建立效用函数，确定几个维度，然后按照边际效用递减原则对各个维度的情况打分，最终应该评价效用最大。
+资料：</p>
+<ol>
+  <li><a href="https://www.zhihu.com/question/24123648/answer/27911498">收入和幸福感</a></li>
+  <li><a href="https://www.jianshu.com/p/d3533cf12209">构建效用函数据</a></li>
+  <li><a href="http://daily.zhihu.com/story/8280265">个人效用函数</a></li>
+</ol>
+
+<p><strong>Updated 2018-01-20</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/10/forbes-rank/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/20/antifragile-career/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/01/07/pkill-ssh/">干掉僵死ssh进程</a>
+                  <a class="post-link" href="/2018/01/18/2018-investment/">2017投资小结与2018年的交易逻辑</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-07
+                        <i class="fa fa-calendar"></i>2018-01-18
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -439,76 +540,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
+        <a href="/category/#economy" title="Category: economy" rel="category">economy</a>&nbsp;
     
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#ssh" title="Tag: ssh" rel="tag">ssh</a>&nbsp;
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>有的时候网络不稳定，断掉后再登录发现服务器上依然有ssh的会话，按理说应该跳出才对。这时可以用pkill来杀死对应的session，例如：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-kill</span> <span class="nt">-t</span> pts/2
-</code></pre></div></div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/01/07/pkill-ssh/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/01/03/random-post-ajax/">给博客增加了一个随机展示内容的功能</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-01-03
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#internet" title="Category: internet" rel="category">internet</a>&nbsp;
-    
-        <a href="/category/#javascript" title="Category: javascript" rel="category">javascript</a>
+        <a href="/category/#investment" title="Category: investment" rel="category">investment</a>
     
   
 
@@ -525,15 +559,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#json" title="Tag: json" rel="tag">json</a>&nbsp;
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
     
-        <a href="/tag/#ajax" title="Tag: ajax" rel="tag">ajax</a>&nbsp;
-    
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
-    
-        <a href="/tag/#javascript" title="Tag: javascript" rel="tag">javascript</a>&nbsp;
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+        <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>
     
   
 
@@ -543,41 +571,21 @@
                 </div>
                 <div class="excerpt">
                     
-<p>给主页加了一个小模块，随机显示一些自己value的原则性内容，折腾了一下午，记录一下：</p>
+<p>17年的交易逻辑的确太嫩了，若不是最后一个月通胀预期起来，恐怕一整年收益跑不过货币基金。最主要的三条经验教训如下：</p>
 
-<p>首先也是考虑到服务器端传文件下来，然后用javascript解析后post上去，但是代码简单测试了下没有起效。没细究原因，查了下能否用jekyll实现，结果发现jekyll只是在build过程中随机一下，并不能在页面刷新时随机。这样很正常嘛，本身就是静态网页啦。</p>
+<ol>
+  <li>信仰价投，左侧交易就代表要在市场非理性的时候拿得住，流动性保证和严格按照交易系统策略交易非常重要，止损位置应该在安全边际以下某一范围。如果胆小，仓位控制不超过10%，真破产就当作慈善了吧。毕竟杠铃策略完全可以保证无风险一端的基本cover激进端平均一年一个负面黑天鹅的损失。</li>
+  <li>逻辑对的情况下，却不能低估市场非理性的时间。上升期更是这样，不要猜顶，不轻易做空头。杠铃策略，与泡沫共舞，用正头寸收益养put。</li>
+  <li>尽管看准了不少标的，还是要记住，这是牛市给的，不要忘了最大的一个没看准的标的是USD，或许逻辑没错，时间尺度错了，但是教训应该是择时上恪守左侧交易为主，右侧控制好头寸的策略。</li>
+</ol>
 
-<p>所以还是回到刚刚的思路，查了下解决方案，发现是自己定义了函数但是木有执行。在定义后加入执行代码后，生效。注意对应的json包不能放在jekyll生成的下划线前缀目录下，否则无法获取到。javascript代码：</p>
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showJson</span><span class="p">(){</span>  
-    <span class="kd">var</span> <span class="nx">test</span><span class="p">;</span>  
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">){</span>  
-        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>  
-    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">){</span>  
-        <span class="nx">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">();</span>  
-    <span class="p">}</span><span class="k">else</span><span class="p">{</span>  
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Browser not supported!"</span><span class="p">);</span>  
-    <span class="p">}</span>  
-    
-    <span class="k">if</span><span class="p">(</span><span class="nx">test</span> <span class="o">!=</span><span class="kc">null</span><span class="p">){</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s2">"/database/principles.json"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>  
-        <span class="nx">test</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>  
-            <span class="k">if</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span><span class="o">&amp;&amp;</span><span class="nx">test</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">){</span>  
-                <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>  
-                <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
-                <span class="kd">var</span> <span class="nx">rnd_pos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"content-principle"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">rnd_pos</span><span class="p">].</span><span class="nx">content</span><span class="p">;</span>
-            <span class="p">}</span>  
-        <span class="p">};</span>  
-    <span class="p">}</span>  
-<span class="p">}</span>  
-<span class="nx">showJson</span><span class="p">();</span> 
-</code></pre></div></div>
+<p>2018年逻辑应该基本清晰：油价 通胀 波动率。标的也非常清晰，除了上述三点教训，还是要注意仓位控制和恪守逻辑和策略。不贪不惧，多看书少看盘。毕竟目标很简单，跑赢无风险4%而已，去年目标是不亏，最后却完成了今年的目标不是。</p>
 
+<p><strong>Updated 2018-01-18</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/01/03/random-post-ajax/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/01/18/2018-investment/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -592,10 +600,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page21" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">22/91</span>
+          <span class="page_number ">22/93</span>
           
             <a href="/page23" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -611,6 +619,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1982,6 +2018,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2027,14 +2071,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2055,14 +2106,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2181,7 +2225,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2223,7 +2267,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2244,7 +2288,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2307,7 +2351,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2475,7 +2519,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2729,6 +2773,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2742,6 +2800,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2751,16 +2819,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2778,7 +2836,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2788,15 +2855,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2814,7 +2872,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3147,7 +3205,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3201,7 +3259,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3299,6 +3357,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

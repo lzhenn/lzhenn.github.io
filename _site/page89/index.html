@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/29/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim左列显示行号</a>
+                  <a class="post-link" href="/2014/07/31/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM源码查阅技巧（Linux下文本文件处理技巧）</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-29
+                        <i class="fa fa-calendar"></i>2014-07-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -391,7 +397,7 @@
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#vim" title="Tag: vim" rel="tag">vim</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -400,46 +406,64 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#vi-vimrc" id="markdown-toc-vi-vimrc">vi ~/.vimrc</a></li>
-</ul>
+                    
+<p>在经历两天完全没有头绪的痛苦过程后，终于想起来去年十一月刚刚开始试着移植CESM的时候在工作站上下载的CAM Tutorial。抓过来一看，果然有physics和接口的介绍，虽然Tutorial已经是09年的了，但当时居然已经是CAM5的版本……NCAR五年前就已经转的起来CAM5的物理包了么……天河二号上转起来都这么慢，反正Tianhe-2性能指标基本都是靠Phi顶起来的，也不奇怪。扯远了。</p>
 
-<p>打开</p>
+<p>这套tutorial的interface模块介绍写得正合我胃口，基本都是介绍CAM源码结构，运行流程的。看过Neale的Physics in CAM的Tutorial，对大致的物理过程运行流程清楚后，这个interface模块介绍的tutorial看起来还是很顺的。而且值得窃喜的三点是：</p>
 
-<p>:set nu</p>
+<p>1.我居然下载了它，因为目前CESM官网上已经删除了10年以前的培训材料。当然这会有一个比较大的问题，10年之后基本都是针对CESM的，每个模块都讲，但是都讲不细致。所以已经找不到针对CAM Interface的培训资料了。我很幸运。</p>
 
-<p>关闭</p>
+<p>2.它里面举的例子居然是针对convect_deep.F90诶~就是要改你丫的嘛啊哈哈哈</p>
 
-<p>:set nonu</p>
+<p>3.2009年NCAR就已经用起来CAM5了诶！啊哈哈哈！</p>
 
-<p>但是想将这个设置写进VI的配置文件，就</p>
+<p>不扯了，说正题。其实就是为了记录一下vi已经linux的一些使用技巧，尤其是处理文本的时候（比如源代码）。</p>
 
-<h1 id="vi-vimrc">vi ~/.vimrc</h1>
+<p>vi下查找</p>
+<blockquote>:/the_content_you_search</blockquote>
+<p>查找下一个用n键</p>
 
-<p>在这个文件中，添加</p>
+<p><strong><span style="color: #008000;">#Up to 20140729#</span></strong></p>
 
-<p>set nu</p>
+<p>在physics的主调用程序下查找所有的物理包，这个命令很好用。</p>
+<blockquote>grep call tphys*c.F90</blockquote>
+<p>tphys*c.F90通配了before和after coupling的两个物理包调用文件，grep这两个文件中的call语句（亮点！），因此抓出来的都是参数化过程。</p>
 
-<p>就行了</p>
-<p style="text-indent: 2em;">:set number
-:set nu 这个是简写</p>
-<p style="text-indent: 2em;"></p>
-<p style="text-indent: 2em;">参考：http://happyolucky.blog.163.com/blog/static/12235640020096235012610/</p>
+<p><strong><span style="color: #008000;">#Up to 20140731#</span></strong></p>
+
+<p>上述语句配合管道符可以改写为</p>
+<blockquote>cat tpys*c.F90 | grep call</blockquote>
+<p><strong><span style="color: #008000;">#Up to 20140802#</span></strong></p>
+<div class="entry-content">
+
+<strong>统计源码行数：</strong>比如位于CAM的源码根目录下，统计CAM的源码总行数（去掉空格）
+<blockquote>$find ./ -name “*.F90″ |xargs cat|grep -v ^$|wc -l</blockquote>
+答案是——————————499742
+
+居然不到50万行，比我想象要少诶……
+
+参考资料中还有记录空行等命令格式
+
+http://www.cnblogs.com/fullhouse/archive/2011/07/17/2108786.html
+
+<strong><span style="color: #008000;">#Up to 20140815#</span></strong>
+
+</div>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/29/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/07/31/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/">【未解决】CESM1.2.2移植到中大hpc4平台出问题</a>
+                  <a class="post-link" href="/2014/07/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/">【已解决】天河二号上CAM5强可扩展性测试</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-28
+                        <i class="fa fa-calendar"></i>2014-07-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -458,7 +482,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
     
   
 
@@ -487,47 +513,28 @@
                 </div>
                 <div class="excerpt">
                     
-<p>有1.2.0的基础，想必1.2.2应该是好搞定的，很多配置文件可以从1.2.0里拷贝过来。如法炮制，在天河二号上应该也可以这么搞定。</p>
+<p>应包老师要求，在天河二号上进行CAM5的强可扩展性测试。进行一个节点测试的时候发现积分速度才2.7yr/day，着实吓了一大跳。CAM4可是12.7yr啊，速度还赶不上CAM4的1/4？？！！换其他计算节点后还是这个速度，看起来CAM5的计算量增加的不是一点半点啊。最后测试结果如下，基本只有CAM4四分之一的速度。</p>
 
-<p>首先cd到新版的Machines目录下，然后拷贝旧版中的<em>config_machines.xml config_compilers.xml</em> 以及 <em>mkbatch.${MACH}</em>这三个配置文件过来（${MACH}代表自定义的机器名）</p>
-<blockquote>#cd ~/CESM/cesm1_2_2//scripts/ccsm_utils/Machines
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ图片20140730164146.jpg"><img class="alignnone size-medium wp-image-49" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ图片20140730164146.jpg" alt="QQ图片20140730164146" width="600" /></a></p>
 
-#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_machines.xml ./
+<p>晚上看NCAR Tutorial的时候看到了几张图，从上到下分别是CAM5的物理过程，CAM4和CAM5的积分步流程。可以看到CAM5各个物理过程之间也存在通信（这才合理嘛！）。再加上辐射方案的改进，计算时间也大增，据包庆老师说辐射计算时间占到总计算时间的一半以上。CAM5会这么慢其实也合情合理吧。</p>
 
-#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/config_compilers.xml ./
-
-#cp ~/CESM/cesm1_2_0/scripts/ccsm_utils/Machines/mkbatch.sigon ./</blockquote>
-<p>回到scripts目录，再采用create_newcase的方法进行X Compset的测试，</p>
-<blockquote>#./create_newcase -case testnew -res f45_g37 -compset X -mach sigon</blockquote>
-<p>结果出现了意想不到的错误：</p>
-
-<p><em>WARNING:</em>
-<em>    The perl module XML::LibXML is needed for XML parsing in the CESM script system.</em>
-<em>        Please contact your local systems administrators or IT staff and have them install it for</em>
-<em>        you, or install the module locally.</em></p>
-
-<p>回到1.2.0的目录测试，发现1.2.0是没有问题的。感觉像是新版加了perl的神马库去解析xml文件，google之，发现应该是这样。</p>
-
-<p>https://bb.cgd.ucar.edu/cesm-12-stempede-problem</p>
-
-<p>https://bb.cgd.ucar.edu/warning-cesm122</p>
-
-<p>按照贴子里的说法下载 XML::LibXML  安装，发现安装说明一头雾水完全看不懂，cpan命令无效，退出到workstation居然有cpan命令，呃……看起来是hpc4又没装神马东西，回来再慢慢捣鼓吧……</p>
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/图片1.png"><img class="alignnone size-medium wp-image-52" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/图片1.png" alt="图片1" width="600" /></a><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084017.gif"><img class="alignnone size-medium wp-image-50" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084017.gif" alt="QQ截图20140731084017" width="600" /></a><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084049.jpg"><img class="alignnone size-medium wp-image-51" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/07/QQ截图20140731084049.jpg" alt="QQ截图20140731084049" width="600" /></a></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/28/cesm1-2-2-e7-a7-bb-e6-a4-8d-e5-88-b0-e4-b8-ad-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/07/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/07/28/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/">大气所学习小记20140728</a>
+                  <a class="post-link" href="/2014/07/30/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/">大气所学习小记20140729</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-07-28
+                        <i class="fa fa-calendar"></i>2014-07-30
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -573,25 +580,39 @@
                 </div>
                 <div class="excerpt">
                     
-<p>今天应该是来大气所这三天里获得信息量最大的一天（半天）了，收益非凡！</p>
+<p>早起公交，早饭。饭后去家乐福买了香皂和纸巾，发现把杯子丢在了宿舍，于是又买了一瓶水。</p>
 
-<p>首先是GFDL Prof. Yi Ming 和佛罗里达大学 Prof. Zhaohua Wu的报告。Prof. Yi Ming用英文演讲，可能一方面因为内容太深，另一方面英文实在是太成问题了，根本听不懂，只能感慨自己水爆了。大概能听出来是讲了三方面内容（其实周天军老师最后提示才知道……）。一是通过某种手段估计可以减少人类活动中aerosol排放造成的气候反馈过程的不确定性，就是有方法能够缩短IPCC报告中aerosol效应error bar。确实帅呆！ 二是热带环流的一些内容，只记得wet get wetter，dry get dryer 和 stable get stabler这些，实在是听不懂……囧。 第三方面讲了GFDL model的一些发展状况。</p>
+<p>到所里发现办公室没有开门，没钥匙。发短信问国魁师兄什么时间过来。没回。便先去了611孟军师兄的办公室小坐。九点多下来一次还是没人，好在十点钟有报告。</p>
 
-<p>Prof. Zhaohua Wu的报告大概还是能够听明白的，可能主要是因为没有讲技术细节而且还是中文吧。从IPCC AR5中model historical run与观测的Ts对比那张经典的figure引出，指出了model对突变把握中存在的问题。以及采用统计方法在研究气候问题中的局限性、片面性。讲的很好，从平均值到方差，到基于平均值和方差的一系列方法，包括EOF等，实际都由于简化而掩盖了大量的信息，又产生了虚假信号。随后引入EMD方法，感觉应该就是杨老师让国军师兄重点研究和采用的那个吧，要不Zhaohua Wu这个名字怎么这么耳熟呢。这个方法的原理确实绝，时序信号最大值包络线最小值包络线做个差，就提出低频信号了，帅呆！当然具体技术细节上还是需要很多数学技巧的。列了很多的文献，大概记了下，需要的时候下载看，正好能够和杨老师的课题契合。今年Wu老师还发了Nature Climate Change的文章，佩服啊！做了好多年方法，从最初的为人不屑为人唾骂到现在逐渐被接受以及能够利用该方法发Nature……板凳坐得十年冷，坚韧不拔，自强不息！是以为戒！</p>
+<p>报告内容：http://www.lasg.ac.cn/xsbg/2014/7/q1c61fkk14.htm。前两天杨老板发消息说中大八月份的一个报告便是这个。</p>
 
-<p>随后紧接着是LASG模式开发组的组会，见到了龚华师兄以及包庆老师，包老师主导，明显是一位活力四射开朗有趣的老师。我介绍了CESM在天河二号上移植的情况，有点小紧张。包老师表示很好，也希望作为模式组未来机器选择的一个参考，讲了很多有意思的事情 ，比如NCAR的超级计算机（估计是yellowstone）是装在3000+m的山上的，可以利用环境散热，TH-2装在广州，天天那么热，这个散热费肯定海了，最后还不是承担在用户身上，价格居高不下。对呀！很有道理。又讲中国硬件是有啦，软件却是个大瓶颈啊，和国外差的远了。所以我们必须要跟上，必须自主研发才行啊。暗暗佩服，包老师确实是懂得深明大义的牛人啊。</p>
+<p>Prof. Wang没有讲数学细节，依然听不懂。大概内容是通过最大熵增原理去计算地表能量收支，可以理解为一个模型或者说通用方法。信息熵的观点引入到地学研究的一个成功范例。前面讲和Bulk Transfer Model的对比，一般陆面模式的Bulk Transfer Model缺点倒是记得清楚：1.计算过程中能量缺乏守恒性，2.存在梯度计算，测量误差很大，3.风速的不确定性，粗糙度的难以测量，4.一阶闭合本身就是近似，精确度有限。</p>
 
-<p>中午一起去吃饭，中餐似的快餐店，名字忘了，在路对面商业区，点了份东坡肉，味道还可以，就是搭配可乐感觉有点诡异。</p>
+<p>Model的数学基础有四点：1.贝叶斯概率论；2.信息熵；3.最大熵原理；4.最大熵增原理</p>
 
-<p>下午去东航售票点取票，北土城地铁站还是挺远的，中间路过微电子所，三元桥下了地铁后还是走了好长一段路才到东航的售票点，那个片区叫静安里。大气所这边叫华严里，才发现北京好多“里”啊，可能和胡同有关？</p>
+<p>讲了一个简单的并联电路求分流的例子，大家都知道用欧姆定律。从最大熵原理的角度进行解析的话，系统会使得总的热耗散最小（why？），方程很好列，乘上个拉格朗日算子就解出来了。虽然我不知道怎么解……</p>
 
-<p>嗯，大概就这些啦。</p>
+<p>计算地面能量收支的过程基本类似：物理上，无非就是净辐射进来，感热潜热出去；冰面雪面水面冠层适当进行一些调整。根据这个物理情景构造热耗散函数，乘拉格朗日算子，如法炮制。解出来的结果是Prof. Wang Highlight的。参数就是热惯量，潜热的惯量又正比于感热的惯量，不知怎么又把方程的自由度限制了一下，发现只和入射净辐射、Ts和比湿有关。优点很明显，没有风速了，不用粗糙度了，也不用梯度了，pia的一下把测量中最困难的几个量给扔了，帅呆！</p>
+
+<p>最后拿这个model算了些东西，和观测对比，貌似日变化之类还是能对上的，强度差的挺大。又和NCEP提供的资料对比，发现两者差的更大了，但是NCEP的潜热通量看上去是觉得不对，六七八月南半球日极值到了500W，换算成蒸发有6-7mm，而且南半球的潜热通量要比北半球高；Prof. Wang的Model是整个反过来的，从直观上想一下，貌似还是应该北半球夏季蒸发多一点，潜热通量大一些吧。</p>
+
+<p>听完报告回办公室发现有人来了，放下包吃饭。吃完饭回来打算给办公室的师兄师姐分好丽友，刚刚拿出来，包庆老师就来找我。叫到他办公室，说有没有查邮件啊，我说没。说清华有个薛老师也是移植CESM有些问题，你和他交流下等等，他是做计算机出身的，基本超级计算领域清华应该是国内的top1了，可以学习啊云云。我说好好好。包老师办公室不大，也不小。有长沙发，开放式的办公桌，桌上应该是Mac Pro。其他地方没细看，应该有一部打印机。办公椅看上去非常舒服，整个人都可以陷进去一般，虽然包老师坐着，但给人一种埋在沙发里躺着的感觉，这么工作起来还是挺惬意的。以后我也搞这么个椅子，再适当运动运动。就不用总担心颈椎腰椎了。后来三点多钟到走廊走了走，恰巧包老师端着杯子上来，说三楼有现磨咖啡豆，你喝不喝咖啡，免费的，我们所已经共产主义了哈哈哈~包老师确实是很能干，也很会干的人，前途无量啊。</p>
+
+<p>下午准备晚上找何编聊的内容，张方案的源文件接近四千行代码，搜索cape十几二十个结果，看上去完全没头绪。反正文件锁定了，晚上再问问吧。对何编的试验设计还是有疑问，做了ppt备注。晚上一并去问问。</p>
+
+<p>下午吃过饭回来，发现门又锁了。从六点半直等到八点半，本来还想再过一遍ppt，结果师兄回来开门之前何编老师就打电话让我过去了。两个多小时等待期间背了背托福单词，又跑到四十号楼转了一圈参观。四十号楼和科研楼是连体的，在楼内直接可以走过去。发现人很少，走廊又没有窗户，很封闭的感觉，晚上还有些恐怖。开门后拿了电脑就去找何编，从科研楼509到40#楼711，路挺绕。</p>
+
+<p>问明白了试验设计，方案，何老师的基本思路还是希望我能把每个积分步中的物理过程调用的顺序搞清楚，接口搞明白，之后再往Ttendency上加这个Heating的强迫项，不是直接改张方案这么简单，shallow convection和large-scale 里面也有Q啊，不是说直接在张方案里注入就行。又解释了一番A那篇文章的试验设计。其实很多地方还是和我想的比较类似的，从物理合理的角度出发，方法可以自己确定，Annual Cycle这类信号肯定是会去掉的，作者没必要说那么详细。想来想去，还是自己读的太少。很多方法和技术的运用，基本是约定俗成的，看到response差不多了，也就应该明白怎么操作的了，没必要细究（或者说不细究也就明白了）。说到做Model的苦与乐。技术活居多，门槛高，动手要勤快，Paper不好发，但真正钻进去才是窥探物理本质，才有意思。对我来说，coding本身就是很有挑战性满足支配欲的事情嘛~更何况深入的是物理而不是回归来合成去看到似是而非的现象就扯所谓的本质。“为赋新词强说愁”。说到做model的好处，也很明显，本身门槛就高，做的人少，所以一旦有人会，那便很抢手，吃香。突然想到了前段时间flash编程突然大受欢迎，因为互联网发展，网页游戏繁荣，而会flash编程的人又太少，所以瞬间此类人才价格疯涨。不知道目前怎么样了，估计应该昙花一现吧，前端不是html5+css3的天下了么，毕竟IT新陈代谢太快了。又太久没关注了啊~</p>
+
+<p>说道这里，瞬间有些不太美好的感觉。做model会不会也昙花一现呢？风险高的几点就在于，首先气象这个领域出路太狭窄，太专太封闭；其次，而仅仅做model又很难从一般科研人员堆paper的路子爬上去，因此一旦气象科研的路数变了，或者整个领域出现了因宏观政策性调整等不确定因素造成的坍缩，做model的人很难将已经深入的专业知识转移到其他领域，从而威胁到个人及家庭的底层生存需求。</p>
+
+<p>话说回来，毕竟能做model能做技术活的人肯定要有较好的计算机、网络以及Linux等基础，动手能力自然不差。所以明确的路子还是支起一行副业，而且是与专业相关的比较靠谱。开网店、投资期货、炒股等基础投入大、风险高而且经验几乎没有，没有一定资本前还是暂且不作考虑。当然首先还是要踏踏实实地积累好本专业基础知识，试着发paper；同时继续保持对IT行业的高敏感度及热情，了解整个业界动向，不断学习新技术积累建站搭站、硬件及操作系统维护、网页编程、网站管理经验，拓展渠道试着去接手一些外包项目，多结交技术型人才，拓展信息源。大致能够理清三条线吧：1.夯实基础，深入数值模式；2.广泛涉猎，提好科学问题，paper发好、发多；3.保持对本专业及IT行业的热情，终身学习，试着发展相关副业。</p>
 
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/07/28/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/07/30/e5-a4-a7-e6-b0-94-e6-89-80-e5-ad-a6-e4-b9-a0-e5-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -606,10 +627,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page88" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">89/91</span>
+          <span class="page_number ">89/93</span>
           
             <a href="/page90" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -625,6 +646,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1996,6 +2045,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2041,14 +2098,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2069,14 +2133,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2195,7 +2252,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2237,7 +2294,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2258,7 +2315,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2321,7 +2378,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2489,7 +2546,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2743,6 +2800,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2756,6 +2827,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2765,16 +2846,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2792,7 +2863,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2802,15 +2882,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2828,7 +2899,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3161,7 +3232,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3215,7 +3286,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3313,6 +3384,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim块选择</a>
+                  <a class="post-link" href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/">【已解决】自动生成pbs的create_newcase.sh</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-22
+                        <i class="fa fa-calendar"></i>2015-01-08
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -399,30 +403,55 @@
                 </div>
                 <div class="excerpt">
                     
-<p>之前一直用“v”进入可视模式，今天查替换的资料，发现可以通过大写“V”进入可是模式，直接进入行选择，这样进行块复制会方便很多。其他块选择及辅助命令的说明记在这里：</p>
-<pre>v------------块选择，字符模式
-V------------块选择，行模式
-Ctrl+v-------块选择，矩形模式
+<p>在上一篇<a href="http://222.200.180.66:1234/L_Zealot/blog/wordpress/?p=387">【已解决】shell大法好——用here document生成脚本</a>中介绍了如何使用here document自动生成脚本文件，折腾了一番，搞定了新的create_newcase.sh，可以自动生成pbs文件啦，不用每次调核心数调节点调路径啦。话说shell的if语法真是折腾，调试了快半个小时才通过三行if语句。注意各种空格！</p>
 
-gg-----------移动到文件头
-G------------移动到文件尾
-0------------移动到行首
-$------------移动到行尾</pre>
+<p>核心代码：</p>
+<pre>97 #Deal with que and nodes
+98 NNODES=$[NTASKS/16]
+99
+100 if [ $QUENAME = "ys" ]; then
+101 WALLTIME=999
+102 elif [ $QUENAME = "few" ]; then
+103 WALLTIME=720
+104 elif [ $QUENAME = "medium" ]; then
+105 WALLTIME=168
+106 else
+107 WALLTIME=48
+108 fi
+109
+110 #--------------------------------------
+111 #------Now generate the pbs file-------
+112 #--------------------------------------
+113 cat &lt;&lt; EOF &gt; run.pbs
+114 #!/bin/sh
+115 #PBS -N $CASENAME
+116 #PBS -q $QUENAME
+117 #PBS -l walltime=$WALLTIME:00:00
+118 #PBS -l nodes=$NNODES:ppn=16
+119 #PBS -r n
+120 #PBS -o cesmrun.log
+121 #PBS -e cesmrun.err
+122 echo "This jobs is "\$PBS_JOBID@\$PBS_QUEUE
+123 MPIBIN=/public/mpi/mvapich2-18-intel/bin
+124 EXEROOT=/users/yangsong3/L_Zealot/F/$CASENAME/exe
+125 cd \$EXEROOT
+126 \$MPIBIN/mpirun -np $NTASKS -hostfile \$PBS_NODEFILE ./cesm.exe &gt;&amp; ../run.log
+127 EOF</pre>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/22/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/01/08/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e8-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/12/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim注释语法高亮</a>
+                  <a class="post-link" href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/">【已解决】shell大法好——用here document生成脚本</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-20
+                        <i class="fa fa-calendar"></i>2015-01-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -468,120 +497,106 @@ $------------移动到行尾</pre>
                 </div>
                 <div class="excerpt">
                     
-<p>vim默认注释为深蓝色，太暗太难看。查了下改成了亮绿色，发现有些关键词高亮也是亮绿，后改为亮蓝色，难看点也就这样吧……</p>
+<p>CESM从新建一个case，更改pe layers，到最后提交run脚本执行，还是需要折腾一番的，尤其是四期动辄就对csh傻眼（貌似最近好了），还是提交标准的bash pbs妥当，不过更改pbs，又要费一番功夫。最好就是在create newcase的时候直接把bps生成好，change pe layers的脚本里也加入对pbs修改的语句，这样就可以省下很多功夫。按照【shell 生成文本】的关键词查了下资料。发现here document可以解决问题。</p>
+<blockquote>
+<div>例如下面的here.sh 文件</div>
+<div>cat &lt;&lt; EOF &gt; output.sh</div>
+<div>echo "hello"</div>
+<div>echo "world"</div>
+<div>EOF</div>
+<div>使用 sh here.sh 运行这个脚本文件，会得到output.sh 这个新文件，里面的内容如下</div>
+<div>echo "hello"</div>
+<div>echo "world"</div>
+<div></div></blockquote>
+<div>还是很简单的说～而且可以识别母脚本中的变量。另外here document还可以用来与数据库或者终端交互，功能确实强大。</div>
+<div></div>
+<div>参考资料：</div>
+<div>http://www.2cto.com/os/201307/231010.html</div>
+<div></div>
+<div>http://jeremiah.blog.51cto.com/539865/339211</div>
+<div></div>
 
-<p>其中6是颜色号</p>
-<pre>highlight Comment ctermfg=6 guifg=6</pre>
-<table style="height: 115px; border-color: #969595;" border="1" width="180">
-<tbody>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;"><strong>颜色号</strong></span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;"><strong>颜色</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">0</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #999999;"><strong>Black</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">1</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ff0000;"><strong>Red</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">2</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #00ff00;"><strong>Green</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">3</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ff9900;"><strong>Yellow</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">4</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #0000ff;"><strong>Dark Blue</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">5</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ff00ff;"><strong>Pink</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">6</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #33cccc;"><strong>Light Blue</strong></span></td>
-</tr>
-<tr>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;">7</span></td>
-<td style="width: 80px; background-color: #000000;"><span style="color: #ffffff;"><strong>White</strong></span></td>
-</tr>
-</tbody>
-</table>
+                </div>
+                <div class="read-all">
+                    <a  href="/2015/01/07/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91shell/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2015/01/05/e3-80-90paperhub-e3-80-91refman-e6-a0-bc-e5-bc-8f/">【paperhub】格式导出与pdf附件信息</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2015-01-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>研究了半天终于搞明白了怎么用endnote导出ris或者enw，这样终于可以弄清楚几个关键属性对应的keyword了，又可以扩展paperhub的功能。目前考虑加入本地附件链接，doi怎么搞目前还没头绪。</p>
+
+<p>第一步，确定ris或者enw导出在样式中被选中</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap2.jpg"><img class="alignnone size-full wp-image-378" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap2.jpg" alt="Snap2" width="422" height="541" /></a></p>
+
+<p>第二步，选中文献，文件–&gt;导出，可以看到输出样式可选ris或者enw输出</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-379" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg" alt="Snap3" width="577" height="537" /></a></p>
+
+<p>一个导出文件的例子，其中L1 标签后面对应ris导出格式的本地pdf路径。
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/Snap3.jpg"><img class="alignnone size-full wp-image-380" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/01/QQ图片20150105185757.jpg" alt="QQ图片20150105185757" width="758" height="516" /></a></p>
+
 <p> </p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/12/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】ncl求线性回归系数的问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-12-16
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>求线性回归系数画图，直接用regCoef函数出现维度问题，出不来图。看了下varSummary，奇奇怪怪一大堆，估计是误差估计之类的东西。于是对返回变量做取值操作，没有问题。</p>
-
-<p>例子：</p>
-<pre>391 reg_var4 = season_var4(0,:,:)
-392 reg_var4 = (/regCoef(sst_ts(i,:),season_var4_anoLLT)/)</pre>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/12/16/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2015/01/05/e3-80-90paperhub-e3-80-91refman-e6-a0-bc-e5-bc-8f/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -596,10 +611,10 @@ $------------移动到行尾</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page67" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">68/91</span>
+          <span class="page_number ">68/93</span>
           
             <a href="/page69" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -615,6 +630,34 @@ $------------移动到行尾</pre>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1986,6 +2029,14 @@ $------------移动到行尾</pre>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2031,14 +2082,21 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2059,14 +2117,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2185,7 +2236,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2227,7 +2278,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2248,7 +2299,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2311,7 +2362,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2479,7 +2530,7 @@ $------------移动到行尾</pre>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2733,6 +2784,20 @@ $------------移动到行尾</pre>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2746,6 +2811,16 @@ $------------移动到行尾</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2755,16 +2830,6 @@ $------------移动到行尾</pre>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2782,7 +2847,16 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2792,15 +2866,6 @@ $------------移动到行尾</pre>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2818,7 +2883,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3151,7 +3216,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3205,7 +3270,7 @@ $------------移动到行尾</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3303,6 +3368,33 @@ $------------移动到行尾</pre>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

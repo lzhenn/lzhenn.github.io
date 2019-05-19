@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/05/24/cesm-aquap/">CESM测试Aqua Planet试验</a>
+                  <a class="post-link" href="/2018/07/05/EC2-diggler/">EC2迁移：从Razortail到Diggler</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-05-24
+                        <i class="fa fa-calendar"></i>2018-07-05
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,11 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#cesm" title="Category: cesm" rel="category">cesm</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#Notebook" title="Category: Notebook" rel="category">Notebook</a>
     
   
 
@@ -389,9 +397,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#cesm" title="Tag: cesm" rel="tag">cesm</a>&nbsp;
+        <a href="/tag/#EC2" title="Tag: EC2" rel="tag">EC2</a>&nbsp;
     
-        <a href="/tag/#aqua-planet" title="Tag: aqua-planet" rel="tag">aqua-planet</a>
+        <a href="/tag/#Notebook" title="Tag: Notebook" rel="tag">Notebook</a>
     
   
 
@@ -400,126 +408,74 @@
                     </div>
                 </div>
                 <div class="excerpt">
-                    
-<p>开始测试Aqua-Planet试验，直接按照aqua的设置run没有任何问题，但是发现SST没有annual cycle，询问师姐：</p>
-<blockquote>
-  <p>你是用的cesm的default的 aqua compset吗 如果是的话，那么好像是不需要额外读入sst文件的，而是直接在code里指定需要哪种sst profile就可以，具体是通过修改ocn_comp.F90 中 sst_option，这里不同的sst_option代表不同的profile；关于topo，好像你是需要在user_nl_cam里指定一个新的topo文件的(把高度啥的设为0)</p>
-</blockquote>
+                    <ul id="markdown-toc">
+  <li><a href="#预安装" id="markdown-toc-预安装">预安装</a></li>
+</ul>
 
-<p>这么说还需要自己写一个topo为0的文件。</p>
+<p>Razortail的免费期马上要过了，用菇菇的信息注册了新的AWS账户，开了新的节点，叫做Diggler吧.主机位置也从韩国首尔搬到了新加坡，希望坡县的丢包率能低一点，可悲。</p>
 
-<p><a href="http://www.cesm.ucar.edu/models/simpler-models/fixed_sst_aqua.html">一些资料</a></p>
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fsyws2e8q9j20mb05bt94.jpg" alt="" /></p>
 
-<p>修改轨道参数，固定黄赤交角为0度：</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="n">rb_mode</span><span class="o">=</span><span class="s">'fixed_parameters'</span>
-<span class="n">orb_obliq</span><span class="o">=</span><span class="mf">0.0</span>
-<span class="n">orb_eccen</span><span class="o">=</span><span class="mf">0.0167239</span>
-<span class="n">orb_mvelp</span><span class="o">=</span><span class="mf">102.035</span>
+<p><img src="http://ww1.sinaimg.cn/large/73ebdc71gy1fsywu80c5tj20g5054mxe.jpg" alt="" /></p>
 
+<p>记录下配置过程。参考之前<a href="https://novarizark.github.io/2017/07/03/aws-ec2-e6-90-ad-e5-bb-bavps/">Razortail的记录</a>。</p>
+
+<h4 id="预安装">预安装</h4>
+
+<p>git安装</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> yum install git
 </code></pre></div></div>
 
-<p><strong>Updated 2018-05-14</strong></p>
+<p>配置ssh</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ssh</span><span class="nt">-keygen</span>
+</code></pre></div></div>
+
+<p>安装SS依赖(参考最<a href="https://github.com/shadowsocks/shadowsocks-libev">新版本依赖</a>)</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum install <span class="nt">-y</span> gcc gettext-devel unzip autoconf automake make zlib-devel libtool xmlto asciidoc udns-devel libev-devel
+<span class="nb">sudo </span>yum install <span class="nt">-y</span> pcre pcre-devel perl perl-devel cpio expat-devel openssl-devel mbedtls-devel
+<span class="nb">sudo </span>yum install gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel <span class="nt">-y</span>
+</code></pre></div></div>
+
+<p>安装libsodium到系统默认搜索路径</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
+./configure
+make <span class="o">&amp;&amp;</span> make check
+<span class="nb">sudo </span>make install
+</code></pre></div></div>
+<p>Follow the instructions in <a href="https://github.com/shadowsocks/shadowsocks-libev">SS Severlibv Version</a>.</p>
+
+<p>注意用sudo ldconfig来更新lib配置。</p>
+
+<p>安装ss后的配置：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0.0"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"server_port"</span><span class="p">:</span><span class="w"> </span><span class="err">xxxxx</span><span class="p">,</span><span class="w">
+</span><span class="s2">"local_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+</span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yourpwd"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w">
+</span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aes-256-cfb"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"fast_open"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>注意去掉旧版本中的local_address字段。</p>
+
+<p><strong>Updated 2018-07-05</strong></p>
 
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/05/24/cesm-aquap/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/07/05/EC2-diggler/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/05/17/thinking-young-world/">十年绚烂</a>
+                  <a class="post-link" href="/2018/06/25/trading-diary/">20180625交易笔记-东边日出西边雨</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-05-17
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
-    
-        <a href="/tag/#career" title="Tag: career" rel="tag">career</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>不知道什么时候开始，觉得一天天，一周周，一月月过得越来越快，小学的时候，一周五天，一学期四个月多么漫长啊，而如今，不知不觉间几个月就没了。</p>
-
-<p>老了。熬夜撑不住了，早晨也时常六点多就醒。25岁真的是人生的顶峰，随后就是下坡路。20-30岁，这短暂的十年真的是人生最美好的十年。</p>
-
-<p>朱老板听了位列福布斯30-30一哥们的报告，激动得语无伦次，对其口才风度能力气质佩服的五体投地。默默查了下30-30，指的是福布斯评选出的30位30岁以下的精英青年。一眼望去，创业者居多，翻了翻后面，体育健儿，知名艺人也位列其上。猛然意识到，他们与我，是同龄人。</p>
-
-<p>同龄人！时至2018，第一批90后只剩下两年就30岁了。连第一批00后今年都要大学入学了！盯着那一串名单，愈发感到恐惧和沮丧。且不说零星可见的00后艺人，对艺人和运动员这两个群体来说，如果在20-30岁阶段不能够成为业界明珠，那么这一辈子，也极少可能再向上走了吧。
-曾经觉得年轻，觉得未来充满了选择，充满了机遇，充满了可能性，而事实却远非如此。我们可以设想，即便人感受时间的流逝是线性的，即便机遇和可能性随着年龄增长也是线性减少的，这种希望也应该线性地减少才对。
-可吊诡的呢，是人感受到的时间流逝，随着年龄增长是越来越快的；而很多机遇和选择，随着时间流逝甚至可能是指数递减的，比如对艺人来说，18岁和27岁可能遇到的机会，决然是不同的。
-但是希望这种事情，却可以被称为执念，随着时间流逝，并不会以某种圆润的曲线下降。直到有一天，现实狠狠地甩了一巴掌，按王小波的话，就像挨了锤的牛一样。这个时候才会发现，自己只有希望的泡泡，却没有希望的内容。这也是为什么在各种语言的描述中，希望总是破灭的，而不是消失，减弱之类的修饰。</p>
-
-<p>我该庆幸自己意识到这一点了么？回望过去六年，我在做什么，获得了什么，争取到了什么？</p>
-
-<p>时间那么公平，所有人，无论是谁，过了一年就是长了一岁。中午看到李迅雷文章，年轻人越来越少的中国。是噢，我还把自己当年轻人。我的同龄人，都是85-95这批回声婴儿潮里的孩子，如今，真的是在二十几岁最好的年华，如今都在各自工作岗位上，奉献自己的青春汗水。这批人里，早有能够凭一张打码自拍一夜赚数百万收入，也有无数屌丝无产者，甚至，将来可能还有一批负资产人士。五年之后，我们30多岁了，十年之后，更是集体奔四。五年十年，过起来只会越来越快，年轻人，真的越来越少。</p>
-
-<p>下午见闻小编发来运单截图，中奖书籍发货了。看着手写运单清秀的字迹，《你的名字》剧照做头像，突然很感慨，我们这批人里，多少还把自己当作孩子，然而历史的行程从不曾暂停，工作岗位上的我们，已经是中流砥柱。如此形势，是危，也是机。</p>
-
-<p><strong>Updated 2018-05-17</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/05/17/thinking-young-world/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/05/08/trading-diary/">20180508交易笔记-油飞了以及其他</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-05-08
+                        <i class="fa fa-calendar"></i>2018-06-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -561,11 +517,7 @@
     
         <a href="/tag/#investment" title="Tag: investment" rel="tag">investment</a>&nbsp;
     
-        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>&nbsp;
-    
-        <a href="/tag/#option" title="Tag: option" rel="tag">option</a>&nbsp;
-    
-        <a href="/tag/#market&nbspcrash" title="Tag: market&nbspcrash" rel="tag">market&nbspcrash</a>
+        <a href="/tag/#stock" title="Tag: stock" rel="tag">stock</a>
     
   
 
@@ -575,33 +527,128 @@
                 </div>
                 <div class="excerpt">
                     
-<p>原油这次真的起飞了。昨晚油价一路窜高，布油一路突突到76刀+，创下三年半来新高。</p>
+<p>这一个多月来宏观形势云诡波谲，不可谓不精彩绝伦。还是先说说自己的持仓情况。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fr3q64rs8mj20rx0lx424.jpg" alt="" /></p>
+<p>具体标的方面，Oil相关减仓约1/3，投入贵金以及债类资产。油价应已经进入平衡价位，基于前期权益类资产和商品类资产价格比值考虑，均值回归模型下如果美油跌至60左右我会考虑再适当加仓。
+纳指继续推高，科技龙头和小盘股齐飞，维持QDII定投，小盘股方面GNC这种死狗都开始反弹了，适当减了点补仓。鹅飞了，创造出单支标的盈利记录，真的是没有想到的事情，之前还买了put套保，看不懂，不看好可持续性，已减半仓。德银PB不到0.3，市值不及城商行，佛系地加了点。减仓HK ETF标的，买入put套保，逻辑是金管局跟；不列颠ETF一直半死不活，股息4%+了，继续看好，后期可以持续加仓。其他标的并不明朗，后期适当增配些通胀挂钩债券和短期利率债货币基金。</p>
 
-<p>之前的逻辑在不断地验真，去年到现在，最主要的资本利得基本都是油给的。对于高信噪比的趋势交易，真的没必要天天盯盘，更重要的是信心和布局。70+其实基本已经在平衡价位了，现在投机性交易者正在助推价格继续上涨，后续布油一旦触碰到80，打算减半仓。</p>
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fsn8gv1kuvj20s90ivdid.jpg" alt="" /></p>
 
-<p>昨天看投研帮文章表示商品/权益类资产价格比值达到历史新低，该指标均指回归无非两种途径：A权益类资产大跌，B商品价格大涨。直觉应该买个大盘的put对冲下，不过仔细想了想自己的商品标的和权益类资产的对冲手段似乎没什么问题，瞄了下九月到期的QQQ的put，尼玛100股要600多刀，宰人呢这是。决定财报季过后适当减仓，继续观望。</p>
-
-<p><img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fr3qdqtsdaj20ec09yq5d.jpg" alt="" /></p>
-
-<p>消息面上中美贸易战继续来来去去过招，川普要撕毁伊核协议，基本面上还是美利坚继续复苏扩张，上月非农虽然不及预期，但是失业率跌倒4%以下(当然每次危机前也近似这么漂亮的数字)，欧洲有整体熄火的迹象，国内各指标基本保持稳定，去杠杆总基调下资金面依然紧张。</p>
-
-<p>总之16-18全球应该是经历了一次信贷脉冲下的小复苏，根本问题当然没有解决，而且更严重了，没错，债务问题。短暂的波动并不能代替长期的趋势，时先生那句“债务是一条带血的主线”依然萦绕耳畔。短期来看，油飞了，通胀预期也跟着起来了，但17年后长债收益率和黄金出现背离，反映着黄金隐含的通胀预期与TIPS反应的通胀预期的背离，金银波动率逐渐走低。Fed措辞似乎开始接受低通胀，并且对未来的经济增长和通胀预期表示隐忧。虽然大趋势上依然固执于通胀走强，但短期考虑以期权策略做多波动性。</p>
-
-<p>另外最近开始看东野圭吾的《解忧杂货铺》。坦白说，看他第一本《拉普拉斯的魔女》，对其行文的印象就是灰暗的白描和冷淡的叙事，实则压抑。作品吸引我的地方往往在于其对人物心理和动机的揭示以及对现实社会背景的折射。比如魔女中弑夫者的价值观（大致印象）:</p>
+<p>宏观层面，USD爆发：</p>
 
 <blockquote>
-  <p>找年龄差不多的男人结婚，老了之后，两个老人相互照顾多累呀。如果找个有钱的老男人嫁了，老男人寿命不久，死了之后自己依然年轻，还能继承一大笔遗产……</p>
+  <p>美元指数的这一波持续上行始于4月中旬，从4月17日到6月15日，美元指数升值幅度约为6.0%，同期美元对人民币双边汇率升值约2.2%；但端午节后的四个交易日，美元指数的最大升值幅度仅为0.8%，但美元对人民币双边汇率的升值幅度则达到了1.2%。
+HKD/RMB也从四月中旬的0.8升值到了0.83.近几天USD指数下跌，RMB并没有像样反弹，反倒补跌。</p>
 </blockquote>
 
-<p>《解忧杂货铺》就更有意思了，现时背景下在失去的二十年里成长的一代年轻人，利用跨时空书信教育70年代石油危机时的父辈要去珍惜工作机会，继承家业的机会，告诉他们再过30年连大学生出来都可能找不到工作（误入杂货铺的三人就是找不到工作四处偷窃的社会青年）。依托时代背景塑造人物再折射时代背景，叙事行文的淡漠情感，其书近几年在国内的流行和畅销程度，其实可以反映出很多有意思的事情。愿意或者不愿，我们都将见证即将到来的这个时代。</p>
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fsnfz8426vj20ry0iltb3.jpg" alt="" /></p>
 
-<p><strong>Updated 2018-05-08</strong></p>
+<p>川怼见完三哥，回到家就向中国加税。之前在财新群里看到有人讲，国内外主流媒体从川怼上台到贸易战开打，前期都做了错误的预判，值得反思。</p>
+
+<p>区域性因素考虑，南美诸国有超跌超卖倾向，待探底稳定后可布局相应ETF长期持有。</p>
+
+<p>最近定投的大A相关基金跌成狗，直接把支付宝年收益拉到负了，坑爹，看了基本标的情况不觉得有太大问题，考虑下收入和现金流，大概减了30%额度，剩下继续坚持，每月也没多少钱。</p>
+
+<p>昨晚放出降准消息，可以说是非常失望了，过去一两年景气周期以来，哪怕是加息25基点，也有逆转民众预期的可能，如今这般面多了放水，水多了加面的局面，继续苟且。等了两年，我是寒心了，重新捡起英语，锻炼好身体，深挖洞广积粮。</p>
+
+<p>言尽于此。</p>
+
+<p><strong>Updated 2018-06-25</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/05/08/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/06/25/trading-diary/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/06/05/ubuntu-parted/">Ubuntu下用parted分区4TB硬盘</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-06-05
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+    
+        <a href="/tag/#ubuntu" title="Tag: ubuntu" rel="tag">ubuntu</a>&nbsp;
+    
+        <a href="/tag/#parted" title="Tag: parted" rel="tag">parted</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>Orion要用来做天池比赛的服务器啦，安多一块硬盘用来存雷达数据。放上后需要用parted做分区，然后mkfs格式化，过程和CentOS差不多。这里做一下记录：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lzhenn@thinkstation:~<span class="nv">$ </span><span class="nb">sudo </span>parted /dev/sdb
+<span class="o">(</span>parted<span class="o">)</span> mklabel GPT                                                      
+<span class="o">(</span>parted<span class="o">)</span> mkpart primary 0% 100%                                           
+<span class="o">(</span>parted<span class="o">)</span> print                                                            
+Model: ATA HGST HUS724040AL <span class="o">(</span>scsi<span class="o">)</span>
+Disk /dev/sdb: 4001GB
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: 512B/4096B
+Partition Table: gpt
+Disk Flags: 
+
+Number  Start   End     Size    File system  Name     Flags
+ 1      1049kB  4001GB  4001GB               primary
+<span class="o">(</span>parted<span class="o">)</span> quit
+lzhenn@thinkstation:~<span class="nv">$ </span>partprobe  <span class="c"># let the core know the partation</span>
+lzhenn@thinkstation:~<span class="nv">$ </span>mkfs.ext4 /dev/sdb1 <span class="c"># format</span>
+                     
+</code></pre></div></div>
+<p>format后，建立fstab并mount -a即可。与CentOS完全一致。</p>
+
+<p><strong>Updated 2018-06-05</strong></p>
+
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/06/05/ubuntu-parted/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -616,10 +663,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page8" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">9/91</span>
+          <span class="page_number ">9/93</span>
           
             <a href="/page10" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -635,6 +682,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2006,6 +2081,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2051,14 +2134,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2079,14 +2169,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2205,7 +2288,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2247,7 +2330,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2268,7 +2351,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2331,7 +2414,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2499,7 +2582,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2753,6 +2836,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2766,6 +2863,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2775,16 +2882,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2802,7 +2899,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2812,15 +2918,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2838,7 +2935,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3171,7 +3268,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3225,7 +3322,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3323,6 +3420,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

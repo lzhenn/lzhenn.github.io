@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2018/03/12/cryptography-python-mysql/">不要使用明文密码！以mysql创建数据库链接为例讨论下密码学</a>
+                  <a class="post-link" href="/2018/03/30/tf-img-classifier/">测试基于tensorflow的图片分类器</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-12
+                        <i class="fa fa-calendar"></i>2018-03-30
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -374,227 +378,6 @@
     
         <a href="/category/#python" title="Category: python" rel="category">python</a>&nbsp;
     
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
-    
-        <a href="/category/#algorithm" title="Category: algorithm" rel="category">algorithm</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#AES&nbspEncrypt" title="Tag: AES&nbspEncrypt" rel="tag">AES&nbspEncrypt</a>&nbsp;
-    
-        <a href="/tag/#python_import" title="Tag: python_import" rel="tag">python_import</a>&nbsp;
-    
-        <a href="/tag/#pymysql" title="Tag: pymysql" rel="tag">pymysql</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc">
-  <li><a href="#对称加密" id="markdown-toc-对称加密">对称加密</a></li>
-  <li><a href="#公钥非对称加密" id="markdown-toc-公钥非对称加密">公钥非对称加密</a></li>
-</ul>
-
-<p>终于把基本的数据库组织结构学的差不多啦，上午拖着需要补充的市场数据，测试导入数据！</p>
-
-<p>python3使用pymysql模块连接InnoDB数据库，连接过程中需要用户名密码，可是明文密码再上传github这是找死，决定研究下简单的加密解密过程，从外部读取密文，再decode后给入。</p>
-
-<h3 id="对称加密">对称加密</h3>
-<p>加密算法分对称加密和非对称加密。对称加密很好理解，就是经典的凯撒密码的套路，采用同样的密钥加密和解密（字幕平移法则）。
-<img src="https://bignerdcoding.com/uhttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2017/08/3799978773.jpeg" alt="" /></p>
-
-<p>DES是经典的对称加密算法，64bits为单位然后套轮函数循环，但是DES目前已经被攻破，三重DES（密钥1加密，密钥2解密，密钥3加密）还有应用价值。
-AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平移），MixColumns（混列），最后AddRoundKey（与原数据异或）。此为一轮AES。
-如果采用对称加密，推荐AES算法。</p>
-
-<h3 id="公钥非对称加密">公钥非对称加密</h3>
-<p>公钥加密是密码学领域非常牛逼的技术，即加密密钥和解密密钥可以不同，这样可以避免密钥配送过程中的风险。公钥丢失也不怕，神不神奇？</p>
-
-<p>比如用户浏览器和server之间非对称加密过程可以是这样：server给公钥，用户用公钥加密，将密文给server（公钥、密文都被窃取也无法获得明文），server将密文用私钥解密。
-经典非对称加密算法RSA。其<a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html">数学原理</a>在阮一峰的网站有介绍。不再赘述。</p>
-
-<p>以我们的应用情景来说，因为不涉及通讯，直接AES对称加密即可。</p>
-
-<p>构建如下类解决：</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AESCipher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="mi">32</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">):</span>
-        <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pad</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
-        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">iv</span> <span class="o">+</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enc</span><span class="p">):</span>
-        <span class="n">enc</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">]</span>
-        <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpad</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enc</span><span class="p">[</span><span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">:]))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span> <span class="o">*</span> <span class="nb">chr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">)</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_unpad</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:])]</span>
-</code></pre></div></div>
-
-<p><a href="https://bignerdcoding.com/archives/33.html">参考资料</a></p>
-
-<p><strong>Updated 2018-03-12</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/12/cryptography-python-mysql/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/11/mysql-error-full-disk/">mysql创建数据库出错、根目录额满、与数据库存放位置迁移</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-11
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
-        <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>&nbsp;
-    
-        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>&nbsp;
-    
-        <a href="/tag/#centos" title="Tag: centos" rel="tag">centos</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>今天打算创建Mercurius的数据库，神奇的是，输入create database后报错</p>
-
-<blockquote>
-  <p>ERROR 1006 (HY000): Can’t create database ‘mercurius’ (errno: 28)</p>
-</blockquote>
-
-<p>换了root账户也不行，查到的信息都是说mysql的数据库权限问题，检查后的确木有问题呀。
-注意到google出的关键词errno号不同，很多13号，而我是28号，深度搜索了一番，找到了答案：</p>
-<blockquote>
-  <p>This error means that your mysql server does not have enough free space. You need to check the file system size and please remove unwanted software(s) or installers or files.</p>
-</blockquote>
-
-<p>我去，坑我？磁盘满额？df查看一下，果然/根目录满额。奇怪～</p>
-
-<p>利用find找大文件：</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-size</span> +800M
-</code></pre></div></div>
-
-<p>发现除了最早丢过来的安装包，就是gdm的log最大，cd过去一看，可了不得，13G的log，应该是图形界面出错后一直在写error，写到了3月5日，果断删掉～并且把安装包移走。目前解决，后面看是否还继续写log。</p>
-
-<p>慎重起见，将mysql的数据库路径进行迁移，然后发现进了个大坑。无论怎样按照<a href="http://blog.csdn.net/liuchunming033/article/details/51851667">网上的步骤</a>调整，都会遇到mysqld服务无法打开的结果。甚至rsync数据库然后做链接都不行。
-折腾了一下午，突然想到，不就是把mercurius数据库拿出来么，不动mysql本身的账户库还不行。好吧，最后给mercurius做了链接搞定，要注意所在的上层目录必须有root用户和用户组的读写权限。</p>
-
-<p><strong>Updated 2018-03-11</strong></p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2018/03/11/mysql-error-full-disk/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2018/03/06/mysql-basics/">mysql基本操作</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2018-03-06
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>&nbsp;
-    
         <a href="/category/#notebook" title="Category: notebook" rel="category">notebook</a>
     
   
@@ -612,9 +395,7 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
-    
-        <a href="/tag/#database" title="Tag: database" rel="tag">database</a>
+        <a href="/tag/#tensorflow" title="Tag: tensorflow" rel="tag">tensorflow</a>
     
   
 
@@ -624,137 +405,214 @@ AES是取代DES的算法，具体步骤为替换（SubBytes），ShiftRows（平
                 </div>
                 <div class="excerpt">
                     
-<p>常用命令</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
-<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
-<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
-<span class="k">select</span> <span class="k">database</span><span class="p">();</span> <span class="o">#</span> <span class="k">show</span> <span class="n">what</span> <span class="k">is</span> <span class="n">the</span> <span class="n">selected</span> <span class="k">database</span>
-<span class="k">drop</span> <span class="k">database</span> <span class="n">if</span> <span class="k">exists</span> <span class="n">test</span><span class="p">;</span>
+<p>开始测试tensorflow的图片分类器！
+按<a href="https://www.youtube.com/watch?v=gIhUePPFmpY">这个视频</a>来，发现train的一步出现问题</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:tensorflow:Couldn't understand architecture name ''
 </code></pre></div></div>
-<p>建立好数据库之后，则可以开始建立tables啦，这个过程中需要有一些数据库的设计思路，大概是列出各种table，如下图：
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2ugsl2uej20nd0gbwka.jpg" alt="" /></p>
+<p>发现是指定的环境变量读不到，于是将给ARCH赋值的语句和python执行语句一起放到shell脚本里，问题解决。
+train的过程大概用了不到五分钟，估计30-60min的经验是CPU-based，tf应该自动选用cuda解决了。</p>
 
-<p>然后我们仿照视频教程建立一个存储学生数据的table</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span>
-    <span class="o">-&gt;</span> <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">email</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">street</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="k">state</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="nv">"PA"</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">zip</span> <span class="n">mediumint</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">phone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">birth_date</span> <span class="n">date</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">date_entered</span> <span class="k">timestamp</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">lunch_cost</span> <span class="n">float</span> <span class="k">null</span><span class="p">,</span>
-    <span class="o">-&gt;</span> <span class="n">student_id</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
-</code></pre></div></div>
-<p>解释一下各关键词：</p>
+<p>之后做测试，效果很好。</p>
 
-<p>varchar代表可变长度的string，not null表示不能是空值；</p>
+<p><img src="https://ws1.sinaimg.cn/large/73ebdc71ly1fpwweqdx63j20fz0790t7.jpg" alt="" /></p>
 
-<p>state因为只有两个字母，所以，强制要求char(2)，并且给了default值为PA。mediumint有意思，查了一下，发现mysql提供非常多种类的数据类型，估计是考虑到数据库的空间利用效率的原因。
-<img src="https://ws1.sinaimg.cn/large/73ebdc71gy1fp2v4f3uo0j20wc07c42m.jpg" alt="" />
-我们总结一下数据类型：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHAR		fixed length character string
-VARCHAR		a character string with a length that is variable
-BLOB		contain 2^16 bytes of data
-BIGINT		2^63 to -2^63-1
-FLOAT		decimal spaces 1.1e38 to -1.1e38
-DOUBLE		decimal spaces, 1.7e308 to -1.7e308
-ENUM		A character stirng that has a limited number of total values, which you must define
-SET			(Seldom used) A set of legal possible character strings. Unlike ENUM, a SET can contain a multiple values in comparason to the one legal value with ENUM.
-DATE		YYYY-MM-DD
-TIME		HH:MM:SS
-DATETIME	YYYY-MM-DD HH:MM:SS
-TIMESTAMP	YYYYMMDDHHMMSS
-YEAR		YYYY
-</code></pre></div></div>
-<p>unsigned 表示非负值。</p>
-
-<p>sex的enum非常清楚了，只有两个选项。</p>
-
-<p>注意入学时间，用的timestamp类型，可以看到数据库软件本身提供了非常体贴的类型，不需要自己parser date string啦。</p>
-
-<p>最后一个student id，被定义为主键。</p>
-
-<p>然后我们看一下student中的情况</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">describe</span> <span class="n">student</span><span class="p">;</span>
-
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-<span class="o">|</span> <span class="n">Field</span>        <span class="o">|</span> <span class="k">Type</span>                  <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span>           <span class="o">|</span> <span class="n">Extra</span>                       <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-<span class="o">|</span> <span class="n">first_name</span>   <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">last_name</span>    <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">email</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>           <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">street</span>       <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">city</span>         <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="k">state</span>        <span class="o">|</span> <span class="n">char</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>               <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="n">PA</span>                <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">zip</span>          <span class="o">|</span> <span class="n">mediumint</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">phone</span>        <span class="o">|</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>           <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">birth_date</span>   <span class="o">|</span> <span class="n">date</span>                  <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">sex</span>          <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">)</span>         <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">date_entered</span> <span class="o">|</span> <span class="k">timestamp</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span> <span class="k">on</span> <span class="k">update</span> <span class="k">CURRENT_TIMESTAMP</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">lunch_cost</span>   <span class="o">|</span> <span class="n">float</span>                 <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span>                             <span class="o">|</span>
-<span class="o">|</span> <span class="n">student_id</span>   <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span>      <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>              <span class="o">|</span> <span class="n">auto_increment</span>              <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------+-----------------------+------+-----+-------------------+-----------------------------+</span>
-
-</code></pre></div></div>
-
-<p>查看table中field值的方法：</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="n">first_name</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>可以用逗号隔开多个fields。
-清空数据表</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">truncate</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>注意truncate和drop的区别，drop直接将table从database拿掉，truncate仅仅是清空field的content。
-我们总结一下层级关系</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>databases
-	tabels
-		fields
-			field rows (contents)
-</code></pre></div></div>
-
-<p>向student table中插入一条数据记录</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">student</span> <span class="n">value</span>
-    <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">'Dennis'</span><span class="p">,</span> <span class="s1">'Lee'</span><span class="p">,</span> <span class="s1">'dcooper@aol.com'</span><span class="p">,</span> <span class="s1">'123 Main St'</span><span class="p">,</span> <span class="s1">'Yakima'</span><span class="p">,</span> <span class="s1">'WA'</span><span class="p">,</span> <span class="mi">95294</span><span class="p">,</span> <span class="s1">'510-365-0383'</span><span class="p">,</span> <span class="s1">'1995-2-22'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="mi">3</span><span class="p">.</span><span class="mi">50</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>查看加入的数据记录</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slect</span> <span class="o">*</span> <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
-</code></pre></div></div>
-<p>Foreign Key的概念</p>
-
-<p>表A中的Primary Key，出现在表B中，则为Foreign Key，可为空值，可重复出现。</p>
-
-<p>如果要对已有的表增加一条数据属性，使用alter table语句</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">test</span>
-    <span class="o">-&gt;</span> <span class="k">add</span> <span class="n">maxscore</span> <span class="n">int</span> <span class="k">not</span> <span class="k">null</span> <span class="k">after</span> <span class="k">type</span><span class="p">;</span>
-
-<span class="k">describe</span> <span class="n">test</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-<span class="o">|</span> <span class="n">Field</span>    <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-<span class="o">|</span> <span class="n">date</span>     <span class="o">|</span> <span class="n">date</span>             <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="k">type</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'Q'</span><span class="p">)</span>    <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">maxscore</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">class_id</span> <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
-<span class="o">|</span> <span class="n">test_id</span>  <span class="o">|</span> <span class="n">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+------------------+------+-----+---------+----------------+</span>
-
-</code></pre></div></div>
-<p>改变已有的数据表中的Field名，</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">score</span> <span class="n">change</span> <span class="n">event_id</span> <span class="n">test_id</span>
-    <span class="o">-&gt;</span> <span class="n">int</span> <span class="n">unsigned</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>Updated 2018-03-08</strong></p>
+<p><strong>Updated 2018-03-30</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2018/03/06/mysql-basics/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2018/03/30/tf-img-classifier/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/28/recover-techblog/">我的技术博客有救了！</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-28
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#hardware" title="Category: hardware" rel="category">hardware</a>&nbsp;
+    
+        <a href="/category/#linux" title="Category: linux" rel="category">linux</a>&nbsp;
+    
+        <a href="/category/#mysql" title="Category: mysql" rel="category">mysql</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#server" title="Tag: server" rel="tag">server</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>周三助教回到东校，决定去处理一下实验室服务器，看下我的wordpress博客内容到底还有没有救。因为<a href="https://novarizark.github.io/2017/12/30/raid-rebuild/">上次</a>做了1号盘位的rebuild，这次测试将0号盘位degraded的旧硬盘换下。
+可是将0号盘位换下后，1号盘位显示为non-raid磁盘，而0号新盘直接不认，what the fuck。怀疑是上次rebuild没有完成，所以将旧硬盘再次换到0号位置让raid卡自己玩去。
+换上旧硬盘后可以正常识别到raid信息并进入系统。测试mysql数据库居然发现wp_posts数据都存在，太幸运了，我的技术博客有救了！果断导出。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysqldump <span class="nt">-h</span> localhost <span class="nt">-u</span> root <span class="nt">-p</span> <span class="nt">--database</span> wordpress | gzip <span class="o">&gt;</span> backupfile.sql.gz
+gunzip <span class="nt">-c</span> backupfile.sql.gz <span class="o">&gt;</span> bck.sql 
+</code></pre></div></div>
+
+<p>之后在mysql下导入</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">source</span> <span class="o">~/</span><span class="n">bck</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>查看中文时注意utf8编码</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span> <span class="k">names</span> <span class="n">utf8</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>后面考虑写个python脚本将过去的日志转成markdown放到jekyll博客下。</p>
+
+<p><strong>Updated 2018-03-28</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/28/recover-techblog/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2018/03/26/principle-from-mistakes/">Form principles from mistakes</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2018-03-26
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#principle" title="Category: principle" rel="category">principle</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>&nbsp;
+    
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <p>如何按照达里奥的《原则》来处理生活、学习、工作、投资？Learn from mistakes非常重要。出错不怕，怕的是知错不改。策略法则的反脆弱性来自于不断试错和快速迭代。快速迭代要求知错而改，而不是在同一条道路上反复撞墙。
+这篇文章用于总结经历过的错误，并试图从错误中抽象避免下次出现同样问题的原则。</p>
+
+<p>勘误表</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ID</th>
+      <th style="text-align: left">Date</th>
+      <th style="text-align: left">目标</th>
+      <th style="text-align: left">失败情况</th>
+      <th style="text-align: left">失败原因</th>
+      <th style="text-align: left">总结原则</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">20180105</td>
+      <td style="text-align: left">因肠胃问题中山二院就医</td>
+      <td style="text-align: left">1. 没携带医保卡（实际并不需要，但不应遗漏）<br />2. 没有携带病历<br /> 3.粪便检查没有携带纸巾，不得不外出购买</td>
+      <td style="text-align: left">没有条理化检查任务所需准备</td>
+      <td style="text-align: left">1.条理化检查执行任务所需要的准备<br /> 2.随身携带纸巾是具有保险性质的操作</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">20180119</td>
+      <td style="text-align: left">参加JW婚礼需要一双皮鞋</td>
+      <td style="text-align: left">鞋码购买错误，造成不便</td>
+      <td style="text-align: left">没有细致查看购买条款及介绍，没有联系客服</td>
+      <td style="text-align: left">购买物品时反复查验其属性说明是否合乎要求</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">20180207</td>
+      <td style="text-align: left">返程火车票学生票</td>
+      <td style="text-align: left">学生证缺少注册章损失187元</td>
+      <td style="text-align: left">学生证拿去注册后没有仔细查验注册章</td>
+      <td style="text-align: left">仔细查验对后续任务有重要影响的任务完成情况</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Updated 2018-03-26</strong></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2018/03/26/principle-from-mistakes/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -769,10 +627,10 @@ YEAR		YYYY
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page14" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">15/91</span>
+          <span class="page_number ">15/93</span>
           
             <a href="/page16" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -788,6 +646,34 @@ YEAR		YYYY
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2159,6 +2045,14 @@ YEAR		YYYY
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2204,14 +2098,21 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2232,14 +2133,7 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2358,7 +2252,7 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2400,7 +2294,7 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2421,7 +2315,7 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2484,7 +2378,7 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2652,7 +2546,7 @@ YEAR		YYYY
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2906,6 +2800,20 @@ YEAR		YYYY
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2919,6 +2827,16 @@ YEAR		YYYY
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2928,16 +2846,6 @@ YEAR		YYYY
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2955,7 +2863,16 @@ YEAR		YYYY
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2965,15 +2882,6 @@ YEAR		YYYY
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2991,7 +2899,7 @@ YEAR		YYYY
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3324,7 +3232,7 @@ YEAR		YYYY
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3378,7 +3286,7 @@ YEAR		YYYY
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3476,6 +3384,33 @@ YEAR		YYYY
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

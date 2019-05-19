@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/">【Linux】Windows上传文件名乱码解决</a>
+                  <a class="post-link" href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/">【未解决】python安装pandas等数据处理类库</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-26
+                        <i class="fa fa-calendar"></i>2016-04-07
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,9 +376,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
-    
-        <a href="/category/#Windows" title="Category: Windows" rel="category">Windows</a>
+        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
     
   
 
@@ -391,9 +393,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
-    
-        <a href="/tag/#Windows" title="Tag: Windows" rel="tag">Windows</a>
+        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
     
   
 
@@ -403,203 +403,189 @@
                 </div>
                 <div class="excerpt">
                     
-<p>由于windows和linux对文件系统的编码方式不同，从windows上传或者从linux下载的文件名总存在乱码，解决方法很简单。实际上linux程序包里存在一个convmv的转换程序。</p>
+<p>首先按照<a href="http://youerning.blog.51cto.com/10513771/1711008">这个网站</a>yum这些东西，然后pip安装，</p>
 
-<p>首先，检测下是否有这个程序，如果没有，yum安装一下。</p>
+<p>出现错误：Command “python setup.py egg_info” failed with error code 1 in /tmp/pip-build-Cblre2/pandas/</p>
 
-<p>转换命令</p>
+<p>之后的剧情就是个坑了，查了个资料，说把python用yum给remove了，然后编译安装新版本的就行，我居然TMD信以为真，remove过程中突然出现一个提示说cannot remove yum，纳尼……啥时候要remove yum。</p>
 
-<p>convmv -f GBK -t UTF-8 -r yourdir/ –notest</p>
+<p>不管了，编译安装python2.7，发现yum还是不能安装pandas，这个时候我做了个最错误的决定，将系统原有的/usr/下所有python的lib include全删了，用2.7去替换……天真如我啊啊啊 = =</p>
 
-<p>-f是源编码格式</p>
+<p>之后yum就不正常了，出现：</p>
 
-<p>-t为目标编码格式</p>
+<p>No module named yum这种错误</p>
 
-<p>–notest代表直接进行mv操作</p>
+<p>查了下，正确安装新版本python的姿势：</p>
 
-<p>-r代表递归</p>
+<p>http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7</p>
 
-<p>yourdir/为操作目录</p>
+<p>原来系统安装的python 与许多组件有依赖关系，随意搞掉是不可以的，吐血。于是找办法去解决，下载了python，yum等几个关联包，重新rpm安装，再运行yum出现新错误：No module named rpm，纳尼……</p>
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/26/e3-80-90linux-e3-80-91windows-e4-b8-8a-e4-bc-a0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/">【mysql】测试wordpress与mysql数据库的关系</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-25
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
+<p>想到之前自己删除了所有原本的python相关库，估计是这个问题。</p>
 
-                    <div class="label-card">
-                    
+<p>折腾半天，去workstation上yum update了，然后scp所有/usr下与python相关的文件夹过来……</p>
 
+<p>yum可以用了，update过程中出现许多不匹配的错误，这应该是workstation上rpm管理的软件信息与team server不同造成……</p>
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
-    
-        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
-    
-  
+<p>yum update后，似乎没什么问题了。</p>
 
-  <!-- <span class="point">•</span> -->
-</span>
+<p>附带官方所有软件包地址：http://mirror.centos.org/centos/6/os/x86_64/Packages/</p>
 
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
-    
-        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>第一次建立wordpress站点的时候搞得不明不白，这次建站，决定测试一下进入mysql的具体流程</p>
-
-<p>经典步骤：</p>
-<pre>$ mysql -u adminusername -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 5340 to server version: 3.23.54
- 
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
- 
-mysql&gt; CREATE DATABASE databasename;
-Query OK, 1 row affected (0.00 sec)
- 
-mysql&gt; GRANT ALL PRIVILEGES ON databasename.* TO "wordpressusername"@"hostname"
-    -&gt; IDENTIFIED BY "password";
-Query OK, 0 rows affected (0.00 sec)
-  
-mysql&gt; FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.01 sec)
-
-mysql&gt; EXIT
-Bye
-$</pre>
-<p>第一次测试，所有都用root用户名和密码，成功！</p>
-
-<p>第二次，一般用户下，一般用户名登录mysql，无法创建数据库。</p>
-
-<p>第三次，一般用户下，root登录，创建数据库，grant时用 ”yangsong3”@”localhost”，wordpress设置下用yangsong3，失败！</p>
-
-<p>用root，成功～说明wordpress实际是用的root用户名访问mysql的。</p>
-
-<p> </p>
-
-<p> </p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2016/02/25/e3-80-90mysql-e3-80-91-e6-b5-8b-e8-af-95wordpress/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/">【shell】文本处理-金价</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-02-24
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>awk工具可以很好的用来剔除html标签</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>awk ‘BEGIN {FS=”&gt;”} NR==19 {print $2}’ gold-1602041300</td>
-      <td>awk ‘BEGIN {FS=”&lt;”} {print $1}’</td>
-    </tr>
-  </tbody>
+<p>重新编译安装python2.7，按照<a href="http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7">这个帖子</a>，需要安装setuptools和PIP，之后用PIP安装pandas等库，成功！</p>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter"></td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">matplotlib -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number2 index1 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">numpy -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number3 index2 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">pandas -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
+<div class="line number4 index3 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">seaborn scipy</code></div>
+</div></td>
+</tr>
+</tbody>
 </table>
 
-<p>分别把左侧关标签和右侧开标签作为分隔符，最后print $1即可。</p>
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/">VBA学习笔记</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-03-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
 
-<p>字符串变量截取${var:7}，从第八个字符开始向后。</p>
+                    <div class="label-card">
+                    
 
-<p>参考：http://blog.csdn.net/misskissc/article/details/8217877</p>
 
-<p> </p>
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#EXCEL/VBA" title="Category: EXCEL/VBA" rel="category">EXCEL/VBA</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#EXCEL/VBA" title="Tag: EXCEL/VBA" rel="tag">EXCEL/VBA</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>打开开发工具功能选项卡</p>
+
+<p>文件–&gt;选项–&gt;自定义功能区</p>
+
+<p>选定区域，F5，定位，可以定位选中到想要的区域</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/02/24/e3-80-90shell-e3-80-91-e6-96-87-e6-9c-ac-e5-a4-84/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2016/03/21/sp-cam-amip-run/">SP-CAM AMIP run</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2016-03-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<ol>
+  <li>
+    <p>注意下载完整restart文件以及rpointer</p>
+  </li>
+  <li>
+    <p>AMIP run默认输出中fincl1文件变量cb_sulf_c在SP下不存在，因此运行前删掉atm_in中fincl1这一行即可。</p>
+  </li>
+  <li>
+    <p>不要用xxx.run提交，用yhbatch直接提交包含yhrun的脚本</p>
+  </li>
+</ol>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2016/03/21/sp-cam-amip-run/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -614,10 +600,10 @@ $</pre>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page42" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">43/91</span>
+          <span class="page_number ">43/93</span>
           
             <a href="/page44" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -633,6 +619,34 @@ $</pre>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2004,6 +2018,14 @@ $</pre>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2049,14 +2071,21 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2077,14 +2106,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2203,7 +2225,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2245,7 +2267,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2266,7 +2288,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2329,7 +2351,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2497,7 +2519,7 @@ $</pre>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2751,6 +2773,20 @@ $</pre>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2764,6 +2800,16 @@ $</pre>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2773,16 +2819,6 @@ $</pre>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2800,7 +2836,16 @@ $</pre>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2810,15 +2855,6 @@ $</pre>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2836,7 +2872,7 @@ $</pre>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3169,7 +3205,7 @@ $</pre>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3223,7 +3259,7 @@ $</pre>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3321,6 +3357,33 @@ $</pre>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

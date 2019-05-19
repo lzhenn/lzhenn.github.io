@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL写binery文件Fortran读出错——BigEndian问题</a>
+                  <a class="post-link" href="/2014/10/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL大文件支持</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-19
+                        <i class="fa fa-calendar"></i>2014-10-26
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,11 +376,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>&nbsp;
-    
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>&nbsp;
-    
-        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
     
   
 
@@ -393,11 +393,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>&nbsp;
-    
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>&nbsp;
-    
-        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
     
   
 
@@ -407,67 +403,32 @@
                 </div>
                 <div class="excerpt">
                     
-<p>ncl写二进制文件非常方便，setfileoption+fbinrecwrite语句即可。处理模式输出的加热数据测试了一下，非常迅速搞定。随后需要用到fortran代码来读写二进制文件，没想到却遇到大问题。</p>
+<p>写2GB以上文件</p>
 
-<p>ncl下采用fbinrecwrite写入的文件为fortran下的sequential读取方式（貌似这个才是符合ieee标准的），按照<a href="http://www.ncl.ucar.edu/Document/Functions/Built-in/fbinrecwrite.shtml">官网指示</a>，代码很容易编译通过，但是执行出错。ifort编译执行错误结果：</p>
-<blockquote>forrtl: severe (98): cannot allocate memory for the file buffer - out of memory, unit 100, file /users/yangsong3/L_Zealot/F/f90/CAM4_PTENDT_DIFF_mon.dat</blockquote>
-<p>采用gfortran编译，同样执行出错：</p>
-<blockquote>At line 12 of file read_heat_diff.f90 (unit = 100, file = '../data/model_post/CAM4_PTENDT_DIFF_mon.dat')
-Fortran runtime error: End of file</blockquote>
-<p>第一次在linux平台下编译自己写的fortran代码，多少还是有些心虚。ifort表示内存不足，gfortran表示读到文件末尾，有些莫名其妙，检查路径文件名，文件大小，读取方式，貌似都没问题，折腾许久没有结果。</p>
+<p>setfileoption(“nc”,”Format”,”LargeFile”)</p>
 
-<p>问题只能回溯到ncl那么简单的二进制写入上，fbinrecwrite看上去没什么问题，setfileoption中的几个选项值得怀疑，查了下BigEndian的问题，是这样描述的：</p>
-<blockquote>其实big endian是指低地址存放最高有效字节（MSB），而little endian则是低地址存放最低有效字节（LSB）。
+<p>or</p>
 
-用文字说明可能比较抽象，下面用图像加以说明。比如数字0x12345678在两种不同字节序CPU中的存储顺序如下所示：
+<p>setfileoption(“nc”,”Format”,”NetCDF4Classic”)</p>
 
-<strong>Big Endian</strong>
+<p>参考</p>
 
-低地址                                   高地址
------------------------------------------&gt;
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|   12  |   34  |   56  |   78   |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-<strong>Little Endian</strong>
-
-低地址                                   高地址
------------------------------------------&gt;
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|   78|   56  |   34  |   12   |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</blockquote>
-<p>虽然看上去出错信息并不是这么指向的，但还是要试一试，查了下fortran在字节序处理的问题，果然，一行open语句赫然入眼：</p>
-
-<p>open(…,<strong><em>convert=”big_endian”</em></strong>)</p>
-
-<p>加入测试，我擦嘞……居然可以了，果然是字节序的问题。原来fortran默认的是非人的little endian，好吧……关键是运行出错给出的那些错误信息，完全无厘头，真是对编译器失望了。另外SGI编译器默认为BigEndian。</p>
-
-<p>另外fortran读ncl写出的多维二进制数据的时候，注意维数方向是相反的哦！如ncl数组（33，44），fortran（44，33）</p>
-
-<p>【参考资料】</p>
-
-<p>http://blog.csdn.net/sunshine1314/article/details/2309655 BigEndian和LittleEndian</p>
-
-<p>http://bbs.lasg.ac.cn/?action-viewthread-tid-13303</p>
-
-<p>http://www.360doc.com/content/11/0216/10/2609140_93438395.shtml</p>
-
-<p> </p>
+<p>http://www.ncl.ucar.edu/Support/talk_archives/2011/0599.html</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
+                  <a class="post-link" href="/2014/10/25/e4-b8-8e-e4-bd-95-e7-bc-96-e8-80-81-e5-b8-88-e5-9/">与何编老师合作的feedback试验过程总结</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-18
+                        <i class="fa fa-calendar"></i>2014-10-25
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -486,7 +447,7 @@ Fortran runtime error: End of file</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
     
   
 
@@ -503,7 +464,7 @@ Fortran runtime error: End of file</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
     
   
 
@@ -513,42 +474,32 @@ Fortran runtime error: End of file</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
-<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
-set shiftwidth=4
+<p>留个坑，回来慢慢填。</p>
 
-set expandtab</blockquote>
-<p> </p>
+<p>同何编老师进行feedback试验的合作，从七月底正式前往学习heating injection的技术到现在，整整三个月了。如今，何老师的初稿已经发过来了，我却徒挂一个第三作者的名字，从头到尾却没有一张自己做的图。心里很不是滋味。客观原因永远找不完，主观上自己的问题，必须要一一总结反思。</p>
 
-<p>对于已经存在的文件：</p>
-<blockquote><strong>TAB替换为空格：</strong>
-:set ts=4
-:set expandtab
-:%retab!</blockquote>
-<p>多行缩进在命令行模式下</p>
-<blockquote>n&gt;</blockquote>
-<p>向右缩进n行，左用&lt;代替</p>
+<p>1.Double Check的重要性！</p>
 
-<p>【参考资料】</p>
+<p>2.不能够办到的事情，就不要承诺！</p>
 
-<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
+<p>3.如何在尽量不让他人感到被打扰与自己能够获取足够的信息顺利开展合作之间平衡，很难。</p>
 
-<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
+<p>4.事情不要因为看上去不容易做，就往后拖，越拖越烦，越拖越觉得难做，越拖越让人觉得你的能力存在问题。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/25/e4-b8-8e-e4-bd-95-e7-bc-96-e8-80-81-e5-b8-88-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/">【已解决】putty在vim下使用小键盘</a>
+                  <a class="post-link" href="/2014/10/23/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM进行branch run</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-18
+                        <i class="fa fa-calendar"></i>2014-10-23
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -567,7 +518,7 @@ set expandtab</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -584,7 +535,7 @@ set expandtab</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -594,12 +545,58 @@ set expandtab</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>putty默认在vim下小键盘是不启动的，启动方式：
-选项Terminal-&gt;Features里，找到Disable application keypad mode，选上</p>
+<p>coupled spin-up run终于快接近尾声了，可以开始进行Heat试验的branch run了。UG上给出了branch run的设置方法，不过as it always，依然洗练，依然是yellowstone+HPSS上的配置，坑爹啊……照着来了一遍，问题记录在这里：</p>
+
+<p>create_newcase，不要setup。</p>
+
+<p><strong><span style="color: #ff0000;">1.</span></strong></p>
+<blockquote>./xmlchange RUN_TYPE=branch
+
+./xmlchange RUN_REFCASE=B_CON
+
+./xmlchange RUN_STARTDATE=0150-01-01
+
+./xmlchange RUN_REFDATE=0150-01-01</blockquote>
+<p><strong><span style="color: #ff0000;">2.拷贝user_nl_*文件</span></strong></p>
+
+<p><strong><span style="color: #ff0000;">3.拷贝SourceMods文件</span></strong></p>
+
+<p><strong><span style="color: #ff0000;">4.cesm_setup</span></strong>，出错：</p>
+<blockquote>ERROR(Build::Namelist::_parse_next): expect a equal '=' sign instead got: .rtm.r.0150-01-01-00000.nc
+ERROR: rtm.buildnml.csh failed
+ERROR: /users/yangsong3/L_Zealot/couple/B_brch/preview_namelists failed: 25344</blockquote>
+<p>又是rtm出问题，goole之</p>
+
+<p>https://bb.cgd.ucar.edu/cesm-120-rtmbuildnmlcsh-branch-run</p>
+
+<p>表示居然是一个bug！按照帖子更改./Buildconf/rtm.buildnml.csh 58与62行：</p>
+<blockquote>set nrevsn_rtm = "nrevsn_rtm='${RUN_REFCASE}.rtm.r.${RUN_REFDATE}-${RUN_REFTOD}.nc'"</blockquote>
+<p>可以通过setup。</p>
+
+<p><span style="color: #ff0000;"><strong>4.编译</strong></span></p>
+
+<p><span style="color: #ff0000;"><strong>5.拷贝restart与ini文件 cp …./<em>0150</em> ./</strong></span></p>
+
+<p><span style="color: #ff0000;"><strong>6.提交作业</strong></span>，第一次错误：</p>
+
+<p>csh运行中出现如下提示：</p>
+<blockquote>File status unknown: B_CON.clm2.r.0150-01-01-00000.nc
+File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
+<p>出现错误，找不到rpointer文件</p>
+<blockquote>forrtl: severe (29): file not found, unit 98, file /users/yangsong3/L_Zealot/couple/B_brch/exe/rpointer.drv</blockquote>
+<p>拷贝 rpointer* 到目录下，并更改restart日期，重新提交作业。</p>
+
+<p>居然可以运行，逐日输出暂时没有发现问题！</p>
+
+<p><strong>#Up to 20141030#</strong></p>
+
+<p>cesm1.2.1已经修正cesm_setup中的bug</p>
+
+<p><strong>#Up to 20150106#</strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/23/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -614,10 +611,10 @@ set expandtab</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page75" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">76/91</span>
+          <span class="page_number ">76/93</span>
           
             <a href="/page77" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -633,6 +630,34 @@ set expandtab</blockquote>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2004,6 +2029,14 @@ set expandtab</blockquote>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2049,14 +2082,21 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2077,14 +2117,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2203,7 +2236,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2245,7 +2278,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2266,7 +2299,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2329,7 +2362,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2497,7 +2530,7 @@ set expandtab</blockquote>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2751,6 +2784,20 @@ set expandtab</blockquote>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2764,6 +2811,16 @@ set expandtab</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2773,16 +2830,6 @@ set expandtab</blockquote>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2800,7 +2847,16 @@ set expandtab</blockquote>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2810,15 +2866,6 @@ set expandtab</blockquote>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2836,7 +2883,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3169,7 +3216,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3223,7 +3270,7 @@ set expandtab</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3321,6 +3368,33 @@ set expandtab</blockquote>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

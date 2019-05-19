@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/">yh数据处理</a>
+                  <a class="post-link" href="/2016/09/03/linux-e4-b8-8b-e5-88-87-e6-8d-a2shell-e7-8e-af-e5/">Linux下切换shell环境</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-04-28
+                        <i class="fa fa-calendar"></i>2016-09-03
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -399,30 +403,28 @@
                 </div>
                 <div class="excerpt">
                     
-<p>iconv转码函数非常好用，可以直接在命令行下进行数据转码，例子：</p>
+<p>默认为bash，支持的环境存储在</p>
 
-<p>iconv weawher_coop1 -f gbk -t UTF-8 -o weather_coop1.utf-8</p>
+<p>/etc/shells,vi可以查看。</p>
 
-<p>split函数可以按行分隔文件：</p>
+<p>若切换，用chsh命令，有问题，ypchsh命令。</p>
 
-<p>split -l 10000 -d -a 4 weather_coop1.utf-8 ./splited-noreject/weather<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></p>
-
-<p>10000行一个文件，后缀为4位数字。</p>
+<p>重新登录tty后生效。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/04/28/yh-e6-95-b0-e6-8d-ae-e5-a4-84-e7-90-86/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/09/03/linux-e4-b8-8b-e5-88-87-e6-8d-a2shell-e7-8e-af-e5/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/">【未解决】python安装pandas等数据处理类库</a>
+                  <a class="post-link" href="/2016/05/14/e3-80-90python-e3-80-91matplotlib-e9-85-8d-e7-bd/">【python】matplotlib配置文件</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-04-07
+                        <i class="fa fa-calendar"></i>2016-05-14
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -441,7 +443,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Python" title="Category: Python" rel="category">Python</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -458,7 +460,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Python" title="Tag: Python" rel="tag">Python</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -468,64 +470,28 @@
                 </div>
                 <div class="excerpt">
                     
-<p>首先按照<a href="http://youerning.blog.51cto.com/10513771/1711008">这个网站</a>yum这些东西，然后pip安装，</p>
+<p>开始用python画图啦，发现matplotlib功能强大到令人发指，ug整整两千多页！我了个去！除了地图数据可能不及NCL强大，一般性的line bar等等图画起来简直是炫爆了。</p>
 
-<p>出现错误：Command “python setup.py egg_info” failed with error code 1 in /tmp/pip-build-Cblre2/pandas/</p>
+<p>有相应的配置文件可以设置默认样式，寻找配置文件可以先import matplotlib，然后</p>
 
-<p>之后的剧情就是个坑了，查了个资料，说把python用yum给remove了，然后编译安装新版本的就行，我居然TMD信以为真，remove过程中突然出现一个提示说cannot remove yum，纳尼……啥时候要remove yum。</p>
+<p>[1] matplotlib.matplotlib_fname()</p>
 
-<p>不管了，编译安装python2.7，发现yum还是不能安装pandas，这个时候我做了个最错误的决定，将系统原有的/usr/下所有python的lib include全删了，用2.7去替换……天真如我啊啊啊 = =</p>
-
-<p>之后yum就不正常了，出现：</p>
-
-<p>No module named yum这种错误</p>
-
-<p>查了下，正确安装新版本python的姿势：</p>
-
-<p>http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7</p>
-
-<p>原来系统安装的python 与许多组件有依赖关系，随意搞掉是不可以的，吐血。于是找办法去解决，下载了python，yum等几个关联包，重新rpm安装，再运行yum出现新错误：No module named rpm，纳尼……</p>
-
-<p>想到之前自己删除了所有原本的python相关库，估计是这个问题。</p>
-
-<p>折腾半天，去workstation上yum update了，然后scp所有/usr下与python相关的文件夹过来……</p>
-
-<p>yum可以用了，update过程中出现许多不匹配的错误，这应该是workstation上rpm管理的软件信息与team server不同造成……</p>
-
-<p>yum update后，似乎没什么问题了。</p>
-
-<p>附带官方所有软件包地址：http://mirror.centos.org/centos/6/os/x86_64/Packages/</p>
-
-<p>重新编译安装python2.7，按照<a href="http://ruiaylin.github.io/2014/12/12/python%20update/#%E4%BF%AE%E5%A4%8D_yum_%E5%B7%A5%E5%85%B7">这个帖子</a>，需要安装setuptools和PIP，之后用PIP安装pandas等库，成功！</p>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td class="gutter"></td>
-<td class="code">
-<div class="container">
-<div class="line number1 index0 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">matplotlib -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
-<div class="line number2 index1 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">numpy -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
-<div class="line number3 index2 alt2"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">pandas -i http:</code><code class="bash plain">//pypi</code><code class="bash plain">.douban.com</code><code class="bash plain">/simple</code> <code class="bash plain">--trusted-host pypi.douban.com</code></div>
-<div class="line number4 index3 alt1"><code class="bash plain">pip </code><code class="bash functions">install</code> <code class="bash plain">seaborn scipy</code></div>
-</div></td>
-</tr>
-</tbody>
-</table>
+<p>可以找到相应的配置文件路径。</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/04/07/python-e5-ae-89-e8-a3-85pandas-e7-ad-89-e6-95-b0-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/14/e3-80-90python-e3-80-91matplotlib-e9-85-8d-e7-bd/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/">VBA学习笔记</a>
+                  <a class="post-link" href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/">【Supermarket】执行情况计划及进度</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2016-03-21
+                        <i class="fa fa-calendar"></i>2016-05-10
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -544,7 +510,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#EXCEL/VBA" title="Category: EXCEL/VBA" rel="category">EXCEL/VBA</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>
     
   
 
@@ -561,7 +529,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#EXCEL/VBA" title="Tag: EXCEL/VBA" rel="tag">EXCEL/VBA</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>
     
   
 
@@ -571,15 +541,37 @@
                 </div>
                 <div class="excerpt">
                     
-<p>打开开发工具功能选项卡</p>
-
-<p>文件–&gt;选项–&gt;自定义功能区</p>
-
-<p>选定区域，F5，定位，可以定位选中到想要的区域</p>
+<p>2016.5.14执行计划应完成</p>
+<ul>
+	<li>逐日客流时间序列（四门店同图）</li>
+	<li>小波分析其中一两店，给出图</li>
+	<li>平均周变化
+<ul>
+	<li>排除节假日调休的周变化，如果来得及</li>
+	<li>排除超过1个标准差的周变化，如果来得及</li>
+</ul>
+</li>
+	<li>平均日变化
+<ul>
+	<li>工作日和周末各自的日变化<span id="transmark" style="display: none; width: 0px; height: 0px;"></span></li>
+</ul>
+</li>
+	<li>尝试套用ARIMA模型进行预测</li>
+</ul>
+<p>下一步计划：</p>
+<ul>
+	<li>特殊事件因子
+<ul>
+	<li>法定节假日及调休</li>
+	<li>高温热浪、强降水、寒潮</li>
+	<li>促销活动</li>
+</ul>
+</li>
+</ul>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2016/03/21/vba-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2016/05/10/e3-80-90supermarket-e3-80-91-e6-89-a7-e8-a1-8c-e6/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -594,10 +586,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page40" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">41/91</span>
+          <span class="page_number ">41/93</span>
           
             <a href="/page42" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -613,6 +605,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1984,6 +2004,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2029,14 +2057,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2057,14 +2092,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2183,7 +2211,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2225,7 +2253,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2246,7 +2274,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2309,7 +2337,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2477,7 +2505,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2731,6 +2759,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2744,6 +2786,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2753,16 +2805,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2780,7 +2822,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2790,15 +2841,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2816,7 +2858,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3149,7 +3191,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3203,7 +3245,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3301,6 +3343,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

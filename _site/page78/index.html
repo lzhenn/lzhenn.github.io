@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/16/linux-e6-9f-a5-e6-89-be-e6-96-87-e4-bb-b6-e6-89-80/">Linux查找文件所在位置</a>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim空格tab键转换及多行缩进</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-16
+                        <i class="fa fa-calendar"></i>2014-10-18
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -399,106 +403,42 @@
                 </div>
                 <div class="excerpt">
                     
-<p>Linux下查找命令find， locate，find选项太多，每次查文件都记不住怎么搞，最常用的当前目录递归深入查找写在这里了，以后记住</p>
-<blockquote>find ./ -name "*keyword*"</blockquote>
+<p>tab键缩进往往采用4个空格代替会有更好的兼容性，vi中设置如下，配置.vimrc文件：</p>
+<blockquote>set ts=4  (注：ts是tabstop的缩写，设TAB宽4个空格)
+set shiftwidth=4
 
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/10/16/linux-e6-9f-a5-e6-89-be-e6-96-87-e4-bb-b6-e6-89-80/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/">【更新中】高分辨率CAM更改PE Layers的测试</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-14
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
-    
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
-    
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>应老板项目要求，CAM的分辨率早晚要shift到F05的水平，前两天在学校四期平台上测试了下，默认配置，CAM4物理，96个核，900s积分时间，运行情况实在惨不忍睹：</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png"><img class="alignnone size-full wp-image-199" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png" alt="QQ截图20141014222809" width="1054" height="763" /></a></p>
-
-<p>运行一个月用了整整一晚上，十几分钟才能输出一天，一个文件1.2G，我擦嘞。</p>
-
-<p>转到天河二号，直接调用了1200个核心，物理包用的CAM5，大概三四分钟出来一天的样子，发现IO是个大瓶颈。测试改PE层，只有atm用1200个核心，其他用120个核心，依然是sequential执行，效果差不多。</p>
-
-<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png"><img class="alignnone size-full wp-image-198" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png" alt="QQ截图20141014220543" width="1066" height="757" /></a></p>
-
-<p>决定尝试采用concurrent的方式进行，UG上给的1800+个核心，而且用了多线程的方式，还是先不冒险多线程了吧，atm缩减到768，其他大概凑天河二号节点情况24核心的倍数，具体配置如下，几个concurrent的层次模块与UG上一致。<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png"><img class="alignnone size-full wp-image-202" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png" alt="QQ截图20141014223453" width="958" height="1575" /></a></p>
-
+set expandtab</blockquote>
 <p> </p>
 
-<p>运行速度貌似差别不大，可以省核时了。但是IO实在是太慢了，1秒钟才能写入10-20M+？我擦嘞，这是网速来着……1分钟+才能写出一个日平均，真是丧心病狂啊……回来得问问超算中心，PIO究竟能不能实现。</p>
+<p>对于已经存在的文件：</p>
+<blockquote><strong>TAB替换为空格：</strong>
+:set ts=4
+:set expandtab
+:%retab!</blockquote>
+<p>多行缩进在命令行模式下</p>
+<blockquote>n&gt;</blockquote>
+<p>向右缩进n行，左用&lt;代替</p>
+
+<p>【参考资料】</p>
+
+<p>http://blog.csdn.net/vsooda/article/details/7296676</p>
+
+<p>http://blog.163.com/squall_smile/blog/static/6034984020136304402583/</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/11/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e9-a/">【已解决】高分辨率CAM模式MPI buffer溢出</a>
+                  <a class="post-link" href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/">【已解决】putty在vim下使用小键盘</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-11
+                        <i class="fa fa-calendar"></i>2014-10-18
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -517,9 +457,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
-    
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
     
   
 
@@ -536,9 +474,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
-    
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
     
   
 
@@ -548,18 +484,89 @@
                 </div>
                 <div class="excerpt">
                     
-<p>f05配置，CAM4没有问题，CAM5运行两次出现</p>
-<blockquote>Fatal error in PMPI_Bcast: Message truncated, error stack:
-MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but buffer size is 32</blockquote>
-<p>的错误，纯粹是尝试的心态，调整环境变量，加入如下语句</p>
-
-<p><strong>MPI_BUFFER_SIZE=128</strong></p>
-
-<p>默认MPI缓存增加到128个字节么？反正增加了，居然能够运行。Done!</p>
+<p>putty默认在vim下小键盘是不启动的，启动方式：
+选项Terminal-&gt;Features里，找到Disable application keypad mode，选上</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/11/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/18/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91putty/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/">【已解决】vim针对ncl的语法高亮及自动补全</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-17
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
+    
+        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
+    
+        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>官网上查到了几个编辑器增强插件，浏览了一下，发现针对vim的属git上那个最好(Courtesy of Xin Xie [School of Marine and Atmospheric Sciencs, Stony Brook University].)</p>
+
+<p>方法比较简单，相关文件已经打包放在文章最后，拷贝到~/.vim相应位置即可。需要注意.vimrc是放在主目录下的，且一定不要直接mv过去，否则会覆盖掉原有的设置，需要拷贝内容复制。</p>
+
+<p>命令补全快捷键是CTRL+n</p>
+
+<p>【参考资料】</p>
+
+<p>http://www.ncl.ucar.edu/Applications/editor.shtml#vim</p>
+
+<p>【附件】</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/ncl_vim_highlight.zip">ncl_vim_highlight</a></p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/17/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91vim-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -574,10 +581,10 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page77" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">78/91</span>
+          <span class="page_number ">78/93</span>
           
             <a href="/page79" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -593,6 +600,34 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1964,6 +1999,14 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2009,14 +2052,21 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2037,14 +2087,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2163,7 +2206,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2205,7 +2248,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2226,7 +2269,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2289,7 +2332,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2457,7 +2500,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2711,6 +2754,20 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2724,6 +2781,16 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2733,16 +2800,6 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2760,7 +2817,16 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2770,15 +2836,6 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2796,7 +2853,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3129,7 +3186,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3183,7 +3240,7 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3281,6 +3338,33 @@ MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but b
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

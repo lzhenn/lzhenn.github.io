@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/26/google-hosts/">google hosts</a>
+                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91wordp/">【已解决】Wordpress按修改顺序排列文章</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-26
+                        <i class="fa fa-calendar"></i>2014-11-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -372,7 +376,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
+        <a href="/category/#blog" title="Category: blog" rel="category">blog</a>
     
   
 
@@ -389,7 +393,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
+        <a href="/tag/#blog" title="Tag: blog" rel="tag">blog</a>
     
   
 
@@ -399,28 +403,33 @@
                 </div>
                 <div class="excerpt">
                     
-<p>hosts文件是个很好的东西哦，还可以屏蔽激活神马的烦心事</p>
+<p>确实按修改时间排序才是比较符合一般人浏览习惯的，<span style="color: #ff6600;"><strong>（原来除了我之外还有其他读者呀，好感动，不介意就冒个泡呗，留个nickname+邮箱就好，嘿嘿）</strong></span>查了下，改index.php下的loop中的一个属性即可，加在while主循环之前，主循环后再来个<span class="pln">wp_reset_query</span><span class="pun">();即可。粗体标注更改属性：</span></p>
+<pre class="wp-code-highlight prettyprint prettyprinted"><span class="pln">$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$args </span><span class="pun">=</span><span class="pln"> array</span><span class="pun">(</span><strong><span class="str">'orderby'</span><span class="pun">=&gt;</span><span class="pln">modified</span></strong><span class="pun"><strong>,</strong>
+</span><span class="str">              'showposts'</span><span class="pun">=&gt;</span><span class="lit">10</span><span class="pun">,
+              </span><span class="str">'paged'</span><span class="pun">=&gt;</span><span class="pln"> $paged
+	      </span><span class="pun">);</span><span class="pln">
+query_posts</span><span class="pun">(</span><span class="pln">$args</span><span class="pun">);</span></pre>
+<p> </p>
 
-<p>C:\Windows\System32\drivers\etc</p>
+<p>【参考资料】</p>
 
-<p>实时更新：</p>
-
-<p>http://www.360kb.com/kb/2_122.html</p>
+<p>http://i7298.com/archives/55</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/26/google-hosts/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91wordp/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/">【已解决】NCL大文件支持</a>
+                  <a class="post-link" href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/">【已解决】利用php函数强制下载链接（即不允许浏览器打开文本文件）</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-26
+                        <i class="fa fa-calendar"></i>2014-11-02
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -439,7 +448,13 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#NCL" title="Category: NCL" rel="category">NCL</a>
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>&nbsp;
+    
+        <a href="/category/#PaperHub" title="Category: PaperHub" rel="category">PaperHub</a>&nbsp;
+    
+        <a href="/category/#Project" title="Category: Project" rel="category">Project</a>&nbsp;
+    
+        <a href="/category/#PHP&amp;mySQL" title="Category: PHP&amp;mySQL" rel="category">PHP&amp;mySQL</a>
     
   
 
@@ -456,7 +471,13 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#NCL" title="Tag: NCL" rel="tag">NCL</a>
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>&nbsp;
+    
+        <a href="/tag/#PaperHub" title="Tag: PaperHub" rel="tag">PaperHub</a>&nbsp;
+    
+        <a href="/tag/#Project" title="Tag: Project" rel="tag">Project</a>&nbsp;
+    
+        <a href="/tag/#PHP&amp;mySQL" title="Tag: PHP&amp;mySQL" rel="tag">PHP&amp;mySQL</a>
     
   
 
@@ -466,32 +487,31 @@
                 </div>
                 <div class="excerpt">
                     
-<p>写2GB以上文件</p>
+<p>今天做paperhub v0.01的时候，生成的enw文件会自动在浏览器中打开，而我们希望能够采用下载的形式在endnote中打开。百度了下，解决方法原来可以直接用php去修改html请求头:</p>
+<blockquote>$filename = '/path/'.$_GET['file'].'.txt'; //文件路径
+header("Content-Type: application/force-download");
+header("Content-Disposition: attachment; filename=".basename($filename));
+readfile($filename);</blockquote>
+<p>最初写在了solve_enw.php中，结果是整个页面的html流都返回了，原来是这样。于是又建立了一个down_enw.php文件，不输出html流，可以正常下载enw文件。</p>
 
-<p>setfileoption(“nc”,”Format”,”LargeFile”)</p>
+<p>参考资料：</p>
 
-<p>or</p>
-
-<p>setfileoption(“nc”,”Format”,”NetCDF4Classic”)</p>
-
-<p>参考</p>
-
-<p>http://www.ncl.ucar.edu/Support/talk_archives/2011/0599.html</p>
+<p>http://www.jb51.net/article/26907.htm</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/26/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ncl-e/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/11/02/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-8/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/25/e4-b8-8e-e4-bd-95-e7-bc-96-e8-80-81-e5-b8-88-e5-9/">与何编老师合作的feedback试验过程总结</a>
+                  <a class="post-link" href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/">【已解决】restart改变CAM输出变量场</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-25
+                        <i class="fa fa-calendar"></i>2014-10-31
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -510,7 +530,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>
     
   
 
@@ -527,7 +547,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>
     
   
 
@@ -537,21 +557,19 @@
                 </div>
                 <div class="excerpt">
                     
-<p>留个坑，回来慢慢填。</p>
+<p>CESM模式运行过程中如果想要更改CAM的输出频率或者输出的变量场，单纯的restart是不行的，因为ug上说了，restart的话，pop和ice model会再次读取namelist，但是atm模块不理的，ug上给了一个巨坑爹的解决办法，先给case换个名字，再建个case做branch run。这不是扯淡么。</p>
 
-<p>同何编老师进行feedback试验的合作，从七月底正式前往学习heating injection的技术到现在，整整三个月了。如今，何老师的初稿已经发过来了，我却徒挂一个第三作者的名字，从头到尾却没有一张自己做的图。心里很不是滋味。客观原因永远找不完，主观上自己的问题，必须要一一总结反思。</p>
+<p>不信邪，试了下这个办法是可以的，前提是之前run的时候一定要把restart文件记录下来。</p>
 
-<p>1.Double Check的重要性！</p>
+<p>该env_run.xml几个变量，把run的类型改成branch，时间点指定到restart file上，改rpointer，改rtm的bug，其实跟branch run的方式一样，只不过不用重新建立case而已。</p>
 
-<p>2.不能够办到的事情，就不要承诺！</p>
+<p>当然不要忘了改user_nl_xxx</p>
 
-<p>3.如何在尽量不让他人感到被打扰与自己能够获取足够的信息顺利开展合作之间平衡，很难。</p>
-
-<p>4.事情不要因为看上去不容易做，就往后拖，越拖越烦，越拖越觉得难做，越拖越让人觉得你的能力存在问题。</p>
+<p>done！</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/25/e4-b8-8e-e4-bd-95-e7-bc-96-e8-80-81-e5-b8-88-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/31/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91resta/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -566,10 +584,10 @@
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page73" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">74/91</span>
+          <span class="page_number ">74/93</span>
           
             <a href="/page75" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -585,6 +603,34 @@
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1956,6 +2002,14 @@
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2001,14 +2055,21 @@
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2029,14 +2090,7 @@
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2155,7 +2209,7 @@
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2197,7 +2251,7 @@
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2218,7 +2272,7 @@
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2281,7 +2335,7 @@
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2449,7 +2503,7 @@
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2703,6 +2757,20 @@
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2716,6 +2784,16 @@
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2725,16 +2803,6 @@
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2752,7 +2820,16 @@
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2762,15 +2839,6 @@
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2788,7 +2856,7 @@
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3121,7 +3189,7 @@
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3175,7 +3243,7 @@
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3273,6 +3341,33 @@
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

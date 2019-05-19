@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,94 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM continue run的使用方法</a>
+                  <a class="post-link" href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/">【更新中】高分辨率CAM更改PE Layers的测试</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-22
+                        <i class="fa fa-calendar"></i>2014-10-14
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>LZN
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>&nbsp;
+    
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>&nbsp;
+    
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    
+<p>应老板项目要求，CAM的分辨率早晚要shift到F05的水平，前两天在学校四期平台上测试了下，默认配置，CAM4物理，96个核，900s积分时间，运行情况实在惨不忍睹：</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png"><img class="alignnone size-full wp-image-199" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014222809.png" alt="QQ截图20141014222809" width="1054" height="763" /></a></p>
+
+<p>运行一个月用了整整一晚上，十几分钟才能输出一天，一个文件1.2G，我擦嘞。</p>
+
+<p>转到天河二号，直接调用了1200个核心，物理包用的CAM5，大概三四分钟出来一天的样子，发现IO是个大瓶颈。测试改PE层，只有atm用1200个核心，其他用120个核心，依然是sequential执行，效果差不多。</p>
+
+<p><a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png"><img class="alignnone size-full wp-image-198" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014220543.png" alt="QQ截图20141014220543" width="1066" height="757" /></a></p>
+
+<p>决定尝试采用concurrent的方式进行，UG上给的1800+个核心，而且用了多线程的方式，还是先不冒险多线程了吧，atm缩减到768，其他大概凑天河二号节点情况24核心的倍数，具体配置如下，几个concurrent的层次模块与UG上一致。<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png"><img class="alignnone size-full wp-image-202" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2014/10/QQ截图20141014223453.png" alt="QQ截图20141014223453" width="958" height="1575" /></a></p>
+
+<p> </p>
+
+<p>运行速度貌似差别不大，可以省核时了。但是IO实在是太慢了，1秒钟才能写入10-20M+？我擦嘞，这是网速来着……1分钟+才能写出一个日平均，真是丧心病狂啊……回来得问问超算中心，PIO究竟能不能实现。</p>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2014/10/14/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
+              <li>
+                <h2>
+                  <a class="post-link" href="/2014/10/11/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e9-a/">【已解决】高分辨率CAM模式MPI buffer溢出</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2014-10-11
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -403,102 +490,29 @@
                 </div>
                 <div class="excerpt">
                     
-<p>重复何老师试验，跑CAM5的物理，学校集群太慢，于是到天河二号上跑。CTRL试验跑的顺风顺水，一路到30年。SEN试验第一次在第八年断了，第二次第四年，第三次恼了，开continue run，发现错误提示是找不到rpointer文件，原来需要在开始跑的时候就在env_run.xml里设置好REST_N变量才行，默认给的是=$STOP_N。也就是仅仅在程序运行完成后的最后一年生成rpointer文件。只得改成1后继续从头运行，果然每年都生成了每个模块对应的rpointer（rpointer.xxx）。不出所料，程序到第六年又断掉了，把continue run设置为TRUE后可以正常运行。嗯嗯还不错~查看cam的输出发现输出文件莫名其妙大了一些，莫非会输出一些与重启运行有关的变量？</p>
+<p>f05配置，CAM4没有问题，CAM5运行两次出现</p>
+<blockquote>Fatal error in PMPI_Bcast: Message truncated, error stack:
+MPIDI_CH3U_Request_unpack_uebuf(685): Message truncated; 95 bytes received but buffer size is 32</blockquote>
+<p>的错误，纯粹是尝试的心态，调整环境变量，加入如下语句</p>
 
-<p>后话是，continue run跑了10个月又挂了，开始怀疑编译存在问题……重新编译继续continue中，囧……</p>
+<p><strong>MPI_BUFFER_SIZE=128</strong></p>
 
-<p><strong><span style="color: #008000;">#Up to 20140922#</span></strong></p>
-
-<p>经后来检查发现，确实是NetCDF 4.0.1的问题，CESM UG上建议采用4.1.2以上的版本，就是因为之前的版本存在corrept write的问题，尤其是在IO拥堵的情况下。Shift到4.3.2后，没有出现这类问题，但是4.3.2在天河二号上似乎还不能够使用ncdump，近期天河二号IO有很大改善，改回4.0.1后出问题的频率大大降低了。</p>
-
-<p><strong><span style="color: #008000;">#Up to 20141019#</span></strong></p>
+<p>默认MPI缓存增加到128个字节么？反正增加了，居然能够运行。Done!</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/22/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/11/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e9-a/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/">【已解决】Grub2默认启动Windows的设置</a>
+                  <a class="post-link" href="/2014/09/27/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ntfs/">【已解决】ntfs-3g移动硬盘自动挂载</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-20
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>LZN
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p>前两天给X240s换了固态硬盘，重装系统后一直没再折腾。今天终于有空处理下CentOS7默认启动项的问题了。解决方法应该比较暴力：</p>
-
-<p>grub2/grub.cfg下</p>
-<blockquote>if [ "${next_entry}" ] ; then
-set default="${next_entry}"
-set next_entry=
-save_env next_entry
-set boot_once=true
-else
-<strong>set <span style="color: #ff0000;">default=0</span></strong>
-fi</blockquote>
-<p>直接把${saved_entry}展开变量改成Windows所在列表号就可以。反正谁也不会动辄改动grub</p>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2014/09/20/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91grub2/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/">【已解决】四期平台ys队列排队机制问题</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-09-19
+                        <i class="fa fa-calendar"></i>2014-09-27
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -519,7 +533,7 @@ fi</blockquote>
     
         <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>&nbsp;
     
-        <a href="/category/#HPC" title="Category: HPC" rel="category">HPC</a>
+        <a href="/category/#Hardware" title="Category: Hardware" rel="category">Hardware</a>
     
   
 
@@ -538,7 +552,7 @@ fi</blockquote>
     
         <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>&nbsp;
     
-        <a href="/tag/#HPC" title="Tag: HPC" rel="tag">HPC</a>
+        <a href="/tag/#Hardware" title="Tag: Hardware" rel="tag">Hardware</a>
     
   
 
@@ -548,25 +562,23 @@ fi</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>前几天发现ys队列的排队机制存在问题，即若某节点已经被前一个任务独占，排队机制似乎没有摒除该节点，后一个任务依然可能被提交到该节点，造成负载过大。发邮件给学校超算中心后如石沉大海，没有回复。想到之前给杨老师集群做测试的时候，直接手动指定hostfiles，于是自己动手，丰衣足食。</p>
+<p>ntfs格式的硬盘要通过ntfs-3g在linux下才能挂载，开机挂载相应修改fstab即可。对于移动硬盘，为了能达到即插即用的效果，还需要做以下工作。</p>
 
-<p>先写hostfile文件，比如使用c74到c77四个节点，每个节点16个核心，hostfile可以这样写</p>
+<p>用root权限建立/sbin/mount.ntfs文件，内容如下：</p>
+<blockquote>#!/bin/sh
+export LANG=en_US.UTF-8
+exec /sbin/mount.ntfs-3g "$@"</blockquote>
+<p>保存后重新插入移动硬盘，看看NTFS格式的分区是不是跟FAT32的分区一样自动加载了？</p>
 
-<p>c74:16</p>
+<p><strong>记得给/sbin/mount.ntfs文件权限哦 chmod a+x /sbin/mount.ntfs</strong></p>
 
-<p>c75:16</p>
+<p>参考资料</p>
 
-<p>c76:16</p>
-
-<p>c77:16</p>
-
-<p>然后mpirun -hosts后面指定到这个文件。</p>
-
-<p>需要注意的是，提交pbs的话会被忽视这个设定，所以只能采用screen的方式运行脚本。pestat qstat下都不能查到任务号。</p>
+<p>http://blog.163.com/cmh_lj/blog/static/100812304201252522119264/</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/09/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91-e5-9/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/09/27/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-e3-80-91ntfs/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -581,10 +593,10 @@ fi</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page79" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">80/91</span>
+          <span class="page_number ">80/93</span>
           
             <a href="/page81" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -600,6 +612,34 @@ fi</blockquote>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -1971,6 +2011,14 @@ fi</blockquote>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2016,14 +2064,21 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2044,14 +2099,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2170,7 +2218,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2212,7 +2260,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2233,7 +2281,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2296,7 +2344,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2464,7 +2512,7 @@ fi</blockquote>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2718,6 +2766,20 @@ fi</blockquote>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2731,6 +2793,16 @@ fi</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2740,16 +2812,6 @@ fi</blockquote>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2767,7 +2829,16 @@ fi</blockquote>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2777,15 +2848,6 @@ fi</blockquote>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2803,7 +2865,7 @@ fi</blockquote>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3136,7 +3198,7 @@ fi</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3190,7 +3252,7 @@ fi</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3288,6 +3350,33 @@ fi</blockquote>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>

@@ -334,6 +334,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -349,11 +353,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/23/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/">【已解决】CESM进行branch run</a>
+                  <a class="post-link" href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/">【已解决】CESM rebuild restart后不认SourceMods及namelist内容</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-23
+                        <i class="fa fa-calendar"></i>2014-10-28
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -399,69 +403,42 @@
                 </div>
                 <div class="excerpt">
                     
-<p>coupled spin-up run终于快接近尾声了，可以开始进行Heat试验的branch run了。UG上给出了branch run的设置方法，不过as it always，依然洗练，依然是yellowstone+HPSS上的配置，坑爹啊……照着来了一遍，问题记录在这里：</p>
+<p>今天下午画CAM5 Heat试验的图，发现不能通过显著性检验，非常令人费解。毕竟已经重复跑过多遍了，再次重来，而且还是时空代价这么高的CAM5，终归让人沮丧。检查强迫输入文件没问题，fortran源代码中inject的读写函数也没问题，想到最初检查03-09年的数据通过显著性是没有问题的，于是检查10年之后的输出……完全不能通过。</p>
 
-<p>create_newcase，不要setup。</p>
+<p>返回查找log文件，发现25日那天我为了增快运行速度，更改pe_layers之后rebuild重启了一次，貌似rebuild过程中完全无视了我SourceMods中的内容！restart之后的结果转的其实是control，完全没有inject heating！简直无语了，为什么会这样。现在只能重新编译，在10年处restart试试看了。非常郁闷。</p>
 
-<p><strong><span style="color: #ff0000;">1.</span></strong></p>
-<blockquote>./xmlchange RUN_TYPE=branch
+<p>突然想到couple的试验还没有检查，暗暗祈祷画了个响应场，傻眼了，发现all value=0，以为脚本出错，查错时发现最不愿看到的事情还是发生了，所有的branch run的结果和原始的control结果一模一样……OMG！又不认SourceMods！实在是非常不能够理解。测试在修改的代码里加入错误，运行build程序时确乎是能够读到错误的，说明是可以读到SourceMods的，非常的奇怪，莫非与cesm_setup被clean后或者第一次build的时候是不去读SourceMods的？为了做测试，更改了pe layers，clean了setup，在代码里故意注入iulog文件句柄输出，重新build。</p>
 
-./xmlchange RUN_REFCASE=B_CON
+<p><strong><span style="color: #008000;">#Up to 20141029#</span></strong></p>
 
-./xmlchange RUN_STARTDATE=0150-01-01
+<p>今天来查看结果，还是不行。不知道为什么，即便编译的时候会去检查Sourcemods的错误以及后来测试加入iulog也是可以输出的，但就是不会去执行。</p>
 
-./xmlchange RUN_REFDATE=0150-01-01</blockquote>
-<p><strong><span style="color: #ff0000;">2.拷贝user_nl_*文件</span></strong></p>
+<p>今天中午回来索性直接查个遍。calday过1直接log输出heatf的所有数据。编译成功运行，查看输出——全部都是0！这种情况最大的可能当然是没有读取heatf的强迫文件。分明记得heatf的强迫在physics initial这个subroutine里呀，难道restart的时候就不会去做initial么？向上翻了翻代码，查了下restart的关键词，发现惊天地泣鬼神的三行语句：</p>
+<blockquote>750 if (nsrest .eq. 0) then
+751 call phys_inidat(cam_out, pbuf2d)
+752 end if</blockquote>
+<p>反查了下nsrest是什么，在control目录下，cam_control_mod这个module写的那叫一个清楚啊</p>
+<blockquote>11 integer :: nsrest ! run type flag (0=initial, 1=restart-continuation, 3=restart-branch.)</blockquote>
+<p>而我那可怜的读取外强迫文件的语句，被我扔在了phys_inidat这个subroutine下读取，OMG！原来你丫的inidat只在startup的case下采去读，我restart不出问题才怪，<span style="color: #ff0000;"><strong>物理包真正的initial在phys_init这个soubroutine里！</strong></span>找到这个问题，重新编译测试，没想到提交任务的时候c73节点down掉了，真是那个叫什么来着，屋漏偏逢连阴雨，哪壶不开提哪壶么……</p>
 
-<p><strong><span style="color: #ff0000;">3.拷贝SourceMods文件</span></strong></p>
+<p>好在找到问题了，couple的问题也是一样的，当然也能迎刃而解。经测试，确实是这个问题造成的。</p>
 
-<p><strong><span style="color: #ff0000;">4.cesm_setup</span></strong>，出错：</p>
-<blockquote>ERROR(Build::Namelist::_parse_next): expect a equal '=' sign instead got: .rtm.r.0150-01-01-00000.nc
-ERROR: rtm.buildnml.csh failed
-ERROR: /users/yangsong3/L_Zealot/couple/B_brch/preview_namelists failed: 25344</blockquote>
-<p>又是rtm出问题，goole之</p>
-
-<p>https://bb.cgd.ucar.edu/cesm-120-rtmbuildnmlcsh-branch-run</p>
-
-<p>表示居然是一个bug！按照帖子更改./Buildconf/rtm.buildnml.csh 58与62行：</p>
-<blockquote>set nrevsn_rtm = "nrevsn_rtm='${RUN_REFCASE}.rtm.r.${RUN_REFDATE}-${RUN_REFTOD}.nc'"</blockquote>
-<p>可以通过setup。</p>
-
-<p><span style="color: #ff0000;"><strong>4.编译</strong></span></p>
-
-<p><span style="color: #ff0000;"><strong>5.拷贝restart与ini文件 cp …./<em>0150</em> ./</strong></span></p>
-
-<p><span style="color: #ff0000;"><strong>6.提交作业</strong></span>，第一次错误：</p>
-
-<p>csh运行中出现如下提示：</p>
-<blockquote>File status unknown: B_CON.clm2.r.0150-01-01-00000.nc
-File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
-<p>出现错误，找不到rpointer文件</p>
-<blockquote>forrtl: severe (29): file not found, unit 98, file /users/yangsong3/L_Zealot/couple/B_brch/exe/rpointer.drv</blockquote>
-<p>拷贝 rpointer* 到目录下，并更改restart日期，重新提交作业。</p>
-
-<p>居然可以运行，逐日输出暂时没有发现问题！</p>
-
-<p><strong>#Up to 20141030#</strong></p>
-
-<p>cesm1.2.1已经修正cesm_setup中的bug</p>
-
-<p><strong>#Up to 20150106#</strong></p>
+<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/23/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/28/e3-80-90-e6-9c-aa-e8-a7-a3-e5-86-b3-e3-80-91cesm/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/19/e6-90-ac-e7-a0-96-e6-9c-9f/">搬砖期……</a>
+                  <a class="post-link" href="/2014/10/27/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91coupl/">【更新中】couple Branch Run出现找不到目录的奇怪问题</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-19
+                        <i class="fa fa-calendar"></i>2014-10-27
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -480,7 +457,9 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#thinking" title="Category: thinking" rel="category">thinking</a>
+        <a href="/category/#CESM" title="Category: CESM" rel="category">CESM</a>&nbsp;
+    
+        <a href="/category/#Fortran" title="Category: Fortran" rel="category">Fortran</a>
     
   
 
@@ -497,7 +476,9 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#thinking" title="Tag: thinking" rel="tag">thinking</a>
+        <a href="/tag/#CESM" title="Tag: CESM" rel="tag">CESM</a>&nbsp;
+    
+        <a href="/tag/#Fortran" title="Tag: Fortran" rel="tag">Fortran</a>
     
   
 
@@ -507,24 +488,30 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>还有10天就到月底了，这个月有好几个deadline，估计是没法全部完成了，spin-up了半个多月终于快完了，月底前必须要稀里哗啦把结果都搞出来发给何老师，paper的deadline指定是完成不了了，一张图都没有pannel出来，囧。还要上课，还要课堂展示，还要组会还要报告还要培训～Anyway，事情虽多，但是没有感到厌烦，内心还是很有斗志很有激情的，这种状态很好，最后十天加大工作强度提高效率，继续保持！</p>
+<p>spin-up了200年，看了下TS的变化，其实三十年就已经基本平衡了。150年以后的部分可以当cp_con来用肯定没问题。因为晓明姐需要地表比湿变量，所以打算从150年开始跑个restart。奇葩的是，改了restart文件到150年，跑得非常之慢，同样配置，之前12分钟左右出结果，现在要三十分钟。跑了一两年断掉了，出错</p>
+<blockquote>forrtl: severe (121): Cannot access current working directory for unit 65 （UNKNOWN）</blockquote>
+<p>某个未知文件找不到，莫名其妙。重新提交任务还是一样的错误。索性依葫芦画瓢来个branch run。提交上去貌似没问题，但是同样运行非常慢，也运行了两年挂掉了。提示错误一致，发生位置貌似在restart相关的源代码处。莫非生成restart文件的问题，断掉每年生成一个restart文件，并且不再用branchrun，开CONTINUE RUN，貌似现在可以跑。</p>
 
-<p>heating试验结果发给何老师后将是一个段落，确定paper的figures后也是一个段落。一步步来，自顶向下，分而治之，问题终归能够解决。最近真的不再打怵改源码的事情了，接下来把技术巩固好，虽然在搬砖期，图书馆不能少去，英语和运动和文献涉猎要坚持，更不能忽略感情和保持稳定良好的心态，加油！</p>
+<p><strong><span style="color: #008000;">#Up to 20141027#</span></strong></p>
+
+<p>这几天发现这类错误非常随机，估计是IO问题造成，也有可能是NetCDF版本的问题（ug中提到的bug）。回来可以测试下更高版本的NetCDF。</p>
+
+<p><strong><span style="color: #008000;">#Up to 20141102#</span></strong></p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/19/e6-90-ac-e7-a0-96-e6-9c-9f/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/27/e3-80-90-e6-9b-b4-e6-96-b0-e4-b8-ad-e3-80-91coupl/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-ef-bc-8c-e8-b/">【已解决，转】vi多文件编辑</a>
+                  <a class="post-link" href="/2014/10/26/google-hosts/">google hosts</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2014-10-19
+                        <i class="fa fa-calendar"></i>2014-10-26
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>LZN
@@ -543,7 +530,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Linux" title="Category: Linux" rel="category">Linux</a>
+        <a href="/category/#Internet" title="Category: Internet" rel="category">Internet</a>
     
   
 
@@ -560,7 +547,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#Linux" title="Tag: Linux" rel="tag">Linux</a>
+        <a href="/tag/#Internet" title="Tag: Internet" rel="tag">Internet</a>
     
   
 
@@ -570,67 +557,17 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                 </div>
                 <div class="excerpt">
                     
-<p>转自：http://www.cnblogs.com/end/archive/2012/06/12/2546757.html</p>
+<p>hosts文件是个很好的东西哦，还可以屏蔽激活神马的烦心事</p>
 
-<p>1、在同一窗口中打开多个文件：</p>
+<p>C:\Windows\System32\drivers\etc</p>
 
-<p>vi file1 file2 file3
-:n 切换到下一个文件 (n=next)
-:N 切换到上一个文件
-2、在不同窗口中打开多个文件：</p>
+<p>实时更新：</p>
 
-<p>如果已经打开一个了一个文件，
-则在vi的命令输入状态下输入 :sp 另外一个文件的路径及文件名，
-如此就可以在一个窗口打开多个文件了。</p>
-
-<p>或者用 vi -o file1 file2 file3….用分割屏幕窗口方式同时打开多个文件。
-可以使用 ctrl + 两次按 w 或者ctrl + w 然后按上下键在上下窗口间切换。
-2.窗口分割实现编辑多文件
-*先使用vi打开一个文件，例如vi actinia_proenrule.sh
-*分割窗口打开另外的文件
-命令行模式下输入 sp 另外一个文件 就可以水平分割继续打开第二个文件，如果想纵向分割，可以使用vsp 文件名
-注：sp=split，vsp=vsplit. 上面的写法是vi支持的简略写法，v实际就是vertical，从中我们可以看出改命令的含义，另外vi不仅仅支持两个文件，还支持更多个文件同时在一个 大的窗口中显示编辑，同时还支持同时打开的两个文件是同一个文件。
-*窗口切换
-可以使用 ctrl +两次按 w，这样就可以在各个文件中切换</p>
-
-<p>之前觉得vi的多文档编辑用着很不方便，现在接触了几个，用过了MiniBufExplorer，发现看着不是很舒服。还是使用ｌｓ比较好看一些。</p>
-
-<p>:ls 展示全部的打开文档</p>
-
-<p>:xn 切换到向下的第x个文档</p>
-
-<p>n ctrl+6 ： 切换到第n个buffer</p>
-
-<p>ctrl+6 或 :e# 回到前一个编辑文件</p>
-
-<p>分屏</p>
-
-<p>:new xxx</p>
-
-<p>ctrl+w s 对当前文档内容分屏显示</p>
-
-<p>ctrl+w q 关闭所处分屏</p>
-
-<p>ctrl+w o 仅显示当前分屏内容</p>
-
-<p>ctrl+w j k 上下选择分屏</p>
-
-<p>个人觉得最值得用的命令就是ctrl+w w 快速在分屏的两个屏幕中切换</p>
-
-<p> </p>
-
-<p>下面写的还没用过~看了大家的分享觉得这几个还不错</p>
-
-<p>:n1,n2 co n3: 将n1行到n2行之间的内容拷贝到第n3行下
-:n1,n2 m n3:将n1行到n2行之间的内容移至到第n3行下
-:n1,n2 d: 将 n1行到n2行之间的内容删除
-:n1,n2 w!command: 将文件中n1行至n2行的内容作为command的输入并执行之，
-若不指定n1，n2，则表示将整个文件内容作为command的输入
-方式2的优点在可以直接使用nyy和pp命令在各个窗口的文件之间进行拷贝和粘贴，操作比较方便。</p>
+<p>http://www.360kb.com/kb/2_122.html</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2014/10/19/e3-80-90-e5-b7-b2-e8-a7-a3-e5-86-b3-ef-bc-8c-e8-b/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2014/10/26/google-hosts/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -645,10 +582,10 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page74" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">75/91</span>
+          <span class="page_number ">75/93</span>
           
             <a href="/page76" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page91" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <a href="/page93" class="next"><i class="fa fa-angle-double-right"></i></a>
           
         </div>
     </div>
@@ -664,6 +601,34 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                 </div>
                 <ul class="content-ul">
                     
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                        
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2019">2019 (5)</a></li>
+                            
+                          
                         
                           
                           
@@ -2035,6 +2000,14 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                             
                           
                         
+                          
+                          
+                          
+                          
+                            <li><a data-scroll href="archive/#y2007">2007 (1)</a></li>
+                            
+                          
+                        
                 </ul>
             </div>
             <!--Principles-->
@@ -2080,14 +2053,21 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#blog" style="font-size: 16.5pt; color: #111;">blog</a>
+                      <a href="/tag/#blog" style="font-size: 17pt; color: #111;">blog</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #777;">PHP&amp;mySQL</a>
+                      <a href="/tag/#thinking" style="font-size: 14.5pt; color: #444;">thinking</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#PHP&amp;mySQL" style="font-size: 10.5pt; color: #888;">PHP&amp;mySQL</a>
                     
                       
                       
@@ -2108,14 +2088,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#thinking" style="font-size: 14pt; color: #444;">thinking</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #222;">CESM</a>
+                      <a href="/tag/#CESM" style="font-size: 15.5pt; color: #333;">CESM</a>
                     
                       
                       
@@ -2234,7 +2207,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#English" style="font-size: 11.5pt; color: #666;">English</a>
+                      <a href="/tag/#English" style="font-size: 11.5pt; color: #777;">English</a>
                     
                       
                       
@@ -2276,7 +2249,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #777;">Notebook</a>
+                      <a href="/tag/#Notebook" style="font-size: 10.5pt; color: #888;">Notebook</a>
                     
                       
                       
@@ -2297,7 +2270,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #888;">Git&amp;GitHub</a>
+                      <a href="/tag/#Git&amp;GitHub" style="font-size: 9.5pt; color: #999;">Git&amp;GitHub</a>
                     
                       
                       
@@ -2360,7 +2333,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #888;">EC2</a>
+                      <a href="/tag/#EC2" style="font-size: 9.5pt; color: #999;">EC2</a>
                     
                       
                       
@@ -2528,7 +2501,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       
                       
-                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #888;">python_import</a>
+                      <a href="/tag/#python_import" style="font-size: 9.5pt; color: #999;">python_import</a>
                     
                       
                       
@@ -2782,6 +2755,20 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                       
                       <a href="/tag/#shapefile" style="font-size: 9pt; color: #999;">shapefile</a>
                     
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#NetCDF" style="font-size: 9pt; color: #999;">NetCDF</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#Git&GitHub" style="font-size: 9pt; color: #999;">Git&GitHub</a>
+                    
                 </div>
             </div>
 
@@ -2795,6 +2782,16 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                 </div>
                 <ul class="content-ul" recent>
                     
+                        <li><a href="/2019/04/15/mad-world-thinking/">《一年无明》观后感：大城市市民阶层的蝼蚁化</a></li>
+                    
+                        <li><a href="/2019/02/04/card-play-life/">人生是一场牌局</a></li>
+                    
+                        <li><a href="/2019/01/25/new-tax-system-student-stipend/">一向年光有限身：新税改后助研津贴退税，学生多赚有几何？</a></li>
+                    
+                        <li><a href="/2019/01/24/multiple-user-single-server-github/">Multiple users, single server account, github</a></li>
+                    
+                        <li><a href="/2019/01/10/netcdf-sizeof-off_t/">NetCDF ERROR: configure: error: cannot compute sizeof (off_t)</a></li>
+                    
                         <li><a href="/2018/12/31/ncl-pop-regrid/">NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found</a></li>
                     
                         <li><a href="/2018/12/27/cesm-segfault-log/">CESM Reading User-defined File got Segmentation Fault</a></li>
@@ -2804,16 +2801,6 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                         <li><a href="/2018/12/18/nuuk-in-the-air/">Nuuk in the air</a></li>
                     
                         <li><a href="/2018/11/13/shapefile-mask/">Mask region in the grid system according to shapefile</a></li>
-                    
-                        <li><a href="/2018/11/08/cesm-fully-coupled-aquap/">CESM Fully Coupled Aqua-Planet Experiments</a></li>
-                    
-                        <li><a href="/2018/10/29/cesm-fully-coupled-correction/">CESM Fully-coupled Model State Correction</a></li>
-                    
-                        <li><a href="/2018/10/14/cesm-aquap/">CESM测试Aqua Planet试验</a></li>
-                    
-                        <li><a href="/2018/10/11/trading-diary/">20181011交易笔记-跟得上的旋律，踩不中的鼓点</a></li>
-                    
-                        <li><a href="/2018/09/15/dalio-debt-crisis/">Interview: Ray Dalio's Lessons from the Financial Crisis</a></li>
                     
                 </ul>
             </div>
@@ -2831,7 +2818,16 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                             <span class="name">
                                 blog
                             </span>
-                            <span class="badge">30</span>
+                            <span class="badge">33</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
+                            <span class="name">
+                                thinking
+                            </span>
+                            <span class="badge">19</span>
                         </a>
                     </li>
                     
@@ -2841,15 +2837,6 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                                 PHP&amp;mySQL
                             </span>
                             <span class="badge">10</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#thinking" class="categories-list-item" cate="thinking">
-                            <span class="name">
-                                thinking
-                            </span>
-                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -2867,7 +2854,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                             <span class="name">
                                 Linux
                             </span>
-                            <span class="badge">58</span>
+                            <span class="badge">60</span>
                         </a>
                     </li>
                     
@@ -3200,7 +3187,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                             <span class="name">
                                 economy
                             </span>
-                            <span class="badge">20</span>
+                            <span class="badge">21</span>
                         </a>
                     </li>
                     
@@ -3254,7 +3241,7 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                             <span class="name">
                                 notebook
                             </span>
-                            <span class="badge">24</span>
+                            <span class="badge">25</span>
                         </a>
                     </li>
                     
@@ -3352,6 +3339,33 @@ File status unknown: B_CON.rtm.r.0150-01-01-00000.nc</blockquote>
                         <a href="/category/#wrf" class="categories-list-item" cate="wrf">
                             <span class="name">
                                 wrf
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#NetCDF" class="categories-list-item" cate="NetCDF">
+                            <span class="name">
+                                NetCDF
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#Git&GitHub" class="categories-list-item" cate="Git&GitHub">
+                            <span class="name">
+                                Git&GitHub
+                            </span>
+                            <span class="badge">1</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/category/#finance" class="categories-list-item" cate="finance">
+                            <span class="name">
+                                finance
                             </span>
                             <span class="badge">1</span>
                         </a>
