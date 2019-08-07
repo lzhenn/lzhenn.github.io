@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Forbes分析与财务目标"
-categories: principle 
-tags:  thinking blog
+categories: thinking
+tags:  thinking
 author: LZN
 ---
 

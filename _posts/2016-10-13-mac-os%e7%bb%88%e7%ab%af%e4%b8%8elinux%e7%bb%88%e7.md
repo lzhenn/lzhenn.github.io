@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Mac OS终端与Linux终端的使用区别" 
-categories: Linux
-tags: Linux
+categories: technology
+tags: mac_os linux
 author: LZN
 ---
 

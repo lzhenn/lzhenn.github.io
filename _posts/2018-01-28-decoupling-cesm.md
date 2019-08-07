@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "CESM air-sea decoupling测试"
-categories: modeling meteorology 
-tags: CESM decoupling
+categories: science
+tags: cesm decoupling
 author: LZN
 ---
 

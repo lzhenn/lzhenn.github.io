@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "学习与工作日记：关键词"
-categories:  notebook linux algorithm
-tags:  blog keyword&nbspnotebook
+categories:  others
+tags:  notebook
 author: LZN
 ---
 

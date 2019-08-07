@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Porting CESM1.2.2 on SAVIO" 
-categories: blog
-tags: blog
+categories: science
+tags: cesm linux hpc
 author: LZN
 ---
 

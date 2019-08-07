@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Change CESM/CLM Surface to Pure Bare Ground"
-categories: cesm
+categories: science 
 tags: cesm clm pft
 author: LZN
 ---

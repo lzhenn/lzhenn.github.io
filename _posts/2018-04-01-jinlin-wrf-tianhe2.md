@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Porting WRF v3.8.1 on Tianhe2"
-categories: hardware linux notebook
-tags: server WRF
+categories: science 
+tags: server wrf hpc
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "CMAQ output files" 
-categories: AirQualityModeling
-tags: AirQualityModeling
+categories: science
+tags: cmaq
 author: LZN
 ---
 

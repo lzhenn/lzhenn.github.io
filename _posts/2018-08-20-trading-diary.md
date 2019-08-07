@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "20180820交易笔记-倾听上帝的脚步"
-categories: economy investment notebook
-tags:   investment stock
+categories: finance
+tags:   investment stock finance trading
 author: LZN
 ---
 

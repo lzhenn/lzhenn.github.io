@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "东校实验室服务器阵列rebuild"
-categories: hardware
-tags:  raid server
+categories: technology
+tags:  raid server rebuild
 author: LZN
 ---
 

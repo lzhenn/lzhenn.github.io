@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "我的技术博客有救了！"
-categories: hardware linux mysql
-tags:  server blog jekyll
+categories: technology
+tags:  server jekyll raid
 author: LZN
 ---
 

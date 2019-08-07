@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "从备份的wordpress数据库重建技术博客"
-categories: notebook mysql 
-tags: server blog database wordpress jekyll markdown
+categories: technology 
+tags: server database wordpress jekyll markdown
 author: LZN
 ---
 

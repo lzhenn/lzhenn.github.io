@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "20180625交易笔记-东边日出西边雨"
-categories: economy investment notebook
-tags:   investment stock
+categories: finance
+tags:   investment stock finance trading
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "SP-CAM AMIP run" 
-categories: CESM
-tags: CESM
+categories: science
+tags: cesm spcam amip
 author: LZN
 ---
 

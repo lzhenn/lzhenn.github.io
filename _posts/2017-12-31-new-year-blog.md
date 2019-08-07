@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "岁末年初"
-categories: emotion
-tags:  blog thinking
+categories: thinking
+tags: thinking
 author: LZN
 ---
 

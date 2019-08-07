@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Neptune met with 403 when push to repo" 
-categories: Git&amp;GitHub
-tags: Git&amp;GitHub
+categories: technology 
+tags: git github web
 author: LZN
 ---
 

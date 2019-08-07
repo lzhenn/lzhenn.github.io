@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "porting DART on CORI" 
-categories: Linux CESM HPC
-tags: Linux CESM HPC
+categories: technology
+tags: cesm dart nersc hpc linux
 author: LZN
 ---
 

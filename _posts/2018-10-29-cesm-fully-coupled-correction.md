@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CESM Fully-coupled Model State Correction"
-categories: cesm
+categories: science 
 tags: cesm fully-coupled
 author: LZN
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "一向年光有限身：新税改后助研津贴退税，学生多赚有几何？"
-categories: economy finance notebook
-tags: 
+categories: thinking
+tags: thinking finance
 author: LZN
 ---
 

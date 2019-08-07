@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "CESM RESTFORMAT: NUMBER OF RECORDS ON RESTART FILE NOT SUPPORTED"
-categories: CESM
-tags: CESM
+categories: science
+tags: cesm
 author: LZN
 ---
 

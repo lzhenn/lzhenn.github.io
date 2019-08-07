@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【已解决】WordPress搭建过程" 
-categories: blog PHP&amp;mySQL
-tags: blog PHP&amp;mySQL
+categories: technology
+tags: wordpress php mysql web
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Thinking: TED talk from Ray Dalio"
-categories: notebook economy
-tags:  blog thinking dalio 
+categories: finance
+tags:  dalio thinking finance
 author: LZN
 ---
 

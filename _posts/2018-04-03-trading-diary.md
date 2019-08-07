@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "20180403交易笔记-市场转向信号？"
-categories: economy investment notebook
-tags:   investment stock ETF market&nbspcrash
+categories: finance
+tags:   investment stock ETF trading
 author: LZN
 ---
 

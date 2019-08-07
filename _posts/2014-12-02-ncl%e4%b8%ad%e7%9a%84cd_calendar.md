@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【已解决】ncl中的cd_calendar" 
-categories: NCL
-tags: NCL
+categories: science
+tags: ncl cd_calendar
 author: LZN
 ---
 

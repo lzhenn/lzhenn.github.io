@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Interview: Ray Dalio's Lessons from the Financial Crisis"
-categories: notebook economy
-tags:  blog thinking dalio debt crisis
+categories: thinking
+tags:  finance thinking dalio debt_crisis
 author: LZN
 ---
 

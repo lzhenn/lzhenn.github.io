@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "AWS EC2搭建VPS" 
-categories: Linux Hardware Notebook 
-tags: EC2 Notebook
+categories: technology
+tags: ec2 aws vps linux
 author: LZN
 ---
 

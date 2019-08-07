@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【solved】Teamserver huge .xsession-error problem" 
-categories: Linux Software
-tags: Linux Software
+categories: technology
+tags: linux xsession server linux
 author: LZN
 ---
 

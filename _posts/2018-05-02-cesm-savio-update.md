@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Savio update: CESM changes"
-categories: hardware linux notebook cesm
+categories: technology
 tags: server cesm
 author: LZN
 ---

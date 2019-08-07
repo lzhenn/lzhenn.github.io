@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CESM Fully Coupled Aqua-Planet Experiments"
-categories: cesm
+categories: science 
 tags: cesm aqua-planet
 author: LZN
 ---

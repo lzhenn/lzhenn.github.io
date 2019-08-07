@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Shell采用wait和后台执行实现多进程"
-categories: linux 
+categories: technology 
 tags:  server shell
 author: LZN
 ---

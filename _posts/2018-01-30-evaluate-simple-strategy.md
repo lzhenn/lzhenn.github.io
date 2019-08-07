@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "追涨杀跌还是买跌卖涨？几个简单策略的实现与横评"
-categories: economy investment 
-tags:   thinking investment career
+categories: finance 
+tags: finance  thinking investment python
 author: LZN
 ---
 

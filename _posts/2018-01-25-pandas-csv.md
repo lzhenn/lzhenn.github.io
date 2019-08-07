@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "利用pandas处理csv文件注意"
-categories: python
-tags:  pandas
+categories: technology
+tags:  pandas python csv
 author: LZN
 ---
 

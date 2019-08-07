@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Fortran direct recl problem" 
-categories: Fortran
-tags: Fortran
+categories: technology
+tags: fortran recl 
 author: LZN
 ---
 

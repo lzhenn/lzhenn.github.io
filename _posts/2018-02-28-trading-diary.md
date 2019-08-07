@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "20180228交易笔记"
-categories: economy investment notebook
-tags:   investment stock ETF market&nbspcrash
+categories: finance
+tags:   investment stock ETF trading finance
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "看CESM Tutorial CAM Physics (Video)的一点想法" 
-categories: CESM thinking
-tags: CESM thinking
+categories: science
+tags: cesm cam thinking
 author: LZN
 ---
 

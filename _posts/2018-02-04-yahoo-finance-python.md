@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "爬取Yahoo Finance美股数据"
-categories: economy investment python
-tags:   yahoo-finance spider investment python_import stock
+categories: finance 
+tags:   yahoo-finance spider investment python finance equity
 author: LZN
 ---
 

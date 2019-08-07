@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "GFDL MOIST CORE on SAVIO" 
-categories: blog
-tags: blog
+categories: technology 
+tags: gfdl_fms dycore
 author: LZN
 ---
 

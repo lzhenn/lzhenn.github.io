@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【CESM】couple the SP-CAM with POP" 
-categories: CESM
-tags: CESM
+categories: science
+tags: cesm spcam
 author: LZN
 ---
 

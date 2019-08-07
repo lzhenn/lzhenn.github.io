@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "google hosts" 
-categories: Internet
-tags: Internet
+categories: technology
+tags: web hosts
 author: LZN
 ---
 

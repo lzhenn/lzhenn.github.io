@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "NetCDF ERROR: configure: error: cannot compute sizeof (off_t)"
-categories: NetCDF Linux
-tags: NetCDF Linux
+categories: technology
+tags: netcdf linux 
 author: LZN
 ---
 

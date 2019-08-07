@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Maintaining: skipping incompatible /usr/lib64/libncurses.so when searching for -lncurses"
-categories: Linux
-tags: Linux
+categories: technology 
+tags: linux
 author: LZN
 ---
 

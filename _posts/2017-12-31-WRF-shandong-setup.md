@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "山东半岛预报系统搭建"
-categories: modeling linux
-tags:  WRF forecast&nbsp;system
+categories: project
+tags:  project wrf-sdpwfe
 author: LZN
 ---
 

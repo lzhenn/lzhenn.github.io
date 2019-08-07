@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Using Debug Mode in compiler to locate Segfault"
-categories: Linux Fortran
-tags: Linux Fortran HPC
+categories: technology
+tags: linux fortran hpc debug compiler
 author: LZN
 ---
 

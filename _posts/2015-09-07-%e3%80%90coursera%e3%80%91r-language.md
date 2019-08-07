@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【Coursera】R Language" 
-categories: Notebook Coursera R
-tags: Notebook Coursera R
+categories: others
+tags: notebook coursera r
 author: LZN
 ---
 

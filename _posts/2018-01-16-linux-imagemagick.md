@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "利用imagemagick去除png白边"
-categories: linux
-tags:  imagemagic
+categories: technology
+tags:  imagemagic linux
 author: LZN
 ---
 

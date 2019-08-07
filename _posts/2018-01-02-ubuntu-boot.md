@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Ubuntu开机启动"
-categories: linux
-tags:  ubuntu server
+categories: technology
+tags:  ubuntu server linux
 author: LZN
 ---
 

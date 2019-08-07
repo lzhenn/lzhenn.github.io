@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Jupyter notebook学习记录"
-categories: python notebook
-tags:  jupyter&nbspnotebook
+categories: technology
+tags:  jupyter_notebook python
 author: LZN
 ---
 

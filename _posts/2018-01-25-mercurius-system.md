@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Mercurius交易策略系统搭建"
-categories: economy investment python modeling 
-tags: thinking investment career quandl blog
+categories: project
+tags: mercurius investment finance
 author: LZN
 ---
 

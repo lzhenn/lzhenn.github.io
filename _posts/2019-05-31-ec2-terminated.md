@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "EC2 Terminated+胡言乱语"
-categories: AWS Linux
-tags: AWS Linux
+categories: technology
+tags: aws linux
 author: LZN
 ---
 

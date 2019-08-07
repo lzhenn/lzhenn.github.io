@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【CESM】slab ocean coupling" 
-categories: CESM ClimateChange
-tags: CESM ClimateChange
+categories: science
+tags: cesm slab_ocean coupling
 author: LZN
 ---
 

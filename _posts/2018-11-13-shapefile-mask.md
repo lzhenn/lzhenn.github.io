@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Mask region in the grid system according to shapefile"
-categories: wrf
+categories: science
 tags: wrf shapefile
 author: LZN
 ---

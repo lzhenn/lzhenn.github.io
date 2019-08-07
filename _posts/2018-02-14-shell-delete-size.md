@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Shell删除一定大小文件"
-categories: linux 
-tags:  server shell
+categories: technology
+tags:  server shell linux
 author: LZN
 ---
 

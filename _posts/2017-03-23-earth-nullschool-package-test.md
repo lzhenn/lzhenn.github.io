@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Earth.NullSchool Package test" 
-categories: fullstackdevelopment
-tags: fullstackdevelopment
+categories: technology 
+tags: earth_nullschool nodejs
 author: LZN
 ---
 

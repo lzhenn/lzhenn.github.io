@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【solved, git&github】first move to push my project" 
-categories: Internet Git&amp;GitHub
-tags: Internet Git&amp;GitHub
+categories: technology
+tags: git github web
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Installing node.js on Mac OS" 
-categories: MacOS fullstackdevelopment
-tags: MacOS fullstackdevelopment
+categories: technology
+tags: nodejs mac_os
 author: LZN
 ---
 

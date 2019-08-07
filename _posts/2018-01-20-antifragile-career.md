@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "模型化分析职业选择上反脆弱策略的收益条件"
-categories: economy investment 
-tags:   thinking investment career antifragile
+categories: thinking
+tags:   thinking
 author: LZN
 ---
 

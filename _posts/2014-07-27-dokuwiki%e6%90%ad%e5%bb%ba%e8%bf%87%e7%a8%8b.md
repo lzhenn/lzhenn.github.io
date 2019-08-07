@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【已解决】Dokuwiki搭建过程" 
-categories: blog
-tags: blog wiki
+categories: technology
+tags: dokuwiki web wiki
 author: LZN
 ---
 

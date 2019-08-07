@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "流动性，以及缺少流动性市场中的生存策略"
-categories: liquidity market Living&thinking career
-tags: principle investment Economics
+categories: finance
+tags: investment finance trading
 author: LZN
 ---
 

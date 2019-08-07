@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Ubuntu/K4200机器学习系统搭建"
-categories: linux machine&nbsp;leanring 
-tags:  ubuntu machine&nbsp;learning CUDA deep&nbsp;learning
+categories: technology 
+tags:  ubuntu machine_learning cuda deep_learning python tensorflow
 author: LZN
 ---
 

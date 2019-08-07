@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【R】Installing R on Windows" 
-categories: Windows Software R
-tags: Windows Software R
+categories: technology
+tags: windows r
 author: LZN
 ---
 

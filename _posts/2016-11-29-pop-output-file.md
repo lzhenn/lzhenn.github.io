@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "POP output file" 
-categories: CESM
-tags: CESM
+categories: science
+tags: cesm pop
 author: LZN
 ---
 

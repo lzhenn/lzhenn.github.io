@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "20181011交易笔记-跟得上的旋律，踩不中的鼓点"
-categories: economy investment notebook
-tags:   investment stock
+categories: finance
+tags:   investment stock finance trading
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "利用pandas生成excel文件"
-categories: python
-tags:  pandas excel 
+categories: technology
+tags:  pandas excel
 author: LZN
 ---
 

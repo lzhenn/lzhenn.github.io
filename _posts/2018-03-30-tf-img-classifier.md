@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "测试基于tensorflow的图片分类器"
-categories: python notebook
-tags: tensorflow 
+categories: technology
+tags: tensorflow python
 author: LZN
 ---
 

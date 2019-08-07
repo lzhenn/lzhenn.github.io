@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "工作信息搜集记录"
-categories: notebook 
-tags:  thinking career
+categories: others
+tags:  thinking notebook
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "anaconda下使用pip包" 
-categories: Python
-tags: Python
+categories: technology 
+tags: python pip anaconda
 author: LZN
 ---
 

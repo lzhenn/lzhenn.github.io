@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Porting CAM3 on SAVIO" 
-categories: CESM Fortran Software
-tags: CESM Fortran Software
+categories: science
+tags: cesm cam hpc
 author: LZN
 ---
 

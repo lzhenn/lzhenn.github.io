@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【solved, R】problems during installing devtools" 
-categories: Windows Software R
-tags: Windows Software R
+categories: technology
+tags: windows r
 author: LZN
 ---
 

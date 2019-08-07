@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "EC2迁移II：财务系统"
-categories:  Linux Hardware Notebook
-tags: EC2 Notebook
+categories:  technology
+tags: ec2 aws quandl
 author: LZN
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "mysql字段注释"
-categories: mysql notebook
+categories: technology
 tags:  server database 
 author: LZN
 ---

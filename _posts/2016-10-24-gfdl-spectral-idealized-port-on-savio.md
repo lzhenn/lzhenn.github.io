@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "GFDL Spectral Idealized port on SAVIO" 
-categories: Linux HPC GFDL_FMS
-tags: Linux HPC GFDL_FMS
+categories: science
+tags: gfdl_fms linux hpc
 author: LZN
 ---
 

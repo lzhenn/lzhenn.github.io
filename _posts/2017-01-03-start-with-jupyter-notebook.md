@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Start with Jupyter notebook" 
-categories: Python
-tags: Python
+categories: technology
+tags: python jupyter_notebook
 author: LZN
 ---
 

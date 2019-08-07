@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【已解决】NCL input in flex scanner failed错误" 
-categories: NCL
-tags: NCL
+categories: science 
+tags: ncl 
 author: LZN
 ---
 

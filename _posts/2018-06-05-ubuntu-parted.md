@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Ubuntu下用parted分区4TB硬盘"
-categories: Hardware Linux
-tags: Linux Hardware ubuntu parted
+categories: technology
+tags: linux hardware ubuntu parted
 author: LZN
 ---
 

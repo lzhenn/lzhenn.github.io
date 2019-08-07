@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "《非理性繁荣》和《1929年大崩盘》阅读笔记"
-categories: notebook reading economy
-tags:  blog thinking market&nbspcrash 
+categories: thinking
+tags:  blog thinking finance 
 author: LZN
 ---
 

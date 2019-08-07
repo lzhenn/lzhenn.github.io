@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Setup SAVIO@Berkeley" 
-categories: blog
-tags: blog
+categories: technology
+tags: linux hpc
 author: LZN
 ---
 

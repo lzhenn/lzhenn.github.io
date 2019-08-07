@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【ongoing】use grads to read cesm output" 
-categories: CESM NCL
-tags: CESM NCL
+categories: science
+tags: cesm ncl grads
 author: LZN
 ---
 

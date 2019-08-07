@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "WRF SST Update problem solved"
-categories: WRF notebook
-tags: server WRF
+categories: science
+tags: server wrf sst
 author: LZN
 ---
 

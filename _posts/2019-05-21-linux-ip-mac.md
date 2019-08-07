@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Maintaining: Server network outage due to IP-MAC bind issue"
-categories: Internet Linux
-tags: Internet Linux
+categories: technology
+tags: linux web
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Nuuk in the air"
-categories: thinking blog
-tags: thinking blog
+categories: thinking 
+tags: thinking
 author: LZN
 ---
 

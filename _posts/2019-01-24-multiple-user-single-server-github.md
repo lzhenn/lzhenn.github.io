@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Multiple users, single server account, github"
-categories: Linux Git&GitHub
-tags: Linux Git&GitHub
+categories: technology
+tags: linux git git github
 author: LZN
 ---
 

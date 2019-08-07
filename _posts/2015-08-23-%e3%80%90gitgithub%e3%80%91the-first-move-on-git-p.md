@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【git&github】the first move on git push" 
-categories: Git&amp;GitHub
-tags: Git&amp;GitHub
+categories: technology
+tags: git github
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【paperhub】格式导出与pdf附件信息" 
-categories: PaperHub Project
-tags: PaperHub Project
+categories: project
+tags: project paperhub
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Mercurius事件监听系统终于Online啦"
-categories: economy investment python modeling 
-tags: thinking investment career quandl blog event-listening
+categories: project 
+tags: mercurius investment quandl blog event-listening
 author: LZN
 ---
 

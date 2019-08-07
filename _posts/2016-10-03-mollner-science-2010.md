@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Mollner-Science-2010" 
-categories: PaperReading 2016
-tags: PaperReading 2016
+categories: science
+tags: paper_reading
 author: LZN
 ---
 

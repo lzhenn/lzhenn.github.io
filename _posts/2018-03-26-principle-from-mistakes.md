@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Form principles from mistakes"
-categories: principle 
-tags:  thinking blog
+categories: thinking
+tags:  thinking
 author: LZN
 ---
 

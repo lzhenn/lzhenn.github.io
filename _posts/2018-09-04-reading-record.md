@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "《激荡十年：水大鱼大》阅读笔记"
-categories: notebook reading economy
-tags:  blog thinking 
+categories: thinking
+tags:  reading notebook thinking 
 author: LZN
 ---
 

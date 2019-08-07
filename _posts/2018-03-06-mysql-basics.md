@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "mysql基本操作"
-categories: mysql notebook
-tags:  server database 
+categories: technology
+tags:  server database mysql 
 author: LZN
 ---
 

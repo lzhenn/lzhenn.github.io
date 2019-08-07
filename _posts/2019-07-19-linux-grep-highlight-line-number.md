@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Using Highlight Text and Show Line Number in grep command"
-categories: Linux
-tags: Linux
+categories: technology
+tags: linux grep
 author: LZN
 ---
 

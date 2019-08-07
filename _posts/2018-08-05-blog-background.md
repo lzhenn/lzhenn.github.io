@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "给博客加了个Matrix字幕雨的动态背景"
-categories: internet
-tags:  github blog jekyll html5 css 
+categories: technology
+tags:  github jekyll html5 css 
 author: LZN
 ---
 

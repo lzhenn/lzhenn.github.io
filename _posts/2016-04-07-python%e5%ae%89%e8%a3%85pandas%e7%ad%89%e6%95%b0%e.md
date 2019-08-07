@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【未解决】python安装pandas等数据处理类库" 
-categories: Python
-tags: Python
+categories: technology
+tags: python pandas linux
 author: LZN
 ---
 
@@ -52,3 +52,5 @@ yum update后，似乎没什么问题了。
 </tr>
 </tbody>
 </table>
+
+**请直接安装anaconda，并采用python3版本 2019/08/07**

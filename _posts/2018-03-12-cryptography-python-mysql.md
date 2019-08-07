@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "不要使用明文密码！以mysql创建数据库链接为例讨论下密码学"
-categories: python mysql notebook linux algorithm
-tags:  database AES&nbspEncrypt python_import pymysql
+categories: technology
+tags:  database AES_Encrypt python pymysql mysql
 author: LZN
 ---
 

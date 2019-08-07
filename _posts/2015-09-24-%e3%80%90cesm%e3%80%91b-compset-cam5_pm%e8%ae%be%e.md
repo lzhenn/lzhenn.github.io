@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【CESM】B compset CAM5_PM设置" 
-categories: CESM ClimateChange
-tags: CESM ClimateChange
+categories: science
+tags: cesm cam5 compset
 author: LZN
 ---
 

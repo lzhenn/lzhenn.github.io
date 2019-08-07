@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "CentOS mysql安装"
-categories: linux mysql
-tags:  server centos database
+categories: technology
+tags:  server centos database mysql
 author: LZN
 ---
 

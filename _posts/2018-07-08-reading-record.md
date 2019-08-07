@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "《枪炮、病菌与钢铁》阅读笔记"
-categories: notebook reading economy
-tags:  blog thinking 
+categories: thinking
+tags:  notebook thinking 
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "mysql创建数据库出错、根目录额满、与数据库存放位置迁移"
-categories: mysql notebook linux
-tags:  server database centos
+categories: technology
+tags:  server database centos mysql
 author: LZN
 ---
 

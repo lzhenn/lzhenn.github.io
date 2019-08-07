@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "移植DART到NERSC" 
-categories: Linux CESM
-tags: Linux CESM
+categories: technology
+tags: linux cesm dart nersc
 author: LZN
 ---
 

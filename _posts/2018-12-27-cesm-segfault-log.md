@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "CESM Reading User-defined File got Segmentation Fault"
-categories: CESM
-tags: CESM
+categories: science
+tags: cesm segmentation_fault
 author: LZN
 ---
 

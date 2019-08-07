@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "SMOKE-learn" 
-categories: AirQualityModeling
-tags: AirQualityModeling
+categories: science
+tags: smoke
 author: LZN
 ---
 

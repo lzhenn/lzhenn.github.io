@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "贝叶斯模型, MC, MC, 与MCMC"
-categories: machine&nbsp;leanring 
-tags: machine&nbsp;learning CUDA deep&nbsp;learning MCMC Bayes
+categories: technology
+tags: machine_learning cuda deep_learning mcmc bayes
 author: LZN
 ---
 

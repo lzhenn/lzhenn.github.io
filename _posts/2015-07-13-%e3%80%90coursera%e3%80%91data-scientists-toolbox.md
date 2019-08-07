@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【Coursera】Data Scientist's Toolbox" 
-categories: Notebook Coursera
-tags: Notebook Coursera
+categories: others
+tags: coursera
 author: LZN
 ---
 

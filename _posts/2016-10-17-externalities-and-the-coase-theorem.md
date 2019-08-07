@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Externalities and the Coase Theorem" 
-categories: Economics
-tags: Economics
+categories: economics
+tags: coase_theorem externalities
 author: LZN
 ---
 

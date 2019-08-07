@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "十年绚烂"
-categories: blog thinking 
-tags: blog thinking career
+categories: thinking 
+tags: thinking
 author: LZN
 ---
 

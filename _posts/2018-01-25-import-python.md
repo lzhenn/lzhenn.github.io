@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "python import其他文件"
-categories: python
-tags: python_import
+categories: technology
+tags: python
 author: LZN
 ---
 

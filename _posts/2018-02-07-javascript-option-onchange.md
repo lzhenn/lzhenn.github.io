@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Javascript响应option OnChange事件"
-categories: javascript
+categories: technology
 tags:  javascript html jekyll
 author: LZN
 ---

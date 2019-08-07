@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "【NOT solved】GFDL atmosphere dycore porting" 
-categories: Linux GFDL_FMS
-tags: Linux GFDL_FMS
+categories: science
+tags: linux dycore gfdl_fms
 author: LZN
 ---
 

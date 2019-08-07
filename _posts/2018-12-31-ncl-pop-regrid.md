@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "NCL ERROR: PopLatLon function cannot access map_* create_rmpPopFileName: file not recognized/found"
-categories: NCL
-tags: NCL
+categories: science
+tags: ncl
 author: LZN
 ---
 

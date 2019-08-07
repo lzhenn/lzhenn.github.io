@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "为python增加默认的库搜索路径"
-categories: python linux
-tags: python_import 
+categories: technology
+tags: python
 author: LZN
 ---
 

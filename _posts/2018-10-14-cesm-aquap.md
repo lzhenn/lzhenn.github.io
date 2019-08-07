@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CESM测试Aqua Planet试验"
-categories: cesm
+categories: science
 tags: cesm aqua-planet
 author: LZN
 ---

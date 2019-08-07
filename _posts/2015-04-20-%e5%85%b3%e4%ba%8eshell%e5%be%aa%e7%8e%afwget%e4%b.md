@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "关于shell循环wget与tar" 
-categories: Linux
-tags: Linux
+categories: technology
+tags: linux shell wget tar
 author: LZN
 ---
 

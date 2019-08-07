@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "病了快一个月"
-categories: thinking blog
-tags: thinking blog
+categories: thinking
+tags: thinking
 author: LZN
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "port smoke on SAVIO" 
-categories: Linux AirQualityModeling
-tags: Linux AirQualityModeling
+categories: science
+tags: linux smoke hpc
 author: LZN
 ---
 
