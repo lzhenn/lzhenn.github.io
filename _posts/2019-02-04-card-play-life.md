@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "人生是一场牌局"
-categories: thinking blog
-tags: thinking blog
+categories: thinking
+tags: thinking 
 author: LZN
 ---
 
