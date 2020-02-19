@@ -33,6 +33,11 @@ Resources and bookmarks for work, hobby, and others.
 
     Online png or jpg zipper.
 
+* [docsmall](https://docsmall.com/)
+
+   Make figures, pdfs smaller! 
+
+
 * [Weibo image host Chrome Extends](https://github.com/Suxiaogang/WeiboPicBed)
 
     Chrome Extensions for image host using Sina Weibo.
