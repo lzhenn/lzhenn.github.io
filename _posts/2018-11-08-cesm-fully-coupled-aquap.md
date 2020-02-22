@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CESM Fully Coupled Aqua-Planet Experiments"
+title:  "CESM Hierarchical Experiments: From Fully-Coupled Aqua-Planet to Real-world Experiments"
 categories: science 
 tags: cesm aqua-planet
 author: LZN
