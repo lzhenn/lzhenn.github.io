@@ -11,7 +11,7 @@ author: LZN
 
 **Updated 2020-02-20**
 
-The following sketch displays our hierarchical experiments to reveal the origin of large-scale circulations.
+The following sketch displays our hierarchical experiments trying to understand the origin of large-scale circulations.
 ![3QT176.jpg](https://s2.ax1x.com/2020/02/22/3QT176.jpg)
 
 A series of articles have been archived to record the process:
