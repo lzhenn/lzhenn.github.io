@@ -9,15 +9,18 @@ author: LZN
 * content
 {:toc}
 
-After Repeating `Sandy (2012)`, Now here we archive the process in building the coupling framework for simulating `Mangkhut (2018)` over the South China Sea.
+After Repeating `Sandy (2012)`, we finally come to start to build the coupling framework over the Guangdong-Hong Kong-Macao Greater Bay Area (GBA). Here we archive the process in building the coupling framework for simulating `Mangkhut (2018)`.
 
-The `Sandy (2012)` case can be smoothly repeated by following the instructions on the manual. While buiding up the coupling framework over the SCS need more efforts.
+Domain Configuration:
+![302g2t.jpg](https://s2.ax1x.com/2020/02/27/302g2t.jpg)
 
-I skipped the WRF procedure. Now we form the roms grid system using WPS generated `geo_em` data.
+The `Sandy (2012)` case can be smoothly repeated by following the instructions on the manual. While buiding up the coupling framework over the GBA need more efforts.
 
-1. Note to remove small island. [c200130_gba_roms_grid_mask.m]()
+I skipped the WRF procedure. Now we form the ROMS grid system using WPS generated `geo_em` data.
 
-2. Use ETOPO bathemetry data to fill the h. [step2_ETOPO_bath_to_roms_200219.ncl](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/190203-from-ETOPO1-to-roms-bath.ncl)
+1. Generate ROMS grid system by `geo_em` from WRF-WPS. There is an urban legend that all islands with sizes smaller than 4 px need to be removed to ensure the smooth run. I even tried Computer Vision algorithm to label the connected components and then remove the elements. Finally, I found this is not necessary. The underlying cause of unstable integration is still from the bathymetry. [step1_roms_grid_from_wps_200219.m](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/step1_roms_grid_from_wps_200219.m)
+
+2. Use ETOPO bathymetry data to fill the h. [step2_ETOPO_bath_to_roms_200219.ncl](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/190203-from-ETOPO1-to-roms-bath.ncl)
 
 3. Primary process using 9-point smooth, let min(bath)=5. [step3_OPTIONAL_prim_process_roms_bath_200219.ncl](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/200204-roms-bath-smooth.ncl)
 
