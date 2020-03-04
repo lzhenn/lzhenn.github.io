@@ -70,5 +70,8 @@ Here is a bug in the original mtools from the COAWST if using OPeNDP through the
 Final settings for the COAWST:
 ![30RAsK.jpg](https://s2.ax1x.com/2020/02/27/30RAsK.jpg)
 
-**Updated 2020-02-27**
+Task-based Load-Balancing Configuration:
+![3oVwRK.jpg](https://s2.ax1x.com/2020/03/04/3oVwRK.jpg)
+
+**Updated 2020-03-04**
 
