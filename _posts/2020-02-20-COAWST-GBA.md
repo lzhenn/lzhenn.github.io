@@ -71,7 +71,7 @@ Final settings for the COAWST:
 ![30RAsK.jpg](https://s2.ax1x.com/2020/02/27/30RAsK.jpg)
 
 Task-based Load-Balancing Configuration:
-![3oVwRK.jpg](https://s2.ax1x.com/2020/03/04/3oVwRK.jpg)
+![3ohGd0.jpg](https://s2.ax1x.com/2020/03/04/3ohGd0.jpg)
 
 **Updated 2020-03-04**
 
