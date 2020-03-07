@@ -67,6 +67,10 @@ Here is a bug in the original mtools from the COAWST if using OPeNDP through the
 
 3.2 Interpolate to the model layers. This will take a while. [step5_local_gba_roms_master_climatology_coawst_mw_200219.m](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/step5_local_gba_roms_master_climatology_coawst_mw_200219.m)
 
+### IV. Change the maximum current speed limit
+
+In `ROMS/Modules/mod_scalars.F`, change `max_speed = 20.0_dp` to `max_speed = 100.0_dp` as TC may cause very strong surface current.
+
 Final settings for the COAWST:
 ![30RAsK.jpg](https://s2.ax1x.com/2020/02/27/30RAsK.jpg)
 
@@ -76,5 +80,5 @@ Task-based Load-Balancing Configuration:
 Demo in the ROMS SST:
 ![37XCQI.gif](https://s2.ax1x.com/2020/03/05/37XCQI.gif)
 
-**Updated 2020-03-04**
+**Updated 2020-03-07**
 
