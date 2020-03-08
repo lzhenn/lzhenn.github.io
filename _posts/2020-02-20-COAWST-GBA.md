@@ -71,6 +71,11 @@ Here is a bug in the original mtools from the COAWST if using OPeNDP through the
 
 In `ROMS/Modules/mod_scalars.F`, change `max_speed = 20.0_dp` to `max_speed = 100.0_dp` as TC may cause very strong surface current.
 
+### V. SCRIP Weighting File
+
+Follow the instrucitions in the manual and compile the `scrip_coawst` util for generating the weighting file. Note that the path in `scrip_coawst_XXX.in` should not longer than 80 chars.
+
+
 Final settings for the COAWST:
 ![30RAsK.jpg](https://s2.ax1x.com/2020/02/27/30RAsK.jpg)
 
