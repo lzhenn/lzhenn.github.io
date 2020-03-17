@@ -75,15 +75,21 @@ In `ROMS/Modules/mod_scalars.F`, change `max_speed = 20.0_dp` to `max_speed = 10
 
 Follow the instrucitions in the manual and compile the `scrip_coawst` util for generating the weighting file. Note that the path in `scrip_coawst_XXX.in` should not longer than 80 chars.
 
+### VI. Gallery
 
-Final settings for the COAWST:
-![30RAsK.jpg](https://s2.ax1x.com/2020/02/27/30RAsK.jpg)
+Current settings across 3 component models in the COAWST:
+![8ahuJf.jpg](https://s1.ax1x.com/2020/03/17/8ahuJf.jpg)
 
 Task-based Load-Balancing Configuration:
 ![3ohGd0.jpg](https://s2.ax1x.com/2020/03/04/3ohGd0.jpg)
 
-Demo in the ROMS SST:
-![37XCQI.gif](https://s2.ax1x.com/2020/03/05/37XCQI.gif)
+The ROMS surf layer temp:
+![8ahBy4.gif](https://s1.ax1x.com/2020/03/17/8ahBy4.gif)
 
-**Updated 2020-03-07**
+### Acknowledgement
+
+We really appreciate Dr. John Warner for his great efforts to build the COAWST coupling framework, which provides us the possibility to investigate our potential ideas in TC-wave-sea simulation. 
+We also appreciate Dr. Mathieu Dutour Sikiric for his LP bathy tool to optimize the bathy over the SCS, which is very important to run the model stably.
+
+**Updated 2020-03-17**
 
