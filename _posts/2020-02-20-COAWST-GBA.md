@@ -53,7 +53,7 @@ Why/How do we smooth the bathy in ROMS? I quote a very insightful post from the 
 
 > 2) I identify those regions (i.e. using magnitude of velocity) and create weight factor for smoothing, big magnitude big weight. You want to smooth only there where you have big errors from HPGE, and keep as close as possible to real bathy. After smoothing you get new bathy, run the same case again and compute magnitude again, do that in a iterative way until you are happy. In my case I have to run model for a week to get to steady state with "HPGE" currents that are not changing any more.  
 
-Also the [Dutour et al. (2009)](https://www.sciencedirect.com/science/article/pii/S1463500309000742)
+Also according to [Dutour et al. (2009)](https://www.sciencedirect.com/science/article/pii/S1463500309000742):
 
 > The initial error, called an error of the first type (Mellor et al., 1994), is easy to estimate: simply run the model with no forcing and a horizontally uniform vertical T/S profile to get the induced currents. The remaining HPG error, called an error of the second type, is much smaller but still creates artificial currents, which limit the stability of the model. It is very difficult to estimate this error and there are only heuristic rules about it based on experience with the ROMS model. To be on the safe side, it is recommended to use grids with , and most simulations with ROMS are done with  and  (see Shchepetkin and McWilliams (2003) for more details). Therefore, we call a grid numerically stable if , even if this is somewhat arbitrary.
 Useful links:
