@@ -9,7 +9,7 @@ author: LZN
 * content
 {:toc}
 
-Since we don't care about the chemical process when investigate the physical climate system, we hope to close the prognostic chemistry model in CAM5. For F compset, it is easy because a specific PM compset without active chemistry model has been provided by CESM. For B compset, there is no option like this.
+Since we don't care about the chemical process when investigate the physical climate system, we hope to turn off the prognostic chemistry model and used prescribed modal aerosols in CAM5. For F compset, it is easy because a specific PM compset without active chemistry model has been provided by CESM. For B compset, there is no option like this.
 
 Therefore, we try to capture the differences in FC5PM and FC5. We first see the differences in output flow after create_newcase command.
 <pre>6c6
