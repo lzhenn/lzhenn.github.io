@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "买房的财务安全边际计算"
-categories: finiance 
+categories: finance 
 tags: finance
 author: LZN
 ---
