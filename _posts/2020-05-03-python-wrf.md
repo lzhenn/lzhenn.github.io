@@ -1,38 +1,23 @@
 ---
 layout: post
-title:  "Install metpy in a new conda environment"
+title:  "Start to use Python for Most Work"
 categories: technology
-tags: python metpy anaconda
+tags: python xarray salem  
 author: LZN
 ---
 
 * content
 {:toc}
 
-I used the default environment to install `metpy` with:
+Start to use python to deal with the WRF output. [xarray](http://xarray.pydata.org/en/stable/index.html) is a very important package to deal with `NetCDF` and `HDF5` data.
+As WRF files are not exactly CF compliant: you’ll need a special parser for the timestamp, the coordinate names are a bit exotic and do not correspond to the dimension names, they contain so-called staggered variables (and their correponding coordinates), etc.
 
-```bash
-conda install metpy
+[salem](https://salem.readthedocs.io/en/latest/wrf.html) is needed to parser wrf data. This is useful to slice wrf data in xarray.
+
+```python
+ds=ds.sel(time=slice('2018-09-15','2018-09-17'))
 ```
 
-got errors.
+**Updated 2020-05-03**
 
-```
-
-```
-
-Following [this post](https://github.com/Unidata/MetPy/issues/1305). The issue seems to be a specific version dependency issue. In conda, the metpy is version 0.11, while version 0.12 solves the problem.
-
-Here we just create a new conda environment for `metpy`.
-```bash
-conda create -n metpy python=3.7
-```
-
-Use `pip install` to install the metpy. After that, we found the `cartopy` need to be installed. Then, everything goes fine.
-
-Example figure:
-
-![YYpWrV.jpg](https://s1.ax1x.com/2020/05/11/YYpWrV.jpg)
-
-**Updated 2020-05-11**
 
