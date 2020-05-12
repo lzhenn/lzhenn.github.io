@@ -34,5 +34,9 @@ Example figure:
 
 ![YYpWrV.jpg](https://s1.ax1x.com/2020/05/11/YYpWrV.jpg)
 
+CartoPy figure:
+
+![Yt1kKP.jpg](https://s1.ax1x.com/2020/05/12/Yt1kKP.jpg)
+
 **Updated 2020-05-11**
 
