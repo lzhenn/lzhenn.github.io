@@ -18,7 +18,7 @@ conda install metpy
 got errors.
 
 ```
-
+TypeError: find_intersections takes 5 parameters, but 3 units were passed
 ```
 
 Following [this post](https://github.com/Unidata/MetPy/issues/1305). The issue seems to be a specific version dependency issue. In conda, the metpy is version 0.11, while version 0.12 solves the problem.
