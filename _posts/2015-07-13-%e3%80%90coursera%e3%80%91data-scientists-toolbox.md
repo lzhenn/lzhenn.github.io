@@ -26,7 +26,7 @@ mining the web
 
 处理技巧-数学和统计知识-专业知识
 
-<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/07/QQ图片20150713150848.jpg"><img class="alignnone  wp-image-613" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/masthttps://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/07/QQ图片20150713150848.jpg" alt="QQ图片20150713150848" width="267" height="262" /></a>
+<a href="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/07/QQ图片20150713150848.jpg"><img class="alignnone  wp-image-613" src="https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2015/07/QQ图片20150713150848.jpg" alt="QQ图片20150713150848" width="267" height="262" /></a>
 
 <strong>W1-L2
 </strong>
