@@ -34,5 +34,15 @@ export LD_LIBRARY_PATH=$ECCODES_DIR/lib:$LD_LIBRARY_PATH
 
 `xr.open_dataset('example.grib', engine='cfgrib')` works with some data-caused errors.
 
+Error things like:
+```
+cfgrib.dataset.DatasetBuildError: key present and new value is different
+```
+
+See [this post](https://github.com/ecmwf/cfgrib/issues/13). Add a `backend_kwargs` to overwrite the "strict" option will fix the problem:
+```python
+ds_grib = xr.open_dataset('../../data/era5/sfc202005.grib', engine='cfgrib', backend_kwargs={'errors': 'ignore'})
+```
+
 **Updated 2020-05-19**
 
