@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Build WRF+ROMS+SWAN over GBA in COAWST Framework"
+title:  "Build WRF+ROMS+SWAN over the GBA in COAWST Framework"
 categories: technology science
 tags: linux hpc COAWST
 author: LZN
