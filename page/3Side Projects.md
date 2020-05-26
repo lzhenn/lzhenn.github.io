@@ -84,10 +84,15 @@ type: page
 
 * content
 {:toc}
-## SDPWFE  
+## SPELLCASTER!
+Spellcaster! is a machine learning algorithm based, monthly anomaly prediction experiment, forcusing on temperature and precipitation anomalies in each individual weather station in China.
+Prediction initials @ 16Z in each day among 20th to 25th.
+<img src="https://raw.githubusercontent.com/Novarizark/routine-output/master/spellcaster/realtime.t2m.png?{{ site.time }}" />
+
+## SDPWFE  <font color="red"><b>(Inactive)</b></font>
 Shandong Peninsula Weather Forecasting Experiment **(For Research Use ONLY)**. [Control Scripts](https://github.com/Novarizark/wrf-sdpwfe)
 
-~~Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.~~
+Prediction initials @ 8pm (UTC+8, Day0) and will be updated around 9am (UTC+8, Day+1) on the next day.
 
 <font color="red"><b>Due to computation resourses run out, we suspended the realtime forecast on Feb 20, 2019. The system will restart once the computional resourses are available.</b></font>
 ### Station Timeseries
