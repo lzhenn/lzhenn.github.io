@@ -87,6 +87,7 @@ type: page
 ## SPELLCASTER!
 Spellcaster! is a machine learning algorithm based, monthly anomaly prediction experiment, forcusing on temperature and precipitation anomalies in each individual weather station in China.
 Prediction initials @ 16Z in each day among 20th to 25th.
+**Current Algorithm: LASSO + Random Forest**
 <img src="https://raw.githubusercontent.com/Novarizark/routine-output/master/spellcaster/realtime.t2m.png?{{ site.time }}" />
 
 ## SDPWFE  <font color="red"><b>(Inactive)</b></font>
