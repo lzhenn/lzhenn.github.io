@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Novarizark's PC" 
-categories: other
+categories: others
 tags: blog hardware thinking blackleach wizardspike
 author: LZN
 ---

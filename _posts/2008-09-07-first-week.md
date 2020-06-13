@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "高二开学第一周及相关"
-categories: repost
+categories: baidu-hi
 tags: thinking
 author: LZN
 ---

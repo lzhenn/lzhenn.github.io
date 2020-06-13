@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[转]我是一个硬盘"
-categories: repost
+categories: baidu-hi
 tags: thinking
 author: LZN
 ---

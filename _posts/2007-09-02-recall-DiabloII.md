@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "回首D2"
-categories: repost
+categories: baidu-hi
 tags: thinking
 author: LZN
 ---
