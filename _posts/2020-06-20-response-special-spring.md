@@ -43,7 +43,7 @@ Therefore, if we can lock an episode in the seasonal cycle with the minimum natu
 Fig. R2 displays the mean SLP and SLP differences between Tahiti and Darwin. As shown in the black boxes in Figs. R2a-b, springtime undertakes the lowest variation among the annual cycle. Using springtime mean values instead of simply annual mean values to calculate long-term trend, we can naturally filter the uncertainty contributed by natural oscillated variabilities. As the dominant inter-annual variability in the climate system is ENSO, the unique low variability feature of boreal spring comes from the seasonality of ENSO. Webster and Yang (1992) discussed the seasonality of the ENSO, and indicated that the spring is the ENSO developing or decaying season when the equatorial pressure gradient was the weakest. 
 
 ![NlvdGq.png](https://s1.ax1x.com/2020/06/20/NlvdGq.png)
-F<p align="center"><span style="font-weight:bold;">igure R2.</span> Mean sea level pressure and difference of mean sea level pressure between Tahiti and Darwin (the shaded areas demonstrate the ranges within a ±1 standard deviation), after Yang et al. (2017).</p>
+<p align="center"><span style="font-weight:bold;">Figure R2.</span> Mean sea level pressure and difference of mean sea level pressure between Tahiti and Darwin (the shaded areas demonstrate the ranges within a ±1 standard deviation), after Yang et al. (2017).</p>
 
 
 **Reference**
