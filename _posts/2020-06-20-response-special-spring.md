@@ -2,7 +2,7 @@
 layout: post
 title:  "Trend Measurement in a Mock Earth Considering Seasonality"
 categories: science 
-tags: 
+tags: seasonality climate 
 author: LZN
 ---
 
