@@ -9,8 +9,7 @@ type: page
 * content
 {:toc}
 
-<a href="javascript:void(0)" target="_blank" onclick="showPdf('https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf')">显示pdf文档</a>
-<canvas id="the-canvas"></canvas>
+<a href="javascript:void(0)" target="_blank" onclick="showPdf('http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/usersguide/ug.pdf')">显示pdf文档</a>
 
 * [CV for Academic Circle](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf)  ([学术界简历](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf))
 <!--* [CV for Industrial Circle](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/2018/cv/CV-Academic-English.pdf) ([工业界简历](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/2018/cv/CV-Industrial-Chinese.pdf))-->
