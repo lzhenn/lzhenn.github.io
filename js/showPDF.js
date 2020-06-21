@@ -1,4 +1,8 @@
 function showPdf(urlPdf){
+// Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var PDFJS = window['pdfjs-dist/build/pdf'];
+
+    // The workerSrc property shall be specified.
     PDFJS.workerSrc = 'http://mozilla.github.io/pdf.js/build/pdf.worker.js';//加载核心库
     PDFJS.getDocument(urlPdf).then(function getPdfHelloWorld(pdf) {
         pdf.getPage(1).then(function getPageHelloWorld(page) {// 获取第一页数据
