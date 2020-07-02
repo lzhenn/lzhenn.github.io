@@ -11,7 +11,7 @@ author: LZN
 
 In the **[Spellcaster!](https://novarizark.github.io/Side%20Projects/#spellcaster)** project, we combined observational analysis data and s2s forecast data to form the forecast inputs. 
 By the default scratch code I wrote, the process is very slow. For 2000 stations, it took nearly 30 minutes to complete the combination.
-I speculated the bottleneck is in the IO, so here I try to use `multiprocessing` in python to inrease the IO speed.
+I speculated the bottleneck is in the IO, so here I try to use `multiprocessing` in python to increase the IO speed.
 
 The orginal hotspot code:
 ```python
@@ -104,8 +104,8 @@ def combine_data(itsk, sta_df, ano_var1, fcst_var1, np_time, npblend_outdir):
 ```
 
 Note:
-* Some xarray operations cannot be parallelized, as the `NetCDF` operation is "lazy", combining xarray operation like `group` and multiprocessing will cause HDF5 IO errors. These confilicted operation should be extracted from the parallelized function.
-* The orginal code is not efficient, as the xarray operations will be repeatly called over a large array. This is the true hot spot. As a comparation: orginal code ~ 30 min; optimizing anomaly calculation before repeatly `sel`: ~ 1 min; 4 tasks parallel: 10s.
+* Some xarray operations cannot be parallelized, as the `NetCDF` operation is "lazy", combining xarray operation like `group` and multiprocessing will cause HDF5 IO errors. These conflicted operations should be excluded from the parallelized function.
+* The original code is not efficient, as the xarray operations will be repeatedly called over a large array. This is the true hot spot. As a comparison: original code ~ 30 min; optimizing anomaly calculation before repeating `sel`: ~ 1 min; 4 tasks parallel: 10s.
 
 The principle for optimization:
 1. Hot spot may comes from highly encapsulated operations 
