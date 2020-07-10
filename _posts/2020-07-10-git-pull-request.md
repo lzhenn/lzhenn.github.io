@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Try the community development tool in GitHub"
+title:  "Try the Community Development Tool on GitHub"
 categories: technology
 tags: github pull-request branch merge
 author: LZN
