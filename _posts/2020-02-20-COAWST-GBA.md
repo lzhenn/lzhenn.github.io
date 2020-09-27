@@ -22,7 +22,7 @@ I skipped the WPS procedure for building WRF grid system. Now we form the ROMS g
 1.2 Generate ROMS grid system by `geo_em` from WRF-WPS. There is an urban legend that all islands with sizes smaller than 4 px need to be removed to ensure the smooth run. I even tried Computer Vision algorithm to label the connected components and then remove the elements. Finally, I found this is not necessary. The underlying cause of unstable integration is still from the bathymetry. [step1_roms_grid_from_wps_200219.m](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/step1_roms_grid_from_wps_200219.m)
 
 Final Domain Configuration (Outer and white inner box for WRF, and black dashed box for ROMS):
-![302g2t.jpg](https://s2.ax1x.com/2020/02/27/302g2t.jpg)
+![0FgyK1.png](https://s1.ax1x.com/2020/09/27/0FgyK1.png)
 
 
 ### II. Build Bathymetry Data
@@ -35,13 +35,13 @@ Of note is that here we also set the minimum bathy to 10 m. This is quite import
 How to justify "too shallow"? In this case, we have a strong typhoon, using 10 s dtime in ROMS, the 10-m shallowest bathy works fine. Meanwhile, we restricted the deepest bathy to 3000 m, as we do not concern the deep sea process in this relative short simulation. [step3_OPTIONAL_prim_process_roms_bath_200219.ncl](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/step3_OPTIONAL_prim_process_roms_bath_200219.ncl)
 
 Original Bathymetry:
-![30HJc4.jpg](https://s2.ax1x.com/2020/02/28/30HJc4.jpg)
+![0F2JRH.png](https://s1.ax1x.com/2020/09/27/0F2JRH.png)
 
 2.3 Smooth the bathemetry to satisfy the [rx threshold](https://www.myroms.org/forum/viewtopic.php?t=2841), using the LP method. There is a toolkit from IRB in Croatia [LP Bathymetry](https://www2.irb.hr/korisnici/mdsikir/Bathymetry/), providing several ways to deal with the problem.
 Note the `lp_solve` [command line tool](https://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.5/lp_solve_5.5.2.5_exe_ux64.tar.gz/download) need to be installed at frist. For other version, remember to download the file named as **lp_solve_x.x.x.x_exe_ux64.tar.gz**. [step4_LP_smooth_bath_200219.m](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/step4_LP_smooth_bath_200219.m)
 
 Bathymetry Change After LP Optimization. Note that the deepest bathy has been cut off at 3000 meter:
-![307IX9.png](https://s2.ax1x.com/2020/02/28/307IX9.png)
+![0F2GJe.png](https://s1.ax1x.com/2020/09/27/0F2GJe.png)
 
 Why/How do we smooth the bathy in ROMS? I quote a very insightful post from the ROMS forum here:
     
