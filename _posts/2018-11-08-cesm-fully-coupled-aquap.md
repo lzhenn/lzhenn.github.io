@@ -12,14 +12,13 @@ author: LZN
 **Updated 2020-02-20**
 
 The following sketch displays our hierarchical experiments trying to understand the origin of large-scale circulations.
-![3QT176.jpg](https://s2.ax1x.com/2020/02/22/3QT176.jpg)
+![0huGnO.png](https://s1.ax1x.com/2020/10/13/0huGnO.png)
 
-A series of articles have been archived to record the process:
+A series of articles archived the procedures to obtain the implementation of the experiments:
 1. [Change CESM/CLM Surface to Pure Bare Ground](https://novarizark.github.io/2018/06/05/clm-landuse/)
 2. [CESM F Compset Aqua-Planet Test (in Chinese)](https://novarizark.github.io/2018/05/24/cesm-aquap/)
 
-Now, finally, we chose the red pill, try to go deep in the model configuration to change the land/sea cover and implement our pure-aqua and surf-aqua experiment. See the following sketch:
-
+Now, finally, we chose the red pill, try to go deep into the model configuration/source, to change the land/sea mask and implement our pure-aqua and surf-aqua experiments.
 
 The implementation of fully coupled aqua-planet experiment is not so straightforward since there is only official support for the prescribed SST aqua-planet. Therefore, as deep-time paleo simulation need to change the land/sea distribution, we seek to use the paleo toolkit to achieve our goal. See [reference](http://www.cesm.ucar.edu/models/paleo/faq/).
 
