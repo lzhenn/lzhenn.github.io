@@ -16,7 +16,7 @@ which pgcc
 /usr/local/pgi-20cos7/linux86-64/2020/bin/pgcc
 ```
 
-###MPICH3
+### MPICH3
 
 No MPI available. Try to compile by myself. [Official Site](https://www.mpich.org/downloads/)
 
@@ -34,7 +34,7 @@ export LD_LIBRARY_PATH=$MPICH/lib:$LD_LIBRARY_PATH
 export INCLUDE=$MPICH/include:$INCLUDE
 ```
 
-###HDF5
+### HDF5
 
 Install [zlib](https://zlib.net/) from source first, defualt configurations.
 
@@ -99,10 +99,10 @@ The question is in the $make check, the NetCDF still fails all HDF5 test with PG
 Bad situation, we need to permutate all possible combinations to get the best practice...
 
 need to refer the [official guide](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html).
-Successful combinations:
 
+...After long-time multiple tests, we finally give up and copy the pre-compiled libs from YQ directory. Still cannot understand why the same compiler/environment does not work.
 
-###Anaconda
+### Anaconda
 
 
 Refrence: https://www.fluidnumerics.com/resources/building-hdf5-with-pgi
