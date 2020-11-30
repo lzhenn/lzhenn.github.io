@@ -92,8 +92,8 @@ Using the above program, we rewrote two files with `SURF_AQUA` and `PURE_AQUA` s
 
 We first check the horizontal grid system.
 
-![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs86oih7d2j20iy0lon87.jpg)
-![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs86ua17h6j20i30ln4a2.jpg)
+[![DRYoKH.png](https://s3.ax1x.com/2020/11/30/DRYoKH.png)](https://imgchr.com/i/DRYoKH)
+[![DRY5xe.png](https://s3.ax1x.com/2020/11/30/DRY5xe.png)](https://imgchr.com/i/DRY5xe)
 
 It can be seen that over the Northern Polar region, the grid system shifts the north pole onto the Greenland Island, and both NH and SH grid poles are located over the landmass.
 
