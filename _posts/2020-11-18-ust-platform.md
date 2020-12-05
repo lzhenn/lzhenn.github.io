@@ -102,10 +102,28 @@ need to refer the [official guide](https://www.unidata.ucar.edu/software/netcdf/
 
 ...After long-time multiple tests, we finally give up and copy the pre-compiled libs from YQ directory. Still cannot understand why the same compiler/environment does not work.
 
-### Anaconda
+### MCT
+
+```
+./configure --prefix=/.... FC=pgfortran CC=pgcc
+```
+
+Modify the `Makefile.conf` to specify the MPI lib and include. Done.
+
+### COAWST
+pgi-16cos7 Error in SWAN:
+PGF90-S-0285-Source line too long (mod_strings.f90: 228)
+
+This is [a legacy problem of PGI compiler](https://github.com/ORAC-CC/orac/issues/12):
+>Interestingly, the latest version of the PGI compilers (18.10, release last Friday) now support line lengths up to 1000 characters. That means that the problem in this bugreport is 'solved', or at least no longer a problem, compilation is successful out-of-the-box on the 18.10 build.
 
 
-Refrence: https://www.fluidnumerics.com/resources/building-hdf5-with-pgi
 
-Updated 2020-11-18**
+
+
+
+### Refrence
+https://www.fluidnumerics.com/resources/building-hdf5-with-pgi
+
+Updated 2020-12-05**
 
