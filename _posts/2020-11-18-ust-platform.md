@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "UST METCTM1"
+title:  "METCTM1"
 categories: technology
 tags: linux 
 author: LZN
@@ -9,6 +9,12 @@ author: LZN
 * content
 {:toc}
 
+
+### Final Configurations
+
+
+#### PGI Compilers
+
 Check version for the environment:
 
 ```bash
@@ -16,7 +22,7 @@ which pgcc
 /usr/local/pgi-20cos7/linux86-64/2020/bin/pgcc
 ```
 
-### MPICH3
+#### MPICH3
 
 No MPI available. Try to compile by myself. [Official Site](https://www.mpich.org/downloads/)
 
@@ -26,7 +32,7 @@ make            # works! more than 1 hour
 make install   
 ```
 
-Environmental variables:
+##### Environmental variables
 ``` bash
 export MPICH=/home/metctm1/soft/mpich3-pgi20
 export PATH=$MPICH/bin:$PATH
@@ -34,9 +40,21 @@ export LD_LIBRARY_PATH=$MPICH/lib:$LD_LIBRARY_PATH
 export INCLUDE=$MPICH/include:$INCLUDE
 ```
 
-### HDF5
+#### ZLIB
+
+Zlib for HDF5 and NetCDF4.
 
 Install [zlib](https://zlib.net/) from source first, defualt configurations.
+
+##### Environmental variables
+``` bash
+export ZDIR=/home/metctm1/soft/zlib-1211-gcc
+export LD_LIBRARY_PATH=${ZDIR}/lib:${LD_LIBRARY_PATH}
+export INCLUDE=${ZDIR}/include:${INCLUDE}
+```
+
+
+#### HDF5
 
 Choose [HDF5 1.10](https://portal.hdfgroup.org/display/support/HDF5%201.10.7) to avoid compatibility issues.
 
@@ -48,7 +66,58 @@ make            # Successful! about 1 hour
 make install    
 ```
 
-A good reference from [Fluid Numerics](https://www.fluidnumerics.com/resources/building-hdf5-with-pgi)
+##### Environmental variables
+``` bash
+HDF5=/home/metctm1/soft/hdf5-1107-pgi
+export PATH=$HDF5/bin:$PATH
+export LD_LIBRARY_PATH=$HDF5/lib:$LD_LIBRARY_PATH 
+export INCLUDE=$HDF5/include:$INCLUDE
+```
+
+#### NetCDF
+
+Get the latest release for [C](https://github.com/Unidata/netcdf-c/releases) and [Fortran](https://github.com/Unidata/netcdf-fortran/releases).
+
+Note to assign the paths explicitly!
+
+``` bash
+# C Lib
+CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-472c453f-pgi20 --disable-dap CC=pgcc
+make
+make check
+make install
+
+# Fortran Lib
+CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include -I/home/metctm1/soft/netcdf-474c453f-pgi20/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib -L/home/metctm1/soft/netcdf-474c453f-pgi20/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-474c453f-pgi20 --disable-dap FC=pgfortran
+```
+
+ZDIR=/home/metctm1/soft/zlib-1211-gcc H5DIR=/home/metctm1/array/soft/hdf5-1.10.7-pgi20 CPPFLAGS='-I${H5DIR}/include -I${ZDIR}/include' LDFLAGS='-L${H5DIR}/lib -L${ZDIR}/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-472c453f-pgi20 --disable-dap CC=pgcc
+
+CPP=cpp CFLAGS="-fPIC -m64 -tp=px" CXXFLAGS="-fPIC -m64 -tp=px" FCFLAGS="-fPIC -m64 -tp=px" CC=pgcc CXX=pgc++ FC=pgfortran ./configure --with-zlib=/home/yhuangci/soft/zlib-1.2.11-gcc --prefix=/home/yhuangci/soft/hdf5-1.10.6-pgi-16cos7 --enable-hl  --enable-threadsafe --enable-cxx --enable-fortran --enable-unsupported
+
+CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-474c453f-pgi20 --disable-dap CC=pgcc
+
+
+##### Environmental variables
+``` bash
+
+```
+
+#### MCT
+
+```
+./configure --prefix=/.... FC=pgfortran CC=pgcc
+```
+
+Modify the `Makefile.conf` to specify the MPI lib and include. Done.
+
+#### COAWST
+
+### Issues
+
+#### HDF5
+Using the PGI compiler to compile HDF5 is quite torturous, a good reference from [Fluid Numerics](https://www.fluidnumerics.com/resources/building-hdf5-with-pgi):
+
 ```
 HDF5 has long been a standard for sharing scientific data across High Performance Computing (HPC) platforms. From the HDF website "HDF5 is a data model, library, and file format for storing and managing data. It supports an unlimited variety of datatypes, and is designed for flexible and efficient I/O and for high volume and complex data. HDF5 is portable and is extensible, allowing applications to evolve in their use of HDF5." Other data models, like NetCDF from UCAR, are built on top of HDF5 and are heavily used in oceanography, meteorology, and other earth science domains. Given this, many applications rely on having a usable working version of HDF5 that they can link into their applications.
 
@@ -59,23 +128,21 @@ Building HDF5 with parallel and Fortran support with PGI compilers is not as str
 This document provides details necessary for compiling HDF5 from source with the PGI compilers. HDF5 is built using an autotools build system. Template configure incantations are provided with the install notes along with expected output at the configure stage of the build.  Ultimately, this was a roughly 16 hour exploration into this build issue that ultimately led to its resolution. 
 ```
 
-Environmental variables:
-``` bash
-HDF5=/home/metctm1/soft/hdf5-1107-pgi
-export PATH=$HDF5/bin:$PATH
-export LD_LIBRARY_PATH=$HDF5/lib:$LD_LIBRARY_PATH 
-export INCLUDE=$HDF5/include:$INCLUDE
-```
-###NetCDF
+#### NetCDF
 
-Get the latest release for [C](https://github.com/Unidata/netcdf-c/releases) and [Fortran](https://github.com/Unidata/netcdf-fortran/releases).
+It was quite anoying that the root reason of the failure in compiling NetCDF is that:
+
+1. The system manager has compiled a legacy HDF5 (1.8.12 or so) in the root paths (`/bin`, `/lib` `/usr/include`) with unknown environment.
+2. If we use the following command (default from the netCDF website) with pre-assigned variables `ZDIR` and `H5DIR`, it seems `make` will give higher priority to the root paths than the variable-assigned paths.
+
 ```bash
 ZDIR=/home/metctm1/soft/zlib-1211-gcc
 H5DIR=/home/metctm1/soft/hdf5-1107-pgi
 CPPFLAGS='-I${H5DIR}/include -I${ZDIR}/include' LDFLAGS='-L${H5DIR}/lib -L${ZDIR}/lib' ./configure --prefix=${NCDIR} --disable-dap CC=pgcc
 ```
 
-Error:
+##### Error Log
+
 ```
 configure: error: HDF5 was not built with zlib, which is required. Rebuild HDF5 with zlib.
 ```
@@ -100,30 +167,41 @@ Bad situation, we need to permutate all possible combinations to get the best pr
 
 need to refer the [official guide](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html).
 
-...After long-time multiple tests, we finally give up and copy the pre-compiled libs from YQ directory. Still cannot understand why the same compiler/environment does not work.
+#### COAWST
 
-### MCT
-
-```
-./configure --prefix=/.... FC=pgfortran CC=pgcc
-```
-
-Modify the `Makefile.conf` to specify the MPI lib and include. Done.
-
-### COAWST
 pgi-16cos7 Error in SWAN:
 PGF90-S-0285-Source line too long (mod_strings.f90: 228)
 
 This is [a legacy problem of PGI compiler](https://github.com/ORAC-CC/orac/issues/12):
 >Interestingly, the latest version of the PGI compilers (18.10, release last Friday) now support line lengths up to 1000 characters. That means that the problem in this bugreport is 'solved', or at least no longer a problem, compilation is successful out-of-the-box on the 18.10 build.
 
+Changing compiler version does not work as the HDF5 and NetCDF depend on the PGI16. We modify the source code in `ROMS/Modules/mod_strings` to hard-code the multi-line char initialization.
+```fortran
+ character (len=512) :: my_fflags =" -fastsse -Mipa=fast -Kieee -I/home/metctm1/array/soft/MCT4COAWST/include&
+            & -I/home/metctm1/array/app/COAWST/COAWST201205//WRF/main -I/home/metctm1/array/app/COAWST/COAWST201205//WRF/external/esmf_time_f90&
+            & -I/home/metctm1/array/app/COAWST/COAWST201205//WRF/frame -I/home/metctm1/array/app/COAWST/COAWST201205//WRF/share -Mfree -Mfree" 
 
+```
 
+Then, the final link problem:
+```
+IPA: no IPA optimizations
+```
+After comment out -Mipa=fast in ROMS, still not work (We finally found this is not needed).
 
+We found another possible error:
+
+```
+WRF/main/libwrflib.a(module_ra_rrtmg_lwf.o): In function `memory_':
+module_ra_rrtmg_lwf.f90:(.text+0x0): multiple definition of `memory_'
+./Build/libUTIL.a(memory.o):memory.f90:(.text+0x0): first defined here 
+```
+
+We rename the module `memory` to `memory_wrf` and it works!
 
 
 ### Refrence
 https://www.fluidnumerics.com/resources/building-hdf5-with-pgi
 
-Updated 2020-12-05**
+Updated 2020-12-10**
 
