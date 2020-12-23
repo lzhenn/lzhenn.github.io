@@ -91,13 +91,6 @@ make install
 CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include -I/home/metctm1/soft/netcdf-474c453f-pgi20/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib -L/home/metctm1/soft/netcdf-474c453f-pgi20/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-474c453f-pgi20 --disable-dap FC=pgfortran
 ```
 
-ZDIR=/home/metctm1/soft/zlib-1211-gcc H5DIR=/home/metctm1/array/soft/hdf5-1.10.7-pgi20 CPPFLAGS='-I${H5DIR}/include -I${ZDIR}/include' LDFLAGS='-L${H5DIR}/lib -L${ZDIR}/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-472c453f-pgi20 --disable-dap CC=pgcc
-
-CPP=cpp CFLAGS="-fPIC -m64 -tp=px" CXXFLAGS="-fPIC -m64 -tp=px" FCFLAGS="-fPIC -m64 -tp=px" CC=pgcc CXX=pgc++ FC=pgfortran ./configure --with-zlib=/home/yhuangci/soft/zlib-1.2.11-gcc --prefix=/home/yhuangci/soft/hdf5-1.10.6-pgi-16cos7 --enable-hl  --enable-threadsafe --enable-cxx --enable-fortran --enable-unsupported
-
-CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-474c453f-pgi20 --disable-dap CC=pgcc
-
-
 ##### Environmental variables
 ``` bash
 
