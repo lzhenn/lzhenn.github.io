@@ -44,7 +44,7 @@ In `pop2_in`, we see the namelist variable define oceanic bottom topography:
 topography_file = '/users/yangsong3/CESM/input/ocn/pop/gx1v6/grid/topography_20090204.ieeei4'
 ```
 
-This is an IEEE4 integer binary file. Since the [paleo toolkit](https://github.com/Novarizark/paleoToolkit/blob/master/cesm1/ocn/mk_ocn_grid/paleotopo.f90) for changing the bathymetry is quite complex, we tried to use basic ncl script to change the value.
+This is an IEEE standard 4 byte integer binary file. Since the [paleo toolkit](https://github.com/Novarizark/paleoToolkit/blob/master/cesm1/ocn/mk_ocn_grid/paleotopo.f90) for changing the bathymetry is quite complex, we tried to use basic ncl script to change the value.
 
 Results from the file:
 
@@ -100,14 +100,14 @@ It can be seen that over the Northern Polar region, the grid system shifts the n
 According to the Paleo FAQ:
 >The ocean model requires that grid poles be placed over land. Numerically no computation can be done at the convergence point of all longitudes at the grid pole. The ocean model solves this problem by shifting the grid pole away from the geographic pole and placing it over a land mass. (Atmospheric models solve this problem by using numerical filters). Therefore if there is no land at the geographic pole, the numerical pole must be shifted over land elsewhere.
 
-To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass **(It does not work! We have to maintain the polar land inside the ocean grid "black hole"!)**. If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.
-
+~~To make it simple, we first tried to maintain the default Greenland replaced grid pole/ SH pole with no land mass.  If that does not work, we will try to maintain the Greenland and Antarctica landmass, which will not influence our main results.~~
+**(The upper test does not work! We have to maintain the polar land inside the ocean grid "black hole"! Otherwise, at the first step of integration, the atmosphere will complain it got a zero longwave radiation (temperature=0K) from the black hole.)**.
 
 #### 1.3 Region mask file
 
 We check the POP default basin mask file, with the min=-14 and max=11, the masking figure can be found on the [NCL popmask page](https://www.ncl.ucar.edu/Applications/popmask.shtml).
 
-![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs8ekx208mj20jw0da0wp.jpg)
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/popmask_1_lg.png)
 
 And the `gx1v6_region_idx` is avaliable in the run folder:
 
@@ -186,11 +186,11 @@ All CESM Land/Sea mask info comes from the ocean data. In the [paleo resources](
 
 Notes:
 
-* Scripgrids data [download path](https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/share/scripgrids/)
+* Scripgrids data available in `${CESM_INPUT}/share/scripgrids/` or [download here](https://svn-ccsm-inputdata.cgd.ucar.edu/trunk/inputdata/share/scripgrids/)
 * Use NCL change `gx1v6_090205.nc` grid_imask variable
 * Use following command to generate mapping data:
 ``` bash
- ./gen_cesm_maps.sh -fatm /users/yangsong3/CESM/input/share/scripgrids/fv1.9x2.5_090205.nc -natm fv19_25 -focn /users/yangsong3/CESM/input/share/scripgrids/gx1v6_aqua_polar_180614.nc -nocn gx1PT --nogridcheck
+ ${CESMROOT}/tools/mapping/gen_mapping_files/gen_cesm_maps.sh -fatm /users/yangsong3/CESM/input/share/scripgrids/fv1.9x2.5_090205.nc -natm fv19_25 -focn /users/yangsong3/CESM/input/share/scripgrids/gx1v6_aqua_polar_180614.nc -nocn gx1PT --nogridcheck
 ```
 * Following the instructing in `/users/yangsong3/CESM/cesm1_2_2/tools/mapping/gen_domain_files` to build `gen_domain` executable. **Note to change the following line in Macro if met MPI/NC variable not found problem:**
 ``` makefile
