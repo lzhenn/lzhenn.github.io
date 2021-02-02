@@ -26,7 +26,7 @@ If you `ncdump` that file, you will see this variable:
 
 The first dimension show the corresponding PFT (Plant Functional Types), which define the types and fraction of different landcovers a certain grid (Mosaic method). There is the code table:
 
-![](https://ws1.sinaimg.cn/large/73ebdc71ly1fs0m9y9g3oj20kb0ie0ve.jpg)
+![](https://github.com/Novarizark/Novarizark.github.io/blob/master/uploads/2021/landcover.jpg?raw=true)
 
 Thus, the only thing we need to do is to create a new file with change only in PCT_PFT(0,:,:)=100.0.
 
