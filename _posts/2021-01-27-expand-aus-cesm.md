@@ -46,18 +46,37 @@ If you are not familiar with this, please refer [the previous post](https://nova
 
 ### II. Ocean
 
-Using the [python script]() to change bathymetry.
+Based on the modified land/sea mask file, we then adjust the corresponding ocean files.
 
-Check the bathymetry is correctly modified.
+1. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210128-pop2-chg-bathy-accord-imask.py) to change bathymetry. Note the "big-enddian/little endian" shift is much easier in python.
 
-Change Oceanic Region Mask.
+2. [Check the bathymetry](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/180620-draw-ocean-bath.ncl) is correctly modified. Here we maintained the original bathymetry to minimize the change in the real ocean (hop the integration is smooth).
 
-Change Initial condition.
+3. [Change Oceanic Region Mask](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210128-pop2-chg-maskid-accord-imask.py).
 
-Verify the initial condition change.
+4. [Change Initial condition](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210128-pop2-chg-init-accord-imask.py).
 
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/210203-changed-bathymetry.png)
 
-### III. Atmosphere
+**Fig.3 Modified Ocean Bathymetry (shadings denote active grids in one ocean column)**
 
+### III. Coupler
+
+Follow [the previous post](https://novarizark.github.io/2018/11/08/cesm-fully-coupled-aquap/#ii-coupler-mapping-modification) to generate SCRIP mapping files and domain files for other components.
+
+### IV. Atmosphere
+
+Using the generated domain files, here we modify the topography and ocnmask files for the atmosphere.
+
+1. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-topo-accord-ifrac.py) to change the `LANDFRAC` in topography file according to the `domain.lnd` file generated in III. (not sure if the model really use `landfrac` variable in the topo file.)
+
+2. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-ocnfrac-accord-ifrac.py) to change the `frac` in `domain.camocn` file. (Still not sure if the model really use this file, as I cannot target any code relating this file in the case folder.)
 
 ### IV. Land
+
+Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-clm-chg-surfdata.py) to modify the land surface data sets, including PFT, soil color, etc.
+
+### V. Namelist
+
+Follow [the previous post](https://novarizark.github.io/2018/11/08/cesm-fully-coupled-aquap/#62-namelist-changes-surf_aqua-final) to setup your namelist files.
+
