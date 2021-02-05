@@ -18,7 +18,7 @@ In this fully coupled experiment, we expand the Australian landmass to connect t
 We expand the land westward based on the natural eastern coastline of Australia (northeast corner: Cape York, and southeast corner: Tasmania), and naturally merged the African continent.
 For the **newly emerged landmass**, Plant Functional Types (PFT) are entirely set to bare soil, with the model default clay/sand/silt ratio. 
 Soil color is set to code 20, which is in accordance with the western Australia.
-The terrain height is zero.
+The terrain height is 10 m to avoid sea level change issues.
 We compiled the CAM3.5 physics package to accelerate the model spin-up. With 10 nodes (240 processors) layout on TH-2, CAM3.5 physics gains ~20% speed-up than CAM4 physics (27 sim.y/day vs 22 sim.y/day).
 
 You may check the following links about the land surface properties:
@@ -68,7 +68,7 @@ Follow [the previous post](https://novarizark.github.io/2018/11/08/cesm-fully-co
 
 Using the generated domain files, here we modify the topography and ocnmask files for the atmosphere.
 
-1. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-topo-accord-ifrac.py) to change the `LANDFRAC` in topography file according to the `domain.lnd` file generated in III. (not sure if the model really use `landfrac` variable in the topo file.)
+1. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-topo-accord-ifrac.py) to change the `LANDFRAC` in topography file according to the `domain.lnd` file generated in III. (ignored by CAM4 and CAM5; fractional land is defined by the coupler mapping files.)
 
 2. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-ocnfrac-accord-ifrac.py) to change the `frac` in `domain.camocn` file. (Still not sure if the model really use this file, as I cannot target any code relating this file in the case folder.)
 
@@ -79,4 +79,14 @@ Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandS
 ### V. Namelist
 
 Follow [the previous post](https://novarizark.github.io/2018/11/08/cesm-fully-coupled-aquap/#62-namelist-changes-surf_aqua-final) to setup your namelist files.
+
+### VI. Troubleshooting
+
+We can successfully integrate the model after above settings. The question is, we found runtime error from atm model 
+```
+COLDSST: encountered in cldfrc:         241           6  0.161392688007392
+```
+This error comes from `cloud_fraction.F90`, and it complains about low SSTs. We then found there is a strenge error from cpl to the atm that the grid cell with certain fraction of ocean surface, feels SST=0K.
+This should not have happened as scrip mapping should have handle it well. We recheced all files with proper configurations and finally used some tricks to get SST from adjacent cell and rewrite the wrongly set SST in the fractional cell.
+
 
