@@ -66,11 +66,9 @@ Follow [the previous post](https://novarizark.github.io/2018/11/08/cesm-fully-co
 
 ### IV. Atmosphere
 
-Using the generated domain files, here we modify the topography and ocnmask files for the atmosphere.
+Using the generated domain files, here we modify the topography file for the atmosphere.
 
-1. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-topo-accord-ifrac.py) to change the `LANDFRAC` in topography file according to the `domain.lnd` file generated in III. (ignored by CAM4 and CAM5; fractional land is defined by the coupler mapping files.)
-
-2. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-ocnfrac-accord-ifrac.py) to change the `frac` in `domain.camocn` file. (Still not sure if the model really use this file, as I cannot target any code relating this file in the case folder.)
+1. Use [this script](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210202-cam-chg-topo-accord-ifrac.py) to change the `LANDFRAC` and `PHIS` (terrain height) in topography file according to the `domain.lnd` file generated in III. (LANDFRAC is ignored by CAM4 and CAM5; fractional land is defined by the coupler mapping files.)
 
 ### IV. Land
 
