@@ -99,7 +99,7 @@ This should not have happened as scrip mapping should have handle it well. We re
 
 **TOA Radiative Budget**
 
-![](https://github.com/Novarizark/Novarizark.github.io/blob/master/uploads/2021/ts_FSNT_FLNT.png)
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/ts_FSNT_FLNT.png)
 
 **TOA Radiative Budget Time series**
 
