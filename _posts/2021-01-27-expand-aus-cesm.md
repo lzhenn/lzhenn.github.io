@@ -87,4 +87,25 @@ COLDSST: encountered in cldfrc:         241           6  0.161392688007392
 This error comes from `cloud_fraction.F90`, and it complains about low SSTs. We then found there is a strenge error from cpl to the atm that the grid cell with certain fraction of ocean surface, feels SST=0K.
 This should not have happened as scrip mapping should have handle it well. We recheced all files with proper configurations and finally used some tricks to get SST from adjacent cell and rewrite the wrongly set SST in the fractional cell.
 
+### VII. Combined script
+
+### VIII. Gallery
+
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/Z500_2d.png)
+
+**500 hPa HGT**
+
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/toa_balance_2d.png)
+
+**TOA Radiative Budget**
+
+![](https://github.com/Novarizark/Novarizark.github.io/blob/master/uploads/2021/ts_FSNT_FLNT.png)
+
+**TOA Radiative Budget Time series**
+
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/ts_2d.result.gif)
+
+**Surface Temperature**
+
+
 
