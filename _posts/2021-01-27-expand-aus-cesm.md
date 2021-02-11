@@ -89,6 +89,10 @@ This should not have happened as scrip mapping should have handle it well. We re
 
 ### VII. Combined script
 
+1. [Main Driver](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210210-control_modify_ext_files.sh)
+2. [Cpl Controller](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210211-gen-cpl-domain.sh)
+3. [Setup Experiment](https://github.com/Novarizark/tracacode/blob/master/2101-LandSea-Polar-XMHu/script/210211-setup-experiment.sh)
+
 ### VIII. Gallery
 
 ![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/2021/Z500_2d.png)
