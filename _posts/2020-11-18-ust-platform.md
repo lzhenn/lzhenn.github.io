@@ -61,9 +61,9 @@ Choose [HDF5 1.10](https://portal.hdfgroup.org/display/support/HDF5%201.10.7) to
 Try the following command to compile the HDF5 with PGI compilers.
 
 ```bash
-$ CPP=cpp CFLAGS="-fPIC -m64 -tp=px" CXXFLAGS="-fPIC -m64 -tp=px" FCFLAGS="-fPIC -m64 -tp=px" CC=pgcc CXX=pgc++ FC=pgfortran ./configure --with-zlib=/home/yhuangci/soft/zlib-1.2.11-gcc --prefix=/home/yhuangci/soft/hdf5-1.10.6-pgi-16cos7 --enable-hl  --enable-threadsafe --enable-cxx --enable-fortran --enable-unsupported
-make            # Successful! about 1 hour
-make install    
+$CPP=cpp CFLAGS="-fPIC -m64 -tp=px" CXXFLAGS="-fPIC -m64 -tp=px" FCFLAGS="-fPIC -m64 -tp=px" CC=pgcc CXX=pgc++ FC=pgfortran ./configure --with-zlib=/home/metctm1/array/soft/zlib-1.2.11-gcc --prefix=/home/metctm1/array/soft/hdf5-1.10.7-pgi20-amd --enable-hl --enable-threadsafe --enable-cxx --enable-fortran --enable-unsupported 
+$make            # Successful! about 1 hour
+$make install    
 ```
 
 ##### Environmental variables
