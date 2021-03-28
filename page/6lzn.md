@@ -44,3 +44,7 @@ Life is cool, but we need to find the cool things first.
 ----
 <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script> 
 <script src="../js/showPDF.js" charset="utf-8"></script>
+
+## Comments
+
+{% include comments.html %}
