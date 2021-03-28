@@ -8,6 +8,9 @@ type: page
 
 * content
 {:toc}
+
+![](https://github.com/Novarizark/Novarizark.github.io/blob/master/uploads/leisure.jpg)
+
 <ul>
 <li><a href="https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf">CV for Academia</a> (<a href="https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf">学术界简历</a>)</li>
 </ul>
@@ -22,7 +25,6 @@ I am now a postdoctoral researcher using high performance computing clusters and
 
 Life is cool, but we need to find the cool things first.
 
-![](http://ww1.sinaimg.cn/large/73ebdc71gy1fmzzdtzucxj20wu0kugmh.jpg)
 
 ## Contact Me
 
