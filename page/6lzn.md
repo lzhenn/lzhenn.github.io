@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About Zhenning LI
+title: Zhenning LI
 permalink: /lzn/
 icon: id-card-o 
 type: page
