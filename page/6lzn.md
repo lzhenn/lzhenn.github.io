@@ -9,7 +9,7 @@ type: page
 * content
 {:toc}
 
-![](https://github.com/Novarizark/Novarizark.github.io/blob/master/uploads/leisure.jpg)
+![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/leisure.jpg)
 
 <ul>
 <li><a href="https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf">CV for Academia</a> (<a href="https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf">学术界简历</a>)</li>
