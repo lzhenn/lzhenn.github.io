@@ -11,10 +11,7 @@ type: page
 
 ![](https://raw.githubusercontent.com/Novarizark/Novarizark.github.io/master/uploads/leisure.jpg)
 
-<ul>
-<li><a href="https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf">CV for Academia</a> (<a href="https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf">学术界简历</a>)</li>
-</ul>
-<!--* [CV for Academia]()  ([学术界简历](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf))-->
+* [CV for Academia](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/CV_ZhenningLi_full_with_pub_appendix.pdf)
 <!--* [CV for Industrial Circle](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/2018/cv/CV-Academic-English.pdf) ([工业界简历](https://github.com/Novarizark/Novarizark.github.io/raw/master/uploads/2018/cv/CV-Industrial-Chinese.pdf))-->
 
 ## About Me
