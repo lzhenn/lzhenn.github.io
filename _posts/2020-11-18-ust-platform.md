@@ -92,12 +92,11 @@ CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/s
 ```
 
 ##### Environmental variables
+``` bash
 export NETCDF=/home/metctm1/array/soft/netcdf-474c453f-pgi20/
 export PATH=$NETCDF/bin:$PATH
 export LD_LIBRARY_PATH=$NETCDF/lib:$LD_LIBRARY_PATH
 export INCLUDE=$NETCDF/include/:$INCLUDE
-``` bash
-
 ```
 
 #### MCT
