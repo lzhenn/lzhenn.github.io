@@ -88,7 +88,7 @@ make check
 make install
 
 # Fortran Lib
-CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include -I/home/metctm1/soft/netcdf-474c453f-pgi20/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib -L/home/metctm1/soft/netcdf-474c453f-pgi20/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-474c453f-pgi20 --disable-dap FC=pgfortran
+CPPFLAGS='-I/home/metctm1/array/soft/hdf5-1.10.7-pgi20/include -I/home/metctm1/soft/zlib-1211-gcc/include -I/home/metctm1/array/soft/netcdf-474c453f-pgi20/include' LDFLAGS='-L/home/metctm1/array/soft/hdf5-1.10.7-pgi20/lib -L/home/metctm1/soft/zlib-1211-gcc/lib -L/home/metctm1/array/soft/netcdf-474c453f-pgi20/lib' ./configure --prefix=/home/metctm1/array/soft/netcdf-474c453f-pgi20 --disable-dap FC=pgfortran
 ```
 
 ##### Environmental variables
