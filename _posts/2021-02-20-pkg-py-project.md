@@ -20,7 +20,9 @@ conda env list
 conda activate test_aeolus
 ```
 
-Install required packages in the brand-new environment by `pip`, until our package runs smooth.
+Try to run the project in this new environment, you will encontour many `ModuleNotFoundError`.
+
+This is a "ping-pang" game, and install required packages in the brand-new environment by `pip`, until our package runs smooth. At this moment:
 
 ```bash
 pip freeze > requirements.txt
