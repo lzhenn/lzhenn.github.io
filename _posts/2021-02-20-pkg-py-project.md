@@ -50,7 +50,11 @@ pip install -r requirements.txt
 python run.py
 ```
 
+After testing, you may want to delete the test environment
 
+``` bash
+conda remove -n test_install --all
+```
 
 ### Refrence
 https://blog.usejournal.com/why-and-how-to-make-a-requirements-txt-f329c685181e
