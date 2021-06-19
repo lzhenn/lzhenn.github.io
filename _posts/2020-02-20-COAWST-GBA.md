@@ -20,6 +20,21 @@ I skipped the WPS procedure for building WRF grid system. Now we form the ROMS g
 1.1 Use WPS to generate a `geo_em` file which is equal or larger compared to your aim ROMS domain. For example, in our case, we need to set the ROMS in around 2.2 km spatial resolution and 900x600 size, so I generate a `geo_em` file with 3 km and 1000x1000 size first.
 
 1.2 Generate ROMS grid system by `geo_em` from WRF-WPS. There is an urban legend that all islands with sizes smaller than 4 px need to be removed to ensure the smooth run. I even tried Computer Vision algorithm to label the connected components and then remove the elements. Finally, I found this is not necessary. The underlying cause of unstable integration is still from the bathymetry. [step1_roms_grid_from_wps_200219.m](https://github.com/Novarizark/project/blob/master/1911-COAWST/script/gba-roms-grid/step1_roms_grid_from_wps_200219.m)
+Meanwhile, we need to be careful to fit the condition in `Lm` and `Mm`:
+
+```
+! Lm           Number of INTERIOR grid RHO-points in the XI-direction for
+!                each nested grid, [1:Ngrids]. If using NetCDF files as
+!                input, Lm=xi_rho-2 where "xi_rho" is the NetCDF file 
+!                dimension of RHO-points. Recall that all RHO-point
+!                variables have a computational I-range of [0:Lm+1].
+!
+! Mm           Number of INTERIOR grid RHO-points in the ETA-direction for
+!                each nested grid, [1:Ngrids]. If using NetCDF files as
+!                input, Mm=eta_rho-2 where "eta_rho" is the NetCDF file 
+!                dimension of RHO-points. Recall that all RHO-point
+!                variables have a computational J-range of [0:Mm+1].
+```
 
 Final Domain Configuration (Outer and white inner box for WRF, and black dashed box for ROMS):
 ![0FxmND.png](https://s1.ax1x.com/2020/09/27/0FxmND.png)
