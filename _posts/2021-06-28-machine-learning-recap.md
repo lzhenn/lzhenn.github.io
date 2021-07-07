@@ -2,7 +2,7 @@
 layout: post
 title:  "Coursera Machine Learning Recap: W1-2"
 categories: technology
-tags: csapp coursera 
+tags: cs229 coursera 
 author: LZN
 ---
 
