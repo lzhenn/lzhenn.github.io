@@ -40,7 +40,3 @@ cd B
 git fetch
 git merge origin master
 ```
-
-If 
-
-
