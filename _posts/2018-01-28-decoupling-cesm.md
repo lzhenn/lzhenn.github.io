@@ -9,6 +9,8 @@ author: LZN
 * content
 {:toc}
 
+**Please check my [GitHub Repo](https://github.com/Novarizark/tracacode/tree/master/SRC_MOD_LIB-2017/SourceMods-SST-decoupling) for the most recent code implementation in CESM1.2.2.**
+
 在之前MM高原试验基础上，应黄老师要求增加北大西洋SST restoring的试验。因通量计算在海洋模块进行，所以应该在海洋模块计算之前修改并update。
 
 查到论坛[帖子](https://bb.cgd.ucar.edu/how-prescribe-sst-annual-cycle-cesm-pop2)，以及HC师兄提供的code.
