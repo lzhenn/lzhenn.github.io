@@ -9,7 +9,7 @@ author: LZN
 * content
 {:toc}
 
-There is a common case that multiple users use the same Linux server account, but they have different github account and their own repo. How to get a solution for this problem?
+There is a common case that multiple users use the same Linux server account, but they have different github accounts and their own repos. How to get a solution for this problem?
 ![](http://ww1.sinaimg.cn/large/73ebdc71ly1fzhkby1wadj20qo0k0gm9.jpg)
 
 Given you have already configured an active github account (Alice) on the server with all global git and ssh settings done. We treat Alice as the main account.
@@ -20,7 +20,7 @@ Now configuring the ssh settings. We generate one more RSA key pairs.
 ssh-keygen  -t rsa -C "hello world"
 ```
 
-When choosing the save path, be sure save the file to a new name, e.g. `id_rsa_bob`.
+When choosing the save path, **be sure** to save the file to a new name, e.g. `id_rsa_bob`.
 
 Then we add the private key to ssh settings.
 
@@ -37,14 +37,14 @@ Next, we write the `~/.ssh/config` file:
 
 ``` bash
 # git@github.com:Alice
-Host github-alice
+Host github.com
   User Alice 
   HostName github.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_rsa
 
 # git@github.com:bob
-Host github-bob
+Host github-bob.com
   User bob
   HostName github.com
   PreferredAuthentications publickey
