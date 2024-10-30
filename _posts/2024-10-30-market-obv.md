@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "EGU23-10723 Supplementary Materials: Mangkhut (2018)"
+title:  "24年10月市场观察"
 categories: finance 
 tags: thinking
 author: LZN
@@ -11,8 +11,6 @@ author: LZN
 Higher for Longer。
 
 Fed 9月50个基点的降息，犹如一针兴奋剂，殷切期待的市场在9月中旬把US10一路压倒到3.6%附近，然而对Fed来说，没有足够的经济数据恶化作为支撑的话，绝无可能形成快速降息的演化路径。本月市场对快速降息的期待情绪迅速消退，US10目前已经升至4.3%左右。
-
-![](https://mmbiz.qpic.cn/mmbiz_png/AAicsK9yN42KZ0ibo9eJm4aoUVABH67G42wCQMIR2D0TlKQObY0WKlHOVpo0173Ijbyiakicf3bnnvL5nVww2fwYkg/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1)
 
 巴菲特认为，无风险利率犹如地心引力，没有风险资产能够脱离地心引力，在高息环境下依然一路飙涨。
 
