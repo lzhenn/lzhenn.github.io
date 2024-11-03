@@ -14,8 +14,11 @@ author: LZN
 
 The return on the ETNs is linked to the inverse of the daily performance of the S&P 500 VIX Short-Term Futures™ Index ER less the investor fee. The ETNs provide traders with an exchange traded instrument enabling them to efficiently express their market views on the short-term futures contracts on the CBOE SPX Volatility Index® (the “VIX®”). ：
 
-然而，2018年2月5日这一天，XIV尽管没有归零，一切都结束了。
+然而，2018年2月5日这一天，XIV尽管没有归零（跌幅达到80%），一切都结束了。
 
 ![](https://i.imgur.com/zJqI4V0.jpeg)
 
-这是一种典型的压路机前捡钢镚的投机。
+这是一种典型的压路机前捡钢镚的投机，尽管大概率会赚钱，但是一旦小概率事件发生，影响是致命的。
+
+我们简单回顾一下那段时间的市场走势。首先看VIX，一月底至二月初，伴随美股整体下跌，大致有一个从10到18的上升，随后2月5日开盘后，迅速飙涨至50，极度恐慌的水平。
+![](https://i.imgur.com/TjeJhFB.png)
