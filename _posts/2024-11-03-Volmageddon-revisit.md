@@ -16,4 +16,6 @@ The return on the ETNs is linked to the inverse of the daily performance of the 
 
 然而，2018年2月5日这一天，XIV尽管没有归零，一切都结束了。
 
-![](https://imgur.com/zJqI4V0)
+![](https://i.imgur.com/zJqI4V0.jpeg)
+
+这是一种典型的压路机前捡钢镚的投机。
