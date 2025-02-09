@@ -37,7 +37,7 @@ author: LZN
 
 哈，有意思。
 
-![](https://i.imgur.com/CIyVtay.png)
+![](https://i.imgur.com/AsYRT3k.png)
 
 __香农传英文原著书名：A Mind At Play__
 
