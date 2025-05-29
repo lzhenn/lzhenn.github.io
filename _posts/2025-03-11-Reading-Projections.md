@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "《照亮破碎之心》阅读随记"
-categories: finance 
+categories: science 
 tags: thinking
 author: LZN
 ---
