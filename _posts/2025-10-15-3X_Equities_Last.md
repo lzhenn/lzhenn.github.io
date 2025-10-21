@@ -425,7 +425,7 @@ b.在相似幅度的最大回撤水平下，能够获得高于底层标的的长
 
 参考：
 
-![王冠的重量](https://mp.weixin.qq.com/s/d6a0P_k4c9_9zJMr8G5-fQ)
+[王冠的重量](https://mp.weixin.qq.com/s/d6a0P_k4c9_9zJMr8G5-fQ)
 
 
 
