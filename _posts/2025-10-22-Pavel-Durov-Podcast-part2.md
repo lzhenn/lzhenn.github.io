@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Telegram创始人帕维尔·杜罗夫2025年10月播客实录 | 中英文完整版精译 Part2"
-categories: science
+categories: thinking 
 tags: thinking
 author: LZN
 ---
