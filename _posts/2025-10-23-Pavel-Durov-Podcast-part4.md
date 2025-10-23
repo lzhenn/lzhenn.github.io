@@ -8,7 +8,7 @@ author: LZN
 
 _书童按：本篇是帕维尔·杜罗夫（Pavel Durov）于2025年10月接受Lex Fridman的播客采访实录，Pavel是端到端加密通信软件Telegram的创始人兼CEO。其采访中涉及精简团队、高度自动化、法国被捕、审查、企业家的困境等话题，精彩绝伦，令人击节称赞。初稿采用AI机器翻译，经自动化中英混排，书童仅做简单校对及批注。原稿中英文混排近7万字，书童将分为Part1-4发出，本篇是最后一部分，以飨诸君。_
 
-![](https://i.imgur.com/nMdEsIs.png)
+![](https://i.imgur.com/2cq5xnB.png)
 
 **爱德华·斯诺登**
 
