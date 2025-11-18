@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "只要买入这种魔法资产，就能缓冲标普500一半的跌幅？"
+title:  "斩钉截铁回绝97.5%的股票，热泪盈眶拥抱100%的市场"
 categories: finance 
 tags: thinking 
 author: LZN
