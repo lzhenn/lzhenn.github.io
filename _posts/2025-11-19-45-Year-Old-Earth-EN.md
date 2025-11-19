@@ -10,6 +10,8 @@ A while ago, Xianggu sent an interesting screenshot from Shutong:
 
 ![](https://i.imgur.com/O4O3N0e.jpeg)
 
+>Today I saw an interesting post: Earth is 45 and a half years old this year. It started raising bacteria around age 7, started raising jellyfish at age 38, started raising dinosaurs 2 years ago, adopted humans at the pet market this morning, and has been raising them for 8 hours now.
+
 It's really too interesting!
 
 Humans find it hard to imagine extremely large or tiny orders of magnitude in spatiotemporal scales, yet they can familiarly perceive the spatiotemporal scales in their own living physical environment.
