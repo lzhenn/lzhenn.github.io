@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "财务自由路线图（一）：丢掉财富自由这个浆糊概念，请大声喊出财务自由！"
+title:  "财务自由篇（一）：丢掉财富自由这个浆糊概念，请大声喊出财务自由！"
 categories: finance 
 tags: thinking 
 author: LZN
