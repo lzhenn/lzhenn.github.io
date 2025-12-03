@@ -34,7 +34,7 @@ def bold_speaker_lines(file_path, output_path):
     print(f"Processed file saved to {output_path}")
 
 # Example usage
-src_path = '../_posts/'
+src_path = '../_drafts/'
 input_file = src_path + 'combined_transcript.md'
 output_file = src_path + 'formatted_transcript.md'
 bold_speaker_lines(input_file, output_file)

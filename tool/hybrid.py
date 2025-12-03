@@ -38,7 +38,7 @@ def combine_transcripts(cn_file, en_file, output_file):
         outfile.writelines(combined_lines)
 
 if __name__ == '__main__':
-    src_path = '../_posts/'
+    src_path = '../_drafts/'
     cn_file = src_path + 'CN.txt'
     en_file = src_path + 'EN.txt'
     output_file = src_path + 'combined_transcript.md'

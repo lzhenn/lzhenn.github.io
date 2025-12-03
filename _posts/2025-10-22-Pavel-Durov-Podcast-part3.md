@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "高压教育、游戏开发、极致优化：Telegram创始人帕维尔·杜罗夫2025年10月播客实录 | 中英文完整版精译 Part3"
-categories: thinking 
+categories: podcast 
 tags: thinking
 author: LZN
 ---

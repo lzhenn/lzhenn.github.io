@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "进化、低维流形、开放世界、生命模拟：Deepmind创始人哈萨比斯2025年7月播客实录 | 中英文完整版精译（上）"
-categories: science
+categories: podcast 
 tags: thinking
 author: LZN
 ---

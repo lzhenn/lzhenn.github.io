@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "生命、天气模拟、AGI、：诺贝尔化学奖得主、Deepmind创始人哈萨比斯2025年7月播客实录 | 中英文完整版精译（中）"
-categories: science
+categories: podcast 
 tags: thinking
 author: LZN
 ---

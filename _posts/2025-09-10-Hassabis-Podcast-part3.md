@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "化学诺奖得主、Deepmind创始人哈萨比斯2025年7月播客实录 | 中英文完整版精译（下）"
-categories: science
+categories: podcast 
 tags: thinking
 author: LZN
 ---
