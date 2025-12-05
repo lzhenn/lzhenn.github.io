@@ -6,7 +6,9 @@ tags: thinking
 author: LZN
 ---
 
-我们来看经常支出和资本支出（非经常支出）
+我们来看固定支出和可变支出。
+
+在会计和财务管理中，固定支出（Fixed Costs）和可变支出（Variable Costs）是一种基于成本行为（是否随产量或销量变化）的分类方式，而CapEX（Capital Expenditures，资本支出）和OpEX（Operating Expenditures，运营支出）是一种基于支出性质和会计处理方式的分类。
 
 财务自由的关键节点上，通常有这样一个特征：
 

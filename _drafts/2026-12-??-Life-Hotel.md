@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "存在篇（二） | 人生逆旅：您已入住，请随时准备退房"
+title:  "存在篇（二） | 人生逆旅：您已入住预期停留时间的38.35%，但请做好随时可能退房的准备。"
 categories: thinking
 tags: thinking
 author: LZN
