@@ -1,488 +1,384 @@
-GTA 6
-GTA 6
-Lex Fridman (00:56:05) 因为他们一直追求着他们深切关心的事物。这就是一切，他们真心乐于去做这件事，然后就像是，"生活中还有什么其他东西？" 与此相比，还有什么呢？这就是人生的起起落落。你需要黑暗，需要低谷才能真正体验高峰。让我问问你关于压力的问题。对于《侠盗猎车手VI》，有着疯狂程度的兴奋和期待。对GTA V和GTA IV也是如此，甚至更早之前也是如此。你和团队每次都交付了。在这种每个人都期望其成功的压力下进行创意工作有多困难？
-Lex Fridman (00:56:05) Because they’ve been pursuing a thing that they deeply care about. This has been everything and they’re so truly happy to do it, and then it’s like, “What else is there in life?” Compared to this, what else is there? So that’s the ups and downs of life. You need the darkness and you need the lows to really experience the highs. Let me ask you about the pressure. There’s an insane level of excitement and expectation for Grand Theft Auto VI. Same was true for GTA V and GTA IV, and even before that. And you and the team delivered every time. How difficult was it to do creative work under such pressure where everyone expects this to be a success?
-Dan Houser (00:56:53) 我非常擅长划分，你知道，只是说……而且我试着只是去，对于所有创意工作，我都会想，"嗯，我感觉自己像个可怕的骗子，但还没有被发现。尽力而为，希望这次不会被发现。" 如果我能够说，"我努力工作了。我努力以正直的态度去做。我努力不去抄袭别人。我可能上述几点都做过，"你知道，试图带来一些新的东西。而我们，作为一个团体，制作了一些我们引以为傲的东西。那就足够了。你不能……如果你不想发疯，我无法坐在那里担心财务结果。
-Dan Houser (00:56:53) I was pretty good at compartmentalizing, you know, and just saying… And I try just to go, and with all creative work, I go, “Well, I feel like a terrible fraud, but I haven’t been found out yet. Just do my best and hopefully I won’t be found out this time.” And if I can go, “I tried hard with the work. I tried to do it with integrity. I tried not to copy someone else. I have probably done all of the above,” you know, try to bring something new to it. And we, as a group, made something we are proud of. Then that’s enough. You can’t… If you don’t want to go insane, I couldn’t sit there and worry about financial results.
-Dan Houser (00:57:35) 你知道，如果我们制作了伟大的东西却没有卖出去，那也必须接受。因为目标是制作出某种……你知道，电子游戏很昂贵，所以它是一种商业形式的创造力。它是一种商业艺术形式，你知道。所以你必须在脑海中明白，你正在花费别人大量的金钱。你必须尝试为他们赚回来。但同时，我对自己辩称，好吧，如果我们……赚回来的方法就是尝试制作出伟大的东西。所以两种压力指向同一个方向。我认为GTA IV压力非常大，因为公司承受了所有这些压力。公司因为"热咖啡"事件几乎几次内爆。那是极其艰难的。
-Dan Houser (00:57:35) You know, if we made something great and it didn’t sell, that would have to be okay. Because the goal is to make something that’s… You know, video games are expensive, so it is a commercial form of creativity. It’s a commercial art form, you know. So you have to be, in your mind, you’re spending large amounts of someone else’s money. You have to try and make it back for them. But at the same time, my argument with myself was, well, if we… The way to make it back is try and make something great. So both pressures are pointing in the same direction. I think GTA IV was very pressured because there’d been all this pressure on the company. The company nearly imploded several times due to Hot Coffee. It was extremely tough.
-Dan Houser (00:58:17) 所以我认为那感觉压力非常大。GTA III时，公司基本上破产了。
-Dan Houser (00:58:17) So I think that felt very stressful. GTA III, the company was basically broke.
-Dan Houser (00:58:21) 但我那时年轻，并不真的在乎。你知道，那不是……我还没有生活在成年人的世界里。它们每一个都有自己的压力。所有的游戏都有自己的压力。我越是觉得自己从创意角度投入其中，并试图更加雄心勃勃，就我个人而言，我感觉压力更大，你知道，当它发布时，那会是正确的选择。因为同样，如果你试图在创意上大力挥棒，并且你花了很多钱，那可能会相当有压力。你知道，我认为在《荒野大镖客2》时，当我们落后于计划时。我们超支太多，以至于我不想考虑它。而你正在制作一个关于一个死于肺结核的牛仔的游戏，而游戏本身还没整合好。
-Dan Houser (00:58:21) But I was young and didn’t really care. You know, it wasn’t… I wasn’t living in the grown-up world yet. All of them had their own pressure. All of the games had their own pressure. All the more I felt I’d gone into it creatively and tried to be more ambitious, for me personally, I felt more pressure, you know, when it came out that that would have been the right choice. Because again, if you’re trying to take big swings creatively and you’ve spent a lot of money, that can be quite stressful. You know, I think with Red Dead 2, when, you know, we were behind schedule. We were over budget so much I didn’t want to think about it. And you’re making a game about a cowboy dying of TB and the game’s not coming together.
-Dan Houser (00:59:02) 结果在那个时刻很多人怀疑你。那并不那么有趣。所以我认为那是很大的压力。但是任何事，做新的事情，新东西，并不一定有像发布漫画书那样的压力，或者以同样的方式，因为它花的时间没那么长，但如果你在创作东西，总会有压力，人们会喜欢它。
-Dan Houser (00:59:02) Turns out a lot of people doubt you at that moment. It’s not that fun. So I think that was a lot of pressure. But anything, doing something new, the new stuff, there’s not necessarily pressure on releasing a comic book or in the same way because it’s not taken as long, but if you’re making things, there’s always pressure that people are going to like it.
-Lex Fridman (00:59:20) 你认为为什么GTA IV、GTA V和现在的GTA VI会引发如此多的兴奋？
-Lex Fridman (00:59:20) Why do you think there was so much excitement about GTA IV, GTA V, and now GTA VI?
-Dan Houser (00:59:25) 因为它们不是那么经常发布。而且我认为我们在该IP范围内不断创新方面做得非常好。游戏总是感觉不同。人们有非常强烈的感受："我喜欢这个。我不那么喜欢那个，"因为它们非常不同。所以你会……同时你也知道将会发生什么。这是一款《侠盗猎车手》，你知道，它将是一款关于成为罪犯的游戏，但它的游戏方式将会发生很大变化。所以我认为IP不断演变的方式让人们非常兴奋地想要玩它。我们也非常擅长营销它们。我们真的努力以一种感觉像是对经典电影营销更新的方式来营销它们，在那里你真的是……
-Dan Houser (00:59:25) Because they don’t come out that regularly. And I think we did a really good job of constantly innovating within what the IP was. The games always felt different. People have very strong feelings: “I like this one. I didn’t like that one as much,” because they are pretty different. So you would… There would be simultaneously where you know what’s going to happen. It’s a Grand Theft Auto, you know, it’s going to be a game about being a criminal, but the way it’s going to be a game is going to change quite a lot. So I think the way the IP kept evolving made people really excited to play it. And we were good at marketing them as well. We really tried to market them in a way that felt like an update of classic film marketing, where you were really…
-Dan Houser (01:00:03) 感觉就像你已经身临其境，只因为你已经看到了预告片之类的东西。
-Dan Houser (01:00:03) It felt like you’re already in the product just because you’d seen the trailers and stuff.
-Lex Fridman (01:00:06) 你提到你没有为《侠盗猎车手VI》进行写作。对于《侠盗猎车手VI》回归到罪恶都市感觉如何？这是20多年后了，但最初的GTA罪恶都市游戏背景设定在80年代。所以可能有点受《疤面煞星》启发？
-Lex Fridman (01:00:06) You’ve mentioned that you haven’t written for Grand Theft Auto VI. What’s it feel like Grand Theft Auto VI returning to Vice City? This is over 20 years later, but the original GTA Vice City game was set in the ’80s. So maybe inspired by Scarface a little bit?
-Dan Houser (01:00:22) 《疤面煞星》，《迈阿密风云》。
-Dan Houser (01:00:22) Scarface, Miami Vice.
-Lex Fridman (01:00:24) 《迈阿密风云》。
-Lex Fridman (01:00:24) Miami Vice.
-Dan Houser (01:00:25) 还有我们80年代的童年。你知道我很久以前就意识到，不幸的是，我们制作了那款游戏，它的背景设定，我想，是86年。我们在2002年制作了它，所以是之后16年。而现在距离罪恶都市发布已经远不止16年了。所以在我们制作它的时候，80年代还不太遥远。
-Dan Houser (01:00:25) And our ’80s childhoods. You know what I realized quite a while ago, unfortunately, was that we made that game, and it was set, I think, in ’86. We made it in 2002, so 16 years after. And now it’s way past 16 years since Vice City came out. So the ’80s were not that long ago when we made it.
-Lex Fridman (01:00:46) 我认为迈阿密是世界上最独特的城市之一。
-Lex Fridman (01:00:46) I think Miami is one of the most unique cities in the world.
-Dan Houser (01:00:49) 哦，是的。
-Dan Houser (01:00:49) Oh yeah.
-Lex Fridman (01:00:50) 特别是如果你想讽刺美国文化，它具有这种光鲜表面和黑暗黑社会的二元性。它有网红。它有加密货币兄弟，游艇，比基尼，整容手术，跑车，毒品，卡特尔现金，奢侈品，超级富豪，以及极度贫困，包罗万象。它会是探索人性可能产生的完整角色阵容的完美城市吗？
-Lex Fridman (01:00:50) Especially if you’re thinking about satirizing American culture, it has this duality of a glossy surface and a dark underworld. It has the influencers. It has the crypto bros, the yachts, bikinis, plastic surgery, sports cars, drugs, cartel cash, luxury, super-rich people, and the desperately poor, just the whole of it. Would it be the perfect city to explore the full cast of characters that are possible, that human nature can generate?
-Dan Houser (01:01:18) 我认为是其中之一。GTA不断回到迈阿密、纽约、洛杉矶是有原因的。我认为它们都恰好非常适合你所阐述的那些方面。你可以把它搬到这些地方中的任何一个，它都会有效。
-Dan Houser (01:01:18) I think it’s one of them. There’s a reason why GTA kept coming back to Miami, New York, Los Angeles. I think they’re all very good for exactly what you laid out. You could say move it to any of those, and it would work.
-Lex Fridman (01:01:32) 所以是的，有一个大熔炉……
-Lex Fridman (01:01:32) So yeah, there’s a melting pot…
-Dan Houser (01:01:33) 熔……
-Dan Houser (01:01:33) Melt…
-Lex Fridman (01:01:33) ……在纽约也有这个方面，对吗？
-Lex Fridman (01:01:33) …aspect in New York also, right?
-Dan Houser (01:01:35) 是的，融合。是的，洛杉矶也有融合的一面。你知道，在所有这些城市中，都有浮华、魅力、底层社会、移民、巨大财富。我认为这些对于任何东西都非常有趣，不仅仅是GTA，而是任何你想要一种生活切片的东西，几乎像是一种狄更斯书籍的某种精神错乱版本。你知道，这种广阔的生活切片——他用伦敦做到了。你知道，这种精神错乱版本的这些，你知道，在大熔炉中的各种各样的人物。任何这些全球性城市都很适合。
-Dan Houser (01:01:35) Yeah, melting. Yeah, melting aspect to LA. You know, there’s glitz, glamour, underbelly, immigrants, enormous wealth in all of them. I think those are what I think are really fun for any, not even just the GTA, but for anything where you want a kind of slice of life, almost like a sort of psychotic version of a Dickens book. You know, this big slice of life—he did it with London. You know, this psychotic version of these, you know, big, all kinds of characters in a melting pot. Any of these global cities work well for that.
-Lex Fridman (01:02:06) 你知道是否有考虑过去其他地方，比如伦敦？
-Lex Fridman (01:02:06) Do you know if that was ever a consideration to go elsewhere to like a London?
-Dan Houser (01:02:11) 我们26年前在伦敦制作了一个小东西，GTA伦敦，俯视角的，为PS1。那相当可爱有趣。作为PlayStation 1的第一个任务包。我认为对于一个完整的GTA游戏，我们总是认为IP中固有的美国元素太多，在伦敦或其他任何地方都很难让它奏效。你知道，你需要枪支，你需要这些夸张的角色。只是感觉这款游戏太关乎美国了，可能是从一个局外人的视角。但你知道，那与这件事的本质如此相关，以至于在其他地方不会以同样的方式奏效。
-Dan Houser (01:02:11) We made a little thing in London 26 years ago, GTA London, for the top-down, for the PS1. That was pretty cute and fun. As the first mission pack ever for PlayStation 1. I think for a full GTA game, we always decided it was that there was so much Americana inherent in the IP, it would be really hard to make it work in London or anywhere else. You know, you needed guns, you needed these larger-than-life characters. It just felt like the game was so much about America, possibly from an outsider’s perspective. But you know, that was so much about what the thing was that it wouldn’t really have worked in the same way elsewhere.
-Lex Fridman (01:02:52) 所以你已经创造了，我不知道有多少，超过10款《侠盗猎车手》游戏。
-Lex Fridman (01:02:52) So you’ve, you’ve created, I don’t know how many, over 10 Grand Theft Auto games.
-Dan Houser (01:02:56) 我想是的。
-Dan Houser (01:02:56) I think so.
-Lex Fridman (01:02:58) 我不得不问，对于不参与，告别《侠盗猎车手》世界并不得不观看《侠盗猎车手VI》发布，是否有点苦乐参半？还是更兴奋？是什么感觉？
-Lex Fridman (01:02:58) I have to ask, is it a little bit bittersweet to not be part, to say goodbye to the Grand Theft Auto world and having to watch Grand Theft Auto VI released? Or is it more excitement? What’s the feeling?
-Dan Houser (01:03:12) 我认为这是……我该怎么描述它？当然，上述都有。你知道，正如你所知，很高兴在做其他事情，对我们现在正在做的事情感到兴奋，当然超级兴奋，放手一些我以某种方式为之工作了大约20多年的东西。你知道，并且为过去10或11年发布的游戏撰写剧本，写了所有剧本，或者，你知道，是所有这些的首席编剧，无论是什么。所以当然，放手那是一个很大的改变，在某种程度上是悲伤的。
-Dan Houser (01:03:12) I think it’s… how would I describe it? Of course, it’s all of the above. You know, it’s exactly as you know, pleased to be doing other stuff, excited for what we’re working on now, super excited of course, letting go of something I worked on in one way or another for like 20 odd years. You know, and wrote on them for the last 10 or 11 that came out, wrote all of them, or, you know, lead writer on all of them, whatever it was. So of course, letting go of that is, you know, a big change, and sad in a way.
-Dan Houser (01:03:53) 因为每一款游戏都是一种独立的故事，这与我认为如果有人在《荒野大镖客》系列上继续可能会在某种程度上更悲伤是不同的，因为它是一个连贯的两部曲。听到有人在那上面工作可能会更悲伤。但同样，那可能也会发生。我不拥有IP。那是交易的一部分。在这些东西上工作是一种特权，但你未必拥有它。
-Dan Houser (01:03:53) Because each of the games was a kind of standalone story, it’s not quite the same as I think probably it would be in some ways sadder if someone continued on Red Dead, because it was a cohesive two-game arc. That might be more sad to hear someone working on that. But again, that will probably happen too. I don’t own the IP. That was the sort of part of the deal. It’s a privilege to work on stuff, but you don’t necessarily own it.
-Lex Fridman (01:04:21) 当你完成游戏时，是否总感觉像是告别？就像当你完成《荒野大镖客2》时，就像你在告别亚瑟？就像你创造的角色，你正在离开。
-Lex Fridman (01:04:21) When you’re done with the game, does it always feel like a goodbye? Like when you’re done with Red Dead 2, is it like you’re saying goodbye to Arthur? Like the characters you created, you’re walking away.
-Dan Houser (01:04:32) 在游戏结束时，你确实有点像在告别亚瑟。甚至在游戏结束之前，是的，我想你已经和他们在一起七、八年了，你必须某种程度上放手，否则你就不能进行下一个。所以，总是有这样的事，"好了，那完成了。"有时人们会问我关于旧游戏的问题。当然，当我在制作新游戏的中间时，我甚至不一定能记得。我通常记忆力很好，因为你必须某种程度上放手。所以，你如此沉浸其中并思考它。当然在最后阶段，最后几个月，你真的、真的随时沉浸于每一个细微差别和每一个小细节。然后你就不再以同样的方式思考它了。
-Dan Houser (01:04:32) You kind of are saying goodbye to Arthur in the end of the game. Even before the end of the game, yeah, I think you’ve been with them for seven, eight years, and you have to kind of let it go or you can’t go on to the next one. So, there’s always this thing of, “Okay, that’s done.” And sometimes people would ask me questions about older games. And certainly when I was in the middle of making new ones, I just couldn’t really necessarily even remember. And I got a pretty good memory normally, because you kind of have to let it go. So, you’re so immersed in it and thinking about it. And certainly in that last period, the last few months, you’re really, really immersed in every little nuance and every little detail all of the time. And then you’re just not thinking about it in the same way.
-Lex Fridman (01:05:12) 是的。有趣的是，从玩家的角度来看，感觉就像一个我思念的老朋友，无论是约翰还是亚瑟还是尼克，那是一次真正的告别。完成一款电子游戏有一种真正的悲伤。
-Lex Fridman (01:05:12) Yeah. It’s funny, from the player perspective, it feels like an old friend that I miss, whether it’s John or Arthur or Nico, it’s a real goodbye. There’s a real sadness to finishing a video game.
-Dan Houser (01:05:24) 我希望如此。
-Dan Houser (01:05:24) I hope so
-Lex Fridman (01:05:24) ……合法地…… ……一种悲伤的经历，不仅因为故事是悲伤的，或者……
-Lex Fridman (01:05:24) …legitimately… …A sad experience, not just because the story is sad, or…
-Dan Houser (01:05:30) 因为你已经和他们在一起这么久了。
-Dan Houser (01:05:30) Because you’ve been with them so long.
-Lex Fridman (01:05:32) 而关闭它是一次真正的告别。当你关闭电子游戏时，有一种感觉，就像告别一个朋友。并且……
-Lex Fridman (01:05:32) And it’s a real goodbye to close it. There’s that feeling when you’ve closed the video game, and it’s like saying goodbye to a friend. And it’s…
-Dan Houser (01:05:43) 那就像你读完一本你爱的书时的感觉。是一样的感觉。
-Dan Houser (01:05:43) That’s when you finish a book you love. It’s the same feeling.
-Lex Fridman (01:05:46) 一样的感觉。
-Lex Fridman (01:05:46) Same feeling.
-Dan Houser (01:05:46) 我认为这是我们在Rockstar早期真正渴望拥有的东西，让人们能有那种感觉。不仅仅是通关关卡的狂热，而是告别角色的感觉。你知道，我认为那是我们真正想在游戏中实现的东西，我们甚至不知道这是否可能。所以听到人们这么说是非常值得的。
-Dan Houser (01:05:46) And I think that was something that we really, in the early days of Rockstar, really aspired to have that, where people would have that. It wasn’t just the mania of clearing a level, but the feeling of saying goodbye to characters. You know, I think that was something we really wanted to achieve in games that we didn’t know was even possible. So to hear people say that is incredibly rewarding.
-Lex Fridman (01:06:09) 是的，凯鲁亚克《在路上》的结尾，"变老的凄凉残片。"我只是记得合上那本书并想，"在这个大世界里我他妈的到底在做什么？"这是一种忧郁的感觉，但没有比那种感觉更好的了，而你已经实现了它。在电子游戏中，能够通过《荒野大镖客》实现这一点是如此罕见，对我来说是《侠盗猎车手IV》的尼克。我不得不问一下，在2018年的采访中，你谈到了讽刺美国文化，我认为《侠盗猎车手》一直在试图这样做。并且你做了一个，我认为，非常有力的观察，即在政治方面，人们变得越来越分裂。它变得越来越荒谬、可笑和极端，因此变得越来越难讽刺，因为它变得可笑的速度太快了。
-Lex Fridman (01:06:09) Yeah, the end of On The Road by Kerouac, “Forlorn rags of growing old.” I just remember closing that and thinking, “What the fuck am I doing in this big world?” It’s a melancholic feeling, but there’s nothing like that feeling, and you’ve achieved that. It’s so rare in video games to be able to achieve that with Red Dead, and for me it was Grand Theft Auto IV with Nico. I have to ask about, in the 2018 interview, you talked about satirizing American culture, which I think Grand Theft Auto was trying to do. And you’ve made, I think, a really powerful observation that on the political front people are getting more divided. It’s getting more absurd, ridiculous, and extreme, so becoming harder and harder to satirize because of how rapidly it’s becoming ridiculous.
-Lex Fridman (01:06:53) 你谈到，你甚至不知道《侠盗猎车手VI》是否可能进行讽刺，因为等到你发布它的时候，就讽刺而言它可能已经过时了，讽刺基本上会变成现实。首先，很高兴听听你对此的最新看法，其次，似乎你已经用《美国秘闻》回答了你自己的评论，它似乎很好地讽刺了美国文化，其夸张程度非常过分。不管怎样，这里面有很多问题。
-Lex Fridman (01:06:53) You’re talking about, you don’t even know if a Grand Theft Auto VI is possible to satirize, because by the time you release the thing, it’s already going to be outdated in terms of the satire will become reality essentially. First of all, it’d be nice to get your updated view on that, and second of all, it seems like you’ve answered your very own comment with American Caper, which seems to satirize American culture just fine in how much over the top it goes. Anyway, that’s lots of questions in there.
-Dan Houser (01:07:26) 我们做漫画书享受的事情之一是我们仍然有制作周期。但制作周期不是四或五年。制作周期是，你知道，当我们制作……时大约一年。我们可以做更新、更新得多的更新。而且我们，你知道，我们刚刚完成了那部12期系列的第10期。所以它不完全……不完全那么困难。你仍然可以把握它的基调。但是是的，我认为任何试图谈论这个始于2015年、2016年的当前时代的人都会面临这个问题：当事物移动得如此迅速时，你如何刻画它？
-Dan Houser (01:07:26) One of the things we’ve enjoyed about doing a comic book is that we are it still has lead times. But the lead times are not four or five years. The lead times are, you know, a year when we’re putting… We can make little updates much, much newer. And we’re, you know, we’re just wrapping issue 10 of a 12-issue arc for that. So it’s not quite… It’s not quite as difficult. You still can get the tone of it. But yeah, I think it’s an issue anyone trying to talk about this current era, which began in 2015, 2016, is going to have of how do you characterize it when things move so quickly and so fast?
-Lex Fridman (01:08:07) 那么《美国秘闻》首先是，一部史诗漫画。我喜欢它，艺术。
-Lex Fridman (01:08:07) So American Caper is, first of all, an epic comic book. I love it, the art.
-Dan Houser (01:08:11) 是的，艺术很漂亮。David Lapham是画师。他做了惊人的工作。他是一个非常、非常棒的讲故事者。
-Dan Houser (01:08:11) Yeah, the art’s beautiful. David Lapham is the artist. He did an amazing job. He is a wonderful, wonderful storyteller.
-Lex Fridman (01:08:18) 是什么让你想把它设定在怀俄明州？
-Lex Fridman (01:08:18) What made you want to set it in Wyoming?
-Dan Houser (01:08:21) 我没有在那里看到过我了解的现代故事。我开始在落基山脉和西部多花了一些时间，然后我就……我在像纽约州北部的乡村花了很多时间，觉得我从未真正很好地捕捉到它。只是这些地方随着它们变化的这个想法并没有……这是一种做犯罪故事的方式，感觉与GTA不同。你知道，那不一定是你会设定GTA的地方，但感觉它非常有趣且未被充分探索。
-Dan Houser (01:08:21) I hadn’t seen a modern story there that I knew about. I’d started to spend a bit more time in the Rockies and in the West, and I was like… I’d spent a lot of time in, like, the countryside in Upstate New York and thought I never really captured it quite right. And just the idea of these places as they change didn’t… It was a way of doing a crime story that didn’t feel the same as a GTA. You know, it was not somewhere you would necessarily set a GTA, but it felt like it was really interesting and under-explored.
-Lex Fridman (01:08:49) 而且有过分夸张的东西。有……
-Lex Fridman (01:08:49) And there is over-the-top stuff. There’s- there’s…
-Dan Houser (01:08:51) 它肯定有点夸张。
-Dan Houser (01:08:51) It’s definitely slightly over the top.
-Lex Fridman (01:08:53) 那么让我记下这个。我想有剧透警告，从第一期开始。有一个虔诚的郊区摩门教徒，我认为，用铲子犯下连环谋杀，作为一种宗教赎罪形式。
-Lex Fridman (01:08:53) So let me take notes on this. There’s a spoiler alert, I guess, from the first issue, I believe. There’s a devout suburban Mormon who commits, I think, serial murder with a shovel as a form of religious atonement.
-Dan Houser (01:09:07) 他不一定是，你知道，最聪明的人。而他相当愤世嫉俗的老板利用他的宗教和他犯下的一些错误，勒索他去谋杀商业伙伴。
-Dan Houser (01:09:07) He is not necessarily, you know, the sharpest tool in the box. And his rather cynical boss is using his religion and some mistakes he’s made to blackmail him into murdering business associates.
-Lex Fridman (01:09:23) 当然，还有这种莎士比亚式的两个邻居的情况，他们每个人在善恶方面都有双重性。所以有一个华尔街外迁者想成为一个牛仔。
-Lex Fridman (01:09:23) And of course, there’s this Shakespearean sort of two neighbors situation, and each of them having a duality of who they are in terms of good and evil. So there’s a Wall Street transplant who wants to be a cowboy.
-Dan Houser (01:09:36) 是的。
-Dan Houser (01:09:36) Yes.
-Lex Fridman (01:09:37) 他喜欢手动收集公牛精液。准确吗？我是说……
-Lex Fridman (01:09:37) Who loves to manually harvest bull semen. Accurate? I mean…
-Dan Houser (01:09:43) 是的。
-Dan Houser (01:09:43) Yes.
-Lex Fridman (01:09:43) 这些是我一直在做的笔记。
-Lex Fridman (01:09:43) These are the notes I’ve been taking.
-Dan Houser (01:09:45) 是的。他是一个，嗯……他是一个有些困惑的、痴迷于长寿的……有钱的家伙，他逃到怀俄明州，正在实现一系列幻想。
-Dan Houser (01:09:45) Yes. He is a, um… He is a somewhat confused, longevity-obsessed… Rich dude who’s run away to Wyoming and is living out an assortment of fantasies.
-Lex Fridman (01:09:56) 而公牛精液是长寿的重要组成部分。
-Lex Fridman (01:09:56) And bull semen is a big component of longevity.
-Dan Houser (01:09:58) 是的。他非常热衷于所有生命黑客，你知道，用人类生长激素，赚钱。住在大牧场上，已经疯了。
-Dan Houser (01:09:58) Yes. He’s very into all the life hacking, you know, roiding HGH and making money. Has lost his mind living on a big ranch.
-Lex Fridman (01:10:09) 当然，在讽刺的主题上，有一个女人穿着战术装备睡觉，并沉迷于在线阴谋论，特别是华盛顿特区的恋童癖者。
-Lex Fridman (01:10:09) Of course, on the theme of satire, there is a woman who sleeps in tactical gear and is consumed by online conspiracies, like especially pedophiles in DC.
-Dan Houser (01:10:19) 是的。基于我认识的一个人，他完全被"红丸"了。我对这件事发生在人们身上感到着迷。
-Dan Houser (01:10:19) Yes. Based on someone I know, who got completely red-pilled. And I was fascinated by the fact that this was happening to people.
-Lex Fridman (01:10:29) 是的，所以，你知道，对美国文化的讽刺。稍作停顿。去下洗手间？
-Lex Fridman (01:10:29) Yeah, so, you know, satire of American culture. Quick pause. Bathroom break?
-Dan Houser (01:10:34) 当然。
-Dan Houser (01:10:34) Sure.
-Lex Fridman (01:10:35) 我认为GTA5有电子游戏历史上最大的首发，而GTA6有潜力超过它。首先，你认为它会吗？更广泛地说，你对电子游戏成功的定义是什么？
-Lex Fridman (01:10:35) I think GTA5 had the biggest launch in video game history, and GTA6 has the potential to top that. First of all, do you think it will? And more broadly, what was your definition of success for a video game?
-Dan Houser (01:10:50) 我认为它会，因为它的期待度如此之高，而期待是早期销售的最佳驱动力，正如我们从GTA4对比《荒野大镖客：救赎》初代所看到的。你知道，GTA4，期待度高得多，早期销量好得多。所以我认为它会卖得很好。那从来不是我对成功的定义，但你肯定想赚钱。你知道，你正在花费别人的钱。所以第一位的成功是，你是否在赚回那笔钱加上一美元？在某种程度上，那必须是……那必须是唯一最重要的事情，这样你才能再做一次。你知道，你有一个庞大的团队。人们需要支付房租。你必须让企业的灯亮着，所以你必须赚取微薄的利润。如果你这样想，那会让你保持创造力。
-Dan Houser (01:10:50) I would assume it will because it’s so anticipated, and anticipation is the best driver of early sales, as we saw with GTA4 versus Red Dead Redemption one. You know, GTA4, far more anticipated, sold much better early on. So I would assume it will sell really well. That was never my definition of success, but you certainly wanted to make money. You know, you’re spending someone’s money. So the number one success is, are you making that money back plus a dollar? At some level, that has to be… That has to be the single most important thing so you get to do it again. You know, you’ve got big teams of people. People need to pay the rent. You have to keep the lights on in the business, so you have to make a small profit. If you think in that way, that keeps you being creative.
-Dan Houser (01:11:36) 我认为那就像……试图忘记那一点，并不是一个真正的选项，但我们几乎总是那样做。我们并不总是那样做，但我们几乎总是那样做。我认为对我来说，成功的定义是，我们是否尝试了做新事情并完成了它们，或者实现了我们的一些目标。那才是重要的事情。再次，人们是否以我希望的方式回应这些世界和这些角色？
-Dan Houser (01:11:36) I think that was like… Trying to forget about that, it’s not really an option, but we almost always did that. We didn’t quite always do that, but we almost always did that. I think the definition of success for me was, had we tried to do new things and done them, or achieved some of our goals. That was the thing that mattered. Again, were people responding to these worlds and these characters in a way that I wanted them to?
-Lex Fridman (01:11:59) 电子游戏能够赚取数十亿美元，这对你来说是否疯狂，如果你看看80年代和90年代，你知道，没有人认真对待电子游戏。即使在21世纪初，它……而现在它们基本上是……我的意思是，很有可能如果你展望10年、20年后，电子游戏将超越电影，成为一种消费故事的方式。
-Lex Fridman (01:11:59) Is it crazy to you that video games are able to make billions of dollars, when if you look at, like, the ’80s and ’90s, you know, nobody took video games seriously. And even in the aughts, it… And now they’re basically… I mean, it’s very possible if you look out 10, 20 years from now that video games surpass film as a way to consume stories.
-Dan Houser (01:12:21) 我认为它们在某些方面可能已经做到了。而且当然，作为一种商业主张，它们已经做到了。但我认为那不是……你知道，作为一种讲故事的方式，我认为它们更擅长讲述某些类型的故事，而电影更擅长其他类型的故事。你知道，我认为，我认为如果你想要一个长篇的、漫谈式的冒险，电子游戏更好。如果你想要一个简短、紧凑的体验，电影更好。我们一直觉得游戏是即将到来的媒介。所以，花了20年说，"游戏是未来。游戏是未来。" 并且，你知道，先是被人嘲笑，然后被人嘲笑，然后有人点头，然后它就差不多发生了。所以我会……
-Dan Houser (01:12:21) I think they’ve possibly already done that in some ways. And certainly, as a business proposition, they’ve already done that. But I think that’s not… You know, as a way of telling stories, I think they’re better at telling certain kinds of stories, and films are better at other kinds of stories. You know, I think, I think if you want a long, discursive adventure, a video game is better. If you want a short, tight experience, a film is better. We always felt games were the coming medium. And so, spent 20 years saying, “Games are the future. Games are the future.” And, you know, being sneered at, then being laughed at, then having people nod their heads, and then it kind of happening. So I would…
-Dan Houser (01:13:03) 嗯，你知道，同时，尽管你可能会说什么，但你不一定相信它会成真。但它已经成真了，而且我认为游戏只会变得更好，更有趣，更有创意，你知道，更多样化。
-Dan Houser (01:13:03) Well, you know, at the same time, much as you might say something, you don’t necessarily believe it’s gonna be true. But it has become true, and I think still that games are only gonna get better, more interesting, more creatively, you know, diverse.
-荒野大镖客：救赎 2
-Red Dead Redemption 2
-Lex Fridman (01:13:18) 你说过，在你看来，《荒野大镖客：救赎2》是你做过的最好的东西。我认为有充分的理由可以说它是有史以来最伟大的游戏。你认为是什么元素让这款游戏真正伟大？
-Lex Fridman (01:13:18) You said that Red Dead Redemption 2, in your opinion, is the best thing you’ve ever done. I think there’s a strong case to be made that it’s the greatest game of all time. What are the elements that make that game truly great, do you think?
-Dan Houser (01:13:30) 我认为你有一个经验非常丰富的、极其强大的团队在一起工作，这个团队基本上自2001年到2006年之间的某个时候就组建起来了。所以这是一个长期、经验丰富的团队。我认为我们能够让一个更小规模的团队从一开始就投入其中，提出一些我们可以嵌入游戏中的古怪想法，然后我们某种程度上必须贯彻执行。但我认为我们能在它有完整团队之前就非常有创意，这是有帮助的。我认为牛仔背景设定很棒，因为它赋予了一种神话般的严肃性，有时在当代背景设定中做事无法获得这种严肃性。你知道，我认为我们最接近那种严肃性的是GTA IV，但它就是不能……
-Dan Houser (01:13:30) I think you had an incredibly strong team working together that was very experienced, that had basically been in place since somewhere between 2001 and 2006. So it was a long, experienced team. I think we got to spend a smaller group of us working on it from day one, coming up with some wacky ideas that we got to embed in the game, and then we kind of had to follow through with. But I think it was helpful that we got to be very creative before it had a full team on it. I think that the cowboy setting is great because it gives a sort of mythic seriousness that sometimes doing stuff in a contemporary setting doesn’t allow. You know, I think the closest we got to that kind of seriousness was GTA IV, but it just can’t…
-Dan Houser (01:14:18) 一旦你将事物设定在现代世界，它们就太狂躁了。你无法获得一些那种我喜欢的略带，你知道，歌剧感的感觉。有些人认为那可能有点夸张，但我，你知道，我喜欢这种，你知道，人们在暴力中、在暴力之间寻找意义……我认为西部以及与西部相关的所有主题确实适合这一点。所以我认为，然后枪战非常棒，马匹令人难以置信。所以我认为你有这种技术诀窍、一个非常、非常强大的团队和非常强大的材料的结合。
-Dan Houser (01:14:18) Once you’re setting things in the modern world, they’re too frenetic. You can’t get some of that slightly, you know, operatic feel that I love. That some people think is maybe a little over the top, but I, you know, I love this kind of, you know, people searching for meaning… …Within, amongst the violence. I think that the West and all of the themes around the West really lend themselves to that. So I think that, and then the gunplay was fantastic, and the horses were incredible. So I think you had this combination of kind of technical know-how, a very, very strong team, and really strong material.
-Lex Fridman (01:14:51) 你必须去到你的思想中的什么地方，也许是哲学上的，也许是精神上的，才能够创造出RDR的世界？当然它是基于《荒野大镖客：左轮》的，但那是……
-Lex Fridman (01:14:51) Where did you have to go to in your mind, maybe philosophically, maybe spiritually, to be able to create the RDR world? So of course it was based on Red Dead Revolver, but that’s-
-Dan Houser (01:15:01) 是的。
-Dan Houser (01:15:01) Yes
-Lex Fridman (01:15:02) 那是根本不同的……我的意思是，那次跃进到伟大的神话故事，即《荒野大镖客：救赎》初代。然后更是如此，《荒野大镖客：救赎2》。那是不同于你，或者也许任何人，在电子游戏中创造过的任何东西。
-Lex Fridman (01:15:02) That’s a fundamentally different… I mean, that leap into the great mythic story that was Red Dead Redemption one. And then even more so, Red Dead Redemption two. That was unlike anything you, or maybe anyone, has ever created in video games.
-Dan Houser (01:15:21) 谢谢。
-Dan Houser (01:15:21) Thank you.
-Lex Fridman (01:15:22) 那么，比如，涉及了什么药物？
-Lex Fridman (01:15:22) So, like, what drugs were involved?
-Dan Houser (01:15:25) 没有药物。
-Dan Houser (01:15:25) No drugs.
-Lex Fridman (01:15:25) 好的。
-Lex Fridman (01:15:25) Okay.
-Dan Houser (01:15:26) 没有。很久以前就停止用药了。
-Dan Houser (01:15:26) No. Stopped the drugs long before.
-Lex Fridman (01:15:28) 好的。
-Lex Fridman (01:15:28) Okay.
-Dan Houser (01:15:28) 这就是我做了所有这些工作的原因。没有别的事可做。所以是的，开放世界电子游戏对我的心理健康非常有益，从这个角度来说。让我保持忙碌。但是《荒野大镖客》……我告诉你，我会给你我的版本。现在游戏是由大团队制作的。
-Dan Houser (01:15:28) That’s why I did all that work. Had nothing else to do. So yeah, open-world video games were very good for my mental health in that way. Kept me busy. But Red, so Red Dead… I’ll tell, I’ll give you my version. Now the games are made by big teams.
-Dan Houser (01:15:45) 所以我，但我会给你我的，只从我个人视角看的故事的人文版本。我们制作了《荒野大镖客：左轮》，决定，或者说完成了《荒野大镖客：左轮》，那原本是一个卡普空的游戏。他们不想完成它，所以我们完成了它。他们在日本发布了它，我们在美国发布了它，我想是在2004年。并且决定我们将开始为PS3开发一款开放世界牛仔游戏。没有想太多，那时我们还做了一堆其他事情。慢慢地，2005年，2006年，游戏开始成形。开始与首席设计师Christian Cantamessa会面，为游戏讨论一些想法和故事构想，并开始思考一些东西。开始思考，那么，什么对开放世界游戏有效？
-Dan Houser (01:15:45) So I, but I will give you my human interest version of the story from my perspective only. We made Red Dead Revolver, decided that, or finished Red Dead Revolver, that had been a Capcom game. And they didn’t want to finish it, so we finished it. And they released it in Japan and we released it in the US in, I think, 2004. And decided we would start work on an open-world cowboy game for PS3. Didn’t think too much more about it, and that was when we did a bunch of other stuff to work on. And slowly, 2005, 2006, the game started to come to life. Began to meet with the lead designer, Christian Cantamessa, and thrash out a few ideas and story ideas for the game, and begin to think about some stuff. And start thinking about, well, what works for an open-world game?
-Dan Houser (01:16:35) 什么对牛仔游戏有效？然后又一次，我在偷懒或者拖延。
-Dan Houser (01:16:35) What works for a cowboy game? And again, I was being lazy or procrastinating.
-Lex Fridman (01:16:41) 我们可以稍微离题一下吗？当你提到你偷懒时做笔记，那些笔记是什么样的？是像涂鸦吗？
-Lex Fridman (01:16:41) Can we just go on a small tangent? When you mentioned you take notes when you’re being lazy, what do those notes look like? Are they like doodles?
-Dan Houser (01:16:48) 它们看起来要么像，要么是黄色便签本…… ……或者是那时候的黑莓手机，或者是现在的iPhone。我会写下主题，然后只是给自己发邮件做个笔记。
-Dan Houser (01:16:48) They look like either, either a yellow pad… …Or a BlackBerry in those days, or an iPhone in these days. I’ll write the subject matter and then just email myself a note.
-Dan Houser (01:16:58) 这是个好主意，这是个好主意。或者可能是在便签本上涂鸦。然后我会整理……如果是数字方式做的，那么我会把它们整理成一个长长的Word文件。然后我会看着它们，想，"这是个想法，这是个想法，这是个想法。" 看看是否能有什么结果。看看我现在把它们汇总起来然后通读。有什么连贯的东西吗？你知道，关于角色这个，角色那个。这会是句有趣的台词。这是给主角的台词。实际上，让主角这样工作。你知道，这段关系怎么样？
-Dan Houser (01:16:58) Here’s a good idea, here’s a good idea. Or it might be scribbling on a pad. And then I’ll assemble… If they’re done digitally, then I’ll assemble them into one long Word file. And then I’ll look at them and go, “Here’s an idea, here’s an idea, here’s an idea.” And see if it comes to anything. See if I now aggregate them together and then read through them. Is there anything coherent there? You know, something about the character like this, the character like that. This would be a funny line. This is a line for the main character. Actually, make the main character work like this. You know, what about this relationship?
-Dan Houser (01:17:29) 当你开始玩弄这些想法，"如果我们从那个地方开始，去到那个地方呢？" 开始，只是开始玩弄所有不同的零碎部分。然后我们开始为游戏的开头充实一些流程。以及这个想法，你将从尘土飞扬的美国西部开始，这意味着我们不需要做太多树木。然后去墨西哥，再回来。我们有一个粗略的流程。而且我真的很害怕写任何实际的对话。我完全不知道如何着手。我一直在想，"会来的，会来的。" 然后我继续拖延，因为我可以用GTA IV的事拖延很长时间。我一直在担心它。然后我在GTA IV的工作结束了，但游戏还没发布。
-Dan Houser (01:17:29) As you start to just play around with, “What about if we start in that place, go to that place?” Start, just start to play around with all of the different bits and pieces. And we began to flesh out some flow for the start of the game. And this idea you’d start in dusty American West, which meant we didn’t have to make too many trees. And then go to Mexico, and then come back. And we had a sort of loose flow. And I was really scared of writing any actual dialogue. And I didn’t have a clue how to go about it. And I kept, “It’ll come, it’ll come.” And then I kept because I could postpone it for ages because we were doing GTA IV. And I kept worrying about it. And then my work was wrapped on GTA IV, but the game wasn’t out yet.
-Dan Houser (01:18:13) 我们做了一堆营销材料，有一个短暂的窗口期，我没有太多其他事做。我和我当时的女朋友，现在的妻子，她当时怀着我们的第一个孩子，已经临近生产，我们去了州北部的一所房子，坐在那里……嗯，她，她坐在那里要么为我做饭，要么看电视或读书。而我就只是每天整天坐在房间里。就坐在那里，盯着电脑，试图思考，"我怎么能做到让它听起来不荒谬？" 你如何用牛仔的习语写作，让它感觉既有点现代感，又能赋予游戏我想要的那种生命力和分量，并且我认为我们可以，我认为我们可以侥幸成功？
-Dan Houser (01:18:13) And we’d done a bunch of the marketing stuff, and had a little window when I wasn’t doing much else. And I took a week with my then girlfriend, now wife, who was heavily pregnant with our first child, and we went up to a house upstate and sat there in the… Well, she, she sat there either cooking for me or watching TV or reading. And I just went and sat in the room all day, every day. And just sat there and stared at the computer and tried to think about, “How can I do this so it doesn’t sound ridiculous?” How can you write in a cowboy idiom that feels both slightly contemporary, but also gives the game this sort of life and this weight that I want it to have, and think we can, think we can get away with?
-Dan Houser (01:18:53) 大约三天后，它开始来了。然后突然我在接下来的几天里写了大约九、十个场景。在那之后，我知道我掌握了它。我不知道那是不是因为有很多关于角色关心他的家庭的内容，因为我当时刚开始有家庭的阶段。
-Dan Houser (01:18:53) And after about three days, it just started to come. And then suddenly I wrote about nine, 10 scenes in the next couple of days. And after that, I knew I had it. And I don’t know if that was why there was so much about a character caring about his family, because I was just beginning the process of having a family.
-Lex Fridman (01:19:12) 哦。
-Lex Fridman (01:19:12) Oh.
-Dan Houser (01:19:13) 所以我不知道那是否……
-Dan Houser (01:19:13) So I don’t know if that…
-Lex Fridman (01:19:14) 所以你……
-Lex Fridman (01:19:14) And so you-
-Dan Houser (01:19:14) 我不知道那在多大程度上渗入其中，但我认为它在某种程度上渗入了。
-Dan Houser (01:19:14) I don’t know to what extent that bled in there, but I think it bled in there to some extent.
-Lex Fridman (01:19:17) 所以那是创造360度全方位角色的一部分。
-Lex Fridman (01:19:17) So that was part of creating the 360-degree characters.
-Dan Houser (01:19:20) 我想是的。
-Dan Houser (01:19:20) I think so.
-Lex Fridman (01:19:21) 这是这样一个男人，他有能力，参与了很多暴力，同时也关心他的家庭。
-Lex Fridman (01:19:21) Here’s this man that is capable, is involved in a lot of violence, who also cares about his family.
-Dan Houser (01:19:29) 他长大了，他正试图远离那些，成为一个男人，一个成年人。他能逃脱吗？然后，当他无法逃脱时，他愿意为了拯救他的家庭做什么？而那正是，我开始得到一些想法的感觉。感觉只是……我的意思是，她，嗯，她还没有分娩，但我开始与"我将成为父母"的想法作斗争。所以我希望其中一些……显然，后来我可能六个月都没有再写任何东西，所以后来我们有了一个孩子。但当然对于最初那部分，我认为其中一些开始渗入其中。
-Dan Houser (01:19:29) He’s grown up, and he’s trying to step away from that and be a man, be a grown-up. Can he get away from it? And then, when he can’t get away from it, what’s he willing to do to save his family? And that was, I felt, starting to get some idea. Feeling just… I mean, she, well, she hadn’t given birth yet, but I was beginning to grapple with the ideas of, “I’m going to become a parent.” So I hope some of that… And obviously, then I probably didn’t write any more for six months, so later on we had a child. But certainly for that first bit, I think some of that began to bleed in there.
-Lex Fridman (01:19:57) ……你感觉到了你实际上可以做这件事。是真的。它本来很可能变得荒谬且不可信，车队之间的对话。
-Lex Fridman (01:19:57) …you got the feeling that you can actually do it. It’s true. It could have very easily been ridiculous and not believable, the dialogue between convoys.
-Dan Houser (01:20:09) 是的。
-Dan Houser (01:20:09) Yes.
-Lex Fridman (01:20:09) 而且是的，我的意思是，可能投入了大量工作让它感觉真实可信。像莎士比亚式的戏剧，但不是那种俗气的类型。
-Lex Fridman (01:20:09) And yes, I mean, there’s probably so much work went into making it feel real and believable. And like a Shakespearean type of drama, but not the cheesy kind.
-Dan Houser (01:20:27) 嗯，我只是希望当他们说话时感觉……我的意思是，我热爱对话。我一直，你知道，我喜欢词语的声音，但我只是希望当它们听起来时，听起来不俗气，不荒谬。你希望听到他们多说一些。当他们说话时不会让你感到非常难堪。在某种程度上，这就是所有的目标。然后他们感觉这家伙将要踏上这趟生死之旅，而你关心他。你必须关心他留下的妻子和孩子，即使你不认识他们。
-Dan Houser (01:20:27) Well, I just wanted it to feel when they spoke… I mean, I love dialogue. I’m always, you know, I love the sound of words, but I just wanted it to feel like when they sounded, it didn’t sound cheesy, it didn’t sound ridiculous. You wanted to hear them speak more. It didn’t make you cringe awfully when they spoke. At some level, that was all the goal was. And then they felt like this guy was going to go on this life and death odyssey and you cared about him. You had to care about his wife and child that he left behind, even though you didn’t know them.
-Lex Fridman (01:20:56) 你是什么时候知道你将如何结束《荒野大镖客：救赎》初代的？
-Lex Fridman (01:20:56) When did you know how you were going to end Red Dead Redemption one?
-Dan Houser (01:21:00) 我记得我和设计师Christian开过一个会。我不记得是哪一年了。可能是2008年末、2009年初的某个时候，我们在讨论最后的部分，我说，"我认为他必须死。" 他立刻接受了这个想法，说，"那是……是的，是的。不，不，等等，不，这不行。游戏不能这样。如果他死了就不行。" 你知道，我开始思考，好吧，如果我们……只是技术上不行，因为你需要能够完成所有的事情。然后我开始思考，"实际上，我认为如果我们这样做，我们可以让它奏效。" 所以他后来真的推动了这个想法，而且似乎……我当时想，"啊，" 我仍然很矛盾。
-Dan Houser (01:21:00) I remember I had a meeting with Christian, the designer. I can’t remember what year. Probably some point late 2008, early 2009, and we were discussing the last bit, and I said, “I think he’s got to die.” And he leapt on the idea and went, “That’s… Yeah, yes, yes. No, no, wait, no, it can’t work. Games can’t work like that. It can’t work if he’s dead.” You know, I began to think through, well, if we… Just technically it doesn’t work because you have to be able to finish all the stuff up. And then I began to think through, “Actually, I think we can make it work if we do it this way.” And so he then really pushed for that idea, and it seemed to… I was like, “Ah,” and I was still torn.
-Dan Houser (01:21:37) 我认为在叙事上很聪明，但作为游戏设计的一部分，它是否能在技术上奏效，我很矛盾，但我认为它做到了。
-Dan Houser (01:21:37) I thought it was clever narratively but I was torn if it was gonna work technically as a piece of game design, but I think it did.
-Lex Fridman (01:21:47) 是的，剧透警告，当然，我们怎么讲述那个故事？嗯，所以他经历了很多。约翰做了所有追捕他旧团伙的肮脏工作，他终于能够回家与家人团聚，待在牧场。然后政府背叛了他，派军队去杀他。而且有对话……我的意思是，那简直……我认为我两次在电子游戏历史中落泪，一次就是那段对话。我认为约翰和他的妻子说话，如果我模糊记得的话。我想他说了，"我爱你。" 但他说得非常少。他没有……他让它看起来像是他很快就会见到她和他的儿子。那段对话做得非常精湛，像是"少即是多"的定义。就是那么干脆利落，那和……
-Lex Fridman (01:21:47) Yeah, and spoiler alert, of course, how do we tell the story of that? Well, so he goes through a lot. John does all the dirty work of hunting down his old gang, and he finally is able to go home and be with his family, be on the ranch. And then the government betrays him and sends troops to kill him. And there is dialogue… I mean, that just… I think the two times I shed a tear in video game history for me is that dialogue. I think John talking to his wife, if I vaguely remember. I think he said, “I love you.” But he said very little. He didn’t… He made it seem like he’s going to see her and his son shortly. That dialogue was masterfully done, like a definition of less is more. It was just so crisp, that and…
-Lex Fridman (01:22:49) 还有，当然，另一个同样来自记忆，亚瑟骑着马，音乐响起。在那期间很难不落泪。不管怎样，约翰在谷仓里和他妻子对话的结尾，那时他即将走出去……面对必死的命运。你还记得写那段吗？
-Lex Fridman (01:22:49) And, of course, the other one is again, from memory, Arthur riding his horse and the music is playing. It’s very hard not to shed a tear during that. Anyway, the dialogue of John talking to his wife at the end when he’s in a barn and is about to walk out- … to face certain death. Do you remember writing that?
-Dan Houser (01:23:14) 哦，记得。但同样，演员太棒了，而且那时我们已经见过他的一些作品了。他有非常好的……他非常擅长读那些台词，我知道他可以给我们……在那一刻你能感觉到，就像……我认为那些台词在非常简短有力时效果最好。所以我知道……我知道他能让那句台词听起来很好。
-Dan Houser (01:23:14) Oh, yeah. But again, the actor was so good, and we’ve already seen a bunch of his work by then. He had such a good… He was so good at reading those lines that I knew he could give us… that you could feel at that point, like- I think those lines are best when they’re really short and punchy. So I knew- I knew he’d be able to make that line sound good.
-Lex Fridman (01:23:35) 所以你当时在想象他的声音。你只是……
-Lex Fridman (01:23:35) So you were imagining his voice. You were just-
-Dan Houser (01:23:37) 而且我认为《荒野大镖客：救赎》初代的所有演员都非常强大，他们真的让那款游戏活了起来。如果他们，他们和导演Rod，没有做得那么好，那听起来会非常俗气。
-Dan Houser (01:23:37) And I think all of those actors on Red Dead Redemption one were so strong that they really brought that game to life. If they, them and Rod, the director, hadn’t done such a good job it would have sounded cheesy as hell.
-Lex Fridman (01:23:50) 是的，你说过RDR1的结尾是你参与创造的最好的东西之一。为什么？为什么那个结尾对你来说如此有力？它代表了什么？
-Lex Fridman (01:23:50) Yeah, you’ve said that the ending of RDR1 is one of the best things you’ve been a part of creating. Why? Why is that ending so powerful to you? What does it represent?
-Dan Houser (01:24:07) 我认为因为要让故事有效……我的意思是，仅仅从一个技术挑战的角度。要让故事有效，他必须死。但要让游戏有效，让他死去感觉像是一个挑战。那可能是我工作过的第四、第五或第六款开放世界游戏，而且你知道，在那之前我花了所有这些年弄清楚这些故事如何运作。如何让它们在技术上运作，如何让它们感觉合适，它们如何以我所能的最好方式与开放形式的游戏玩法互动。然后突然我们要打破我们的一条黄金法则，那就是在游戏结束时，你解放角色去完成所有的支线故事，永远玩下去。
-Dan Houser (01:24:07) I think because for the story to work… I mean, just from a technical challenge. For the story to work, he had to die. But for a game to work, it felt like a challenge to make him die. It was probably the fourth, fifth, or sixth open-world game I’d worked on and I’d, you know, spent all these years before that working out how these stories worked. How to make them work technically, how to make them feel right, how they interacted with the open form gameplay as best I could. And suddenly we’re going to break one of our golden rules, which was at the end of the game you’re freeing the character to go and wrap up all the side stories, to play forever.
-Dan Houser (01:24:49) 在这款游戏中你将无法做到这一点，因为这家伙会死，我们将不得不让你扮演一个不同的角色。而叙事，如果我们做得好的话，将会足够引人入胜，以至于你不会在乎这一点。或者你会因为他死了而难过，但你实际上可以有这个情感时刻。所以我认为从技术角度来看，这样做是一个很大的风险，然后它奏效了。所以我认为那件充满恐惧的事情最终结果还不错。
-Dan Houser (01:24:49) You’re not going to be able to do that in this game because the guy’s going to be dead and we’re going to have to have you play as a different character. And the narrative, if we’ve done a good job, is going to be compelling enough where you’re not going to care about that. Or you’re going to be upset that he’s dead, but you can actually have this emotional moment. So I think it was a big risk from a technical perspective for us to do that, and then it worked. So I think that was something that was very full of fear and it worked out okay.
-Lex Fridman (01:25:18) 什么……
-Lex Fridman (01:25:18) What-
-Dan Houser (01:25:18) 而且我认为人们真的对我们这样做感到非常沮丧和生气，因为他们不认为那会发生，但我认为他们也经历了你所描述的那种体验，那就是与虚构作品中的角色一起的那种创造性的、超越的时刻，这正是我们一直渴望给予人们的。
-Dan Houser (01:25:18) And I think people were really upset and angry at us for doing it because they didn’t think it was going to happen, but I think they also had that kind of experience you’re describing, which is that kind of creative, transcendent moment with characters in a piece of fiction, which is what we’ve always aspired to giving people.
-Lex Fridman (01:25:32) 我的意思是，这太不可思议了，因为我认为……我不记得有任何一款电子游戏在那之前做过类似的事情。
-Lex Fridman (01:25:32) I mean, it’s incredible because I don’t think… I don’t remember a single video game that has done that before.
-Dan Houser (01:25:37) 嗯，我本来想在GTA IV的结尾杀死尼克的，但你不能那样做。你知道，游戏不是那样运作的。所以这是我们没有做过的事情。想过要做，没有做，然后就想，"我们做吧。冒个险做吧。我们不能做。试试看。" 然后它就奏效了。
-Dan Houser (01:25:37) Well, I would like to have, at the end of GTA IV, killed Niko, but you couldn’t do it. You know, the game doesn’t work out like that. So it was this thing where we hadn’t done it. Thought about doing it, hadn’t done it and then going, “Let’s do it. Let’s take the risk and do it. We can’t do it. Let’s try.” And it worked.
-Lex Fridman (01:25:53) 是的，关于儿子的决定呢？你知道，约翰付出了那么多努力以确保杰克不会陷入暴力的生活……然后却非常像《教父》。是……他通过复仇被拖回了暴力。
-Lex Fridman (01:25:53) Yeah, what about the decision with the son? You know, John gives so much effort to make sure that Jack doesn’t end up in a life of violence… And then it’s very Godfather-like. It’s- … he’s dragged back into it through revenge.
-Dan Houser (01:26:11) 那也是，游戏仍然必须作为一款游戏来运作。从纯粹的讲故事角度来看，那是否是最好的结局，我不知道。但我知道我们必须让游戏运作。
-Dan Houser (01:26:11) That was also, the game still had to work as a game. Whether that was the right ending, 100% the best ending from a pure storytelling perspective, I don’t know. But I know that we had to make the game work.
-Lex Fridman (01:26:25) 哦，有趣。
-Lex Fridman (01:26:25) Oh, interesting.
-Dan Houser (01:26:26) 所以那是……我认为它在某种程度上是有效的，杰克无法逃脱，但我总是也想要一个杰克逃脱了的版本，但那不是……你知道。两者对我来说都很有趣。
-Dan Houser (01:26:26) So it was… I think it kind of worked in that way where Jack can’t escape, but I always also wanted a version of it where Jack did escape, but that wasn’t… You know. Both were interesting to me.
-Lex Fridman (01:26:37) 你能稍微深入一点吗？比如，你说的"为了让游戏运作"是什么意思？这是如此直接……就像库布里克谈论为了让这部电影运作，它必须要有……因为从我的角度来看，我只考虑故事。为了让游戏运作，技术方面是什么？
-Lex Fridman (01:26:37) Can you just dig in a little deeper? Like, what do you mean about for the game to work? It’s such a direct… It’s like Kubrick talking about for this movie to work, it has to have… Because from my perspective, I just think about the story. What’s the technical aspect for the game to work?
-Dan Houser (01:26:50) 这只是机械体验，你有一个你控制的化身，你，你……你知道，游戏并不真正结束，你必须能够在世界中漫游并做事。所以在游戏结束时，你必须能够带着你相当有限的功能集在世界中漫游，也就是你可以，你知道，跑到某人面前打他们，或者跑到某人面前射击他们，或者跑到某人面前抢劫他们，或者跑到某人面前和他们说话。或者跳上马或者做所有其他事情。为了让游戏仍然有趣，并且让人们获得完整的360度体验，他们必须，你知道，100%完成游戏，而不仅仅是完成故事，你必须有一个化身来做那些事情。
-Dan Houser (01:26:50) It’s just the mechanical experience is you have an avatar you control and you, you… You know, the games don’t really end and you have to be able to wander around the world and do stuff. So at the end of the game, you have to be able to wander around with your fairly limited set of features, which is you can, you know, run up to someone and punch them or run up to someone and shoot them or run up to someone and rob them, or run up to someone and talk to them. Or jump on a horse or do all this other stuff. In order for the game still to be fun and people to get this full 360-degree experience with it, they had to, you know, 100% the game as opposed to just finishing the story, you have to have an avatar to do that stuff with.
-Dan Houser (01:27:33) 所以那是，那是杰克的角色/以杰克结束故事的挑战。
-Dan Houser (01:27:33) So that was that was the sort of challenge of, of Jack’s character/wrapping up the story as Jack.
-Lex Fridman (01:27:39) 哦，化身结束，有限性，真的有力量。
-Lex Fridman (01:27:39) Oh, there’s real power for the avatar to end, the finiteness.
-Dan Houser (01:27:46) 是的。两款《荒野大镖客》，你显然更换了化身……我们再次这样做了。我认为当你从一个角色切换到另一个角色时，那个时刻有些有趣，因为他们是你又不是你，你知道，然后突然你就是另一个人了。
-Dan Houser (01:27:46) Yeah. Both the Red Deads, you obviously change avatars- …which we did again. I think there’s something interesting about that moment when you change from one character to another because they are you and they’re not you, you know, and then just suddenly you’re someone else.
-Lex Fridman (01:27:59) 我的意思是，我对那次经历真的感到震撼，但那是一次美丽的经历。是一次难忘的经历。电子游戏还能追求什么？你知道，创造那种体验，那是伟大的电影所做的，那是伟大的书籍所做的。
-Lex Fridman (01:27:59) I mean, I was really shaken by that experience, but it’s a beautiful experience. It’s like an unforgettable experience. What else can video games possibly reach for? You know, to create that experience, that’s what great films do, that’s what great books do.
-Dan Houser (01:28:17) 就是那个。我的意思是，就是那个和游戏中的世界构建。我认为身处这个虚假的地方，然后承担这些叙事冒险的体验，当那结合起来时，你就有了惊人的体验。
-Dan Houser (01:28:17) It’s that. I mean, it’s that and the world building in games. I think the experience of being in this fake place and then taking on these narrative adventures, when that combines, you’ve got the amazing experience.
-Lex Fridman (01:28:28) 那么你认为在RDR中你创造的最好角色是谁？对我来说，我认为肯定是《荒野大镖客：救赎2》中的亚瑟是电子游戏中创造过的最好角色。
-Lex Fridman (01:28:28) So who do you think is the best character you’ve ever created in RDR? To me, I think definitively Arthur from Red Dead Redemption 2 is the best character ever created in video games.
-Dan Houser (01:28:43) 谢谢。
-Dan Houser (01:28:43) Thank you.
-Lex Fridman (01:28:43) 我认为甚至没有接近的。约翰会是第二名，这说起来很有趣。但是，像，那些是……约翰会是接近的第二名，但亚瑟绝对是……你在那次采访中谈到过，你说很多电子游戏基于相同的前提运作，你从一个弱者开始，最终成为一个强大的超级英雄。但如果你从一个硬汉开始，一个已经很强壮的人，一个对他的世界地位情感上很自信的人呢？亚瑟的旅程不是关于成为超级英雄，因为他在开始时几乎就是，而是关于一次智力上的过山车，当他的世界观被拆解时。所以它与一个角色的正常旅程非常不同。
-Lex Fridman (01:28:43) I think there’s not even close. John would be second, which is hilarious to say. But, like, those are… John would be a close second, but Arthur is definitively… And you’ve talked about it in that interview, you said that a lot of video games work on the same premise, that you start as a weak person and end up as a strong superhero. But what if you start as a tough guy, someone who already is very strong, someone that’s emotionally confident of his place in the world? Arthur’s journey is not about becoming a superhero because he’s almost one at the start, but it’s about an intellectual rollercoaster when his worldview gets taken apart. So it’s very different than the normal journey of a character.
-Dan Houser (01:29:32) 是的，在游戏中。
-Dan Houser (01:29:32) Yeah, in a game.
-Lex Fridman (01:29:33) 在游戏中。
-Lex Fridman (01:29:33) In a game
-Dan Houser (01:29:33) ……为了反转它。所以有几个其他主题与之匹配。所以他们是从狂野西部来的人，但他们被推向越来越东的地方。所以这几乎像是一部反西部片。一部东部片。你在向东旅行。你在向文明旅行。而且我认为在我职业生涯早期，我不会与这些想法作斗争，因为它是如此，你知道，这种获得不同类型的力量和不同类型的弱点的想法很有趣。
-Dan Houser (01:29:33) …in order to reverse it. So there were a couple other themes that matched that. So they’re guys from the Wild West, but they’re being pushed ever further east. So it’s almost like an anti-Western. An Eastern. You’re traveling east. You’re traveling into civilization. And I don’t think I would’ve been grappling with those ideas earlier in my career, because it was so, you know, this idea of getting a different kind of strength and different kind of weakness was interesting.
-Lex Fridman (01:30:01) 关于死亡性的组成部分呢，一个角色面对他自己的死亡性，在一个延长的时期内？有点像对死亡的真正恐惧的前景，对死亡的领悟……
-Lex Fridman (01:30:01) What about the component of mortality, of a character facing his own mortality over a prolonged period? Sort of just the prospect of real fear of death, realization of death…
-Dan Houser (01:30:16) 是的。我认为那真的……
-Dan Houser (01:30:16) Yeah. I thought that was really…
-Lex Fridman (01:30:16) ……作为故事的一部分。
-Lex Fridman (01:30:16) …as part of the story.
-Dan Houser (01:30:17) ……真的是一件有趣的事情来玩。约翰在《荒野大镖客1》中死了。我想用《荒野大镖客2》超越那一点，或者以不同的方式做到这一点。所以这个想法是……但是约翰的死相当突然，所以如果他有这个漫长的、拖延的死亡，而且我一直痴迷于肺结核。作为一种疾病，它是一个很好的文学手段。
-Dan Houser (01:30:17) …really a fun thing to play with. John dies in Red Dead 1. I wanted to top that with Red Dead 2, or do that in a different way. And so the idea that it’s… But John’s death is fairly sudden, and so if he’s got this long, drawn-out death, and then I’d always been obsessed by TB. As diseases go, it’s a great literary device.
-Dan Houser (01:30:39) 你知道，因为这是一种漫长的、拖延的、缓慢的死亡，但同时你也在变弱。我的祖父实际上在抗生素发明之前得过肺结核，在他有了孩子，也就是我父亲之后，被送到了疗养院，只有三人存活，大约35人里只有三人。所以我一直对肺结核这种疾病很着迷。感觉它是一个有趣的想法来玩弄，这个家伙正在变弱，而他感觉自己是不朽的，本质上是不朽的。他是电子游戏中的主角，他不会死，突然他变得会死。你知道，但这帮助他看到一些东西。我认为那是在游戏中做主角的一种不同方式。
-Dan Houser (01:30:39) You know, because it is this long, drawn-out, slow death, but in which you are also getting weaker. And my grandfather actually had TB before they invented antibiotics and was sent to a sanatorium just after he’d had his child, my father, and survived, but only three of them out of like 35 survived. So I was always captivated by TB as an illness. It felt like it was an interesting thing to play around with as an idea, this guy getting weaker who felt like he was immortal and essentially was immortal. He was the protagonist in a video game, he could not die, and suddenly he is becoming mortal. You know, but that helps him see stuff. I thought that was a different way of doing a lead character in a game.
-Lex Fridman (01:31:24) 是的。你认为他是你创造过的最伟大的角色吗？
-Lex Fridman (01:31:24) Yeah. Do you think it’s the greatest character you’ve ever created?
-Dan Houser (01:31:28) 我认为他是最好的主角。你知道，主角与配角不同，我认为他是最全面且效果最好的。他和尼克是我喜欢的两个，你知道。他们是最有雄心的两个。所以对我来说，这总是难以取舍，你知道？但然后我喜欢美术团队做的所有事情。他们做了惊人的工作。日记本的想法是他们的，以及那种……所有功能融入亚瑟角色的方式，我认为那真的……他真的很全面，他在很多不同方面都表现得非常好。我喜欢他与他前女友有缺陷的关系之类的事情。所有的边……你知道，围绕他出现的片段。
-Dan Houser (01:31:28) I think he’s the best lead character. You know, the lead characters are different from the side characters, and I think he’s the most rounded and works the best. Him and Nico are the two I like, you know. They were the two most ambitious. So for me, it’s always a toss-up, you know? But then I loved all the stuff the art team did. They did such an amazing job. It was their idea with the journal and that kind of… …The way that all the features worked into Arthur’s character, I thought that was really… He was really rounded, he worked in lots of different ways really well. I loved his flawed relationship with his old girlfriend, things like that. All the side… you know, the bits that turned up around him.
-Lex Fridman (01:32:15) 所以你也喜欢配角。你喜欢整个阵容的……
-Lex Fridman (01:32:15) So you also like the side characters. You like the flavor…
-Dan Houser (01:32:19) 是的，当然。
-Dan Houser (01:32:19) Yeah, of course
-Lex Fridman (01:32:19) ……风味。你创造的一些最爱是什么？我相信你目前正在创作的那个……奈杰尔·戴夫，那是一个……你称他为配角。
-Lex Fridman (01:32:19) …of the full cast. What are some of the favorites you’ve created? I’m sure the one you’re currently working on… …Nigel Dave, that’s a… You called him a side character.
-Dan Houser (01:32:28) 嗯，他不是主角。他像是……他是一个神，不是角色。
-Dan Houser (01:32:28) Well, he’s not a protagonist. He’s like a go- He’s a god, not a character.
-Lex Fridman (01:32:32) 当然。
-Lex Fridman (01:32:32) Sure.
-Dan Houser (01:32:32) 所以他不是……他，我很享受。我喜欢达奇。你知道，部分原因是我们为第一款游戏为他写了一些台词，而演员做得如此出色，以至于当他说话时，他们所有的背景故事都涌向我，那时我反正已经在脑海中稍微构思过一些。但我知道他从那时起就是这个更大的帮派分子，我差不多确切看到了他是谁。所以那感觉像……对我来说他感觉像一个活生生的角色。
-Dan Houser (01:32:32) So he’s not… Him, I’m enjoying. I love Dutch. You know, it was partly because we wrote a few lines for him for the first game, and the actor did such an amazing job that when he spoke, it just came to me all of their backstory, which I’d been playing around with by that point anyway, a little bit in my head. But I knew he was this bigger gangster from then, I sort of saw exactly who he was. And so that felt like… He felt like a living character to me.
-Lex Fridman (01:33:02) 我们应该说达奇在《荒野大镖客：救赎》两款游戏中都像是有点神一般的存在……
-Lex Fridman (01:33:02) And we should say that Dutch is kind of like maybe a little bit of a godlike figure…
-Dan Houser (01:33:07) 是的。
-Dan Houser (01:33:07) Yeah
-Lex Fridman (01:33:07) ……在帮派中是领袖。达奇与亚瑟，与约翰之间有一种父子关系。我的意思是，帮派有一种家庭感。他们探索了所有这些动态，然后是背叛的感觉以及亚瑟面对肺结核。你反对家庭，反对父亲……因为他在转变他的世界观、道德观，以及所有那种东西。所以所有非常莎士比亚式的戏剧就在那里。而达奇在整个过程中都是一个突出的、神一般的存在。他自己也有缺陷，在他们所处的框架下也是一个善恶并存的人。
-Lex Fridman (01:33:07) …in both of the Red Dead Redemption games. He’s the leader of the gang. And there’s a father-son relationship with Dutch, with Arthur, with John. I mean, there’s a family feeling to the gang. They explore all of those dynamics, and then the feeling of betrayal and Arthur facing tuberculosis. You’re going against the family, going against the father… …Because he is transforming his sense of the world, of morality, of all those kinds of things. So all the kind of very Shakespearean drama is right there. And Dutch is a prominent, godlike figure through all of that. Also flawed himself, also a man of good and evil in that framework that they’re operating under.
-Dan Houser (01:33:52) 而他，他在他的自我中溺亡了，你知道，他的自我战胜了他。我认为他是……但他年轻时的理想主义有一些有缺陷但美丽的东西，而那大多在镜头之外。但作为个人，我一直非常容易受有魅力的人影响。而他很有魅力。所以我能看出人们如何被有魅力的人所吸引。而这里的想法是一个非常迷人的人，他的路已经走到了尽头。
-Dan Houser (01:33:52) And he, he’s just drowning in his ego at the end. You know, his ego gets the better of him. I think he’s… But there was something flawed but beautiful in his idealism when he was younger, and that’s mostly off camera. But as an individual, I’ve always been very susceptible to charming people. And he’s charming. So I can see how people get captivated by charming people. And the idea here was a very charming person, and the road’s run out for him.
-Lex Fridman (01:34:23) 我个人害怕我有多么热爱人类，以及我多么容易受到魅力和领袖气质的影响。因为它会模糊你对人性的判断。
-Lex Fridman (01:34:23) I personally am afraid of how much I love human beings and how susceptible I am to charm and charisma. Because it can cloud your judgment about human nature.
-Dan Houser (01:34:36) 完全正确。而那就是发生在他身上的事。结果那也模糊了他对自己的判断。他有点迷上了自己的废话。
-Dan Houser (01:34:36) Completely. And that’s what happened with him. And it ended up clouding his judgment about himself. He kind of fell for his own rubbish.
-Lex Fridman (01:34:45) 是的。但也模糊了亚瑟的判断。
-Lex Fridman (01:34:45) Yeah. But also, it clouded Arthur’s judgment.
-Dan Houser (01:34:49) 哦，完全正确。亚瑟完全，你知道，柏拉图式地爱着他。他崇拜他。他把自己的权力让给了他。然后我认为对亚瑟来说，旅程是在垂死之际重新夺回那种权力。你知道，那就是为什么我认为那真的很有趣。
-Dan Houser (01:34:49) Oh, completely. Arthur was completely, you know, platonically in love with him. He was worshiping him. He’d given up his power to him. And then I think for Arthur, the journey is retaking that power in the moment of dying. You know, and that’s what the whole… that’s why I thought that was really interesting.
-Lex Fridman (01:35:05) 是的。亚瑟失去他的身份、毕生的归属感和生命，同时失去他的生命，这确实是悲剧性的。在面临死亡性时，他意识到他并不是……所有这一切都是一个谎言。
-Lex Fridman (01:35:05) Yeah. It’s truly tragic for Arthur to be losing his identity, lifelong identity, and sense of belonging, and losing his life at the same time. In facing mortality, he is realizing that he’s not… all of it has been a lie.
-Dan Houser (01:35:26) 但他有机会做一些……嗯，这取决于你做什么选择。但他有机会做一些好事。所以他，你知道，他得到了他的救赎时刻。
-Dan Houser (01:35:26) But he gets to do some… Well, it depends on what choices you make. But he gets to do some good. And so he, you know, he gets his moment of redemption.
-Lex Fridman (01:35:34) 只是一点点。但是意识到……你整个一生过的都不是好的生活。你一直不是一个好人。
-Lex Fridman (01:35:34) Just a little bit. But realizing… Your whole life you’ve been living not a good life. You’ve been not a good man.
-Dan Houser (01:35:42) 那不正是我们都害怕的吗？
-Dan Houser (01:35:42) Isn’t that what we’re all afraid of?
-Lex Fridman (01:35:43) 我想改变你的方式永远不会太晚。
-Lex Fridman (01:35:43) I guess it’s never too late to change your ways.
-Dan Houser (01:35:47) 希望不会。我的意思是，那是……
-Dan Houser (01:35:47) Hope not. I mean, that’s…
-Lex Fridman (01:35:47) 那么最大、最重要的问题，首要的、核心的，我们今天谈话的主要原因，来自互联网的头号问题。它是如此荒谬，但我必须问。你见过加文吗？加文是谁？更多背景信息，《荒野大镖客：救赎2》中有一个名叫奈杰尔的家伙，他在整个游戏中疯狂地寻找一个名叫加文的神秘人。这已经成为互联网、RDR粉丝群中最大的谜团之一。所以理论包括，理论一：这是一种分裂人格障碍。奈杰尔自己就是加文。所以这个理论的证据是信件，有一些证据表明可能是由于创伤，这种分裂人格障碍被创造出来，这个加文在奈杰尔的思想中被创造出来。
-Lex Fridman (01:35:47) So the biggest, most important question, primary, central to the reason we’re talking today, the number one question from the internet. It is so ridiculous, but I must ask. Have you seen Gavin? Who is Gavin? So for more context, there’s a guy named Nigel in Red Dead Redemption 2 who’s frantically searching for a mystery man named Gavin throughout the game. This has become one of the biggest mysteries amongst the interwebs, the RDR fan base. So the theories include, theory one is it’s a split personality disorder. Nigel himself is Gavin. So the evidence is the letter for this theory that has some evidence that may be due to trauma, this split personality disorder was created, this Gavin was created inside Nigel’s mind.
-Lex Fridman (01:36:41) 理论二：加文死了，奈杰尔只是处于否认状态。理论三：这只是个恶作剧，Rockstar故意创造了一个无法解决的谜题来让玩家发疯。我也听说过理论四：加文就是神秘人。所以有一个迷人的角色，神秘人，这个超自然角色在RDR1中有所存在，在RDR2中也有一点。但是是的。那么哪个理论最接近真相？
-Lex Fridman (01:36:41) Theory two is Gavin is dead and Nigel’s simply in denial. Theory three is that it’s just a troll and Rockstar intentionally created an unsolvable mystery to drive players crazy. I also heard theory four is Gavin is the Strange Man. So there’s this fascinating character, the Strange Man, this supernatural character that has a presence in RDR1 and a little bit in RDR2 also. But yeah. So which theory is closest to the truth?
-Dan Houser (01:37:13) 不是三或四。在我的脑海中，介于一和二之间。是的。而且我只是喜欢他喊"加文！"的方式。那只是让我觉得好笑。所以在某种程度上，它可能是恶作剧，因为我们不想让它完全是一个清晰的谜团。我们想让它有一点冒险性。但它的本意是……从未被完全解释，加文不在了。加文要么回家了，加文离开了他，加文……我们本打算继续探索这个想法。他将会以某种方式重新出现。
-Dan Houser (01:37:13) Not three or four. Somewhere in my mind, somewhere between one and two. Yeah. And I just loved the way he shouted, “Gavin!” It just amused me. So at some level, it probably is trolling in that we didn’t want it to be a totally clear mystery. We wanted it to have a little bit of adventure to it. But it was meant to be… without ever fully being explained, that Gavin’s not there anymore. Gavin’s either gone home, Gavin’s left him, Gavin’s… and we were going to keep exploring that idea. That he was going to reappear in some way or other.
-Lex Fridman (01:37:49) 你有没有想到这个小互动会激发人们多少想象力、兴奋和好奇心？
-Lex Fridman (01:37:49) Did you have any idea how much imagination, excitement, and curiosity that little interaction would inspire in people?
-Dan Houser (01:37:59) 有也没有。我的意思是，你永远无法知道在这些大型游戏中人们会觉得什么有趣，而且其中很多也取决于表演。那家伙喊"加文"的时候就是很有趣。但《荒野大镖客：救赎1》中有一个行人每个人都痴迷，而我真没预料到那一点。所以我们试着放一些角色进去。我是说，加文本应是有趣的。我认为他很有趣。但你永远不知道人们会痴迷于什么。有其他角色我认为很有趣，但人们甚至没有注意到他们，或者他们以完全不同的方式看待他们。
-Dan Houser (01:37:59) Yes and no. I mean, you could never know what people are going to find amusing in these big games, and a lot of it comes down to acting as well. The guy was just funny when he said, “Gavin.” It was just funny. But there was a pedestrian in Red Dead Redemption 1 that everyone was obsessed by, and I really wasn’t expecting that. So we try and put a few characters in. I mean, Gavin was supposed to be amusing. I thought he was amusing. But you never know what people are going to get obsessed by. There are other characters I think are funny and people don’t even notice them, or they see them in a completely different way.
-Lex Fridman (01:38:30) 你参与写那封信了吗？
-Lex Fridman (01:38:30) Did you have a part in writing the letter?
-Dan Houser (01:38:32) 是的。我不记得是我写的还是……要么我写的，要么迈克写的，或者我们都写了。我真的记不清了，老实说。但是的，我肯定编辑过，迈克可能写了，或者我可能写了。我真的不记得了。
-Dan Houser (01:38:32) Yeah. I can’t remember if I wrote it or… either I wrote it or Mike wrote it, or we both wrote it. I really can’t remember, to be honest with you. But yeah, I certainly would have edited it, and Mike might have written it or I might have written it. I really can’t remember.
-Lex Fridman (01:38:43) 这太迷人了，因为那一小段文字……当然你有成千上万的页面……
-Lex Fridman (01:38:43) It’s so fascinating because that little piece of writing… of course you have thousands of pages…
-Dan Houser (01:38:48) 是的。对……
-Dan Houser (01:38:48) Yeah. T-
-Lex Fridman (01:38:48) ……但那小段文字却被仔细分析。
-Lex Fridman (01:38:48) …but that little piece of writing gets analyzed.
-Dan Houser (01:38:51) 哦，但我们当然深入讨论过它，如果迈克在这里，我会问他。他可能记得。我真的不能……我们做了很多这样的事情……我喜欢在《荒野大镖客》中用信件讲述所有这些奇怪的背景故事。有些变得非常清晰，有些仍然有点晦涩。但我认为总的基调是没有加文这个人。要么根本没有加文，要么他早就离开了。所以有点像分裂人格，你知道，然后我们打算在后续游戏中提供更多信息。
-Dan Houser (01:38:51) Oh, but we certainly talked about it in depth, and if Mike was here, I’d ask him. He might remember. I can’t really… and we do so much of those things… …And I loved the use of letters in Red Dead to tell all these weird backstories. And some became very clear and some were still a little kind of opaque. But I think the general vibe was there was no Gavin. Either there was no Gavin or he’d long since left. So it’s kind of a split personality, you know, and then we were going to, over subsequent games, provide more information.
-Lex Fridman (01:39:20) 所以在某种意义上，你自己也不太清楚。你大概有个想法，所以……比如，你更倾向于哪一种，理论一还是二？加文死了，奈杰尔处于否认状态，还是他头脑中真的有某种沟通在进行？
-Lex Fridman (01:39:20) So in some sense, you yourself don’t quite know. You kind of have an idea, so… like, which way do you lean more, theory one or two? Is he dead and Nigel’s in denial, or is there real communication going on inside his head?
-Dan Houser (01:39:36) 不，加文存在过。所以不是说他是一个分裂人格，而我们唯一没有真正决定的是，在未来的游戏中，我们是会揭示加文已经死了，还是加文会出现，早已抛弃了这个疯子？你知道，那就是我们仍在考虑的事情。我认为想法是他永远不会遇到……在这个游戏中他永远不会遇到加文。
-Dan Houser (01:39:36) No, Gavin existed. So it wasn’t that he was a split personality, and the only thing we hadn’t really decided was in a future game were we going to reveal that Gavin was dead, or was Gavin going to turn up having long since abandoned this maniac? You know, that was what we were still playing around with. I think the idea was that he was never going to meet… He was never going to meet Gavin in this game.
-Lex Fridman (01:39:58) 我的意思是，这太迷人了，因为你必须考虑所有这些。你必须写所有这些。你必须进行那些讨论。你必须进行那些辩论。
-Lex Fridman (01:39:58) I mean, it’s just fascinating because you have to think about all of that. You have to write all of that. You have to have those discussions. You have to have those debates.
-Dan Houser (01:40:06) 而且它必须感觉新鲜。那是……就像我们以前做过的那样。不断地观察，就像你做的那样……你知道，我想我做过大概15到20款这样的游戏。你必须做些新东西。它不能太重复自己。
-Dan Houser (01:40:06) And it has to feel fresh. That was… Like, what we’ve done before. Constantly looking as you do… You know, I think I’ve done somewhere between 15 and 20 of these games. You’ve got to do stuff that’s new. It can’t repeat itself too much.
-Lex Fridman (01:40:18) 我的意思是，我们也生活在互联网时代。你意识到有成千上万的人在担心加文在哪里、是谁。
-Lex Fridman (01:40:18) I mean, we also live in the age of the internet. You realize there are like millions of people worrying about where and who Gavin is.
-Dan Houser (01:40:30) 感谢上帝。
-Dan Houser (01:40:30) Thank God.
-Lex Fridman (01:40:31) 就像是……
-Lex Fridman (01:40:31) It’s like-
-Dan Houser (01:40:31) 这很棒，是的。
-Dan Houser (01:40:31) It’s great, yeah.
-Lex Fridman (01:40:32) 他们进行的……这很有趣。想想人们阅读詹姆斯·乔伊斯之类的东西，思考如何拆解《尤利西斯》，争论对它的不同解释。对我来说，这本身也很美。
-Lex Fridman (01:40:32) It’s fascinating that they’re having… Think about people reading James Joyce or something and thinking about, like, breaking apart Ulysses and thinking about, like, arguing about different interpretations of it. To me, that in itself is also beautiful.
-Dan Houser (01:40:47) 是的。我们希望支线谜题在一定程度上是可解的，但你仍然希望有这些讨论。
-Dan Houser (01:40:47) Yeah. We want the side mysteries to be solvable up to a point, but you still want these discussions.
-Lex Fridman (01:40:53) 是的，神秘性。
-Lex Fridman (01:40:53) Yeah, the mystery.
-Dan Houser (01:40:53) 你知道，而且你希望它，只要它感觉在整体基调上适合你正在制作的这整个庞大的、蓬乱的故事体验。加文就是关于这个的，他非常奇怪，而且他本质上就是……一个英国人尖叫"加文"就是有些好笑。我不知道为什么。
-Dan Houser (01:40:53) You know, and you want it as long as it feels tonally appropriate for this whole big, sort of, shaggy dog story experience you’re making. Which Gavin was just about, and he was so weird, and he just was intrinsically… there was just something funny about an English person screaming, “Gavin.” I don’t know why.
-Lex Fridman (01:41:10) 是的。其中的一些幽默，我的意思是，《荒野大镖客：救赎》中有某些幽默，但《侠盗猎车手》中有很多……而且它……很难用语言形容为什么那好笑，为什么它会成为梗，为什么会病毒式传播，因为它就是好笑。它是……
-Lex Fridman (01:41:10) Yeah. Some of that humor, I mean, there’s certain humor in Red Dead Redemption, but there’s a lot of it in Grand Theft Auto… …And what… It’s hard to put into words why that’s funny, why it becomes a meme, why it becomes viral, ’cause it’s just funny. It’s…
-Dan Houser (01:41:26) 是的，我知道为什么我认为它好笑，但你无法……至少我不擅长做的是，说，"这个东西会在网上变得非常流行，而另一个东西不会。" 你可以创造一大堆，你知道，五十个不同的支线事情，人们可能会为之着迷，而你只是不知道他们会回应哪一个。
-Dan Houser (01:41:26) Yeah, I know why I think it’s funny, but what you can’t… What I’m not good at doing at least, is going, “This thing will become really popular online, and this other thing won’t.” You can create a bunch of, you know, fifty different side things that people might get captivated by, and you just do not know what they’re going to respond to.
-Lex Fridman (01:41:44) 你怎么知道某个东西好笑？是你只是感觉到了吗？你只是……
-Lex Fridman (01:41:44) How do you know when something’s funny? Is it you just feel it? You just…
-Dan Houser (01:41:47) 我知道我认为什么好笑。它是，你知道，它让……
-Dan Houser (01:41:47) I know what I think is funny. It’s, you know, it makes…
-Lex Fridman (01:41:49) 你只是谷歌它还是你只是……
-Lex Fridman (01:41:49) You just Google it or you just…
-Dan Houser (01:41:50) ……觉得，因为它也很荒谬。那只是……一个人喊很多次"加文"没什么好笑的。他只是用一种有趣的方式说出来……我只是认为那可能有趣。很棒，而且他只是用一种如此有趣的方式说出来。……然后它就变得有趣了。就像，你……我们经常有那些支线角色，他们不那么好笑，而我认为他们会很滑稽，然后你把他们放进游戏里，他们很糟糕——他们还好，但不是那么棒。那家伙就是让那东西活了起来。
-Dan Houser (01:41:50) …like, just because it’s ridiculous as well. That was just… There’s nothing funny about a dude shouting, “Gavin,” a lot. He just said it in a fu… I just thought it might be funny. It was great, and he just said it in such a funny way. … And then it just became funny. Like, you… We often have those side characters and they’re not that funny, and I think they’re gonna be hysterical, and then you put them in the game, and they’re awf- they’re fine, but they’re not amazing. That guy just brought that stuff to life.
-Lex Fridman (01:42:12) 是的。还有他的背景故事。我是说，伦敦人而且不……是的，那……
-Lex Fridman (01:42:12) Yeah. And his backstory too. I mean, Londoner and not… Yeah, that…
-Dan Houser (01:42:16) 是的，我认为那是……你知道，只是它……有时一个英国人说"加文"这个名字很有趣。我不知道为什么。
-Dan Houser (01:42:16) Yeah, I think that was what… You know, just that it… There’s something sometimes funny, an English person saying the name Gavin is quite funny. I don’t know why.
-Lex Fridman (01:42:24) 那么关于神秘人，又名黑衣人。在《侠盗猎车手V》中与迈克尔和医生之间有什么元素吗？比如，神秘人是谁？
-Lex Fridman (01:42:24) So about the Strange Man, AKA the Man in Black. Is there some element with Michael and the therapist in Grand Theft Auto V? Like, who is the Strange Man?
-Dan Houser (01:42:32) 嗯，神秘人，同样是我们很快想出来的。我们制作了《荒野大镖客1》，或者说正在制作《荒野大镖客1》，我们制作了这个——我们觉得相当引人入胜的故事和相当有趣的开放世界。但我们已经制作了一堆《侠盗猎车手》，显然，但不幸的是，我们拿掉了机枪，因为这是牛仔游戏，除了固定位置的大型机枪。我们拿掉了汽车，拿掉了城市和大量的行人。所以我们基本上有一个关于一个人骑着马在沙漠里转悠的游戏，而且相当无聊。
-Dan Houser (01:42:32) Well, the Strange Man was, again, someone we came up with quickly. We made Red Dead 1, or rather, were making Red Dead 1, and we’d made this—we felt quite compelling story and quite interesting open world. But we’d already made a bunch of Grand Theft Autos, obviously, but unfortunately, we’d taken out the machine guns because it was a cowboy game, apart from the big fixed position ones. And we’d taken out the cars, and we’d taken out the city and large numbers of pedestrians. So we essentially had a game about a dude riding a horse- around the desert, and it was quite boring.
-Dan Houser (01:43:10) 所以我们开始用内容填充它，必须即兴发挥。我们用我们称之为随机事件的东西填充它，这些是你可以互动的动作捕捉时刻。它们——设计师们对那些做了惊人的工作。它们真的很有趣，但数量不够。然后我们觉得需要更多故事，因为故事可能有点短。所以，在开发相当后期的时候，我们开始加入几乎像这些RPG类型的内容，你去见某人。我们思考它们的方式是它们像短篇小说。所以你去见某人；他们会给你一个小任务，比如去给我收集15束花。当你回来时，它会解决你的故事。
-Dan Houser (01:43:10) And so we then started filling it with content, having to improvise. And we filled it with these things we call random events that would be these sort of mocap moments that you could interact with. And they were—the designers did an amazing job with those. They were really fun, but there were not enough of them. And then we felt we needed more story because the story was perhaps a little short. So we, quite late in development, started putting in almost like these RPG-type content where you go and meet someone. And the way we thought of them was they were like short stories. So you go and meet someone; they’d set you a small problem, like go and collect me 15 bunches of flowers. And when you came back, it would resolve your story.
-Dan Houser (01:43:49) 然后，你知道，一个会说，"去为我的新娘采花，"你回来后新娘死了。我们试图把它们做成像这些带有意外结局的短篇小说。而他出现了——当我在为那些构思想法时——作为只是这个奇怪的角色。然后我们把他融入故事中一些，随着你推进游戏他会解锁，并对你所做的事进行评论。所以他本应是你阴影、你的业力、魔鬼的一种体现——在某种程度上，你知道，只是看到世界。然后我们逐渐构建了他的背景故事，并决定，你知道。所以在《荒野大镖客2》中，你可以再次与他互动，或者并不真正互动。
-Dan Houser (01:43:49) And so then, you know, one would go, “Go get them for my bride,” and you come back and the bride’s dead. We tried to make them like these short stories with a sting in the tail. And he came out—as I was trying to come up with ideas for those—as just this weird character. And then we built him a bit into the story, where he would unlock as you worked your way through and be a commentary on what you were doing. So he was meant to be a kind of manifestation of your shadow, your karma, the devil—somewhere, you know, just saw the world. And then we built out his backstory over time and decided, you know. And so in Red Dead 2, you could interact with him again, or not really interact with him.
-Dan Houser (01:44:34) 但他存在，而且他本应是，你知道，任何创意者都可能害怕的东西，一个某种程度上将灵魂出卖给魔鬼的艺术家。而那慢慢地揭示出来。
-Dan Houser (01:44:34) But he was there and he was meant to be, you know, something I suppose any creative is scared of, an artist who’s kind of sold his soul to the devil. And that slowly revealed itself.
-Lex Fridman (01:44:44) 在主角和……之间有一种联系。这是像荣格式阴影类型的情况吗？
-Lex Fridman (01:44:44) There is a connection between the main character and… Is it like a Jungian shadow type of situation?
-Dan Houser (01:44:51) 嗯，有点，因为他知道你在做什么。这种联系是，而且，而且，而且从未真正澄清的是，他是否对每个人都了解这一点？比如，他是在跟踪你，还是因为他与邪恶势力达成的契约，能够对每个人都这样做？我不认为我们必然澄清过这一点。他肯定能为你这样做。
-Dan Houser (01:44:51) Well, it’s sort of, because he knows what you’re up to. The connection is, and, and, and what’s never really made clear is, does he know this about everybody? Like, is he following you, or is he able, because of the pact he’s made with, with, with, with, with evil forces, able to do this for everybody? And I don’t think we necessarily ever clarify that. He’s certainly able to do it for you.
-Lex Fridman (01:45:10) 我的意思是，在叙事方面，有一些技巧来揭示一种对主角思想的自省式分析。我的意思是，这就是我提到迈克尔的医生的原因。在电子游戏中，那是一个非常有力、有趣的做法。就像，我，我不记得见过……那太酷了……我的意思是，那里有《黑道家族》的元素，和心理医生。
-Lex Fridman (01:45:10) I mean, there’s, sort of narrative-wise, there’s techniques to reveal a kinda self-reflection analysis of the main character’s thoughts. I mean, that’s why I brought up the therapist with Michael. That was a really powerful, interesting thing to do in a video game. Like, I, I don’t think I’ve seen… That, that’s such a cool… I mean, there’s a Sopranos element there, with the therapist.
-Dan Houser (01:45:33) 有点像，是的。
-Dan Houser (01:45:33) Little bit, yeah.
-Lex Fridman (01:45:33) 我真的很喜欢通过那种技巧让角色进行自我反思的机会。
-Lex Fridman (01:45:33) I really love an opportunity for a character to just self-reflect through that technique.
-Dan Houser (01:45:40) 但它也根据你所做的事情而改变。所以它有点……它不像它可能的那样互动，但它有点互动，或者稍微响应你所做的事。所以感觉它仍然是有效的电子游戏内容，因为它在某种程度上是活的。而且我只是认为弗里德兰德医生这个角色很有趣，因为他很糟糕。所以就像在洛杉矶。你在接受治疗。非常洛杉矶。但它也非常洛杉矶，他想写一本书并背叛你。
-Dan Houser (01:45:40) But it also changed depending on what you’d done. So it was sort of slightly… It wasn’t as interactive as it could be, but it was slightly interactive, or slightly responsive to what you’d done. So it felt it was still valid video game content, because it was living, up to a point. And I just thought the character, Dr. Friedlander, was just funny, because he was awful. So it was like LA. You’re in therapy. It’s very LA. But it’s also very LA, he wants to write a book and betray you.
-Dan Houser (01:46:04) 那感觉像是一个好的、好的转折。而且它是……它感觉像一个《侠盗猎车手》式的医生。但是就像让游戏中的玩家，而游戏本质上是种物理的，你知道，你走——你走路，你，你打东西，你跑来跑去，你开车，你射击人，诸如此类。有这些物理幻想。试图让他们进入一个更反思性或形而上的状态片刻，我认为会非常有趣。
-Dan Houser (01:46:04) Which felt like a good, a good twist. And it was… It felt like a Grand Theft Auto therapist. But just like the idea of making the player in a game, and games are intrinsically kind of physical, and, you know, you wa- you walk, you, you punch things, you run around, you drive cars, you shoot people, whatever. There’s these kind of physical fantasies. Trying to put them into a slightly more reflective or metaphysical state for a moment, I think can be really fun.
-Lex Fridman (01:46:30) 我认为，对我来说，关于《荒野大镖客：救赎》，关于电子游戏，最令人惊讶的事情之一是，《荒野大镖客：救赎》展示了对于叙事而言，极度具体、复杂的细节具有多么大的价值。在故事中，也包括视觉上。它只是增加了世界是真实的感觉。所以我不得不问，在RDR中，你最喜欢的一些极度具体、复杂的细节是什么？我可以给你一些选项。互联网最喜欢的是马睾丸在寒冷天气中收缩。
-Lex Fridman (01:46:30) I think, to me, one of the most surprising things about Red Dead Redemption, about video games, that Red Dead Redemption showed is how much value for storytelling is insanely specific, intricate details. In the story, but also visually. It just added to the feeling that the world is real. So I have to ask, what are some of your favorite insanely specific, intricate details in RDR? I can give you some options. The internet’s favorite is horse testicles shrinking in cold weather.
-Dan Houser (01:47:07) 是的。那些家伙在那些上面做了惊人的工作。
-Dan Houser (01:47:07) Yep. Those guys did an amazing job on those.
-Lex Fridman (01:47:10) 我是说，我只是……而且肯定开过会，肯定有工程师和图形设计师……
-Lex Fridman (01:47:10) I mean, I just… And there must’ve been a meeting, and there must’ve been engineers and graphics designers…
-Dan Houser (01:47:17) 那只是，我想，只是艺术家。
-Dan Houser (01:47:17) It was just, I think, just artists.
-Lex Fridman (01:47:18) 艺术家。
-Lex Fridman (01:47:18) Artists
-Dan Houser (01:47:18) ……建模师，我想。我认为那没那么难。
-Dan Houser (01:47:18) …modelers, I think. I don’t think it was that hard.
-Lex Fridman (01:47:22) 好的。呃……
-Lex Fridman (01:47:22) Okay. Uh-
-Dan Houser (01:47:23) 这个双关语够了。
-Dan Houser (01:47:23) Enough of that pun.
-Lex Fridman (01:47:24) 谢谢。为此谢谢你。亚瑟的头发和胡子实时生长。所以，枪支维护很重要。火器变脏，性能随时间变差。动物尸体真实地分解。
-Lex Fridman (01:47:24) Thank you. Thank you for that. Arthur’s hair and beard grow in real time. So, gun maintenance matters. Firearms get dirty and perform worse over time. Animal carcasses decompose realistically.
-Dan Houser (01:47:38) 它们感觉确实如此。
-Dan Houser (01:47:38) They feel like they do.
-Lex Fridman (01:47:39) 这在电子游戏中仍然极其罕见。那，时间方面。
-Lex Fridman (01:47:39) That’s still extremely rare in video games. That, the temporal aspect.
-Dan Houser (01:47:43) 是的。对。
-Dan Houser (01:47:43) Yes. Yeah.
-Lex Fridman (01:47:43) 那渗透了整个时间。你知道，NPC记得你。
-Lex Fridman (01:47:43) That permeates through time. You know, NPCs remembering you.
-Dan Houser (01:47:47) 那是最好的。我的意思是，那是我喜欢的东西。在新游戏中围绕这一点尝试了很多东西，因为我认为那超级有趣。好吗？
-Dan Houser (01:47:47) That’s the best. I mean, that’s the thing I love. Playing around with a lot of stuff in the new games around that, ’cause I think it’s super interesting. Okay?
-Lex Fridman (01:47:56) 它真的很有力，对吗？
-Lex Fridman (01:47:56) It’s really powerful, right?
-Dan Houser (01:47:56) 让它们……是的，真的很有趣。我认为……它只是赋予了一种……它是一种非常有趣的方式，给你一种既是系统性的又是程序性的叙事内容。
-Dan Houser (01:47:56) To make them… Yeah, really interesting. I think the… It just gives a… It’s a really fun way of giving you kind of narrative content that is also systemic and procedural.
-Lex Fridman (01:48:06) 是的。从技术上讲，让游戏感觉它记得你，是否真的很难做？你知道吗？
-Lex Fridman (01:48:06) Yeah. Is it technically really difficult to do, for, for the game, for the game to feel like it remembers you? You know?
-Dan Houser (01:48:13) 我认为用现代技术，那不难，但你需要跟踪很多东西才能让它有趣。
-Dan Houser (01:48:13) I think with modern tech, it’s not that hard, but there’s a lot of stuff you need to track to make it interesting.
-Lex Fridman (01:48:20) 是的，拥有记忆。所以那真的很有力。泥土物理，所以亚瑟的靴子会沾泥，并留下实际的足迹。我是说，那真是令人难以置信。真的，真的令人难以置信。
-Lex Fridman (01:48:20) Yeah, to have a memory. So that’s really powerful. The mud physics, so Arthur’s boots get muddy and leave actual tracks. I mean, that’s just incredible. Really, really incredible.
-Dan Houser (01:48:30) 你知道，我们制作了一款尘土飞扬的游戏。《荒野大镖客1》是一款超级尘土飞扬的游戏。你知道，牛仔的问题是，如果你试图制作一款"牛仔精选"游戏，然后你必须制作续集，你必须想出不同的地理环境。所以这就是为什么游戏以雪地开始。所以我们想要一款有雪和泥的游戏，因为那些是你在《荒野大镖客1》中没怎么见过的东西。然后挑战就是如何在游戏中让泥土看起来好？而那些人做了惊人的工作。
-Dan Houser (01:48:30) You know, we made a dusty game. Red Dead 1 is a super dusty game. You know, the problem with cowboys is that if you’ve tried to make a “Greatest Hits of the Cowboy” game, and then you’ve got to make a sequel, you’ve got to come up with different geography. So that’s why the game starts in the snow. So we wanted a game that had snow and mud, because those were things you hadn’t really seen in Red Dead 1. And then the challenge is how do you make mud good in a game? And the guys did an amazing job.
-Lex Fridman (01:48:55) 我是说，RDR2开场的那场暴风雪，我不记得上次我体验过类似的东西是什么时候了，但你感觉到了。我不知道你们他妈的怎么做到的。不仅仅是图形，是一切。一切共同作用。我想有些对话对此真的很重要。
-Lex Fridman (01:48:55) I mean, the snowstorm that starts the game RDR2, I don’t remember the last time I’ve experienced anything like it, but you felt it. I don’t know how the hell you do that. It’s not just graphics, it’s everything. Everything together. I suppose some of the dialogue is really important to that.
-Dan Houser (01:49:11) 还有表演。他们感觉，他们感觉冷。
-Dan Houser (01:49:11) Also the acting. They feel, they feel cold.
-Lex Fridman (01:49:13) 是的，没错。
-Lex Fridman (01:49:13) Yeah, that’s right.
-Dan Houser (01:49:14) 他们感觉绝望。那种有点像……
-Dan Houser (01:49:14) And they feel desperate. There was that feeling of sort of…
-Lex Fridman (01:49:17) 是的。
-Lex Fridman (01:49:17) Yes
-Dan Houser (01:49:17) ……流亡的感觉。就像你在逃离什么，那在开始给游戏注入了能量。
-Dan Houser (01:49:17) …exodus. Like you’re running away from something, that gives the game energy at the start.
-Lex Fridman (01:49:21) 而且是在夜晚。哦，伙计，那做得太精湛了。
-Lex Fridman (01:49:21) And it was at night. Oh man, it was just masterfully done.
-Dan Houser (01:49:23) 而且他们是一大群人。另一个对比……
-Dan Houser (01:49:23) And there was a big group of them. The other contrast…
-Lex Fridman (01:49:25) 是的。
-Lex Fridman (01:49:25) Yes.
-Dan Houser (01:49:25) 你知道，第一款游戏，你开始时是独狼。突然你置身于这个大群体中。所以感觉非常不同。
-Dan Houser (01:49:25) You know, first game, you start off as a lone wolf. Suddenly you’re in this big group. So it felt very different.
-Lex Fridman (01:49:30) 在亚瑟的身体上，枪伤会持续。所以那种时间一致性……那真的很重要。体重不足的亚瑟看起来憔悴，而超重的亚瑟会有一个大肚子和更丰满的脸。同样，你所做的那些决定在游戏中随着时间的推移显现出来。而且它们是一致的。我不知道，我没有见过很多游戏那样做。那一定很难做，但那样在细节上付出那种程度的关注，跨越时间，并且针对事物的特定图形表现，是令人难以置信的。
-Lex Fridman (01:49:30) In Arthur’s body, bullet wounds persist. So that temporal consistency… …That’s really important. An underweight Arthur looks gaunt, and overweight Arthur gets a gut and a fuller face. Again, those decisions that you make reveal themselves in the game across time. And they’re consistent. I don’t know, I did not see many games do that. It must be difficult to do, but to give that level of care to the details in that way, across time, and for specific graphical representations of things, is incredible.
-Dan Houser (01:50:05) 是的，我的意思是，我猜……
-Dan Houser (01:50:05) Yeah, I mean, I guess…
-Lex Fridman (01:50:05) 你有最喜欢的吗？你第一次觉得，"这太棒了"的时候是什么？
-Lex Fridman (01:50:05) Do you have favorites? Where you were first, like, “This is amazing.”
-Dan Houser (01:50:11) 我认为是所有。我认为整个……对我来说，我最关心的是整个东西如何结合在一起。你知道，事实是，每一个，它们都感觉彼此相属。你创造了这个有凝聚力的、非常，引用"现实主义的"对于电子游戏体验，而且所有细节都感觉它们融合在一起。
-Dan Houser (01:50:11) I think all of it. I think the way the whole… To me, the thing that I would care about most was the way the whole thing sat together. You know, the fact that each of those, they all feel like they belong together with each other. You made this cohesive, very, quote-unquote, “realistic” for a video game experience, and all the details feel like they mesh.
-Lex Fridman (01:50:31) 嗯，对我来说，关于马的一切。对很多人来说。包括睾丸收缩。决定的过程是什么？互联网似乎真的很关心……我是说，他们如此爱这款游戏，所以他们想知道是否有任何内容被删减。我肯定有内容被删减，因为你必须选择。决定删减什么，删减什么场景的过程是什么？在GTA或RDR中，是否有任何你不得不放弃的场景，你真的很想念或希望你能做到？
-Lex Fridman (01:50:31) Well, for me, everything about the horse. For a lot of people. Testicle shrinking included. What’s the process of deciding? The internet seems to really care about… I mean, they love the game so much, so they want to know if anything was cut. And I’m sure stuff was cut because you have to choose. What’s the process of deciding what to cut, what to cut scenes? Are there any scenes that you had to let go of that you really miss or wish you could have done in either GTA or RDR?
-Dan Houser (01:51:05) 嗯，我认为游戏最终成为了它们应有的样子。
-Dan Houser (01:51:05) Well, I think the games ended up the way they were supposed to be.
-Dan Houser (01:51:08) 你知道，我认为总是有……在RDR开始的部分，他有过一个刚刚在《荒野大镖客2》中死去的婴儿，我们最终删掉了它，这是正确的决定。在某种程度上太残酷了。但我认为那给了他真实的……而且他对他偶尔的女友并不很同情，她生了孩子。所以，这让他在开始时非常、非常讨厌，我认为那会很有趣，因为那样会让他的救赎弧更有趣。他在开始时不是一个讨人喜欢的角色，而那是一个……我们最终让他稍微更……他仍然有点强硬和讨厌，但他在早期稍微更讨人喜欢一些。从商业角度看那是正确的决定。那样更好。
-Dan Houser (01:51:08) You know, I think there was always… There was a bit at the start of RDR where he’d had a baby who just died in Red Dead 2, and we ended up cutting it, which was the right decision. It was too tough in some ways. But I think it gave him real… And he was not very sympathetic to his occasional girlfriend who’d had the baby. So, it made him very, very nasty at the start, which I thought would be interesting to play around with because then it would make his redemptive arc even more interesting. He was not a likable character at the start, and that was one… And we ended up making him slightly more like… He was still sort of tough and nasty, but he’s slightly more likable early on. That was the right decision commercially. It’s better that way.
-Dan Houser (01:51:53) 但我确实，你知道，但我仍然喜欢那一小部分。它对我个人有共鸣。有……只是他无法触及他的情感，我认为那真的很强有力，因为后来在游戏中他变得非常情绪化。但也总是有小部分被修剪掉。你知道，并且没有……或者一些任务技术上就是无法运作。通常情况是，"这个任务技术上无法运作。哦天哪，我们得删掉它。好吧，我们如何把故事重新粘合起来？" 随着时间的推移，我们在跨过缺失部分粘合故事方面变得更好。你在游戏后期，只是有些东西，你知道，一些具有挑战性的大时刻就是看起来很糟糕，所以你直接去掉它。
-Dan Houser (01:51:53) But I did, you know, but I still like that little bit. It spoke to me personally. There… And just his inability to access his emotions I thought was really strong because then later in the game he’s getting very emotional. But there are also always little bits and pieces that get trimmed. You know, and don’t… Or missions that just are not going to work technically. Usually, it’s like, “This mission’s not going to work technically. Oh God, we’ve got to cut it. Okay, how do we glue the story back together?” And we got better over time at gluing the story across missing chunks. You get late in the game, and it’s just something, you know, some big challenging moment just is going to look rubbish, so you just get rid of it.
-Lex Fridman (01:52:32) 我认为剪辑，剪辑电影，我想象剪辑电子游戏，剪辑精简是一种艺术形式，但它也……感觉像是折磨，因为你放弃了你投入了如此多热爱的东西。
-Lex Fridman (01:52:32) I think editing, editing film, and I imagine editing video games, editing down is an art form, but it’s also just… It feels like torture because you’re letting go of things you put so much love into.
-Dan Houser (01:52:48) 是的，可能是改动。如果你爱上了某个东西，而其他人都说，"改掉它，"那当然，在某种程度上可能是令人沮丧的。否则，你可以关心它。但是，你知道，如果我参与了大的创意决策，然后你说，"好吧，这是正确的决定，"我大概可以接受得很好。我认为有时对于设计师来说，当他们整个游戏中只设计了四、五个任务，而其中两个被删减时，那一定非常…… ……非常困难。
-Dan Houser (01:52:48) Yeah, it could be changes. If you fall in love with something and everyone else goes, “Let’s change it,” that could be, of course, that could be upsetting in some ways. Otherwise, you can care about it. But, you know, if I was involved in the big creative thing and you go, “Okay, it’s the right decision,” I can probably live with that fine. I think sometimes for designers when they’re only designing four or five missions in the whole game and two of them get cut, that must be really… … Really hard.
+离开R星
+Leaving Rockstar Games
+Lex Fridman (01:59:30) 你于2020年离开了Rockstar，并最终创立了Absurd Ventures，正如我们一直在谈论的。对于在Rockstar的时光，你最怀念什么？是否有一些特定的时刻，当你回想起来时会带来快乐？
+Lex Fridman (01:59:30) You left Rockstar in 2020 and eventually launched Absurd Ventures as we’ve been talking about. What do you miss about your time at Rockstar? Is there specific moments that bring you joy when you think about them?
+Dan Houser (01:59:43) 当然，那是我整个，你知道，那是我20多年，21年左右的生活。是的，我为了这份工作搬到美国，并在从事这份工作中成长。我一直住在纽约。那是一段，有时非常紧张，有时又充满魔幻色彩的经历。但它也仅仅是我生命中巨大的一部分。
+Dan Houser (01:59:43) Of course, it was my whole, you know, it was my life for 20 something years, 21 years or something. It was and I moved to America to do it, and grew up doing it. And I was always living in, in New York. It was a, at times, very intense and at other times magical experience. But it was also just a huge chunk of my life.
+Lex Fridman (02:00:06) 低谷和高潮？
+Lex Fridman (02:00:06) The lows and the highs?
+Dan Houser (02:00:07) 以及中间状态。它就是，它就是我的生活，你知道吗？我的生活就是那份工作，我在纽约认识的人，以及我的家庭。我们正在做的事情紧张而创新，在不同的时间和以不同的方式被更广泛的社会所爱戴和憎恨。而且是在这家不断陷入麻烦的古怪公司里。所以真的很有趣。
+Dan Houser (02:00:07) And the middles. It just, it was just my life, you know? My life was that job and the people I knew in New York, and my family. And we were doing something that was intense and innovative, both loved and hated by wider society in different ways and at different times. And in this weird company that was constantly in trouble. So it was really fun.
+Lex Fridman (02:00:30) 即使只是回顾那段时光到今天，作为一个创意头脑，在那20年里你是如何演变的？
+Lex Fridman (02:00:30) Just even looking back at that time to today how did you evolve as a creative mind across those 20 years?
+Dan Houser (02:00:36) 嗯，我当时是个孩子，一个25岁的孩子……什么都不懂，我想成为一名作家，但我仍然没有在写作。我买了一个笔记本，偶尔会在上面涂鸦，那些笔记本我现在还放在某个地方。我当时在做电子游戏，那在当时是能想象到的最没有文学性的媒介了。在PS1游戏上，真的没有那种空间。
+Dan Houser (02:00:36) Well, I was a child, I was a 25-year-old child- …who didn’t know anything, and I wanted to be a writer, but I still wasn’t writing. And I bought a notebook and I’d occasionally scribble in it, and I’ve still got those notebooks somewhere. And I was working in video games, which were the least literary medium it’s possible to imagine at the time. There was no room for that on PS1 games, really.
+Dan Houser (02:01:00) 想着我需要停下来做点别的事，但又没有技能或信心去做。我在伦敦一直如此，然后我来到纽约，在纽约很有趣，真的很有趣，在纽约创办一家新公司也很有趣。那是一次惊人的冒险。但作为一个人，我仍然迷失着。然后当我27岁时，我仍然完全迷失，像个孩子。我停止了一些不良行为，差不多就在第二天，机会来了，得以在开放世界游戏上写作和工作，以及我在前几年半懂不懂学到的所有技能，还有我的思维方式——因为我是一名地理学家而不是历史学家，所以经常思考空间——所有这些结合在一起，我得到了在一个开放世界游戏上工作的机会。
+Dan Houser (02:01:00) Thinking I needed to stop and do something else, but not having the skills or the confidence to do it. And I’d been doing that in London, then I came to New York, and it was fun, really fun to be in New York, and really fun to do a new company in New York. And that was an amazing adventure. But I was still lost as a human being. And then when I was 27, I was still completely lost, a child. And I stopped some of my bad behavior, and the next day pretty much the chance to write on, work on open world games and all the skills I’d half learned over the previous years and my way of thinking where I thought about space a lot because I was a geographer rather than a historian came together and I got the chance to work on an open world game.
+Dan Houser (02:01:43) 所以感觉这就是命中注定。探索很有趣，但真正有趣的是与这个团队一起探索，你知道，Alex Horton，Navid，Leslie，苏格兰的伙计们，以及纽约所有以这种新方式制作这些新游戏的人。然后说：“哦，我们需要找一百个配音。我们没钱。我们到底要怎么做到？我们把所有人的朋友都找来，然后录制所有对话台词，就像我们会发明游戏中行人说话的方式一样。” 没有其他人做那种事。这很疯狂。所以我认为从2001年到2005年左右的那段时间，有很多早期的创新，感觉真的很令人兴奋，因为我们在做新东西。那感觉… 它感觉…
+Dan Houser (02:01:43) So it felt like it was meant to be. It was fun to explore, but really fun to explore with this team that was, you know, Alex Horton, Navid, Leslie, and the guys in Scotland and all the people in New York making these new games in this new way. And going, “Oh, we need to find a hundred voices. We’ve got no money. How the hell are we going to do that? We’ll get everyone’s friends in and just record all lines of dialogue each as we kind of would invent the way that pedestrians would speak video games.” No one else was doing that kind of stuff. It was insane. So I think that that period from kind of 2001 to 2005, it was lots of early innovation and felt really exciting because we were doing new stuff. It didn’t feel… it felt…
+Dan Houser (02:02:23) 有创意，但还不像写作。只是逐渐变成那样，我们感觉做了很多有创意的事情，学习如何组装这些东西，了解它需要什么。然后我想，我们之前谈过，但进入制作《GTA 4》的旅程，那时开始感觉更像一次真正的写作体验。在那个时候，我大概已经为此做好了准备。然后我就想，“嗯，这比电影更好。这是电影做不到的事情。” 你知道，这种扮演这个移民的360度体验。而且感觉，我们仍然只是触及了表面。我的意思是，现在在某些方面仍然感觉如此，但当时感觉还是有点…
+Dan Houser (02:02:23) creative, but it didn’t feel like writing yet. Just becoming that, we felt lots of, doing lots of creative things and learning how to assemble the stuff and learning what it could take. And then I think, we talked about it earlier, but the journey into doing GTA 4 when it began to feel more like a proper writing experience. And I was kind of probably ready for that at that point. And then I was like, “Well, this is better than films. This is something that films can’t do.” You know, this 360-degree experience of being this immigrant. And it still felt, we were still only scratching the surface. I mean, it still feels like that now in some ways, but it still felt a little…
+Dan Houser (02:02:55) 然后是那五款游戏，你知道，《GTA 4》和《5》、《Red Dead 1》和《2》，它们的所有额外扩展包，还有《Max Payne 3》，我认为在那个时期，我们将游戏的主题带入了新的领域。从写作的角度来看，那是最令人兴奋的时期。从商业和早期创意的时期来看，2001年到2005年可能是最令人兴奋的。
+Dan Houser (02:02:55) And then that five games, you know, GTA 4 and 5, Red Dead 1 and 2, all the extra packs for them, and Max Payne 3, I think we took the games thematically into new places through that period. From a writing perspective, that was the most exciting period. From a business and sort of early creativity period, the period 2001 to 2005 was probably the most exciting.
+Dan Houser (02:03:18) 最初的创始团队都做得很好。个人生活也还不错，感觉没那么一团糟。然后从2007年开始，'07，'08年，个人生活很幸福，有了孩子，婚姻美满，游戏也做得越来越好。但业务上有很多压力，你知道，预算变得非常大，所以增加了压力。所以总是有好的一面和压力的一面，但是，你知道，总是努力出现，尽我所能，思考如何用新的方式去做。总是尝试去想，“这是一个新媒介。”我们能做什么新的？
+Dan Houser (02:03:18) To use the original starting team, all doing well. Personal life was doing okay, didn’t feel like such a mess. And then from 2007 onward, ‘7, ‘8, was happy personally having children, happily married, and the games were just getting much better. But there were lots of pressure in the business, you know, and the budgets got really big, so it added to the stress. So there’s always good bits and stresses, but, you know, and always just tried to show up and do my best and think about how I could do it in a new way. Always trying to go, “It’s a new medium.” What can we do that’s new?”
+Lex Fridman (02:03:57) 但是作为一名作家，作为人性研究者，首先，你是否曾惊讶于自己实际上，你内心确实拥有，通过幽默和悲剧，创造这些极其引人入胜的人物的能力？因为我记得在哪里读到过，詹姆斯·乔伊斯20岁时说他将成为有史以来最伟大的作家。我觉得每个20岁的人都这么说。只是詹姆斯·乔伊斯做到了。
+Lex Fridman (02:03:57) But as a writer, as a scholar of human nature, first of all, were you surprised that you were actually, you were actually able, like you had it in you, through humor and tragedy, to create these incredibly compelling characters? ‘Cause I- I think I remember reading somewhere that James Joyce, when he was 20, said that he’s going to be the greatest writer ever. And I- I feel like every 20-year-old says this. It’s just James Joyce pulls it off.
+Dan Houser (02:04:27) 是的。
+Dan Houser (02:04:27) Yes.
+Lex Fridman (02:04:27) 那么，你是否曾惊讶于自己实际上能够做到？那个人是如何随着你的演变在写作上变得越来越好的？
+Lex Fridman (02:04:27) So were you, were you surprised that you were a- actually able to do it? And how did that person get better and better and better at writing as you evolved?
+Dan Houser (02:04:37) 团队变得越来越好，所以我们可以以更雄心勃勃的方式写作。动画变得越来越好，所以我们可以以更好的方式支持它。我们可以更深入。我的意思是，在PS2游戏上你无法那么深入，所以技术也在进化。我不知道。我觉得我擅长做这个，并且为此受过良好的训练。我在正确的时间出现在了正确的地方，我既幸运，又有一套思考角色的方法，当你把他们浓缩成大约十个句子时，会很有趣。我想我是，你知道，而且… 我以一种整体的方式看待世界。
+Dan Houser (02:04:37) The team got better and better, so we could write in a more ambitious way. The animation got better, so we could support it in a better way. We could go deeper. I mean, you couldn’t go that deep on a PS2 game, so it was also just the technology evolved. I don’t know. I felt like I was good at doing it, and I was well-trained for it. I’d been in the right place at the right time, and I was both lucky and had a way of thinking about characters that, when you reduce them to about 10 sentences, was amusing. I think I was, you know, and it was… and I saw the world in a holistic way.
+Dan Houser (02:05:14) 我以一种整体的方式看待社会，你可以把它分解成一个开放世界的电子游戏。我对此思考了很多，而我思考事物的方式恰好适合这个，不管出于什么原因。那只是好运。
+Dan Houser (02:05:14) And I saw society in a holistic way that you could break apart into an open-world video game. I thought about it a bunch, and the way I think about things was suitable for that, for whatever reason. That was just good fortune.
+Lex Fridman (02:05:27) Laszlo提到，还有另一位传奇人物你仍在合作。他说你会把自己锁在房间里写广播对话，我想。你会把自己锁在房间里，点凤尾鱼洋葱披萨和健怡可乐。这是准确的信息吗？
+Lex Fridman (02:05:27) Laszlo mentioned that it was another legend who you’re still working with. He mentioned that you would lock yourself in a room writing dialogue for radio, I think. You would lock yourself in a room and get anchovies and onion pizza and Diet Cokes. Is this accurate information?
+Dan Houser (02:05:45) 非常准确。
+Dan Houser (02:05:45) Very accurate.
+Lex Fridman (02:05:45) 在你生命的哪些时期，这是你创作过程的燃料？是凤尾鱼洋葱披萨吗？
+Lex Fridman (02:05:45) For which periods of your life was this fuel for your creative process? Is it anchovies and onion pizza?
+Dan Houser (02:05:52) 我的那一半还会加上意大利辣香肠。
+Dan Houser (02:05:52) I would also get pepperoni on my half.
+Lex Fridman (02:05:54) 好的。
+Lex Fridman (02:05:54) Okay.
+Dan Houser (02:05:54) 只是为了技术上的准确。
+Dan Houser (02:05:54) Just to be technically accurate.
+Lex Fridman (02:05:55) 好的。
+Lex Fridman (02:05:55) Okay.
+Dan Houser (02:05:55) 他不会加，因为他声称那时是素食主义者。但后来他向我承认他在冰箱里藏了鸡翅。所以他算是一种假素食者。或者我想我们现在有时仍然这样做，作为一种…
+Dan Houser (02:05:55) He wouldn’t, because he claimed to be a vegetarian in those days. But then he’d admit to me he kept chicken wings hidden in the freezer. So he was a sort of fake vegetarian. Or I think we still do it now sometimes, as a sort of…
+Lex Fridman (02:06:06) 是的，致敬。
+Lex Fridman (02:06:06) Yes, homage.
+Dan Houser (02:06:07) 为了纪念。但那始于2001年。我们，Rockstar的办公室那么小，我们又那么穷，没有… 我当时确实有一间私人办公室，但它确实是个小壁橱。没有窗户。字面意思就是坐在一个壁橱里。所以没有空间，我自己只有一张桌子和一把椅子。但我住得离办公室很近，所以我们每周会写一两个下午。他会过来。他是和我们一起工作的自由职业者。他会从长岛过来，然后我们跳上地铁，去我在切尔西的公寓，坐在我住的那个肮脏的小公寓里，从街角买披萨。然后那变成了，你知道，我们都喜欢健怡可乐和披萨，非常游戏开发者风格。那变成了好运的象征。
+Dan Houser (02:06:07) To memorialize. But that began in 2001. And we, the office at Rockstar, was so small, and we were so broke that there was no… and I did have a private office at the time, but it genuinely was a cupboard. It didn’t have a window. It was literally sitting in a cupboard. So there was no room, and I had a desk and chair just for myself. But I lived quite near the office, so we would write one or two afternoons a week. He’d come in. He was a freelancer working with us. He’d come in from Long Island, and then we would jump on the subway, go to my apartment in Chelsea, and sit in this grimy little apartment I was living in and buy pizza from around the corner. And that became, you know, we both liked Diet Coke and pizza, very video game developer. And that became good luck.
+Dan Houser (02:06:52) 在那里我们会有这些很好的写作会议，我们意识到我们相处得很好，我们有相似的幽默感，我们可以写这些东西，然后他会做所有制作方面的实际工作。所以这对我来说很完美，因为我得以将大部分实际工作外包，而他是一位出色的广播制作人。所以在这方面他是一个很棒的伙伴。那就是那种关系的开始。然后我会找他，我会说：“嗯，我们需要录80个声音。来帮我，因为我没法一次指导80个人。”所以他帮助了这个过程，他是一位非常好的制作人，既是音频制作人，也是找人录音的制作人，还是技术制作人。所以他只是，那就是那种关系的开始，而且一直…
+Dan Houser (02:06:52) And there we’d have these good writing sessions where we realized we got on well with each other, and that we had a similar sense of humor, and we could write the stuff, and then he would do all of the real work producing it. So it was perfect for me because I got to outsource most of the real work, and he’s a brilliant radio producer. So he was a great partner in that way. And then that was how that relationship began. And then I’d get him, I would say, “Well, we’ve got to record these 80 voices. Come and help me because I can’t direct 80 people at once.” So he helped with that process, and he was a really good producer, like audio, like getting bodies in producers as well as technical producer. So he was just, that was the beginning of that relationship, and it was always…
+Dan Houser (02:07:27) 我的工作是确保媒体内容感觉反映了世界的基调，我们会一起写。然后他的工作就是确保它听起来有趣，就像他会以一种非常有趣的方式制作它。
+Dan Houser (02:07:27) My job was to ensure the media content felt like it reflected the tone of the world, and we would write it together. Then his job was just to make sure it sounded funny, like he would just produce it in a really funny way.
+Lex Fridman (02:07:37) 再稍微提一下Laszlo，与他合作超过20年是什么感觉？他仍在与你合作。他是那种华丽多彩的人物，也因为在《侠盗猎车手》游戏中担任电台声音而备受喜爱。
+Lex Fridman (02:07:37) Just to give a little bit more of a shout-out to Laszlo, what’s it been like working with him for over 20 years? He’s working with you still. He’s a kind of this flamboyant, colorful personality, much loved for being a voice also on radio in the Grand Theft Auto games.
+Dan Houser (02:07:58) 是的，规则是当他扮演角色时，我会写他的初稿。所以我会… 而且随着时间的推移，我会写得越来越刻薄。
+Dan Houser (02:07:58) Yeah, and the rule was when he was the character, I would write the first pass of him. So I would… and I would get nastier and nastier over time.
+Lex Fridman (02:08:06) 是的，太棒了。
+Lex Fridman (02:08:06) Yeah, it’s awesome.
+Dan Houser (02:08:07) 所以到了他被剃头，你知道，被所有人惩罚的地步。但即使游戏一作接一作，他变得更糟了。在《GTA3》中，他是一个相当讨人喜欢的角色，然后，你知道，在接下来的12、13年里，情况越来越糟。所以我想他很高兴不再做那个了，但他做得很优雅。他是一个很棒的伙伴，因为他喜欢，你知道… 像我一样，我们只是喜欢制作东西。他喜欢制作东西。他喜欢在新的领域工作。在将漫画书变为现实方面，他提供了很大帮助，做了很多相关的工作。他现在正在做那个。而且，和他一起工作真的很有趣，他总是，你知道，把创造力放在第一位。而且他很滑稽。你知道，他就是一个非常…
+Dan Houser (02:08:07) So to the point where he’s having his head shaved and, you know, being punished by everybody. But even game after game, he got worse. He began as this quite… In GTA3, he’s a quite likable character, and then, you know, over the next 12, 13 years, it just got worse and worse. So I think he’s glad not to be doing that anymore, but he did it with great grace. He’s just a great partner because he likes, you know… Like me, we just like making stuff. He likes to make stuff. He likes to work in new spaces. He’s been a great help on bringing the comic book to life, doing a lot of the work on that. He’s working on that right now. And just, he’s really fun to work with, and he’s always, you know, will put creativity first. And he’s ridiculous. You know, he’s just a really…
+史上最伟大的游戏
+Greatest game of all time
+Lex Fridman (02:08:50) 以最好的方式，是的。除了你参与和创造的游戏之外，你认为哪些游戏是史上最伟大游戏的有力竞争者？
+Lex Fridman (02:08:50) In the best possible way, yeah. Outside of the games you’ve participated in and created, what do you think are some candidates for the greatest game of all time?
+Dan Houser (02:09:01) 俄罗斯方块。
+Dan Houser (02:09:01) Tetris.
+Lex Fridman (02:09:02) 俄罗斯方块。
+Lex Fridman (02:09:02) Tetris.
+Dan Houser (02:09:03) Game Boy版俄罗斯方块。毫无疑问。
+Dan Houser (02:09:03) Tetris Game Boy. No question.
+Lex Fridman (02:09:05) 俄罗斯方块和Game Boy，是的。
+Lex Fridman (02:09:05) Tetris and the Game Boy, yeah.
+Dan Houser (02:09:07) 那是玩那个游戏的完美设备。我从未像喜欢在它上面那样喜欢在任何其他设备上玩。我妻子正试图为我的孩子们弄一个复古的，现在正试图在圣诞节给他们弄到。那是我一生中对任何事物上瘾最深的一次，而我有太多上瘾的事了，我痴迷于它，梦到它。当你用线缆连接两个Game Boy，如果我消掉四行，它会推你的方块前进。这就像完美的游戏设计。所以从纯粹的解谜角度来看，没有游戏能接近它。
+Dan Houser (02:09:07) It was the perfect device for playing that game. I never liked it as much on anything else. My wife was trying to get a retro one for my kids, trying to get them for Christmas right now. It was the most addicted I ever was to anything in my life of far too many addictions, that I was obsessed by it, dreaming about it. And when you link two together with the cable and if I got four, it would push yours forward. It was like the perfect game design. So from a pure puzzle perspective, nothing comes close.
+Lex Fridman (02:09:34) 是的，极其简单。纯粹的游戏玩法，没有叙事。
+Lex Fridman (02:09:34) Yes, extremely simple. Pure gameplay, no narrative.
+Dan Houser (02:09:39) 不，不。什么都没有。不，没有任何个性。那是完全不同的东西。
+Dan Houser (02:09:39) No, no. Nothing. No, no personality at all. It’s a completely different thing.
+Lex Fridman (02:09:43) 完美。
+Lex Fridman (02:09:43) Perfection.
+Dan Houser (02:09:44) 但以它的方式很完美。开放世界游戏不可能那样完美。但你总是梦想制作那样的东西。
+Dan Houser (02:09:44) But perfect in its way. Open-world games can’t be that perfect. But you always dream of making something like that.
+Lex Fridman (02:09:50) 还有超级马里奥。
+Lex Fridman (02:09:50) And Super Mario.
+Dan Houser (02:09:52) 我想是N64上的那些。所有那些早期的3D游戏在你第一次看到时都非常惊人。在N64，PS1上，当你看到时，突然感觉这些游戏，它们活了，而且它们… 或者它们以一种不同的方式可信。我认为那很有趣。
+Dan Houser (02:09:52) I think the N64 ones. All of those early 3D games were very amazing when you first saw them. On the N64, PS1, when you went, it suddenly was like these games, they’re alive, and they did… or they’re believable in a different way. I think that was very interesting.
+Lex Fridman (02:10:10) 它看起来和任何东西都不一样。
+Lex Fridman (02:10:10) It looks nothing like anything else.
+Dan Houser (02:10:12) 任天堂有那种外观。不是吗？总是如此。
+Dan Houser (02:10:12) Nintendo has that look. Doesn’t it? Always.
+Lex Fridman (02:10:14) 是的。我想那就是，他们以这种任天堂的打磨而闻名，每个像素都有其目的。
+Lex Fridman (02:10:14) Yeah. And I think that’s the, they’re known for this Nintendo polish of every pixel has a purpose.
+Dan Houser (02:10:22) 是的。
+Dan Houser (02:10:22) Yes.
+Lex Fridman (02:10:23) 他… 我的意思是，我想俄罗斯方块也有同样的真正专注，用尽可能少的东西提供纯粹的游戏体验。真的很美。当然，塞尔达传说确实开创了很多世界的感觉，但它并不完全是开放世界。
+Lex Fridman (02:10:23) And what he… I mean, I suppose Tetris has that same real focus on delivering a pure gaming experience with as little as possible. It’s really beautiful. And of course, Zelda really pioneered a lot of the feeling of a world, but it’s not quite open world.
+Dan Houser (02:10:41) 不，但它很惊人。几乎就像新的那些，对我来说，它们感觉像希区柯克。它们只是在说电子游戏的语言，你知道，就像，你知道一切都会以这种方式那种方式运作。它很有系统性，但它如何组合在一起是如此惊人。感觉就像你看希区柯克的电影时，那不是现实。他是在用非常非常强烈的口音说电影的语言。它非常非常电影化。根本不是现实主义。这就是那些塞尔达游戏给我的感觉，它们是这些只有在电子游戏中才能存在的惊人事物。它们不可能是别的任何东西。
+Dan Houser (02:10:41) No, but it’s amazing. It’s almost like the new ones, they almost, to me, feel like Hitchcock. They’re just speaking the language of video games, you know, like, you know everything’s gonna work this way and that way. It’s quite systemic, but how it all glues together is so amazing. It feels like when you watch a Hitchcock film, it’s not reality. He’s speaking the language of cinema in a very, very strong, with a very strong accent almost. It’s very, very cinematic. It’s not realism at all. And that’s what those Zelda games kind of feel to me like, they are these amazing things that could only be video games. They couldn’t be anything else.
+Lex Fridman (02:11:15) 对我来说，另一个非常强大的开放世界是《上古卷轴》的世界。它是角色扮演，是奇幻，龙，所有那种东西。
+Lex Fridman (02:11:15) For me, another really powerful open world is The Elder Scrolls world. It’s role-playing, it’s fantasy, dragons, all that kind of stuff.
+Dan Houser (02:11:25) Todd在他所做的方面很出色。是的。它们有点，它们更… 我的意思是，从技术角度来看，我们总是参与其中。我对新游戏也有同感。我们不断尝试在RPG，角色扮演游戏和动作游戏之间找到平衡。然后，你知道，并尝试走向，嗯，带有RPG元素的动作冒险游戏，那意味着什么？我想它们都大致移入了相同的空间。但对我来说，它总是归结为，它容易玩吗？我们的机制超级流畅吗？然后我们能让我们的对话感觉非常生动吗？
+Dan Houser (02:11:25) Todd is great at what he does. It is. They’re slightly, they’re more… I mean, from a technical perspective, we’re always involved. I’d be in the same with the new games. We’re constantly trying to find the balance between, you know, an RPG, a role-playing game, and an action game. And then that, you know, and try to go, well, an action-adventure game with RPG elements, and what does that mean? I think they’ve all kind of moved into roughly the same space. But for me, it always just comes down to, is it easy to play? Are our mechanics super slick? And then can we keep our dialogue feeling very alive?
+Dan Houser (02:12:02) 比如，我并不总是很擅长… 就我们所做的而言，我喜欢别人做的时候。对于我们做的，我们总是想要非常犀利的对话，所以不要给很大的对话树，但仍然要让它有互动性。所以我们会失去一点互动性，但我们仍然会让对话感觉是活的。但我们会在对话方面做得更好，它会感觉更像，稍微更电影化的体验。
+Dan Houser (02:12:02) Like, I’m not always a great… For just what we do, I like when other people do it. For what we do, we always want very punchy dialogue, so don’t give big trees, but still have it interactive. So we’re going to lose a touch of interactivity, but we’ll still have the dialogue feeling like it’s alive. But we’ll get better at dialogue, and it’ll feel more, a slightly more cinematic experience.
+Lex Fridman (02:12:23) 是的。我认为《上古卷轴》系列几乎总是更倾向于开放世界。
+Lex Fridman (02:12:23) Yeah. I think The Elder Scrolls series has almost always leaned a little more towards the open world.
+Dan Houser (02:12:29) 是的。它们是真正的RPG。你知道，我参与制作的游戏，它们并不真正是RPG。它们是在故事驱动的动作游戏上加入了RPG元素。这只是侧重点略有不同，但我仍然认为他们所做的是惊人的。他们和他在这方面做得很出色。
+Dan Houser (02:12:29) Yes. They’re real RPGs. You know, the games that I’ve worked on, they’ve not really been RPGs. They’ve had RPG elements onto a story-driven action game. It’s just a slightly different emphasis, but I still think what they do is amazing. They and he’s brilliant at doing it.
+Lex Fridman (02:12:47) 我认为《侠盗猎车手》、《荒野大镖客：救赎》和《天际》是那种有数百万玩家只是到处走或开车转转的游戏。
+Lex Fridman (02:12:47) And I think Grand Theft Auto, Red Dead Redemption, and Skyrim are games where you have millions of people that just walk around or drive around.
+Dan Houser (02:12:58) 嗯。感受那个世界。
+Dan Houser (02:12:58) Mm-hmm. And feel the world.
+Lex Fridman (02:12:59) 感受那个世界。只是感受那个世界。
+Lex Fridman (02:12:59) Feel the world. Just feel the world.
+Dan Houser (02:13:01) 还有《巫师》，一样。
+Dan Houser (02:13:01) And The Witcher, same thing.
+Lex Fridman (02:13:03) 还有《博德之门1、2、3》，真的很有趣。他们真的试图让你做出的每个选择都真正地分支游戏，以至于那不是选择的幻觉，而是真的…
+Lex Fridman (02:13:03) And Baldur’s Gate 1, 2, and 3, really interesting. They really tried to make every choice that you make genuinely branch the game, to where it’s not the illusion of choice, it’s really…
+Dan Houser (02:13:15) 不是幻觉。是的。
+Dan Houser (02:13:15) Nothing. Yeah.
+Lex Fridman (02:13:16) 是真的，选择真的会改变什么，这在技术上真的很难实现。
+Lex Fridman (02:13:16) It’s really, choice really does something and that’s really hard to pull off technically.
+Dan Houser (02:13:20) 是的。而且很难实现。你总是在争论那个与强故事之间的最佳平衡点。你知道，还有强的机制。很难同时拥有所有这些，而且你，作为一个游戏制作团队，整个团队必须决定他们想落在那条线的哪个位置。
+Dan Houser (02:13:20) Yes. And hard to pull off. You’re always debating the sweet spot between that and a strong story. You know, and strong mechanics. It’s hard to get them all, and you, as a game-making team, the whole team has to figure out where they want to fall on that line.
+来自父亲的人生教训
+Life lessons from father
+Lex Fridman (02:13:41) 一个艰难的话题，你把这本书献给了你的妈妈和爸爸。特别是，你写道：“献给我的父亲，他在我完成这本书时去世了。” 你从你父亲那里学到了关于人生的什么？
+Lex Fridman (02:13:41) A difficult topic, you dedicated the book to your mom and dad. And in particular, you wrote, “To my father, who died while I was finishing the book.” What have you learned about life from your dad?
+Dan Houser (02:13:57) 要出现。要在场。每天去工作。热爱创造性的东西。你知道，他是一名律师，但他也是一名爵士音乐家，他尽最大努力做这两件事。重视家庭比其中任何一件事都重要。你知道，我认为他是一个在场的人。而且，你知道，他热爱书籍，一直热爱书籍，一直热爱电影，热爱音乐。他对电子游戏不感兴趣，但喜欢我们在做奇怪的事情。
+Dan Houser (02:13:57) To show up. To be present. To go to work every day. To love creative things. You know, he was a lawyer, but he was also a jazz musician, and he did both to the best of his abilities. To value family as more important than either of those things. You know, he was a present guy, I think. And, you know, he loved books, always loved books, always loved films, loved music. He wasn’t into video games but liked that we were doing weird things.
+Lex Fridman (02:14:37) 他以你为荣吗？
+Lex Fridman (02:14:37) Was he proud of you?
+Dan Houser (02:14:39) 是的，我想是的。我希望如此。而且，作为一名律师，他在某种程度上确实崇尚对“体制”竖中指。比如，你知道，每当生活变得疯狂……他总是站在弱者和平庸者一边。我认为，你知道，他总是想回敬别人，总是说些傻话，我当然，你知道，从他那里继承了这一点，可能对我有害，但这让生活更有趣。他总是会说些令人讨厌的话，而且根本不在乎。我认为那可能相当鼓舞人心。
+Dan Houser (02:14:39) Yeah, I think so. I hope so. And he was, for a lawyer, he really venerated at some level, giving “the man” the finger. Like, you know, whenever life goes crazy… …He just was always on the side of the underdog and the ridiculous. And I think that, you know, he always wanted to answer people back, always give the silly comment, and I certainly, you know, taken that from him to my detriment probably, but it makes life more fun. He always would just say the obnoxious thing and just didn’t give a fuck. And that was, I think that was probably quite inspiring.
+Lex Fridman (02:15:20) 所以你身上有一点这个特质？
+Lex Fridman (02:15:20) So you have a bit of that in you?
+Dan Houser (02:15:22) 不幸的是是的。不善于闭嘴，不善于循规蹈矩。
+Dan Houser (02:15:22) Unfortunately so, yes. Not good at shutting up, not good at towing the line.
+Lex Fridman (02:15:29) 我想我代表人类文明的大多数人说，幸运的是你拥有这个特质作为你的一部分，因为它贯穿于你的故事中。
+Lex Fridman (02:15:29) I think I speak for most of human civilization that fortunately you have that as part of who you are, because it comes through your stories.
+Dan Houser (02:15:40) 我想这让上学变得困难。你知道，他们送我去这所非常正规的学校——感觉就像，即使在20世纪90年代，它也像是设定在19世纪70年代。但是，你知道，我总是惹上麻烦，不是因为做错了什么，只是总跟老师顶嘴。就是不能安静。
+Dan Houser (02:15:40) I think it made school difficult. You know, they sent me to this very formal school- That was like, it might as well have been set in the 1870s, in the 1990s. But then, you know, I always got in trouble just for… not for doing anything that wrong, just answering teachers back all the time. Couldn’t be quiet.
+死亡
+Mortality
+Lex Fridman (02:16:01) 你多久思考一次死亡？你个人自己害怕死亡吗？
+Lex Fridman (02:16:01) How often do you think about mortality? Are you personally, yourself afraid of death?
+Dan Houser (02:16:07) 嗯，我父亲五月去世了，所以从那以后显然想得更多了。我的意思是，我经常思考它。我害怕吗？我不知道。有些日子非常害怕，有些日子一点也不。我当然希望活得足够长，能看到我的孩子们好好长大和安定下来，这是为了他们。除此之外，有些日子我感觉，你知道，与宇宙有灵性的连接，一点也不怕死；其他日子我感觉自己像一个偶然的幸运儿，会被愤怒的命运击倒，化为乌有，这让我感到恐惧。我只是…
+Dan Houser (02:16:07) Well, my father passed away in May, so a lot more since then, obviously. I mean, I think about it a lot. Am I afraid of it? I don’t know. Some days intensely and some days not at all. I would love to stay alive long enough to see my kids properly grow up and settled, of course, for them. Aside from that, some days I feel, you know, spiritually connected to the universe and not afraid of death at all, and other days I feel like a random piece of good luck who’s gonna get struck down by an angry fate and turn to nothingness, and that terrifies me. I just…
+Lex Fridman (02:16:51) 你对虚无怎么看？我的意思是，虚无本身就很可怕。
+Lex Fridman (02:16:51) What do you think about the nothingness? I mean, that in itself is terrifying.
+Dan Houser (02:16:55) 是的，那很可怕。那个，我的意思是，我倾向于，你知道，我生命中有很长一段时间被那些东西折磨。最近几年，我倾向于相信生命有目的和意义，我们拥有某种灵性或基于灵魂的存在。我不太确定是否有上帝是否重要，无论如何我们可能都应该以同样的方式生活。但我倾向于认为，你知道，生命有一种形而上的目的，而这个目的的一部分就是，你知道，寻找这个目的。但在其他时候，你知道，如果你读了太多科学，你会陷入一切都是虚无的困惑中。
+Dan Houser (02:16:55) Yeah, that is terrifying. That, I mean, I tend to, I tend to, you know, I’ve spent long periods of my life tormented by that stuff. The last few years, I tend to believe there is a purpose and a point to life, and that we have some kind of spiritual or soul-based existence. Not, I’m not quite sure if it matters if there is a God or not, we should probably live our lives the same way either way. But I tend to think that, you know, there is a metaphysical purpose to life and part of that purpose is to, you know, search for the purpose. But at other points, you know, if you read too much science, you get wrapped up in the nothingness of it all.
+Lex Fridman (02:17:38) 另外，你的大脑还有一个特点。在谈到艾米莉·勃朗特的《呼啸山庄》时，你说你幸运地被赋予了感受宏大情感的能力。所以你深刻地感受世界，有时浪漫，有时过于浪漫。你说过，我喜欢这句话，“情感可能会毁了你，但它们是我们拥有的最好的东西。” 那么，这种感受世界的能力，对你来说是一种天赋还是诅咒？你怎么看？
+Lex Fridman (02:17:38) Also, there’s a component to your brain. When talking about Wuthering Heights by Emily Brontë, you said that you have been, by fortune, struck with a bit of a capacity for the grandiosity of feeling. So you feel the world deeply, sometimes romantic, sometimes overly romantic. You’ve said, I like this line, “Feelings may destroy you, but they’re the best thing we have.” So that ability to feel the world, is that a gift or a curse for you? What do you think?
+Dan Houser (02:18:10) 这是个非常有趣的问题，因为它显然两者都是。你知道，有时两者都是，或者有时是其中一种。当事情顺利时，当你感觉活着时，当你感觉与事物连接时，当你在人们身上看到美，在经历中看到喜悦时，它当然是美妙的。当你感觉，你知道，被世界遗弃，随波逐流，无法以某种方式与之连接，迷失了，被上帝或意识或命运或无论什么遗弃时，那就很糟糕。你知道，当我感觉自己是个糟糕的冒牌货时——大多数时候都是——那就很可怕。你宁愿不做这种垃圾事。
+Dan Houser (02:18:10) That’s a really interesting question because it’s obviously both. You know, at times it’s both, or at times it’s one or the other. When things are going well, when you feel alive, when you feel like you’re connected to things, when you’re seeing beauty in people and joy in experiences, of course it’s wonderful. When you’re feeling like, you know, bereft and set adrift by the world and that you can’t connect to it in some way and you’re lost and abandoned by God or consciousness or fate or whatever it is, it’s awful. You know, when I feel like a dreadful hack, which is most of the time, it’s terrible. You’d rather not be doing this rubbish.
+Dan Houser (02:18:49) 然后有时你正在进行创造性工作，感觉很好，你觉得自己在做正确的事，那感觉棒极了，但这种情况不常发生。
+Dan Houser (02:18:49) And then sometimes you’re working creatively and it feels good and you feel like you’re doing the right thing and it feels fantastic, but that’s not very often.
+Lex Fridman (02:18:57) 你认为可能只拥有其中一种而没有另一种吗？
+Lex Fridman (02:18:57) Do you think it’s possible to have one without the other?
+Dan Houser (02:18:59) 不。不，当然不可能。当我思考成长时，就我能够成长的程度而言，就是接受任何情况或自身任何方面的坏与好。你知道，去说：“好吧，这不完美。我不完美。”
+Dan Houser (02:18:59) No. No, of course not. When I think about growing up, to the extent that I am capable of growing up, it is about accepting the bad with the good from any situation or any aspect of myself. You know, going, “Okay, it’s not perfect. I’m not perfect.”
+Lex Fridman (02:19:18) 你说你经常感觉自己像个冒牌货。你大脑中那个自我批评的部分，是特性还是缺陷？
+Lex Fridman (02:19:18) You said you often feel like a hack. Is that self-critical part of your brain, is that a feature or a bug?
+Dan Houser (02:19:28) 这是个，我想这是我们接下来要深入探讨的新事物，缺陷特性。两者都是，不是吗？我的意思是，它不可能导致… 那种自我批评的大脑，我想很多人都深受其苦，我认为互联网就是设计来诱导它的，如果你以前没有，上网之后你就会有。它显然可能变成一种缺陷，但它也能给你动力和不安于现状的感觉，所以它也可能变成一种特性。
+Dan Houser (02:19:28) That’s an, I think it’s the new thing that we’re going to lean into, the bug feature. It’s both, isn’t it? I mean, it cannot lead… That self-critical brain, I think lots of people suffer from, and I think the internet is designed to induce, if you didn’t have it before, you will have it after being online. It clearly can become a bug, but it also can give you drive and a lack of complacency, so it can also become a feature.
+Lex Fridman (02:19:56) 我曾和保罗·康蒂有过相当激烈的争论，他是一位传奇的精神病学家，心灵研究者。他与许多著名的创意人士合作过，他认为那种消极的声音对于创造性天才来说根本不需要。我想，“我认识非常多拥有那种声音的创意人士。”
+Lex Fridman (02:19:56) I had a pretty intense argument with Paul Conti, who’s a legendary psychiatrist, student of the mind, about this. He worked with many famous creative people and he thinks that that negative voice is not at all needed for creative genius. And I thought, “I know awfully a lot of creative people that have that voice.”
+Dan Houser (02:20:20) 我宁愿没有它，但到目前为止我肯定一直与它共存。危险在于消极性… 对我来说，那种消极性和意识变成了同一件事，你知道吗？有时我必须努力不让自己只是永远消极，这对许多人来说可能是人类挣扎的一部分，对我来说肯定是。我想如果你试图做，你知道，好东西，而你不可避免地会反思，而且，你知道，你生活在这个不断、不断被互联网批评的世界里。当然，你知道，任何在互联网上发布东西的人，无论是自己的照片，还是他们制作的任何作品或其他什么，都会得到50条好评和一条差评。记住那条差评。
+Dan Houser (02:20:20) I’d rather not have it, but I certainly have lived with it this far. There’s a danger that negativity… For me, that negativity and consciousness become the same thing, you know? And sometimes I have to fight to not just be perpetually negative, and that can be part of the human struggle for lots of people and certainly has been for me. I think if you’re trying to do, you know, good stuff and you’re reflective inevitably, and, you know, you live in this world of constant, constant criticisms by the internet. Of course, you know, everyone who ever puts something on the internet, be it a picture of themselves or any kind of work they’ve made or whatever it is, is gonna get 50 good comments and one bad comment. Remember the bad comment.
+Dan Houser (02:21:06) 所以那，而那，那变成了消极声音的燃料。我不认识任何足够强大而不… 你知道，我们所有人，你知道，在某种程度上你应该只按重量来衡量那些东西，而不是按质量。但我们当然只关注质量。
+Dan Houser (02:21:06) So that, and that, that becomes fuel for the negative voice. I don’t know anyone that’s strong enough not to… You know, we all, you know, at some level you should just measure that stuff in weight, not in quality. But of course we just focus on the quality.
+Lex Fridman (02:21:18) 而且我确实认为总的来说，随着你变老，这对人们来说是真正的挑战。你可以看到人们选择采取的不同人生轨迹。但很容易滑入愤世嫉俗和消极，滑入陀思妥耶夫斯基《地下室手记》那种虚无主义的世界观。我认为随着时间推移，英雄式的行动是变得更加乐观，看到更多美好。我认为-
+Lex Fridman (02:21:18) And I do think in general, as you get older, that’s the real challenge for people. You can see the different trajectories people choose to take. But it’s easy to slip into cynicism and negativity, into this Dostoevsky’s Notes from Underground, nihilistic kind of worldview. I think the heroic action to take with time is to become more optimistic, to see more good. I think that-
+Dan Houser (02:21:43) 我同意
+Dan Houser (02:21:43) I agree
+Lex Fridman (02:21:43) 可能有一种英雄之旅，起初，也许是生命的前一半或三分之二，极度自我批判，然后在保持一些自我批判方面的同时，以便保持谦逊，开始看到周围一切事物、他人、世界中的美好，甚至也许偶尔，在周末，在自己身上。
+Lex Fridman (02:21:43) There’s probably a hero’s journey of being extremely self-critical at first for the first, maybe half of your life or two-thirds, and then while maintaining some self-critical aspects just so you stay humble, start to see the good in everything around you, in other people, in the world, and even maybe every once in a while, on a weekend, in yourself.
+Dan Houser (02:22:12) 我希望如此。我的意思是，这就是我一直以来的样子。我不可能比童年时更愤世嫉俗了。我认为你说得很美。我不可能比小时候更愤世嫉俗了。我那时看不到任何地方有善良。我认为20世纪70年代末到90年代初的英格兰不是一个充满伟大乐观主义和天真无邪的地方。它是残酷的，而我身在其中也很残酷。我想我已经变得天真得多，并试图在某些方面变得更加纯真，总是试图看到人们身上有缺陷的善良。我尝试或不得不强迫自己变成那样，因为另一种方式不好玩。不友善并不愉快。
+Dan Houser (02:22:12) I hope so. I mean, that’s what I’ve been. I could not be more cynical. I think you put that beautifully. I could not be more cynical than I was as a child. I could not see goodness anywhere. I don’t think late 1970s to early 1990s England was a place of great optimism and naivete. It was brutal, and I was brutal within it. And I think I’ve become much more naive and tried to become more innocent in some ways, and always try to see the flawed good in people. I’ve tried or I’ve had to force myself to be like that because the other way is not fun. It’s not nice to not be nice.
+Lex Fridman (02:22:59) 简单提一下，你在洛杉矶动漫展上与Ryan McCaffrey有一次精彩的对话。我一直是他的大粉丝。他在IGN写很棒的文章，他有一个很棒的播客，每个人都应该去听听。我真的很喜欢。而且，我得以参加一个动漫展，就在观众席里。就像我们私下说的，洛杉矶动漫展，这是我参加的第一个动漫展。那里有各种各样真实、真诚的极客，心地善良…
+Lex Fridman (02:22:59) As a brief aside, you had a wonderful conversation with Ryan McCaffrey at LA Comic-Con. I’ve been a big fan of his for a long time. He writes amazing stuff at IGN, and he has a great podcast, everybody should go listen to it. I really enjoyed it. Plus, I get to attend a Comic-Con and just be there in the audience. And like we were saying offline, the LA Comic-Con, it’s the first Comic-Con I’ve been to. There’s just all kinds of real, genuine nerds, good-hearted…
+Dan Houser (02:23:24) 哦，很吸引人。是的，很棒。
+Dan Houser (02:23:24) Oh, it’s fascinating. Yeah, brilliant.
+Lex Fridman (02:23:25) 那里充满了善意、美好，以及作为某件事粉丝的简单快乐。
+Lex Fridman (02:23:25) It’s just so much kindness and goodness and just simple joy in being a fan of a thing was there.
+Dan Houser (02:23:33) 是的，这就是那些活动的全部意义。
+Dan Houser (02:23:33) Yeah, which is what those things are all about.
+Lex Fridman (02:23:34) 是的。好的，我们来谈谈一些史上最伟大的书籍。我也应该提一下他与Sonia Walger做的优秀播客，她是你的朋友，但她有个很棒的播客。她让嘉宾挑选他们最喜欢、最具影响力的五本书等等。你挑选了五本小说，对应你人生的每个十年。对于听众，他们应该去听听那个对话。但你选了亚瑟·兰塞姆的《冬日假期》。第二本是艾米莉·勃朗特的《呼啸山庄》。然后是F·斯科特·菲茨杰拉德的《夜色温柔》。詹姆斯·琼斯的《细细的红线》，和乔治·艾略特的《米德尔马契》。但是退一步讲，回顾那次对话，如果一个外星人来了，你认为有哪些书籍是你会推荐给他们的候选？
+Lex Fridman (02:23:34) Yeah. Okay, so let’s talk about some of the greatest books of all time. And I should also give a shout-out to an excellent podcast he did with Sonia Walger, who’s a friend of yours, but she had a great podcast. She has guests pick their five favorite, most impactful books and so on. You picked five fiction books, one for each decade of your life. For the audience, they should go listen to that conversation. But you picked Winter Holiday by Arthur Ransome. Second one was Wuthering Heights by Emily Brontë. Then Tender is the Night by F. Scott Fitzgerald. The Thin Red Line by James Jones, and Middlemarch by George Eliot. But just zooming out, reflecting back on that conversation, what do you think if an alien came, what are some candidates for books that you would recommend to them?
+Dan Houser (02:24:22) 《米德尔马契》。
+Dan Houser (02:24:22) Middlemarch.
+Lex Fridman (02:24:23) 《米德尔马契》。
+Lex Fridman (02:24:23) Middlemarch.
+Dan Houser (02:24:23) 它是用英语写的最好的小说。《战争与和平》是用俄语写的最好的小说之一，我认为。我想这两本都是因为如果你只有一本书，你会想要一本长书。
+Dan Houser (02:24:23) It’s the best novel written in English. War and Peace is one of the best novels written in Russian, I would argue. I think both of those are because if you’ve only got one book, you want a long book.
+Lex Fridman (02:24:38) 是的，没错。
+Lex Fridman (02:24:38) Yeah, true.
+Dan Houser (02:24:39) 它们都是那种… 我一直试图放入游戏中的感觉，你知道，那种生活的全部都在这里的感觉。你有爱、死亡、暴力、浪漫，整个人类的体验以不同的方式呈现。所以我认为有些东西很神奇，你知道，《名利场》，我以前喜欢那本小说，不是那本杂志，因为同样，生活的全部都在这里。
+Dan Houser (02:24:39) And they’re both books that kind of… it’s something I was always trying to put into games, and you know, that feeling of all of life is here. You’ve got love, death, violence, romance, the whole human experience in different ways. So I think there’s something amazing about, you know, Vanity Fair, I used to love the novel, not the magazine, because same thing, all of life is here.
+Lex Fridman (02:25:04) 你也高度评价了F·斯科特·菲茨杰拉德和海明威。
+Lex Fridman (02:25:04) You also spoke highly of F. Scott Fitzgerald and Hemingway.
+Dan Houser (02:25:08) 我在20多岁时完全痴迷于他们。完全痴迷。
+Dan Houser (02:25:08) I was obsessed by them in my 20s. Completely obsessed.
+Lex Fridman (02:25:12) 一个人在那个年龄必须如此。绝对。
+Lex Fridman (02:25:12) As one must be. Absolutely.
+Dan Houser (02:25:14) 在那个年龄，我认为他们作为一个组合是如此惊人。一个帮助发现了另一个，然后先去世，然后突然在默默无闻中死去，然后在另一个人还活着并陷入——不是默默无闻——而是衰退时，被重新发现为天才。我认为他们的关系本身就很有小说色彩。
+Dan Houser (02:25:14) At that age, and I think them as a double act is so amazing. One helped discover the other and then died first, and then suddenly died in obscurity and then was rediscovered as a genius while the other one was still alive and falling into not obscurity but into decline. I think their relationship is itself very novelistic.
+Lex Fridman (02:25:37) 顺便说一下，这是写作中也许不再有，也许仍然有的现象，你知道，像弗朗茨·卡夫卡那样在默默无闻中去世的人。所有这些在默默无闻中去世的作家。没有人知道他们，他们后来才出名。这很有趣。那是一个非常有趣的… 你知道，弗朗茨·卡夫卡尤其引人入胜，因为他希望他所有的作品都被烧掉，毁掉。所以，说到批评的声音，我认为他是20世纪最优秀的作家之一。当然，反乌托邦小说真的很有趣，《1984》，《美丽新世界》。
+Lex Fridman (02:25:37) That, by the way, is a phenomenon of writing maybe no longer, maybe still, that, you know, people like Franz Kafka who died in obscurity. All these writers who die in obscurity. Nobody knows them and they become famous later. That is just so interesting. That’s such an interesting… You know, Franz Kafka in particular is fascinating because he wanted all of his work to be burnt, like destroyed. So that, speaking of the critical voice, and I think he’s one of the best writers of the 20th century. Of course, the dystopian novels are really interesting, 1984, Brave New World.
+Dan Houser (02:26:20) 我喜欢《1984》。我从来没听过或读过，然后我想我是在新冠疫情期间通过有声书听的，或者也许读的，我记不清了。然后变得，我想我两者都做了，变得痴迷于它。它有那种渗透到《极乐天堂之床》中的元素，但它太好了。
+Dan Houser (02:26:20) I love 1984. I’d never listened to it or read it, and then I think I did it on Talking Book, or I maybe read it, I can’t remember, during COVID. And became, I think I did both, became obsessed by it. And it’s got the elements of that creeping into A Bed of Paradise, but it’s so good.
+Lex Fridman (02:26:34) 不错。
+Lex Fridman (02:26:34) Nice.
+Dan Houser (02:26:34) 我以前没意识到它这么好。
+Dan Houser (02:26:34) I hadn’t realized how good it was.
+Lex Fridman (02:26:37) 是的。
+Lex Fridman (02:26:37) Yes.
+Dan Houser (02:26:37) 而且它非常符合当下。
+Dan Houser (02:26:37) And it’s so of the moment.
+Lex Fridman (02:26:39) 它几乎因为它的名声和…… …它几乎成了陈词滥调，你抛开人物-
+Lex Fridman (02:26:39) It’s almost like because of its fame and… …It’s almost like cliché, and you take away the character-
+Dan Houser (02:26:45) 是的，如果它是英语… 而且我记得1984年。然后你想，“这是…” 我记得那首歌。只是太多了。
+Dan Houser (02:26:45) Yeah, if it were English… And I remember the year 1984. And you’re like, “This is…” I remember the song. It’s just too much.
+Lex Fridman (02:26:50) 是的，太多了。
+Lex Fridman (02:26:50) Yeah, too much.
+Dan Houser (02:26:50) 不可能那么好。然后它就是那么好。我是完全不带先入之见接触它的，只是，“哦，我应该读完这个，因为这是另一本我没读过的经典。”然后它令人难以置信。
+Dan Houser (02:26:50) It can’t be that good. And then it was that. I came to it completely cold, just, “Oh, I should work my way through this because it’s another classic I haven’t read.” And then it’s incredible.
+Lex Fridman (02:26:59) 我读过次数最多的书是乔治·奥威尔的《动物农场》。我不知道为什么，但那种用童话般的方式讲述极权主义。
+Lex Fridman (02:26:59) And the book I’ve read more than any other book is Animal Farm by George Orwell. I don’t know why exactly, but the childlike fairy tale telling of totalitarianism.
+Dan Houser (02:27:10) 嗯，你是在一个共产主义国家长大的。
+Dan Houser (02:27:10) Well, you grew up in a communist country.
+Lex Fridman (02:27:12) 是的，也许就是这个原因。它的根源。
+Lex Fridman (02:27:12) Yeah, maybe that’s it. The roots of it.
+Dan Houser (02:27:14) 你知道，我记得，我是冷战时期在伦敦长大的孩子。我们总是害怕东欧人。你们会来杀死我们所有人。然后我最终娶了一个波兰人。我那时… 我们… 我们有为我们工作、与我们一起工作的乌克兰人。几年前，我们在纽约州北部围坐在篝火旁，篝火是我们以前的保姆的丈夫搭建的，他是乌克兰人，他曾在红军服役。我当时想，历史是如此奇怪，以至于你最终… 红军曾经是终极敌人。而现在，我们只是和… 在一起。就像，一切都变了。你认为这些事物是永恒的，但它们真的不是。
+Dan Houser (02:27:14) You know, I remember, I was a kid in the Cold War in London. And we were always terrified of Eastern Europeans. You were going to come and kill us all. And then I ended up marrying a Pole. And I was… We were… And we had Ukrainians who worked for us and worked with us. And a few years ago, we were sitting around a campfire in Upstate New York, with the campfire built by our old nanny’s husband, who’s Ukrainian, and he’d been in the Red Army. I was like, history is so strange that you end up… The Red Army used to be the ultimate enemy. And like, we’re now just hanging out with… It’s like, everything changes. You think these things are permanent, and they’re really not.
+Dan Houser (02:27:55) 你知道，我们现在也面临一些这种情况，你认为这些结构是永久的，但它们会改变。
+Dan Houser (02:27:55) You know, and we face some of that now, where you think these structures are permanent, and they’re going to change.
+Lex Fridman (02:27:59) 你还提到，三本伟大的二战书籍是《细细的红线》和瓦西里·格罗斯曼的《生活与命运》。还有格雷厄姆·格林的《恋情的终结》。是什么造就了一本伟大的战争书籍？
+Lex Fridman (02:27:59) And you also mentioned that the three great World War II books are The Thin Red Line and Life and Fate by Vasily Grossman. And The End of the Affair by Graham Greene. What makes for a great war book?
+Dan Houser (02:28:14) 我认为二战很有趣，因为它显然影响了每个地方。所以你可以得到所有这些不同类型的故事。而且有那么多好的… 我只是试图想出一个美国、一个英国、一个东欧的，以获得不同的视角。但世界各地有那么多惊人的二战书籍，涉及各种故事。我认为最完整的一本，因为它包含了生活的全部，可能是《生活与命运》。那本书很惊人。
+Dan Houser (02:28:14) I think World War II is interesting because it affects everywhere, obviously. And so you can get all these different kinds of stories. And there are so many good… I was just trying to come up with a range of one American, one British, one Eastern European, just to get different perspectives. But there are so many amazing World War II books around all kinds of stories. I think the most complete one, because it is this all of life being there, probably is Life and Fate. Which is amazing.
+Lex Fridman (02:28:44) 它是瓦西里·格罗斯曼写的。他亲身经历了斯大林格勒战役。而且还有深刻的哲学成分。
+Lex Fridman (02:28:44) It was written by Vasily Grossman. He experienced Stalingrad firsthand. And there’s also just a deep philosophical component.
+Dan Houser (02:28:51) 特雷布林卡那一部分是任何书中我读过的最令人痛心的章节之一。它真的，几乎比其他任何关于大屠杀的艺术作品都更能让我感受到在那个时刻你会有什么感觉。我的意思是，那是一部不可思议的人道主义作品。
+Dan Houser (02:28:51) And the bit in Treblinka is one of the most harrowing sections of any book I ever read. And it really, almost more than any other piece of art around the Holocaust, made me feel what you would feel like at that moment. I mean, it’s just an incredible piece of humanism.
+Lex Fridman (02:29:08) 还有，我的意思是，维克多·弗兰克尔的《活出生命的意义》。
+Lex Fridman (02:29:08) And also just, I mean, Man’s Search for Meaning by Viktor Frankl.
+Dan Houser (02:29:11) 是啊。哦，是的。
+Dan Houser (02:29:11) Yeah. Oh, yeah.
+Lex Fridman (02:29:12) 似乎那个背景以最纯粹的方式揭示了人性，以及什么样的… 你知道，《活出生命的意义》中是当一切都被从你身边夺走时，你知道，残存的，在这种情况下，对他妻子的爱…… …是那一点点燃烧的火焰。还有，比如说你的格罗斯曼，是微小的善举… …是让人类精神得以持续的东西。
+Lex Fridman (02:29:12) It seems like that context reveals, in the most pure way, human nature and what kind of… You know, in Man’s Search for Meaning is when everything is taken from you, you know, the little remains of love for, in this case, his wife… …Is the thing that is a little flame that burns. And let’s say your Grossman is small acts of kindness… …Is the thing that allows the human spirit to persist.
+Dan Houser (02:29:43) 我喜欢《生活与命运》中的那部分，当你在… 显然，那是在斯大林时期，所以他们都在失去… 他们都知道他们以为革命会带来的美好不会发生。所以每个人都害怕被斯大林杀死，因为那是在大清洗之后。但然后你看到这些人，他们被困在一栋建筑里，在斯大林格勒战斗。所以他们知道此时此刻反正他们死定了。于是他们得以像纯粹、完美的马克思主义共产主义者那样生活，远离斯大林和他所有的胡闹。我认为那一部分令人难以置信，因为你意识到在某些方面，在其所有的恐怖之中，20世纪最令人失望的事情之一，在某种程度上，就是共产主义的彻底失败。
+Dan Houser (02:29:43) I love the bit in Life and Fate when you get… Obviously, it’s in this Stalinist period, and so they’re all losing… They all know that what they thought was going to be wonderful about the revolution isn’t going to happen. So everyone’s scared of being killed by Stalin because it’s post the purges. But then you get these guys and they’re trapped in a building, fighting in Stalingrad. And so they know at this moment they’re dead anyway. And they get to live like pure, perfect Marxist communists away from Stalin and all his nonsense. And I thought that section’s incredible because you realize in some ways, in all of its horrors, the most disappointing thing about the 20th century, in some ways, was the absolute failure of communism.
+Dan Houser (02:30:29) 你知道吗？因为那是一个如此，你知道，所谓的美丽想法，但它一次又一次地就是行不通。而这些为之奋斗，然后看到它行不通的人们，我认为他们是那种迷人的角色。你知道… …所有1917年的革命者，后来都被斯大林杀害了，除了他和列宁之外的所有人。
+Dan Houser (02:30:29) You know? It was… Because it was such a, you know, quote-unquote beautiful idea and it just did not work time and time again. And these people who fought for it and then saw it not working, I think they’re sort of fascinating characters. You know… …All of the revolutionaries from 1917 that were then killed by Stalin, which was all of them apart from him and Lenin.
+Lex Fridman (02:30:50) 而那是，你知道，现代政治中的人们谈论共产主义就像它是微不足道的，它会轻易导致暴行，但我不认为它那么微不足道。这是人类的理想主义。就像，你知道，为什么我们不能… 基本上，为什么我们不能和睦相处？这背后有真正的同情心。有真正的爱。你意识到的是… 这是对人性真正的研究，不幸的是，在规模上，那种同情心被集权所滥用。所以总有一个独裁者，在那个背景下，在那套技术条件下，独裁者会出现，并做出与… …理想承诺相反的事。
+Lex Fridman (02:30:50) And that was, you know, people in modern-day politics talk about communism like it’s trivially, it’s trivial that it would lead to atrocities, but I don’t think it’s that trivial. It’s this idealism of humans. It’s like, you know, why can’t… Basically, why can’t we all get along? There’s a real compassion behind it. There’s real love. And what you realize is there is… it’s a real study, the 20th century, of human nature that unfortunately at scale, that kind of compassion is abused by centralized power. So there’s a dictator always, in that context, in those, given that set of technologies, a dictator arises and does the opposite… …Of what the promise of the ideal is supposed to be.
+Dan Houser (02:31:37) 嗯，我认为… 我那时想了很多，因为我被所有这些失望的共产主义者教导过，你知道吗？89年后，所有这些英国的共产主义者，你知道，都不得不接受，发现在…发生的所有这些暴行。所以它总是让我着迷。然后你思考现代时刻的复杂性或一个人自己的价值观所在。我说，你知道，没有，而且无论他们，我们现在称之为左派还是右派，是否与那些词语的共产主义时代有任何关联？我想可能没有。我认为事情已经变了，但根本上，我会说，我认为值得为之奋斗的一个价值是，每当任何一方开始走向思想控制时… …就远离。
+Dan Houser (02:31:37) Well, I think… I thought a lot about that then because I was taught by all these disappointed communists, you know? After ’89, all of these English communists, you know, were all like having to access, discovering all these atrocities that happened in… You know, so it was, it always fascinated me. And then you think about complexities or where one’s own values are in the modern moment. And I say, you know, without, and whether either of them, what we would call left now or call right now, does it have any bearing on the sort of communist era of those words? And I would say probably not. I think things have changed, but fundamentally, the one value that I would go, I would think is worth fighting for is whenever either side starts to move towards thought control… …Move away.
+Dan Houser (02:32:25) 那永远不是正确的结果。永远正确的结果不是，“哦，你说错了话。你现在应该被清除。”那永远永远不应该是我们应该倾向的事情。
+Dan Houser (02:32:25) That’s never the right outcome. The never right outcome is, “Oh, you’ve said the wrong thing. You should be removed now.” That should never ever be a thing we should lean towards.
+Lex Fridman (02:32:35) 是的，似乎自由，个人自由，是…
+Lex Fridman (02:32:35) Yeah, it does seem like freedom, individual freedom, is a prerequisite for…
+Dan Houser (02:32:41) 对于幸福来说是。
+Dan Houser (02:32:41) For happiness.
+Lex Fridman (02:32:42) …对于幸福… …对于更广泛社会的繁荣来说是。所以，就像你说的，1984相当… 我的意思是，它是一种漫画式描绘。
+Lex Fridman (02:32:42) …for happiness… …For the flourishing of a larger society. So there’s, like you said, 1984 is pretty… I mean, it’s a caricature.
+Dan Houser (02:32:48) 但它很出色。
+Dan Houser (02:32:48) But it is brilliant.
+Lex Fridman (02:32:49) 它相当… 它实际上也是个好故事。那是我对《美丽新世界》的批评，它只是写得不好。但我想《美丽新世界》可能比《1984》更适用于21世纪，所以…
+Lex Fridman (02:32:49) It’s quite… It’s actually also just a good story. That’s my criticism of Brave New World, it’s just poorly written. But I think Brave New World probably applies more to the 21st century than does 1984, so…
+Dan Houser (02:33:02) 我不知道。我认为《1984》中的虚假战争…… …以及它揭示的方式… …其中的一切都是为他设的局。如果他能看到互联网… 有些东西，它就像一个模拟互联网，他们建立的那个世界。…围绕主角。
+Dan Houser (02:33:02) I don’t know. I think 1984 with the fake wars… …And the way that it revealed… …Everything in it was a setup for him. There’s something that if he could’ve seen the internet… there’s something of, it’s like an analog internet, that world they build. …Around the main character.
+给年轻人的建议
+Advice for young people
+Lex Fridman (02:33:19) 对于今天的年轻人，关于，比如说，事业，你会给出什么建议？如何拥有一份能为之自豪的事业，如何拥有能为之自豪的人生？你的人生非同寻常。
+Lex Fridman (02:33:19) What advice would you give to a young person today about, let’s say, career? How to have a career they can be proud of, how they can have a life to be proud of? You’ve had a non-standard life.
+Dan Houser (02:33:32) 我的人生很幸运，其中我奋力把事情搞砸，而命运总是给我一根骨头。
+Dan Houser (02:33:32) I’ve had a lucky life in which I have fought to mess things up and fate has always thrown me a bone.
+Lex Fridman (02:33:41) 你在南美洲旅行过，有流浪汉拿着砍刀追你。
+Lex Fridman (02:33:41) You’ve traveled in South America and had hobos chase you with machetes.
+Dan Houser (02:33:47) 是的，一次。
+Dan Houser (02:33:47) Yeah, once.
+Lex Fridman (02:33:48) 所以那发生过。
+Lex Fridman (02:33:48) So that happened.
+Dan Houser (02:33:49) 那是一系列糟糕的人生决定。而且我跑掉了。你知道，我的意思是，我逃到了南美洲。那是个糟糕的决定。我从那个拿着刀的人那里跑掉了。那是个好决定。我来到了美国。那是个好决定。我来到洛杉矶，那，我认为，是个好决定。看到美国不同的一面，处于不同的创意环境中很有趣。洛杉矶在创造力和娱乐方面仍然很棒，更广泛的娱乐产业。我认为那很有趣。我会说什么？我会说当你得到机会时，抓住它。这是我做得很好的一件事。
+Dan Houser (02:33:49) That was a series of poor life decisions. And I ran away. You know, I mean, I ran away to South America. That was a poor decision. I ran away from the guy with a knife. That was a good decision. I came to America. That was a good decision. I came to LA, that’s, I think, been a good decision. It’s been fun to see a different side of America and be in a different creative environment. LA is still amazing for creativity and entertainment, the wider entertainment industry stuff. I think that’s been fun. What would I say? I would say when you get a chance, take it. That was one thing I did do well.
+Dan Houser (02:34:33) 当我得到机会时，我擅长抓住它们。我会说不要太年轻就担心你的事业。我会说担心拥有一个全面的智识内在生活，因为你将要在自己的头脑中度过整个一生。所以你对自己的头脑越感兴趣，你对世界越感兴趣，你就越不会惹恼自己。所以我会说，我会说不要在本科阶段攻读职业学位。那是我的… 我会说做点别的。做点，你知道，随机的，然后之后再专注。那会是，我认为我是在反对人们四年前对STEM科目的痴迷。
+Dan Houser (02:34:33) When I got chances, I was good at taking them. I would say do not worry too young about your career. I would say worry about having a rounded intellectual inner life, because you’re going to spend the whole of your life in your own head. So the more interesting you find your own head, the more interesting you find the world, the less you’re going to annoy yourself. So I would say, I would say do not do a vocational degree as an undergraduate. That’s been my… I would say do something else. Do something, you know, random and then focus afterwards. That would be, I think I was advocating against the obsession that people had about four years ago with STEM subjects.
+Dan Houser (02:35:14) 而现在人工智能可能会让它们都变得无关紧要，也许。所以，你知道，看到一切都在变化很有趣。工作没那么难。你知道，出现，保持热情。亲自出现，保持热情。帮助别人。说，“你在任何工作中都会做得很好。”人们，你知道。
+Dan Houser (02:35:14) And now AI is going to make them all irrelevant anyway, perhaps. So, you know, it’s interesting to see everything changes. Jobs are not that hard. You know, turn up, be enthusiastic. Turn up in person, be enthusiastic. Help people. Say, “You’ll be fine in any job.” People, you know.
+Lex Fridman (02:35:37) 你总是知道何时出现了要抓住的机会吗？比如，“好的，这很有趣，这是新的，这很不一样”？
+Lex Fridman (02:35:37) Did you always know when the chance to take showed up? Like, “Okay, this is interesting, this is new, this is different”?
+Dan Houser (02:35:42) 并不总是，不。但重要的时刻是搬到美国的机会。对我来说，那是一个重要时刻。我的生活一团糟…
+Dan Houser (02:35:42) Not always, no. But the big times were the chance to move to America. For me, that was a big moment. My life was a mess in…
+Lex Fridman (02:35:49) 那是个奇怪的时机。我读到Sam给你写了封邮件。什么… 在南美洲…
+Lex Fridman (02:35:49) That was weird timing. I read that Sam wrote you an email. What… In South America…
+Dan Houser (02:35:56) 我当时真的在南美洲的哥伦比亚，那里战争肆虐。我在做一系列非常糟糕的人生决定，并且在25岁时缺乏生活技能。我最新一个糟糕决定是起得太早，因为警察直到9点才开始工作，但抢劫犯8点就开始了。所以我8点就沿着海滩散步，这些家伙… 这个前一天跟我聊过天的拉斯塔法里教徒出现了，开始试图跟我说话。然后两个人过来跟他说话，我分不清他们是想抢劫他因为他欠他们钱，还是他把我带给了他们。但我确实注意到其中一个有砍刀，另一个有种坏掉的枪。所以我想，“这不好。”然后我跑掉了，穿着我愚蠢的鞋子沿着海滩狂奔。
+Dan Houser (02:35:56) I was literally in South America in Colombia, where there was a war raging. I was making a series of very poor life choices and had a lack of life skills at age 25. My latest poor choice was to get up too early because the police didn’t start work until 9:00, but the muggers started at 8:00. So I was out walking along the beach at 8:00, and these guys… this Rasta who turned up, who I’d been talking to the day before, started trying to talk to me. Then two guys came up to talk to him, and I couldn’t tell if they were trying to mug him because he owed them money or if he brought me to them. But I did notice one of them had a machete, and the other had a kind of broken gun. So I thought, “This is not good.” And I ran off, sprinted down the beach in my silly shoes.
+Dan Houser (02:36:48) 我一生中第一次有机会跑到一条路上，跳进一辆出租车，大喊：“带我去任何地方！”我感觉自己在一部动作电影里，一个拿着砍刀的家伙在追我。出租车司机回头看了看，看到那个拿着砍刀的家伙，然后说，“？” 我说：“不，不，不，他们不是我的朋友。”
+Dan Houser (02:36:48) And I got the chance for once in my life to run over to a road, jump into a taxi, and scream, “Take me anywhere!” I felt like I was in an action movie with a guy chasing after me with a machete. The taxi driver looked back, saw the dude with the machete, and went, “?” And I’m like, “No, no, no, they’re not my friends.”
+Dan Houser (02:37:05) “带我离开这里。”他开车把我带到街上，进入城市的一部分，在卡塔赫纳的旧城区和新城区之间。我下了车，然后脚被一块石头割伤了。那就是我受伤的总和。然后我去了一个网吧，因为那大概是98年底，得到了来纽约为一个游戏工作六周的机会。我想，“嗯，如果我在南美洲待更久，我会把自己害死的，”因为我正在陷入一些愚蠢的事情。所以我去了纽约，他们刚刚开始Rockstar。我在那里写了任务说明等等，帮助设定了基调，结果就留了下来。
+Dan Houser (02:37:05) “Get me out of here.” He drove me up the street into a bit where the town was, kind of between the old town and the new town in Cartagena. I got out of the car and then cut my foot on a rock. That was the sum total of my injuries. Then I went to an internet cafe because this was probably late ’98 and got the chance to come and work on a game for six weeks in New York. I was like, “Well, if I stay in South America much longer, I’m going to get myself killed,” because I was getting into silly stuff. So I went to New York, and they were just starting Rockstar. I got to write the mission statements and whatnot there, help set the tone for that, and just ended up staying.
+Dan Houser (02:37:48) 我不得不来回几次，直到所有签证都办好。然后我就留下来了。“我会待一年，因为纽约挺有趣的。”实际上没那么… 那是朱利安尼的鼎盛时期，在他变成疯子之前。当你去酒吧时，被告知不能跳舞。因为他们试图压制纽约的乐趣。所以实际上比伦敦乐趣少，但纽约仍有巨大的活力。并且接触到了纽约资本主义的那种疯狂。
+Dan Houser (02:37:48) I had to come and go a bit while all the visas got sorted out. And then I just ended up staying. “I’ll stay for a year because New York’s pretty fun.” It actually was not that… this was the height of Giuliani before he was a maniac. You couldn’t, when you went to bars, you were told you couldn’t dance. Because they were trying to clamp down on New York being fun. So it was actually less fun than London, but there’s still a great energy in New York. And got exposed to the kind of madness of New York capitalism.
+Lex Fridman (02:38:18) 顺便说一下，当我们听到背景中的警笛声时，那总是让我想到纽约。
+Lex Fridman (02:38:18) By the way, as we hear sirens in the background, that always makes me think of New York.
+Dan Houser (02:38:21) 是的，当然。
+Dan Houser (02:38:21) Yeah, of course.
+Lex Fridman (02:38:22) 每当我在纽约… …总是有警笛声。
+Lex Fridman (02:38:22) Whenever I’m in New York… …There’s always sirens.
+Dan Houser (02:38:23) 蒸汽从地下冒出来，人们对你尖叫。我的意思是，在洛杉矶你也会遇到人们对你尖叫，至少。
+Dan Houser (02:38:23) Steam coming out the floor, people screaming at you. I mean, you get people screaming at you in LA, at least.
+Lex Fridman (02:38:29) 但更多的是…
+Lex Fridman (02:38:29) But it’s more…
+Dan Houser (02:38:30) 是的，更分散
+Dan Houser (02:38:30) Yeah, it’s more spread out
+Lex Fridman (02:38:31) …更分散，是的。
+Lex Fridman (02:38:31) …spread out, yeah.
+Dan Houser (02:38:31) 在这里你可以得到更多的安静。我热爱那种活力。你知道，努力工作然后能够很晚出去吃饭很棒。而且，纽约对我来说真的是一次非常非常有趣的经历。
+Dan Houser (02:38:31) You can get a bit more quiet here. And I love the energy. You know, it was great to work hard and then be able to go out for dinner late. And, and it, New York was really, really a fun experience for me.
+Lex Fridman (02:38:42) 你与你兄弟Sam合作了许多年。作为创意头脑，作为一个人，你欣赏他什么？
+Lex Fridman (02:38:42) You worked with your brother, Sam, for many years. What do you admire about him as a creative mind, as a human being?
+Dan Houser (02:38:52) 他的驱动力和他早期对电子游戏能成为什么的远见。他是那个理解电子游戏会是下一个大事的人。我认为那是，你知道，在那些日子里人们会当面嘲笑我们这一点。所以有一个人如此坚定地说：“不，不，我们坚持路线，”然后有自信推动这些大项目，这很重要。
+Dan Houser (02:38:52) His drive and his vision early on to see what video games could become. He was the one who understood that video games were the next big thing. And I think that was, you know, people would laugh in our face about that in those days. So to have someone that was strong and saying, “No, no, we stay the course,” and then having the confidence to push through with these big projects.
+电子游戏的未来
+Future of video games
+Lex Fridman (02:39:20) 你对电子游戏的未来感到兴奋吗？
+Lex Fridman (02:39:20) Are you excited for the future of video games?
+Dan Houser (02:39:22) 是的。我想我们… 我，我… 完全。我仍然，我仍然看… 我很高兴你如此，我的意思是，你如此善意地谈论我们的工作，谈论我所做的事情和整个团队所做的事情。这很棒。但我只是看着它并看到问题。看到我们可以做得更好的地方。你知道，我认为总是，每次尝试都做得更好。而且我，你知道… 我们现在正在做的一些东西将会做到人们之前没有真正见过的事情。然后我想只是… 我认为游戏可以变得好得多。它们可以感觉更加生动。所有…
+Dan Houser (02:39:22) Yeah. I think we’re… I, I… Completely. I still, I still look… I’m glad you’ve spoken so, I mean, you’ve spoken so kindly about our work, about the stuff that I did and the stuff the whole teams did. It’s wonderful. But I just look at it and see problems. And see things that we can make do better. You know, I think it was always, try each time to do it better. And I’ve got, you know… Some of the stuff we’re working on now is going to do stuff that people haven’t really seen before. And then I think it’s just… I think that games can get so much better. They can feel so much more alive. All the…
+Dan Houser (02:39:58) 它们可以在叙事上做得更好，感觉更生动，感觉就像，你知道，它们的系统，所有东西，我们谈论过的组成部分。我们可以把每个部分都做得更好。…并把它们更好地结合在一起。我认为… 技术都… 对我来说，仍然感觉它才刚刚开始。你知道，它已经… 电影从1900年，1895年左右进化，直到他们在1930年左右发明了有声电影。不是那样。然后它找到了它的现代形式，然后到39年，他们开始拍彩色电影。而… 基本上，一部现代电影与1939年的电影没什么不同。但对于游戏，我仍然认为我们还有很长的路要走。技术-
+Dan Houser (02:39:58) They can be better at storytelling and feel more alive and feel like, you know, their systems, all the stuff, the, the component parts we talked about. We can both make each of those parts better. …And tie them together better. I think it’s… The technology is all… To me, it still feels like it’s only just beginning. You know, it’s been, it’s been… Cinema evolved from like 1900, 1895, whenever it was, until they invented talking in 1930 or whenever that was. It’s not that. And then it’s kind of found its modern form, and then by ’39, they’re shooting in color. And that’s… Basically, a modern film is no different from a 1939 film. But with games, I still think we’ve got a long way to go. The tech-
+Dan Houser (02:40:37) …技术有这么多不同的部分，它还有很长的路要走，你可以朝着各种有趣的方向发展。
+Dan Houser (02:40:37) …there’s so many different parts of the tech that it’s still got a long way to go and you can go in all different fun directions.
+Lex Fridman (02:40:43) 我只是希望… 而且我知道你说电子游戏的制作时间已经比可能需要的少多了，但我只是希望它能更快。比如，你已经让我…
+Lex Fridman (02:40:43) I just wish… And I know you said video games take a lot less than they could, but I just wish it was faster. Like, you’ve already made me…
+Dan Houser (02:40:52) 我也是
+Dan Houser (02:40:52) Me too
+Lex Fridman (02:40:52) …爱上了Absurdiverse，你已经让我爱上了Better Paradise，而现在我将要沮丧地坐着，意识到我们必须等待。当然，我可以读…
+Lex Fridman (02:40:52) …fall in love with Absurdiverse, and you’ve made me fall in love with the Better Paradise, and now I am going to sit depressed, realizing we’ll have to wait. I could, of course, read…
+Dan Houser (02:41:02) 嗯，我们应该很快会为Absurdiverse推出一些简短的卡通片，并在接下来的时期有更多东西推出。但是的，它只是需要，需要一点时间。你知道，我想，我的意思是，大片从开始到结束通常是四年以上。…你知道，一开始还有所有的法律事务，你知道吗？我们大概会一样。
+Dan Houser (02:41:02) Well, we should have some little short cartoons coming out in a while for Absurdiverse and more stuff coming in the next period. But yeah, it just takes, it takes a little bit of time. You know, I think, I mean, big movies are four years plus from start to end. …You know, with all the legal stuff at the start, you know? We’ll be about the same.
+Lex Fridman (02:41:21) 是的。某些电影从想法到完成，我的意思是，需要10年以上，一些伟大的作品，还有…
+Lex Fridman (02:41:21) Yeah. And certain movies from idea to completion, I mean, take 10 plus years, some of the greats, and…
+Dan Houser (02:41:27) 是的，我的意思是，经常。很多时候那只是开发过程。…那真的很… 有时感觉像是为了不制作东西而设计的。
+Dan Houser (02:41:27) Yeah, I mean, often. A lot of that is just that development process. … That is really… Sometimes feels like it’s designed to not make stuff.
+Lex Fridman (02:41:33) 一个更具体的建议，但关于电子游戏这个话题，对于可能梦想创造伟大游戏的独立电子游戏创作者，你会给出什么建议？他们受到《荒野大镖客》的启发，受到你所创造的所有令人难以置信的开放世界和叙事的启发。比如，怎样才能有机会做出那样的事情？
+Lex Fridman (02:41:33) A bit more of a specific advice, but on the topic of video games, what advice would you give to to maybe independent video game creators that are dreaming of creating great games? They’re inspired by Red Dead, they’re inspired by all the incredible open worlds and narratives you’ve created. Like, how’s it possible to have a chance at doing something like that?
+Dan Houser (02:41:56) 我的意思是，这是… 有两种方式。尝试自己和一个小团体低成本地做，或者加入一家你认为做法正确的公司，你知道吗？我认为这两种方式各有优点。我认为如果你想制作电影化的东西… 是的，人工智能会改变其中一些。但如果你想制作电影化的东西，你需要资源。你仍然可以制作一些非常有趣的东西，不那么电影化，但以某种方式是一种有趣的体验。但一旦你涉及到演员和动作捕捉以及那种大型体验，就会花费一些钱。因此，如果你想做那个，你必须想清楚你想在哪些公司工作，并搞清楚如何到那里工作。
+Dan Houser (02:41:56) I mean, it’s part of… There’s two ways. Try and do it cheaply with yourself and a small group, or join a company that you think is doing it the right way, you know? And I think there’s upsides to either of those. I think if you want to make something that’s cinematic… Yeah, AI is going to change some of this. But if you want to make something that’s cinematic, you need resources. You can still make something that’s really interesting that isn’t super cinematic, but it’s an interesting experience in some ways. But the second you’re involving actors and motion capture and one of those big experiences, it’s going to cost some money. So therefore, if you want to do that, you’ve got to figure out what companies you want to work at and figure out how you get to work there.
+Lex Fridman (02:42:31) 你对人工智能在视频生成、世界生成或开放世界辅助生成世界方面有所帮助抱有希望吗？
+Lex Fridman (02:42:31) Do you have hope for AI helping with some of the video generation, some of the world generation, or some of the open-world assistance in generating the world?
+Dan Houser (02:42:45) 是的，有限。绝对，如果使用正确，它将是一个很好的工具。如果使用不正确，将导致大量泛泛之作。你知道，我在游戏行业29年了，一直以来，那款能让制作游戏更简单、更便宜的技术即将出现，而发生的只是游戏变得更好，成本也高得多。所以我总是紧张地说：“终于，我们有了让生活更轻松的那款技术，”但看起来当以正确方式使用它时，它也许能做到。如果你用它来试图替代创造力，它将变得非常平庸。
+Dan Houser (02:42:45) Yes, limited. Absolutely, if used correctly, it will be a great tool. If used incorrectly, it will lead to loads of generic stuff. You know, I’ve been in games for 29 years, and all the time, the piece of tech that’s going to make making games much easier and much cheaper is about to turn up, and all that’s happened is the games have got much better and way more expensive. So I’m always nervous about saying, “Finally, we have that bit of tech that makes our lives easier,” but it looks as if it might be able to do that when you use it in the right way. If you use it to try and substitute for creativity, it’s going to be really generic.
+Lex Fridman (02:43:19) 一个大的、荒谬的问题：我们在这里进行的这一切，生命，存在的意义是什么？我们为什么在这里？
+Lex Fridman (02:43:19) A big, ridiculous question: What’s the meaning of this whole thing we have going on here, of life, of existence? Why are we here?
+Dan Houser (02:43:29) 观察宇宙。最容易说得通的答案是，我们由宇宙设计来观察它自己，并以有趣的方式评论它。
+Dan Houser (02:43:29) To watch the universe. The easiest plausible answer is we are designed by the universe to watch itself and to comment on it in interesting ways.
+Lex Fridman (02:43:39) 持续地以越来越有趣的方式。爱在其中扮演什么角色？
+Lex Fridman (02:43:39) Consistently more and more interesting ways. What role does love play as part of that?
+Dan Houser (02:43:46) 它是唯一可能让它值得做的事情。其他一切，一切物质的东西，都是无关紧要的。所以唯一有价值的是这些非物质的东西。你知道，我确实认为形而上学对我来说总是胜过物理学。
+Dan Houser (02:43:46) It’s the only thing that makes it possibly worth doing. Everything else, everything material, is irrelevant. So the only things of value are these immaterial things. You know, I do think metaphysics always trumps physics for me.
+Lex Fridman (02:44:03) 那么，Dan，从我心底里，说到爱，谢谢你。
+Lex Fridman (02:44:03) Well, Dan, from the bottom of my heart, speaking of love, thank you.
+Dan Houser (02:44:07) 真是荣幸。谢谢你，伙计。
+Dan Houser (02:44:07) What a pleasure. Thank you, man.
+Lex Fridman (02:44:09) 感谢你为这个世界创造的一切。我和数百万你游戏的铁杆粉丝永远心存感激。我知道有很多人想对你说谢谢。
+Lex Fridman (02:44:09) Thank you for everything you’ve created in this world. Me and millions of diehard fans of your games are forever grateful. I know there’s a lot of people that would like to say thank you to you.
+Dan Houser (02:44:19) 澄清一下，因为我总是喜欢说得很清楚… …从来不是我一个人。总是我和真正有才华、做了惊人事情的人坐在一起。
+Dan Houser (02:44:19) Just to be clear, because I always like to make this very clear… …It was never me. It was always me sat alongside people with actual real talent who did amazing things.
+Lex Fridman (02:44:28) 嗯，我希望你继续保持自我批判，并在世界上创造棒极了的作品。我们迫不及待地想要继续探索你创造的世界。非常感谢你今天来聊天，兄弟。
+Lex Fridman (02:44:28) Well, I hope you keep being self-critical and creating awesome stuff in the world. And we can’t wait to keep exploring the worlds you create. Thank you so much for talking today, brother.
+Dan Houser (02:44:41) 谢谢你邀请我。真是荣幸。
+Dan Houser (02:44:41) Thank you for having me. What a privilege.
+Lex Fridman (02:44:43) 感谢收听这次与Dan Houser的对话。要支持这个播客，请查看描述中的赞助商，在那里你也可以找到联系我、提问、获得反馈等的链接。现在让我留给你一些欧内斯特·海明威的话，Dan和我最喜欢的作家之一：“世界击垮每一个人，之后，许多人在被击垮的地方变得坚强。” 感谢收听。希望下次再见。
+Lex Fridman (02:44:43) Thanks for listening to this conversation with Dan Houser. To support this podcast, please check out our sponsors in the description, where you can also find links to contact me, ask questions, get feedback, and so on. And now let me leave you with some words from Ernest Hemingway, one of Dan’s and my favorite writers: “The world breaks everyone, and afterward, many are strong at the broken places.” Thank you for listening. I hope to see you next time.
