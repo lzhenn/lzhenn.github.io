@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "请回答2045：你我对AI来说，有什么价值？"
+title:  "ASI篇（一）| 请回答2045：智人是否会接受下一次进化？"
 categories: thinking
 tags: thinking
 author: LZN
