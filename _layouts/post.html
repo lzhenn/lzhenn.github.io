@@ -69,7 +69,7 @@ layout: default
 
 
     </div>
-    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <button class="anchor" type="button" aria-label="Toggle table of contents" aria-expanded="false" aria-controls="content-side">Contents ☰</button>
     <div class="right">
         <div class="wrap">
 
@@ -99,8 +99,9 @@ layout: default
     for (var i = 0; i < aTags.length; i++) {
         if (aTags[i].origin !== window.location.origin) {
             aTags[i].setAttribute('target', '_blank')
+            aTags[i].setAttribute('rel', 'noopener noreferrer')
         }
     }
 }());
 </script>
-<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+<script src="{{ "/js/pageContent.js" | prepend: site.baseurl }}" charset="utf-8"></script>

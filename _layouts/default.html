@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="{{ page.lang | default: 'zh-CN' }}">
   {% include head.html %}
-
   <body>
-
-    <canvas id="c"  style="postion:relative;left:0px;top:60px;width:100%;height:800px;"></canvas>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <canvas id="matrix-rain" aria-hidden="true"></canvas>
+    <div class="ambient-grid" aria-hidden="true"></div>
     {% include header.html %}
-
-        {{ content }}
-
+    <main id="main-content" tabindex="-1">
+      {{ content }}
+    </main>
     {% include footer.html %}
     {% include backToTop.html %}
-    <script src="{{ " /js/main.js " | prepend: site.baseurl }}" charset="utf-8"></script>
-    <script src="{{ " /js/smooth-scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script>
-    <script type="text/javascript">
-      smoothScroll.init({
-        speed: 500, // Integer. How fast to complete the scroll in milliseconds
-        easing: 'easeInOutCubic', // Easing pattern to use
-        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
-      });
-    </script>
-    <script src="/js/cmatrix.js" charset="utf-8"></script>
-    <!-- <script src="{{ " /js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
+    <script src="{{ '/js/main.js' | relative_url }}" defer></script>
+    <script src="{{ '/js/cmatrix.js' | relative_url }}" defer></script>
   </body>
-
 </html>

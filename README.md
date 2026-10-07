@@ -410,3 +410,18 @@ About my old blog theme, I won't maintain any more. And I put the code at  [Gaoh
 ## License
 
 [MIT License](https://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/LICENSE.md)
+
+### Local dark-theme preview
+
+With Ruby 3.1+ and Bundler installed:
+
+```sh
+bundle install
+bundle exec jekyll serve --config _config.yml,_config.local.yml --destination /tmp/lzn-blog-preview
+```
+
+Open <http://127.0.0.1:4000>. The local configuration disables analytics,
+visit counters, and third-party comments so preview traffic is not recorded.
+Build output goes outside the tracked `_site` directory. Production builds use
+`_config.yml` alone. The global theme is in `_sass/_cyberpunk.scss`; the optional
+Matrix animation is in `js/cmatrix.js` and respects reduced-motion preferences.
