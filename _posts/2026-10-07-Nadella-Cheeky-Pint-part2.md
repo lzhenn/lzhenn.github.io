@@ -4,18 +4,10 @@ title: "【Cheeky Pint】算力瓶颈、企业主权与智能体商务 | 纳德�
 categories: podcast
 tags: [thinking, AI]
 author: LZN
-description: "这一篇从 AI 投资是否重演互联网泡沫谈起。纳德拉区分闲置的暗光纤与当下供不应求的计算基础设施，又把“主权”从数据存放在哪里，推到企业的隐性知识究竟属于谁。随后，对话转向 Excel 的生命力，以及从商品发现、购买到客服，智能体可能怎样改变整个交易过程。"
+description: "本篇是萨提亚·纳德拉（Satya Nadella）接受约翰·科里森（John Collison）的 Cheeky Pint 播客采访实录，原节目于2025年11月18日发布。纳德拉是微软首席执行官，自2014年起执掌微软；科里森是支付平台 Stripe 的联合创始人兼总裁。其采访中涉及 AI 投资与互联网泡沫的异同、芯片与电力等算力基础设施瓶颈、数据主权与企业隐性知识、Excel 的生命力，以及智能体如何改变商品发现、交易结算与客户服务等话题。初稿采用 Luna 机器翻译，经 DeepSeek 与 Qwen 交叉校审、中英混排，并附必要批注。全文分上、中、下三部分发出，本篇为中篇，以飨诸君。"
 ---
 
-_书童按：这一篇从 AI 投资是否重演互联网泡沫谈起。纳德拉区分闲置的暗光纤与当下供不应求的计算基础设施，又把“主权”从数据存放在哪里，推到企业的隐性知识究竟属于谁。随后，对话转向 Excel 的生命力，以及从商品发现、购买到客服，智能体可能怎样改变整个交易过程。_
-
-**节目**：Cheeky Pint 第 19 期；主持人 John Collison，嘉宾 Satya Nadella。**原节目发布于 2025 年 11 月 18 日**，本文中的“今天”“现在”均沿用当时语境。
-
-**本篇范围**：00:27:03—00:53:47。 [原节目与音视频](https://cheekypint.transistor.fm/19) · [英文转录](https://cheekypint.transistor.fm/19/transcript)
-
-本系列据完整英文转录逐段翻译，中文在前、英文在后；保留原稿时间戳，长发言按语义分段。Luna 初译，经 DeepSeek-V4.1-Flash 与 Qwen3.6-35B-A3B 从语言和忠实度两个维度交叉校审，再综合定稿。必要的事实背景与转录疑点另作译注；嘉宾的观点和判断保留原意。
-
-**系列目录**：[上篇：企业 AI、工作方式与互联网往事](/2026/10/07/Nadella-Cheeky-Pint-part1/) · [中篇：算力瓶颈、企业主权与智能体商务](/2026/10/07/Nadella-Cheeky-Pint-part2/) · [下篇：模型忠诚、产品捆绑与组织文化](/2026/10/07/Nadella-Cheeky-Pint-part3/)
+_书童按：本篇是萨提亚·纳德拉（Satya Nadella）接受约翰·科里森（John Collison）的 [Cheeky Pint 播客采访实录](https://cheekypint.transistor.fm/19)，原节目于2025年11月18日发布。纳德拉是微软首席执行官，自2014年起执掌微软；科里森是支付平台 Stripe 的联合创始人兼总裁。其采访中涉及 AI 投资与互联网泡沫的异同、芯片与电力等算力基础设施瓶颈、数据主权与企业隐性知识、Excel 的生命力，以及智能体如何改变商品发现、交易结算与客户服务等话题。初稿采用 Luna 机器翻译，经 DeepSeek 与 Qwen 交叉校审、中英混排，并附必要批注。全文分上、中、下三部分发出，本篇为中篇，以飨诸君。_
 
 **本篇目录**
 
@@ -318,8 +310,6 @@ _书童按：这一篇从 AI 投资是否重演互联网泡沫谈起。纳德拉
 **Satya Nadella (00:53:29)** Makes sense. And I also think intuitively, all of us are inside sales, or other customer service is also inside sales. And so intuitively that makes sense and definitely in the agentic world you can stitch these things together so that the seams are not like what they are today.
 
 ---
-
-**继续阅读**：[上篇：企业 AI、工作方式与互联网往事](/2026/10/07/Nadella-Cheeky-Pint-part1/) · [下篇：模型忠诚、产品捆绑与组织文化](/2026/10/07/Nadella-Cheeky-Pint-part3/)
 
 ## 译注 {#notes}
 

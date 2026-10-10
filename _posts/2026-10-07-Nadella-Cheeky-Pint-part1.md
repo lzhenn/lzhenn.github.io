@@ -4,22 +4,13 @@ title: "【Cheeky Pint】企业 AI、工作方式与互联网往事 | 纳德拉�
 categories: podcast
 tags: [thinking, AI]
 author: LZN
-description: "AI 进入企业，难处究竟在模型，还是在数据、权限与记忆？这期 Cheeky Pint 里，John Collison 与微软 CEO 萨提亚·纳德拉从这个问题聊起，随后谈到纳德拉如何通过 Teams 了解公司、为什么持续走近开发者，以及人将怎样指挥成群的智能体。最后，两人回到九十年代：微软看到了互联网，却一度押错了实现路径。上篇保留节目开场的精彩片段剪辑，因此会与后文有少量重复。"
+description: "本篇是萨提亚·纳德拉（Satya Nadella）接受约翰·科里森（John Collison）的 Cheeky Pint 播客采访实录，原节目于2025年11月18日发布。纳德拉是微软首席执行官，自2014年起执掌微软；科里森是支付平台 Stripe 的联合创始人兼总裁。其采访中涉及企业 AI 的落地、数据治理与组织记忆、纳德拉的日常管理方式、开发者生态、智能体时代的人机界面，以及微软在互联网兴起之初的技术判断与战略取舍等话题。初稿采用 Luna 机器翻译，经 DeepSeek 与 Qwen 交叉校审、中英混排，并附必要批注。全文分上、中、下三部分发出，本篇为上篇，以飨诸君。"
 ---
 
-_书童按：AI 进入企业，难处究竟在模型，还是在数据、权限与记忆？这期 Cheeky Pint 里，John Collison 与微软 CEO 萨提亚·纳德拉从这个问题聊起，随后谈到纳德拉如何通过 Teams 了解公司、为什么持续走近开发者，以及人将怎样指挥成群的智能体。最后，两人回到九十年代：微软看到了互联网，却一度押错了实现路径。上篇保留节目开场的精彩片段剪辑，因此会与后文有少量重复。_
-
-**节目**：Cheeky Pint 第 19 期；主持人 John Collison，嘉宾 Satya Nadella。**原节目发布于 2025 年 11 月 18 日**，本文中的“今天”“现在”均沿用当时语境。
-
-**本篇范围**：00:00:00—00:27:03。 [原节目与音视频](https://cheekypint.transistor.fm/19) · [英文转录](https://cheekypint.transistor.fm/19/transcript)
-
-本系列据完整英文转录逐段翻译，中文在前、英文在后；保留原稿时间戳，长发言按语义分段。Luna 初译，经 DeepSeek-V4.1-Flash 与 Qwen3.6-35B-A3B 从语言和忠实度两个维度交叉校审，再综合定稿。必要的事实背景与转录疑点另作译注；嘉宾的观点和判断保留原意。
-
-**系列目录**：[上篇：企业 AI、工作方式与互联网往事](/2026/10/07/Nadella-Cheeky-Pint-part1/) · [中篇：算力瓶颈、企业主权与智能体商务](/2026/10/07/Nadella-Cheeky-Pint-part2/) · [下篇：模型忠诚、产品捆绑与组织文化](/2026/10/07/Nadella-Cheeky-Pint-part3/)
+_书童按：本篇是萨提亚·纳德拉（Satya Nadella）接受约翰·科里森（John Collison）的 [Cheeky Pint 播客采访实录](https://cheekypint.transistor.fm/19)，原节目于2025年11月18日发布。纳德拉是微软首席执行官，自2014年起执掌微软；科里森是支付平台 Stripe 的联合创始人兼总裁。其采访中涉及企业 AI 的落地、数据治理与组织记忆、纳德拉的日常管理方式、开发者生态、智能体时代的人机界面，以及微软在互联网兴起之初的技术判断与战略取舍等话题。初稿采用 Luna 机器翻译，经 DeepSeek 与 Qwen 交叉校审、中英混排，并附必要批注。全文分上、中、下三部分发出，本篇为上篇，以飨诸君。_
 
 **本篇目录**
 
-- [开场剪辑](#opening)
 - [企业 AI：数据、记忆与权限](#enterprise-ai)
 - [在虚拟走廊里管理微软](#working-style)
 - [跟着开发者与初创公司走](#developers)
@@ -27,75 +18,6 @@ _书童按：AI 进入企业，难处究竟在模型，还是在数据、权限�
 - [互联网往事：看对范式，还要找对路径](#internet)
 
 ---
-
-## 开场剪辑 {#opening}
-
-*Opening highlights*
-
-<!-- T001P01 -->
-**纳德拉（00:00:00）** 比尔一直对此着迷。我清楚记得他在九十年代说过这话。他说：“软件只有一个类别，叫信息管理。你得把人、地点和事物都整理成结构化数据，就这么简单。”问题在于，人很复杂。
-
-**Satya Nadella (00:00:00)** Bill was always obsessed. I remember him distinctly saying this in the nineties. He said, “There's only one category in software. It's called information management. You've got to schematize people, places and things and that's it.” The problem is people are messy.
-
-<!-- T002P01 -->
-**约翰·科里森（00:00:13）** 人们会忠于某个模型，还是会忠于某个 AI 品牌？
-
-**John Collison (00:00:13)** Do people have loyalty to a model or do they have loyalty to an AI brand?
-
-<!-- T003P01 -->
-**纳德拉（00:00:16）** 你需要一组模型，再由智能体在它们之间协调，让这组模型满足你的需求。
-
-**Satya Nadella (00:00:16)** You want an ensemble of models. You have agents intermediating that ensemble so that it meets your needs.
-
-<!-- T004P01 -->
-**约翰·科里森（00:00:23）** 大家最终的偏好，不会只是更强的智能吗？比如我会打开模型选择器，手动选 o3 来回答“我该去哪儿吃冰淇淋”这种问题。对一些软件公司来说，挑战 Excel 几乎是一种成人礼。它为什么能这么经久不衰？
-
-**John Collison (00:00:23)** Will everyone’s preference not just be for more intelligence? I'll go into the picker and manually select o3 for “where should I go get ice cream” query. It's like a rite of passage for certain software companies to try to take on Excel. Why is it so durable?
-
-<!-- T005P01 -->
-**纳德拉（00:00:38）** 我们多少有点低估它了。就像我可以让它做到——
-
-**Satya Nadella (00:00:38)** We sort of don't give it enough credit. It's like I can make him do—
-
-<!-- T006P01 -->
-**约翰·科里森（00:00:41）** 世界上最容易上手的编程环境。
-
-**John Collison (00:00:41)** The world's most approachable programming environment.
-
-<!-- T007P01 -->
-**纳德拉（00:00:43）** 完全没错。这里说的彼得是谁？
-
-**Satya Nadella (00:00:43)** A hundred percent. And Pieter here is who?
-
-<!-- T008P01 -->
-**约翰·科里森（00:00:46）** 彼得·莱维尔斯。他算是个独立开发者——
-
-**John Collison (00:00:46)** Pieter Levels. He's like an indie—
-
-<!-- T009P01 -->
-**纳德拉（00:00:47）** 哦，对。彼得·莱维尔斯，我认识他。
-
-**Satya Nadella (00:00:47)** Oh yes. Yeah. Pieter Levels. I know him.
-
-<!-- T010P01 -->
-**约翰·科里森（00:00:50）** 当然，你整天泡在线上嘛。看，萨提亚知道彼得·莱维尔斯是谁。这就是微软能成为一家 14 万亿美元公司的原因。数据中心有什么值得一看的吗？还是说，就只是“哇，好多机柜”？[^opening-joke]
-
-**John Collison (00:00:50)** Of course, you're so online. See, Satya knows who Pieter Levels is. This is why Microsoft is like a $14 trillion company. Was there anything good to see at the data center? Or is it like, that’s a lot of racks.
-
-<!-- T011P01 -->
-**纳德拉（00:01:04）** 那是最好玩的地方，哥们儿。
-
-**Satya Nadella (00:01:04)** It’s the most fun place to go, man.
-
-<!-- T012P01 -->
-**约翰·科里森（00:01:07）** 萨提亚·纳德拉于 2014 年接任微软 CEO，但他在公司已经工作了三十多年，见证过许多变化。萨提亚执掌微软期间，公司规模增长了十倍。微软的成功也被归功于他：先是云业务，如今又是 AI 热潮中的表现。
-
-**John Collison (00:01:07)** Satya Nadella took over as Microsoft CEO in 2014, but he’s been with the company for more than 30 years. And he’s seen a lot. Microsoft has grown by 10x in the time that Satya has been running it and he’s credited with Microsoft’s success—first in cloud and now in the AI boom.
-
-<!-- T013P01 -->
-**纳德拉（00:01:22）** 干杯，约翰。聊得真开心。
-
-**Satya Nadella (00:01:22)** Cheers, John. It was great.
 
 ## 企业 AI：数据、记忆与权限 {#enterprise-ai}
 
@@ -419,11 +341,7 @@ _书童按：AI 进入企业，难处究竟在模型，还是在数据、权限�
 
 ---
 
-**继续阅读**：[中篇：算力瓶颈、企业主权与智能体商务](/2026/10/07/Nadella-Cheeky-Pint-part2/) · [下篇：模型忠诚、产品捆绑与组织文化](/2026/10/07/Nadella-Cheeky-Pint-part3/)
-
 ## 译注 {#notes}
-
-[^opening-joke]: 片头由后文话题剪辑而成，话题切换较快。“14 万亿美元”保留主持人的调侃语气，不作为微软当时市值的数据引用。
 
 [^ebc]: EBC 通常指 Executive Briefing Center（高管简报中心）；此处是到这类场合向客户高管介绍产品和愿景。参见 [Oracle 对高管简报中心的介绍](https://www.oracle.com/corporate/executive-briefing-center/)。
 
