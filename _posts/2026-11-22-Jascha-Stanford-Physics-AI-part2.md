@@ -20,6 +20,11 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 
 **Jascha Sohl-Dickstein (21:28)** Okay. If we take these timelines seriously, what should we as as individuals do? These are like plausibly our our last moments to to intellectually shine. Um first, we should make sure our our projects are are still going to be relevant when they're when they're completed. Um there is like some like improving curve of like science that can be done with like minimal human effort just by prompting the best best current foundation model. And one outcome that you really really want to avoid is that you work like super hard for two years and and make significant linear progress but by the time you're done someone can achieve something better like just by asking a a foundation model. Um this this suggests working like on targeted projects like with others so that you can go fast and and stay ahead of the exponential. Um it it discourages slow meandering exploration. Um which I which is like really unfortunate because that's like the kind of science I like love doing the most. So so so I hate saying this but I I think it is nonetheless like like as the world is.
 
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/two-years-of-work.webp"><img src="/uploads/2026/11/stanford-jascha/two-years-of-work.webp" alt="基础模型能力的上升曲线与标有“两年苦功”的项目进展箭头" width="840" height="864" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>选题时，讲者比较的是两年后的两种结果：团队辛苦做出的成果，以及届时用基础模型、花很少人力就能得到的成果。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g3eebcc146fa_0_0">讲者幻灯片，第 20 页</a></small></figcaption>
+</figure>
+
 <!-- T002P02 -->
 **索尔-迪克斯坦（22:39）** 2019 年，理查德·萨顿（Richard Sutton）发表了一篇很棒的文章，名为《苦涩的教训》。他指出，利用计算能力的通用方法最终最有效。《苦涩的教训》或许有正反两面的启示：如果你做的项目会随着算力和智能规模的扩大而变得更有效，甚至能反过来推动这个过程，那么成果的影响力会远超预期。反过来说，千万别做那些只要规模扩大就终究会被解决的项目——可能在你完成之前就会如此。你得逼自己用上手边的 AI 工具。它们让你能做一些全新的事……哎呀。能做的事太多了。哦，还好，还好，那段时间是留给提问的。等一下，我一直看的是后墙上那只钟。好，好，我还有时间。刚才真吓了我一跳。嗯，得讲快点。好，我们继续。
 
@@ -50,12 +55,22 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 
 **Jascha Sohl-Dickstein (27:10)** Um, if you have a limited time to contribute and and the stakes are high, um, you should do something that you're going to be proud of. Um, after you've like retired to your like villa in the Dyson swarm, um, you you want to feel somehow that you helped us get to the the good outcome. Um, you should like choose projects that looking back will have mattered. Um this means that you should um prefer projects that will like positively shift the trajectory post AGI rather than induce like a transient change in in the near term. Uh the photo on the right is is uh the the big reveal. Um the the geologic epoch after the anthroposine is is observable by examining rock strata because like it has the rock strata like distributed in a Dyson swarm around the sun. Um I think this is un unlikely in the next five years but but nonetheless
 
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/dyson-swarm.webp"><img src="/uploads/2026/11/stanford-jascha/dyson-swarm.webp" alt="太阳近旁的别墅和环绕太阳的戴森群，配有讲者的地质时代玩笑" width="1026" height="1068" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>“人类世之后”的想象图。讲者用一个玩笑回扣开场的地层图：未来回看，今天的选择会把我们带到哪里？ <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g35070940651_0_280">讲者幻灯片，第 23 页</a></small></figcaption>
+</figure>
+
 ## 早期的小选择如何改变结果
 
 <!-- T002P08 -->
 **索尔-迪克斯坦（28:17）** 说到做让自己自豪的事，我有时觉得人们认为自己无法影响大局。AI 领域的进展似乎像是一个超出我们掌控的过程。这完全不对。尽管现在的能力发展非常惊人，AI 的指数增长才刚起步，比你想象的还要早。右边可以看到 Epoch AI 对 2030 年算力的外推。这张图的重要之处在于：到 2030 年，算力可能达到 2025 年的一万倍。回头看，我们今天的状态在线性刻度的算力图上几乎贴着零线。就投入 AI 的资源和算力而言，我们仍处在指数增长的极早期。好，所以我们还在指数增长的早期。
 
 **Jascha Sohl-Dickstein (28:17)** on that point of like doing something that you're proud of sometimes I think people feel a lack of agency over over the big picture trajectory. Um the progress in the field of AI can like feel like some process that's beyond our our control. Um, this is like completely false. Despite like current like really dramatic capabilities, we are still like much earlier than you think in the AI exponential. Um, to the right you can see an extrapolation by epoch AI to to compute in in 2030. Um, the important part of this image is that compute has the potential to be 10,000 times larger like in 2030 than it was in in 2025. Um, looking back, our our state today is going to be like visually indistinguishable from zero on a linear access compute plot. We are still super early in the exponential in terms of resources and compute being spent on on AI. Um, okay. So, we're still in the early part of the exponential.
+
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/compute-2030.webp"><img src="/uploads/2026/11/stanford-jascha/compute-2030.webp" alt="Epoch AI 图表按供电、芯片生产、数据和通信延迟列出 2030 年训练算力约束" width="1506" height="822" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>Epoch AI 对 2030 年训练算力约束的估计。彩色区间分别对应不同约束下的可能规模。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g35070940651_0_205">讲者幻灯片，第 24 页</a></small></figcaption>
+</figure>
 
 <!-- T002P09 -->
 **索尔-迪克斯坦（29:28）** 这为什么重要？因为在指数增长的早期做出小小的干预，会产生巨大后果。科学、工程、政府和经济领域里有无数例子：过程早期的小决定，最终导致截然不同的结果。我们可以逐一讨论，但不如挑几个例子。大约在 1980 年，两位科学家提出了标准化的电子邮件交换协议，因此你们每个人都能给房间里的任何其他人发邮件。直到大约十年后，才有人给即时消息做同样的事。因此，你只能给使用同一款产品的人发聊天消息，这就乱成一团了。再比如哈伯—博施固氮法：一小组科学家开发了这项技术，让我们今天大体上有能力养活所有人。没有它，我们的粮食产量远不及现在；而它也是如今多数炸药得以生产的基础。
@@ -76,6 +91,11 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 **索尔-迪克斯坦（32:26）** 未来无从预知。但如果一定要我猜，在接下来一段时期里，你们靠自己的才智影响世界的能力，大致会这样变化：会有一段时期，你们的能力正好和庞大的 AI 智能体团队互补，有你们在，它们才能把本事使出来。你们一周内就能完成过去整个职业生涯都做不到的事。这将是令人惊叹的全球黄金时代。再后来，在 AI 擅长的方向上，你们不再有过人之处。有你们参与，AI 能完成的智力工作，和它独自能做的也就没有分别了。我认为你们应该尽情享受并充分利用这个黄金时代。使用这些工具，用赋予你们的力量做出惊人的成果。
 
 **Jascha Sohl-Dickstein (32:26)** Um the future is unknowable. Of course, if I have to guess though, this is roughly what I think your intellectual leverage on the world is going to look like in in the medium-term future. Um, I think there will be a period where you are like [clears throat] complimentary to and unlock the ability of like vast teams of AI agents to do work. Um, you will be able to do in like a week what you would have been unable to do in your entire career. um it will be like an astounding global golden age and then I think sometime later than that there will come a period where you no longer stick out in a direction that AI is able to stick out in um where you no longer unlock intellectual work that it would be unable to do. Um and I think you should enjoy and make full use of this golden age as as as best as you can. Um, use the tools. Do something like amazing with with the power afforded to you.
+
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/intellectual-effort.webp"><img src="/uploads/2026/11/stanford-jascha/intellectual-effort.webp" alt="生产率随时间变化的示意曲线，两条虚线表示没有 AI 时个人和大学院系的水平" width="1950" height="1338" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>个人智力投入的回报。两条虚线标出没有 AI 时个人和院系的生产率；讲者用这张示意图讨论人的贡献何时会被放大。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g384510b07a1_0_0">讲者幻灯片，第 27 页</a></small></figcaption>
+</figure>
 
 ## 哪些研究方向值得投入
 

@@ -40,6 +40,11 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 
 **Jascha Sohl-Dickstein (00:39)** so the the title for this talk is a play on a very maybe like opinionated and pragmatic book by by Ramoni Kahal who is like a one of the founders like Nobel Prize winner um of of modern neuroscience. uh to get you in the right mindset. On the right here, we have a plot of GDP versus time. And that is you standing on top of that curve. And and you're thinking to yourself, you know, I live in in a pretty normal world, like some things are maybe going to change, but the future is going to look mostly like a linear extrapolation of of the present. And the plot should maybe suggest that this is not the right perspective on on the future. Um, this this plot by the way looks surprisingly similar if you plot it like semi-log y. Um, we did not settle on our current rate of like exponential growth until like around 1950. Um,
 
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/world-gdp.webp"><img src="/uploads/2026/11/stanford-jascha/world-gdp.webp" alt="全球 GDP 曲线末端的小人以为未来将是现在的线性延伸" width="972" height="1056" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>讲者用全球 GDP 曲线开场：站在陡升段上的人，仍可能觉得自己生活在一个再正常不过的时代。原图致意 Tim Urban / Wait But Why。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.p">讲者幻灯片，第 1 页</a></small></figcaption>
+</figure>
+
 <!-- T001P06 -->
 **索尔-迪克斯坦（01:45）** 好，这场演讲的目的，是说服大家未来可能与现在非常不同。AI 正在改变世界，而且目前还只是早期阶段；这场转变不太可能很小。如果你相信这一点，就应该根据 AI 将如何改变世界，来决定自己的职业道路、研究项目，甚至个人生活。我还想强调，在场的各位对未来如何演变有着巨大的影响力。我们可能觉得这是某种庞然大物，正在发生、超出个人控制；这种想法完全错了。最后，我会提出几条实用建议，谈谈如何选择研究项目和思考职业发展。好，我们来谈地质世。
 
@@ -50,6 +55,11 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 
 **Jascha Sohl-Dickstein (02:52)** Um they are measures of of deep time divided by distinct changes in in life forms, climate and and geological processes that that we can observe in rock strata. Humans are starting to have a geologic impact on on the world. Um we're causing the like sixth mass extinction in the history of the earth. uh radioisotopes from nuclear weapons tests are are getting captured in in rockst strata like billions of years in the future. You are going to be able to tell that we were here. There's there's a proposal to name this current period of human-driven global change the the anthroposine epoch. And that this focus on human-driven change is interesting because we are perhaps near the end of the period of humans being the primary intellects driving driving driving global change. Um the the like central conceit of this talk um and and partially because I really like the title is that very much depending on the way in which AI plays out this could be a very very short um geologic epoch.
 
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/anthropocene.webp"><img src="/uploads/2026/11/stanford-jascha/anthropocene.webp" alt="地层柱顶部的放大线指向一个问号，右侧标出人类世的提议起点" width="2640" height="1482" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>地层柱顶端的问号引出讲题：如果以人类活动留下的地质痕迹来界定“人类世”，这个时期可能有多长？ <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g35070940651_0_141">讲者幻灯片，第 4 页</a></small></figcaption>
+</figure>
+
 ## 训练算力和模型能独立完成的任务
 
 <!-- T001P08 -->
@@ -57,15 +67,30 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 
 **Jascha Sohl-Dickstein (04:06)** Okay. So here's a plot of compute used to train notable AI models starting at the very beginning of the anthroposine around around 1950. Um you can see by the way a a change in in slope here um when AI models transitioned from from being like academically interesting to to being commercially relevant. um each tick on the y-axis here is two orders of magnitude larger than the one below it. The compute used to train the biggest models has increased about 10 millionfold in in the last decade. Um in the upper right I've circled a very rough plausible range for the the compute performed by a human brain in in an entire lifetime. um my own like back of the envelope estimate if you imagine that every signapse does like one flop per per millisecond then you get about one trillion pedlops of like compute in the human brain over a lifetime. Um and that would put um lifetime human compute like a fraction of a grid division above the the biggest model on on this chart. Um so we are getting to scales of model training compute similar to those in a human brain across a lifetime. Um this is like not sufficient and and probably not even necessary to to approach like human levels of intelligence but it maybe makes the the comparison somehow a little bit more plausible. Um I am by the way going to try to pause and get questions during the talk. I should have said at the very beginning. So, so if you want to like disagree with something, there'll be more disagreeable stuff to come, but if you want to disagree with something, um, feel free to raise your hand and I'll I'll I'll call on you. Um, okay.
 
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/training-compute.webp"><img src="/uploads/2026/11/stanford-jascha/training-compute.webp" alt="模型训练计算量随年份上升，右上角圈出人脑一生计算量的粗估范围" width="2640" height="1485" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>训练重要模型所用的计算量。纵轴采用对数刻度；右上方椭圆是讲者对人脑一生计算量的粗估。图表来源：Our World in Data。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g35070940651_0_126">讲者幻灯片，第 5 页</a></small></figcaption>
+</figure>
+
 <!-- T001P09 -->
 **索尔-迪克斯坦（06:02）** 增长的不只是 AI 计算规模。这是 METR 最近的一项研究，考察 AI 模型在无人协助时，以 50% 的成功概率完成不同软件任务的任务时间跨度（按人类独立完成任务所需时间衡量）。这个时间跨度不是 AI 做任务要花多久，而是把同一任务交给人类，观察人类不用 AI 要多久。横轴是模型发布年份，纵轴是任务时间跨度。关键是它呈指数增长。我第一次讲这场演讲是在不到一年前，当时我会告诉大家，预计到 2026 或 2027 年，模型就能完成整整一天的软件工作。不到一年后，能力已经增长了十倍，越过了那个水平。更高成功率的曲线斜率相同，只是截距不同。所以，如果你希望模型有 80% 或 90% 的概率成功完成任务，时间预期大概要再加一两年。
 
 **Jascha Sohl-Dickstein (06:02)** It's not just the scale of of AI compute that has been increasing. Um here's a recent study from an organization called beater um looking at the time scale of diverse software tasks that AI models can perform unaded um with 50% probability of success. Um the time scale is not how long it takes the AI to do the task. The time scale is um done is figured out by like assigning the task to humans and seeing how long it takes human beings to perform the same task without AI. Um, and here on the x- axis we have the year the model was released and here on the y- axis we have the time scale and the key thing to observe is that it is increasing exponentially. Um I gave this talk first roughly less than a year ago and at that time I would tell people that we expect models to be able to perform a full day's work in software in like 2026 or 2027 and we are now like less than a year later already like increased by a factor of 10 and like past that point. Um the curves for higher success rates have the same slope. um just a different intercept. So if you want to have a model that's like 80% likely to do the task successfully or like 90% you'd add like a year or two years to to your timeline.
 
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/metr-horizon.webp"><img src="/uploads/2026/11/stanford-jascha/metr-horizon.webp" alt="不同模型以五成概率完成软件任务的时间跨度，纵轴按人类专家工时计" width="2640" height="1350" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>METR 的软件任务评测。一个点对应一个模型，纵轴是人类专家独立完成相应任务所需的时间。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g35070940651_0_183">讲者幻灯片，第 6 页</a></small></figcaption>
+</figure>
+
 <!-- T001P10 -->
 **索尔-迪克斯坦（07:36）** 有人有时会说，AI 只能解决训练数据中出现过的问题。这显然不是字面意义上的事实：只要你给模型输入几个词以上，它生成的序列就会落在训练数据序列的凸包之外。因此，模型做的一切都涉及泛化。不过，人们似乎认为存在某种神奇、不同类型的泛化，是模型做不到的。或许这可以作为证据，说明不存在某种所谓“神奇”的泛化尺度——我不该用这个词——也不会有某个界限，跨过之后才出现一种性质截然不同、但 AI 模型能够实现的泛化。我们可以看看 AI 开始解决人类留下的开放问题。数学家保罗·埃尔德什极其多产，留下许多开放猜想和问题；他去世后，这些问题被形式化并汇集起来，数学家一直尝试求解。过去大约七个月里，AI 模型也开始解出这些问题。AI 现在解决的问题正在拓展数学知识的前沿。我想肯定有人对此有意见。
 
 **Jascha Sohl-Dickstein (07:36)** People sometimes say that AI can only solve problems that are in it training data. Um and and like this isn't like obviously this is not literally true. like if you type more than a few words into an AI model, then then you're like sequences out of the convex hall of like sequences in the training data. So, so everything they do is generalization, but there's somehow this notion that there's this like magic type of generalization which is is different that the models can't achieve. Um and um maybe as a piece of evidence towards there not being some like magical I shouldn't use this word there not being some scale of generalization um beyond which at which some qualitatively different type of generalization that AI models can achieve. Um we can start looking at AI solving problems that were like open problems left by by by humans. Um Paul Erdos um was this like super prolific mathematician who left behind like many many open conjectures um and questions um which have been like formalized and gathered since his death and um real mathematicians try to solve these problems and in the last like roughly seven months u AI models have started to to solve these these problems as well. So AI models are now solving things that um you can that push out the frontier of of what is known about about math. Um I'm sure someone has a complaint about this. So
+
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/erdos-problems.webp"><img src="/uploads/2026/11/stanford-jascha/erdos-problems.webp" alt="两条阶梯曲线分别统计 AI 参与和几乎独立完成的埃尔德什开放问题解答" width="2412" height="1326" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>埃尔德什开放问题的累计解答数。蓝线包括人机合作，橙线是只需极少人类介入的自主解答。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g3eebcc146fa_0_16">讲者幻灯片，第 7 页</a></small></figcaption>
+</figure>
 
 <!-- T001P11 -->
 **索尔-迪克斯坦（09:08）** 请说。
@@ -105,6 +130,11 @@ _书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026
 **索尔-迪克斯坦（14:22）** 如果你认为有某项尚未测量的能力显示 AI 正在停滞，请把它操作化、量化，做成基准。大家会很欢迎这项贡献，你也会得到很多引用。不过我也要提醒大家，过去几乎所有此类尝试都是这样发展的：有人提出基准。如果你在 1990 年代提出基准，花了二十年，才有人造出能在你的基准上达到人类水平表现的 AI。图里这条是随机猜测水平，这条是人类水平表现。所以，如今提出基准，几个月到几年内就能在这个基准上达到人类水平的成绩，而且这种情况相当可靠、一致。我几年前是 Big-Bench 基准的共同创建者之一；甚至在论文发表之前，就已经有论文在其中一些部分刷新了最佳成绩。
 
 **Jascha Sohl-Dickstein (14:22)** Um if you think there is something that we're not measuring that shows that AI is plateauing in some capability that we care about, I like urge you to like operationalize that, quantify it, make a benchmark. Um people will be very very happy for your contribution. you'll get lots of citations. Um, I should also warn you though, the way in which almost all past attempts to do this have gone, which is that someone makes a benchmark and if you made a benchmark in like the 1990s, it took 20 years before people were able to to build AI that could that could achieve human level performance on your benchmark. So, this is like um basically chance and this is human level performance. um if you make a benchmark now it takes like a few months to a few years before um human level achievement is achieved in this benchmark and this is like fairly reliable and and consistent. I was like one of the co-creators of this benchmark called big bench um a few years ago and like we had like papers getting state-of-the-art on like portions of it before the paper was even our paper was even published.
+
+<figure style="margin: 1.4em 0;">
+  <a href="/uploads/2026/11/stanford-jascha/human-benchmarks.webp"><img src="/uploads/2026/11/stanford-jascha/human-benchmarks.webp" alt="多项基准测试的成绩随年份上升，各条曲线在不同年份达到人类水平线" width="1680" height="1314" loading="lazy" style="display: block; max-width: 100%; height: auto; margin: auto;"></a>
+  <figcaption><small>不同基准上的 AI 成绩，以各自的人类表现为参照。讲者用抵达人类水平线所需的时间来比较进展速度。图表来源：Our World in Data。 <a href="https://docs.google.com/presentation/d/1qVFDW8qT4CC4E_2TSVevrDbZ_Z9Utu_I1z0-ISLwZts/edit?slide=id.g35070940651_0_311">讲者幻灯片，第 8 页</a></small></figcaption>
+</figure>
 
 <!-- T001P18 -->
 **索尔-迪克斯坦（15:31）** 我每天都和 Claude 一起工作。感觉就像在和一位热切投入、执行能力极强的研究生合作。幸运的是，目前这位研究生虽然聪明绝顶，研究品味却出奇地差。所以我仍然觉得自己能做点事。但一年前还不是这样。一年前，我没法把一个高层次问题交给 Claude，让它生成几张图，再由我查看；那时我必须深入掌握每一个细节。一年后情况也不会再是这样，模型会更强。
