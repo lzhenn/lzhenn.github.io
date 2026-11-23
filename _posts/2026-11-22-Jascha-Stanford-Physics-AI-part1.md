@@ -7,7 +7,7 @@ author: LZN
 description: "在斯坦福物理与人工智能大会上，贾沙·索尔-迪克斯坦讨论了如何衡量模型能力，怎样看待通用人工智能的时间表。"
 ---
 
-_书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026 年 6 月 12 日在斯坦福大学物理与人工智能大会上的演讲《在人类世的开端与终章，给年轻研究者的建议》（Advice for a Young Investigator in the First and Last Days of the Anthropocene）实录。索尔-迪克斯坦是 Anthropic 研究员，也是扩散模型的早期研究者。他把训练算力、软件任务的时间跨度和数学研究摆在一起，追问这些证据究竟能把我们带到多远。台下随即有人追问，算力资源会不会先耗尽，又有谁能用得起这些模型。译稿由 Luna 初译，DeepSeek 与 Qwen 校审。全文分上下两篇，此为上篇，以飨诸君。_
+_书童按：本篇是贾沙·索尔-迪克斯坦（Jascha Sohl-Dickstein）2026 年 6 月 12 日在斯坦福大学物理与人工智能大会上的演讲《在人类世的开端与终章，给年轻研究者的建议》（Advice for a Young Investigator in the First and Last Days of the Anthropocene）实录。索尔-迪克斯坦是 Anthropic 研究员，也是扩散模型（Diffusion Model）的早期研究者。索尔是一名跨学科通才，本科期间研究物理学和量子计算，之后参与过NASA火星车项目，还研究过神经科学。他擅长从物理学、神经科学和数学中寻找新的机器学习原理，对 AGI和超级智能的发展非常关注且极富洞见。本篇演讲译稿由GPT-6.2 Astra统领把关，Luna通篇初译，DeepSeek与Qwen校审。全文分上下两篇，此为上篇，以飨诸君。_
 
 [演讲录像](https://www.youtube.com/watch?v=3LZN2UUxDos) · [斯坦福大学会议页](https://events.stanford.edu/event/2026-conference-on-physics-and-ai-pai26)。原演讲及录像版权归各自权利人所有。本中英文对照翻译稿件，仅作为交流学习之用。
 
